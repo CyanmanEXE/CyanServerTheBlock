@@ -19,9 +19,9 @@ local encounter1 = {
         {7,1,1,11,1,9}
     },
     teams = {
-        {2,2,1,1,1,1},
-        {2,2,1,1,1,1},
-        {2,2,1,1,1,1}
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1}
     },
 }
 
@@ -172,16 +172,16 @@ local encounter8 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=50,
     enemies = {
-        {name="Spikey",rank=4},
-        {name="GigaCorn",rank=1},
+        {name="Spikey",rank=4,max_hp=800,starting_hp=800},
+        --{name="GigaCorn",rank=1}, IT WAS GIGA CORN
         {name="Puffy",rank=1},--cant be puffy
      
     },
     positions = {
         
         {0,0,0,0,0,2},
-        {0,0,0,1,0,3},
-        {0,0,0,0,2,0}
+        {0,0,0,1,0,0},
+        {0,0,0,0,0,0}
     },
     tiles = {
         {1,9,1,11,1,1},
@@ -194,16 +194,16 @@ local encounter9 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=50,
     enemies = {
-        {name="Spikey",rank=4},--?
-        {name="GigaCorn",rank=1},--?
+        {name="Spikey",rank=3},--?(5/7/24: lv 4 prob victim)(update: no)
+        --{name="GigaCorn",rank=1},--?(possible culprit)(no?)(it WAS this virus) (as of 4am 5/7/24 this works now)
        
      
     },
     positions = {
         
-        {0,0,0,0,0,2},
+        {0,0,0,0,0,0},
         {0,0,0,1,0,1},
-        {0,0,0,0,2,0}
+        {0,0,0,0,0,0}
     },
     tiles = {
         {2,9,2,11,1,1},

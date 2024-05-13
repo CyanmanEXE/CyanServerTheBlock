@@ -11,8 +11,8 @@ function BlizzardMan:new(instance, position, direction)
   local blizzardman = {
     instance = instance,
     id = nil,
-    health = 400,
-    max_health = 400,
+    health = 500,
+    max_health = 500,
     x = math.floor(position.x),
     y = math.floor(position.y),
     z = math.floor(position.z),
@@ -20,7 +20,7 @@ function BlizzardMan:new(instance, position, direction)
       texture_path = "/server/assets/NebuLibsAssets/mugs/blizzardman.png",
       animation_path = "/server/assets/NebuLibsAssets/mugs/blizzardman.animation",
     },
-    encounter = "/server/assets/encounters/big_brute_encounter.zip",
+    encounter = "/server/assets/encounters/dependencies/com_OFC_mob_EXEPoN_023_IceManV1.zip",
     selection = EnemySelection:new(instance),
     is_engaged = false
   }

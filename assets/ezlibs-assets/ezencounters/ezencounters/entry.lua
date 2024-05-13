@@ -103,7 +103,7 @@ local encounter_info = {
     },
     tile_states = {
         0,--normal
-        1,--cracked
+        1,--cracked(its really 2)
         2,--broken
         11,--up
         12,--down
@@ -112,7 +112,7 @@ local encounter_info = {
         7,--empty
         4,--grass
         14,--hidden
-        8,--holy
+        8,--holy (its really 11)
         3,--ice
         5,--lava
         6,--poison

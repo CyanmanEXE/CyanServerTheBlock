@@ -3,62 +3,62 @@
  <image source="IceTileTopper.png" width="192" height="128"/>
  <tile id="0" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
  <tile id="1" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
  <tile id="2" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
  <tile id="3" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
  <tile id="4" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
  <tile id="5" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
  <tile id="6" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
  <tile id="7" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
  <tile id="8" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
  <tile id="9" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
  <tile id="10" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
  <tile id="11" type="Ice">
   <properties>
-   <property name="Sound Effect" value="/server/IceSlide.ogg"/>
+   <property name="Sound Effect" value="/server/assets/IceSlide.ogg"/>
   </properties>
  </tile>
 </tileset>

@@ -162,8 +162,8 @@
   <object id="1" name="Undernet-1ToUndernet1" type="Radius Warp" x="752" y="84">
    <properties>
     <property name="Activation Radius" value="0.6"/>
-    <property name="Arrival Animation" value="arrow_down_left_in"/>
-    <property name="Leave Animation" value="arrow_down_left_out"/>
+    <property name="Arrival Animation" value="arrow_up_right_in"/>
+    <property name="Leave Animation" value="arrow_up_right_out"/>
     <property name="Target Area" value="default"/>
     <property name="Target Object" value="117"/>
    </properties>
