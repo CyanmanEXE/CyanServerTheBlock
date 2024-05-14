@@ -452,8 +452,8 @@ WHAT WOULD YOU LIKE?</property>
     <property name="Text 1">BURNER LETS YOU
 BURN 3X3 PANELS AHEAD
 BURNING EVERYTHING UP
-...
-WELL...
+HEHE.
+WELL.
 DO YOU WANT IT?</property>
    </properties>
    <point/>
@@ -516,14 +516,14 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="88" name="Blaster question" type="Dialogue" x="152" y="1184">
+  <object id="88" name="Blaster question" type="Dialogue" x="152" y="1176">
    <properties>
     <property name="Dialogue Type" value="question"/>
     <property name="Next 1" type="object" value="89"/>
     <property name="Next 2" type="object" value="80"/>
-    <property name="Text 1">Blaster is a well
-rounded buster that
-fires in a T shape!
+    <property name="Text 1">BLASTER BLAST
+PANELS IN A
+T SHAPE ATTACK.
 DO YOU WANT THEM?</property>
    </properties>
    <point/>
@@ -552,7 +552,7 @@ DO YOU WANT THEM?</property>
    <point/>
   </object>
   <object id="92" gid="328" x="464" y="816" width="18" height="25"/>
-  <object id="94" name="Banjo" type="NPC" x="464" y="784">
+  <object id="94" name="Nana" type="NPC" x="464" y="784">
    <properties>
     <property name="Asset Name" value="female-navi-exe5_purple"/>
     <property name="Dialogue Type" value="first"/>
@@ -568,7 +568,7 @@ DO YOU WANT THEM?</property>
     <property name="Dialogue Type" value="first"/>
     <property name="Direction" value="Up Right"/>
     <property name="Next Waypoint 1" type="object" value="96"/>
-    <property name="Text 1" value="Where did my beyblade go..."/>
+    <property name="Text 1" value="Where did my beyblade go."/>
     <property name="Wait Time" value="2"/>
    </properties>
    <point/>
