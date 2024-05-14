@@ -46,7 +46,7 @@ end
 local Ability = {
   Guard = {name = "Guard"}, -- passive, knightman's ability
   Shadowstep = {name = "Shadowstep"}, --passive, Shadowman's ability
-  LongSwrd = {
+  HeroSwrd = {
     name = "HeroSwrd",
     question = "Use HeroSwrd?",
     cost = 2,
@@ -120,7 +120,7 @@ local Ability = {
   NumberSearch = {
     name = "NumberSearch",
     question = "Remove traps & get items?",
-    cost = 1,
+    cost = 3,
     remove_traps = true,
     destroy_items = false,
     generate_shape = static_shape_generator(0, 0, {
@@ -133,25 +133,77 @@ local Ability = {
   HexSickle = {
     name = "HexSickle",
     question = "Should I cut panels with HexSickle?",
-    cost = 1,
+    cost = 2,
     remove_traps = true,
     destroy_items = false,
-    generate_shape = static_shape_generator(0, 1, {
+    generate_shape = static_shape_generator(0, 0, {
       {1, 1, 1}
     }),
     activate = battle_to_liberate_and_loot
   },
+
+Blaster = {
+  name = "Blaster",--think upside down dj
+  question = "Should I blast panels with Blaster?",
+  cost = 1,
+  remove_traps = false,
+  destroy_items = false,
+  generate_shape = static_shape_generator(0,0, {
+    {0, 1, 0},
+    {1, 1, 1}
+    
+  }),
+  activate = battle_to_liberate_and_loot
+
+},
+
+
+Burner = {
+  name = "Burner",
+  question = "Should I burn panels with Burner?",
+  cost = 4,
+  remove_traps = true,
+  destroy_items = true,
+  generate_shape = static_shape_generator(0, 0, {--i guess this makes it lean to left or right?
+    {1, 1, 1},
+    {1, 1, 1},
+    {1, 1, 1}
+    
+  }),
+  activate = battle_to_liberate_and_loot
+
+},
+
+
+CrosBmb = {
+  name = "CrosBmb",
+  question = "Should I blow up panels with Cross Bomb?",
+  cost = 2,
+  remove_traps = true,
+  destroy_items = false,
+  generate_shape = static_shape_generator(0, 0, {
+    {0, 1, 0},
+    {1, 1, 1},
+    {0, 1, 0}
+    
+  }),
+  activate = battle_to_liberate_and_loot
+
+},
 }
 
 local navi_ability_map = {
   HeroSwrd = Ability.HeroSwrd,
   WideSwrd = Ability.WideSwrd,
   OldSaber = Ability.ScrenDiv,
-  HevyShld = Ability.Guard,
+  Guard = Ability.Guard,
   HexScyth = Ability.HexSickle,
   NumGadgt = Ability.NumberSearch,
   GutsHamr = Ability.GutsWave,
-  ShdwShoe = Ability.Shadowstep
+  ShdwShoe = Ability.Shadowstep,
+  Blaster = Ability.Blaster,
+  Burner = Ability.Burner,
+  CrosBmb = Ability.CrosBmb
 }
 
 function Ability.resolve_for_player(player)

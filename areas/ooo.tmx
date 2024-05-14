@@ -920,7 +920,7 @@ WHAT WOULD YOU LIKE?</property>
    </properties>
    <point/>
   </object>
-  <object id="314" name="Ability Quiz 1" type="dialogue" x="1872" y="1176">
+  <object id="314" name="Ability Quiz 1" type="dialogue" x="1984" y="1440">
    <properties>
     <property name="Dialogue Type" value="quiz"/>
     <property name="Next 1" type="object" value="315"/>
@@ -932,7 +932,7 @@ WHAT WOULD YOU LIKE?</property>
    </properties>
    <point/>
   </object>
-  <object id="315" name="Long Sword Question" type="Dialogue" x="1800" y="1104">
+  <object id="315" name="hero sword Question" type="Dialogue" x="1896" y="1472">
    <properties>
     <property name="Dialogue Type" value="question"/>
     <property name="Next 1" type="object" value="317"/>
@@ -946,7 +946,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="316" name="Wide Sword Question" type="Dialogue" x="1928" y="1224">
+  <object id="316" name="Wide Sword Question" type="Dialogue" x="2112" y="1528">
    <properties>
     <property name="Dialogue Type" value="question"/>
     <property name="Next 1" type="object" value="320"/>
@@ -960,7 +960,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="317" name="Give Long Sword Pre" type="Dialogue" x="1792" y="1128">
+  <object id="317" name="Give hero sword Pre" type="Dialogue" x="1896" y="1528">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Next 1" type="object" value="318"/>
@@ -968,7 +968,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="318" name="Give Long Sword" type="Dialogue" x="1792" y="1160">
+  <object id="318" name="Give hero sword" type="Dialogue" x="1904" y="1584">
    <properties>
     <property name="Ability Item" value="HeroSwrd"/>
     <property name="Dialogue Type" value="none"/>
@@ -976,7 +976,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="319" name="Give Wide Sword" type="Dialogue" x="1952" y="1328">
+  <object id="319" name="Give Wide Sword" type="Dialogue" x="2128" y="1648">
    <properties>
     <property name="Ability Item" value="WideSwrd"/>
     <property name="Dialogue Type" value="none"/>
@@ -984,7 +984,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="320" name="Give Wide Sword Pre" type="Dialogue" x="1936" y="1272">
+  <object id="320" name="Give Wide Sword Pre" type="Dialogue" x="2120" y="1584">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Next 1" type="object" value="319"/>
@@ -992,7 +992,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="321" name="Ability Quiz 2" type="dialogue" x="1880" y="1256">
+  <object id="321" name="Ability Quiz 2" type="dialogue" x="1992" y="1536">
    <properties>
     <property name="Dialogue Type" value="quiz"/>
     <property name="Next 1" type="object" value="322"/>
@@ -1004,7 +1004,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="322" name="Shadow Shoe Question" type="Dialogue" x="1816" y="1192">
+  <object id="322" name="Shadow Shoe Question" type="Dialogue" x="1936" y="1504">
    <properties>
     <property name="Dialogue Type" value="question"/>
     <property name="Next 1" type="object" value="323"/>
@@ -1020,7 +1020,7 @@ DO YOU WANT THEM?</property>
    </properties>
    <point/>
   </object>
-  <object id="323" name="Give Shadow Shoe Pre" type="Dialogue" x="1816" y="1224">
+  <object id="323" name="Give Shadow Shoe Pre" type="Dialogue" x="1944" y="1552">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Next 1" type="object" value="324"/>
@@ -1028,7 +1028,7 @@ DO YOU WANT THEM?</property>
    </properties>
    <point/>
   </object>
-  <object id="324" name="Give Shadow Shoe" type="Dialogue" x="1808" y="1256">
+  <object id="324" name="Give Shadow Shoe" type="Dialogue" x="1968" y="1648">
    <properties>
     <property name="Ability Item" value="ShdwShoe"/>
     <property name="Dialogue Type" value="none"/>
@@ -1036,7 +1036,7 @@ DO YOU WANT THEM?</property>
    </properties>
    <point/>
   </object>
-  <object id="325" name="Number Gadget Question" type="Dialogue" x="1864" y="1304">
+  <object id="325" name="KEEP WHAT YOU HAVE" type="Dialogue" x="2000" y="1608">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Text 1" value="NO PROBLEM. SEE YOU LATER!"/>
@@ -1068,7 +1068,7 @@ WHAT WOULD YOU LIKE?</property>
    </properties>
    <point/>
   </object>
-  <object id="329" name="Ability Quiz 1" type="dialogue" x="2008" y="1096">
+  <object id="329" name="Ability Quiz 1" type="dialogue" x="2096" y="1360">
    <properties>
     <property name="Dialogue Type" value="quiz"/>
     <property name="Next 1" type="object" value="330"/>
@@ -1080,7 +1080,7 @@ WHAT WOULD YOU LIKE?</property>
    </properties>
    <point/>
   </object>
-  <object id="330" name="Long Sword Question" type="Dialogue" x="2064" y="1088">
+  <object id="330" name="guts hammer question" type="Dialogue" x="2064" y="1168">
    <properties>
     <property name="Dialogue Type" value="question"/>
     <property name="Next 1" type="object" value="332"/>
@@ -1093,7 +1093,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="331" name="Wide Sword Question" type="Dialogue" x="2032" y="1040">
+  <object id="331" name="old saber question" type="Dialogue" x="2048" y="1096">
    <properties>
     <property name="Dialogue Type" value="question"/>
     <property name="Next 1" type="object" value="335"/>
@@ -1107,7 +1107,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="332" name="Give Long Sword Pre" type="Dialogue" x="2096" y="1088">
+  <object id="332" name="Give gutshammer Pre" type="Dialogue" x="2128" y="1168">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Next 1" type="object" value="333"/>
@@ -1115,7 +1115,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="333" name="Give Long Sword" type="Dialogue" x="2168" y="1088">
+  <object id="333" name="Give guts hammer" type="Dialogue" x="2192" y="1168">
    <properties>
     <property name="Ability Item" value="GutsHamr"/>
     <property name="Dialogue Type" value="none"/>
@@ -1123,7 +1123,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="334" name="Give Wide Sword" type="Dialogue" x="2120" y="1056">
+  <object id="334" name="Give old saber" type="Dialogue" x="2184" y="1096">
    <properties>
     <property name="Ability Item" value="OldSaber"/>
     <property name="Dialogue Type" value="none"/>
@@ -1131,7 +1131,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="335" name="Give Wide Sword Pre" type="Dialogue" x="2080" y="1048">
+  <object id="335" name="Give old saber Pre" type="Dialogue" x="2112" y="1096">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Next 1" type="object" value="334"/>
@@ -1139,7 +1139,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="336" name="Ability Quiz 2" type="dialogue" x="2120" y="1152">
+  <object id="336" name="Ability Quiz 2" type="dialogue" x="2144" y="1248">
    <properties>
     <property name="Dialogue Type" value="quiz"/>
     <property name="Next 1" type="object" value="337"/>
@@ -1151,7 +1151,7 @@ DO YOU WANT IT?</property>
    </properties>
    <point/>
   </object>
-  <object id="337" name="Shadow Shoe Question" type="Dialogue" x="2080" y="1184">
+  <object id="337" name="number gadget Question" type="Dialogue" x="2176" y="1312">
    <properties>
     <property name="Dialogue Type" value="question"/>
     <property name="Next 1" type="object" value="338"/>
@@ -1167,7 +1167,7 @@ DO YOU WANT THEM?</property>
    </properties>
    <point/>
   </object>
-  <object id="338" name="Give Shadow Shoe Pre" type="Dialogue" x="2136" y="1240">
+  <object id="338" name="Give number gadget Pre" type="Dialogue" x="2208" y="1312">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Next 1" type="object" value="339"/>
@@ -1175,7 +1175,7 @@ DO YOU WANT THEM?</property>
    </properties>
    <point/>
   </object>
-  <object id="339" name="Give Shadow Shoe" type="Dialogue" x="2208" y="1264">
+  <object id="339" name="Give number gadget" type="Dialogue" x="2240" y="1312">
    <properties>
     <property name="Ability Item" value="NumGadgt"/>
     <property name="Dialogue Type" value="none"/>
@@ -1183,7 +1183,7 @@ DO YOU WANT THEM?</property>
    </properties>
    <point/>
   </object>
-  <object id="340" name="Number Gadget Question" type="Dialogue" x="2240" y="1192">
+  <object id="340" name="KEEP WHAT YOU HAVE" type="Dialogue" x="2224" y="1248">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Text 1" value="NO PROBLEM. SEE YOU LATER!"/>

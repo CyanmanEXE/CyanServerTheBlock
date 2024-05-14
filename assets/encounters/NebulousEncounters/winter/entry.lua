@@ -99,7 +99,7 @@ function package_build(mob, data)
         --[1, 2, 3, 4, 5, 6]
         --[1, 2vv,3vvv]
         if choice == 1 then
-            mob:create_spawner(flashy_id, Rank.V2):spawn_at(6, 1)--! wow DJ u cant read for tacos
+            mob:create_spawner(swordy_id, Rank.V3):spawn_at(6, 1)--! wow DJ u cant read for tacos
             mob:create_spawner(canguard_id, Rank.V3):spawn_at(6, 2)
             mob:create_spawner(cacter_id, Rank.EX):spawn_at(5, 1)
         elseif choice == 2 then
@@ -241,7 +241,7 @@ function package_build(mob, data)
             mob:create_spawner(burner_id, Rank.V1):spawn_at(6, 3)
         elseif choice == 3 then
             mob:create_spawner(pirana_id, Rank.V2):spawn_at(5, 1)--!
-            mob:create_spawner(flashy_id, Rank.V2):spawn_at(6, 2)
+            mob:create_spawner(swordy_id, Rank.V2):spawn_at(6, 2)
             mob:create_spawner(cacter_id, Rank.V1):spawn_at(4, 3)
         elseif choice == 4 then
             mob:create_spawner(powie3_id, Rank.V1):spawn_at(5, 1)

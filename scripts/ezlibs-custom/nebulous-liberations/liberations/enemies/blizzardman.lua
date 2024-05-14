@@ -11,8 +11,8 @@ function BlizzardMan:new(instance, position, direction)
   local blizzardman = {
     instance = instance,
     id = nil,
-    health = 500,
-    max_health = 500,
+    health = 1300,
+    max_health = 1300,
     x = math.floor(position.x),
     y = math.floor(position.y),
     z = math.floor(position.z),

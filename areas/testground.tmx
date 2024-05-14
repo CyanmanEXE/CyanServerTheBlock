@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="65" height="65" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="531">
+<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="65" height="65" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="560">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/NebuLibsAssets/backgrounds/block/GrayBG.animation"/>
@@ -131,10 +131,6 @@
    </properties>
    <point/>
   </object>
-  <object id="11" gid="9" x="928" y="448" width="50" height="30"/>
-  <object id="12" gid="9" x="928" y="480" width="50" height="30"/>
-  <object id="13" gid="10" x="1056" y="640" width="50" height="30"/>
-  <object id="14" gid="10" x="1088" y="640" width="50" height="30"/>
   <object id="29" type="Dark Panel" gid="4" x="160" y="1536" width="50" height="30"/>
   <object id="32" type="Dark Panel" gid="4" x="64" y="1536" width="50" height="30"/>
   <object id="33" type="Dark Panel" gid="4" x="64" y="1504" width="50" height="30"/>
@@ -300,7 +296,7 @@
   <object id="235" type="Dark Panel" gid="4" x="1152" y="1152" width="50" height="30"/>
   <object id="236" type="Dark Panel" gid="4" x="1184" y="1152" width="50" height="30"/>
   <object id="238" type="Dark Panel" gid="4" x="1216" y="1088" width="50" height="30"/>
-  <object id="239" type="Dark Panel" gid="4" x="1216" y="1056" width="50" height="30"/>
+  <object id="239" type="Dark Panel" gid="4" x="1184" y="1056" width="50" height="30"/>
   <object id="240" type="Dark Panel" gid="4" x="1216" y="1024" width="50" height="30"/>
   <object id="241" type="Dark Panel" gid="4" x="1120" y="960" width="50" height="30"/>
   <object id="242" type="Dark Panel" gid="4" x="1152" y="960" width="50" height="30"/>
@@ -469,12 +465,12 @@
     <property name="Stun Trap" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="395" type="Trap Panel" gid="5" x="1184" y="1056" width="50" height="30">
+  <object id="395" type="Trap Panel" gid="5" x="1184" y="1120" width="50" height="30">
    <properties>
     <property name="Stun Trap" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="396" type="Trap Panel" gid="5" x="416" y="448" width="50" height="30">
+  <object id="396" type="Trap Panel" gid="5" x="384" y="320" width="50" height="30">
    <properties>
     <property name="Stun Trap" type="bool" value="true"/>
    </properties>
@@ -526,30 +522,6 @@
   <object id="409" type="Indestructible Panel" gid="7" x="1216" y="288" width="50" height="30"/>
   <object id="410" type="Indestructible Panel" gid="7" x="1216" y="256" width="50" height="30"/>
   <object id="411" type="Indestructible Panel" gid="7" x="1184" y="256" width="50" height="30"/>
-  <object id="412" gid="9" x="960" y="1024" width="50" height="30"/>
-  <object id="413" gid="9" x="992" y="1024" width="50" height="30"/>
-  <object id="414" gid="9" x="1024" y="1024" width="50" height="30"/>
-  <object id="415" gid="9" x="1056" y="1024" width="50" height="30"/>
-  <object id="416" gid="9" x="1088" y="1024" width="50" height="30"/>
-  <object id="417" gid="9" x="1120" y="1024" width="50" height="30"/>
-  <object id="418" gid="9" x="1120" y="1056" width="50" height="30"/>
-  <object id="419" gid="9" x="1120" y="1088" width="50" height="30"/>
-  <object id="420" gid="9" x="1120" y="1120" width="50" height="30"/>
-  <object id="421" gid="9" x="1120" y="1152" width="50" height="30"/>
-  <object id="422" gid="10" x="512" y="608" width="50" height="30"/>
-  <object id="423" gid="10" x="512" y="576" width="50" height="30"/>
-  <object id="424" gid="10" x="512" y="544" width="50" height="30"/>
-  <object id="425" gid="10" x="512" y="512" width="50" height="30"/>
-  <object id="426" gid="10" x="512" y="480" width="50" height="30"/>
-  <object id="427" gid="10" x="512" y="448" width="50" height="30"/>
-  <object id="428" gid="10" x="512" y="416" width="50" height="30"/>
-  <object id="429" gid="10" x="512" y="384" width="50" height="30"/>
-  <object id="430" gid="10" x="480" y="384" width="50" height="30"/>
-  <object id="431" gid="10" x="448" y="384" width="50" height="30"/>
-  <object id="432" gid="10" x="416" y="384" width="50" height="30"/>
-  <object id="433" gid="10" x="384" y="384" width="50" height="30"/>
-  <object id="434" gid="10" x="384" y="352" width="50" height="30"/>
-  <object id="435" gid="10" x="384" y="320" width="50" height="30"/>
   <object id="436" type="Dark Panel" gid="4" x="384" y="480" width="50" height="30"/>
   <object id="437" type="Dark Panel" gid="4" x="384" y="448" width="50" height="30"/>
   <object id="438" type="Dark Panel" gid="4" x="384" y="416" width="50" height="30"/>
@@ -755,6 +727,152 @@
   <object id="530" type="Item Panel" gid="5" x="1184" y="1088" width="50" height="30">
    <properties>
     <property name="Specific Loot" value="INVINCIBILITY"/>
+   </properties>
+  </object>
+  <object id="531" type="Panel Gate" gid="9" x="1120" y="1152" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="532" type="Panel Gate" gid="9" x="1120" y="1120" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="533" type="Panel Gate" gid="9" x="1120" y="1088" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="534" type="Panel Gate" gid="9" x="1120" y="1056" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="535" type="Panel Gate" gid="9" x="1120" y="1024" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="536" type="Panel Gate" gid="9" x="1088" y="1024" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="537" type="Panel Gate" gid="9" x="1056" y="1024" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="538" type="Panel Gate" gid="9" x="1024" y="1024" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="539" type="Panel Gate" gid="9" x="992" y="1024" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="540" type="Panel Gate" gid="9" x="960" y="1024" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="541" type="Panel Gate" gid="10" x="512" y="608" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="542" type="Panel Gate" gid="10" x="512" y="576" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="543" type="Panel Gate" gid="10" x="512" y="544" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="544" type="Panel Gate" gid="10" x="512" y="512" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="545" type="Panel Gate" gid="10" x="512" y="480" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="546" type="Panel Gate" gid="10" x="512" y="448" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="547" type="Panel Gate" gid="10" x="512" y="416" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="548" type="Panel Gate" gid="10" x="512" y="384" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="549" type="Panel Gate" gid="10" x="480" y="384" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="550" type="Panel Gate" gid="10" x="448" y="384" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="551" type="Panel Gate" gid="10" x="416" y="384" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="552" type="Panel Gate" gid="10" x="384" y="384" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="553" type="Panel Gate" gid="10" x="1088" y="640" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="554" type="Panel Gate" gid="10" x="1056" y="640" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="555" type="Panel Gate" gid="9" x="928" y="480" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="556" type="Panel Gate" gid="9" x="928" y="448" width="50" height="30">
+   <properties>
+    <property name="Gate Key" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="557" type="Item Panel" gid="5" x="160" y="704" width="50" height="30">
+   <properties>
+    <property name="Specific Loot" value="HEART"/>
+   </properties>
+  </object>
+  <object id="558" type="Trap Panel" gid="5" x="160" y="768" width="50" height="30">
+   <properties>
+    <property name="Damage Dealt" type="int" value="5"/>
+    <property name="Damage Trap" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="559" type="Item Panel" gid="5" x="416" y="448" width="50" height="30">
+   <properties>
+    <property name="Specific Loot" value="ORDER_POINT"/>
    </properties>
   </object>
  </objectgroup>

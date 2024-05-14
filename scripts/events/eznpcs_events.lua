@@ -38,7 +38,10 @@ local liberation_item_list = {
 	{n="HexScyth",d="A wicked scythe which cleaves most anything. Use it in Liberations!"},
 	{n="NumGadgt",d="A gadget that's constantly calculating outcomes. Use it in Liberations!"},
 	{n="GutsHamr",d="A hammer that takes guts to wield. Use it in Liberations!"},
-	{n="ShdwShoe",d="Delicate shoes that let you walk on air. Wear them in Liberations!"}
+	{n="ShdwShoe",d="Delicate shoes that let you walk on air. Wear them in Liberations!"},
+	{n="CrosBmb",d="A hefty bomb to blow up panels in a plus shape. use it in Liberations!"},
+	{n="Burner",d="A powerful fire blast to burn up what stands in your way. use it in Liberations!"},
+	{n="Blaster",d="A well rounded buster that fires in a T shape. use it in Liberations!"}
 }
 
 local RematchProgEvent ={
