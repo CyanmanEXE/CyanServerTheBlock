@@ -569,7 +569,7 @@
     <property name="Disappear Cooldown" type="float" value="0"/>
     <property name="Key Name" value="Shifting Key"/>
     <property name="Once" type="bool" value="false"/>
-    <property name="Password" value="GobRiotHPMax"/>
+    <property name="Password" value="Gobby'sPassword"/>
     <property name="Required Keys" type="int" value="1"/>
     <property name="Take Item" type="bool" value="false"/>
     <property name="Unlock Item" value="Shifting Key"/>
@@ -577,11 +577,11 @@
   </object>
   <object id="139" name="Gobby's HP" type="Server Warp" gid="53" x="80" y="1712" width="114" height="64">
    <properties>
-    <property name="Address" value="keristero.xyz"/>
+    <property name="Address" value="goblinriothq.redirectme.net"/>
     <property name="Data" value="TheBlock"/>
     <property name="Direction" value="Down Right"/>
     <property name="Incoming Data" value="ReyHome"/>
-    <property name="Port" type="int" value="9876"/>
+    <property name="Port" type="int" value="27901"/>
     <property name="Warp In" type="bool" value="true"/>
    </properties>
   </object>

@@ -303,16 +303,6 @@
   <object id="203" type="Dark Panel" gid="61" x="832" y="1472" width="50" height="30"/>
   <object id="204" type="Dark Panel" gid="61" x="832" y="1536" width="50" height="30"/>
   <object id="205" type="Dark Panel" gid="61" x="800" y="1504" width="50" height="30"/>
-  <object id="206" type="Panel Gate" gid="137" x="1792" y="1688" width="50" height="30">
-   <properties>
-    <property name="Gate Key" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="207" type="Panel Gate" gid="137" x="1768" y="1728" width="50" height="30">
-   <properties>
-    <property name="Gate Key" type="int" value="2"/>
-   </properties>
-  </object>
   <object id="209" type="Dark Panel" gid="61" x="1088" y="1056" width="50" height="30"/>
   <object id="211" type="Dark Panel" gid="61" x="992" y="1024" width="50" height="30"/>
   <object id="212" type="Dark Panel" gid="61" x="1056" y="1024" width="50" height="30"/>
@@ -574,11 +564,6 @@
     <property name="Money" type="int" value="500"/>
    </properties>
   </object>
-  <object id="486" type="Panel Gate" gid="137" x="1736" y="1816" width="50" height="30">
-   <properties>
-    <property name="Gate Key" type="int" value="2"/>
-   </properties>
-  </object>
   <object id="487" name="Spawn9" type="Spawn Point" x="1104" y="1584">
    <properties>
     <property name="Next Spawn" type="int" value="68"/>
@@ -627,11 +612,6 @@
   <object id="496" type="Item Panel" gid="62" x="672" y="1280" width="50" height="30">
    <properties>
     <property name="Specific Loot" value="ORDER_POINT"/>
-   </properties>
-  </object>
-  <object id="497" type="Panel Gate" gid="137" x="1736" y="1680" width="50" height="30">
-   <properties>
-    <property name="Gate Key" type="int" value="2"/>
    </properties>
   </object>
   <object id="498" type="Panel Gate" gid="67" x="608" y="704" width="50" height="30">

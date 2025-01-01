@@ -1037,7 +1037,7 @@
   <object id="313" gid="103" x="536" y="897.333" width="42" height="35"/>
   <object id="314" type="Checkpoint" gid="64" x="561.424" y="82.1515" width="48" height="52">
    <properties>
-    <property name="Description" value="If this text is here, I forgot to change it..."/>
+    <property name="Description" value="Clyde Candy store coming soon!.."/>
     <property name="Dialogue Type" value="None"/>
     <property name="Disappear Cooldown" type="float" value="0"/>
     <property name="Key Name" value="Shifting Key"/>
