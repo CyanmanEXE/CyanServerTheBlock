@@ -54,7 +54,7 @@
    <properties>
     <property name="Direction" value="Up Right"/>
     <property name="Target Area" value="undernet2"/>
-    <property name="Target Object" value="61"/>
+    <property name="Target Object" value="122"/>
    </properties>
   </object>
   <object id="2" name="Baguett" type="NPC" x="434" y="501">
