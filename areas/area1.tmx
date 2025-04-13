@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="4">
+<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="30" height="30" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="14">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/custom/backgrounds/area1/GrayBG.animation"/>
@@ -11,6 +11,10 @@
  </properties>
  <tileset firstgid="1" source="../assets/tiles/gobby_standard.tsx"/>
  <tileset firstgid="49" source="../assets/tiles/hp_warp.tsx"/>
+ <tileset firstgid="54" source="../assets/tiles/Bucket.tsx"/>
+ <tileset firstgid="55" source="../assets/tiles/Bushes2.tsx"/>
+ <tileset firstgid="59" source="../assets/tiles/BBS.tsx"/>
+ <tileset firstgid="60" source="../assets/tiles/DarkTree.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -46,11 +50,11 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" name="Area1" type="Custom Warp" gid="50" x="446.25" y="571.75" width="114" height="64">
+  <object id="1" name="Undernet 2" type="Custom Warp" gid="50" x="446.25" y="571.75" width="114" height="64">
    <properties>
-    <property name="Direction" value="Down Right"/>
-    <property name="Target Area" value="hp1"/>
-    <property name="Target Object" value="2"/>
+    <property name="Direction" value="Up Right"/>
+    <property name="Target Area" value="undernet2"/>
+    <property name="Target Object" value="61"/>
    </properties>
   </object>
   <object id="2" name="Baguett" type="NPC" x="434" y="501">
@@ -58,7 +62,7 @@
     <property name="Asset Name" value="female-navi-exe5_purple"/>
     <property name="Dialogue Type" value="first"/>
     <property name="Direction" value="Down Left"/>
-    <property name="Text 1" value="Such a weird place.... Where exactly is this in the world?"/>
+    <property name="Text 1" value="We claimed this spot of land the second Wiltman Finally left. It's pretty cozy in here. Finally all that hoarding i've done is going to be worth it!"/>
     <property name="Wait Time" value="2"/>
    </properties>
    <point/>
@@ -68,10 +72,27 @@
     <property name="Asset Name" value="punk-navi-exe6_lime"/>
     <property name="Dialogue Type" value="first"/>
     <property name="Direction" value="Up Right"/>
-    <property name="Text 1" value="I can maybe claim this place as my own! I need a cool name.. Somthing like &quot;Lever's Hideout&quot; or somthing like that..."/>
+    <property name="Text 1" value="That's my doll over there... What? NO not that kind of doll, like my darling, my girl, my babe... What kind of weirdo keeps big sentient dolls around?"/>
     <property name="Wait Time" value="2"/>
    </properties>
    <point/>
   </object>
+  <object id="4" gid="54" x="532" y="476.667" width="14" height="14"/>
+  <object id="5" gid="54" x="546" y="490.667" width="14" height="14"/>
+  <object id="6" gid="54" x="544.667" y="472" width="14" height="14"/>
+  <object id="7" gid="55" x="681.333" y="653.333" width="36" height="35"/>
+  <object id="8" gid="55" x="658" y="684.667" width="36" height="35"/>
+  <object id="9" gid="59" x="373.333" y="550.667" width="32" height="56">
+   <properties>
+    <property name="BBS" type="bool" value="true"/>
+    <property name="Color" type="color" value="#ffff00ff"/>
+    <property name="Name" value="Homes BBS Board"/>
+    <property name="Post Limit" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="10" gid="60" x="398.583" y="282.083" width="39" height="70"/>
+  <object id="11" gid="60" x="533.25" y="288.75" width="39" height="70"/>
+  <object id="12" gid="2147483708" x="288.583" y="406.75" width="39" height="70"/>
+  <object id="13" gid="2147483708" x="286.583" y="552.75" width="39" height="70"/>
  </objectgroup>
 </map>

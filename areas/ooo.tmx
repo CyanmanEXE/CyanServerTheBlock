@@ -569,7 +569,7 @@
     <property name="Disappear Cooldown" type="float" value="0"/>
     <property name="Key Name" value="Shifting Key"/>
     <property name="Once" type="bool" value="false"/>
-    <property name="Password" value="Gobby'sPassword"/>
+    <property name="Password" value="Set2Duet"/>
     <property name="Required Keys" type="int" value="1"/>
     <property name="Take Item" type="bool" value="false"/>
     <property name="Unlock Item" value="Shifting Key"/>
