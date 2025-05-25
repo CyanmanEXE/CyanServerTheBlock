@@ -74,7 +74,7 @@
     <property name="Asset Name" value="heel-navi-exe4_purple"/>
     <property name="Dialogue Type" value="first"/>
     <property name="Direction" value="Down Left"/>
-    <property name="Text 1" value="Hey kid, I know I took months but im almost done!"/>
+    <property name="Text 1" value="Im out of wares... Some chum bought up all my loot!"/>
     <property name="Wait Time" value="2"/>
    </properties>
    <point/>
@@ -186,7 +186,7 @@
     <property name="Activation Radius" value="0.6"/>
     <property name="Arrival Animation" value="arrow_down_right_in"/>
     <property name="Leave Animation" value="arrow_down_right_out"/>
-    <property name="Target Area" value="default"/>
+    <property name="Target Area" value="undernet1"/>
     <property name="Target Object" value="112"/>
    </properties>
    <point/>
@@ -848,9 +848,21 @@
    </properties>
    <point/>
   </object>
-  <object id="112" gid="18" x="455" y="539" width="35" height="45"/>
-  <object id="113" gid="19" x="488.5" y="537.5" width="35" height="45"/>
-  <object id="114" gid="20" x="505" y="533" width="35" height="45"/>
+  <object id="112" gid="18" x="455" y="539" width="35" height="45">
+   <properties>
+    <property name="Interact Relay" type="object" value="2"/>
+   </properties>
+  </object>
+  <object id="113" gid="19" x="488.5" y="537.5" width="35" height="45">
+   <properties>
+    <property name="Interact Relay" type="object" value="2"/>
+   </properties>
+  </object>
+  <object id="114" gid="20" x="505" y="533" width="35" height="45">
+   <properties>
+    <property name="Interact Relay" type="object" value="2"/>
+   </properties>
+  </object>
   <object id="120" name="Fly" type="NPC" x="754.5" y="947.5">
    <properties>
     <property name="Asset Name" value="heel-navi-exe4_blue"/>

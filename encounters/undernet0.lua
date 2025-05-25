@@ -1,133 +1,383 @@
-
-local encounter1 = {
+local Encounter1 = {
+    name="Encounter1",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
-    weight=50,
-    enemies = {
-        {name="Gloomer",rank=1},
-        {name="Basher",rank=1},
-        
-       
+    weight=10,
+    enemies={
+        {name="KillFlower",rank=1},
+        {name="Elemperor",rank=7},
     },
-    positions = {
-        
-        {0,0,0,0,1,0},
-        {0,0,0,0,0,0},
-        {0,0,0,0,0,2}
-    },
-    tiles = {
-        {1,1,8,1,1,1},
-        {4,1,1,1,1,1},
-        {1,1,1,1,1,11}
-    },
-}
-
-
-
-local encounter2 = {
-    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
-    weight=50,
-    enemies = {
-        {name="Ratty",rank=3},--!
-        {name="MegaBunny",rank=1},
-        {name="MetFire",rank=2},
-    },
-    positions = {
-        
-        {0,0,0,0,0,1},
-        {0,0,0,0,2,0},
-        {0,0,0,0,0,3}
-    },
-    tiles = {
-        {9,1,9,1,9,1},
-        {1,9,1,9,9,9},
-        {9,1,9,1,9,1}
-    },
-    obstacles = {
+    obstacles={
         {name="Rock"},
     },
-    obstacle_positions = {
-        {0,0,0,0,0,0},
-        {0,0,0,0,0,0},
-        {0,0,1,0,0,0}
+    positions={
+        {0,0,0,0,1,0},
+        {0,0,0,0,0,2},
+        {0,0,0,1,0,0},
     },
-    
-}
-
-local encounter3 = {
-    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
-    weight=50,
-    enemies = {
-        {name="Cacter",rank=5},
-        {name="HardHead",rank=1},
-        {name="Elemperor",rank=2},
-    },
-    positions = {
-        
-        {0,0,0,0,0,1},
-        {0,0,0,2,0,0},
-        {0,0,0,0,3,0}
-    },
-    tiles = {
-        {1,5,1,9,1,9},
-        {1,12,12,1,9,1},
-        {1,1,1,1,9,1}
-    },
-    
-}
-
-local encounter4 = {
-    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
-    weight=50,
-    enemies = {
-        {name="Flashy",rank=1},--!
-        {name="CirSmash",rank=1},
-        
-    },
-    positions = {
-        
+    obstacle_positions={
         {0,0,0,0,0,0},
         {0,0,0,0,1,0},
-        {0,0,0,0,0,2}
+        {0,0,0,0,0,0},
     },
-    
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {10,9,9,9,9,10},
+        {9,9,9,9,9,9},
+        {10,9,9,9,9,10},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
 }
 
-local encounter5 = {
+local Encounter2 = {
+    name="Encounter2",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
-    weight=50,
-    enemies = {
-        {name="Puffy",rank=3},
-        {name="Canodumb",rank=3},
+    weight=10,
+    enemies={
+        {name="ColdHead",rank=1},
+        {name="Cacter",rank=1},
+        {name="Skelly",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,3,0,0},
+        {0,0,0,0,0,2},
+        {0,0,0,1,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {12,1,9,9,1,1},
+        {9,1,1,12,12,9},
+        {1,12,9,1,9,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter3 = {
+    name="Encounter3",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="HeelNavi",rank=4},
+        {name="Shrimpy",rank=4},
+    },
+    obstacles={
+        {name="BlastCube"},
+        {name="BlastCube"},
+    },
+    positions={
+        {0,0,0,2,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,1},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,1,0},
+        {0,0,2,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter4 = {
+    name="Encounter4",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Swordy",rank=4},
+        {name="Flashy",rank=4},
+        {name="Scuttzer",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,2,0},
+        {0,0,0,0,3,0},
+        {0,0,0,1,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,1,1,9,9,9},
+        {1,9,9,9,9,1},
+        {9,9,9,1,1,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter5 = {
+    name="Encounter5",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Yort",rank=4},
+        {name="Cacter",rank=1},
+        {name="ColdHead",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,3},
+        {0,0,0,0,2,0},
+        {0,0,0,1,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,1,1,9,8,1},
+        {9,1,9,9,1,9},
+        {1,8,9,1,1,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter6 = {
+    name="Encounter6",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="GigaCorn",rank=1},
+        {name="KillFlower",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,1},
+        {0,0,0,0,2,0},
+        {0,0,0,1,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {9,9,9,9,9,9},
+        {9,11,9,9,11,9},
+        {9,9,9,9,9,9},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter7 = {
+    name="Encounter7",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="WindBox",rank=4},
+        {name="Yort",rank=4},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,2,1},
+        {0,0,0,2,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {9,9,2,2,9,9},
+        {2,9,2,2,9,2},
+        {9,9,2,2,9,9},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter8 = {
+    name="Encounter8",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="KillFlower",rank=1},
+        {name="DreamMoss",rank=1},
         {name="Sniper",rank=1},
     },
-    positions = {
-        
-        {0,0,0,0,2,1},
+    obstacles={
+    },
+    positions={
         {0,0,0,0,0,0},
-        {0,0,0,0,0,3}
-    },
-    obstacles = {
-        {name="IceCube"},
-    },
-    obstacle_positions = {
-        {1,0,0,0,0,0},
+        {0,0,0,2,3,1},
         {0,0,0,0,0,0},
-        {0,0,0,1,0,0}
-    },    
-    tiles = {
-        {1,1,3,1,1,1},
-        {3,1,3,1,1,1},
-        {3,1,1,1,1,1}
     },
-    
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,1,1,1,1,8},
+        {9,9,9,9,9,9},
+        {1,1,1,1,1,8},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
 }
 
+local Encounter9 = {
+    name="Encounter9",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="SwapLight",rank=1},
+        {name="Elemperor",rank=3},
+        {name="Cragger",rank=4},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,2,0,0},
+        {0,0,0,0,3,1},
+        {0,0,0,2,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {9,1,14,14,1,9},
+        {1,9,1,1,9,11},
+        {14,1,9,9,1,14},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
 
+local Encounter10 = {
+    name="Encounter10",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="WoodmanPoN",rank=4},
+        {name="ElementMan",rank=8},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,1,0},
+        {0,0,0,0,2,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
 
 return {
-    minimum_steps_before_encounter=90,
-    encounter_chance_per_step=0.7,
-    encounters={encounter1, encounter2, encounter3, encounter4, encounter5}
+    minimum_steps_before_encounter=80,
+    encounter_chance_per_step=0.05,
+    encounters={Encounter1,Encounter2,Encounter3,Encounter4,Encounter5,Encounter6,Encounter7,Encounter8,Encounter9,Encounter10}
 }
-
-

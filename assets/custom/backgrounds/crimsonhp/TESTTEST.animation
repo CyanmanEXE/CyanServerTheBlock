@@ -1,0 +1,5 @@
+!frame_rate 60
+!image_path "C:/Users/ddson/OneDrive/Desktop/Megaman ONB related/test ground/CyanServerTheBlock/assets/custom/backgrounds/crimsonhp/event.png"
+
+anim "New State"
+frame dur=5f x=0 y=-4 w=257 h=105 originx=0 originy=0

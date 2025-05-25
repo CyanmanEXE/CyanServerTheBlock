@@ -314,42 +314,6 @@
     <property name="Unlock Item" value="Shifting Key"/>
    </properties>
   </object>
-  <object id="44" type="Checkpoint" gid="98" x="624" y="1520" width="48" height="52">
-   <properties>
-    <property name="Dialogue Type" value="None"/>
-    <property name="Disappear Cooldown" type="float" value="0"/>
-    <property name="Once" type="bool" value="false"/>
-    <property name="Password" value="no"/>
-    <property name="Required Keys" type="int" value="1"/>
-    <property name="Take Item" type="bool" value="false"/>
-    <property name="Unlock GID" type="int" value="0"/>
-    <property name="Unlock Item" value="Shifting Key"/>
-   </properties>
-  </object>
-  <object id="46" type="Checkpoint" gid="98" x="816" y="496" width="48" height="52">
-   <properties>
-    <property name="Dialogue Type" value="None"/>
-    <property name="Disappear Cooldown" type="float" value="0"/>
-    <property name="Once" type="bool" value="false"/>
-    <property name="Password" value="no"/>
-    <property name="Required Keys" type="int" value="1"/>
-    <property name="Take Item" type="bool" value="false"/>
-    <property name="Unlock GID" type="int" value="0"/>
-    <property name="Unlock Item" value="Shifting Key"/>
-   </properties>
-  </object>
-  <object id="47" type="Checkpoint" gid="98" x="336" y="944" width="48" height="52">
-   <properties>
-    <property name="Dialogue Type" value="None"/>
-    <property name="Disappear Cooldown" type="float" value="0"/>
-    <property name="Once" type="bool" value="false"/>
-    <property name="Password" value="no"/>
-    <property name="Required Keys" type="int" value="1"/>
-    <property name="Take Item" type="bool" value="false"/>
-    <property name="Unlock GID" type="int" value="0"/>
-    <property name="Unlock Item" value="Shifting Key"/>
-   </properties>
-  </object>
   <object id="48" name="Open BBS" type="Board" gid="93" x="672" y="936" width="32" height="56">
    <properties>
     <property name="BBS" type="bool" value="true"/>
@@ -1223,8 +1187,16 @@ DO YOU WANT THEM?</property>
    </properties>
    <point/>
   </object>
-  <object id="346" gid="500" x="824.727" y="879.455" width="18" height="25"/>
-  <object id="347" gid="500" x="824.909" y="891.273" width="18" height="25"/>
+  <object id="346" gid="500" x="824.727" y="879.455" width="18" height="25">
+   <properties>
+    <property name="Flavor" value="A special edition of Striver Gale! This must of been alot of cash.."/>
+   </properties>
+  </object>
+  <object id="347" gid="500" x="824.909" y="891.273" width="18" height="25">
+   <properties>
+    <property name="Flavor" value="A basic beyblade, Radiated Kong!"/>
+   </properties>
+  </object>
   <object id="348" name="Crimson" type="NPC" x="696" y="1016">
    <properties>
     <property name="Asset Name" value="ow"/>
@@ -1243,6 +1215,11 @@ DO YOU WANT THEM?</property>
     <property name="Wait Time" value="2"/>
    </properties>
    <point/>
+  </object>
+  <object id="302" gid="494" x="82.7727" y="114.439" width="136" height="116">
+   <properties>
+    <property name="Flavor" value="A green water fountain? Who is in charge of quality control down here?"/>
+   </properties>
   </object>
  </objectgroup>
  <layer id="3" name="Tile Layer 2" width="105" height="60" offsetx="0" offsety="-16">
@@ -2237,7 +2214,6 @@ DO YOU WANT THEM?</property>
    <point/>
   </object>
   <object id="299" gid="369" x="2850.5" y="-176.5" width="64" height="50"/>
-  <object id="302" gid="494" x="161.5" y="194.5" width="136" height="116"/>
   <object id="341" name="oooTodefault" type="Radius Warp" x="3232" y="1744">
    <properties>
     <property name="Activation Radius" value="1.15"/>

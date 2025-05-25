@@ -147,7 +147,7 @@
   <object id="59" gid="61" x="1040" y="712" width="44" height="61"/>
   <object id="60" gid="61" x="816" y="784" width="44" height="61"/>
   <object id="62" gid="71" x="1155.75" y="1026.75" width="70" height="42"/>
-  <object id="63" gid="71" x="1092.17" y="1092.5" width="70" height="42">
+  <object id="63" gid="71" x="1075" y="1083" width="70" height="42">
    <properties>
     <property name="Flavor" value="I know where u live :)"/>
    </properties>
@@ -163,7 +163,7 @@
     <property name="Activation Radius" value="0.6"/>
     <property name="Arrival Animation" value="arrow_down_left_in"/>
     <property name="Leave Animation" value="arrow_down_left_out"/>
-    <property name="Target Area" value="default"/>
+    <property name="Target Area" value="undernet1"/>
     <property name="Target Object" value="232"/>
    </properties>
    <point/>

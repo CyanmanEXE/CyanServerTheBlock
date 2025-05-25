@@ -388,7 +388,7 @@ encounter options:
         - `BombCorn` (1,4,6,7) ~Author LouisE#9864
         - `JokerEye` (1) ~Author LouisE#9864
         - `MegaCorn` (1) ~Author LouisE#9864
-        - `GigaCorn` (1) ~Author LouisE#9864
+        - `GigaCorn` (1) ~Author LouisE#9864 -BombFamilyDoesntWork
         - `Bladia` (1) ~Author DawnOwl#5358
         - `Metrid` (1,2,3,4) ~Author DawnOwl#5358
         - `Basher` (1) ~Author DawnOwl#5358

@@ -107,7 +107,7 @@
     <property name="Activation Radius" value="0.6"/>
     <property name="Arrival Animation" value="arrow_up_left_in"/>
     <property name="Leave Animation" value="arrow_up_left_out"/>
-    <property name="Target Area" value="default"/>
+    <property name="Target Area" value="undernet1"/>
     <property name="Target Object" value="114"/>
    </properties>
    <point/>
@@ -117,7 +117,7 @@
     <property name="Activation Radius" value="0.6"/>
     <property name="Arrival Animation" value="arrow_up_left_in"/>
     <property name="Leave Animation" value="arrow_up_left_out"/>
-    <property name="Target Area" value="default"/>
+    <property name="Target Area" value="undernet1"/>
     <property name="Target Object" value="115"/>
    </properties>
    <point/>
@@ -452,7 +452,7 @@
   <object id="99" gid="88" x="464" y="496" width="44" height="61"/>
   <object id="100" name="Gobby's somthing two" type="Server Warp" gid="84" x="368" y="400" width="114" height="64">
    <properties>
-    <property name="Address" value="keristero.xyz"/>
+    <property name="Address" value="goblinriothq.redirectme.net"/>
     <property name="Data" value="TheBlock_0"/>
     <property name="Direction" value="Up Right"/>
     <property name="Incoming Data" value="ReyOverhead_0"/>
@@ -900,7 +900,7 @@
     <property name="Activation Radius" value="0.6"/>
     <property name="Arrival Animation" value="arrow_up_left_in"/>
     <property name="Leave Animation" value="arrow_up_left_out"/>
-    <property name="Target Area" value="default"/>
+    <property name="Target Area" value="undernet1"/>
     <property name="Target Object" value="178"/>
    </properties>
    <point/>

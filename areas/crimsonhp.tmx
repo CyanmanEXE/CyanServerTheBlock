@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="80" height="94" tilewidth="64" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="330">
+<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="80" height="94" tilewidth="64" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="336">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/custom/backgrounds/crimsonhp/bg.animation"/>
@@ -23,6 +23,7 @@
  <tileset firstgid="141" source="../assets/tiles/Cyber_Rail.tsx"/>
  <tileset firstgid="142" source="../assets/tiles/gate.tsx"/>
  <tileset firstgid="147" source="../assets/tiles/MysteryData.tsx"/>
+ <tileset firstgid="187" source="../assets/tiles/speaker.tsx"/>
  <layer id="1" name="Tile Layer 1" width="80" height="94">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -267,12 +268,6 @@
   <object id="90" gid="108" x="1216" y="2232" width="64" height="32"/>
   <object id="91" gid="107" x="1184" y="2200" width="64" height="32"/>
   <object id="92" gid="106" x="1152" y="2168" width="64" height="32"/>
-  <object id="93" gid="108" x="1112" y="2176" width="64" height="32"/>
-  <object id="94" gid="107" x="1080" y="2144" width="64" height="32"/>
-  <object id="95" gid="106" x="1048" y="2112" width="64" height="32"/>
-  <object id="96" gid="108" x="1048" y="2176" width="64" height="32"/>
-  <object id="97" gid="107" x="1016" y="2144" width="64" height="32"/>
-  <object id="98" gid="106" x="984" y="2112" width="64" height="32"/>
   <object id="99" gid="108" x="1456" y="1824" width="64" height="32"/>
   <object id="100" gid="107" x="1424" y="1792" width="64" height="32"/>
   <object id="101" gid="106" x="1392" y="1760" width="64" height="32"/>
@@ -517,7 +512,7 @@
   <object id="155" gid="109" x="1022.5" y="2205.5" width="35" height="45"/>
   <object id="156" gid="110" x="1056" y="2204" width="35" height="45"/>
   <object id="157" gid="111" x="1072.5" y="2199.5" width="35" height="45"/>
-  <object id="158" name="Pepperment" type="NPC" x="1048.5" y="2169.5">
+  <object id="158" name="Pepperment" type="NPC" x="1055.5" y="2174.5">
    <properties>
     <property name="Asset Name" value="punk-navi-exe6_navy"/>
     <property name="Dialogue Type" value="random"/>
@@ -1086,7 +1081,7 @@
   </object>
   <object id="325" name="Gobby's somthing one" type="Server Warp" gid="93" x="280" y="240" width="114" height="64">
    <properties>
-    <property name="Address" value="keristero.xyz"/>
+    <property name="Address" value="goblinriothq.redirectme.net"/>
     <property name="Data" value="TheBlock_1"/>
     <property name="Direction" value="Down Left"/>
     <property name="Incoming Data" value="ReyOverhead_1"/>
@@ -1136,6 +1131,8 @@
    </properties>
    <point/>
   </object>
+  <object id="334" gid="187" x="2003" y="751" width="91" height="77"/>
+  <object id="335" gid="187" x="1947.5" y="752.5" width="91" height="77"/>
  </objectgroup>
  <layer id="3" name="Tile Layer 2" width="80" height="94" offsetx="0" offsety="-16">
   <data encoding="csv">
@@ -1444,5 +1441,7 @@
    </properties>
    <point/>
   </object>
+  <object id="332" gid="187" x="2007.5" y="712.5" width="91" height="77"/>
+  <object id="333" gid="187" x="1898.5" y="711.5" width="91" height="77"/>
  </objectgroup>
 </map>

@@ -9,11 +9,11 @@
   <property name="Liberation Encounters" value="/server/assets/encounters/NebulousEncounters/ACDC4Liberation.zip"/>
   <property name="Liberation Tileset" value="/server/assets/tiles/panels.tsx"/>
   <property name="Name" value="Template Lib"/>
-  <property name="Respawn Area" value="default"/>
+  <property name="Respawn Area" value="undernet1"/>
   <property name="Song" value="/server/assets/music/AlouetteEXE_-_Keep_Out_Undernet.ogg"/>
   <property name="Target Phase Count" type="int" value="10"/>
   <property name="Target Player Count" type="int" value="8"/>
-  <property name="Waiting Area" value="default"/>
+  <property name="Waiting Area" value="undernet1"/>
  </properties>
  <tileset firstgid="1" source="../assets/tiles/panel base.tsx"/>
  <tileset firstgid="4" source="../assets/tiles/panels.tsx"/>

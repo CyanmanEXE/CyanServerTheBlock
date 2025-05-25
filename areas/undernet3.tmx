@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="40" height="55" tilewidth="64" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="68">
+<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="40" height="55" tilewidth="64" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="106">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/custom/backgrounds/area1/GrayBG.animation"/>
@@ -29,6 +29,8 @@
  <tileset firstgid="226" source="../assets/tiles/DarkTree.tsx"/>
  <tileset firstgid="227" source="../assets/tiles/rak.tsx"/>
  <tileset firstgid="232" source="../assets/tiles/bn6_securitycube.tsx"/>
+ <tileset firstgid="246" source="../assets/tiles/vines.tsx"/>
+ <tileset firstgid="247" source="../assets/tiles/Boulder.tsx"/>
  <layer id="1" name="Tile Layer 1" width="40" height="55">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -194,12 +196,14 @@
    </properties>
    <point/>
   </object>
-  <object id="45" name="Lamal" type="NPC" x="341.25" y="1012.75">
+  <object id="45" name="Lamal" type="NPC" x="344" y="1016">
    <properties>
     <property name="Asset Name" value="heel-navi-exe4_orange"/>
-    <property name="Dialogue Type" value="first"/>
+    <property name="Dialogue Type" value="question"/>
     <property name="Direction" value="Up Right"/>
-    <property name="Text 1" value=".  .  ."/>
+    <property name="Next 1" type="object" value="87"/>
+    <property name="Next 2" type="object" value="86"/>
+    <property name="Text 1" value="Hi, you got a minute?"/>
     <property name="Wait Time" value="2"/>
    </properties>
    <point/>
@@ -291,8 +295,8 @@ What a rip-off!</property>
   <object id="58" name="undernet3toundernet5" type="Radius Warp" x="81.3636" y="1553.55">
    <properties>
     <property name="Activation Radius" value="0.6"/>
-    <property name="Arrival Animation" value="arrow_down_right_in"/>
-    <property name="Leave Animation" value="arrow_down_right_out"/>
+    <property name="Arrival Animation" value="arrow_up_left_in"/>
+    <property name="Leave Animation" value="arrow_up_left_out"/>
     <property name="Target Area" value="undernet5"/>
     <property name="Target Object" value="156"/>
    </properties>
@@ -305,7 +309,7 @@ What a rip-off!</property>
   <object id="64" gid="229" x="996.5" y="610.167" width="48" height="40"/>
   <object id="65" gid="165" x="854.5" y="506.5" width="64" height="32"/>
   <object id="66" gid="165" x="822.167" y="636.5" width="64" height="32"/>
-  <object id="67" type="Checkpoint" gid="232" x="436.5" y="913.5" width="48" height="52">
+  <object id="67" type="Checkpoint" gid="232" x="24" y="840" width="48" height="52">
    <properties>
     <property name="Description" value="Error, please enter password..."/>
     <property name="Dialogue Type" value="None"/>
@@ -317,6 +321,114 @@ What a rip-off!</property>
     <property name="Take Item" type="bool" value="false"/>
     <property name="Unlock Item" value="Shifting Key"/>
    </properties>
+  </object>
+  <object id="69" gid="246" x="740.167" y="1511.83" width="70" height="42"/>
+  <object id="70" gid="246" x="749.167" y="1545.5" width="70" height="42"/>
+  <object id="71" gid="246" x="726" y="1536.67" width="70" height="42"/>
+  <object id="72" gid="246" x="771.167" y="1536.83" width="70" height="42"/>
+  <object id="73" gid="246" x="705" y="1537.67" width="70" height="42"/>
+  <object id="74" gid="246" x="714.167" y="1570.5" width="70" height="42"/>
+  <object id="75" gid="246" x="740.833" y="1556.5" width="70" height="42"/>
+  <object id="76" gid="246" x="768.167" y="1566.5" width="70" height="42"/>
+  <object id="77" gid="246" x="739.833" y="1590.17" width="70" height="42"/>
+  <object id="78" gid="246" x="717.667" y="1598.33" width="70" height="42"/>
+  <object id="79" gid="246" x="761" y="1593" width="70" height="42"/>
+  <object id="80" name="Mal" type="NPC" x="723.667" y="1425.67">
+   <properties>
+    <property name="Asset Name" value="normal-navi-bn4_bad"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Text 1" value="Juuusssstt GREAT! I tried to get to undernet 2 but Wiltman blocked it off! This blows.."/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="81" gid="246" x="368" y="408" width="70" height="42"/>
+  <object id="82" gid="246" x="392" y="432" width="70" height="42"/>
+  <object id="83" gid="246" x="384" y="392" width="70" height="42"/>
+  <object id="84" gid="246" x="416" y="424" width="70" height="42"/>
+  <object id="85" gid="246" x="368" y="392" width="70" height="42"/>
+  <object id="86" name="Yes" type="Dialogue" x="272" y="976">
+   <properties>
+    <property name="Dialogue Type" value="question"/>
+    <property name="Next 1" type="object" value="89"/>
+    <property name="Next 2" type="object" value="88"/>
+    <property name="Text 1" value="Really? Sweet, do you know the legends of Styanax?"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="87" name="No" type="Dialogue" x="304" y="944">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Text 1" value="Ah, alright.."/>
+   </properties>
+   <point/>
+  </object>
+  <object id="88" name="Yes" type="Dialogue" x="184" y="960">
+   <properties>
+    <property name="Dialogue Type" value="question"/>
+    <property name="Next 1" type="object" value="91"/>
+    <property name="Next 2" type="object" value="90"/>
+    <property name="Text 1" value="You do?? Sweet lets begin."/>
+   </properties>
+   <point/>
+  </object>
+  <object id="89" name="No" type="Dialogue" x="216" y="928">
+   <properties>
+    <property name="Dialogue Type" value="question"/>
+    <property name="Next 1" type="object" value="91"/>
+    <property name="Next 2" type="object" value="88"/>
+    <property name="Text 1" value="For real? Do you want to hear about it then?"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="90" name="Alright!" type="Dialogue" x="112" y="944">
+   <properties>
+    <property name="Dialogue Type" value="question"/>
+    <property name="Next 1" type="object" value="91"/>
+    <property name="Next 2" type="object" value="90"/>
+    <property name="Text 1" value="So there's this character who was designed to hunt some Cyan colored navi but he's been searching for years! ok this was a test,get out."/>
+   </properties>
+   <point/>
+  </object>
+  <object id="91" name="No" type="Dialogue" x="144" y="912">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Text 1" value="Alright suit your sell small fry."/>
+   </properties>
+   <point/>
+  </object>
+  <object id="92" name="Kelbo" type="NPC" x="344" y="952">
+   <properties>
+    <property name="Asset Name" value="punk-navi-exe6_red"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Left"/>
+    <property name="Text 1" value="That guy doesnt make any sense. I dont like hiim..."/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="93" gid="247" x="351" y="875" width="47" height="58"/>
+  <object id="94" gid="247" x="356" y="892" width="47" height="58"/>
+  <object id="95" gid="247" x="382.5" y="897.5" width="47" height="58"/>
+  <object id="96" gid="247" x="388.5" y="923.5" width="47" height="58"/>
+  <object id="97" gid="247" x="373.5" y="932.5" width="47" height="58"/>
+  <object id="98" gid="247" x="398" y="968" width="47" height="58"/>
+  <object id="99" gid="247" x="415" y="929" width="47" height="58"/>
+  <object id="100" gid="247" x="414.5" y="951.5" width="47" height="58"/>
+  <object id="101" gid="247" x="444" y="962" width="47" height="58"/>
+  <object id="102" gid="247" x="429.5" y="984.5" width="47" height="58"/>
+  <object id="103" gid="247" x="413.5" y="988.5" width="47" height="58"/>
+  <object id="104" gid="247" x="333.5" y="896.5" width="47" height="58"/>
+  <object id="105" name="Kan" type="NPC" x="407" y="855">
+   <properties>
+    <property name="Asset Name" value="heel-navi-exe4_orange"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Right"/>
+    <property name="Text 1" value="Welp that' a bummer, cant get through like this..."/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
   </object>
  </objectgroup>
  <objectgroup id="8" name="Object Layer 2" offsetx="0" offsety="-64"/>
