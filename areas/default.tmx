@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="20" height="15" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="54">
+<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="30" height="15" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="75">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/custom/backgrounds/crimsonhp/highway.animation"/>
@@ -25,27 +25,27 @@
  <tileset firstgid="119" source="../assets/tiles/vendor_desk.tsx"/>
  <tileset firstgid="123" source="../assets/tiles/gate.tsx"/>
  <tileset firstgid="128" source="../assets/tiles/train.tsx"/>
- <layer id="1" name="Tile Layer 1" width="20" height="15">
+ <layer id="1" name="Tile Layer 1" width="30" height="15">
   <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,57,57,57,0,0,0,0,0,0,0,57,57,57,0,0,0,
-0,0,0,0,57,57,57,0,0,18,18,18,0,0,57,57,57,0,0,0,
-0,0,0,0,57,57,57,0,0,0,18,0,0,0,57,57,57,0,0,0,
-0,0,0,0,0,56,0,0,0,30,30,30,0,0,0,19,0,0,0,0,
-0,0,0,0,0,56,56,56,56,56,18,19,19,19,19,19,0,0,0,0,
-0,0,0,0,0,0,0,0,0,18,30,18,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,18,18,0,18,18,18,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,18,18,18,18,18,18,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,18,18,0,18,18,18,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,
+0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,
+0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,57,57,57,0,0,0,0,0,0,0,57,57,57,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,57,57,57,0,0,18,18,18,0,0,57,57,57,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,57,57,57,0,0,0,18,0,0,0,57,57,57,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,56,0,0,0,30,30,30,0,0,0,19,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,56,56,56,56,56,18,19,19,19,19,19,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,18,30,18,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,18,18,0,18,18,18,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,18,18,18,18,18,18,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,18,18,0,18,18,18,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" type="Custom Warp" gid="69" x="464" y="176" width="114" height="64">
+  <object id="1" type="Custom Warp" gid="69" x="624" y="176" width="114" height="64">
    <properties>
     <property name="Direction" value="Down Left"/>
     <property name="Target Area" value="undernet1"/>
@@ -53,7 +53,7 @@
     <property name="Warp In" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="2" type="Custom Warp" gid="69" x="144" y="176" width="114" height="64">
+  <object id="2" type="Custom Warp" gid="69" x="304" y="176" width="114" height="64">
    <properties>
     <property name="Direction" value="Down Left"/>
     <property name="Target Area" value="Netopia1"/>
@@ -61,7 +61,7 @@
     <property name="Warp In" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="3" name="Prog-743" type="NPC" x="304" y="272">
+  <object id="3" name="Prog-743" type="NPC" x="464" y="272">
    <properties>
     <property name="Asset Name" value="prog"/>
     <property name="Dialogue Type" value="first"/>
@@ -71,13 +71,13 @@
    </properties>
    <point/>
   </object>
-  <object id="4" type="Home Warp" gid="73" x="319" y="415" width="62" height="37">
+  <object id="4" type="Home Warp" gid="73" x="479" y="415" width="62" height="37">
    <properties>
     <property name="Direction" value="Up Right"/>
     <property name="Warp In" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="9" name="HighwayBBS" gid="79" x="288" y="200" width="32" height="56">
+  <object id="9" name="HighwayBBS" gid="79" x="448" y="200" width="32" height="56">
    <properties>
     <property name="BBS" type="bool" value="true"/>
     <property name="Color" type="color" value="#ff00ffff"/>
@@ -85,14 +85,14 @@
     <property name="Post Limit" type="int" value="100"/>
    </properties>
   </object>
-  <object id="22" gid="94" x="440.5" y="215.5" width="29" height="37"/>
-  <object id="23" gid="94" x="572.5" y="225.5" width="29" height="37"/>
-  <object id="24" gid="2147483746" x="356.5" y="195.5" width="44" height="71">
+  <object id="22" gid="94" x="600.5" y="215.5" width="29" height="37"/>
+  <object id="23" gid="94" x="732.5" y="225.5" width="29" height="37"/>
+  <object id="24" gid="2147483746" x="516.5" y="195.5" width="44" height="71">
    <properties>
-    <property name="Flavor" value="UPDATE 4.0.0: ADDED 2 new AREAS, ADDED NEW VIRUS ENCOUNTERS, REMOVED GOLDEN MOLOKO I THINK, NEW FUN FACTS, FIXED ROBBERS TRYING TO ROB YOU MAYBE, ADDED NO USE FOR MONEY AGAIN. LAST UPDATED 5/25/25 12:46 AM!"/>
+    <property name="Flavor" value="UPDATE 4.0.1: ADDED 2 new AREAS, ADDED NEW VIRUS ENCOUNTERS, REMOVED GOLDEN MOLOKO I THINK, NEW FUN FACTS, FIXED ROBBERS TRYING TO ROB YOU MAYBE, ADDED NO USE FOR MONEY AGAIN. LAST UPDATED 5/26/25 6:45 PM!"/>
    </properties>
   </object>
-  <object id="33" name="Prog-356" type="NPC" x="205" y="431">
+  <object id="33" name="Prog-356" type="NPC" x="365" y="431">
    <properties>
     <property name="Asset Name" value="prog"/>
     <property name="Dialogue Type" value="question"/>
@@ -105,7 +105,7 @@
    </properties>
    <point/>
   </object>
-  <object id="34" name="Yes" type="Dialogue" x="157" y="379">
+  <object id="34" name="Yes" type="Dialogue" x="317" y="379">
    <properties>
     <property name="Dialogue Type" value="question"/>
     <property name="Next 1" type="object" value="36"/>
@@ -114,7 +114,7 @@
    </properties>
    <point/>
   </object>
-  <object id="35" name="No" type="Dialogue" x="151" y="449">
+  <object id="35" name="No" type="Dialogue" x="311" y="449">
    <properties>
     <property name="Dialogue Type" value="question"/>
     <property name="Next 1" type="object" value="38"/>
@@ -123,61 +123,55 @@
    </properties>
    <point/>
   </object>
-  <object id="36" name="Yes" type="Dialogue" x="134.5" y="335.5">
+  <object id="36" name="Yes" type="Dialogue" x="294.5" y="335.5">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Text 1" value="YAY!!!"/>
    </properties>
    <point/>
   </object>
-  <object id="37" name="No" type="Dialogue" x="108.5" y="363.5">
+  <object id="37" name="No" type="Dialogue" x="268.5" y="363.5">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Text 1" value="YOU GOT MY HOPES UP!.."/>
    </properties>
    <point/>
   </object>
-  <object id="38" name="Yes" type="Dialogue" x="119" y="403">
+  <object id="38" name="Yes" type="Dialogue" x="279" y="403">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Text 1" value="DANG.. I NEED TO GET FIXED!"/>
    </properties>
    <point/>
   </object>
-  <object id="39" name="No" type="Dialogue" x="84.5" y="417.5">
+  <object id="39" name="No" type="Dialogue" x="244.5" y="417.5">
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Text 1" value="OH YOU JOKESTER!"/>
    </properties>
    <point/>
   </object>
-  <object id="40" gid="2147483767" x="217.5" y="408.5" width="35" height="45">
+  <object id="40" gid="2147483767" x="377.5" y="408.5" width="35" height="45">
    <properties>
     <property name="Interact Relay" type="object" value="33"/>
    </properties>
   </object>
-  <object id="41" gid="2147483768" x="216" y="442" width="35" height="45">
+  <object id="41" gid="2147483768" x="376" y="442" width="35" height="45">
    <properties>
     <property name="Interact Relay" type="object" value="33"/>
    </properties>
   </object>
-  <object id="43" gid="2147483769" x="211.5" y="478.5" width="35" height="45">
+  <object id="43" gid="2147483769" x="371.5" y="478.5" width="35" height="45">
    <properties>
     <property name="Interact Relay" type="object" value="33"/>
    </properties>
   </object>
-  <object id="44" gid="2147483768" x="216" y="462" width="35" height="45">
+  <object id="44" gid="2147483768" x="376" y="462" width="35" height="45">
    <properties>
     <property name="Interact Relay" type="object" value="33"/>
    </properties>
   </object>
-  <object id="47" gid="128" x="476.5" y="129.5" width="67" height="58"/>
-  <object id="48" gid="129" x="520.5" y="129.5" width="67" height="58"/>
-  <object id="49" gid="128" x="157" y="131" width="67" height="58"/>
-  <object id="50" gid="129" x="201" y="131" width="67" height="58"/>
-  <object id="51" gid="128" x="302" y="128" width="67" height="58"/>
-  <object id="52" gid="129" x="346" y="128" width="67" height="58"/>
-  <object id="53" type="Checkpoint" gid="101" x="175.5" y="304.5" width="48" height="52">
+  <object id="53" type="Checkpoint" gid="101" x="336" y="304" width="48" height="52">
    <properties>
     <property name="Description" value="We are sorry! This area is under construction! Please come back another time! Admin's welcome!"/>
     <property name="Dialogue Type" value="None"/>
@@ -189,6 +183,111 @@
     <property name="Take Item" type="bool" value="false"/>
     <property name="Unlock Item" value="Shifting Key"/>
    </properties>
+  </object>
+  <object id="57" name="Prog-257" type="NPC" x="880" y="80">
+   <properties>
+    <property name="Asset Name" value="train2"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Left"/>
+    <property name="Next Waypoint 1" type="object" value="60"/>
+    <property name="Text 1" value="HELLO! WELCOME TO THE HIGHWAY! TO MY LEFT, YOU WILL FIND YOURSELF IN THE UNDERNET(THE BLOCK) AND TO MY RIGHT YOU WILL FIND YOURSELF AT NETOPIA!. SAFE TRAVELS!"/>
+    <property name="Wait Time" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="60" name="Waypoint 1" type="Waypoint" x="80" y="80">
+   <properties>
+    <property name="Direction" value="Up Left"/>
+    <property name="Next Waypoint 1" type="object" value="61"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="61" name="Waypoint 2" type="Waypoint" x="80" y="80">
+   <properties>
+    <property name="Direction" value="Down Right"/>
+    <property name="Next Waypoint 1" type="object" value="62"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="62" name="Waypoint 3" type="Waypoint" x="880" y="80">
+   <properties>
+    <property name="Direction" value="Down Right"/>
+    <property name="Next Waypoint 1" type="object" value="57"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="67" name="Prog-257" type="NPC" x="80" y="112">
+   <properties>
+    <property name="Asset Name" value="train2"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="Next Waypoint 1" type="object" value="68"/>
+    <property name="Text 1" value="HELLO! WELCOME TO THE HIGHWAY! TO MY LEFT, YOU WILL FIND YOURSELF IN THE UNDERNET(THE BLOCK) AND TO MY RIGHT YOU WILL FIND YOURSELF AT NETOPIA!. SAFE TRAVELS!"/>
+    <property name="Wait Time" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="68" name="Waypoint 1" type="Waypoint" x="880" y="112">
+   <properties>
+    <property name="Direction" value="Down Right"/>
+    <property name="Next Waypoint 1" type="object" value="69"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="69" name="Waypoint 2" type="Waypoint" x="880" y="112">
+   <properties>
+    <property name="Direction" value="Up Left"/>
+    <property name="Next Waypoint 1" type="object" value="70"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="70" name="Waypoint 3" type="Waypoint" x="80" y="112">
+   <properties>
+    <property name="Direction" value="Up Left"/>
+    <property name="Next Waypoint 1" type="object" value="67"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="71" name="Prog-257" type="NPC" x="80" y="48">
+   <properties>
+    <property name="Asset Name" value="train2"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="Next Waypoint 1" type="object" value="72"/>
+    <property name="Text 1" value="HELLO! WELCOME TO THE HIGHWAY! TO MY LEFT, YOU WILL FIND YOURSELF IN THE UNDERNET(THE BLOCK) AND TO MY RIGHT YOU WILL FIND YOURSELF AT NETOPIA!. SAFE TRAVELS!"/>
+    <property name="Wait Time" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="72" name="Waypoint 1" type="Waypoint" x="880" y="48">
+   <properties>
+    <property name="Direction" value="Down Right"/>
+    <property name="Next Waypoint 1" type="object" value="73"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="73" name="Waypoint 2" type="Waypoint" x="880" y="48">
+   <properties>
+    <property name="Direction" value="Up Left"/>
+    <property name="Next Waypoint 1" type="object" value="74"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="74" name="Waypoint 3" type="Waypoint" x="80" y="48">
+   <properties>
+    <property name="Direction" value="Up Left"/>
+    <property name="Next Waypoint 1" type="object" value="71"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
   </object>
  </objectgroup>
 </map>
