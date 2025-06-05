@@ -5,6 +5,7 @@ local compression_script = {}
 compression_script.colliders = {}
 compression_script.compressed_players = {}
 
+
 Net:on("player_move", function(event)
   local player_id = event.player_id
   local area_id = Net.get_player_area(player_id)
@@ -12,8 +13,10 @@ Net:on("player_move", function(event)
   local area_colliders = compression_script.colliders[area_id]
   for _, collider in ipairs(area_colliders) do
     if compression_script.is_colliding(collider, event.x, event.y, event.z) then
+      
       if collider.custom_properties.Compress then
         compression_script.compress(player_id)
+       
       elseif collider.custom_properties.Decompress then
         compression_script.decompress(player_id)
       end

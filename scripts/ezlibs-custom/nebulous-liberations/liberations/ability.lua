@@ -44,7 +44,7 @@ local function battle_to_liberate_and_loot(instance, player_session, r, remove_t
 end
 
 local Ability = {
-  Guard = {name = "Guard"}, -- passive, knightman's ability
+  --Guard = {name = "Guard"}, -- passive, knightman's ability
   Shadowstep = {name = "Shadowstep"}, --passive, Shadowman's ability
   HeroSwrd = {
     name = "HeroSwrd",
@@ -196,7 +196,7 @@ local navi_ability_map = {
   HeroSwrd = Ability.HeroSwrd,
   WideSwrd = Ability.WideSwrd,
   OldSaber = Ability.ScrenDiv,
-  Guard = Ability.Guard,
+  --Guard = Ability.Guard,
   HexScyth = Ability.HexSickle,
   NumGadgt = Ability.NumberSearch,
   GutsHamr = Ability.GutsWave,

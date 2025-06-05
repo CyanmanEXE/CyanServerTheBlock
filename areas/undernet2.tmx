@@ -316,8 +316,8 @@
   <object id="122" name="Area1" type="Custom Warp" gid="129" x="497.25" y="849.25" width="114" height="64">
    <properties>
     <property name="Direction" value="Down Left"/>
-    <property name="Target Area" value="area1"/>
-    <property name="Target Object" value="1"/>
+    <property name="Target Area" value="headdm"/>
+    <property name="Target Object" value="30"/>
    </properties>
   </object>
  </objectgroup>

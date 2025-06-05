@@ -22,9 +22,6 @@
  <tileset firstgid="7" source="../assets/tiles/selected tile.tsx"/>
  <tileset firstgid="13" source="../assets/tiles/block-undernet.tsx"/>
  <tileset firstgid="61" source="../assets/tiles/panels.tsx"/>
- <tileset firstgid="131" source="../../../Downloads/ServerBackup-main (2)/ServerBackup-main/Server_12_22_2021/assets/tiles/panels.tsx"/>
- <tileset firstgid="131" source="../../../Downloads/ServerBackup-main/ServerBackup-main/Server_12_22_2021/assets/tiles/DarkLiberationRamp.tsx"/>
- <tileset firstgid="131" source="../../../Downloads/ServerBackup-main/ServerBackup-main/Server_12_22_2021/assets/tiles/DarkLiberationTileset.tsx"/>
  <tileset firstgid="131" source="../assets/tiles/DarkLiberationRamp.tsx"/>
  <tileset firstgid="135" source="../assets/tiles/DarkLiberationTileset.tsx"/>
  <layer id="1" name="Tile Layer 1" width="65" height="65">

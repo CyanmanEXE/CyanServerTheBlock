@@ -112,12 +112,5 @@
   <object id="21" gid="393" x="339.25" y="927.417" width="23" height="47"/>
   <object id="22" gid="394" x="344.75" y="902.583" width="23" height="47"/>
   <object id="23" gid="395" x="342.583" y="868.75" width="23" height="47"/>
-  <object id="24" name="fgbmbjkn" type="Custom Warp" gid="18" x="72" y="792" width="114" height="64">
-   <properties>
-    <property name="Direction" value="Down Right"/>
-    <property name="Target Area" value="devroom2"/>
-    <property name="Target Object" value="1"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>

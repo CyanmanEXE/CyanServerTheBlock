@@ -851,8 +851,16 @@
   <object id="313" gid="2147483806" x="1840" y="1120" width="64" height="81"/>
   <object id="314" gid="148" x="1840" y="1144" width="64" height="81"/>
   <object id="315" gid="148" x="1840" y="1120" width="64" height="81"/>
-  <object id="317" gid="166" x="1840" y="1144" width="64" height="81"/>
-  <object id="319" gid="166" x="1840" y="1120" width="64" height="81"/>
+  <object id="317" gid="166" x="1840" y="1144" width="64" height="81">
+   <properties>
+    <property name="Flavor" value="Man... I cant get through this..."/>
+   </properties>
+  </object>
+  <object id="319" gid="166" x="1840" y="1120" width="64" height="81">
+   <properties>
+    <property name="Flavor" value="Too much dark flames.."/>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="4" name="Tile Layer 2" width="90" height="125" offsetx="0" offsety="-16">
   <data encoding="csv">
