@@ -1,34 +1,36 @@
+-- this script might be slow with enough players, but eh
+-- add Rect objects with a custom bool property of Compress or Decompress
 
-local colliders = {}
-local compressed_players = {}
+local compression_script = {}
+compression_script.colliders = {}
+compression_script.compressed_players = {}
 local compressSfx = "/server/assets/compression/sfx.ogg"
 
-function handle_player_move(player_id, x, y, z)
+Net:on("player_move", function(event)
+  local player_id = event.player_id
   local area_id = Net.get_player_area(player_id)
 
-  local area_colliders = colliders[area_id]
-
+  local area_colliders = compression_script.colliders[area_id]
   for _, collider in ipairs(area_colliders) do
-    if is_colliding(collider, x, y, z) then
+    if compression_script.is_colliding(collider, event.x, event.y, event.z) then
       if collider.custom_properties.Compress then
-        compress(player_id)
+        compression_script.compress(player_id)
       elseif collider.custom_properties.Decompress then
-        decompress(player_id)
+        compression_script.decompress(player_id)
       end
-
       break
     end
   end
-end
+end)
 
-function is_colliding(collider, x, y, z)
+function compression_script.is_colliding(collider, x, y, z)
   return collider.z == z and
          x > collider.x and x < collider.x + collider.width and
          y > collider.y and y < collider.y + collider.height
 end
 
-function compress(player_id)
-  if compressed_players[player_id] then
+function compression_script.compress(player_id)
+  if compression_script.compressed_players[player_id] then
     -- already compressed
     return
   end
@@ -42,14 +44,13 @@ function compress(player_id)
       duration = .25
     }
   })
-
   Net.play_sound_for_player(player_id, compressSfx)
 
-  compressed_players[player_id] = true
+  compression_script.compressed_players[player_id] = true
 end
 
-function decompress(player_id)
-  if not compressed_players[player_id] then
+function compression_script.decompress(player_id)
+  if not compression_script.compressed_players[player_id] then
     -- not yet compressed
     return
   end
@@ -63,15 +64,14 @@ function decompress(player_id)
       duration = .25
     }
   })
-
-  Net.play_sound_for_player(player_id, compressSfx)
-
-  compressed_players[player_id] = nil
+Net.play_sound_for_player(player_id, compressSfx)
+  compression_script.compressed_players[player_id] = nil
 end
 
-function handle_player_disconnect(player_id)
-  compressed_players[player_id] = nil
-end
+Net:on("player_disconnect", function(event)
+  local player_id = event.player_id
+  compression_script.compressed_players[player_id] = nil
+end)
 
 for _, area_id in ipairs(Net.list_areas()) do
   local area_colliders = {}
@@ -84,5 +84,7 @@ for _, area_id in ipairs(Net.list_areas()) do
     end
   end
 
-  colliders[area_id] = area_colliders
+  compression_script.colliders[area_id] = area_colliders
 end
+
+return compression_script
