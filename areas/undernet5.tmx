@@ -101,12 +101,12 @@
  </layer>
  <objectgroup id="2" name="Object Layer 1">
   <object id="1" gid="128" x="1952" y="1616" width="96" height="64"/>
-  <object id="4" name="PressExit" x="574.625" y="1279.38" width="32" height="16">
+  <object id="4" name="PressExit" x="576" y="1264" width="32" height="16">
    <properties>
     <property name="Decompress" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="5" name="PressEnter" x="575.125" y="1247.38" width="32" height="32">
+  <object id="5" name="PressEnter" x="576" y="1232" width="32" height="32">
    <properties>
     <property name="Compress" type="bool" value="true"/>
    </properties>
