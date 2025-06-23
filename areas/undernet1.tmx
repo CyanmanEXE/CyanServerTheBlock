@@ -46,6 +46,7 @@
  <tileset firstgid="302" source="../assets/tiles/CompressionRoadsYoka.tsx"/>
  <tileset firstgid="346" source="../assets/tiles/Cyber_Rail.tsx"/>
  <tileset firstgid="347" source="../assets/tiles/warp.tsx"/>
+ <tileset firstgid="353" source="../assets/indy-trains/platforms.tsx"/>
  <layer id="1" name="Tile Layer 1" width="46" height="80">
   <data encoding="csv">
 0,2147483994,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -994,21 +995,6 @@
     <property name="Flavor" value="A leaking pipe.. Someone should fix that..."/>
    </properties>
   </object>
-  <object id="252" gid="300" x="855.5" y="1656.5" width="47" height="58">
-   <properties>
-    <property name="Flavor" value="Dang a big rock is in the way..."/>
-   </properties>
-  </object>
-  <object id="253" gid="300" x="858" y="1624" width="47" height="58">
-   <properties>
-    <property name="Flavor" value="Dang a big rock is in the way..."/>
-   </properties>
-  </object>
-  <object id="254" gid="300" x="888" y="1656" width="47" height="58">
-   <properties>
-    <property name="Flavor" value="Dang a big rock is in the way..."/>
-   </properties>
-  </object>
   <object id="255" gid="301" x="350" y="1054" width="32" height="24">
    <properties>
     <property name="Flavor" value="A GOLDEN MOLOKO WATCHES YOU"/>
@@ -1296,9 +1282,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,3,3,3,0,0,0,0,0,79,79,79,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,3,3,3,79,79,79,79,79,79,79,79,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,3,3,3,0,0,0,0,0,79,79,79,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,353,3,3,0,0,0,0,0,79,79,79,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,2147484002,3,3,79,79,79,79,79,79,79,79,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,3,3,0,0,0,0,0,79,79,79,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1368,7 +1354,7 @@
     <property name="Target Object" value="263"/>
    </properties>
   </object>
-  <object id="265" name="Prog-690" type="Conductor" x="112" y="2208">
+  <object id="265" name="Prog-690" type="Conductor" x="120" y="2200">
    <properties>
     <property name="1 Area" value="default"/>
     <property name="1 Name" value="Rail Road"/>
