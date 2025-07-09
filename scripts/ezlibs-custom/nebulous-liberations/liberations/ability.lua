@@ -190,20 +190,36 @@ CrosBmb = {
   activate = battle_to_liberate_and_loot
 
 },
-}
 
+Bazooka = {
+    name = "Bazooka",
+    question = "Demolish with Bazooka?",
+    cost = 2,
+    remove_traps = true,
+    destroy_items = true,
+    generate_shape = static_shape_generator(0, 0, {
+      {1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1},
+      {1, 1, 1, 1, 1},
+    }),
+    activate = liberate_and_loot
+  }
+}
 local navi_ability_map = {
   HeroSwrd = Ability.HeroSwrd,
   WideSwrd = Ability.WideSwrd,
   OldSaber = Ability.ScrenDiv,
   --Guard = Ability.Guard,
-  HexScyth = Ability.HexSickle,
+  HexSickle = Ability.HexSickle,
   NumGadgt = Ability.NumberSearch,
   GutsHamr = Ability.GutsWave,
   ShdwShoe = Ability.Shadowstep,
   Blaster = Ability.Blaster,
   Burner = Ability.Burner,
-  CrosBmb = Ability.CrosBmb
+  CrosBmb = Ability.CrosBmb,
+  Bazooka = Ability.Bazooka,
 }
 
 function Ability.resolve_for_player(player)

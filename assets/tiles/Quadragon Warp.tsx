@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.8" tiledversion="1.8.4" name="Quadragon Warp" tilewidth="64" tileheight="36" tilecount="12" columns="6" objectalignment="bottom">
+<tileset version="1.10" tiledversion="1.11.2" name="Quadragon Warp" tilewidth="64" tileheight="36" tilecount="12" columns="6" objectalignment="center">
  <tileoffset x="0" y="11"/>
  <image source="Quadragon Warp.png" width="384" height="72"/>
  <tile id="0">

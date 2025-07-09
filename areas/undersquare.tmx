@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="35" height="35" tilewidth="64" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="129">
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="35" height="35" tilewidth="64" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="129">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/custom/backgrounds/area1/GrayBG.animation"/>
@@ -321,9 +321,7 @@
     <property name="Asset Name" value="female-navi-exe5_purple"/>
     <property name="Dialogue Type" value="question"/>
     <property name="Direction" value="Down Left"/>
-    <property name="Next 1" type="object" value="34"/>
-    <property name="Next 2" type="object" value="35"/>
-    <property name="Text 1" value="*twinkle twinkle* With that my simp-ies, we shall go find this... Oh! Hi there, you must be that navi who I'm collabing with! (what was your name again?....hmm the name sounds lame, lets just call you Norm for now) Well Norm! you're a bit late, but never too late for *ahem* Beat! That! Simp! Are you ready to see who's the unlucky fighter today?"/>
+    <property name="Text 1" value="Hm? Oh..Heya. I lost all of my simps.. I... Need a new job, but what??"/>
     <property name="Wait Time" value="2"/>
    </properties>
    <point/>

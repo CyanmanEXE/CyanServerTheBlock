@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="70" height="100" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="255">
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="70" height="100" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="271">
  <properties>
   <property name="Name" value="DeepNet2"/>
   <property name="Song" value="/server/assets/music/undernet4theme.ogg"/>
@@ -16,6 +16,9 @@
  <tileset firstgid="65" source="../assets/tiles/Netopia_Tileset_directional_paths.tsx"/>
  <tileset firstgid="101" source="../assets/tiles/tree2.tsx"/>
  <tileset firstgid="105" source="../assets/tiles/Toy.tsx"/>
+ <tileset firstgid="106" source="../assets/tiles/bodies.tsx"/>
+ <tileset firstgid="126" source="../assets/tiles/fire.tsx"/>
+ <tileset firstgid="130" source="../assets/tiles/Fireman Flame.tsx"/>
  <layer id="1" name="Tile Layer 1" width="70" height="100">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -151,14 +154,6 @@
    </properties>
    <point/>
   </object>
-  <object id="4" gid="36" x="1080" y="2232" width="28" height="34"/>
-  <object id="5" gid="36" x="1128" y="2368" width="28" height="34"/>
-  <object id="6" gid="36" x="1272" y="2296" width="28" height="34"/>
-  <object id="7" gid="36" x="1176" y="2240" width="28" height="34"/>
-  <object id="8" gid="36" x="1072" y="2304" width="28" height="34"/>
-  <object id="9" gid="36" x="1200" y="2408" width="28" height="34"/>
-  <object id="10" gid="36" x="1120" y="2232" width="28" height="34"/>
-  <object id="11" gid="36" x="1232" y="2320" width="28" height="34"/>
   <object id="12" gid="38" x="1208" y="2240" width="64" height="32"/>
   <object id="13" gid="38" x="1048" y="2344" width="64" height="32"/>
   <object id="14" gid="38" x="1208" y="2200" width="64" height="32"/>
@@ -187,12 +182,12 @@
    </properties>
    <point/>
   </object>
-  <object id="208" name="Dark3" type="NPC" x="1144" y="2256">
+  <object id="208" name="Loner" type="NPC" x="1146.56" y="2234.66">
    <properties>
     <property name="Asset Name" value="ow"/>
     <property name="Dialogue Type" value="first"/>
     <property name="Direction" value="Down"/>
-    <property name="Text 1" value="If you can see this message , well assume you arent supposed to be here yet. The owner didnt finish what he was doing so.... Go back ok?"/>
+    <property name="Text 1" value="..."/>
     <property name="Wait Time" value="2"/>
    </properties>
    <point/>
@@ -243,7 +238,11 @@
    </properties>
    <point/>
   </object>
-  <object id="246" gid="105" x="1208" y="1848" width="32" height="24"/>
+  <object id="246" gid="105" x="1208" y="1848" width="32" height="24">
+   <properties>
+    <property name="Flavor" value="There lie's a land , parallel too where you stand. But a tragic event occurred that changed the course of it's own history, your muscle memory would feel disturbed like reaching for someone who has the face of who you know but you just know it isn't right somehow.."/>
+   </properties>
+  </object>
   <object id="247" gid="40" x="1392" y="2208" width="48" height="40"/>
   <object id="248" gid="40" x="1392" y="2200" width="48" height="40"/>
   <object id="249" gid="40" x="1392" y="2184" width="48" height="40"/>
@@ -258,5 +257,25 @@
     <property name="Target Object" value="3"/>
    </properties>
   </object>
+  <object id="255" gid="109" x="1152.84" y="2259.88" width="40" height="36">
+   <properties>
+    <property name="Flavor" value="The moloko seem's sad, she refuses to leave the navis side."/>
+   </properties>
+  </object>
+  <object id="256" gid="126" x="878.185" y="1964.37" width="33" height="59"/>
+  <object id="257" gid="126" x="1070.52" y="1870.05" width="33" height="59"/>
+  <object id="258" gid="126" x="1327.17" y="1326.1" width="33" height="59"/>
+  <object id="259" gid="126" x="1005.86" y="1101.36" width="33" height="59"/>
+  <object id="260" gid="126" x="1581.59" y="748.945" width="33" height="59"/>
+  <object id="261" gid="151" x="739.863" y="1729.1" width="32" height="64"/>
+  <object id="262" gid="151" x="739.546" y="1711.21" width="32" height="64"/>
+  <object id="263" gid="151" x="740.71" y="1693.95" width="32" height="64"/>
+  <object id="264" gid="151" x="741.346" y="1681.03" width="32" height="64"/>
+  <object id="265" gid="144" x="813.152" y="1409.6" width="32" height="64"/>
+  <object id="266" gid="144" x="812.332" y="1394.39" width="32" height="64"/>
+  <object id="267" gid="151" x="811.786" y="1378.55" width="32" height="64"/>
+  <object id="268" gid="151" x="811.786" y="1378.55" width="32" height="64"/>
+  <object id="269" gid="151" x="812.697" y="1363.79" width="32" height="64"/>
+  <object id="270" gid="144" x="811.877" y="1359.15" width="32" height="64"/>
  </objectgroup>
 </map>

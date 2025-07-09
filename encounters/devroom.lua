@@ -3,187 +3,16 @@ local Encounter1 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Champy",rank=1},
-        {name="RareChampy",rank=1},
-        {name="Chimpy",rank=1},
-        {name="Chumpy",rank=1},
-        {name="Spikey",rank=1},
-        {name="Volgear",rank=1},
-        {name="Metrid",rank=1},
-        {name="Scuttle",rank=1},
-        {name="Lark",rank=1},
-        {name="Tark",rank=1},
-        {name="Bark",rank=1},
-        {name="ColdHead",rank=1},
-        {name="Shrimpy",rank=1},
-        {name="KillerEye",rank=1},
-        {name="DemonEye",rank=1},
-        {name="JokerEye",rank=1},
-        {name="Scuttler",rank=1},
-    },
-    obstacles={
-    },
-    positions={
-        {10,11,12,1,2,3},
-        {16,0,17,4,5,6},
-        {13,14,15,7,8,9},
-    },
-    obstacle_positions={
-        {0,0,0,0,0,0},
-        {0,0,0,0,0,0},
-        {0,0,0,0,0,0},
-    },
-    player_positions={
-        {0,0,0,0,0,0},
-        {0,1,0,0,0,0},
-        {0,0,0,0,0,0},
-    },
-    tiles={
-        {1,1,1,1,1,1},
-        {1,1,1,1,1,1},
-        {1,1,1,1,1,1},
-    },
-    teams={
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
-    },
-}
-
-local Encounter2 = {
-    name="Encounter2",
-    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
-    weight=10,
-    enemies={
-        {name="Flashy",rank=1},
-        {name="Bunny",rank=1},
-        {name="TuffBunny",rank=1},
-        {name="MegaBunny",rank=1},
-        {name="KillPlant",rank=1},
-        {name="KillWeed",rank=1},
-        {name="KillFlower",rank=1},
-        {name="Cactikil",rank=1},
-        {name="Cactroll",rank=1},
-        {name="Scuttzer",rank=1},
-        {name="Cacter",rank=1},
-        {name="HeelNavi",rank=1},
-        {name="Mettaur",rank=1},
-        {name="Gunner",rank=1},
-        {name="Sniper",rank=1},
-        {name="Shooter",rank=1},
-        {name="Fishy",rank=1},
-    },
-    obstacles={
-    },
-    positions={
-        {10,11,12,1,2,3},
-        {13,0,14,4,5,6},
-        {15,16,17,7,8,9},
-    },
-    obstacle_positions={
-        {0,0,0,0,0,0},
-        {0,0,0,0,0,0},
-        {0,0,0,0,0,0},
-    },
-    player_positions={
-        {0,0,0,0,0,0},
-        {0,1,0,0,0,0},
-        {0,0,0,0,0,0},
-    },
-    tiles={
-        {1,1,1,1,1,1},
-        {1,1,1,1,1,1},
-        {1,1,1,1,1,1},
-    },
-    teams={
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
-    },
-}
-
-local Encounter3 = {
-    name="Encounter3",
-    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
-    weight=10,
-    enemies={
         {name="Swordy",rank=1},
-        {name="Skarab",rank=1},
-        {name="Skarry",rank=1},
-        {name="Skelly",rank=1},
-        {name="Elemperor",rank=1},
-        {name="Cragger",rank=1},
-        {name="CirKill",rank=1},
-        {name="CirCrush",rank=1},
-        {name="CirSmash",rank=1},
-        {name="Quaker",rank=1},
-        {name="Dominerd",rank=1},
-        {name="Yort",rank=1},
-        {name="Ratty",rank=1},
+        {name="Piranha",rank=1},
         {name="BombCorn",rank=1},
-        {name="GigaCorn",rank=1},
-        {name="MegaCorn",rank=1},
-        {name="HauntedCandle",rank=1},
     },
     obstacles={
     },
     positions={
-        {10,11,12,1,2,3},
-        {13,0,17,4,5,6},
-        {14,15,16,7,8,9},
-    },
-    obstacle_positions={
-        {0,0,0,0,0,0},
-        {0,0,0,0,0,0},
-        {0,0,0,0,0,0},
-    },
-    player_positions={
-        {0,0,0,0,0,0},
-        {0,1,0,0,0,0},
-        {0,0,0,0,0,0},
-    },
-    tiles={
-        {1,1,1,1,1,1},
-        {2,1,1,1,1,1},
-        {1,1,1,1,1,1},
-    },
-    teams={
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
-    },
-}
-
-local Encounter4 = {
-    name="Encounter4",
-    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
-    weight=10,
-    enemies={
-        {name="Catack",rank=1},
-        {name="Scutz",rank=1},
-        {name="DarkMech",rank=1},
-        {name="Volcano",rank=1},
-        {name="SwapLight",rank=1},
-        {name="Dharma",rank=1},
-        {name="Dharga",rank=1},
-        {name="Dhardara",rank=1},
-        {name="Beetank",rank=1},
-        {name="Powie",rank=1},
-        {name="Powie2",rank=1},
-        {name="Powie3",rank=1},
-        {name="MetFire",rank=1},
-        {name="FulFire",rank=1},
-        {name="DthFire",rank=1},
-        {name="FighterPlane",rank=1},
-        {name="Cannodumb (family)",rank=1},
-    },
-    obstacles={
-        {name="Rock"},
-    },
-    positions={
-        {9,10,11,14,1,2},
-        {12,0,13,3,4,5},
-        {15,16,17,6,7,8},
+        {0,0,0,0,1,0},
+        {0,0,0,0,0,2},
+        {0,0,0,3,0,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -205,10 +34,11 @@ local Encounter4 = {
         {2,2,2,1,1,1},
         {2,2,2,1,1,1},
     },
+    music={path="bn4_boss.mid"},
 }
 
 return {
     minimum_steps_before_encounter=80,
     encounter_chance_per_step=0.05,
-    encounters={Encounter1,Encounter2,Encounter3, Encounter4}
+    encounters={Encounter1}
 }
