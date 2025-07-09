@@ -1377,6 +1377,9 @@
     <property name="1 Area" value="default"/>
     <property name="1 Name" value="Rail Road"/>
     <property name="1 Type" value="Area"/>
+    <property name="2 Area" value="96.60.137.203:8767,UnderSquare,Undersquare Train"/>
+    <property name="2 Name" value="undersquare"/>
+    <property name="2 Type" value="Server"/>
     <property name="Train" value="train"/>
    </properties>
    <point/>
