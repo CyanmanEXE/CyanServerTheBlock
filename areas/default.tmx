@@ -491,7 +491,7 @@
   </object>
   <object id="24" gid="2147483746" x="1563.5" y="1312" width="44" height="71">
    <properties>
-    <property name="Flavor" value="UPDATE 5.0.4: Removed Golden Moloko again, fixed stuff, added maze, get through it for a bazooka for liberation missions. Fixed you being dipped into the void... LAST UPDATED 7/12/25 7:00 PM!"/>
+    <property name="Flavor" value="UPDATE 5.0.4: Removed Golden Moloko again, updated adver script thing LAST UPDATED 10/27/25 4:51 PM!"/>
    </properties>
   </object>
   <object id="33" name="Prog-356" type="NPC" x="1608.5" y="1575">
