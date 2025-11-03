@@ -1,5 +1,6 @@
 local Direction = require("scripts/ezlibs-scripts/direction")
 local helpers = require('scripts/ezlibs-scripts/helpers')
+local CONFIG = require('scripts/ezlibs-scripts/ezconfig')
 local ezmemory = require('scripts/ezlibs-scripts/ezmemory')
 local ezcache = require('scripts/ezlibs-scripts/ezcache')
 local math = require('math')
@@ -7,8 +8,8 @@ local math = require('math')
 local eznpcs = {}
 local placeholder_to_botid = {}
 
-local npc_asset_folder = '/server/assets/ezlibs-assets/eznpcs/'
-local custom_events_script_path = 'scripts/events/eznpcs_events'
+local npc_asset_folder = CONFIG.NPC_ASSET_FOLDER
+local custom_events_script_path = CONFIG.NPC_EVENTS_SCRIPT_PATH
 local custom_events_script_loaded = false
 local generic_npc_mug_animation_path = npc_asset_folder..'mug/mug.animation'
 local npcs = {}
@@ -294,6 +295,7 @@ end
 function on_npc_reached_waypoint(npc,waypoint)
     local should_be_cached = ezcache.object_is_of_type(waypoint,{"Waypoint"})
     if not should_be_cached then
+        printd("WARNING Waypoint "..waypoint.id.." at "..waypoint.x..","..waypoint.y.." in "..npc.area_id.." has incorrect type and wont be cached")
     end
     if waypoint.custom_properties['Wait Time'] ~= nil then
         npc.wait_time = tonumber(waypoint.custom_properties['Wait Time'])
