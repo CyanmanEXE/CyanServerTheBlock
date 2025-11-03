@@ -69,7 +69,7 @@ local GrantLiberationAbility = {
 	end
 }
 
-local VirologistDateCheck = {
+--[[local VirologistDateCheck = {
 	name = "Virologist Timer Check",
 	action = function(npc, player_id, dialogue, relay_object)
 		return async(function()
@@ -91,9 +91,9 @@ local VirologistDateCheck = {
 			return dialogue.custom_properties["Next 1"]
 		end)
 	end
-}
+}]]--
 
-local VirologistAssistance = {
+--[[local VirologistAssistance = {
 	name = "Virologist Battle",
 	action = function(npc, player_id, dialogue, relay_object)
 		return async(function()
@@ -167,10 +167,10 @@ local VirologistAssistance = {
 			end
 		end)
 	end
-}
+}]]
 
-eznpcs.add_event(VirologistDateCheck)
-eznpcs.add_event(VirologistAssistance)
+--eznpcs.add_event(VirologistDateCheck)
+--eznpcs.add_event(VirologistAssistance)
 eznpcs.add_event(GrantLiberationAbility)
 eznpcs.add_event(event2)
 eznpcs.add_event(RematchProgEvent)
