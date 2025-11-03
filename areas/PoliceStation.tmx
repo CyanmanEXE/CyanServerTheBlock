@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="15" height="15" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="10">
+ <properties>
+  <property name="Background" value="custom"/>
+  <property name="Background Animation" value="/server/assets/custom/backgrounds/crimsonhp/Oven.animation"/>
+  <property name="Background Texture" value="/server/assets/custom/backgrounds/crimsonhp/Oven.png"/>
+  <property name="Background Vel X" value="0"/>
+  <property name="Background Vel Y" value="0"/>
+  <property name="Name" value="PolceHub"/>
+  <property name="Song" value="/server/assets/music/BN2 Internet.ogg"/>
+ </properties>
+ <tileset firstgid="1" source="../assets/tiles/portpanels.tsx"/>
+ <tileset firstgid="9" source="../assets/tiles/Police Gate.tsx"/>
+ <tileset firstgid="11" source="../assets/tiles/Quadragon Warp.tsx"/>
+ <tileset firstgid="23" source="../assets/tiles/Desk Buildable.tsx"/>
+ <tileset firstgid="26" source="../assets/tiles/CookMachine.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="15" height="15">
+  <data encoding="csv">
+0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,
+0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,
+0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,
+0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,
+1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,
+0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,
+0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,
+0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
+0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,
+0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,
+0,0,0,0,0,0,1,1,1,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="1" gid="2147483657" x="249" y="325" width="63" height="112"/>
+  <object id="2" gid="2147483658" x="209" y="327" width="63" height="112"/>
+  <object id="3" gid="17" x="227.5" y="422.5" width="64" height="36"/>
+  <object id="5" name="DESK FOR MISSION GIVING" gid="2147483671" x="50" y="220" width="33" height="35"/>
+  <object id="6" gid="2147483671" x="50" y="236" width="33" height="35"/>
+  <object id="7" gid="2147483671" x="50.5" y="205.5" width="33" height="35"/>
+  <object id="9" gid="2147483674" x="419" y="175" width="40" height="45"/>
+ </objectgroup>
+</map>

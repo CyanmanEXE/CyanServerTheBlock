@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="40" height="40" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="4">
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="40" height="40" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="6">
  <properties>
   <property name="Background" value="custom"/>
-  <property name="Background Animation" value="/server/assets/custom/backgrounds/porttown/generic.animation"/>
-  <property name="Background Texture" value="/server/assets/custom/backgrounds/porttown/generic.png"/>
-  <property name="Background Vel X" value="0.1"/>
+  <property name="Background Animation" value="/server/assets/custom/backgrounds/crimsonhp/Oven.animation"/>
+  <property name="Background Texture" value="/server/assets/custom/backgrounds/crimsonhp/Oven.png"/>
+  <property name="Background Vel X" value="0"/>
   <property name="Background Vel Y" value="0"/>
   <property name="Name" value="PortTwn1"/>
   <property name="Song" value="/server/assets/music/construction.ogg"/>
@@ -17,6 +17,8 @@
  <tileset firstgid="69" source="../assets/tiles/DenTownNet_Tileset.tsx"/>
  <tileset firstgid="183" source="../assets/tiles/Den_Exits.tsx"/>
  <tileset firstgid="201" source="../assets/tiles/Invisible Tile.tsx"/>
+ <tileset firstgid="202" source="../assets/tiles/CompressionRoadsYoka.tsx"/>
+ <tileset firstgid="246" source="../assets/tiles/Netopia_Tileset_directional_paths.tsx"/>
  <layer id="1" name="Tile Layer 1" width="40" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -36,14 +38,14 @@
 0,0,0,0,0,0,0,126,126,0,0,0,0,0,0,0,0,126,126,126,126,50,50,50,50,50,0,0,0,0,0,126,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,126,126,0,0,0,0,0,0,0,0,126,0,0,0,50,50,50,50,50,0,0,0,0,0,126,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,126,126,0,0,0,0,0,0,0,0,126,0,0,0,50,50,50,50,50,0,0,0,0,0,126,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,126,126,0,0,0,0,0,0,0,0,126,0,0,0,0,126,0,0,0,0,0,0,0,50,50,50,0,0,0,0,0,0,0,
-0,0,0,0,0,126,126,126,126,126,126,126,126,0,0,0,0,126,0,126,126,126,126,0,0,0,0,0,0,0,50,50,50,0,0,0,0,0,0,0,
-0,0,0,0,0,126,0,0,0,0,0,0,126,126,126,126,126,126,0,0,0,0,0,0,0,0,0,0,0,0,50,50,50,0,0,0,0,0,0,0,
-0,0,0,0,0,126,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,126,0,0,0,0,0,0,0,0,
-0,0,0,0,126,126,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,126,0,0,0,0,0,0,0,0,
-0,0,0,0,0,126,0,0,0,50,50,50,50,50,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,126,0,0,0,0,0,0,0,0,
-0,0,0,0,0,126,0,0,0,50,50,50,50,50,0,0,126,126,126,126,126,0,0,0,0,0,0,0,0,0,0,126,0,0,0,0,0,0,0,0,
-0,0,0,0,0,126,0,0,0,50,50,50,50,50,126,126,126,0,0,0,126,0,0,0,0,0,0,0,0,0,0,126,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,126,126,0,0,0,0,0,0,0,0,126,0,0,0,0,126,0,0,267,0,0,0,0,50,50,50,0,0,0,0,0,0,0,
+0,0,0,0,0,126,126,126,126,126,126,126,126,0,0,0,0,126,0,126,126,126,126,0,0,50,0,0,0,0,50,50,50,0,0,0,0,0,0,0,
+0,0,0,0,0,126,0,0,0,0,0,0,126,126,126,126,126,126,0,0,0,0,0,0,0,235,0,0,0,0,50,50,50,0,0,0,0,0,0,0,
+0,0,0,0,0,126,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,231,216,239,0,0,0,126,0,0,0,0,0,0,0,0,
+0,0,0,0,126,126,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,234,206,0,0,126,0,0,0,0,0,0,0,0,
+0,0,0,0,0,126,0,0,0,50,50,50,50,50,0,0,0,0,0,0,0,0,0,0,0,0,207,242,219,0,0,126,0,0,0,0,0,0,0,0,
+0,0,0,0,0,126,0,0,0,50,50,50,50,50,0,0,126,126,126,126,126,0,0,0,0,0,203,0,0,0,0,126,0,0,0,0,0,0,0,0,
+0,0,0,0,0,126,0,0,0,50,50,50,50,50,126,126,126,0,0,0,126,0,0,0,0,0,50,0,0,0,0,126,0,0,0,0,0,0,0,0,
 0,0,0,0,0,126,0,0,0,50,50,50,50,50,0,0,0,0,0,0,126,0,0,126,0,50,50,50,0,0,0,126,0,0,0,0,0,0,0,0,
 0,0,0,0,0,126,0,0,0,50,50,50,50,50,0,0,0,0,0,126,126,126,126,126,126,50,50,50,0,0,0,126,0,0,0,0,0,0,0,0,
 0,0,0,0,0,126,126,0,0,0,126,0,0,0,0,0,0,0,0,0,0,0,0,126,0,50,50,50,0,0,0,126,0,0,0,0,0,0,0,0,
@@ -62,7 +64,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="2" name="???" type="Custom Warp" gid="57" x="744" y="456" width="64" height="36">
+  <object id="2" name="???" type="Custom Warp" gid="57" x="104" y="1128" width="64" height="36">
    <properties>
     <property name="Direction" value="Down Right"/>
     <property name="Target Area" value="default"/>
@@ -70,6 +72,16 @@
    </properties>
   </object>
   <object id="3" name="gfdhf" type="Radius Warp" x="752" y="88">
+   <properties>
+    <property name="Activation Radius" value="0.6"/>
+    <property name="Arrival Animation" value="arrow_up_right_in"/>
+    <property name="Leave Animation" value="arrow_up_right_out"/>
+    <property name="Target Area" value="Netopia1"/>
+    <property name="Target Object" value="48"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="5" name="gfdhf" type="Radius Warp" x="267" y="1101">
    <properties>
     <property name="Activation Radius" value="0.6"/>
     <property name="Arrival Animation" value="arrow_up_right_in"/>
