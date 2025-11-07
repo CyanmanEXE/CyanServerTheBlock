@@ -491,7 +491,7 @@
   </object>
   <object id="24" gid="2147483746" x="1563.5" y="1312" width="44" height="71">
    <properties>
-    <property name="Flavor" value="UPDATE 5.0.4: Removed Golden Moloko again, updated adver script thing LAST UPDATED 10/27/25 4:51 PM!"/>
+    <property name="Flavor" value="UPDATE 5.0.7: Removed Golden Moloko again, updated adver script thing LAST UPDATED 11/6/25 9:51 PM!"/>
    </properties>
   </object>
   <object id="33" name="Prog-356" type="NPC" x="1608.5" y="1575">
@@ -589,6 +589,9 @@
     <property name="3 Area" value="96.60.137.203:8768,default,red line"/>
     <property name="3 Name" value="train station"/>
     <property name="3 Type" value="Server"/>
+    <property name="4 Area" value="143.198.61.124:3000,default,MainTrain"/>
+    <property name="4 Name" value="ACDC BN3"/>
+    <property name="4 Type" value="Server"/>
     <property name="Train" value="train"/>
    </properties>
    <point/>
