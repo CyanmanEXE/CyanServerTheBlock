@@ -1,0 +1,1220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="40" height="35" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="280">
+ <properties>
+  <property name="Background" value="custom"/>
+  <property name="Background Animation" value="/server/assets/custom/backgrounds/crimsonhp/port.animation"/>
+  <property name="Background Texture" value="/server/assets/custom/backgrounds/crimsonhp/port.png"/>
+  <property name="Background Vel X" value="0"/>
+  <property name="Background Vel Y" value="0.5"/>
+  <property name="Mystery Data Maximum" type="int" value="8"/>
+  <property name="Mystery Data Minimum" type="int" value="2"/>
+  <property name="Name" value="PortTwn2"/>
+  <property name="Song" value="/server/assets/music/BN2 Internet.ogg"/>
+ </properties>
+ <tileset firstgid="1" source="../assets/tiles/Beach Tiles.tsx"/>
+ <tileset firstgid="51" source="../assets/tiles/hp_warp_blue.tsx"/>
+ <tileset firstgid="56" source="../assets/tiles/Beach Arrows.tsx"/>
+ <tileset firstgid="88" source="../assets/tiles/Invisible Tile.tsx"/>
+ <tileset firstgid="89" source="../assets/tiles/Beach_Next_Area.tsx"/>
+ <tileset firstgid="121" source="../assets/tiles/Beach_Warp.tsx"/>
+ <tileset firstgid="125" source="../assets/tiles/pipe2.tsx"/>
+ <tileset firstgid="126" source="../assets/tiles/Screen2.tsx"/>
+ <tileset firstgid="129" source="../assets/tiles/Quadragon Warp.tsx"/>
+ <tileset firstgid="141" source="../assets/tiles/Den_Exits.tsx"/>
+ <tileset firstgid="159" source="../assets/tiles/DenTownNet_Tileset.tsx"/>
+ <tileset firstgid="273" source="../assets/tiles/DenTownStairs.tsx"/>
+ <tileset firstgid="282" source="../assets/tiles/DenTownNet_Tileset2.tsx"/>
+ <tileset firstgid="396" source="../assets/tiles/bn6_securitycube.tsx"/>
+ <tileset firstgid="410" source="../assets/tiles/Boulder.tsx"/>
+ <tileset firstgid="411" source="../assets/tiles/Teddy.tsx"/>
+ <tileset firstgid="412" source="../assets/tiles/portpanels.tsx"/>
+ <tileset firstgid="420" source="../assets/tiles/bushes1.tsx"/>
+ <tileset firstgid="424" source="../assets/tiles/Castle Wall.tsx"/>
+ <tileset firstgid="426" source="../assets/tiles/speaker.tsx"/>
+ <tileset firstgid="427" source="../assets/tiles/Toy.tsx"/>
+ <tileset firstgid="428" source="../assets/tiles/train.tsx"/>
+ <tileset firstgid="430" source="../assets/tiles/Police.tsx"/>
+ <tileset firstgid="431" source="../assets/tiles/Police Gate.tsx"/>
+ <tileset firstgid="433" source="../assets/tiles/vendor_desk.tsx"/>
+ <tileset firstgid="437" source="../assets/tiles/obstacle_stump.tsx"/>
+ <tileset firstgid="438" source="../assets/tiles/Podium.tsx"/>
+ <tileset firstgid="446" source="../assets/tiles/tiny_desks.tsx"/>
+ <tileset firstgid="448" source="../assets/tiles/obstacle_stone.tsx"/>
+ <tileset firstgid="456" source="../assets/tiles/Junkpiles.tsx"/>
+ <tileset firstgid="458" source="../assets/tiles/Desk Buildable.tsx"/>
+ <tileset firstgid="461" source="../assets/tiles/GreenMysteryData.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="40" height="35">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,
+0,0,0,0,0,0,0,0,0,0,88,0,0,0,0,0,0,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,
+0,0,0,0,0,0,0,0,0,0,88,0,0,0,0,0,0,0,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,
+0,0,0,0,0,0,0,0,0,0,156,0,0,0,0,0,0,0,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,413,
+0,0,0,0,0,0,0,0,0,0,415,0,0,0,0,0,0,0,0,413,413,413,413,413,413,413,413,0,0,0,0,0,0,0,0,0,0,413,413,413,
+0,0,0,0,0,0,0,0,0,0,415,0,0,0,0,0,0,0,0,0,413,413,413,413,413,413,413,0,0,0,0,0,0,0,0,0,0,413,413,413,
+0,0,0,0,415,415,415,0,0,0,415,0,0,0,415,415,415,415,415,415,413,413,413,413,413,413,413,0,0,413,413,413,0,0,0,0,0,0,413,413,
+0,0,0,0,415,415,415,415,415,415,415,415,0,0,0,415,0,0,0,415,413,413,413,413,413,413,413,0,0,413,413,413,415,415,415,0,0,0,0,413,
+0,0,0,0,415,415,415,0,0,415,415,415,415,415,415,415,0,0,0,0,0,413,413,413,413,413,413,0,0,413,413,413,0,0,415,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,415,415,415,0,0,0,0,0,0,0,0,0,413,413,413,413,413,413,0,0,0,0,0,0,0,415,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,415,0,0,0,0,0,0,413,413,413,0,413,413,413,413,413,413,0,0,0,0,0,0,0,415,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,415,0,0,0,0,0,0,413,413,413,0,0,0,0,0,0,0,0,0,0,415,415,415,415,415,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,415,0,0,0,0,0,0,413,413,413,0,0,0,0,0,0,0,0,0,0,415,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,415,0,0,415,0,0,0,0,0,0,0,415,0,0,0,415,415,415,415,415,415,415,415,415,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,415,415,0,415,0,0,415,0,415,0,0,415,0,0,0,415,0,415,415,0,415,0,0,415,415,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,415,0,415,415,415,415,415,415,415,415,415,415,415,415,415,0,0,0,0,415,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,415,0,415,0,0,0,0,0,415,0,0,415,0,0,0,0,0,0,0,415,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,415,0,415,0,0,0,0,0,0,0,0,0,0,0,0,415,415,415,415,415,415,415,415,415,415,415,415,0,0,0,0,0,
+0,0,0,0,0,0,0,0,415,415,415,0,0,0,0,0,0,0,0,413,413,413,0,0,415,0,0,0,0,415,0,0,0,0,415,0,413,413,413,0,
+0,0,0,0,0,0,0,0,415,0,0,0,0,0,0,415,415,415,415,413,413,413,415,415,415,0,0,0,0,415,0,0,0,0,415,415,413,413,413,0,
+0,0,0,0,0,0,0,0,415,0,0,0,0,0,0,415,0,0,0,413,413,413,0,0,415,0,0,0,0,415,0,0,0,0,0,0,413,413,413,0,
+0,0,0,0,0,0,0,0,415,415,0,0,0,0,0,415,0,0,0,0,415,0,0,0,415,0,0,0,0,415,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,415,0,0,0,0,413,413,413,0,0,0,415,0,0,0,415,0,0,0,413,413,413,0,415,415,415,0,0,0,0,0,
+0,0,0,0,0,0,0,0,415,415,415,0,0,0,413,413,413,415,415,415,415,0,0,0,415,415,0,0,413,413,413,0,415,415,415,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,415,415,415,0,0,413,413,413,0,0,0,0,0,412,0,0,415,415,0,413,413,413,0,415,415,415,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,415,0,0,0,0,0,0,0,0,0,0,0,412,412,412,0,415,0,0,0,0,0,0,0,415,0,0,0,0,0,0,
+0,0,0,0,0,415,415,415,0,415,0,0,0,0,0,0,0,0,0,412,412,412,412,412,0,415,0,0,0,0,0,0,0,415,0,0,0,0,0,0,
+0,0,0,0,0,415,415,415,415,415,0,0,0,412,412,412,412,412,412,412,0,412,412,412,0,415,415,0,0,0,0,0,0,415,0,0,0,0,0,0,
+0,0,0,0,0,415,415,415,0,0,0,0,0,412,412,412,412,412,412,412,0,0,415,0,0,0,415,415,415,415,0,0,0,415,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,412,412,412,412,412,412,412,0,0,415,415,415,415,415,0,0,415,0,0,0,415,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,412,412,412,412,412,412,412,0,0,0,0,0,0,0,0,0,141,0,0,0,141,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,412,412,412,412,412,412,412,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="2" name="Prog-946" type="NPC" x="816" y="944">
+   <properties>
+    <property name="Asset Name" value="prog"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Text 1" value="HELLO!"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="6" name="Baton" type="NPC" x="688.5" y="657.5">
+   <properties>
+    <property name="Asset Name" value="female-navi-exe4_orange"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Text 1" value="Hello!"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="7" name="Offical-001" type="NPC" x="464" y="848">
+   <properties>
+    <property name="Asset Name" value="official-navi-exe4_orange"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="8"/>
+    <property name="Text 1" value="Dont mind me citizen! I'm Just on patrol!"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8" name="Waypoint 1" type="Waypoint" x="528" y="848">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="9"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9" name="Waypoint 1" type="Waypoint" x="528" y="784">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="10"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="10" name="Waypoint 1" type="Waypoint" x="464" y="784">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="7"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="11" name="Offical-002" type="NPC" x="1008" y="536">
+   <properties>
+    <property name="Asset Name" value="official-navi-exe4_orange"/>
+    <property name="Dialogue Type" value="question"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next 1" type="object" value="24"/>
+    <property name="Next 2" type="object" value="23"/>
+    <property name="Next Waypoint 1" type="object" value="12"/>
+    <property name="Text 1" value="Citizen! Seen anything... Weird?..."/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="12" name="Waypoint 1" type="Waypoint" x="976" y="536">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="13"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="13" name="Waypoint 1" type="Waypoint" x="973" y="495">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="14"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14" name="Waypoint 1" type="Waypoint" x="711.5" y="486.5">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="15"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="15" name="Waypoint 1" type="Waypoint" x="712.5" y="553.5">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="16"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="16" name="Waypoint 1" type="Waypoint" x="420" y="560">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="17"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="17" name="Waypoint 1" type="Waypoint" x="430" y="518">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="18"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="18" name="Waypoint 1" type="Waypoint" x="441.5" y="560.5">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="19"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="19" name="Waypoint 1" type="Waypoint" x="726" y="568">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="20"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="20" name="Waypoint 1" type="Waypoint" x="725" y="501">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="21"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="21" name="Waypoint 1" type="Waypoint" x="983" y="487">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="22"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="22" name="Waypoint 1" type="Waypoint" x="984" y="536">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="11"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="23" name="No" type="Dialogue" x="1100.5" y="561.5">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Text 1" value="Very well!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="24" name="Yes" type="Dialogue" x="1071" y="491">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Text 1" value="Hmm.. You dont say?... I shall check it out!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="26" gid="2147483773" x="933" y="289" width="50" height="78">
+   <properties>
+    <property name="Flavor" value="Clean!"/>
+   </properties>
+  </object>
+  <object id="27" gid="2147483773" x="931.5" y="352.5" width="50" height="78">
+   <properties>
+    <property name="Flavor" value="Clean!"/>
+   </properties>
+  </object>
+  <object id="29" gid="126" x="911" y="305" width="44" height="71">
+   <properties>
+    <property name="Flavor" value="II WORK DJ"/>
+   </properties>
+  </object>
+  <object id="30" name="Lawy" type="NPC" x="655.5" y="660.5">
+   <properties>
+    <property name="Asset Name" value="female-navi-exe6_yellow"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Text 1" value="Heya!~"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="34" gid="410" x="279.5" y="310.5" width="47" height="58">
+   <properties>
+    <property name="Flavor" value="Dang a big rock is in the way..."/>
+   </properties>
+  </object>
+  <object id="39" name="Cyan HP" type="Custom Warp" gid="52" x="177.5" y="914.5" width="114" height="64">
+   <properties>
+    <property name="Direction" value="Up Right"/>
+    <property name="Target Area" value="hp1"/>
+    <property name="Target Object" value="44"/>
+   </properties>
+  </object>
+  <object id="40" name="Layki" type="NPC" x="335" y="815">
+   <properties>
+    <property name="Asset Name" value="female-navi-exe4_orange"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Left"/>
+    <property name="Text 1" value="I herd this way is a shortcut to the block but we need a password... Why though?"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="41" type="Checkpoint" gid="396" x="301" y="879" width="48" height="52">
+   <properties>
+    <property name="Description" value="Out"/>
+    <property name="Dialogue Type" value="None"/>
+    <property name="Disappear Cooldown" type="float" value="0"/>
+    <property name="Key Name" value="Shifting Key"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Password" value="bagel bites"/>
+    <property name="Required Keys" type="int" value="1"/>
+    <property name="Take Item" type="bool" value="false"/>
+    <property name="Unlock Item" value="Shifting Key"/>
+   </properties>
+  </object>
+  <object id="48" name="port1" type="Radius Warp" x="944.45" y="1031.18">
+   <properties>
+    <property name="Activation Radius" value="0.6"/>
+    <property name="Arrival Animation" value="arrow_down_left_in"/>
+    <property name="Leave Animation" value="arrow_down_left_out"/>
+    <property name="Target Area" value="porttown1"/>
+    <property name="Target Object" value="3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="49" gid="126" x="745.5" y="826.5" width="44" height="71">
+   <properties>
+    <property name="Flavor" value="Become an offical today!"/>
+   </properties>
+  </object>
+  <object id="50" gid="126" x="748" y="782" width="44" height="71">
+   <properties>
+    <property name="Flavor" value="Drop by the corner chip store for some wild finds!"/>
+   </properties>
+  </object>
+  <object id="51" name="Jal" type="NPC" x="784" y="816">
+   <properties>
+    <property name="Asset Name" value="female-navi-exe4_orange"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Left"/>
+    <property name="Next Waypoint 1" type="object" value="52"/>
+    <property name="Text 1" value="Hmm..... Maybe I should advertise my store?"/>
+    <property name="Wait Time" value="3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="52" name="Waypoint 1" type="Waypoint" x="782" y="752">
+   <properties>
+    <property name="Direction" value="Up Left"/>
+    <property name="Next Waypoint 1" type="object" value="51"/>
+    <property name="Wait Time" value="3"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="53" gid="420" x="1000" y="1048" width="36" height="35"/>
+  <object id="54" gid="420" x="920" y="1048" width="36" height="35"/>
+  <object id="55" gid="420" x="848" y="800" width="36" height="35"/>
+  <object id="56" gid="420" x="848" y="760" width="36" height="35"/>
+  <object id="57" gid="420" x="848" y="720" width="36" height="35"/>
+  <object id="58" gid="420" x="864" y="904" width="36" height="35"/>
+  <object id="63" gid="2147484074" x="896" y="846" width="91" height="77"/>
+  <object id="65" gid="427" x="643" y="169" width="32" height="24">
+   <properties>
+    <property name="Flavor" value="They say that WiltMan always hated going to portTown2..."/>
+   </properties>
+  </object>
+  <object id="73" gid="2147484079" x="729.5" y="964.5" width="63" height="112">
+   <properties>
+    <property name="Flavor" value="What a nice looking entry way."/>
+   </properties>
+  </object>
+  <object id="74" gid="2147484080" x="689.5" y="966.5" width="63" height="112">
+   <properties>
+    <property name="Flavor" value="What a nice looking entry way."/>
+   </properties>
+  </object>
+  <object id="75" name="Offical-003" type="NPC" x="719.5" y="842.5">
+   <properties>
+    <property name="Asset Name" value="official-navi-exe4_orange"/>
+    <property name="Date" value="* * 18 * * *"/>
+    <property name="Dialogue Type" value="before"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Text 1" value="Our captain is out at the moment. Somthing about a rock..."/>
+    <property name="Text 2" value="Zzzzzzz.....Zzzzz..."/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="76" gid="2147483774" x="804" y="612" width="44" height="71">
+   <properties>
+    <property name="Flavor">PLACE AD HERE
+</property>
+   </properties>
+  </object>
+  <object id="77" gid="2147483774" x="959" y="607" width="44" height="71">
+   <properties>
+    <property name="Flavor" value="Need money? Try helping others in need from the BBS today!"/>
+   </properties>
+  </object>
+  <object id="78" gid="2147483774" x="925" y="963" width="44" height="71">
+   <properties>
+    <property name="Flavor" value="Need a bodyguard? Call the X team today!"/>
+   </properties>
+  </object>
+  <object id="79" name="Greyson" type="NPC" x="952" y="816">
+   <properties>
+    <property name="Asset Name" value="normal-navi-bn4_green"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Text 1" value="This speaker is huge! I herd someonne makes them from the block!"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="80" name="Jack" type="NPC" x="857" y="1017">
+   <properties>
+    <property name="Asset Name" value="normal-navi-bn4_green"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Right"/>
+    <property name="Text 1" value="Darn, I had alot of guts to get this far to be part of the offical's but I got scared the second I saw the gate..."/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="81" name="Lonny" type="NPC" x="626" y="728">
+   <properties>
+    <property name="Asset Name" value="normal-navi-bn4_brown"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Text 1" value="Back in my days , the net was mainly the same design everywhere and we liked it!"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="82" name="Offical-005" type="NPC" x="304" y="304">
+   <properties>
+    <property name="Asset Name" value="official-navi-exe4_orange"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Left"/>
+    <property name="Text 1" value="We managed to move this rock but accidently placed it infront of the square..."/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="83" name="Offical-004" type="NPC" x="592" y="464">
+   <properties>
+    <property name="Asset Name" value="official-navi-exe4_orange"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Right"/>
+    <property name="Text 1" value="Hm..."/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="84" name="Offical-006-Captin" type="NPC" x="688" y="880">
+   <properties>
+    <property name="Asset Name" value="official-navi-exe6_orange"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Right"/>
+    <property name="Text 1" value="Hello citizen!"/>
+    <property name="Wait Time" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="85" name="William" type="NPC" x="816" y="530">
+   <properties>
+    <property name="Asset Name" value="normal-navi-bn4_red"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Right"/>
+    <property name="Text 1" value="Did you know it's hard for viruses to even thrive here because of the police force? They are on the double when there's a report of a virus! I guess so navis can focus on advertisements..."/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="86" name="Kim" type="NPC" x="985.5" y="784.5">
+   <properties>
+    <property name="Asset Name" value="male-navi-exe6_teal"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="Text 1" value="I wonder how one would even get over there..."/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="87" name="Unna" type="NPC" x="1201" y="725">
+   <properties>
+    <property name="Asset Name" value="female-navi-exe6_pink"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Right"/>
+    <property name="Text 1" value="Well well, this i might need.."/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="88" gid="433" x="1175.5" y="674" width="35" height="45">
+   <properties>
+    <property name="Interact Relay" type="object" value="90"/>
+   </properties>
+  </object>
+  <object id="89" gid="435" x="1205" y="668.5" width="35" height="45">
+   <properties>
+    <property name="Interact Relay" type="object" value="90"/>
+   </properties>
+  </object>
+  <object id="90" name="Yala" type="NPC" x="1189.5" y="646.5">
+   <properties>
+    <property name="Asset Name" value="female-navi-exe6_pink"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next 1" type="object" value="218"/>
+    <property name="Text 1" value="Welcome!~"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="91" gid="420" x="1050" y="684" width="36" height="35"/>
+  <object id="92" gid="420" x="1006" y="726" width="36" height="35"/>
+  <object id="93" gid="420" x="913" y="721" width="36" height="35"/>
+  <object id="94" gid="420" x="1043" y="595" width="36" height="35"/>
+  <object id="95" gid="2147483774" x="484" y="512" width="44" height="71">
+   <properties>
+    <property name="Flavor" value="PLACE AD HERE"/>
+   </properties>
+  </object>
+  <object id="96" gid="456" x="848.5" y="305.5" width="64" height="64"/>
+  <object id="97" gid="456" x="689.5" y="168.5" width="64" height="64"/>
+  <object id="98" gid="456" x="745" y="255" width="64" height="64"/>
+  <object id="100" gid="457" x="751.5" y="144.5" width="64" height="64"/>
+  <object id="101" gid="457" x="668" y="218" width="64" height="64"/>
+  <object id="102" gid="457" x="807.5" y="222.5" width="64" height="64"/>
+  <object id="103" gid="2147484105" x="815" y="349" width="64" height="64"/>
+  <object id="104" gid="2147484104" x="829.5" y="178.5" width="64" height="64"/>
+  <object id="105" gid="2147484104" x="744.5" y="89.5" width="64" height="64"/>
+  <object id="106" gid="2147484104" x="656.5" y="121.5" width="64" height="64"/>
+  <object id="107" gid="2147484104" x="687" y="91" width="64" height="64"/>
+  <object id="108" gid="2147484104" x="677.5" y="110.5" width="64" height="64"/>
+  <object id="109" gid="2147484104" x="713" y="91" width="64" height="64"/>
+  <object id="110" gid="456" x="651.5" y="110.5" width="64" height="64"/>
+  <object id="111" gid="456" x="665" y="93" width="64" height="64"/>
+  <object id="112" gid="456" x="632" y="130" width="64" height="64"/>
+  <object id="113" gid="456" x="661.5" y="306.5" width="64" height="64"/>
+  <object id="114" gid="456" x="679" y="313" width="64" height="64"/>
+  <object id="115" gid="456" x="701.5" y="314.5" width="64" height="64"/>
+  <object id="116" gid="456" x="702.5" y="301.5" width="64" height="64"/>
+  <object id="117" gid="456" x="656.5" y="217.5" width="64" height="64"/>
+  <object id="118" gid="456" x="689.5" y="216.5" width="64" height="64"/>
+  <object id="119" gid="2147484104" x="714.5" y="229.5" width="64" height="64"/>
+  <object id="120" gid="457" x="735.5" y="232.5" width="64" height="64"/>
+  <object id="121" gid="2147484105" x="759" y="285" width="64" height="64"/>
+  <object id="122" gid="2147484105" x="761.5" y="296.5" width="64" height="64"/>
+  <object id="123" gid="2147484105" x="759.5" y="310.5" width="64" height="64"/>
+  <object id="124" gid="2147484105" x="762.5" y="325.5" width="64" height="64"/>
+  <object id="125" gid="457" x="756" y="344" width="64" height="64"/>
+  <object id="126" gid="457" x="695.5" y="342.5" width="64" height="64"/>
+  <object id="127" gid="457" x="692" y="368" width="64" height="64"/>
+  <object id="128" gid="457" x="693.5" y="394.5" width="64" height="64"/>
+  <object id="129" gid="457" x="698.5" y="403.5" width="64" height="64"/>
+  <object id="130" gid="457" x="725.5" y="402.5" width="64" height="64"/>
+  <object id="131" gid="456" x="748" y="402" width="64" height="64"/>
+  <object id="132" gid="456" x="771" y="407" width="64" height="64"/>
+  <object id="133" gid="456" x="789.5" y="406.5" width="64" height="64"/>
+  <object id="134" gid="456" x="817.5" y="406.5" width="64" height="64"/>
+  <object id="135" gid="456" x="810" y="372" width="64" height="64"/>
+  <object id="136" gid="456" x="832" y="384" width="64" height="64"/>
+  <object id="137" gid="2147484104" x="819" y="353" width="64" height="64"/>
+  <object id="138" gid="2147484104" x="818" y="264" width="64" height="64"/>
+  <object id="139" gid="2147484104" x="627.5" y="210.5" width="64" height="64"/>
+  <object id="140" gid="2147484104" x="607" y="133" width="64" height="64"/>
+  <object id="141" gid="2147484104" x="593" y="125" width="64" height="64"/>
+  <object id="142" gid="457" x="566.5" y="113.5" width="64" height="64"/>
+  <object id="143" gid="457" x="565.5" y="90.5" width="64" height="64"/>
+  <object id="144" gid="457" x="565" y="63" width="64" height="64"/>
+  <object id="145" gid="457" x="562.5" y="51.5" width="64" height="64"/>
+  <object id="146" gid="457" x="785" y="51" width="64" height="64"/>
+  <object id="147" gid="457" x="817.5" y="86.5" width="64" height="64"/>
+  <object id="148" gid="457" x="851.5" y="150.5" width="64" height="64"/>
+  <object id="149" gid="457" x="593.5" y="176.5" width="64" height="64"/>
+  <object id="150" gid="2147484105" x="603.5" y="156.5" width="64" height="64"/>
+  <object id="151" gid="457" x="849.5" y="342.5" width="64" height="64"/>
+  <object id="152" gid="457" x="848.5" y="363.5" width="64" height="64"/>
+  <object id="153" gid="457" x="846.5" y="371.5" width="64" height="64"/>
+  <object id="154" gid="457" x="845.5" y="382.5" width="64" height="64"/>
+  <object id="155" gid="457" x="847" y="391" width="64" height="64"/>
+  <object id="156" gid="457" x="847.5" y="398.5" width="64" height="64"/>
+  <object id="157" name="HEY DONT FORGET ME DJ LOOK AT ME FOR THE CRON DATE STUFF" gid="457" x="846.5" y="401.5" width="64" height="64">
+   <properties>
+    <property name="Flavor" value="seconds, minute, hour, day, month, year"/>
+   </properties>
+  </object>
+  <object id="158" gid="457" x="829" y="279" width="64" height="64"/>
+  <object id="159" gid="457" x="852" y="276" width="64" height="64"/>
+  <object id="160" gid="457" x="820" y="120" width="64" height="64"/>
+  <object id="162" gid="457" x="596" y="26" width="64" height="64"/>
+  <object id="163" gid="2147484104" x="628" y="18" width="64" height="64"/>
+  <object id="164" gid="2147484104" x="643" y="19" width="64" height="64"/>
+  <object id="165" gid="2147484104" x="654" y="24" width="64" height="64"/>
+  <object id="166" gid="2147484104" x="657" y="19" width="64" height="64"/>
+  <object id="167" gid="457" x="689" y="19" width="64" height="64"/>
+  <object id="168" gid="457" x="719.5" y="20.5" width="64" height="64"/>
+  <object id="169" gid="457" x="747.5" y="22.5" width="64" height="64"/>
+  <object id="170" name="Bana" type="NPC" x="743" y="167">
+   <properties>
+    <property name="Asset Name" value="normal-navi-bn4_bad"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Next 1" type="object" value="171"/>
+    <property name="Text 1" value="Where is it... AH!"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="171" name="TEXT1" type="Dialogue" x="738" y="-68.03">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Mugshot" value="player"/>
+    <property name="Next 1" type="object" value="172"/>
+    <property name="Text 1" value="What... Are you doing?"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="172" name="TEXT2" type="Dialogue" x="754.31" y="-82.59">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Mugshot" value="normal-navi-bn4_bad"/>
+    <property name="Next 1" type="object" value="173"/>
+    <property name="Text 1" value="uh, nothing! Nothing at all!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="173" name="TEXT2" type="Dialogue" x="758.75" y="-110">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Mugshot" value="player"/>
+    <property name="Text 1" value="Sure...."/>
+   </properties>
+   <point/>
+  </object>
+  <object id="174" name="Seller" type="NPC" x="605" y="63">
+   <properties>
+    <property name="Asset Name" value="normal-navi-bn4_bad"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="Text 1" value="Welcome! No one followed you right?..."/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="175" gid="2147484104" x="784" y="20" width="64" height="64"/>
+  <object id="176" gid="2147484104" x="808.5" y="17.5" width="64" height="64"/>
+  <object id="177" gid="2147484104" x="841" y="17" width="64" height="64"/>
+  <object id="178" gid="2147484104" x="913.5" y="178.5" width="64" height="64"/>
+  <object id="179" gid="2147484104" x="913.5" y="146.5" width="64" height="64"/>
+  <object id="180" gid="456" x="914" y="118" width="64" height="64"/>
+  <object id="181" gid="457" x="913" y="49" width="64" height="64"/>
+  <object id="182" gid="457" x="876.5" y="19.5" width="64" height="64"/>
+  <object id="183" gid="2147484105" x="914.5" y="17.5" width="64" height="64"/>
+  <object id="184" gid="2147484105" x="865" y="71" width="64" height="64"/>
+  <object id="185" gid="2147484105" x="952.5" y="179.5" width="64" height="64"/>
+  <object id="186" gid="2147484105" x="979.5" y="180.5" width="64" height="64"/>
+  <object id="187" gid="457" x="1012" y="180" width="64" height="64"/>
+  <object id="188" gid="457" x="1010.5" y="147.5" width="64" height="64"/>
+  <object id="189" gid="457" x="1011.5" y="114.5" width="64" height="64"/>
+  <object id="190" gid="456" x="950.5" y="51.5" width="64" height="64"/>
+  <object id="191" gid="456" x="979.5" y="54.5" width="64" height="64"/>
+  <object id="192" gid="456" x="1012.5" y="55.5" width="64" height="64"/>
+  <object id="193" gid="456" x="1041.5" y="52.5" width="64" height="64"/>
+  <object id="194" gid="2147484104" x="1075" y="49" width="64" height="64"/>
+  <object id="195" gid="2147484104" x="1074.5" y="79.5" width="64" height="64"/>
+  <object id="196" gid="2147484104" x="1072.5" y="113.5" width="64" height="64"/>
+  <object id="197" gid="2147484104" x="1041" y="179" width="64" height="64"/>
+  <object id="198" gid="2147484104" x="1074.5" y="181.5" width="64" height="64"/>
+  <object id="199" gid="2147484104" x="1107.5" y="178.5" width="64" height="64"/>
+  <object id="200" gid="2147484104" x="1133" y="145" width="64" height="64"/>
+  <object id="201" gid="2147484104" x="1131.5" y="110.5" width="64" height="64"/>
+  <object id="202" gid="2147484104" x="1140" y="80" width="64" height="64"/>
+  <object id="203" gid="2147484104" x="1105" y="17" width="64" height="64"/>
+  <object id="204" gid="2147484104" x="1142.5" y="17.5" width="64" height="64"/>
+  <object id="205" gid="2147484104" x="955" y="21" width="64" height="64"/>
+  <object id="206" gid="456" x="987" y="23" width="64" height="64"/>
+  <object id="207" gid="456" x="1028" y="26" width="64" height="64"/>
+  <object id="208" gid="457" x="1051.5" y="20.5" width="64" height="64"/>
+  <object id="209" gid="457" x="1075.5" y="22.5" width="64" height="64"/>
+  <object id="210" gid="437" x="1233.5" y="144.5" width="64" height="64"/>
+  <object id="211" name="Plumber" type="NPC" x="1009" y="275">
+   <properties>
+    <property name="Asset Name" value="female-navi-exe5_purple"/>
+    <property name="Dialogue Type" value="itemcheck"/>
+    <property name="Direction" value="Hey! Im in charge of this towns plumbing system! Im great at my job but I just cant keep up with the ammount of viruses that keeps creeping in. If you want a quick buck you could help me out eh? To show you finished up cleaning up the viruses reach to the end of the sewer comp and bring me back the ping device and that gives me proof you finished!"/>
+    <property name="Next 1" type="object" value="278"/>
+    <property name="Next 2" type="object" value="279"/>
+    <property name="Take Item" type="bool" value="true"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="213" name="Offical-007" type="NPC" x="752" y="624">
+   <properties>
+    <property name="Asset Name" value="official-navi-exe4_orange"/>
+    <property name="Dialogue Type" value="none"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="Event Name" value="Virologist Timer Check"/>
+    <property name="Next 1" type="object" value="217"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="214" name="But You're Busy" type="Dialogue" x="720" y="624">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Text 1" value="Ah, I understand."/>
+   </properties>
+   <point/>
+  </object>
+  <object id="215" name="Said Not Busy" type="Dialogue" x="720" y="600">
+   <properties>
+    <property name="Dialogue Type" value="question"/>
+    <property name="Next 1" type="object" value="216"/>
+    <property name="Next 2" type="object" value="214"/>
+    <property name="Text 1">I'm a virologist. If you don't mind, would you battle
+some viruses I have in captivity?</property>
+   </properties>
+   <point/>
+  </object>
+  <object id="216" name="Will Battle" type="Dialogue" x="752" y="592">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Event Name" value="Virologist Battle"/>
+    <property name="Text 1" value="Excellent. Please, prepare yourself!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="217" name="Continue To Event" type="Dialogue" x="728" y="656">
+   <properties>
+    <property name="Dialogue Type" value="question"/>
+    <property name="Next 1" type="object" value="214"/>
+    <property name="Next 2" type="object" value="215"/>
+    <property name="Text 1" value="I could use some help. Are you busy?"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="218" name="Question" type="Shopping question" x="1171.5" y="616.5">
+   <properties>
+    <property name="Dialogue Type" value="question"/>
+    <property name="Next 1" type="object" value="219"/>
+    <property name="Next 2" type="object" value="220"/>
+    <property name="Text 1" value="Would you like to see my wares?~"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="219" name="Yes" type="Dialogue" x="1168.5" y="583.5">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Next 1" type="object" value="221"/>
+    <property name="Text 1" value="Lovely~!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="220" name="No" type="Dialogue" x="1141.5" y="588.5">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Text 1" value="Bummer~"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="221" name="Said Yes Merchant Shop Open" type="Dialogue" x="1185.5" y="597.5">
+   <properties>
+    <property name="Dialogue Type" value="shop"/>
+    <property name="Item 1" type="object" value="222"/>
+    <property name="Item 2" type="object" value="223"/>
+    <property name="Item 3" type="object" value="224"/>
+    <property name="Item 4" type="object" value="225"/>
+    <property name="Item 5" type="object" value="241"/>
+    <property name="Item 6" type="object" value="242"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="222" name="Bagel" type="Item" x="1177" y="558">
+   <properties>
+    <property name="Amount" type="int" value="999"/>
+    <property name="Description" value="A plain bagel..."/>
+    <property name="Name" value="Bagel"/>
+    <property name="Price" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="223" name="Spoon" type="Item" x="1189" y="557">
+   <properties>
+    <property name="Amount" type="int" value="999"/>
+    <property name="Description" value="A broken plastic spoon."/>
+    <property name="Name" value="Spoon"/>
+    <property name="Price" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="224" name="Xbox360 Controler" type="Item" x="1200" y="559">
+   <properties>
+    <property name="Amount" type="int" value="999"/>
+    <property name="Description" value="Where did she get this?"/>
+    <property name="Name" value="Xb360cnt"/>
+    <property name="Price" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="225" name="NotBugFrag" type="Item" x="1212.5" y="558.5">
+   <properties>
+    <property name="Amount" type="int" value="999"/>
+    <property name="Description" value="looks odd.."/>
+    <property name="Name" value="NotBugFrag"/>
+    <property name="Price" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="226" gid="459" x="714" y="882" width="33" height="35">
+   <properties>
+    <property name="Interact Relay" type="object" value="75"/>
+   </properties>
+  </object>
+  <object id="227" gid="459" x="730" y="882" width="33" height="35">
+   <properties>
+    <property name="Interact Relay" type="object" value="75"/>
+   </properties>
+  </object>
+  <object id="228" gid="459" x="698.5" y="881.5" width="33" height="35">
+   <properties>
+    <property name="Interact Relay" type="object" value="75"/>
+   </properties>
+  </object>
+  <object id="230" gid="420" x="683.5" y="996.5" width="36" height="35"/>
+  <object id="237" name="Kane" type="NPC" x="750.5" y="909.5">
+   <properties>
+    <property name="Asset Name" value="male-navi-exe6_teal"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="Text 1" value="Im filling out this application to be part of the offical force, there are alot of tough questions...."/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="238" name="port3" type="Radius Warp" x="336" y="184">
+   <properties>
+    <property name="Activation Radius" value="0.6"/>
+    <property name="Arrival Animation" value="arrow_up_right_in"/>
+    <property name="Leave Animation" value="arrow_up_right_out"/>
+    <property name="Target Area" value="porttown3"/>
+    <property name="Target Object" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="239" name="port3" type="Custom Warp" gid="129" x="1060" y="806" width="64" height="36">
+   <properties>
+    <property name="Direction" value="Up Right"/>
+    <property name="Target Area" value="porttown3"/>
+    <property name="Target Object" value="13"/>
+   </properties>
+  </object>
+  <object id="240" name="port1" type="Radius Warp" x="1070.95" y="1022.68">
+   <properties>
+    <property name="Activation Radius" value="0.6"/>
+    <property name="Arrival Animation" value="arrow_down_left_in"/>
+    <property name="Leave Animation" value="arrow_down_left_out"/>
+    <property name="Target Area" value="porttown1"/>
+    <property name="Target Object" value="92"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="241" name="Fake Badge" type="keyitem" x="1225" y="563">
+   <properties>
+    <property name="Amount" type="int" value="999999999"/>
+    <property name="Description" value="A fake offical badge that could fool many."/>
+    <property name="Name" value="Fake Badge"/>
+    <property name="Price" type="int" value="1000"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="242" name="Fake Badge" type="Item" x="1231" y="569">
+   <properties>
+    <property name="Amount" type="int" value="999999999"/>
+    <property name="Description" value="A fake offical badge that could fool many.2"/>
+    <property name="Name" value="Fake Badge"/>
+    <property name="Price" type="int" value="1000"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="243" name="PortSquare" type="Custom Warp" gid="129" x="164" y="292" width="64" height="36">
+   <properties>
+    <property name="Direction" value="Up Right"/>
+    <property name="Target Area" value="porttown3"/>
+    <property name="Target Object" value="13"/>
+   </properties>
+  </object>
+  <object id="244" name="MO000" type="Mystery Option" x="714.5" y="1480.5">
+   <properties>
+    <property name="Amount" type="int" value="3"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="5"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="245" name="MO001" type="Mystery Option" x="722.5" y="1472.5">
+   <properties>
+    <property name="Amount" type="int" value="6"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="10"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="246" name="MO002" type="Mystery Option" x="730.5" y="1464.5">
+   <properties>
+    <property name="Amount" type="int" value="9"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="15"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="247" name="MO003" type="Mystery Option" x="738.5" y="1456.5">
+   <properties>
+    <property name="Amount" type="int" value="12"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="20"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="248" name="MO004" type="Mystery Option" x="746.5" y="1448.5">
+   <properties>
+    <property name="Amount" type="int" value="15"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="25"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="249" name="MO005" type="Mystery Option" x="754.5" y="1440.5">
+   <properties>
+    <property name="Amount" type="int" value="18"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="30"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="250" name="MO006" type="Mystery Option" x="762.5" y="1432.5">
+   <properties>
+    <property name="Amount" type="int" value="21"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="35"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="251" name="MO007" type="Mystery Option" x="770.5" y="1424.5">
+   <properties>
+    <property name="Amount" type="int" value="24"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="40"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="252" name="MO008" type="Mystery Option" x="778.5" y="1416.5">
+   <properties>
+    <property name="Amount" type="int" value="27"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="45"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="253" name="MO009" type="Mystery Option" x="786.5" y="1408.5">
+   <properties>
+    <property name="Amount" type="int" value="30"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="50"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="254" name="MO013" type="Mystery Option" x="762.5" y="1480.5">
+   <properties>
+    <property name="Next 1" type="object" value="244"/>
+    <property name="Next 2" type="object" value="244"/>
+    <property name="Next 3" type="object" value="244"/>
+    <property name="Next 4" type="object" value="245"/>
+    <property name="Next 5" type="object" value="245"/>
+    <property name="Next 6" type="object" value="245"/>
+    <property name="Next 7" type="object" value="246"/>
+    <property name="Next 8" type="object" value="246"/>
+    <property name="Next 9" type="object" value="247"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="255" name="MO014" type="Mystery Option" x="770.5" y="1472.5">
+   <properties>
+    <property name="Next 1" type="object" value="244"/>
+    <property name="Next 2" type="object" value="244"/>
+    <property name="Next 3" type="object" value="244"/>
+    <property name="Next 4" type="object" value="246"/>
+    <property name="Next 5" type="object" value="247"/>
+    <property name="Next 6" type="object" value="247"/>
+    <property name="Next 7" type="object" value="248"/>
+    <property name="Next 8" type="object" value="248"/>
+    <property name="Next 9" type="object" value="248"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="256" name="MO015" type="Mystery Option" x="778.5" y="1464.5">
+   <properties>
+    <property name="Next 1" type="object" value="245"/>
+    <property name="Next 2" type="object" value="245"/>
+    <property name="Next 3" type="object" value="247"/>
+    <property name="Next 4" type="object" value="247"/>
+    <property name="Next 5" type="object" value="248"/>
+    <property name="Next 6" type="object" value="248"/>
+    <property name="Next 7" type="object" value="250"/>
+    <property name="Next 8" type="object" value="252"/>
+    <property name="Next 9" type="object" value="252"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="257" name="MO016" type="Mystery Option" x="786.5" y="1456.5">
+   <properties>
+    <property name="Next 1" type="object" value="246"/>
+    <property name="Next 2" type="object" value="246"/>
+    <property name="Next 3" type="object" value="246"/>
+    <property name="Next 4" type="object" value="250"/>
+    <property name="Next 5" type="object" value="250"/>
+    <property name="Next 6" type="object" value="251"/>
+    <property name="Next 7" type="object" value="251"/>
+    <property name="Next 8" type="object" value="252"/>
+    <property name="Next 9" type="object" value="253"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="258" name="MO017" type="Mystery Option" x="794.5" y="1448.5">
+   <properties>
+    <property name="Next 1" type="object" value="254"/>
+    <property name="Next 2" type="object" value="254"/>
+    <property name="Next 3" type="object" value="254"/>
+    <property name="Next 4" type="object" value="254"/>
+    <property name="Next 5" type="object" value="255"/>
+    <property name="Next 6" type="object" value="255"/>
+    <property name="Next 7" type="object" value="255"/>
+    <property name="Next 8" type="object" value="256"/>
+    <property name="Next 9" type="object" value="253"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="259" name="MO018" type="Mystery Option" x="802.5" y="1440.5">
+   <properties>
+    <property name="Next 1" type="object" value="255"/>
+    <property name="Next 2" type="object" value="255"/>
+    <property name="Next 3" type="object" value="255"/>
+    <property name="Next 4" type="object" value="255"/>
+    <property name="Next 5" type="object" value="256"/>
+    <property name="Next 6" type="object" value="256"/>
+    <property name="Next 7" type="object" value="256"/>
+    <property name="Next 8" type="object" value="257"/>
+    <property name="Next 9" type="object" value="253"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="260" type="Mystery Datum" gid="461" x="242.5" y="911.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="258"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="261" type="Mystery Datum" gid="461" x="627" y="1075" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="258"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="262" type="Mystery Datum" gid="461" x="671.5" y="1401.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="259"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="263" type="Mystery Datum" gid="461" x="752" y="194" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="259"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="264" type="Mystery Datum" gid="461" x="1074.5" y="879.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="259"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="265" type="Mystery Datum" gid="461" x="146" y="340" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="258"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="266" type="Mystery Datum" gid="461" x="367.5" y="846.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="258"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="267" type="Mystery Datum" gid="461" x="243" y="501" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="258"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="268" type="Mystery Datum" gid="461" x="531.5" y="596.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="258"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="269" type="Mystery Datum" gid="461" x="850.5" y="851.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="258"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="270" type="Mystery Datum" gid="461" x="693" y="725" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="259"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="271" type="Mystery Datum" gid="461" x="1169" y="723" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="258"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="272" type="Mystery Datum" gid="461" x="561.5" y="400.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="258"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="273" type="Mystery Datum" gid="461" x="687.5" y="254.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="259"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="274" type="Mystery Datum" gid="461" x="972.5" y="337.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="259"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="275" type="Mystery Datum" gid="461" x="273.5" y="818.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="259"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="276" type="Mystery Datum" gid="461" x="368" y="370" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="259"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="278" name="TEXT no ping" type="Dialogue" x="1052.56" y="246.41">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Mugshot" value="female-navi-exe5_purple"/>
+    <property name="Text 1" value="Hey! Im in charge of this towns plumbing system! Im great at my job but I just cant keep up with the ammount of viruses that keeps creeping in. If you want a quick buck you could help me out eh? To show you finished up cleaning up the viruses reach to the end of the sewer comp and bring me back the ping device and that gives me proof you finished!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="279" name="TEXT ping!" type="Dialogue" x="1094.56" y="288.41">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Mugshot" value="official-navi-exe4_orange"/>
+    <property name="Text 1" value="Ping!"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+</map>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.10" tiledversion="1.11.2" name="CookMachine" tilewidth="40" tileheight="45" tilecount="1" columns="1" objectalignment="center">
- <tileoffset x="0" y="5"/>
+ <tileoffset x="0" y="-10"/>
  <image source="CookMachine.png" width="40" height="45"/>
  <tile id="0">
   <objectgroup draworder="index" id="2">

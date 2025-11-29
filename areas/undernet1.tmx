@@ -1380,6 +1380,9 @@
     <property name="2 Area" value="96.60.137.203:8767,UnderSquare,Undersquare Train"/>
     <property name="2 Name" value="undersquare"/>
     <property name="2 Type" value="Server"/>
+    <property name="3 Area" value="PoliceStation"/>
+    <property name="3 Name" value="PoliceStation"/>
+    <property name="3 Type" value="Area"/>
     <property name="Train" value="train"/>
    </properties>
    <point/>

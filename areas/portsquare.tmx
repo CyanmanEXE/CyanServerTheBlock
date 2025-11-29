@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="35">
+ <tileset firstgid="1" source="../assets/tiles/portpanels.tsx"/>
+ <tileset firstgid="9" source="../assets/tiles/Quadragon Warp.tsx"/>
+ <tileset firstgid="21" source="../assets/tiles/GreenMysteryData.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="20" height="20" offsetx="1.5" offsety="4.5">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,
+0,0,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,
+0,0,4,4,4,4,0,0,4,4,0,0,0,0,0,0,0,0,0,0,
+0,0,0,4,4,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,
+0,0,0,4,4,0,0,4,4,4,4,4,4,0,0,0,0,0,0,0,
+0,0,0,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,
+0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,
+0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,0,0,0,
+0,0,0,0,0,0,0,4,4,4,4,4,4,0,0,4,4,0,0,0,
+0,0,0,0,0,0,0,4,4,4,4,4,4,0,0,4,4,0,0,0,
+0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,4,4,0,0,0,
+0,0,0,0,0,0,0,0,0,4,4,0,0,0,4,4,4,4,4,0,
+0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,0,
+0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="1" name="???" type="Custom Warp" gid="9" x="312" y="310" width="64" height="36">
+   <properties>
+    <property name="Direction" value="Up Right"/>
+    <property name="Target Area" value="porttown3"/>
+    <property name="Target Object" value="13"/>
+   </properties>
+  </object>
+  <object id="2" name="MO000" type="Mystery Option" x="185.5" y="623.5">
+   <properties>
+    <property name="Amount" type="int" value="1"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="5"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="3" name="MO001" type="Mystery Option" x="193.5" y="615.5">
+   <properties>
+    <property name="Amount" type="int" value="10"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="10"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="4" name="MO002" type="Mystery Option" x="201.5" y="607.5">
+   <properties>
+    <property name="Amount" type="int" value="15"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="15"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="5" name="MO003" type="Mystery Option" x="209.5" y="599.5">
+   <properties>
+    <property name="Amount" type="int" value="25"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="20"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="6" name="MO004" type="Mystery Option" x="217.5" y="591.5">
+   <properties>
+    <property name="Amount" type="int" value="47"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="25"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="7" name="MO005" type="Mystery Option" x="225.5" y="583.5">
+   <properties>
+    <property name="Amount" type="int" value="400"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="30"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="8" name="MO006" type="Mystery Option" x="233.5" y="575.5">
+   <properties>
+    <property name="Amount" type="int" value="69"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="35"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="9" name="MO007" type="Mystery Option" x="241.5" y="567.5">
+   <properties>
+    <property name="Amount" type="int" value="91"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="40"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="10" name="MO008" type="Mystery Option" x="249.5" y="559.5">
+   <properties>
+    <property name="Amount" type="int" value="99"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="45"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="11" name="MO009" type="Mystery Option" x="257.5" y="551.5">
+   <properties>
+    <property name="Amount" type="int" value="140"/>
+    <property name="Description" value="money"/>
+    <property name="Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Price" type="int" value="50"/>
+    <property name="Type" value="money"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="12" name="MO013" type="Mystery Option" x="233.5" y="623.5">
+   <properties>
+    <property name="Next 1" type="object" value="2"/>
+    <property name="Next 2" type="object" value="2"/>
+    <property name="Next 3" type="object" value="2"/>
+    <property name="Next 4" type="object" value="3"/>
+    <property name="Next 5" type="object" value="3"/>
+    <property name="Next 6" type="object" value="3"/>
+    <property name="Next 7" type="object" value="4"/>
+    <property name="Next 8" type="object" value="4"/>
+    <property name="Next 9" type="object" value="5"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="13" name="MO014" type="Mystery Option" x="241.5" y="615.5">
+   <properties>
+    <property name="Next 1" type="object" value="2"/>
+    <property name="Next 2" type="object" value="2"/>
+    <property name="Next 3" type="object" value="2"/>
+    <property name="Next 4" type="object" value="4"/>
+    <property name="Next 5" type="object" value="5"/>
+    <property name="Next 6" type="object" value="5"/>
+    <property name="Next 7" type="object" value="6"/>
+    <property name="Next 8" type="object" value="6"/>
+    <property name="Next 9" type="object" value="6"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="14" name="MO015" type="Mystery Option" x="249.5" y="607.5">
+   <properties>
+    <property name="Next 1" type="object" value="3"/>
+    <property name="Next 2" type="object" value="3"/>
+    <property name="Next 3" type="object" value="5"/>
+    <property name="Next 4" type="object" value="5"/>
+    <property name="Next 5" type="object" value="6"/>
+    <property name="Next 6" type="object" value="6"/>
+    <property name="Next 7" type="object" value="8"/>
+    <property name="Next 8" type="object" value="10"/>
+    <property name="Next 9" type="object" value="10"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="15" name="MO016" type="Mystery Option" x="257.5" y="599.5">
+   <properties>
+    <property name="Next 1" type="object" value="4"/>
+    <property name="Next 2" type="object" value="4"/>
+    <property name="Next 3" type="object" value="4"/>
+    <property name="Next 4" type="object" value="8"/>
+    <property name="Next 5" type="object" value="8"/>
+    <property name="Next 6" type="object" value="9"/>
+    <property name="Next 7" type="object" value="9"/>
+    <property name="Next 8" type="object" value="10"/>
+    <property name="Next 9" type="object" value="11"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="16" name="MO017" type="Mystery Option" x="265.5" y="591.5">
+   <properties>
+    <property name="Next 1" type="object" value="12"/>
+    <property name="Next 2" type="object" value="12"/>
+    <property name="Next 3" type="object" value="12"/>
+    <property name="Next 4" type="object" value="12"/>
+    <property name="Next 5" type="object" value="13"/>
+    <property name="Next 6" type="object" value="13"/>
+    <property name="Next 7" type="object" value="13"/>
+    <property name="Next 8" type="object" value="14"/>
+    <property name="Next 9" type="object" value="11"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="17" name="MO018" type="Mystery Option" x="273.5" y="583.5">
+   <properties>
+    <property name="Next 1" type="object" value="13"/>
+    <property name="Next 2" type="object" value="13"/>
+    <property name="Next 3" type="object" value="13"/>
+    <property name="Next 4" type="object" value="13"/>
+    <property name="Next 5" type="object" value="14"/>
+    <property name="Next 6" type="object" value="14"/>
+    <property name="Next 7" type="object" value="14"/>
+    <property name="Next 8" type="object" value="15"/>
+    <property name="Next 9" type="object" value="11"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Type" value="random"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="18" type="Mystery Datum" gid="21" x="-66.5" y="487.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="16"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="19" type="Mystery Datum" gid="21" x="-31" y="334" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="16"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="20" type="Mystery Datum" gid="21" x="142.5" y="544.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="17"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="21" type="Mystery Datum" gid="21" x="-70.5" y="631.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="17"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="22" type="Mystery Datum" gid="21" x="-76.5" y="443.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="17"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="23" type="Mystery Datum" gid="21" x="-191.5" y="550.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="16"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="24" type="Mystery Datum" gid="21" x="-39" y="412" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="16"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="25" type="Mystery Datum" gid="21" x="49" y="500" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="16"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="26" type="Mystery Datum" gid="21" x="-160.5" y="369.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="16"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="27" type="Mystery Datum" gid="21" x="-111.5" y="308.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="16"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="28" type="Mystery Datum" gid="21" x="-130.5" y="483.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="17"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="29" type="Mystery Datum" gid="21" x="-218.5" y="431.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="16"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="30" type="Mystery Datum" gid="21" x="65.5" y="551.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="16"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="31" type="Mystery Datum" gid="21" x="59.5" y="633.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="17"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="32" type="Mystery Datum" gid="21" x="-100.5" y="575.5" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="17"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="33" type="Mystery Datum" gid="21" x="-28" y="535" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="17"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+  <object id="34" type="Mystery Datum" gid="21" x="-11" y="576" width="14" height="43">
+   <properties>
+    <property name="Next 1" type="object" value="17"/>
+    <property name="Type" value="random"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
