@@ -6,11 +6,25 @@
 - `Net.get_player_fragments(player_id)`
 - `Net.set_player_fragments(player_id, count)`
 - `Net.send_player_email(player_id, mail={})`
+- `Net.email_read(event={player_id, email_id})`
 - `Net.player_alloc_sprite(player_id, sprite_id, params={})`
 - `Net.player_draw_sprite(player_id, sprite_id, obj={})`
 - `Net.player_erase_sprite(player_id, obj_id)`
 - `Net.player_dealloc_sprite(player_id, sprite_id)`
+- `Net.virtual_input(event={player_id, events={name, state}})`
+- `Net.provide_asset(area_id, asset_path, hint={asset_type, package_type})`
+- `Net.provide_asset_for_player(player_id, asset_path, hint={asset_type, package_type})`
+  
+## Changelog
+### 11/22/25
+- `Net.virtual_input(event)` added
+- `hint` param added for `Net.provide_asset` and `Net.provide_asset_for_player`
 
+### 11/21/25
+- `opacity` can now optionally be replaced with `a` for alpha channel.
+- `r`, `g`, `b` properties added to sprite draw api.
+- `color_mode` property added to sprite draw api.
+  
 ## Breaking 2.1 Beta Changes
 - Sprite objects cannot change their anim doc via `anim_path`.
   - If you need to use a new anim doc, it's likely with a new texture too.
@@ -22,7 +36,7 @@ This API will toggle the visibility of the HUD visible or invisible.
 Track the state on your own if needed. Often times, it's enough just
 to hide it for cutscenes and then toggle it visible again after.
 
-## `set_player_hude_mode`
+## `set_player_hud_mode`
 The param `mode` is an enum with key-values `health=0` or `icon=1`.
 
 `health` corresponds to the player health in cyberworld.
@@ -73,12 +87,10 @@ All but one of the properties are mandatory:
 - `mug_animation_path`: (string) The server asset path of the mugshot anim.
 - `read`: (bool) **OPTIONAL** Indicates whether or not the player has read the email.
 
-### Read Events
+## Event `email_read`
 When a player reads an email, a Net event `Net.email_read` is triggered.
 You can use this event to track what emails have been read and send this information
 back to your player on join in order to persist game state.
-
-- `Net.email_read(player_id, email_id)`
 
 #### Overwriting
 ... Alternatively, you can send an entirely different email whenever a player
@@ -117,13 +129,26 @@ Objects have the following properties:
 - `sx`: (number) **OPTIONAL** the x scale of the sprite.
 - `sy`: (number) **OPTIONAL** the y scale of the sprite.
 - `ro`: (number) **OPTIONAL** the rotation of the sprite in degrees.
-- `opacity`: (int) **OPTIONAL** the opacity of the image in range 0-255.
-- `anim_state`: (string) **OPTIONAL** the new anim state to apply to this object.
+- `opacity`: (int) **OPTIONAL** the opacity of the sprite in range 0-255.
+- `a`: _an alternative name for `opacity`._
+- `r`: (int) **OPTIONAL** the red channel of the sprite in range 0-255.
+- `g`: (int) **OPTIONAL** the green channel of the sprite in range 0-255.
+- `b`: (int) **OPTIONAL** the blue channel of the sprite in range 0-255.
+- `color_mode`: (int) **OPTIONAL** the enum of the color mode.
+- `anim_state`**: (string) **OPTIONAL** the new anim state to apply to this object.
 
 > For `ox` and `oy` fields, if the sprite object uses an animation,
 > then the animation will override this property.
 
+> The animation for a sprite will loop.
+
 For all assets, be sure to provide them to your player before making this draw statement.
+
+### Color Modes
+The following color modes are available:
+- `0`: Multiply (default draw behavior)
+- `1`: Additive
+- `2`: Colorize
 
 ## `player_erase_sprite`
 Erases a sprite instance (object) identified by `obj_id` for some player.
@@ -133,3 +158,57 @@ Erases a sprite from the client identified by its `sprite_id` for some player.
 
 **Deallocating a sprite erases all objects referring to it**.
 This is a convenience feature and will also release those `obj_id`s for use.
+
+## Event `virtual_input`
+When the player is online and their **input is locked**, the client
+will emit virtual key press information for server owners to respond to
+in their own custom game states.
+
+The param `event` is a lua object with properties, so a table `{}`.
+The event has the following structure:
+- `player_id` - the player these virtual inputs correspond to
+- `events` - a lua table of the name-state pairs of inputs
+
+### Input Events
+This sub `events` lua object has the following structure:
+- `name` - the name of the virtual key input
+- `state` - an enum of the possible input states
+
+The input states can be 
+- `0` - Pressed
+- `1` - Held
+- `2` - Released
+
+> If there are no input events found for some given `name`, then
+> this indicates that no input event has occured. For example, a button
+> pressed for more than 1 frame is followed by a button held event.
+> When the player releases either `pressed` or `held`, a `release` event is emitted.
+> After `release`, there will be no more button states in the `events` table
+> for that button.
+
+## `Net.provide_asset`
+A new **OPTIONAL** `hint` parameter tells the server how to tag an asset.
+This parameter is a lua object and therefore a table `{}`.
+
+- `asset_type` - an enum identifying the asset as text, texture, audio, or data (other).
+- `package_type` - an **OPTIONAL** enum identifying the asset as a package (mod).
+
+### Asset Types
+- Text = `0`
+- Texture = `1`
+- Audio = `2`
+- Data = `3`
+  
+### Package Types
+- Blocks = `0`
+- Card = `1`
+- Encounter = `2`
+- Character = `3`
+- Library = `4`
+- Player = `5`
+
+## `Net.provide_asset_for_player`
+A new **OPTIONAL** `hint` parameter tells the server how to tag an asset.
+This parameter is a lua object and therefore a table `{}`.
+
+See: [`Net.provide_asset`](#netprovide_asset)

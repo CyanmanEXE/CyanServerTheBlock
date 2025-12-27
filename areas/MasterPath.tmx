@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="10" height="50" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="110">
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="10" height="50" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="118">
  <properties>
   <property name="Background" value="custom"/>
-  <property name="Background Animation" value="/server/assets/custom/backgrounds/crimsonhp/port.animation"/>
-  <property name="Background Texture" value="/server/assets/custom/backgrounds/crimsonhp/port.png"/>
+  <property name="Background Animation" value="/server/assets/custom/backgrounds/area1/GrayBG.animation"/>
+  <property name="Background Texture" value="/server/assets/custom/backgrounds/area1/Undernet_BG.png"/>
   <property name="Background Vel X" value="0"/>
-  <property name="Background Vel Y" value="0.5"/>
+  <property name="Background Vel Y" value="0"/>
   <property name="Name" value="TrialComp"/>
-  <property name="Song" value="/server/assets/music/BN2 Internet.ogg"/>
+  <property name="Song" value="/server/assets/music/undernet4theme.ogg"/>
  </properties>
  <tileset firstgid="1" source="../assets/tiles/ughlol.tsx"/>
  <tileset firstgid="9" source="../assets/tiles/fire.tsx"/>
  <tileset firstgid="13" source="../assets/tiles/fire2.tsx"/>
+ <tileset firstgid="17" source="../assets/tiles/hp_warp_blue.tsx"/>
+ <tileset firstgid="22" source="../assets/tiles/bn6_securitycube.tsx"/>
  <layer id="1" name="Tile Layer 1" width="10" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
@@ -67,8 +69,6 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" gid="9" x="128" y="1504" width="33" height="59"/>
-  <object id="2" gid="9" x="192" y="1504" width="33" height="59"/>
   <object id="3" gid="9" x="192" y="1568" width="33" height="59"/>
   <object id="4" gid="9" x="128" y="1568" width="33" height="59"/>
   <object id="5" gid="13" x="192" y="1440" width="29" height="37"/>
@@ -141,5 +141,74 @@
   <object id="107" gid="13" x="120" y="240" width="29" height="37"/>
   <object id="108" gid="13" x="120" y="200" width="29" height="37"/>
   <object id="109" gid="13" x="120" y="160" width="29" height="37"/>
+  <object id="110" name="Porttown2" type="Custom Warp" gid="18" x="115" y="1489" width="114" height="64">
+   <properties>
+    <property name="Direction" value="Up Right"/>
+    <property name="Target Area" value="porttown2"/>
+    <property name="Target Object" value="280"/>
+    <property name="Warp In" type="bool" value="true"/>
+    <property name="Warp Out" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="111" name="Placeholder" type="NPC" x="147" y="119">
+   <properties>
+    <property name="Asset Name" value="owGold"/>
+    <property name="Dialogue Type" value="random"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Text 1" value="Their rage is unrivaled, their focus is impressive... Dance with the viruses with respect!"/>
+    <property name="Text 10" value="These viruses are worthy foes... Honor them with fast deletions!"/>
+    <property name="Text 2" value="Your buster makes for a luring beat... And these viruses call for a song!"/>
+    <property name="Text 3" value="These viruses have grown ravenous... Show them why you have made it this far..."/>
+    <property name="Text 4">Last shot, last slash, last toss... Be the one who is the last one standing.
+</property>
+    <property name="Text 5">These viruses deserve your respect,  go beyond what they can comprehend...
+ 
+</property>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="112" type="Checkpoint" gid="22" x="145.5" y="1426.5" width="48" height="52">
+   <properties>
+    <property name="Description" value="...A voice can be herd..."/>
+    <property name="Dialogue Type" value="None"/>
+    <property name="Disappear Cooldown" type="float" value="0"/>
+    <property name="Interact Relay" type="object" value="111"/>
+    <property name="Password" value="1"/>
+   </properties>
+  </object>
+  <object id="113" name="TESTER" type="Radius Encounter" x="128" y="1312" width="35" height="31">
+   <properties>
+    <property name="Name" value="Encounter1"/>
+   </properties>
+  </object>
+  <object id="114" name="TESTER" type="Radius Encounter" x="128" y="1152" width="35" height="31">
+   <properties>
+    <property name="Name" value="Encounter2"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Path" value=""/>
+   </properties>
+  </object>
+  <object id="115" name="TESTER" type="Radius Encounter" x="128" y="1024" width="35" height="31">
+   <properties>
+    <property name="Name" value="Encounter3"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Path" value=""/>
+   </properties>
+  </object>
+  <object id="116" name="TESTER" type="Radius Encounter" x="128" y="832" width="35" height="31">
+   <properties>
+    <property name="Name" value="Encounter4"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Path" value=""/>
+   </properties>
+  </object>
+  <object id="117" name="TESTER" type="Radius Encounter" x="128" y="512" width="35" height="31">
+   <properties>
+    <property name="Name" value="Encounter5"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Path" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

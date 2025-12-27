@@ -97,15 +97,39 @@ Map:
 - Foreground Vel Y: float
 - Foreground Parallax: float
 
-### Types
+Tiles:
 
-Types are used to denote special tiles or objects understood by the client.
+- Shadow: string
+  - "Always"
+  - "Never"
+  - Unset - Automatic
 
-Home Warp:
+### Object and Tile Classes
+
+Classes are used to denote special tiles or objects understood by the client.
+
+- Warps
+  - [Home Warp](#home-warp)
+  - [Position Warp](#position-warp)
+  - [Server Warp](#server-warp)
+  - [Custom Server Warp](#custom-server-warp)
+  - [Custom Warp](#custom-warp)
+- Movement
+  - [Stairs](#stairs)
+  - [Conveyor](#conveyor)
+  - [Ice](#ice)
+  - [Treadmill](#treadmill)
+- Plain Markers
+  - [Board](#board)
+  - [Shop](#shop)
+  - [Arrow](#arrow)
+  - [Invisible](#invisible)
+
+#### Home Warp
 
 - Tile Objects only
 - Visible in minimap
-- Players will be warped home if they walk into the tile this object is centered on
+- Players will be warped home if colliding with the warp
 - Custom properties:
   - Direction: string
     - Left
@@ -148,18 +172,46 @@ Server Warp:
     - Custom data to pass to the other server
     - Can be read through handle_player_request on the other server
     - Try to keep it short! Long data strings may get ignored
+  - Direction: string
+    - Left
+    - Right
+    - Up
+    - Down
+    - Up Left
+    - Up Right
+    - Down Left
+    - Down Right
 
 Custom Server Warp:
 
 - Tile Objects only
 - Visible in minimap
 - Players will be warped out if colliding with the warp, the result of the warp can be resolved in handle_custom_warp
+- Custom Properties:
+  - Direction: string
+    - Left
+    - Right
+    - Up
+    - Down
+    - Up Left
+    - Up Right
+    - Down Left
+    - Down Right
 
 Custom Warp:
 
 - Tile Objects only
 - Visible in minimap
 - Players will be warped out if colliding with the warp, the result of the warp can be resolved in handle_custom_warp
+  - Direction: string
+    - Left
+    - Right
+    - Up
+    - Down
+    - Up Left
+    - Up Right
+    - Down Left
+    - Down Right
 
 Board:
 
@@ -222,46 +274,158 @@ Treadmill:
     - Down Right
   - Speed: number? (Tiles per second, default: 1.875)
 
+Arrow:
+
+- Tiles only
+- Visible in minimap
+- Custom properties:
+
+  - Direction: string
+    - Up Left
+    - Up Right
+    - Down Left
+    - Down Right
+
+#### Invisible
+
+- Tiles only
+- Hides the tile from players, great for invisible pathways
+
 ## Lua API
 
 Commented functions are in development and require changes to the client (specified below).
 
-### Entry functions
+### Net Events
 
-```Lua
-function tick(delta_time)
-function handle_player_request(player_id, data) -- player requests connection to server (only transfers and kicks should occur here)
-function handle_player_connect(player_id) -- player connects to the server (good place to setup while the player is loading)
-function handle_player_join(player_id) -- player enters their first area after connecting
-function handle_player_transfer(player_id) -- player changes area
-function handle_custom_warp(player_id, object_id) -- player warped out by a "Custom Warp" or "Custom Server Warp"
-function handle_object_interaction(player_id, object_id, button)
-function handle_actor_interaction(player_id, actor_id, button) -- actor_id is a player or bot id
-function handle_tile_interaction(player_id, x, y, z, button)
-function handle_textbox_response(player_id, response) -- response is an index or a string
-function handle_board_open(player_id)
-function handle_board_close(player_id)
-function handle_post_selection(player_id, post_id)
-function handle_post_request(player_id) -- bbs post request for infinite scroll
-function handle_shop_close(player_id)
-function handle_shop_purchase(player_id, item_name)
-function handle_battle_results(player_id, stats) -- stats = { health: number, score: number, time: number, ran: bool, emotion: number, turns: number, npcs: { id: String, health: number }[] }
-function handle_server_message(ip, port, data)
-function handle_authorization(identity, host, port, data) -- a player on another server needs to be authenticated with this server
+```lua
+Net:on("tick", function(event)
+  -- { delta_time: number (seconds) }
+  print(event.delta_time)
+end)
 
--- For the following functions:
---  default action is not taken until after execution
+Net:on("authorization", function(event)
+  -- a player on another server needs to be authenticated with this server
+  -- the host and port for the other server is provided with the event for custom response / implementation
+  -- do NOT share identity with other servers, use data for a temporary link between identities without sharing the identity
+  -- { identity: string, host: string, port: number, data: string }
+  print(event.identity, event.host, event.port, event.data)
+end)
 
-function handle_player_disconnect(player_id)
-function handle_player_move(player_id, x, y, z)
+Net:on("player_request", function(event)
+  -- player requests connection to server (only transfers and kicks should occur here)
+  -- { player_id: string, data: string }
+  print(event.player_id, event.data)
+end)
 
--- For the following functions:
---  default action is not taken on the server until after execution. for the client, the action has already been taken
---  returning true will prevent the default action
+Net:on("player_connect", function(event)
+  -- player connects to the server (good place to setup while the player is loading)
+  -- { player_id: string }
+  print(event.player_id)
+end)
 
--- health, max_health, and element will be updated before this function
-function handle_player_avatar_change(player_id, details) -- details = { texture_path: string, animation_path: string, name: string, element: string, max_health: number }
-function handle_player_emote(player_id, emote)
+Net:on("player_join", function(event)
+  -- player enters their first area after connecting
+  -- { player_id: string }
+  print(event.player_id)
+end)
+
+Net:on("player_area_transfer", function(event)
+  -- player changes area
+  -- { player_id: string }
+  print(event.player_id)
+end)
+
+Net:on("player_disconnect", function(event)
+  -- the player is invalid after this function excecutes
+  -- { player_id: string }
+  print(event.player_id)
+end)
+
+Net:on("player_move", function(event)
+  -- Net.get_player_position(event.player_id) will report the old position
+  -- { player_id: string, x: number, y: number, z: number }
+  print(event.player_id, event.x, event.y, event.z)
+end)
+
+Net:on("player_avatar_change", function(event)
+  -- may change in a future update from avatar swapping removal in v2.5
+  -- health, max_health, and element will be updated on the player before this function executes
+  -- { player_id: string, texture_path: string, animation_path: string, name: string, element: string, max_health: number, prevent_default: Function }
+  print(event.player_id, event)
+end)
+
+Net:on("player_emote", function(event)
+  -- { player_id: string, emote: number, prevent_default: Function }
+  print(event.player_id, event.emote)
+end)
+
+Net:on("custom_warp", function(event)
+  -- player warped out by a "Custom Warp" or "Custom Server Warp"
+  -- { player_id: string, object_id: number }
+  print(event.player_id, event.object_id)
+end)
+
+Net:on("object_interaction", function(event)
+  -- { player_id: string, object_id: number, button: number }
+  print(event.player_id, event.object_id, event.button)
+end)
+
+Net:on("actor_interaction", function(event)
+  -- { player_id: string, actor_id: string, button: number }
+  -- actor_id is a player or bot id
+  print(event.player_id, event.actor_id, event.button)
+end)
+
+Net:on("tile_interaction", function(event)
+  -- { player_id: string, x: number, y: number, z: number, button: number }
+  print(event.player_id, event.x, event.y, event.z, event.button)
+end)
+
+Net:on("textbox_response", function(event)
+  -- { player_id: string, response: number | string }
+  print(event.player_id, event.response)
+end)
+
+Net:on("board_open", function(event)
+  -- deprecated
+  print(event.player_id)
+end)
+
+Net:on("board_close", function(event)
+  -- { player_id: string }
+  print(event.player_id)
+end)
+
+Net:on("post_request", function(event)
+  -- board post request for infinite scroll (UI has exhausted posts)
+  -- { player_id: string }
+  print(event.player_id)
+end)
+
+Net:on("post_selection", function(event)
+  -- { player_id: string, post_id: string }
+  print(event.player_id, event.post_id)
+end)
+
+Net:on("shop_close", function(event)
+  -- { player_id: string }
+  print(event.player_id)
+end)
+
+Net:on("shop_purchase", function(event)
+  -- { player_id: string, item_name: string }
+  print(event.player_id, event.item_name)
+end)
+
+Net:on("battle_results", function(event)
+  -- { player_id: string, health: number, score: number, time: number, ran: bool, emotion: number, turns: number, enemies: { id: String, health: number }[] } }
+  print(event.player_id, event.health, event.time, event.ran, event.emotion, event.turns, event.enemies)
+end)
+
+Net:on("server_message", function(event)
+  -- { host: string, port: number, data: string }
+  print(event.host, event.port, event.data)
+end)
 ```
 
 ### Net API
@@ -309,7 +473,7 @@ Net.get_tileset(area_id, tileset_path) -- { path, first_gid }?
 Net.get_tileset_for_tile(area_id, tile_gid) -- { path, first_gid }?
 Net.get_tile(area_id, x, y, z) -- { gid, flipped_horizontally, flipped_vertically, rotated }
 Net.set_tile(area_id, x, y, z, tile_gid, flip_h?, flip_v?, rotate?)
-Net.provide_asset(area_id, path)
+Net.provide_asset(area_id, path, hint) -- hint = {asset_type, package_type})
 Net.play_sound(area_id, path)
 ```
 
@@ -317,12 +481,13 @@ Net.play_sound(area_id, path)
 
 ```lua
 Net.list_objects(area_id) -- object_id[]
-Net.get_object_by_id(area_id, object_id) -- { id, name, type, visible, x, y, z, width, height, rotation, data, custom_properties }?
-Net.get_object_by_name(area_id, name) -- { id, name, type, visible, x, y, z, width, height, rotation, data, custom_properties }?
+Net.get_object_by_id(area_id, object_id) -- { id, name, class, type, visible, x, y, z, width, height, rotation, data, custom_properties }?
+Net.get_object_by_name(area_id, name) -- { id, name, class, visible, x, y, z, width, height, rotation, data, custom_properties }?
 Net.create_object(area_id, { name?, type?, visible?, x?, y?, z?, width?, height?, rotation?, data, custom_properties? }) -- object_id
 Net.remove_object(area_id, object_id)
 Net.set_object_name(area_id, object_id, name)
-Net.set_object_type(area_id, object_id, type)
+Net.set_object_class(area_id, object_id, class)
+Net.set_object_type(area_id, object_id, type) -- deprecated
 Net.set_object_custom_property(area_id, object_id, name, value)
 Net.resize_object(area_id, object_id, width, height)
 Net.set_object_rotation(area_id, object_id, rotation)
@@ -391,7 +556,7 @@ Net.is_player(player_id)
 Net.get_player_area(player_id) -- area_id
 Net.get_player_ip(player_id) -- address
 Net.get_player_name(player_id) -- name
-Net.set_player_name(player_id)
+Net.set_player_name(player_id, name)
 Net.get_player_direction(player_id)
 Net.get_player_position(player_id) -- { x, y, z }
 Net.get_player_mugshot(player_id) -- { texture_path, animation_path }
@@ -404,7 +569,7 @@ Net.animate_player(player_id, state_name, loop?)
 Net.animate_player_properties(player_id, keyframes) -- unstable
 Net.is_player_battling(player_id)
 Net.is_player_busy(player_id)
-Net.provide_asset_for_player(player_id, path)
+Net.provide_asset_for_player(player_id, path, hint) -- hint = {asset_type, package_type}
 Net.play_sound_for_player(player_id, path)
 Net.exclude_object_for_player(player_id, object_id)
 Net.include_object_for_player(player_id, object_id)
@@ -420,6 +585,7 @@ Net.unlock_player_camera(player_id)
 Net.lock_player_input(player_id)
 Net.unlock_player_input(player_id)
 Net.teleport_player(player_id, warp, x, y, z, direction?)
+Net.offer_package(player_id, package_path)
 Net.set_mod_whitelist_for_player(player_id, whitelist_path) -- whitelist has this format: `[md5] [package_id]\n`
 Net.initiate_encounter(player_id, package_path, data?) -- data is a table, read as second param in package_build for the encounter package
 Net.initiate_pvp(player_1_id, player_2_id, field_script_path?)
@@ -438,12 +604,18 @@ Net.message_player(player_id, message, mug_texture_path?, mug_animation_path?)
 Net.question_player(player_id, question, mug_texture_path?, mug_animation_path?)
 Net.quiz_player(player_id, option_a?, option_b?, option_c?, mug_texture_path?, mug_animation_path?)
 Net.prompt_player(player_id, character_limit?, default_text?)
-Net.open_board(player_id, board_name, color, posts) -- color = { r: 0-255, g: 0-255, b: 0-255 }, posts = { id: string, read: bool?, title: string?, author: string? }[]
+
+-- color = { r: 0-255, g: 0-255, b: 0-255 }, posts = { id: string, read: bool?, title: string?, author: string? }[]
+-- returns EventEmitter, re-emits post_selection, post_request, board_close
+Net.open_board(player_id, board_name, color, posts)
 Net.prepend_posts(player_id, posts, post_id?) -- unstable, issues arise when multiple scripts create boards at the same time
 Net.append_posts(player_id, posts, post_id?) -- unstable, issues arise when multiple scripts create boards at the same time
 Net.remove_post(player_id, post_id) -- unstable, issues arise when multiple scripts create boards at the same time
 Net.close_bbs(player_id)
-Net.open_shop(player_id, items, mug_texture_path?, mug_animation_path?) -- items = { name: string, description: string, price: number }[]
+
+-- items = { name: string, description: string, price: number }[]
+-- returns EventEmitter, re-emits shop_purchase, shop_close
+Net.open_shop(player_id, items, mug_texture_path?, mug_animation_path?)
 ```
 
 #### Player Data API
@@ -477,6 +649,7 @@ Net.remove_asset(server_path)
 Net.has_asset(server_path)
 Net.get_asset_type(server_path)
 Net.get_asset_size(server_path)
+Net.read_asset(server_path) -- returns asset content as string (text assets) or base64 string (binary assets)
 ```
 
 ### Async API
@@ -488,6 +661,7 @@ Note: paths in this section use system paths and not asset paths.
 -- promise objects returned by most async functions
 promise.and_then(function(value))
 
+Async.await(async_iterator) -- iterator
 Async.await(promise) -- value -- for coroutines
 Async.await_all(promises) -- values[] -- for coroutines
 Async.promisify(coroutine) -- promise
@@ -501,8 +675,51 @@ Async.message_server(address, port, data) -- you will not know if this succeeds,
 Async.sleep(duration) -- promise, value = nil
 ```
 
-## Building
+### Asyncified Net API
+
+Async alternatives to some Net API functions. Promises return nil if the user disconnects.
+
+```lua
+Async.message_player(player_id, message, mug_texture_path?, mug_animation_path?) -- promise, value = number?
+Async.question_player(player_id, question, mug_texture_path?, mug_animation_path?) -- promise, value = number?
+Async.quiz_player(player_id, option_a?, option_b?, option_c?, mug_texture_path?, mug_animation_path?) -- promise, value = number?
+Async.prompt_player(player_id, character_limit?, default_text?) -- promise, value = string?
+Async.initiate_encounter(player_id, package_path, data?) -- promise, value = { player_id: string, health: number, score: number, time: number, ran: bool, emotion: number, turns: number, enemies: { id: String, health: number }[] } }
+Async.initiate_pvp(player_1_id, player_2_id, field_script_path?) -- promise, value = { player_id: string, health: number, score: number, time: number, ran: bool, emotion: number, turns: number, enemies: { id: String, health: number }[] } }
+```
+
+### Event Emitters
+
+```lua
+local emitter = Net.EventEmitter.new()
+emitter:emit(event_name, ...)
+emitter:on(event_name, function(...))
+emitter:once(event_name, function(...))
+emitter:on_any(function(event_name, ...))
+emitter:on_any_once(function(event_name, ...))
+emitter:remove_listener(event_name, callback)
+emitter:remove_on_any_listener(callback)
+emitter:async_iter(event_name) -- iterator that returns promises, value = ...
+emitter:async_iter_all(event_name) -- iterator that returns promises, value = event_name, ...
+emitter:destroy() -- allows async iterators to complete
+```
+
+### Lua STD Changes
+
+`print` and `tostring` will display tables.
+
+`printerr` will output red text to stdout.
+
+## Building the Project
+
+Windows requires for building lua [MSVC++](https://docs.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022)
 
 This project is built with Rust, so after installing Cargo, you can compile and run the project with `cargo run`.
 
-If you are interested in understanding the source before making changes, check out the [achitecture document](./ARCHITECTURE.md).
+If you are interested in understanding the source before making changes, check out the [architecture document](./ARCHITECTURE.md).
+
+### Distributing
+
+Install cargo-about: `cargo install cargo-about`
+
+Run `cargo run --bin create_distributable`, a folder named `dist` will be created.

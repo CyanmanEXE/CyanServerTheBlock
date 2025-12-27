@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="124">
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="50" height="50" tilewidth="64" tileheight="32" infinite="0" nextlayerid="11" nextobjectid="135">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/custom/backgrounds/crimsonhp/port.animation"/>
@@ -28,6 +28,10 @@
  <tileset firstgid="99" source="../assets/tiles/water.tsx"/>
  <tileset firstgid="103" source="../assets/tiles/kabob.tsx"/>
  <tileset firstgid="104" source="../assets/tiles/GreenMysteryData.tsx"/>
+ <tileset firstgid="112" source="../assets/tiles/Den_Exits.tsx"/>
+ <tileset firstgid="130" source="../assets/tiles/BigPipe.tsx"/>
+ <tileset firstgid="131" source="../assets/tiles/CompressionRoadsYoka.tsx"/>
+ <tileset firstgid="175" source="../assets/tiles/bodies.tsx"/>
  <layer id="1" name="Tile Layer 1" width="50" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -151,7 +155,13 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="8" name="Object Layer 3" offsetx="0" offsety="-16"/>
+ <objectgroup id="8" name="Object Layer 3" offsetx="0" offsety="-16">
+  <object id="134" gid="176" x="200" y="808" width="40" height="36">
+   <properties>
+    <property name="Flavor" value="Im not gonna lie...This area isn't done dude,come back later please"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer id="3" name="Tile Layer 3" width="50" height="50" offsetx="0" offsety="-32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -280,9 +290,9 @@
 0,0,0,0,0,0,0,0,0,0,0,5,5,5,0,0,0,0,0,0,5,5,5,0,0,0,5,0,0,5,0,0,0,5,0,0,0,5,5,5,5,5,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,5,0,0,0,0,5,0,0,5,0,5,5,5,5,0,0,0,0,0,5,5,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,5,5,5,0,0,5,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,5,5,5,0,0,5,5,0,0,0,0,0,5,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,5,5,5,5,5,5,0,0,0,0,0,0,0,0,5,5,5,5,5,5,0,0,0,0,0,0,0,0,5,5,5,0,0,0,5,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,5,0,0,0,0,0,5,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,5,5,5,0,0,0,5,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,5,5,5,5,5,5,0,0,0,0,0,0,0,0,5,5,5,5,5,5,0,0,142,0,0,0,0,0,5,5,5,0,0,0,5,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,139,0,0,0,0,0,5,0,0,0,0,0,5,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,0,0,0,0,0,0,0,5,0,0,132,0,0,0,0,0,5,5,5,0,0,0,5,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,5,0,0,0,0,5,5,5,5,5,5,5,0,5,5,5,0,0,0,5,5,5,5,5,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,0,0,0,5,5,5,5,5,5,5,0,5,5,5,0,0,0,5,0,0,5,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,5,0,0,0,5,5,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,5,0,5,5,0,0,0,0,0,0,
@@ -312,7 +322,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,112,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
@@ -507,7 +517,7 @@
   </object>
   <object id="62" gid="97" x="848" y="464" width="64" height="64"/>
   <object id="63" gid="97" x="400" y="400" width="64" height="64"/>
-  <object id="64" gid="98" x="936" y="648" width="70" height="42"/>
+  <object id="64" gid="98" x="944.5" y="741.5" width="70" height="42"/>
   <object id="65" gid="98" x="944" y="880" width="70" height="42"/>
   <object id="66" gid="98" x="920" y="888" width="70" height="42"/>
   <object id="67" gid="98" x="920" y="864" width="70" height="42"/>
@@ -896,17 +906,58 @@
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="123" type="Checkpoint" gid="74" x="336" y="528" width="48" height="52">
+  <object id="124" name="???" type="Custom Warp" gid="50" x="262.5" y="517.5" width="64" height="36">
    <properties>
-    <property name="Description" value="This area is under construction, please come back later!"/>
-    <property name="Dialogue Type" value="None"/>
-    <property name="Disappear Cooldown" type="float" value="0"/>
-    <property name="Key Name" value="Shifting Key"/>
-    <property name="Once" type="bool" value="false"/>
-    <property name="Password" value="1"/>
-    <property name="Required Keys" type="int" value="1"/>
-    <property name="Take Item" type="bool" value="false"/>
-    <property name="Unlock Item" value="Shifting Key"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="Target Area" value="Ponddrive1"/>
+    <property name="Target Object" value="125"/>
+   </properties>
+  </object>
+  <object id="125" name="???" type="Custom Warp" gid="50" x="838" y="1350" width="64" height="36">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Target Area" value="Ponddrive1"/>
+    <property name="Target Object" value="124"/>
+   </properties>
+  </object>
+  <object id="126" name="PD2" type="Radius Warp" x="846.5" y="1535.5">
+   <properties>
+    <property name="Activation Radius" value="0.6"/>
+    <property name="Arrival Animation" value="arrow_down_left_in"/>
+    <property name="Leave Animation" value="arrow_down_left_out"/>
+    <property name="Target Area" value="ponddrive2"/>
+    <property name="Target Object" value="36"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="127" gid="130" x="615.5" y="74.5" width="47" height="57">
+   <properties>
+    <property name="Flavor" value="DO NOT TOUCH"/>
+   </properties>
+  </object>
+  <object id="128" name="PressEnter" x="928" y="576" width="32" height="32">
+   <properties>
+    <property name="Compress" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="129" name="PressEnter" x="928" y="512" width="32" height="32">
+   <properties>
+    <property name="Compress" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="130" gid="190" x="344" y="152" width="40" height="36">
+   <properties>
+    <property name="Flavor" value="She seem's to be asleep..."/>
+   </properties>
+  </object>
+  <object id="131" name="PressExit" x="928" y="608" width="32" height="24.3182">
+   <properties>
+    <property name="Decompress" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="132" name="PressExit" x="928" y="488" width="32" height="24.3182">
+   <properties>
+    <property name="Decompress" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

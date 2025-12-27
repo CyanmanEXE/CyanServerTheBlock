@@ -33,26 +33,26 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,19,19,19,19,19,19,19,0,0,0,0,0,0,0,0,
-0,0,0,0,19,19,19,19,19,19,19,19,0,0,0,0,0,0,0,0,
-0,0,0,19,19,19,19,19,19,19,19,19,0,0,0,0,0,0,0,0,
-0,0,0,19,19,19,19,19,19,19,19,19,0,0,0,0,0,0,0,0,
-0,0,19,19,19,19,19,19,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,19,19,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,19,19,19,0,0,32,32,32,22,22,22,32,32,32,0,0,0,0,
-0,19,19,19,19,0,0,32,0,0,22,22,22,0,0,32,0,0,0,0,
-0,19,19,19,0,0,0,32,0,0,22,22,22,0,0,32,0,0,0,0,
-0,19,19,19,0,0,0,32,0,0,0,22,0,0,0,32,0,0,0,0,
-0,19,19,19,0,0,0,32,22,22,22,22,22,22,22,32,0,0,0,0,
-0,19,19,19,0,0,0,32,22,0,0,22,0,0,22,32,0,0,0,0,
-0,19,19,19,0,0,0,32,22,0,22,22,22,0,22,32,0,0,0,0,
-0,19,19,19,0,0,0,32,22,22,22,22,22,22,22,32,0,0,0,0,
-0,19,19,19,0,0,0,32,32,32,22,22,22,32,32,32,0,0,0,0,
-0,19,19,19,0,0,0,0,0,0,22,22,22,0,0,0,0,0,0,0,
-0,19,19,19,0,0,0,0,0,0,22,22,22,0,0,0,0,0,0,0,
-0,19,19,19,19,19,19,19,19,0,22,22,22,0,0,19,19,19,0,0,
-0,19,19,19,19,19,19,19,19,19,22,22,22,19,19,19,19,19,0,0,
-0,19,19,19,19,19,19,19,19,0,0,22,0,0,0,19,19,19,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,32,32,32,22,22,22,32,32,32,0,0,0,0,
+0,0,0,0,0,0,0,32,0,0,22,22,22,0,0,32,0,0,0,0,
+0,0,0,0,0,0,0,32,0,0,22,22,22,0,0,32,0,0,0,0,
+0,0,0,0,0,0,0,32,0,0,0,22,0,0,0,32,0,0,0,0,
+0,0,0,0,0,0,0,32,22,22,22,22,22,22,22,32,0,0,0,0,
+0,0,0,0,0,0,0,32,22,0,0,22,0,0,22,32,0,0,0,0,
+0,0,0,0,0,0,0,32,22,0,22,22,22,0,22,32,0,0,0,0,
+0,0,0,0,0,0,0,32,22,22,22,22,22,22,22,32,0,0,0,0,
+0,0,0,0,0,0,0,32,32,32,22,22,22,32,32,32,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,22,22,22,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,22,22,22,0,0,0,0,0,0,0,
+0,0,0,0,0,19,19,19,0,0,22,22,22,0,0,19,19,19,0,0,
+0,0,0,0,0,19,19,19,19,19,22,22,22,19,19,19,19,19,0,0,
+0,0,0,0,0,19,19,19,0,0,0,22,0,0,0,19,19,19,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -87,34 +87,22 @@
    <point/>
   </object>
   <object id="5" gid="13" x="336" y="400" width="33" height="54"/>
-  <object id="21" name="Personal Prog" type="NPC" x="336" y="688">
+  <object id="21" name="Personal Prog" type="NPC" x="339" y="723">
    <properties>
     <property name="Asset Name" value="prog"/>
     <property name="Dialogue Type" value="first"/>
     <property name="Direction" value="Up Right"/>
-    <property name="Text 1" value="DID YOU KNOW MR. CYANMAN'S FAVORITE COLOR IS CYAN? I WONDER IF THAT'S WHY HE'S CALLED THAT.... NAH CAN'T BE!"/>
+    <property name="Text 1" value="HELLO!"/>
     <property name="Wait Time" value="2"/>
    </properties>
    <point/>
   </object>
-  <object id="23" type="Checkpoint" gid="35" x="303" y="783" width="48" height="52">
-   <properties>
-    <property name="Dialogue Type" value="None"/>
-    <property name="Disappear Cooldown" type="float" value="0"/>
-    <property name="Once" type="bool" value="false"/>
-    <property name="Password" value="Taco"/>
-    <property name="Required Keys" type="int" value="1"/>
-    <property name="Take Item" type="bool" value="false"/>
-    <property name="Unlock GID" type="int" value="8"/>
-    <property name="Unlock Item" value="Shifting Key"/>
-   </properties>
-  </object>
-  <object id="28" name="Personal Prog" type="NPC" x="371" y="819">
+  <object id="28" name="Personal Prog" type="NPC" x="434" y="658">
    <properties>
     <property name="Asset Name" value="prog"/>
     <property name="Dialogue Type" value="first"/>
     <property name="Direction" value="Up Right"/>
-    <property name="Text 1" value="WHAT'S THAT BOX RIGHT THERE FOR? IT'S TO ONLY LET CERTAIN PEOPLE IN FOR THE &quot;CLUB&quot;! IF YOU HAVE NO PASSWORD FOR IT, YOU'RE NOT PART OF THE CLUB!"/>
+    <property name="Text 1" value=":)"/>
     <property name="Wait Time" value="2"/>
    </properties>
    <point/>
@@ -158,7 +146,7 @@
     <property name="Flavor" value="Tacokabobs? How is that possible?"/>
    </properties>
   </object>
-  <object id="44" type="Custom Warp" gid="65" x="259" y="225" width="114" height="64">
+  <object id="44" type="Custom Warp" gid="65" x="173.5" y="748.5" width="114" height="64">
    <properties>
     <property name="Direction" value="Down Left"/>
     <property name="Target Area" value="porttown2"/>
