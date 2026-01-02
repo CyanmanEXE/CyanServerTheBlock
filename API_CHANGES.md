@@ -12,13 +12,10 @@
 - `Net.player_erase_sprite(player_id, obj_id)`
 - `Net.player_dealloc_sprite(player_id, sprite_id)`
 - `Net.virtual_input(event={player_id, events={name, state}})`
-- `Net.provide_asset(area_id, asset_path, hint={asset_type, package_type})`
-- `Net.provide_asset_for_player(player_id, asset_path, hint={asset_type, package_type})`
   
 ## Changelog
 ### 11/22/25
 - `Net.virtual_input(event)` added
-- `hint` param added for `Net.provide_asset` and `Net.provide_asset_for_player`
 
 ### 11/21/25
 - `opacity` can now optionally be replaced with `a` for alpha channel.
@@ -185,30 +182,3 @@ The input states can be
 > When the player releases either `pressed` or `held`, a `release` event is emitted.
 > After `release`, there will be no more button states in the `events` table
 > for that button.
-
-## `Net.provide_asset`
-A new **OPTIONAL** `hint` parameter tells the server how to tag an asset.
-This parameter is a lua object and therefore a table `{}`.
-
-- `asset_type` - an enum identifying the asset as text, texture, audio, or data (other).
-- `package_type` - an **OPTIONAL** enum identifying the asset as a package (mod).
-
-### Asset Types
-- Text = `0`
-- Texture = `1`
-- Audio = `2`
-- Data = `3`
-  
-### Package Types
-- Blocks = `0`
-- Card = `1`
-- Encounter = `2`
-- Character = `3`
-- Library = `4`
-- Player = `5`
-
-## `Net.provide_asset_for_player`
-A new **OPTIONAL** `hint` parameter tells the server how to tag an asset.
-This parameter is a lua object and therefore a table `{}`.
-
-See: [`Net.provide_asset`](#netprovide_asset)

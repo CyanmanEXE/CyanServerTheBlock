@@ -397,12 +397,12 @@
     <property name="Target Object" value="44"/>
    </properties>
   </object>
-  <object id="46" gid="58" x="496" y="240" width="70" height="42"/>
+  <object id="46" gid="58" x="453.5" y="248.5" width="70" height="42"/>
   <object id="47" gid="58" x="448" y="432" width="70" height="42"/>
   <object id="48" gid="58" x="472" y="536" width="70" height="42"/>
   <object id="50" gid="58" x="488" y="640" width="70" height="42"/>
   <object id="51" gid="58" x="784" y="792" width="70" height="42"/>
-  <object id="52" gid="61" x="470.5" y="151.5" width="40" height="36">
+  <object id="52" gid="61" x="501.5" y="244.5" width="40" height="36">
    <properties>
     <property name="Flavor" value="Im not gonna lie...This area isn't done dude,come back later please"/>
    </properties>
