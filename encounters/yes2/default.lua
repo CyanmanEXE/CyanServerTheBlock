@@ -1,0 +1,49 @@
+local Encounter1 = {
+    name="Encounter1",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="MetFire",rank=1},
+        {name="Swordy",rank=1},
+        {name="ColdHead",rank=1},
+        {name="Skarab",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,3},
+        {0,0,0,0,1,4},
+        {0,0,0,0,0,2},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,0,1,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
+    },
+    teams={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    freedom_mission={
+        enabled=true,
+        turn_count=3,
+        player_can_flip=true
+    },
+}
+
+return {
+    minimum_steps_before_encounter=1e+22,
+    encounter_chance_per_step=0.05,
+    encounters={Encounter1}
+}
