@@ -1,0 +1,6 @@
+animation state="BG"
+frame duration="0.0833333" x="0" y="0" w="256" h="256" originx="0" originy="0"
+frame duration="0.0833333" x="264" y="0" w="256" h="256" originx="0" originy="0"
+frame duration="0.0833333" x="528" y="0" w="256" h="256" originx="0" originy="0"
+frame duration="0.0833333" x="0" y="264" w="256" h="256" originx="0" originy="0"
+frame duration="0.0833333" x="263" y="264" w="256" h="256" originx="0" originy="0"  

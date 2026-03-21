@@ -1,0 +1,117 @@
+local Encounter1 = {
+    name="Encounter1",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="MegaBunny",rank=1},
+        {name="Basher",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,1,0,0},
+        {0,0,0,0,0,2},
+        {0,0,0,0,1,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {8,1,1,18,18,18},
+        {18,18,18,8,1,1},
+        {8,1,1,18,18,18},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter2 = {
+    name="Encounter2",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="MegaBunny",rank=1},
+        {name="Basher",rank=1},
+        {name="Volgear",rank=3},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,2},
+        {0,0,0,1,3,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {18,18,18,8,1,1},
+        {1,1,1,18,18,18},
+        {18,18,18,1,1,8},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter3 = {
+    name="Encounter3",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="WindBox",rank=4},
+        {name="Ratty",rank=4},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,2,0,0},
+        {0,0,0,0,0,2},
+        {0,0,0,0,0,1},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {1,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {18,1,18,1,18,1},
+        {1,8,1,18,8,18},
+        {18,1,18,1,18,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+return {
+    minimum_steps_before_encounter=80,
+    encounter_chance_per_step=0.05,
+    encounters={Encounter1,Encounter2,Encounter3}
+}

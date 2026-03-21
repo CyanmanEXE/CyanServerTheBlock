@@ -217,6 +217,9 @@
     <property name="6 Area" value="SnowPark3"/>
     <property name="6 Name" value="SnowPark3"/>
     <property name="6 Type" value="Area"/>
+    <property name="7  Area" value="Chichi"/>
+    <property name="7 Name" value="Chiki1"/>
+    <property name="7 Type" value="Area"/>
     <property name="Train" value="train"/>
    </properties>
    <point/>

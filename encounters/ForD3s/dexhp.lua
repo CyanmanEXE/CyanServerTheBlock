@@ -1,0 +1,298 @@
+local Encounter1 = {
+    name="Encounter1",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Mettaur",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,1,0},
+        {0,0,0,0,0,0},
+        {0,0,0,1,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,2,1,2,1,1},
+        {1,1,1,1,1,1},
+        {1,1,2,1,2,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter2 = {
+    name="Encounter2",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Mettaur",rank=1},
+        {name="Cannodumb (family)",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,1},
+        {0,0,0,0,2,0},
+        {0,0,0,1,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,2,1,2,1,1},
+        {1,1,1,1,1,1},
+        {1,1,2,1,2,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter3 = {
+    name="Encounter3",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Cannodumb (family)",rank=1},
+        {name="Mettaur",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,2},
+        {0,0,0,1,0,0},
+        {0,0,0,0,0,2},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,2,1,2,1,1},
+        {1,1,1,1,1,1},
+        {1,1,2,1,2,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter4 = {
+    name="Encounter4",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Cannodumb (family)",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,1},
+        {0,0,0,0,1,0},
+        {0,0,0,0,0,1},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,2,1,2,1,1},
+        {1,1,1,1,1,1},
+        {1,1,2,1,2,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter5 = {
+    name="Encounter5",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Mettaur",rank=1},
+        {name="Cannodumb (family)",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,2,0},
+        {0,0,0,0,0,0},
+        {0,0,0,1,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,2,1,2,1,1},
+        {1,1,1,1,1,1},
+        {1,1,2,1,2,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter6 = {
+    name="Encounter6",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Mettaur",rank=1},
+        {name="Cannodumb (family)",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,2,0},
+        {0,0,0,0,0,0},
+        {0,0,0,1,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,2,1,2,1,1},
+        {1,1,1,1,1,1},
+        {1,1,2,1,2,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter7 = {
+    name="Encounter7",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Mettaur",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,1},
+        {0,0,0,0,0,0},
+        {0,0,0,1,0,1},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,2,1,2,1,1},
+        {1,1,1,1,1,1},
+        {1,1,2,1,2,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter8 = {
+    name="Encounter8",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Spikey",rank=1},
+        {name="Mettaur",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,1,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,2},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,2,1,2,1,1},
+        {1,1,1,1,1,1},
+        {1,1,2,1,2,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+return {
+    minimum_steps_before_encounter=80,
+    encounter_chance_per_step=0.05,
+    encounters={Encounter1,Encounter2,Encounter3,Encounter4,Encounter5,Encounter6,Encounter7,Encounter8}
+}

@@ -34,6 +34,7 @@
  <tileset firstgid="321" source="../assets/tiles/kabob.tsx"/>
  <tileset firstgid="322" source="../assets/tiles/table4.tsx"/>
  <tileset firstgid="323" source="../assets/tiles/Boulder.tsx"/>
+ <tileset firstgid="324" source="../assets/tiles/exe45_trees.tsx"/>
  <layer id="1" name="Tile Layer 1" width="44" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -891,7 +892,7 @@
   <object id="120" name="fiix me too!" gid="2147483970" x="440.5" y="869.5" width="55" height="62"/>
   <object id="121" gid="317" x="344" y="920" width="114" height="160"/>
   <object id="122" gid="322" x="460.5" y="795.5" width="55" height="62"/>
-  <object id="123" type="Checkpoint" gid="284" x="272" y="624" width="48" height="52">
+  <object id="123" type="Checkpoint" gid="284" x="297" y="437" width="48" height="52">
    <properties>
     <property name="Description" value="This area is under construction, please come back later!"/>
     <property name="Dialogue Type" value="None"/>

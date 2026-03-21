@@ -1,0 +1,79 @@
+Portown: Amherst(3)
+--metal panels & holes--
+1.Cannodumbs-:(
+2.Bunny
+3.oldstove
+4.windbox/vac
+5.ratty
+
+pond: Rivers Pond(3)!
+--sea&grass--
+1.cactikill
+2.bugtank
+3.fishy
+4.bombcorn
+5.shrimpy
+
+snow: Winter memories(2)!
+--ice&cracked--
+1.swordy
+2.yort
+3.hauntedcandle
+4.volgear
+5.tark
+
+Mall: HadleyMall(2)
+--sand&sea--
+1.shrimpy
+2.piranah
+3.cragger
+4.tark
+5.skarab
+
+undernet: Main Block(12)
+--poison&holy--
+1.cragger
+2.hauntedcandle
+3.jokereye
+4.cirkill
+5.heelnavi
+
+Chiki: Chicopee(5)!
+--hole&Holy--
+1.fishy
+2.metrid
+3.skelly
+4.cirkill
+5.quaker
+
+School:Belcher/Litwin/Belamy(5)!
+--metal&holy--
+1.basher
+2.darkmech
+3.swordy
+4.boomer
+5.cragger
+
+Hood:Springfield(4)
+--Poison&volcano--
+1.Mettaur
+2.Gunner
+3.Skarab
+4.fighterplane
+5.heelnavi
+
+Sewers:???(1)
+--sea&volcano--
+1.Fishy
+2.Cragger
+3.ratty
+4.bunny
+5.quaker
+
+VastTraveler:AmazonWareHouse(3)
+--Lava&Metal&Arrow--
+1.Champy
+2.Metrid
+3.volgear
+4.bunny
+5.volcano
