@@ -6,6 +6,9 @@ Support for more sources such as WASM/WASI (C++, Kotlin, etc) or JavaScript can 
 
 The Plugin Interface could also be used to build a Rust based script compiled directly into the server.
 
+## Version
+Run `net_battle_server --version`.
+
 ## Assets
 
 Types of assets:
@@ -422,9 +425,19 @@ Net:on("battle_results", function(event)
   print(event.player_id, event.health, event.time, event.ran, event.emotion, event.turns, event.enemies)
 end)
 
+Net:on("battle_exit", function(event)
+  -- { player_id: string }
+  print(event.player_id)
+end)
+
 Net:on("server_message", function(event)
   -- { host: string, port: number, data: string }
   print(event.host, event.port, event.data)
+end)
+
+Net:on("email_read", function(event)
+  -- { player_id: string, email_id: string }
+  print(event.player_id, event.email_id)
 end)
 ```
 
@@ -571,6 +584,8 @@ Net.is_player_battling(player_id)
 Net.is_player_busy(player_id)
 Net.provide_asset_for_player(player_id, path, hint) -- hint = {asset_type, package_type}
 Net.play_sound_for_player(player_id, path)
+Net.set_song_for_player(player_id, song_path)
+Net.stop_song_for_player(player_id)
 Net.exclude_object_for_player(player_id, object_id)
 Net.include_object_for_player(player_id, object_id)
 Net.exclude_actor_for_player(player_id, actor_id)
@@ -716,7 +731,28 @@ Windows requires for building lua [MSVC++](https://docs.microsoft.com/en-us/cpp/
 
 This project is built with Rust, so after installing Cargo, you can compile and run the project with `cargo run`.
 
-If you are interested in understanding the source before making changes, check out the [architecture document](./ARCHITECTURE.md).
+### `OpenSSL` on Windows
+Windows may need an extra dependency OpenSSL and will compile it from source.
+We will need `perl` to help build this package.
+In admin power shell, run and install:
+
+```shell
+choco install openssl
+choco install strawberryperl
+```
+
+A reboot is required after installation.
+After rebooting try to build. If you are getting errors about
+C API mismatches, try forcing an update on both `openssl` and `openssl-sys`:
+
+```shell
+cargo update -p openssl
+cargo update -p openssl-sys
+cargo clean
+cargo build --release
+```
+
+If you are interested in understanding the source before making changes, check out the [achitecture document](./ARCHITECTURE.md).
 
 ### Distributing
 

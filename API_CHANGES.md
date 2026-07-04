@@ -16,6 +16,18 @@
 - `Net.provide_asset_for_player(player_id, asset_path, hint={asset_type, package_type})`
   
 ## Changelog
+### 06/08/26
+- Event added `Net:on("battle_exit")`
+- Fires after exitting the battle, after rewards, if any.
+- Helps timing of post-battle cutscenes and events.
+
+```lua
+Net:on("battle_exit", function(event)
+  -- { player_id: string }
+  print(event.player_id)
+end)
+```
+
 ### 02/18/26
 - `Net.set_song_for_player(player_id, path)`.
 - `Net.stop_song_for_player(player_id)`.

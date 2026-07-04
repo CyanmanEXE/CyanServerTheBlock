@@ -592,8 +592,8 @@
     <property name="3 Area" value="PoliceStation"/>
     <property name="3 Name" value="PoliceStation"/>
     <property name="3 Type" value="Area"/>
-    <property name="4 Area" value="undernet1"/>
-    <property name="4 Name" value="undernet1"/>
+    <property name="4 Area" value="Chichi"/>
+    <property name="4 Name" value="Chiki1"/>
     <property name="4 Type" value="Area"/>
     <property name="Train" value="train"/>
    </properties>

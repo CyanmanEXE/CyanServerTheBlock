@@ -1,0 +1,1267 @@
+{
+    "automappingRulesFile": "",
+    "commands": [
+    ],
+    "compatibilityVersion": 1100,
+    "extensionsPath": "extensions",
+    "folders": [
+        "."
+    ],
+    "properties": [
+    ],
+    "propertyTypes": [
+        {
+            "id": 1,
+            "name": "QuizFailAction",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "retry",
+                "hide_once",
+                "hide_temp",
+                "explode"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 2,
+            "name": "ItemType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "item",
+                "keyitem",
+                "money",
+                "fragments",
+                "tokens"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 3,
+            "name": "CurrencyType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "money",
+                "fragments",
+                "tokens"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 4,
+            "name": "WaypointType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "first",
+                "random",
+                "before",
+                "after"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 5,
+            "name": "MysteryType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "keyitem",
+                "item",
+                "money",
+                "random",
+                "quiz",
+                "fragments",
+                "tokens",
+                "encounter"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 6,
+            "name": "DialogueType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "first",
+                "question",
+                "quiz",
+                "random",
+                "itemcheck",
+                "before",
+                "after",
+                "shop",
+                "password",
+                "quest_switch",
+                "quest_event",
+                "item",
+                "email",
+                "questcheck",
+                "battle_npc"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 7,
+            "name": "Direction",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Up",
+                "Down",
+                "Left",
+                "Right",
+                "Up Left",
+                "Up Right",
+                "Down Left",
+                "Down Right"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "color": "#ffffaa00",
+            "drawFill": true,
+            "id": 8,
+            "members": [
+                {
+                    "name": "Consume",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Description",
+                    "type": "string",
+                    "value": "It's a Security Cube"
+                },
+                {
+                    "name": "Key Name",
+                    "type": "string",
+                    "value": "money"
+                },
+                {
+                    "name": "Once",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Password",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Required Keys",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Skip Prompt",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Unlock Failed Message",
+                    "type": "string",
+                    "value": "You were unable to unlock the Security Cube"
+                },
+                {
+                    "name": "Unlocked Message",
+                    "type": "string",
+                    "value": "The Security Cube was unlocked!"
+                },
+                {
+                    "name": "Unlocking Animation Time",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Unlocking Asset Name",
+                    "type": "string",
+                    "value": "bn5cubegreen_bot"
+                },
+                {
+                    "name": "Unlocking Sound Path",
+                    "type": "string",
+                    "value": "/server/assets/ezlibs-assets/sfx/panel_change.ogg"
+                }
+            ],
+            "name": "Checkpoint",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ff00aaff",
+            "drawFill": true,
+            "id": 9,
+            "members": [
+                {
+                    "name": "Amount",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Cost Amount",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Cost Failure Message",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Cost Type",
+                    "propertyType": "CurrencyType",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Description",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Explosion Count",
+                    "type": "qlonglong",
+                    "value": 3
+                },
+                {
+                    "name": "Failure Message",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Locked",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Next 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 10",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 2",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 3",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 4",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 5",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 6",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 7",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 8",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 9",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "On Fail",
+                    "propertyType": "QuizFailAction",
+                    "type": "string",
+                    "value": "retry"
+                },
+                {
+                    "name": "Once",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Password Locked",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Quiz List",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Reward Amount",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Reward Description",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Reward Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Reward Type",
+                    "propertyType": "ItemType",
+                    "type": "string",
+                    "value": "item"
+                },
+                {
+                    "name": "Type",
+                    "propertyType": "MysteryType",
+                    "type": "string",
+                    "value": "item"
+                }
+            ],
+            "name": "Mystery Data",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffaa66cc",
+            "drawFill": true,
+            "id": 10,
+            "members": [
+                {
+                    "name": "Next 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 10",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 2",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 3",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 4",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 5",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 6",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 7",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 8",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 9",
+                    "type": "object",
+                    "value": 0
+                }
+            ],
+            "name": "Quiz List",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ff88aa44",
+            "drawFill": true,
+            "id": 11,
+            "members": [
+                {
+                    "name": "Correct Answer",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Option 1",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Option 2",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Option 3",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Question",
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "name": "Quiz Question",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ff88ff88",
+            "drawFill": true,
+            "id": 12,
+            "members": [
+                {
+                    "name": "Event Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name",
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "name": "Location Trigger",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffff8888",
+            "drawFill": true,
+            "id": 13,
+            "members": [
+                {
+                    "name": "Address",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Arrival Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Data",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": "Down"
+                },
+                {
+                    "name": "Dont Teleport",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Incoming Data",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Port",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Warp In",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Warp Out",
+                    "type": "bool",
+                    "value": false
+                }
+            ],
+            "name": "Server Warp",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffff8888",
+            "drawFill": true,
+            "id": 14,
+            "members": [
+                {
+                    "name": "Arrival Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": "Down"
+                },
+                {
+                    "name": "Dont Teleport",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Incoming Data",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Leave Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Target Area",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Target Object",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Warp In",
+                    "type": "bool",
+                    "value": false
+                }
+            ],
+            "name": "Custom Warp",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffff8888",
+            "drawFill": true,
+            "id": 15,
+            "members": [
+                {
+                    "name": "Arrival Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": "Down"
+                },
+                {
+                    "name": "Dont Teleport",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Incoming Data",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Leave Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Target Area",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Target Object",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Warp In",
+                    "type": "bool",
+                    "value": false
+                }
+            ],
+            "name": "Interact Warp",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffff8888",
+            "drawFill": true,
+            "id": 16,
+            "members": [
+                {
+                    "name": "Activation Radius",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Arrival Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": "Down"
+                },
+                {
+                    "name": "Dont Teleport",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Incoming Data",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Leave Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Target Area",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Target Object",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Warp In",
+                    "type": "bool",
+                    "value": false
+                }
+            ],
+            "name": "Radius Warp",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffaaaaaa",
+            "drawFill": true,
+            "id": 17,
+            "members": [
+                {
+                    "name": "Animation Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Asset Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Date",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Dialogue Type",
+                    "propertyType": "DialogueType",
+                    "type": "string",
+                    "value": "question"
+                },
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": "Down Right"
+                },
+                {
+                    "name": "Dont Face Player",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Dont Notify",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Encounter Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Event Value",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Failure Message",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Item 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Item 2",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Mug Animation Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Mugshot",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Next 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 2",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next Waypoint 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Player Exclusive",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Quest Exclusive",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Quest NPC",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Quest Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Quest State",
+                    "type": "string",
+                    "value": "active"
+                },
+                {
+                    "name": "Take Item",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Text 1",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Text 2",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Text 3",
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "name": "NPC",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ff55ff55",
+            "drawFill": true,
+            "id": 18,
+            "members": [
+                {
+                    "name": "Date",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Next Waypoint 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next Waypoint 2",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next Waypoint 3",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next Waypoint 4",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next Waypoint 5",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Wait Time",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Waypoint Type",
+                    "propertyType": "WaypointType",
+                    "type": "string",
+                    "value": "first"
+                }
+            ],
+            "name": "Waypoint",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffff5555",
+            "drawFill": true,
+            "id": 19,
+            "members": [
+                {
+                    "name": "Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Once",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Path",
+                    "type": "file",
+                    "value": ""
+                },
+                {
+                    "name": "Radius",
+                    "type": "qlonglong",
+                    "value": 1
+                }
+            ],
+            "name": "Radius Encounter",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ff4444ff",
+            "drawFill": true,
+            "id": 20,
+            "members": [
+            ],
+            "name": "Water Refill",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffffdd44",
+            "drawFill": true,
+            "id": 21,
+            "members": [
+                {
+                    "name": "Amount",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Description",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Price",
+                    "type": "qlonglong",
+                    "value": 999999
+                },
+                {
+                    "name": "Type",
+                    "propertyType": "ItemType",
+                    "type": "string",
+                    "value": "item"
+                }
+            ],
+            "name": "Item",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffcc66cc",
+            "drawFill": true,
+            "id": 22,
+            "members": [
+                {
+                    "name": "Body 1",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Body 10",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Body 2",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Body 3",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Body 4",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Body 5",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Body 6",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Body 7",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Body 8",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Body 9",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Date",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Dialogue Type",
+                    "propertyType": "DialogueType",
+                    "type": "string",
+                    "value": "first"
+                },
+                {
+                    "name": "Dont Notify",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Email From",
+                    "type": "string",
+                    "value": "???"
+                },
+                {
+                    "name": "Email Icon",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Email Id",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Email Title",
+                    "type": "string",
+                    "value": "Mail"
+                },
+                {
+                    "name": "Encounter Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Event Value",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Failure Message",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Item 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Item 2",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Mug Animation Path",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Mug Texture Path",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Mugshot",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Next 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 2",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 3",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 4",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 5",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Notify Delay",
+                    "type": "float",
+                    "value": 1.5
+                },
+                {
+                    "name": "Notify Message",
+                    "type": "string",
+                    "value": "Looks like you got an e-mail."
+                },
+                {
+                    "name": "Persist",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "Quest Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Take Item",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Text 1",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Text 2",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Text 3",
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "name": "Dialogue",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffff6600",
+            "drawFill": true,
+            "id": 23,
+            "members": [
+                {
+                    "name": "Follow",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Once",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Target",
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "name": "Explosion Trigger",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffffaa00",
+            "drawFill": true,
+            "id": 24,
+            "members": [
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": "Down Left"
+                },
+                {
+                    "name": "Rush Object",
+                    "type": "object",
+                    "value": 0
+                }
+            ],
+            "name": "Rush Road",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ff88aaff",
+            "drawFill": true,
+            "id": 25,
+            "members": [
+                {
+                    "name": "Compress",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Decompress",
+                    "type": "bool",
+                    "value": false
+                }
+            ],
+            "name": "Compression Tile",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffffaa00",
+            "drawFill": true,
+            "id": 26,
+            "members": [
+            ],
+            "name": "Admin Console",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        }
+    ]
+}
