@@ -489,7 +489,7 @@
     <property name="Warp In" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="9" name="HighwayBBS" gid="2147483727" x="1731.5" y="1400" width="32" height="56">
+  <object id="9" name="HighwayBBS" type="Board" gid="2147483727" x="1731.5" y="1400" width="32" height="56">
    <properties>
     <property name="BBS" type="bool" value="true"/>
     <property name="Color" type="color" value="#ff00ffff"/>

@@ -451,11 +451,14 @@
             }
         },
         "areas/undersquare.tmx": {
-            "scale": 0.9615,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1173.6869474778991,
-                "y": 644.3057722308893
+                "x": 996.9999999999999,
+                "y": 573
             }
         },
         "areas/wilt.tmx": {
