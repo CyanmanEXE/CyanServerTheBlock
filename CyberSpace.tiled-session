@@ -125,33 +125,33 @@
                 2,
                 8
             ],
-            "scale": 0.7526,
-            "selectedLayer": 13,
+            "scale": 0.8427,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 1053.0162104703693,
-                "y": 447.1166622375764
+                "x": 1017.5625964162809,
+                "y": 445.5915509671294
             }
         },
         "areas/Chichi2.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.5205,
+            "scale": 0.5857,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1147.9346781940442,
-                "y": 467.8194044188281
+                "x": 1114.0515622332252,
+                "y": 332.0812702748848
             }
         },
         "areas/Chichi3.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.535,
+            "scale": 0.684,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 851.4018691588784,
-                "y": 496.26168224299056
+                "x": 728.8011695906432,
+                "y": 575.2923976608187
             }
         },
         "areas/Chichi4.tmx": {
@@ -174,11 +174,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.5897,
+            "scale": 1.0565,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 782.601322706461,
-                "y": 372.22316432084114
+                "x": 505.91575958353053,
+                "y": 340.2744912446758
             }
         },
         "areas/MasterPath.tmx": {
@@ -190,30 +190,36 @@
             }
         },
         "areas/PoliceStation.tmx": {
-            "scale": 0.396328125,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                8
+            ],
+            "scale": 1.7744,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 1280.5046323674355,
-                "y": 616.9130691898285
+                "x": 1667.8877366997294,
+                "y": 345.1871055004509
             }
         },
         "areas/Ponddrive1.tmx": {
             "expandedObjectLayers": [
                 6
             ],
-            "scale": 0.5681,
+            "scale": 0.6935,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 1766.414363668368,
-                "y": 678.5777151909874
+                "x": 1346.0706560922854,
+                "y": 711.607786589762
             }
         },
         "areas/Sewer.tmx": {
-            "scale": 0.31706249999999997,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 0.6196,
+            "selectedLayer": 11,
             "viewCenter": {
-                "x": 1600.6307904592943,
-                "y": 758.5255273013997
+                "x": 1314.557779212395,
+                "y": 1033.7314396384763
             }
         },
         "areas/SnowPark3.tmx": {
@@ -222,11 +228,11 @@
                 2,
                 8
             ],
-            "scale": 0.4345,
+            "scale": 0.5123,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 1455.6962025316457,
-                "y": 417.7215189873418
+                "x": 1191.684559828226,
+                "y": 295.7251610384541
             }
         },
         "areas/christmas.tmx": {
@@ -260,11 +266,11 @@
             "expandedObjectLayers": [
                 8
             ],
-            "scale": 1.0364,
+            "scale": 0.8299,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 3482.7286761868004,
-                "y": 1528.8498649170206
+                "x": 3652.849740932643,
+                "y": 1627.3044945174117
             }
         },
         "areas/devroom.tmx": {
@@ -349,11 +355,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.7742,
+            "scale": 0.5928,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 924.1797985016792,
-                "y": 491.4750710410747
+                "x": 964.0688259109311,
+                "y": 591.2618083670715
             }
         },
         "areas/porttown2.tmx": {
@@ -371,22 +377,22 @@
             "expandedObjectLayers": [
                 7
             ],
-            "scale": 0.6644,
+            "scale": 0.8414,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 942.9560505719446,
-                "y": 530.5538832028898
+                "x": 952.5790349417637,
+                "y": 436.77204658901826
             }
         },
         "areas/school.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.2334,
+            "scale": 0.9018,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 687.935787254743,
-                "y": 357.1428571428571
+                "x": 701.375027722333,
+                "y": 348.7469505433577
             }
         },
         "areas/undernet-1.tmx": {
@@ -406,11 +412,14 @@
             }
         },
         "areas/undernet1.tmx": {
-            "scale": 0.2286,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                12
+            ],
+            "scale": 0.9722,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 2141.2948381452316,
-                "y": 929.5713035870516
+                "x": 1654.4949598847975,
+                "y": 1227.6280600699445
             }
         },
         "areas/undernet2.tmx": {
@@ -434,11 +443,11 @@
                 14,
                 2
             ],
-            "scale": 0.5416,
+            "scale": 1.0902,
             "selectedLayer": 13,
             "viewCenter": {
-                "x": 2081.7946824224523,
-                "y": 992.429837518464
+                "x": 1661.621720785177,
+                "y": 318.7488534213906
             }
         },
         "areas/undersquare.tmx": {
@@ -943,18 +952,18 @@
     ],
     "project": "CyberSpace.tiled-project",
     "recentFiles": [
-        "areas/default.tmx",
-        "areas/Chichi.tmx",
-        "areas/porttown3.tmx",
+        "areas/Chichi2.tmx",
+        "areas/Chichi4.tmx",
+        "areas/porttown1.tmx",
         "areas/Hood1.tmx",
+        "areas/Chichi3.tmx",
+        "areas/hp1.tmx",
+        "areas/undernet5.tmx",
+        "areas/school.tmx",
         "areas/undernet0.tmx",
         "areas/undernet-1.tmx",
-        "areas/porttown1.tmx",
-        "areas/Ponddrive1.tmx",
-        "areas/SnowPark3.tmx",
-        "areas/wilt.tmx",
-        "areas/Chichi3.tmx",
-        "areas/Chich5.tmx"
+        "areas/default.tmx",
+        "areas/Chichi.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

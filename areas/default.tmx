@@ -1014,7 +1014,7 @@
     <property name="Unlocked Message" value="Thank you! Have a pleasent day!"/>
    </properties>
   </object>
-  <object id="140" name="To Chiki1" type="Custom Warp" gid="141" x="2184" y="1448" width="64" height="36">
+  <object id="140" name="To Hood1" type="Custom Warp" gid="141" x="2184" y="1448" width="64" height="36">
    <properties>
     <property name="Direction" value="Up Left"/>
     <property name="Target Area" value="Hood1"/>
