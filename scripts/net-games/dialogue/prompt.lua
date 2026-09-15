@@ -1,0 +1,544 @@
+-- scripts/net-games/dialogue/prompt.lua
+-- YES/NO prompt helper for net-games Dialogue (adapted to new displayer)
+
+local Displayer  = require("scripts/displayer/displayer")
+local Input      = require("scripts/input/input")
+
+local Prompt = {}
+Prompt.instances = {}
+Prompt._tick_attached = false
+
+-- Dedicated sprite id ONLY for the selector cursor
+local SELECTOR_SPRITE_ID = 5200
+
+local CURSOR_MOVE_SFX_PATH = "/server/assets/net-games/sfx/cursor_move.ogg"
+local function play_cursor_move_sfx(player_id)
+    Net.provide_asset_for_player(player_id, CURSOR_MOVE_SFX_PATH)
+    if Net.play_sound_for_player then
+        pcall(function() Net.play_sound_for_player(player_id, CURSOR_MOVE_SFX_PATH) end)
+    elseif Net.play_sound then
+        pcall(function() Net.play_sound(player_id, CURSOR_MOVE_SFX_PATH) end)
+    end
+end
+
+-- Backdrop handling (same as dialogue)
+local BACKDROP_TEXTURE = "/server/assets/net-games/displayer/empty_white.png"
+local player_backdrop_sprite = {}
+
+local function ensure_backdrop_sprite(player_id)
+    if player_backdrop_sprite[player_id] then return end
+    local sprite_id = "prompt_backdrop_" .. player_id
+    Net.provide_asset_for_player(player_id, BACKDROP_TEXTURE)
+    Net.player_alloc_sprite(player_id, sprite_id, { texture_path = BACKDROP_TEXTURE })
+    player_backdrop_sprite[player_id] = sprite_id
+end
+
+local function draw_backdrop(player_id, backdrop, z)
+    if not backdrop then return nil end
+    ensure_backdrop_sprite(player_id)
+    local sprite_id = player_backdrop_sprite[player_id]
+    local x = backdrop.x or 0
+    local y = backdrop.y or 0
+    local width = backdrop.width or 240
+    local height = backdrop.height or 160
+    local r = backdrop.r or 0
+    local g = backdrop.g or 0
+    local b = backdrop.b or 0
+    local opacity = backdrop.opacity or 200
+    local a = backdrop.a or 255
+    local draw_id = "prompt_backdrop_" .. player_id
+    Net.player_draw_sprite(player_id, sprite_id, {
+        id = draw_id,
+        x = x * 2,
+        y = y * 2,
+        z = z - 1,
+        sx = width * 2,
+        sy = height * 2,
+        r = r, g = g, b = b,
+        opacity = opacity,
+        a = a,
+        color_mode = 0,
+    })
+    return draw_id
+end
+
+local function erase_backdrop(player_id)
+    Net.player_erase_sprite(player_id, "prompt_backdrop_" .. player_id)
+end
+
+-- Text width helper (using new Font API)
+local function get_text_width(text, font, scale)
+    local w = 0
+    for i = 1, #text do
+        local ch = text:sub(i, i)
+        local gw, _ = Displayer.Font.getGlyphDimensions(font, ch)
+        w = w + gw * scale
+        if i < #text then
+            w = w + 1 * scale
+        end
+    end
+    return w
+end
+
+local LISTENER_ATTACHED = false
+local function ensure_listener()
+    if LISTENER_ATTACHED then return end
+    LISTENER_ATTACHED = true
+    Input.attach_virtual_input_listener()
+end
+
+local function set_input_locked(player_id, locked)
+    if locked then
+        if Net.lock_player_input then pcall(Net.lock_player_input, Net, player_id) end
+    else
+        if Net.unlock_player_input then pcall(Net.unlock_player_input, Net, player_id) end
+    end
+end
+
+local function mk_id(player_id)
+    return "ng_prompt_" .. tostring(player_id)
+end
+
+local function ensure_tick()
+    if Prompt._tick_attached then return end
+    Prompt._tick_attached = true
+    Net:on("tick", function(event)
+        for player_id, inst in pairs(Prompt.instances) do
+            local state = Displayer.Text.getTextBoxState(player_id, inst.box_id)
+            if not state then
+                Prompt.close(player_id, "textbox_missing")
+            else
+                inst:update(event.delta_time or 0)
+            end
+        end
+    end)
+end
+
+-- Selector cursor drawing
+local function ensure_selector_cursor_allocated(player_id)
+    Net.provide_asset_for_player(player_id, "/server/assets/net-games/cursors/text_cursor.png")
+    Net.provide_asset_for_player(player_id, "/server/assets/net-games/cursors/text_cursor.animation")
+    Net.player_alloc_sprite(player_id, SELECTOR_SPRITE_ID, {
+        texture_path = "/server/assets/net-games/cursors/text_cursor.png",
+        anim_path    = "/server/assets/net-games/cursors/text_cursor.animation",
+        anim_state   = "CURSOR_RIGHT",
+    })
+end
+
+local function selector_draw(player_id, draw_id, x, y, z, scale)
+    ensure_selector_cursor_allocated(player_id)
+    Net.player_draw_sprite(player_id, SELECTOR_SPRITE_ID, {
+        id = draw_id,
+        x = x,
+        y = y,
+        z = z,
+        sx = scale,
+        sy = scale,
+        anim_state = "CURSOR_RIGHT",
+    })
+end
+
+local function selector_erase(player_id, draw_id)
+    Net.player_erase_sprite(player_id, draw_id)
+end
+
+-- UI normalize (padding)
+local function normalize_ui(ui)
+    local o = {
+        box_id = ui.box_id,
+        font  = ui.font or "THIN_BLACK",
+        scale = ui.scale or 2.0,
+        z     = ui.z or 100,
+        x = ui.x or 8,
+        y = ui.y or 110,
+        w = ui.w or 224,
+        h = ui.h or 42,
+        backdrop = ui.backdrop or ui.backdrop_config or nil,
+        mugshot  = ui.mugshot or nil,
+        nameplate = ui.nameplate,
+        typing_speed = ui.typing_speed or 99999,
+        type_sfx_path = ui.type_sfx_path,
+        type_sfx_min_dt = ui.type_sfx_min_dt,
+    }
+    if o.backdrop then
+        local px = o.backdrop.padding_x or 0
+        local py = o.backdrop.padding_y or 0
+        if o.backdrop.x then o.x = o.backdrop.x + px end
+        if o.backdrop.y then o.y = o.backdrop.y + py end
+        if o.backdrop.width then o.w = o.backdrop.width - (px * 2) end
+        if o.backdrop.height then o.h = o.backdrop.height - (py * 2) end
+    end
+    return o
+end
+
+-- Text building
+local OPTIONS_INDENT = "       "
+local function join_lines(lines)
+    return table.concat(lines, "\n")
+end
+
+local function build_yesno_text_from_wrapped(question_lines, _max_lines_per_page)
+    local MAX_LINES_PER_PAGE = 3
+    local ROOM = 2
+    local pages = {}
+    local chunk = {}
+    for i = 1, #question_lines do
+        table.insert(chunk, question_lines[i])
+        if #chunk >= ROOM and i < #question_lines then
+            table.insert(pages, join_lines(chunk))
+            chunk = {}
+        end
+    end
+    while #chunk < ROOM do
+        table.insert(chunk, "")
+    end
+    table.insert(chunk, OPTIONS_INDENT .. "Yes    No")
+    table.insert(pages, join_lines(chunk))
+    return table.concat(pages, "\f")
+end
+
+local function options_visible_on_current_page(player_id, box_id)
+    local bd = Displayer.Text.getTextBoxData(player_id, box_id)
+    if not bd or not bd.pages then return false end   -- bd.pages is no longer available in new displayer
+    local p = bd.current_page or 1
+    local page = bd.pages[p]
+    if not page then return false end
+    for i = 1, #page do
+        if tostring(page[i] or ""):find("Yes") then
+            return true
+        end
+    end
+    return false
+end
+
+-- Cursor placement
+local function yesno_cursor_pos(player_id, box_id, ui_norm, selection)
+    local bd = Displayer.Text.getTextBoxData(player_id, box_id)
+    if not bd then
+        return 20, 120
+    end
+    local scale  = bd.scale or ui_norm.scale or 2.0
+    local font   = bd.font  or ui_norm.font  or "THIN_BLACK"
+    local line_h = 12 * scale   -- approximate line height
+
+    -- In new displayer, we cannot rely on bd.pages, bd.current_page, bd.line_x_offsets.
+    -- This function will need to be reimplemented using the actual text layout.
+    -- For now, we use a fallback position.
+    local options_line = 2
+    -- (Old logic that used bd.pages is commented out)
+    -- local curp = bd.current_page or 1
+    -- if bd.pages and bd.pages[curp] then
+    --     local lines = bd.pages[curp]
+    --     for i = 1, #lines do
+    --         local s = tostring(lines[i] or "")
+    --         if s:find("Yes") then
+    --             options_line = i
+    --             break
+    --         end
+    --     end
+    -- end
+
+    local base_x = bd.x or (ui_norm.x * 2)   -- bd.x is screen coordinate
+    local base_y = bd.y or (ui_norm.y * 2)
+
+    local options_y = base_y + ((options_line - 1) * line_h)
+
+    local yes_prefix = OPTIONS_INDENT
+    local no_prefix  = OPTIONS_INDENT .. "Yes    "
+
+    local yes_x = base_x + get_text_width(yes_prefix, font, scale)
+    local no_x  = base_x + get_text_width(no_prefix,  font, scale)
+
+    local cursor_h = 13 * scale
+    local left_of_word = 6 * scale
+    local down_in_line = 9 * scale
+
+    local target_x = (selection == 1) and yes_x or no_x
+    local cx = target_x - left_of_word
+    local cy = options_y + down_in_line + ((line_h - cursor_h) * 0.5)
+
+    return cx, cy
+end
+
+-- Instance
+local PromptInstance = {}
+PromptInstance.__index = PromptInstance
+
+function PromptInstance:new(player_id, opts)
+    local o = setmetatable({}, self)
+    o.player_id = player_id
+    o.box_id = (opts and opts.ui and opts.ui.box_id) or mk_id(player_id)
+    o.ui = normalize_ui((opts and opts.ui) or {})
+    o.question  = (opts and opts.question) or "Continue?"
+    o.on_yes    = (opts and opts.on_yes) or function() end
+    o.on_no     = (opts and opts.on_no) or function() end
+    o.on_cancel = (opts and opts.on_cancel) or function() end
+    o.cancel_behavior = (opts and opts.cancel_behavior) or "select_no"
+    o.reuse_existing_box = (opts and opts.reuse_existing_box == true)
+    o.ready_for_input = false
+    o.selection = 1
+    o.cursor_id = o.box_id .. "_selcursor"
+    o.cursor_phase = 0
+    o.cursor_base_x = nil
+    o.cursor_base_y = nil
+    o.backdrop_id = nil
+    o:render_initial()
+    return o
+end
+
+function PromptInstance:render_initial()
+    local ui = self.ui
+    local player_id = self.player_id
+
+    -- Draw backdrop if provided
+    if ui.backdrop then
+        self.backdrop_id = draw_backdrop(player_id, ui.backdrop, ui.z)
+    end
+
+    -- Helper to copy table
+    local function copy_table(t)
+        local o = {}
+        for k, v in pairs(t or {}) do o[k] = v end
+        return o
+    end
+
+    -- PASS 1: render question-only into a temp box to get wrapped lines
+    local question_only = tostring(self.question or "Continue?")
+    local tmp_box_id = self.box_id .. "__wraptmp"
+    Displayer.Text.closeTextBox(player_id, tmp_box_id) -- remove any old temp
+
+    local tmp_backdrop = copy_table(ui.backdrop)
+    if tmp_backdrop then
+        tmp_backdrop.open_seconds = 0
+        tmp_backdrop.close_seconds = 0
+    end
+
+    local tmp_options = {
+        font = ui.font,
+        scale = ui.scale,
+        z = ui.z,
+        speed = ui.typing_speed,
+        type_sound = ui.type_sfx_path,
+        type_sound_min_dt = ui.type_sfx_min_dt,
+    }
+    Displayer.Text.createTextBox(player_id, tmp_box_id, question_only,
+                                 ui.x, ui.y, ui.w, ui.h, tmp_options)
+
+    local bd = Displayer.Text.getTextBoxData(player_id, tmp_box_id)
+    local q_lines = {}
+    if bd and bd.pages then   -- bd.pages no longer exists; this will fail
+        for p = 1, #bd.pages do
+            for l = 1, #bd.pages[p] do
+                table.insert(q_lines, tostring(bd.pages[p][l] or ""))
+            end
+        end
+    end
+    if #q_lines == 0 then q_lines = { question_only } end
+
+    local max_lines = 3
+    if ui.backdrop and ui.backdrop.max_lines then
+        max_lines = tonumber(ui.backdrop.max_lines) or 3
+    end
+
+    local text = build_yesno_text_from_wrapped(q_lines, max_lines)
+
+    Displayer.Text.closeTextBox(player_id, tmp_box_id)
+
+    -- PASS 2: create the real prompt box
+    local existing_real = Displayer.Text.getTextBoxData(player_id, self.box_id)
+    if existing_real then
+        if not self.reuse_existing_box then
+            Displayer.Text.closeTextBox(player_id, self.box_id)
+        end
+    end
+
+    local text_options = {
+        font = ui.font,
+        scale = ui.scale,
+        z = ui.z,
+        speed = ui.typing_speed,
+        type_sound = ui.type_sfx_path,
+        type_sound_min_dt = ui.type_sfx_min_dt,
+    }
+
+    if self.reuse_existing_box then
+        -- Just recreate (overwrites)
+        Displayer.Text.createTextBox(player_id, self.box_id, text,
+                                     ui.x, ui.y, ui.w, ui.h, text_options)
+    else
+        Displayer.Text.createTextBox(player_id, self.box_id, text,
+                                     ui.x, ui.y, ui.w, ui.h, text_options)
+    end
+
+    -- Attach nameplate if provided and not reusing
+    if not self.reuse_existing_box and ui.nameplate then
+        local bd = Displayer.Text.getTextBoxData(player_id, self.box_id)
+        if bd then
+            Displayer.Nameplate.attach(player_id, nil, self.box_id, bd, ui.nameplate)
+        end
+    end
+end
+
+function PromptInstance:render_cursor()
+    local ui = self.ui
+    local player_id = self.player_id
+    local cx, cy = yesno_cursor_pos(player_id, self.box_id, ui, self.selection)
+    self.cursor_base_x = cx
+    self.cursor_base_y = cy
+    selector_draw(player_id, self.cursor_id, cx, cy, ui.z + 2, ui.scale)
+end
+
+function PromptInstance:update(dt)
+    local player_id = self.player_id
+    local st = Displayer.Text.getTextBoxState(player_id, self.box_id)
+
+    local bd = Displayer.Text.getTextBoxData(player_id, self.box_id)
+    if bd and bd.backdrop and bd.backdrop.indicator then
+        bd.backdrop.indicator.enabled = not options_visible_on_current_page(player_id, self.box_id)
+    end
+
+    if st == "printing" then
+        Input.pop(player_id, "left")
+        Input.pop(player_id, "right")
+        Input.pop(player_id, "up")
+        Input.pop(player_id, "down")
+        Input.pop(player_id, "cancel")
+        if Input.is_down(player_id, "confirm") then
+            Input.pop(player_id, "confirm")
+            Displayer.Text.advanceTextBox(player_id, self.box_id)
+        end
+        return
+    end
+
+    if not self.ready_for_input then
+        Input.pop(player_id, "left")
+        Input.pop(player_id, "right")
+        Input.pop(player_id, "up")
+        Input.pop(player_id, "down")
+        if (st == "waiting" or st == "completed") and options_visible_on_current_page(player_id, self.box_id) then
+            self.ready_for_input = true
+            local held = {}
+            if Input.is_down(player_id, "left")    then table.insert(held, "left")    end
+            if Input.is_down(player_id, "right")   then table.insert(held, "right")   end
+            if Input.is_down(player_id, "up")      then table.insert(held, "up")      end
+            if Input.is_down(player_id, "down")    then table.insert(held, "down")    end
+            if Input.is_down(player_id, "confirm") then table.insert(held, "confirm") end
+            if #held > 0 then
+                Input.consume(player_id)
+                Input.require_release(player_id, held)
+            end
+            self:render_cursor()
+            return
+        end
+        if st == "waiting" and Input.pop(player_id, "confirm") then
+            Displayer.Text.advanceTextBox(player_id, self.box_id)
+            Input.consume(player_id)
+            Input.require_release(player_id, { "confirm" })
+            return
+        end
+        Input.pop(player_id, "cancel")
+        return
+    end
+
+    if self.ready_for_input and options_visible_on_current_page(player_id, self.box_id) then
+        dt = math.min(dt or 0, 1/30)
+        local speed  = 3.8
+        local amp    = 2.0 * (self.ui.scale or 1.0)
+        self.cursor_phase = (self.cursor_phase or 0) + (dt * speed)
+        local t = self.cursor_phase % 1.0
+        local eased = 1.0 - (1.0 - t) * (1.0 - t)
+        local push = eased * amp
+        if self.cursor_base_x and self.cursor_base_y then
+            selector_draw(player_id, self.cursor_id,
+                          self.cursor_base_x + push,
+                          self.cursor_base_y,
+                          (self.ui.z or 100) + 2,
+                          self.ui.scale or 2.0)
+        end
+    end
+
+    if Input.pop(player_id, "left") or Input.pop(player_id, "right") then
+        self.selection = (self.selection == 1) and 2 or 1
+        play_cursor_move_sfx(player_id)
+        self:render_cursor()
+        return
+    end
+
+    if Input.pop(player_id, "confirm") then
+        Prompt.close(player_id, "confirm", { keep_textbox = true })
+        if self.selection == 1 then self.on_yes() else self.on_no() end
+        return
+    end
+
+    if Input.pop(player_id, "cancel") then
+        local beh = self.cancel_behavior or "select_no"
+        if beh == "close" then
+            Prompt.close(player_id, "cancel")
+            self.on_cancel()
+            return
+        end
+        if beh == "ignore" then
+            return
+        end
+        if self.selection ~= 2 then
+            self.selection = 2
+            play_cursor_move_sfx(player_id)
+            self:render_cursor()
+            return
+        end
+        Prompt.close(player_id, "cancel_no", { keep_textbox = true })
+        self.on_no()
+        return
+    end
+end
+
+-- Public API
+function Prompt.yesno(player_id, opts)
+    ensure_listener()
+    ensure_tick()
+    if Prompt.instances[player_id] then
+        Prompt.close(player_id, "replace")
+    end
+    set_input_locked(player_id, true)
+    Input.consume(player_id)
+    local inst = PromptInstance:new(player_id, opts or {})
+    Prompt.instances[player_id] = inst
+    return inst.box_id
+end
+
+function Prompt.close(player_id, reason, opts)
+    local inst = Prompt.instances[player_id]
+    if not inst then return end
+    opts = opts or {}
+    local keep = (opts.keep_textbox == true)
+
+    selector_erase(player_id, inst.cursor_id)
+    if inst.backdrop_id then
+        erase_backdrop(player_id)
+    end
+
+    if not keep then
+        Displayer.Text.closeTextBox(player_id, inst.box_id)
+    else
+        local bd = Displayer.Text.getTextBoxData(player_id, inst.box_id)
+        if bd and bd.backdrop and bd.backdrop.indicator then
+            bd.backdrop.indicator.enabled = true
+        end
+        Input.consume(player_id)
+        Input.clear_require_release(player_id, { "confirm", "cancel" })
+        Input.swallow(player_id, 0.10)
+    end
+
+    set_input_locked(player_id, false)
+
+    if not keep then
+        Input.consume(player_id)
+        if Input.is_down(player_id, "confirm") or Input.is_down(player_id, "cancel") then
+            Input.require_release(player_id, { "confirm", "cancel" })
+        end
+    end
+
+    Prompt.instances[player_id] = nil
+end
+
+return Prompt

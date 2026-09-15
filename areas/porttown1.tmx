@@ -918,7 +918,7 @@
   <object id="125" x="1127" y="395"/>
   <object id="126" x="1127" y="395"/>
   <object id="127" x="1134.5" y="389.5"/>
-  <object id="129" gid="323" x="376" y="408" width="47" height="58">
+  <object id="129" gid="323" x="320" y="416" width="47" height="58">
    <properties>
     <property name="Flavor" value="Hm..."/>
    </properties>

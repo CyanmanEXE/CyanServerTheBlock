@@ -3,15 +3,14 @@ local Encounter1 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Cacter",rank=5},
-        {name="Shrimpy",rank=4},
+        {name="BombCorn",rank=1},
     },
     obstacles={
     },
     positions={
         {0,0,0,0,0,1},
-        {0,0,0,0,0,2},
-        {0,0,0,2,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,1,0,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -40,13 +39,14 @@ local Encounter2 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Fishy",rank=4},
+        {name="Scuttzer",rank=1},
+        {name="Bunny / Rabiree",rank=1},
     },
     obstacles={
     },
     positions={
         {0,0,0,0,0,0},
-        {0,0,0,0,0,1},
+        {0,0,0,0,0,2},
         {0,0,0,1,0,0},
     },
     obstacle_positions={
@@ -76,15 +76,15 @@ local Encounter3 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="BombCorn",rank=4},
-        {name="Beetank",rank=4},
+        {name="Lark",rank=1},
+        {name="Shrimpy",rank=1},
     },
     obstacles={
     },
     positions={
-        {0,0,0,2,0,0},
+        {0,0,0,0,0,2},
+        {0,0,0,0,0,0},
         {0,0,0,1,0,0},
-        {0,0,0,0,2,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -108,8 +108,45 @@ local Encounter3 = {
     },
 }
 
+local Encounter4 = {
+    name="Encounter4",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Cragger",rank=1},
+        {name="Scuttzer",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,1,2},
+        {0,0,0,0,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {9,9,9,16,16,16},
+        {16,1,16,9,1,9},
+        {9,9,9,16,16,16},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
 return {
     minimum_steps_before_encounter=80,
     encounter_chance_per_step=0.05,
-    encounters={Encounter1,Encounter2,Encounter3}
+    encounters={Encounter1,Encounter2,Encounter3,Encounter4}
 }

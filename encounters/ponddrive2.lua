@@ -1,0 +1,155 @@
+local Encounter1 = {
+    name="Encounter1",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="BombCorn",rank=1},
+        {name="Scuttzer",rank=1},
+        {name="Bunny / Rabiree",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,1},
+        {0,0,0,2,0,3},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {9,9,9,16,16,16},
+        {9,9,9,9,9,9},
+        {16,16,16,9,9,9},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter2 = {
+    name="Encounter2",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="BombCorn",rank=1},
+        {name="Lark",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,2},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,1},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,0,1,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {16,16,16,16,16,16},
+        {9,9,9,9,9,9},
+        {9,9,9,9,9,9},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter3 = {
+    name="Encounter3",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Scuttzer",rank=1},
+        {name="Shrimpy",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,2,0,0},
+        {0,0,0,0,1,0},
+        {0,0,0,0,0,2},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {16,9,9,9,9,16},
+        {16,9,9,9,9,16},
+        {16,9,9,9,9,16},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+local Encounter4 = {
+    name="Encounter4",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Cragger",rank=1},
+        {name="Lark",rank=1},
+        {name="Shrimpy",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,2,0,0},
+        {0,0,0,0,1,0},
+        {0,0,0,0,0,3},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {16,16,16,16,16,16},
+        {16,9,16,16,9,16},
+        {16,16,16,16,16,16},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
+return {
+    minimum_steps_before_encounter=80,
+    encounter_chance_per_step=0.05,
+    encounters={Encounter1,Encounter2,Encounter3,Encounter4}
+}

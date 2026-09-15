@@ -961,6 +961,6 @@
     <property name="Decompress" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="135" gid="195" x="866" y="1402" width="44" height="34"/>
+  <object id="135" gid="195" x="1292.81" y="1414.68" width="44" height="34"/>
  </objectgroup>
 </map>

@@ -3,16 +3,14 @@ local Encounter1 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="HauntedCandle",rank=4},
-        {name="Swordy",rank=4},
-        {name="Volgear",rank=4},
+        {name="Champy",rank=1},
     },
     obstacles={
     },
     positions={
         {0,0,0,0,0,0},
-        {0,0,0,2,1,3},
-        {0,0,0,0,0,0},
+        {0,0,0,0,1,0},
+        {0,0,0,0,1,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -41,17 +39,17 @@ local Encounter2 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Tark",rank=1},
-        {name="HauntedCandle",rank=4},
+        {name="HauntedCandle",rank=1},
+        {name="Piranha",rank=1},
     },
     obstacles={
         {name="IceCube"},
         {name="Rock"},
     },
     positions={
-        {0,0,0,0,0,2},
         {0,0,0,0,0,0},
-        {0,0,0,1,0,2},
+        {0,0,0,0,0,1},
+        {0,0,0,2,0,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -80,14 +78,15 @@ local Encounter3 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Yort",rank=4},
-        {name="Volgear",rank=4},
+        {name="Skarab",rank=1},
+        {name="KillerEye",rank=1},
+        {name="Cactikil",rank=1},
     },
     obstacles={
     },
     positions={
-        {0,0,0,1,0,0},
-        {0,0,0,0,2,0},
+        {0,0,0,3,0,0},
+        {0,0,0,0,0,2},
         {0,0,0,1,0,0},
     },
     obstacle_positions={
@@ -112,8 +111,45 @@ local Encounter3 = {
     },
 }
 
+local Encounter4 = {
+    name="Encounter4",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    weight=10,
+    enemies={
+        {name="Skarab",rank=1},
+        {name="Piranha",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,2,0},
+        {0,0,0,0,0,1},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,12,1,12,1,12},
+        {1,12,1,12,1,12},
+        {1,12,1,12,1,12},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
 return {
     minimum_steps_before_encounter=80,
     encounter_chance_per_step=0.05,
-    encounters={Encounter1,Encounter2,Encounter3}
+    encounters={Encounter1,Encounter2,Encounter3,Encounter4}
 }

@@ -208,8 +208,8 @@
     <property name="3 Area" value="PoliceStation"/>
     <property name="3 Name" value="PoliceStation"/>
     <property name="3 Type" value="Area"/>
-    <property name="4 Area" value="undernet1"/>
-    <property name="4 Name" value="undernet1"/>
+    <property name="4 Area" value="Mall1"/>
+    <property name="4 Name" value="Mall1"/>
     <property name="4 Type" value="Area"/>
     <property name="5 Area" value="Sewer"/>
     <property name="5 Name" value="Sewer"/>

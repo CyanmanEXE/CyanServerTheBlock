@@ -11,7 +11,6 @@ local ezmystery = require('scripts/ezlibs-scripts/ezmystery')
 local ezweather = require('scripts/ezlibs-scripts/ezweather')
 local ezwarps = require('scripts/ezlibs-scripts/ezwarps/main')
 local ezfarms = require('scripts/ezlibs-scripts/ezfarms')
-helpers.safe_require('scripts/events/eznpcs_onceitem')
 local ezcheckpoints = require('scripts/ezlibs-scripts/ezcheckpoints')
 local ezannouncement = require('scripts/ezlibs-scripts/ezannounce/ezannounce')
 local ezemail = require('scripts/ezlibs-scripts/ezemail')
@@ -19,8 +18,7 @@ local ezexplosions = require('scripts/ezlibs-scripts/ezexplosions')
 local ezrushroads = require('scripts/ezlibs-scripts/ezrushroads')
 local ezpress = require('scripts/ezlibs-scripts/ezpress')
 local ezusers = require('scripts/ezlibs-scripts/ezusers')
-local ezbbs = require('scripts/ezlibs-scripts/ezbbs')
-local ezbuttons = require('scripts/ezlibs-scripts/ezbuttons')
+local ezbbs = require('scripts/ezlibs-scripts/ezbbs')   -- NEW BBS plugin
 
 local plugins = { 
     ezweather, 
@@ -36,8 +34,7 @@ local plugins = {
     ezrushroads,
     ezpress,
     ezusers,
-    ezbbs,
-    ezbuttons
+    ezbbs,   -- add to plugin list
 }
 
 local sfx = {
@@ -66,7 +63,7 @@ Net:on("battle_results", function(event)
     local stats = {
         health=event.health,
         time=event.time,
-        ran=event.ran,
+        reason=event.reason,
         emotion=event.emotion,
         turns=event.turns,
         enemies=event.enemies,

@@ -31,8 +31,8 @@
   <object id="1" name="???" type="Custom Warp" gid="9" x="312" y="310" width="64" height="36">
    <properties>
     <property name="Direction" value="Up Right"/>
-    <property name="Target Area" value="porttown3"/>
-    <property name="Target Object" value="13"/>
+    <property name="Target Area" value="porttown2"/>
+    <property name="Target Object" value="243"/>
    </properties>
   </object>
   <object id="2" name="MO000" type="Mystery Option" x="185.5" y="623.5">

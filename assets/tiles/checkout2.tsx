@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.8" tiledversion="1.8.6" name="checkout2" tilewidth="143" tileheight="133" tilecount="1" columns="1">
- <image source="checkout3.png" width="143" height="133"/>
+<tileset version="1.8" tiledversion="1.8.6" name="Checkouts" tilewidth="146" tileheight="133" tilecount="2" columns="0">
+ <tileoffset x="0" y="7"/>
+ <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
+  <image width="146" height="86" source="checkout2.png"/>
   <objectgroup draworder="index" id="2">
-   <object id="1" x="92.853" y="122.796">
-    <polygon points="0,0 -84.0819,-45.3679 -81.0574,-65.3298 -47.7876,-92.5506 24.1962,-40.5287 19.6594,-10.8883"/>
+   <object id="1" x="59.5" y="71">
+    <polygon points="0,0 75.5,-35.5 77.5,-52.5 66.5,-57.5 16,-32.5 4,-18 -35,-37 -42.5,-37 -47,-22"/>
+   </object>
+  </objectgroup>
+ </tile>
+ <tile id="1">
+  <image width="143" height="133" source="checkout3.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="96" y="116">
+    <polygon points="0,0 -39.3333,-19.6667 -78,-39 -78,-54.3333 -62.6667,-53.6667 5,-19.3333 10,-9"/>
    </object>
   </objectgroup>
  </tile>

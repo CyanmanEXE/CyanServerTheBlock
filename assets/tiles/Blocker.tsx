@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.10" tiledversion="1.11.2" name="Blocker" tilewidth="44" tileheight="34" tilecount="1" columns="1" objectalignment="bottomright">
- <tileoffset x="0" y="5"/>
+ <tileoffset x="0" y="22"/>
  <image source="Blockage.png" width="44" height="34"/>
  <tile id="0">
   <objectgroup draworder="index" id="2">
