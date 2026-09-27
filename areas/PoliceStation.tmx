@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="30" height="50" tilewidth="64" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="75">
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="30" height="50" tilewidth="64" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="87">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/custom/backgrounds/crimsonhp/Oven.animation"/>
@@ -294,6 +294,18 @@
     <property name="3 Area" value="porttown3"/>
     <property name="3 Name" value="porttown3"/>
     <property name="3 Type" value="Area"/>
+    <property name="4 Area" value="Mall1"/>
+    <property name="4 Name" value="Mall1"/>
+    <property name="4 Type" value="Area"/>
+    <property name="5 Area" value="Sewer"/>
+    <property name="5 Name" value="Sewer"/>
+    <property name="5 Type" value="Area"/>
+    <property name="6 Area" value="SnowPark3"/>
+    <property name="6 Name" value="SnowPark3"/>
+    <property name="6 Type" value="Area"/>
+    <property name="7 Area" value="Chichi"/>
+    <property name="7 Name" value="Chiki1"/>
+    <property name="7 Type" value="Area"/>
     <property name="Train" value="train"/>
    </properties>
    <point/>
@@ -318,7 +330,7 @@
     <property name="Flavor" value="Just sum stuff"/>
    </properties>
   </object>
-  <object id="68" name="Offical-013" type="NPC" x="335" y="499">
+  <object id="68" name="Offical-013" type="NPC" x="532.5" y="533.5">
    <properties>
     <property name="Asset Name" value="official-navi-exe4_orange"/>
     <property name="Dialogue Type" value="itemcheck"/>
@@ -327,7 +339,7 @@
     <property name="Next 1" type="object" value="69"/>
     <property name="Next 2" type="object" value="70"/>
     <property name="Take Item" type="bool" value="true"/>
-    <property name="Text 1" value="CITIZEN??? IN MY HOUSE?!"/>
+    <property name="Text 1" value="Huh? Your very early..."/>
     <property name="Wait Time" value="0"/>
    </properties>
    <point/>
@@ -361,7 +373,7 @@
   </object>
   <object id="72" gid="37" x="498" y="530" width="32" height="72"/>
   <object id="73" gid="37" x="500.5" y="467.5" width="32" height="72"/>
-  <object id="74" type="Checkpoint" gid="45" x="389" y="369" width="48" height="52">
+  <object id="74" type="Checkpoint" gid="45" x="96" y="472" width="48" height="52">
    <properties>
     <property name="Description" value="This area is under construction, please come back later!"/>
     <property name="Dialogue Type" value="None"/>
@@ -373,6 +385,111 @@
     <property name="Take Item" type="bool" value="false"/>
     <property name="Unlock Item" value="Shifting Key"/>
    </properties>
+  </object>
+  <object id="75" name="Jack" type="NPC" x="789.5" y="754.5">
+   <properties>
+    <property name="Asset Name" value="normal-navi-bn4_green"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Right"/>
+    <property name="Next 1" type="object" value="79"/>
+    <property name="Text 1" value="..."/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="76" name="question" type="Dialogue" x="664.5" y="679.5">
+   <properties>
+    <property name="Dialogue Type" value="question"/>
+    <property name="Next 1" type="object" value="77"/>
+    <property name="Next 2" type="object" value="78"/>
+    <property name="Text 1" value="You wanna make this difficult?"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="77" name="yes" type="Dialogue" x="634" y="652">
+   <properties>
+    <property name="Dialogue Type" value="none"/>
+    <property name="Event Name" value="Punch"/>
+    <property name="Next 1" type="object" value="80"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="78" name="no" type="Dialogue" x="675.5" y="666.5">
+   <properties>
+    <property name="Dialogue Type" value="random"/>
+    <property name="Text 1" value="Then scram!"/>
+    <property name="Text 2" value="Get lost then!"/>
+    <property name="Text 3" value="Later kid!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="79" name="normal chat" type="Dialogue" x="612.5" y="669.5">
+   <properties>
+    <property name="Dialogue Type" value="random"/>
+    <property name="Next 1" type="object" value="76"/>
+    <property name="Text 1" value="You're in my way"/>
+    <property name="Text 2" value="I'm walkin here"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="80" name="advance quest" type="Dialogue" x="683.5" y="720.5">
+   <properties>
+    <property name="Dialogue Type" value="quest_event"/>
+    <property name="Event Value" value="punched"/>
+    <property name="Quest Name" value="Get Punched"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="81" name="advance quest" type="Dialogue" x="553.5" y="378.5">
+   <properties>
+    <property name="Dialogue Type" value="quest_event"/>
+    <property name="Event Value" value="accepted"/>
+    <property name="Quest Name" value="Get Punched"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="82" name="Take Quest" type="Dialogue" x="572" y="426">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Next 1" type="object" value="81"/>
+    <property name="Text 1" value="There you are! I need to test the quest functionality! Hey, I need you to go over to my mate over there and get punched!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="83" name="Turn In Quest" type="Dialogue" x="643" y="429">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Next 1" type="object" value="84"/>
+    <property name="Text 1" value="Great job getting punched loser"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="84" name="advance quest" type="Dialogue" x="607" y="369">
+   <properties>
+    <property name="Dialogue Type" value="quest_event"/>
+    <property name="Event Value" value="reset"/>
+    <property name="Quest Name" value="Get Punched"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="85" name="Quest Pending" type="Dialogue" x="605.5" y="432.5">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Text 1" value="What are you waiting for? Go get punched!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="86" name="Quest Giver" type="NPC" x="655.5" y="588.5">
+   <properties>
+    <property name="Asset Name" value="heel-navi-exe4_black"/>
+    <property name="Dialogue Type" value="quest_switch"/>
+    <property name="Direction" value="Down"/>
+    <property name="Quest Name" value="Get Punched"/>
+    <property name="accepted" type="object" value="85"/>
+    <property name="punched" type="object" value="83"/>
+    <property name="unaccepted" type="object" value="82"/>
+   </properties>
+   <point/>
   </object>
  </objectgroup>
 </map>

@@ -1,8 +1,8 @@
 ChikiTown:Netopia
-Original home of Cyan and DJ, navis are kinder here and will have unique colored navis. Many parks and navis running around. Trees main object
+Original home of Kookasami and DJ, navis are kinder here and will have unique colored navis. Many parks and navis running around. Trees main object
 
-Hood:Netopia
-birth place of DJ, close to the undernet so alot of heel navis are around and cops on their toes. lots of broken path. Junk Main object
+Hood(sprngFld):Netopia
+birth place of Kookasami, close to the undernet so alot of heel navis are around and cops on their toes. lots of broken path. Junk Main object
 
 Block:Netopia
 Worse than the hoood, very huge and alot of areas. many navis main attraction and libs

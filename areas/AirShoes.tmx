@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="10" height="10" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="3">
+ <properties>
+  <property name="Background" value="custom"/>
+  <property name="Background Animation" value="/server/assets/custom/backgrounds/crimsonhp/port.animation"/>
+  <property name="Background Texture" value="/server/assets/custom/backgrounds/Mall/Air.png"/>
+  <property name="Background Vel X" value="0"/>
+  <property name="Background Vel Y" value="0"/>
+  <property name="Name" value="ArShs Lkr"/>
+  <property name="Song" value="/server/assets/music/BN2 Internet.ogg"/>
+ </properties>
+ <tileset firstgid="1" source="../assets/tiles/ZeroAccountTileset.tsx"/>
+ <tileset firstgid="35" source="../assets/tiles/Quadragon Warp.tsx"/>
+ <tileset firstgid="47" source="../assets/tiles/Blocker.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="10" height="10">
+  <data encoding="csv">
+18,18,18,18,18,18,18,18,18,18,
+18,18,18,18,18,18,18,18,18,18,
+18,18,18,18,18,18,18,18,18,18,
+18,18,18,18,18,18,18,18,18,18,
+18,18,18,18,18,18,18,18,18,18,
+0,0,0,0,18,18,18,0,0,0,
+18,18,18,0,0,18,0,0,0,0,
+18,18,18,18,18,18,0,0,0,0,
+18,18,18,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="1" name="AirExit" type="Custom Warp" gid="35" x="32" y="224" width="64" height="36">
+   <properties>
+    <property name="Direction" value="Up Right"/>
+    <property name="Target Area" value="Mall2"/>
+    <property name="Target Object" value="2"/>
+   </properties>
+  </object>
+  <object id="2" gid="47" x="176" y="168" width="44" height="34"/>
+ </objectgroup>
+</map>

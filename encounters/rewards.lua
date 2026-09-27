@@ -166,4 +166,33 @@ return {
             high = {type="money",value=205},
         },
     },
+    HeelNavi= {
+        [1] = {
+            low = {type="money",value=50},
+            mid = {type="money",value=200},
+            high = {type="money",value=500},
+        },
+        [2] = {
+            low = {type="money",value=200},
+            mid = {type="money",value=500},
+            high = {type="money",value=600},
+        },
+        [3] = {
+            low = {type="money",value=600},
+            mid = {type="money",value=670},
+            high = {type="money",value=700},
+        },
+        [4] = {
+            low = {type="money",value=700},
+            mid = {type="money",value=900},
+            high = {type="money",value=999},
+        },
+    },
+    Quaker= {
+        [1] = {
+            low = {type="money",value=58},
+            mid = {type="money",value=66},
+            high = {type="money",value=67},
+        },
+    },
 }

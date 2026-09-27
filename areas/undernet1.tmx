@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="46" height="80" tilewidth="64" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="268">
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="46" height="80" tilewidth="64" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="276">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/custom/backgrounds/area1/GrayBG.animation"/>
@@ -1038,6 +1038,83 @@
    </properties>
    <point/>
   </object>
+  <object id="268" name="Robber" type="NPC" x="755" y="915">
+   <properties>
+    <property name="Asset Name" value="heel-navi-exe4_purple"/>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Up Right"/>
+    <property name="Item 1" type="object" value="0"/>
+    <property name="Next 1" type="object" value="269"/>
+    <property name="Text 1" value="Nice wallet, dummy. Give me that!"/>
+    <property name="Wait Time" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="269" name="Bruuh" type="Dialogue" x="268.5" y="839.5">
+   <properties>
+    <property name="Dialogue Type" value="none"/>
+    <property name="Event Name" value="Steal Money"/>
+    <property name="Next 1" type="object" value="270"/>
+    <property name="No Money" type="object" value="271"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="270" name="TEXT2" type="Dialogue" x="214.5" y="841.5">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Direction" value="Down Left"/>
+    <property name="Mugshot" value="player"/>
+    <property name="Next 1" type="object" value="272"/>
+    <property name="Text 1" value="Hey! I worked hard for that!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="271" name="no money" type="Dialogue" x="264" y="854">
+   <properties>
+    <property name="Dialogue Type" value="random"/>
+    <property name="Text 1" value="Bro... I feel sorry for you."/>
+    <property name="Text 2" value="A brokie?! In this economy?"/>
+    <property name="Text 3" value="Dude... Go get a job."/>
+   </properties>
+   <point/>
+  </object>
+  <object id="272" name="FIGHT" type="Dialogue" x="177" y="835">
+   <properties>
+    <property name="Battle Lost" type="object" value="273"/>
+    <property name="Battle Won" type="object" value="274"/>
+    <property name="Dialogue Type" value="none"/>
+    <property name="Event Name" value="Heel1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="273" name="Loser" type="Dialogue" x="156.5" y="803.5">
+   <properties>
+    <property name="Dialogue Type" value="random"/>
+    <property name="Mug Texture Path" value="heel-navi-exe4_purple"/>
+    <property name="Text 1" value="What a joke."/>
+    <property name="Text 2" value="Psshh I feel sorry for you.. Eh not really. Now scram!"/>
+    <property name="Text 3" value="HA! Try that again punk!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="274" name="Winner" type="Dialogue" x="155.5" y="820.5">
+   <properties>
+    <property name="Dialogue Type" value="first"/>
+    <property name="Mug Texture Path" value="heel-navi-exe4_purple"/>
+    <property name="Next 1" type="object" value="275"/>
+    <property name="Text 1" value="Ok ok im sorry! H-here!"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="275" name="gift zenny" type="Dialogue" x="115" y="775">
+   <properties>
+    <property name="Amount" type="int" value="320"/>
+    <property name="Dialogue Type" value="none"/>
+    <property name="Event Name" value="Gift Monies"/>
+    <property name="Next 1" type="object" value="464"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
  <layer id="7" name="Tile Layer 2" width="46" height="80" offsetx="0" offsety="-16">
   <data encoding="csv">
@@ -1383,6 +1460,9 @@
     <property name="3 Area" value="PoliceStation"/>
     <property name="3 Name" value="PoliceStation"/>
     <property name="3 Type" value="Area"/>
+    <property name="4 Area" value="Mall1"/>
+    <property name="4 Name" value="Mall1"/>
+    <property name="4 Type" value="Area"/>
     <property name="Train" value="train"/>
    </properties>
    <point/>

@@ -1,5 +1,5 @@
 local Encounter1 = {
-    name="Encounter1",
+    name="Robber",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={

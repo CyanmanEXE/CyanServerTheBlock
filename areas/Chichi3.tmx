@@ -128,7 +128,7 @@
     <property name="Target Object" value="9"/>
    </properties>
   </object>
-  <object id="11" gid="76" x="-83.5018" y="233.462" width="47" height="58">
+  <object id="11" gid="76" x="-288" y="160" width="47" height="58">
    <properties>
     <property name="Flavor" value="Hm..."/>
    </properties>

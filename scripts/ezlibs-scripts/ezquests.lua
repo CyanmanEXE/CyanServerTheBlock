@@ -118,4 +118,58 @@ local quest_get_punched = {
 }
 ezquests.add_quest(quest_get_punched)
 
+--testing quest
+--handle_event_async must return a promise
+local HeelNaviSus = {
+    name = "Villan Hunter",
+    handle_event_async = function (self,player_id,event_value)
+        return async(function ()
+            local accpeted = ezquests.get_player_quest_flag(player_id,self.name,'accepted')
+            if accpeted or event_value == "accepted" then
+                --set the flag if the quest is accepted, or we are accpeting it
+                ezquests.set_player_quest_flag(player_id,self.name,event_value,true)
+            end
+            if event_value == 'reset' then
+                ezquests.clear_player_quest_flags(player_id,self.name)
+            end
+        end)
+    end,
+    determine_state = function (self,player_id)
+        if ezquests.get_player_quest_flag(player_id,self.name,'WaitingForU') then
+            return "WaitingForU"
+        end
+        if ezquests.get_player_quest_flag(player_id,self.name,'accepted') then
+            return "accepted"
+        end
+        return "unaccepted"
+    end
+}
+ezquests.add_quest(HeelNaviSus)
+
+local HeelNaviSus2 = {
+    name = "Villan Hunter2",
+    handle_event_async = function (self,player_id,event_value)
+        return async(function ()
+            local accpeted = ezquests.get_player_quest_flag(player_id,self.name,'accepted')
+            if accpeted or event_value == "accepted" then
+                --set the flag if the quest is accepted, or we are accpeting it
+                ezquests.set_player_quest_flag(player_id,self.name,event_value,true)
+            end
+            if event_value == 'reset' then
+                ezquests.clear_player_quest_flags(player_id,self.name)
+            end
+        end)
+    end,
+    determine_state = function (self,player_id)
+        if ezquests.get_player_quest_flag(player_id,self.name,'WaitingForU2') then
+            return "WaitingForU"
+        end
+        if ezquests.get_player_quest_flag(player_id,self.name,'accepted') then
+            return "accepted"
+        end
+        return "unaccepted"
+    end
+}
+ezquests.add_quest(HeelNaviSus2)
+
 return ezquests

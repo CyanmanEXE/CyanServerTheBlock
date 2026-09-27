@@ -7,7 +7,104 @@ local ezencounters = require('scripts/ezlibs-scripts/ezencounters/main')
 local helpers = require('scripts/ezlibs-scripts/helpers')
 local LibPlugin = require('scripts/ezlibs-custom/nebulous-liberations/main')
 
+
+
+local sfx = {
+    hurt = '/server/assets/ezlibs-assets/sfx/hurt.ogg',
+    item_get = '/server/assets/ezlibs-assets/sfx/item_get.ogg',
+    recover = '/server/assets/ezlibs-assets/sfx/recover.ogg',
+    card_error = '/server/assets/ezlibs-assets/ezfarms/card_error.ogg'
+}
+
+
+local function _encounter_result_flags(stats)
+    local reason = tonumber(stats and stats.reason or 0) or 0
+    local hp = tonumber(stats and (stats.health or stats.player_hp or stats.hp) or 0) or 0
+
+    local ran, won, lost = false, false, false
+
+    if reason == 1 then        -- battle won
+        won = true
+    elseif reason == 2 then    -- battle lost
+        lost = true
+    elseif reason == 3 then    -- ran with L
+        ran = true
+    elseif reason == 4 then    -- ESC / dev escape
+        ran = true
+    else
+        -- backwards compatibility with older builds
+        ran = stats and (stats.ran or stats.fled or stats.escape) or false
+        if not ran then
+            if hp > 0 then
+                won = true
+            else
+                lost = true
+            end
+        end
+    end
+
+    return {
+        reason = reason,
+        hp = hp,
+        ran = ran,
+        won = won,
+        lost = lost,
+    }
+end
+local boss2 = {
+    name="boss2",
+    path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+    pet_exp=0,
+    enemies={
+        {name="HeelNavi",rank=1},
+    },
+    obstacles={
+    },
+    positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,1,0},
+        {0,0,0,0,0,0},
+    },
+    obstacle_positions={
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    player_positions={
+        {0,0,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,0,0,0,0,0},
+    },
+    tiles={
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
+    },
+    teams={
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+        {2,2,2,1,1,1},
+    },
+}
+
 local event1 = {
+    name="Heel1",
+    action=function (npc,player_id,dialogue,relay_object)
+        return async(function()
+          local stats = await(ezencounters.begin_encounter(player_id, boss2))
+          local flags = _encounter_result_flags(stats)
+
+          if flags.ran or flags.lost then
+              return dialogue.custom_properties["Battle Lost"]
+          else
+              return dialogue.custom_properties["Battle Won"]
+          end
+        end)
+    end
+}
+eznpcs.add_event(event1)
+
+--[[local event1 = {
     name="Heel1",
     action=function (npc,player_id,dialogue,relay_object)
         return async(function()
@@ -17,7 +114,7 @@ local event1 = {
 end
 }
 
-eznpcs.add_event(event1)
+eznpcs.add_event(event1)]]--
 
 
 local event2 = {
@@ -169,6 +266,79 @@ local GrantLiberationAbility = {
 	end
 }]]
 
+local Steal_Money = {
+    name = "Steal Money",
+    action = function(npc, player_id, dialogue)
+        return async(function()
+            if ezmemory.spend_player_money(player_id, 999) then
+                await(Async.message_player(player_id, "Your money was taken!"))
+				print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                return dialogue.custom_properties["Next 1"]
+				else
+                return dialogue.custom_properties["No Money"]
+			end
+        end)
+    end
+}
+eznpcs.add_event(Steal_Money)
+
+local gift_zenny = {
+    name = "Gift Monies",
+    action = function(npc, player_id, dialogue)
+        return async(function()
+            local zenny_amount = tonumber(dialogue.custom_properties["Amount"])
+            ezmemory.spend_player_money(player_id, -zenny_amount)
+            Net.play_sound_for_player(player_id, sfx.item_get)
+            await(Async.message_player(player_id, "Got " .. zenny_amount .. "$!"))
+            return dialogue.custom_properties["Next 1"]
+        end)
+    end
+}
+eznpcs.add_event(gift_zenny)
+local event_snow = {
+    name = "Snow",
+    action = function(npc, player_id, dialogue, relay_object)
+        return async(function()
+            local area_id = Net.get_player_area(player_id)
+            ezweather.start_snow_in_area(area_id)
+            return dialogue.custom_properties["Next 1"]
+        end)
+    end
+}
+eznpcs.add_event(event_snow)
+
+local event1 = {
+    name = "Punch",
+    action = function(npc, player_id, dialogue, relay_object)
+        return async(function()
+            local player_mugshot = Net.get_player_mugshot(player_id)
+            local next_dialogues = helpers.extract_numbered_properties(dialogue,"Next ")
+            Net.play_sound_for_player(player_id, sfx.hurt)
+            await(Async.message_player(player_id, "Bruh!", player_mugshot.texture_path, player_mugshot.animation_path))
+            return first_value_from_table(next_dialogues)
+        end)
+    end
+}
+
+--[[local event5 = {
+    name = "heelsus",
+    action = function(npc, player_id, dialogue, relay_object)
+        return async(function()
+            local player_mugshot = Net.get_player_mugshot(player_id)
+            local next_dialogues = helpers.extract_numbered_properties(dialogue,"Next ")
+            
+            await(Async.message_player(player_id, "Guess that's it... I should report back!", player_mugshot.texture_path, player_mugshot.animation_path))
+            return first_value_from_table(next_dialogues)
+        end)
+    end
+}
+eznpcs.add_event(event5)]]--
+
+
+
+
+
+eznpcs.add_event(event1)
 --eznpcs.add_event(VirologistDateCheck)
 --eznpcs.add_event(VirologistAssistance)
 eznpcs.add_event(GrantLiberationAbility)
