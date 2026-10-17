@@ -930,7 +930,9 @@
     <property name="Asset Name" value="heel-navi-exe4_purple"/>
     <property name="Dialogue Type" value="quest_switch"/>
     <property name="Direction" value="Up Right"/>
+    <property name="Quest Exclusive" value="Villan Hunter"/>
     <property name="Quest Name" value="Villan Hunter"/>
+    <property name="Quest State" value="accepted"/>
     <property name="Text 1" value="...Me? I didnt even do anything! I cant casually enjoy a place now?"/>
     <property name="Wait Time" value="2"/>
     <property name="accepted" type="object" value="139"/>

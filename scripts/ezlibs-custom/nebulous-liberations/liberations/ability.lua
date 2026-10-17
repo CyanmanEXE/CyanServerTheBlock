@@ -44,6 +44,18 @@ local function battle_to_liberate_and_loot(instance, player_session, r, remove_t
 end
 
 local Ability = {
+  LongSwrd = {
+    name = "LongSwrd",
+    question = "Use LongSwrd?",
+    cost = 1,
+    remove_traps = false,
+    destroy_items = false,
+    generate_shape = static_shape_generator(0, 0, {
+      {1},
+      {1},
+    }),
+    activate = battle_to_liberate_and_loot
+  },
   --Guard = {name = "Guard"}, -- passive, knightman's ability
   Shadowstep = {name = "Shadowstep"}, --passive, Shadowman's ability
   HeroSwrd = {
@@ -208,10 +220,11 @@ Bazooka = {
   }
 }
 local navi_ability_map = {
+  LongSwrd = Ability.LongSwrd,
+  --Guard = Ability.Guard,
   HeroSwrd = Ability.HeroSwrd,
   WideSwrd = Ability.WideSwrd,
   OldSaber = Ability.ScrenDiv,
-  --Guard = Ability.Guard,
   HexSickle = Ability.HexSickle,
   NumGadgt = Ability.NumberSearch,
   GutsHamr = Ability.GutsWave,

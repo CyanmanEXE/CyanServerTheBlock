@@ -508,7 +508,7 @@
 </data>
  </layer>
  <objectgroup id="16" name="Object Layer 7" offsetx="0" offsety="-96">
-  <object id="2" name="to chi2" gid="65" x="71.5" y="858.5" width="44" height="71">
+  <object id="2" name="to chi2" gid="65" x="-288" y="528" width="44" height="71">
    <properties>
     <property name="Flavor" value=""/>
    </properties>
