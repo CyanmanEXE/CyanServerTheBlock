@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "areas/ACDC1.tmx",
+    "activeFile": "areas/FootBombers.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -565,11 +565,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.9221,
+            "scale": 1.2471,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 320.22267311794394,
-                "y": 159.9812704854066
+                "x": 432.60364044583423,
+                "y": 143.93392670996707
             }
         },
         "areas/Hood1.tmx": {
@@ -907,11 +907,11 @@
             "expandedObjectLayers": [
                 8
             ],
-            "scale": 0.6035,
+            "scale": 2.5542,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 3407.622203811102,
-                "y": 1482.1872410936203
+                "x": 3443.543966799781,
+                "y": 1660.5982303656724
             }
         },
         "areas/devroom.tmx": {
@@ -942,6 +942,17 @@
             "viewCenter": {
                 "x": 1064.4274444178818,
                 "y": 359.19196748744923
+            }
+        },
+        "areas/footbomb.tmx": {
+            "expandedObjectLayers": [
+                7
+            ],
+            "scale": 1.9824,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1333.989104116223,
+                "y": 814.9213075060534
             }
         },
         "areas/headdm.tmx": {
@@ -1012,11 +1023,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.9455,
+            "scale": 3.9862,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1343.7334743521947,
-                "y": 672.1311475409835
+                "x": 1573.5537604736342,
+                "y": 806.9088354824144
             }
         },
         "areas/porttown2.tmx": {
@@ -1920,11 +1931,13 @@
     "map.width": 20,
     "openFiles": [
         "areas/default.tmx",
-        "areas/ACDC1.tmx"
+        "areas/FootBombers.tmx"
     ],
     "project": "CyberSpace.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "areas/default.tmx",
+        "areas/FootBombers.tmx",
         "areas/DenTown1.tmx",
         "areas/Okuden.tmx",
         "areas/VastTraveler1.tmx",
@@ -1934,9 +1947,7 @@
         "areas/Chichi3.tmx",
         "areas/ACDC3.tmx",
         "areas/ACDC2.tmx",
-        "areas/MasterPath.tmx",
-        "areas/ACDC1.tmx",
-        "areas/Chichi2.tmx"
+        "areas/MasterPath.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

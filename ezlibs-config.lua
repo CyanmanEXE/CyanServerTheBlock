@@ -14,8 +14,10 @@ ezconfig.BOARD_PATH_FOLDER = './memory/board/'
 ezconfig.ENCOUNTERS_PATH = './encounters/'
 ezconfig.NPC_ASSET_FOLDER = '/server/assets/ezlibs-assets/eznpcs/'
 ezconfig.NPC_EVENTS_SCRIPT_PATH = './scripts/events/'
+ezconfig.ENCOUNTERS_PATH = './encounters/'
+ezconfig.NEW_MAIL_MESSAGE_DELAY  = 1.5
 
 -- Admin password seed (plaintext – will be hashed by ezusers)
-ezconfig.ADMIN_SEED = "INPUT_YOUR_SEED_HERE" -- ← change this to your desired admin password
+ezconfig.ADMIN_SEED = "Tacos" -- ← change this to your desired admin password
 
 return ezconfig

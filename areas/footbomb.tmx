@@ -84,8 +84,8 @@
    <properties>
     <property name="Direction" value="Up Right"/>
     <property name="Dont Teleport" type="bool" value="false"/>
-    <property name="Target Area" value="default"/>
-    <property name="Target Object" value="184"/>
+    <property name="Target Area" value="FootBombers"/>
+    <property name="Target Object" value="26"/>
     <property name="Warp In" type="bool" value="true"/>
     <property name="Warp Out" type="bool" value="true"/>
    </properties>
