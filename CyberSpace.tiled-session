@@ -134,6 +134,14 @@
         "C:/Users/ddson/Downloads/ServerBackup-main (2)/ServerBackup-main/Server_12_22_2021/assets/tiles/vendor_desk.tsx": {
             "scaleInDock": 1
         },
+        "C:/Users/ddson/Downloads/footbomb (1).tmx": {
+            "scale": 0.8447,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1444.8916775186458,
+                "y": 843.4947318574641
+            }
+        },
         "C:/Users/ddson/Downloads/gravy-yum-main (1)/gravy-yum-main/areas/default.tmx": {
             "expandedObjectLayers": [
                 21,
@@ -301,6 +309,42 @@
             "scaleInDock": 1
         },
         "C:/Users/ddson/OneDrive/Desktop/Megaman ONB related/test ground/full-build-patch-5/Release/resources/ow/tiles/floor.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/demo/Custom_Central_Tiles.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/demo/warp.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/ezlibs-assets/ezmystery/BlueMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/ezlibs-assets/ezmystery/Dark Mystery Data.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/ezlibs-assets/ezmystery/GreenMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/ezlibs-assets/ezmystery/OrangeMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/ezlibs-assets/ezmystery/PurpleMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/ezlibs-assets/ezmystery/SapphireMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/net-game-footbomb/goal-post/goal-net.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/net-game-footbomb/tiles/SoccorTiles.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/tiles/coffee.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/assets/tourney/ow-tourney-board.tsx": {
             "scaleInDock": 1
         },
         "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/BBS.tsx": {
@@ -579,8 +623,8 @@
             "scale": 3.0446,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 320.07488668462196,
-                "y": 160.1195559350982
+                "x": 303.9808184983249,
+                "y": 134.1719766143336
             }
         },
         "areas/Hood1.tmx": {
@@ -681,8 +725,8 @@
             "scale": 0.5916,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1599.8985801217036,
-                "y": 776.707234617985
+                "x": 1660.7505070993911,
+                "y": 763.1845841784989
             }
         },
         "areas/Sewer.tmx": {
@@ -919,11 +963,11 @@
                 8,
                 2
             ],
-            "scale": 0.6944,
+            "scale": 1.0425,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 3200.604838709677,
-                "y": 1574.7407834101382
+                "x": 3564.028776978417,
+                "y": 1668.5851318944847
             }
         },
         "areas/devroom.tmx": {
@@ -958,14 +1002,26 @@
         },
         "areas/footbomb.tmx": {
             "expandedObjectLayers": [
-                21,
+                19,
                 7
             ],
-            "scale": 6.0612,
-            "selectedLayer": 7,
+            "scale": 0.6306,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1360.0442156668646,
-                "y": 647.9739985481423
+                "x": 1239.2959086584206,
+                "y": 1099.7462733904217
+            }
+        },
+        "areas/footbombZ.tmx": {
+            "expandedObjectLayers": [
+                19,
+                7
+            ],
+            "scale": 1.1849,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1436.8301122457592,
+                "y": 988.6910287787998
             }
         },
         "areas/headdm.tmx": {
@@ -1006,8 +1062,8 @@
             "scale": 3.175,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2640.1574803149606,
-                "y": 1232.283464566929
+                "x": 2816.850393700787,
+                "y": 1279.8425196850394
             }
         },
         "areas/ponddrive2.tmx": {
@@ -1975,19 +2031,20 @@
     "project": "CyberSpace.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "areas/footbomb.tmx",
+        "areas/ooo.tmx",
+        "areas/Ponddrive1.tmx",
+        "C:/Users/ddson/Downloads/footbomb (1).tmx",
         "areas/default.tmx",
         "areas/FootBombers.tmx",
         "areas/porttown1.tmx",
-        "areas/ooo.tmx",
         "areas/DEBUGLIB.tmx",
-        "areas/Ponddrive1.tmx",
-        "areas/footbomb.tmx",
         "areas/undernet1.tmx",
         "areas/testlib.tmx",
         "areas/DenTown1.tmx",
-        "areas/Okuden.tmx",
-        "areas/VastTraveler1.tmx"
+        "areas/Okuden.tmx"
     ],
+    "resizeMap.removeObjects": false,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 39,

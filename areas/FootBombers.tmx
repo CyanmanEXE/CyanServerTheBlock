@@ -176,7 +176,7 @@
    <properties>
     <property name="Direction" value="Up Right"/>
     <property name="Target Area" value="footbomb"/>
-    <property name="Target Object" value="149"/>
+    <property name="Target Object" value="186"/>
     <property name="Warp In" type="bool" value="true"/>
     <property name="Warp Out" type="bool" value="true"/>
    </properties>
