@@ -591,7 +591,7 @@
     <property name="Flavor" value="What a nice looking entry way."/>
    </properties>
   </object>
-  <object id="49" name="Offical-015" type="NPC" x="690" y="95">
+  <object id="49" name="Offical-015" type="NPC" x="688" y="104">
    <properties>
     <property name="Asset Name" value="official-navi-exe4_orange"/>
     <property name="Date" value="* * 05 * * *"/>

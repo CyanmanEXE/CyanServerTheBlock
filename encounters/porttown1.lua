@@ -3,16 +3,15 @@ local Encounter1 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="MegaBunny",rank=1},
-        {name="Cannodumb (family)",rank=1},
         {name="Mettaur",rank=1},
+        {name="Cannodumb",rank=1},
     },
     obstacles={
     },
     positions={
         {0,0,0,1,0,0},
-        {0,0,0,0,3,2},
-        {0,0,0,3,1,0},
+        {0,0,0,0,2,0},
+        {0,0,0,0,1,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -77,16 +76,15 @@ local Encounter3 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Cannodumb (family)",rank=1},
         {name="Gunner",rank=1},
         {name="Mettaur",rank=1},
     },
     obstacles={
     },
     positions={
-        {0,0,0,0,2,0},
-        {0,0,0,3,0,0},
-        {0,0,0,1,0,0},
+        {0,0,0,0,1,0},
+        {0,0,0,2,0,0},
+        {0,0,0,2,0,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},

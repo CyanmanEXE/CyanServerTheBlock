@@ -20,12 +20,12 @@
 0,0,0,3,3,3,0,0,0,0,
 0,0,0,3,3,3,0,0,0,0,
 0,0,0,3,3,3,0,0,0,0,
-0,0,0,0,7,0,0,0,0,0,
-0,0,0,0,7,0,0,0,0,0,
-0,0,0,0,7,0,0,0,0,0,
-0,0,0,0,7,0,0,0,0,0,
-0,0,0,0,7,0,0,0,0,0,
-0,0,0,0,7,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,3,3,3,0,0,0,0,
+0,0,0,3,3,3,0,0,0,0,
+0,0,0,3,3,3,0,0,0,0,
 0,0,0,0,7,0,0,0,0,0,
 0,0,0,0,7,0,0,0,0,0,
 0,0,0,0,7,0,0,0,0,0,
@@ -99,13 +99,6 @@
   <object id="30" gid="13" x="192" y="440" width="29" height="37"/>
   <object id="31" gid="13" x="192" y="400" width="29" height="37"/>
   <object id="32" gid="13" x="192" y="360" width="29" height="37"/>
-  <object id="33" gid="13" x="192" y="320" width="29" height="37"/>
-  <object id="34" gid="13" x="192" y="280" width="29" height="37"/>
-  <object id="35" gid="13" x="192" y="320" width="29" height="37"/>
-  <object id="36" gid="13" x="192" y="280" width="29" height="37"/>
-  <object id="37" gid="13" x="192" y="240" width="29" height="37"/>
-  <object id="38" gid="13" x="192" y="200" width="29" height="37"/>
-  <object id="39" gid="13" x="192" y="160" width="29" height="37"/>
   <object id="75" gid="13" x="120" y="1440" width="29" height="37"/>
   <object id="76" gid="13" x="120" y="1400" width="29" height="37"/>
   <object id="77" gid="13" x="120" y="1360" width="29" height="37"/>
@@ -134,13 +127,6 @@
   <object id="100" gid="13" x="120" y="440" width="29" height="37"/>
   <object id="101" gid="13" x="120" y="400" width="29" height="37"/>
   <object id="102" gid="13" x="120" y="360" width="29" height="37"/>
-  <object id="103" gid="13" x="120" y="320" width="29" height="37"/>
-  <object id="104" gid="13" x="120" y="280" width="29" height="37"/>
-  <object id="105" gid="13" x="120" y="320" width="29" height="37"/>
-  <object id="106" gid="13" x="120" y="280" width="29" height="37"/>
-  <object id="107" gid="13" x="120" y="240" width="29" height="37"/>
-  <object id="108" gid="13" x="120" y="200" width="29" height="37"/>
-  <object id="109" gid="13" x="120" y="160" width="29" height="37"/>
   <object id="110" name="Porttown2" type="Custom Warp" gid="18" x="115" y="1489" width="114" height="64">
    <properties>
     <property name="Direction" value="Up Right"/>
@@ -150,20 +136,12 @@
     <property name="Warp Out" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="111" name="Placeholder" type="NPC" x="147" y="119">
+  <object id="111" name="Placeholder" type="NPC" x="144" y="56">
    <properties>
     <property name="Asset Name" value="owGold"/>
-    <property name="Dialogue Type" value="random"/>
+    <property name="Dialogue Type" value="first"/>
     <property name="Direction" value="Down Left"/>
-    <property name="Text 1" value="Their rage is unrivaled, their focus is impressive... Dance with the viruses with respect!"/>
-    <property name="Text 10" value="These viruses are worthy foes... Honor them with fast deletions!"/>
-    <property name="Text 2" value="Your buster makes for a luring beat... And these viruses call for a song!"/>
-    <property name="Text 3" value="These viruses have grown ravenous... Show them why you have made it this far..."/>
-    <property name="Text 4">Last shot, last slash, last toss... Be the one who is the last one standing.
-</property>
-    <property name="Text 5">These viruses deserve your respect,  go beyond what they can comprehend...
- 
-</property>
+    <property name="Text 1" value="Their rage is vehement... Yet their focus is impressive! Dance with these viruses with respect! When you are ready, yell &quot;Execute&quot;."/>
     <property name="Wait Time" value="2"/>
    </properties>
    <point/>
@@ -174,12 +152,13 @@
     <property name="Dialogue Type" value="None"/>
     <property name="Disappear Cooldown" type="float" value="0"/>
     <property name="Interact Relay" type="object" value="111"/>
-    <property name="Password" value="1"/>
+    <property name="Password" value="Execute"/>
    </properties>
   </object>
   <object id="113" name="TESTER" type="Radius Encounter" x="128" y="1312" width="35" height="31">
    <properties>
     <property name="Name" value="Encounter1"/>
+    <property name="Radius" value="2.0"/>
    </properties>
   </object>
   <object id="114" name="TESTER" type="Radius Encounter" x="128" y="1152" width="35" height="31">

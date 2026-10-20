@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.8" tiledversion="1.8.6" name="Netopia_Tileset_directional_paths2" tilewidth="64" tileheight="40" tilecount="36" columns="12">
+<tileset version="1.10" tiledversion="1.11.2" name="Netopia_Tileset_directional_paths2" tilewidth="64" tileheight="40" tilecount="36" columns="12">
  <tileoffset x="0" y="8"/>
- <image source="Netopia_Tileset_directional_paths2.png" width="768" height="120"/>
+ <image source="Netopia_Tileset_directional_paths.png" width="768" height="120"/>
  <tile id="0" type="Conveyor">
   <properties>
    <property name="Direction" value="Down Right"/>

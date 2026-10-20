@@ -3,7 +3,7 @@ local Encounter1 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Champy",rank=1},
+        {name="Chimpy",rank=1},
     },
     obstacles={
     },
@@ -39,8 +39,8 @@ local Encounter2 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="HauntedCandle",rank=1},
-        {name="Piranha",rank=1},
+        {name="HauntedCandle",rank=2},
+        {name="Piranha",rank=2},
     },
     obstacles={
         {name="IceCube"},
@@ -78,9 +78,9 @@ local Encounter3 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Skarab",rank=1},
-        {name="KillerEye",rank=1},
-        {name="Cactikil",rank=1},
+        {name="Skarry",rank=1},
+        {name="DemonEye",rank=1},
+        {name="Cactikil",rank=5},
     },
     obstacles={
     },
@@ -116,15 +116,15 @@ local Encounter4 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Skarab",rank=1},
-        {name="Piranha",rank=1},
+        {name="Piranha",rank=3},
+        {name="Skelly",rank=1},
     },
     obstacles={
     },
     positions={
         {0,0,0,0,0,0},
-        {0,0,0,0,2,0},
-        {0,0,0,0,0,1},
+        {0,0,0,0,1,0},
+        {0,0,0,0,0,2},
     },
     obstacle_positions={
         {0,0,0,0,0,0},

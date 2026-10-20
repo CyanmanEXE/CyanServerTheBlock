@@ -1,4 +1,4 @@
-local Encounter1 = {
+local Robber = {
     name="Robber",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
@@ -1107,5 +1107,5 @@ local Encounter30 = {
 return {
     minimum_steps_before_encounter=80,
     encounter_chance_per_step=0.05,
-    encounters={Encounter1,Encounter2,Encounter3,Encounter4,Encounter5,Encounter6,Encounter7,Encounter8,Encounter9,Encounter10,Encounter11,Encounter12,Encounter13,Encounter14,Encounter15,Encounter16,Encounter17,Encounter18,Encounter19,Encounter20,Encounter21,Encounter22,Encounter23,Encounter24,Encounter25,Encounter26,Encounter27,Encounter28,Encounter29,Encounter30}
+    encounters={Robber,Encounter2,Encounter3,Encounter4,Encounter5,Encounter6,Encounter7,Encounter8,Encounter9,Encounter10,Encounter11,Encounter12,Encounter13,Encounter14,Encounter15,Encounter16,Encounter17,Encounter18,Encounter19,Encounter20,Encounter21,Encounter22,Encounter23,Encounter24,Encounter25,Encounter26,Encounter27,Encounter28,Encounter29,Encounter30}
 }

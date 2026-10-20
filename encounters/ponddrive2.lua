@@ -3,16 +3,16 @@ local Encounter1 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="BombCorn",rank=1},
         {name="Scuttzer",rank=1},
-        {name="Bunny / Rabiree",rank=1},
+        {name="GigaCorn",rank=1},
+        {name="Cragger",rank=3},
     },
     obstacles={
     },
     positions={
         {0,0,0,0,0,0},
-        {0,0,0,0,0,1},
-        {0,0,0,2,0,3},
+        {0,0,0,0,0,2},
+        {0,0,0,1,0,3},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -41,8 +41,8 @@ local Encounter2 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="BombCorn",rank=1},
-        {name="Lark",rank=1},
+        {name="GigaCorn",rank=1},
+        {name="Tark",rank=1},
     },
     obstacles={
     },
@@ -79,12 +79,13 @@ local Encounter3 = {
     weight=10,
     enemies={
         {name="Scuttzer",rank=1},
-        {name="Shrimpy",rank=1},
+        {name="Shrimpy",rank=4},
+        {name="Shrimpy",rank=3},
     },
     obstacles={
     },
     positions={
-        {0,0,0,2,0,0},
+        {0,0,0,3,0,0},
         {0,0,0,0,1,0},
         {0,0,0,0,0,2},
     },
@@ -115,16 +116,16 @@ local Encounter4 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Cragger",rank=1},
-        {name="Lark",rank=1},
-        {name="Shrimpy",rank=1},
+        {name="Shrimpy",rank=4},
+        {name="Cragger",rank=4},
+        {name="Lark",rank=4},
     },
     obstacles={
     },
     positions={
-        {0,0,0,2,0,0},
-        {0,0,0,0,1,0},
-        {0,0,0,0,0,3},
+        {0,0,0,3,0,0},
+        {0,0,0,0,2,0},
+        {0,0,0,0,0,1},
     },
     obstacle_positions={
         {0,0,0,0,0,0},

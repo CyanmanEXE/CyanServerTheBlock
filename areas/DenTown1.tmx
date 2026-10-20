@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="20" height="20" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="6">
+ <properties>
+  <property name="Background" value="custom"/>
+  <property name="Background Animation" value="/server/assets/custom/backgrounds/Den/07a-centralarea.animation"/>
+  <property name="Background Texture" value="/server/assets/custom/backgrounds/Den/07a-centralarea.png"/>
+  <property name="Background Vel X" value="0.5"/>
+  <property name="Background Vel Y" value="0.5"/>
+  <property name="Mystery Data Maximum" type="int" value="6"/>
+  <property name="Mystery Data Minimum" type="int" value="3"/>
+  <property name="Name" value="DenTown1"/>
+  <property name="Song" value="/server/assets/music/exe4-internet.ogg"/>
+ </properties>
+ <tileset firstgid="1" source="../assets/tiles/DenTownNet_Tileset.tsx"/>
+ <tileset firstgid="115" source="../assets/tiles/Den_Exits.tsx"/>
+ <tileset firstgid="133" source="../assets/tiles/clydeNetopia_Tileset_directional_paths.tsx"/>
+ <tileset firstgid="169" source="../assets/tiles/Netopia_Tileset_directional_paths2.tsx"/>
+ <tileset firstgid="205" source="../assets/tiles/bn6_securitycube.tsx"/>
+ <tileset firstgid="219" source="../assets/tiles/Quadragon Warp.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="20" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,187,184,184,0,0,58,58,58,58,58,58,58,0,0,0,0,130,0,0,
+0,187,0,190,0,0,58,58,58,58,58,58,58,0,0,0,0,58,0,0,
+0,187,0,190,0,0,58,58,58,58,58,58,58,0,58,58,58,58,0,0,
+0,187,0,190,0,0,58,58,58,58,58,58,58,0,58,0,0,0,0,0,
+0,187,0,190,0,0,58,58,58,58,58,58,58,0,58,0,0,0,0,0,
+0,187,0,190,0,0,58,0,0,0,0,0,0,0,58,0,0,58,58,58,
+0,187,0,190,0,0,58,0,0,0,0,0,0,0,58,0,0,58,58,58,
+0,58,0,58,58,58,58,58,58,58,0,0,0,0,58,0,0,58,58,58,
+0,58,0,0,0,0,58,0,0,58,0,0,0,0,58,0,0,0,58,0,
+0,58,58,58,58,58,58,0,0,58,58,58,58,0,58,0,0,58,58,58,
+0,58,0,0,0,0,0,0,0,58,0,0,58,0,58,58,58,58,58,58,
+0,58,0,0,0,0,0,0,58,58,0,0,58,0,0,0,0,58,58,58,
+0,58,0,0,0,0,0,0,58,0,0,0,58,0,0,0,0,0,0,0,
+0,58,0,0,0,0,0,0,58,58,0,58,58,58,0,58,58,58,0,0,
+0,58,0,0,0,0,0,0,0,0,0,58,58,58,58,58,0,58,0,0,
+0,58,0,0,0,58,58,58,0,58,58,58,58,58,0,0,0,58,0,0,
+0,58,58,58,58,58,58,58,181,58,0,58,0,0,0,0,0,58,0,0,
+0,0,0,0,0,58,58,58,0,58,58,58,0,0,0,0,0,127,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="1" name="ACDC1" type="Radius Warp" x="560" y="64">
+   <properties>
+    <property name="Activation Radius" value="0.6"/>
+    <property name="Arrival Animation" value="arrow_up_right_in"/>
+    <property name="Leave Animation" value="arrow_up_right_out"/>
+    <property name="Target Area" value="ACDC1"/>
+    <property name="Target Object" value="82"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2" name="Okuden" type="Radius Warp" x="560" y="576">
+   <properties>
+    <property name="Activation Radius" value="0.6"/>
+    <property name="Arrival Animation" value="arrow_down_left_in"/>
+    <property name="Leave Animation" value="arrow_down_left_out"/>
+    <property name="Target Area" value="Okuden"/>
+    <property name="Target Object" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="3" type="Checkpoint" gid="205" x="208" y="304" width="48" height="52">
+   <properties>
+    <property name="Consume" type="bool" value="true"/>
+    <property name="Description" value="To use this shortcut, please donate 1000 money!"/>
+    <property name="Dialogue Type" value="None"/>
+    <property name="Disappear Cooldown" type="float" value="0"/>
+    <property name="Key Name" value="money"/>
+    <property name="Once" type="bool" value="false"/>
+    <property name="Required Keys" type="int" value="1000"/>
+    <property name="Unlock Failed Message" value="Sorry! That isn't enough! Come back when you have more!"/>
+    <property name="Unlocked Message" value="Thank you! Have a pleasent day!"/>
+   </properties>
+  </object>
+  <object id="4" name="2" type="Custom Warp" gid="219" x="200" y="552" width="64" height="36">
+   <properties>
+    <property name="Direction" value="Up Left"/>
+    <property name="Target Area" value="DenTown1"/>
+    <property name="Target Object" value="5"/>
+   </properties>
+  </object>
+  <object id="5" name="1" type="Custom Warp" gid="219" x="584" y="360" width="64" height="36">
+   <properties>
+    <property name="Direction" value="Up Right"/>
+    <property name="Target Area" value="DenTown1"/>
+    <property name="Target Object" value="4"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

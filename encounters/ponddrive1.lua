@@ -4,11 +4,12 @@ local Encounter1 = {
     weight=10,
     enemies={
         {name="BombCorn",rank=1},
+        {name="MegaCorn",rank=1},
     },
     obstacles={
     },
     positions={
-        {0,0,0,0,0,1},
+        {0,0,0,0,0,2},
         {0,0,0,0,0,0},
         {0,0,0,1,0,0},
     },
@@ -40,7 +41,7 @@ local Encounter2 = {
     weight=10,
     enemies={
         {name="Scuttzer",rank=1},
-        {name="Bunny / Rabiree",rank=1},
+        {name="Rabiree",rank=3},
     },
     obstacles={
     },
@@ -76,8 +77,8 @@ local Encounter3 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Lark",rank=1},
-        {name="Shrimpy",rank=1},
+        {name="Bark",rank=1},
+        {name="Shrimpy",rank=2},
     },
     obstacles={
     },
@@ -113,14 +114,14 @@ local Encounter4 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Cragger",rank=1},
         {name="Scuttzer",rank=1},
+        {name="Cragger",rank=2},
     },
     obstacles={
     },
     positions={
         {0,0,0,0,0,0},
-        {0,0,0,0,1,2},
+        {0,0,0,0,2,1},
         {0,0,0,0,0,0},
     },
     obstacle_positions={

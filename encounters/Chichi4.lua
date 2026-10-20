@@ -3,8 +3,9 @@ local Encounter1 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Zomon / Zaemon",rank=1},
         {name="Metrid",rank=1},
+        {name="Zomon",rank=3},
+        {name="Zomon",rank=4},
     },
     obstacles={
         {name="Rock"},
@@ -13,9 +14,9 @@ local Encounter1 = {
         {name="Rock"},
     },
     positions={
-        {0,0,0,1,0,0},
-        {0,0,0,0,1,0},
-        {0,0,0,0,0,2},
+        {0,0,0,3,0,0},
+        {0,0,0,0,2,0},
+        {0,0,0,0,0,1},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -44,8 +45,8 @@ local Encounter2 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Metrid",rank=1},
-        {name="Beetank",rank=1},
+        {name="Beetank",rank=2},
+        {name="Metrid",rank=2},
     },
     obstacles={
         {name="IceCube"},
@@ -56,9 +57,9 @@ local Encounter2 = {
         {name="Rock"},
     },
     positions={
-        {0,0,0,0,1,0},
-        {0,0,0,0,0,1},
+        {0,0,0,0,2,0},
         {0,0,0,0,0,2},
+        {0,0,0,0,0,1},
     },
     obstacle_positions={
         {0,0,0,6,0,0},
@@ -88,14 +89,16 @@ local Encounter3 = {
     weight=10,
     enemies={
         {name="FighterPlane",rank=1},
+        {name="FighterPlane",rank=2},
+        {name="FighterPlane",rank=3},
     },
     obstacles={
         {name="Rock"},
         {name="Rock"},
     },
     positions={
-        {0,0,0,0,0,1},
-        {0,0,0,0,1,0},
+        {0,0,0,0,0,3},
+        {0,0,0,0,2,0},
         {0,0,0,1,0,0},
     },
     obstacle_positions={
@@ -125,15 +128,15 @@ local Encounter4 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Metrid",rank=1},
-        {name="Fishy",rank=1},
+        {name="Fishy",rank=3},
+        {name="Metrid",rank=4},
     },
     obstacles={
     },
     positions={
-        {0,0,0,0,0,2},
-        {0,0,0,0,1,0},
-        {0,0,0,2,0,0},
+        {0,0,0,0,0,1},
+        {0,0,0,0,2,0},
+        {0,0,0,1,0,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},

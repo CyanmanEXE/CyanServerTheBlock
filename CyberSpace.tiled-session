@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "areas/ooo.tmx",
+    "activeFile": "areas/ACDC1.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -136,17 +136,17 @@
         },
         "C:/Users/ddson/Downloads/gravy-yum-main (1)/gravy-yum-main/areas/default.tmx": {
             "expandedObjectLayers": [
-                24,
-                19,
-                23,
                 21,
-                22
+                23,
+                19,
+                22,
+                24
             ],
-            "scale": 1.0306,
+            "scale": 2.1957,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 1244.4207257908015,
-                "y": 752.4742868232098
+                "x": 1226.260418089903,
+                "y": 682.4702828255226
             }
         },
         "C:/Users/ddson/Downloads/gravy-yum-main (1)/gravy-yum-main/assets/assets/ezlibs-assets/ezmystery/GreenMysteryData.tsx": {
@@ -303,23 +303,139 @@
         "C:/Users/ddson/OneDrive/Desktop/Megaman ONB related/test ground/full-build-patch-5/Release/resources/ow/tiles/floor.tsx": {
             "scaleInDock": 1
         },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/BBS.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/BackBat.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/Banner.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/Custom_Central_Tilesclyde.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/Invisible Tile.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/Screen.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/Shelf1.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/Vampire.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/boxes1.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/boxes2.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/checkout1.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/checkout2.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/coffee2.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/hp_warp.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/shelf2.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/shelf3.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/shelf5.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/shelfA.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/shelfB.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/shelfC.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/shelfD.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/shelfE.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/shelfF.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/shelfs EX.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/table1.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/table2.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/treeA.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/treeB.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/treeC.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/assets/tiles/treeD.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/im not gonna update  year/Navis/TheBlock/incasesomethinggooeswrong/ClydeComp1.tmx": {
+            "scale": 0.3336402499177902,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1518.1022077666075,
+                "y": 762.7976542479795
+            }
+        },
         "X:/Big_Code/Scriptable-OpenNetBattle-Server/assets/tiles/floor.tsx": {
             "scaleInDock": 1
         },
         "areas/ACDC1.tmx": {
-            "scale": 0.4357,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                10,
+                2
+            ],
+            "scale": 0.707,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1190.0390176727105,
-                "y": 478.54028000918066
+                "x": 1241.1598302687412,
+                "y": 703.6775106082038
             }
         },
         "areas/ACDC2.tmx": {
-            "scale": 0.6496,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.6118,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 960.5911330049262,
-                "y": 479.52586206896564
+                "x": 733.0827067669173,
+                "y": 447.0415168355672
+            }
+        },
+        "areas/ACDC3.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.715,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1025.8741258741259,
+                "y": 597.902097902098
             }
         },
         "areas/AirShoes.tmx": {
@@ -337,90 +453,101 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 2.7013,
+            "scale": 0.8788,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 931.9586865583237,
-                "y": 333.7282049383631
+                "x": 898.3841602184798,
+                "y": 293.0131998179336
             }
         },
         "areas/Chich5.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 2.7649,
+            "scale": 0.4996,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 421.895909436146,
-                "y": 245.03598683496693
+                "x": 959.767814251401,
+                "y": 663.5308246597277
             }
         },
         "areas/Chichi.tmx": {
             "expandedObjectLayers": [
                 8,
-                16,
-                2
+                2,
+                16
             ],
-            "scale": 1.8449,
+            "scale": 0.6501,
             "selectedLayer": 13,
             "viewCenter": {
-                "x": 1100.05962382785,
-                "y": 162.33942219090466
+                "x": 769.8815566835872,
+                "y": 300.722965697585
             }
         },
         "areas/Chichi2.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.8014,
+            "scale": 0.8487,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1053.7808834539555,
-                "y": 498.50262041427516
+                "x": 992.6947095557913,
+                "y": 520.2073759868034
             }
         },
         "areas/Chichi3.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.8068,
+            "scale": 0.4765,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1262.3946455131386,
-                "y": 244.79424888448193
+                "x": 880.3777544596012,
+                "y": 439.6642182581322
             }
         },
         "areas/Chichi4.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.7203,
+            "scale": 0.5847,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 955.8517284464806,
-                "y": 612.9390531722894
+                "x": 799.5553275183855,
+                "y": 399.35009406533266
             }
         },
         "areas/ClydeComp1.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.3501,
-            "selectedLayer": 0,
+            "scale": 0.4731,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1392.4592973436158,
-                "y": 792.6306769494431
+                "x": 1212.2172902134853,
+                "y": 774.6776580004228
             }
         },
         "areas/ClydeComp1NEW.tmx": {
             "expandedObjectLayers": [
                 3
             ],
-            "scale": 0.3282,
+            "scale": 0.3168,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1208.1048141377212,
-                "y": 1000.9140767824498
+                "x": 825.441919191919,
+                "y": 1251.5782828282827
+            }
+        },
+        "areas/DenTown1.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.4482,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 699.4645247657295,
+                "y": 333.5564480142792
             }
         },
         "areas/FlavesCurry.tmx": {
@@ -441,27 +568,31 @@
             "scale": 1.9221,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 319.96254097081317,
-                "y": 159.98127048540658
+                "x": 320.22267311794394,
+                "y": 159.9812704854066
             }
         },
         "areas/Hood1.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.776,
+            "scale": 0.9294,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 528.9948453608248,
-                "y": 391.1082474226803
+                "x": 711.749515816656,
+                "y": 518.0761781794707
             }
         },
         "areas/Hood2.tmx": {
-            "scale": 0.6721,
-            "selectedLayer": 6,
+            "expandedObjectLayers": [
+                8,
+                2
+            ],
+            "scale": 0.5765,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 854.7835143579823,
-                "y": 503.6452908793334
+                "x": 977.4501300954032,
+                "y": 578.4908933217694
             }
         },
         "areas/Jelly.tmx": {
@@ -471,15 +602,15 @@
             "scale": 1.3799,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 384.448148416552,
-                "y": 330.0963837959273
+                "x": 480.10725414885144,
+                "y": 240.23479962316117
             }
         },
         "areas/Mall1.tmx": {
             "expandedObjectLayers": [
                 12,
-                2,
-                8
+                8,
+                2
             ],
             "scale": 0.9641,
             "selectedLayer": 7,
@@ -500,11 +631,25 @@
             }
         },
         "areas/MasterPath.tmx": {
-            "scale": 1.7971,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.8901,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 423.7382449501976,
-                "y": 624.0609871459574
+                "x": 535.3331086394787,
+                "y": 653.2973823165937
+            }
+        },
+        "areas/Okuden.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 2.0811,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 667.6757484022871,
+                "y": 303.92580846667624
             }
         },
         "areas/PoliceStation.tmx": {
@@ -540,6 +685,10 @@
                 "y": 873.3668341708543
             }
         },
+        "areas/Shelf1.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "areas/SnowPark3.tmx": {
             "expandedObjectLayers": [
                 8,
@@ -554,11 +703,14 @@
             }
         },
         "areas/SugarArea1.tmx": {
-            "scale": 0.4099,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.3576,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1540.61966333252,
-                "y": 925.8355696511346
+                "x": 1363.255033557047,
+                "y": 885.0671140939598
             }
         },
         "areas/SugarArea2.tmx": {
@@ -576,19 +728,19 @@
             "scale": 0.3971,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1393.855452027197,
-                "y": 940.569126164694
+                "x": 1519.7683203223369,
+                "y": 761.7728531855955
             }
         },
         "areas/TheMaze.tmx": {
             "expandedObjectLayers": [
                 8
             ],
-            "scale": 0.6618,
+            "scale": 0.2949,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 978.392263523723,
-                "y": 2496.9779389543664
+                "x": 1439.471007121058,
+                "y": 2277.0430654459137
             }
         },
         "areas/Tile Assets/BBS.tsx": {
@@ -703,19 +855,22 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.3778,
+            "scale": 1.1988,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 563.5796196835536,
-                "y": 312.4546378284221
+                "x": 575.1584918251585,
+                "y": 302.38571905238564
             }
         },
         "areas/VastTraveler1.tmx": {
-            "scale": 0.5284375,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.615,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 960.3784742755765,
-                "y": 479.71614429331754
+                "x": 955.2845528455284,
+                "y": 688.6178861788618
             }
         },
         "areas/christmas.tmx": {
@@ -725,65 +880,68 @@
             "scale": 0.765,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1354.9019607843138,
-                "y": 792.8104575163399
+                "x": 1519.6078431372548,
+                "y": 760.1307189542483
             }
         },
         "areas/crimsonhp.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.4373,
+            "scale": 0.2746,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2573.7479990852953,
-                "y": 1764.235078893208
+                "x": 2514.566642388929,
+                "y": 1593.2265112891475
             }
         },
         "areas/deep.tmx": {
-            "scale": 0.3308,
+            "scale": 0.293,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2386.6384522370013,
-                "y": 1419.286577992745
+                "x": 2578.4982935153585,
+                "y": 1421.5017064846415
             }
         },
         "areas/default.tmx": {
             "expandedObjectLayers": [
                 8
             ],
-            "scale": 1.0507,
+            "scale": 0.6035,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 3193.1093556676506,
-                "y": 1935.3764157228513
+                "x": 3407.622203811102,
+                "y": 1482.1872410936203
             }
         },
         "areas/devroom.tmx": {
-            "scale": 0.31706249999999997,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.6758,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1600.6307904592943,
-                "y": 799.5269071555294
+                "x": 674.0159810594852,
+                "y": 592.6309559041136
             }
         },
         "areas/dungeon.tmx": {
             "expandedObjectLayers": [
                 7
             ],
-            "scale": 0.4717,
+            "scale": 1.1145,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 1580.4536781852871,
-                "y": 967.7761288954842
+                "x": 1972.6334679228353,
+                "y": 970.3903095558546
             }
         },
         "areas/example liberation friendly.tmx": {
-            "scale": 0.5284375,
-            "selectedLayer": 0,
+            "scale": 0.8366,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 960.3784742755765,
-                "y": 479.71614429331754
+                "x": 1064.4274444178818,
+                "y": 359.19196748744923
             }
         },
         "areas/headdm.tmx": {
@@ -798,119 +956,131 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.1819,
+            "scale": 0.7073,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 684.9141213300618,
-                "y": 360.8596327946527
+                "x": 731.6555916866959,
+                "y": 173.19383571327586
             }
         },
         "areas/liberation1.tmx": {
-            "scale": 0.3730147058823529,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.4279,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1360.5361718904003,
-                "y": 679.5978710822001
+                "x": 1459.4531432577705,
+                "y": 669.5489600373919
             }
         },
         "areas/ooo.tmx": {
             "expandedObjectLayers": [
+                12,
                 2
             ],
-            "scale": 0.9916,
-            "selectedLayer": 5,
+            "scale": 0.425,
+            "selectedLayer": 11,
             "viewCenter": {
-                "x": 3196.3493344090357,
-                "y": 1291.3473174667204
+                "x": 3130.588235294118,
+                "y": 1518.8235294117649
             }
         },
         "areas/ponddrive2.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.3851,
-            "selectedLayer": 0,
+            "scale": 0.4063,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1144.6826943902965,
-                "y": 418.3813443072702
+                "x": 1106.3253753384197,
+                "y": 291.65641151858233
             }
         },
         "areas/portsquare.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 4.861,
+            "scale": 0.561,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 706.5418638140301,
-                "y": 295.92676404032096
+                "x": 640.819964349376,
+                "y": 321.74688057041
             }
         },
         "areas/porttown1.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.027,
+            "scale": 0.9455,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1343.719571567673,
-                "y": 672.3466407010711
+                "x": 1343.7334743521947,
+                "y": 672.1311475409835
             }
         },
         "areas/porttown2.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.9817,
+            "scale": 0.9171,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1842.212488540287,
-                "y": 582.1534073545889
+                "x": 1084.3964671246317,
+                "y": 737.651292116454
             }
         },
         "areas/porttown3.tmx": {
             "expandedObjectLayers": [
-                7,
-                2
+                2,
+                7
             ],
-            "scale": 0.9741,
+            "scale": 0.7141,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 833.076686171851,
-                "y": 503.54173082845705
+                "x": 986.55650469122,
+                "y": 374.597395322784
             }
         },
         "areas/school.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.8002,
+            "scale": 0.7881,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 769.182704323919,
-                "y": 605.4736315921019
+                "x": 967.5168125872351,
+                "y": 439.66501712980585
             }
         },
         "areas/server-02-25-2023/assets/tiles/home_warp.tsx": {
             "scaleInDock": 1
         },
-        "areas/testlib.tmx": {
-            "scale": 0.5728,
+        "areas/testground.tmx": {
+            "scale": 0.5945,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1839.2108938547485,
-                "y": 1078.0377094972066
+                "x": 1617.3254835996636,
+                "y": 788.0571909167368
+            }
+        },
+        "areas/testlib.tmx": {
+            "scale": 0.373,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2197.0509383378017,
+                "y": 1100.5361930294905
             }
         },
         "areas/undernet-1.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 2.0496,
+            "scale": 0.7126,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 3279.9082747853245,
-                "y": 916.0323965651835
+                "x": 3260.5950042099357,
+                "y": 893.2079708111143
             }
         },
         "areas/undernet0.tmx": {
@@ -918,31 +1088,34 @@
                 8,
                 2
             ],
-            "scale": 0.424,
-            "selectedLayer": 1,
+            "scale": 1.532,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 1369.1037735849056,
-                "y": 767.688679245283
+                "x": 2109.986945169713,
+                "y": 521.2140992167102
             }
         },
         "areas/undernet1.tmx": {
             "expandedObjectLayers": [
-                3,
-                12
+                12,
+                3
             ],
             "scale": 0.769,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1281.5344603381013,
-                "y": 1141.0923276983094
+                "x": 2016.2548764629387,
+                "y": 983.745123537061
             }
         },
         "areas/undernet2.tmx": {
-            "scale": 0.6028,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1.0002,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1573.4903782349038,
-                "y": 817.0205706702058
+                "x": 1116.2767446510697,
+                "y": 766.3467306538691
             }
         },
         "areas/undernet3.tmx": {
@@ -958,14 +1131,14 @@
         },
         "areas/undernet5.tmx": {
             "expandedObjectLayers": [
-                14,
-                2
+                2,
+                14
             ],
-            "scale": 3.1661,
+            "scale": 0.4002,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1965.6675405072485,
-                "y": 1474.8428666182367
+                "x": 1922.7886056971513,
+                "y": 998.2508745627186
             }
         },
         "areas/undersquare.tmx": {
@@ -1039,6 +1212,10 @@
         },
         "assets/tiles/Beach_Warp.tsx": {
             "scaleInDock": 1
+        },
+        "assets/tiles/Bench.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "assets/tiles/Beyblade.tsx": {
             "scaleInDock": 1
@@ -1184,6 +1361,10 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "assets/tiles/ClydeZombieArmy.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "assets/tiles/Coffee Cup.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 11.8089
@@ -1309,7 +1490,8 @@
             "scaleInDock": 1
         },
         "assets/tiles/Netopia_Tileset_directional_paths2.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "assets/tiles/Pad2.tsx": {
             "scaleInDock": 1
@@ -1431,7 +1613,7 @@
             "scaleInDock": 1
         },
         "assets/tiles/central_platform.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 0.7369
         },
         "assets/tiles/checkout1.tsx": {
             "scaleInDock": 1
@@ -1683,7 +1865,8 @@
             "scaleInDock": 1
         },
         "assets/tiles/tree2.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "assets/tiles/treeA.tsx": {
             "scaleInDock": 1
@@ -1725,44 +1908,39 @@
             "scaleInDock": 1
         }
     },
-    "frame.defaultDuration": 200,
+    "frame.defaultDuration": 300,
     "last.externalTilesetPath": "C:/Users/ddson/OneDrive/Desktop/Megaman ONB related/test ground/CyanServerTheBlock/assets/tiles",
     "last.imagePath": "C:/Users/ddson/OneDrive/Desktop/Megaman ONB related/test ground/CyanServerTheBlock/assets/tiles",
     "last.objectTypesPath": "C:/Users/ddson/OneDrive/Desktop/Megaman ONB related/test ground/CyanServerTheBlock/scripts/ezlibs-types.json",
     "map.fixedSize": true,
-    "map.height": 30,
+    "map.height": 20,
     "map.lastUsedFormat": "tmx",
     "map.orientation": "2",
     "map.tileWidth": 64,
-    "map.width": 30,
+    "map.width": 20,
     "openFiles": [
         "areas/default.tmx",
-        "areas/porttown1.tmx",
-        "areas/FootBombers.tmx",
-        "areas/ACDC1.tmx",
-        "areas/ACDC2.tmx",
-        "areas/undernet1.tmx",
-        "areas/ooo.tmx"
+        "areas/ACDC1.tmx"
     ],
     "project": "CyberSpace.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "areas/default.tmx",
-        "areas/porttown1.tmx",
-        "areas/FootBombers.tmx",
-        "areas/ACDC1.tmx",
+        "areas/DenTown1.tmx",
+        "areas/Okuden.tmx",
+        "areas/VastTraveler1.tmx",
+        "areas/Hood2.tmx",
+        "areas/Hood1.tmx",
+        "areas/dungeon.tmx",
+        "areas/Chichi3.tmx",
+        "areas/ACDC3.tmx",
         "areas/ACDC2.tmx",
-        "areas/undernet1.tmx",
-        "areas/ooo.tmx",
-        "areas/Mall2.tmx",
-        "areas/Mall1.tmx",
-        "areas/wilt.tmx",
-        "areas/Chichi4.tmx",
-        "areas/Chichi.tmx"
+        "areas/MasterPath.tmx",
+        "areas/ACDC1.tmx",
+        "areas/Chichi2.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 56,
-        "width": 64
+        "height": 39,
+        "width": 38
     }
 }

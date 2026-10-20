@@ -3,8 +3,8 @@ local Encounter1 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Swordy",rank=1},
-        {name="Zomon / Zaemon",rank=1},
+        {name="Swordy",rank=3},
+        {name="Zomon",rank=5},
     },
     obstacles={
         {name="Rock"},
@@ -41,8 +41,8 @@ local Encounter2 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Metrid",rank=1},
-        {name="Fishy",rank=1},
+        {name="Metrid",rank=3},
+        {name="Fishy",rank=2},
     },
     obstacles={
         {name="IceCube"},
@@ -82,16 +82,17 @@ local Encounter3 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Beetank",rank=1},
         {name="Zomon / Zaemon",rank=1},
+        {name="Beetank",rank=3},
+        {name="Zomon",rank=4},
     },
     obstacles={
         {name="Rock"},
     },
     positions={
         {0,0,0,0,0,0},
-        {0,0,0,0,0,2},
-        {0,0,0,1,0,0},
+        {0,0,0,0,3,1},
+        {0,0,0,2,0,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -120,13 +121,14 @@ local Encounter4 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="FighterPlane",rank=1},
-        {name="Fishy",rank=1},
+        {name="FighterPlane",rank=3},
+        {name="Fishy",rank=3},
+        {name="Fishy",rank=2},
     },
     obstacles={
     },
     positions={
-        {0,0,0,0,0,2},
+        {0,0,0,0,0,3},
         {0,0,0,0,1,0},
         {0,0,0,0,0,2},
     },

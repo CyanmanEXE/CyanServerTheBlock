@@ -3,15 +3,15 @@ local Encounter1 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Gunner",rank=1},
-        {name="Fishy",rank=1},
+        {name="Fishy",rank=3},
+        {name="Gunner",rank=3},
     },
     obstacles={
     },
     positions={
-        {0,0,0,0,2,0},
-        {0,0,0,1,0,0},
-        {0,0,0,0,0,2},
+        {0,0,0,0,1,0},
+        {0,0,0,2,0,0},
+        {0,0,0,0,0,1},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -40,13 +40,14 @@ local Encounter2 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Mettaur",rank=1},
+        {name="Mettaur",rank=3},
+        {name="Mettaur",rank=2},
     },
     obstacles={
         {name="Rock"},
     },
     positions={
-        {0,0,0,0,0,1},
+        {0,0,0,0,0,2},
         {0,0,0,0,1,0},
         {0,0,0,1,0,0},
     },
@@ -77,15 +78,16 @@ local Encounter3 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Volgear",rank=1},
-        {name="Ratty",rank=1},
+        {name="Volgear",rank=3},
+        {name="Volgear",rank=2},
+        {name="Ratty",rank=3},
     },
     obstacles={
     },
     positions={
         {0,0,0,1,0,0},
-        {0,0,0,0,1,0},
-        {0,0,0,0,0,2},
+        {0,0,0,0,2,0},
+        {0,0,0,0,0,3},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -115,13 +117,15 @@ local Encounter4 = {
     weight=10,
     enemies={
         {name="Ratty",rank=1},
+        {name="Ratty",rank=2},
+        {name="Ratty",rank=3},
     },
     obstacles={
     },
     positions={
         {0,0,0,0,0,0},
-        {0,0,0,0,1,1},
-        {0,0,0,0,1,0},
+        {0,0,0,0,1,3},
+        {0,0,0,0,2,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
