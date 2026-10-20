@@ -539,6 +539,17 @@
                 "y": 1251.5782828282827
             }
         },
+        "areas/DEBUGLIB.tmx": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 3.3115,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 273.1390608485581,
+                "y": 121.24414917711007
+            }
+        },
         "areas/DenTown1.tmx": {
             "expandedObjectLayers": [
                 2
@@ -565,11 +576,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.2471,
+            "scale": 3.0446,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 432.60364044583423,
-                "y": 143.93392670996707
+                "x": 303.9808184983249,
+                "y": 134.1719766143336
             }
         },
         "areas/Hood1.tmx": {
@@ -668,7 +679,7 @@
                 6
             ],
             "scale": 0.5916,
-            "selectedLayer": 9,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 1660.7505070993911,
                 "y": 763.1845841784989
@@ -905,13 +916,14 @@
         },
         "areas/default.tmx": {
             "expandedObjectLayers": [
-                8
+                8,
+                2
             ],
-            "scale": 2.5542,
+            "scale": 0.8037,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 3443.543966799781,
-                "y": 1660.5982303656724
+                "x": 3205.7981834017673,
+                "y": 1720.1692173696656
             }
         },
         "areas/devroom.tmx": {
@@ -946,13 +958,14 @@
         },
         "areas/footbomb.tmx": {
             "expandedObjectLayers": [
+                21,
                 7
             ],
-            "scale": 1.9824,
+            "scale": 1.4458,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1333.989104116223,
-                "y": 814.9213075060534
+                "x": 1463.2037626227695,
+                "y": 1183.7736893069582
             }
         },
         "areas/headdm.tmx": {
@@ -990,11 +1003,11 @@
                 12,
                 2
             ],
-            "scale": 0.425,
-            "selectedLayer": 11,
+            "scale": 3.175,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 3130.588235294118,
-                "y": 1518.8235294117649
+                "x": 2816.850393700787,
+                "y": 1231.9685039370079
             }
         },
         "areas/ponddrive2.tmx": {
@@ -1076,11 +1089,11 @@
             }
         },
         "areas/testlib.tmx": {
-            "scale": 0.373,
-            "selectedLayer": 0,
+            "scale": 1.7109,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 2197.0509383378017,
-                "y": 1100.5361930294905
+                "x": 2057.6889356479046,
+                "y": 1596.528143082588
             }
         },
         "areas/undernet-1.tmx": {
@@ -1111,11 +1124,11 @@
                 12,
                 3
             ],
-            "scale": 0.769,
+            "scale": 1.0804,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2016.2548764629387,
-                "y": 983.745123537061
+                "x": 1610.9774157719362,
+                "y": 1263.883746760459
             }
         },
         "areas/undernet2.tmx": {
@@ -1936,6 +1949,9 @@
     "project": "CyberSpace.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "areas/undernet1.tmx",
+        "areas/DEBUGLIB.tmx",
+        "areas/testlib.tmx",
         "areas/default.tmx",
         "areas/FootBombers.tmx",
         "areas/DenTown1.tmx",
@@ -1944,10 +1960,7 @@
         "areas/Hood2.tmx",
         "areas/Hood1.tmx",
         "areas/dungeon.tmx",
-        "areas/Chichi3.tmx",
-        "areas/ACDC3.tmx",
-        "areas/ACDC2.tmx",
-        "areas/MasterPath.tmx"
+        "areas/Chichi3.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
