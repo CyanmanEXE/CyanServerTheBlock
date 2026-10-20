@@ -1,3 +1,4 @@
+local logger = require('scripts/ezlibs-scripts/ezlogger').get('ezmemory')
 local json = require('scripts/ezlibs-scripts/json')
 local helpers = require('scripts/ezlibs-scripts/helpers')
 local table = require('table')
@@ -62,9 +63,9 @@ local function ensure_file(path, default_content)
         if f then
             f:write(default_content)
             f:close()
-            print("[ezmemory] Created default file:", path)
+            logger:info("[ezmemory] Created default file:", path)
         else
-            print("[ezmemory] Warning: Could not create file", path)
+            logger:warn("[ezmemory] Warning: Could not create file", path)
         end
     else
         f:close()
@@ -147,7 +148,7 @@ end)
 
 local function printd(...)
     local arg = { ... }
-    print('[ezmemory]', table.unpack(arg))
+    logger:info('[ezmemory]', table.unpack(arg))
 end
 
 local function normalize_player_memory(mem)
@@ -312,7 +313,7 @@ end
 
 function ezmemory.create_or_update_item(item_name, item_description, is_key)
     if not item_name or not item_description then
-        warn('[ezmemory] item not created, missing name or description')
+        logger:warn('[ezmemory] item not created, missing name or description')
         return
     end
     local existing_item_id = ezmemory.get_item_id_by_name(item_name)
@@ -460,7 +461,7 @@ function ezmemory.get_player_name_from_safesecret(safe_secret)
     if player_list[safe_secret] then
         name = player_list[safe_secret]
     end
-    print("NAME=", name)
+    logger:info("NAME=", name)
     return name
 end
 
@@ -649,7 +650,7 @@ end
 
 function ezmemory.spend_player_fragments(player_id, amount)
     if not (Net.get_player_fragments and Net.set_player_fragments) then
-        print("Fragments support isn't installed in ezmemory yet.")
+        logger:info("Fragments support isn't installed in ezmemory yet.")
         return false
     end
 
@@ -803,6 +804,28 @@ function ezmemory.hide_object_from_player_till_disconnect(player_id, area_id, ob
     })
 end
 
+-- Net player IDs can become stale while a delayed button/group callback is
+-- running. Keep these cleanup paths defensive: get_player_area can throw for
+-- an ID that has already disconnected.
+local function get_player_area_safely(player_id)
+    if type(Net.is_player) == "function" then
+        local ok, is_player = pcall(Net.is_player, player_id)
+        if not ok or not is_player then
+            return nil
+        end
+    end
+
+    if type(Net.get_player_area) ~= "function" then
+        return nil
+    end
+
+    local ok, area_id = pcall(Net.get_player_area, player_id)
+    if not ok then
+        return nil
+    end
+    return area_id
+end
+
 function ezmemory.unhide_object_from_player_till_disconnect(player_id, area_id, object_id)
     object_id = tostring(object_id)
     local dict = objects_hidden_till_disconnect_for_player
@@ -816,15 +839,31 @@ function ezmemory.unhide_object_from_player_till_disconnect(player_id, area_id, 
         end
     end
 
-    if Net.include_object_for_player and Net.get_player_area(player_id) == area_id then
+    -- Clear the temporary record even if the player has already left. Only
+    -- call the live-player API after safely confirming their current area.
+    local player_area = get_player_area_safely(player_id)
+    if Net.include_object_for_player and player_area == area_id then
         pcall(Net.include_object_for_player, player_id, object_id)
     end
+    return player_area ~= nil
 end
 
 function ezmemory.unhide_object_from_player(player_id, area_id, object_id)
     object_id = tostring(object_id)
-    local player_area = Net.get_player_area(player_id)
-    local safe_secret = helpers.get_safe_player_secret(player_id)
+
+    local player_area = get_player_area_safely(player_id)
+    if player_area == nil then
+        -- Do not attempt to resolve a player secret or mutate persistent
+        -- memory from an ID that is no longer known to the live server.
+        return false
+    end
+
+    -- A disconnect can still race the area check, so guard secret lookup too.
+    local secret_ok, safe_secret = pcall(helpers.get_safe_player_secret, player_id)
+    if not secret_ok or safe_secret == nil then
+        return false
+    end
+
     local player_area_memory = ezmemory.get_player_area_memory(safe_secret, area_id)
     if player_area_memory.hidden_objects[object_id] then
         player_area_memory.hidden_objects[object_id] = nil
@@ -834,6 +873,7 @@ function ezmemory.unhide_object_from_player(player_id, area_id, object_id)
     if Net.include_object_for_player and player_area == area_id then
         pcall(Net.include_object_for_player, player_id, object_id)
     end
+    return true
 end
 
 function ezmemory.hide_object_from_player(player_id, area_id, object_id)
@@ -1080,9 +1120,9 @@ function ezmemory.play_anim_get(player_id)
     pcall(function()
         return async(function()
             local parsed = avatar_utils.parse_player_animation(player_id, "sheet")
-            print(parsed)
+            -- print(parsed)
             if parsed and (parsed["animations"]["ITEM_GET"] ~= nil and parsed["animations"]["ITEM_GET_HOLD"]) then
-                print(parsed["animations"]["ITEM_GET_HOLD"].total_duration_ms)
+                -- print(parsed["animations"]["ITEM_GET_HOLD"].total_duration_ms)
                 Net.animate_player(player_id, "ITEM_GET", false)
                 await(Async.sleep(tonumber(parsed["animations"]["ITEM_GET"].total_duration_ms)))
                 Net.animate_player(player_id, "ITEM_GET_HOLD", true)
@@ -1095,7 +1135,7 @@ end
 
 function ezmemory.set_direction_anim(player_id, direction)
     pcall(function()
-        print(direction)
+        logger:info(direction)
         Net.animate_player(player_id, idle_map[direction], true)
     end)
 end

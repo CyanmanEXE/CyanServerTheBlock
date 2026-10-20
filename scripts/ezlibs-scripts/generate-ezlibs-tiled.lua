@@ -3,7 +3,7 @@
 -- Output file: ezlibs-tiled-types.json (or specify path as argument)
 -- Run with: lua generate_tiled_types_json.lua [output_path]
 
-local json = require('scripts/ezlibs-scripts/json')  -- use ezlibs' json module
+local json = require('scripts/ezlibs-scripts/json')
 
 -- ----------------------------------------------------------------------
 -- Define all enums used in properties
@@ -23,7 +23,7 @@ local Enums = {
     DialogueType = {
         type = "string",
         values = {"first", "question", "quiz", "random", "itemcheck", "before", "after",
-                  "shop", "password", "quest_switch", "quest_event", "item", "email", 
+                  "shop", "password", "quest_switch", "quest_event", "item", "email",
                   "questcheck", "battle_npc"}
     },
     ItemType = {
@@ -37,6 +37,44 @@ local Enums = {
     QuizFailAction = {
         type = "string",
         values = {"retry", "hide_once", "hide_temp", "explode"}
+    },
+    TriggerShape = {
+        type = "string",
+        values = {"rect", "ellipse"}
+    },
+    ButtonBehavior = {
+        type = "string",
+        values = {"Pressure Plate", "One-Time", "Toggle", "Custom", "Timed"}
+    },
+    KeyType = {
+        type = "string",
+        values = {"money", "fragments", "tokens", "item", "bossgate"}
+    },
+    ButtonChainType = {
+        type = "string",
+        values = {"Any", "Exclusive"}
+    },
+
+    -- ezbuttons group/effect schema values.
+    ButtonGroupMode = {
+        type = "string",
+        values = {"all_active", "any_active", "combination"}
+    },
+    ButtonComboMode = {
+        type = "string",
+        values = {"Inclusive", "Exclusive"}
+    },
+    ButtonEffectEvent = {
+        type = "string",
+        values = {"activated", "deactivated"}
+    },
+    ButtonGroupEvent = {
+        type = "string",
+        values = {"completed", "incomplete"}
+    },
+    ButtonEffectAction = {
+        type = "string",
+        values = {"activate", "deactivate", "toggle", "reset"}
     }
 }
 
@@ -58,7 +96,8 @@ local object_types = {
         color = "#ffaa00",
         members = {
             prop("Password", "string", ""),
-            prop("Key Name", "string", "money"),
+            prop("Key Type", "string", "money", "KeyType"),
+            prop("Key Item Name", "string", ""),
             prop("Required Keys", "number", 1),
             prop("Consume", "bool", false),
             prop("Once", "bool", false),
@@ -86,15 +125,18 @@ local object_types = {
             prop("Failure Message", "string", ""),
             prop("On Fail", "string", "retry", "QuizFailAction"),
             prop("Explosion Count", "number", 3),
+
             -- Reward properties (used when Type = "quiz")
             prop("Reward Type", "string", "item", "ItemType"),
             prop("Reward Name", "string", ""),
             prop("Reward Amount", "number", 1),
             prop("Reward Description", "string", ""),
+
             -- Cost properties
             prop("Cost Type", "string", "", "CurrencyType"),
             prop("Cost Amount", "number", 1),
             prop("Cost Failure Message", "string", ""),
+
             -- Next numbered properties
             prop("Next 1", "object", ""),
             prop("Next 2", "object", ""),
@@ -233,6 +275,53 @@ local object_types = {
             prop("Quest State", "string", "active"),
         }
     },
+    -- FootBomb Ref – a custom NPC reference that starts a private FootBomb match.
+    -- This intentionally includes the full NPC property set so Tiled can configure
+    -- the reference as an NPC, plus the FootBomb instance/dialogue/spawn settings.
+    {
+        name = "FootBomb Ref",
+        color = "#ffcc66",
+        members = {
+            -- Standard NPC properties
+            prop("Direction", "string", "Down", "Direction"),
+            prop("Asset Name", "string", "male-navi-exe6_teal"),
+            prop("Animation Name", "string", ""),
+            prop("Mug Animation Name", "string", ""),
+            prop("Dont Face Player", "bool", false),
+            prop("Next Waypoint 1", "object", ""),
+            prop("Dialogue Type", "string", "", "DialogueType"),
+            prop("Mugshot", "string", "male-navi-exe6_teal"),
+            prop("Text 1", "string", ""),
+            prop("Text 2", "string", ""),
+            prop("Text 3", "string", ""),
+            prop("Next 1", "object", ""),
+            prop("Next 2", "object", ""),
+            prop("Item 1", "object", ""),
+            prop("Item 2", "object", ""),
+            prop("Take Item", "bool", false),
+            prop("Date", "string", ""),
+            prop("Quest Name", "string", ""),
+            prop("Event Value", "string", ""),
+            prop("Dont Notify", "bool", false),
+            prop("Encounter Name", "string", ""),
+            prop("Failure Message", "string", ""),
+            prop("Player Exclusive", "bool", false),
+            prop("Quest NPC", "bool", false),
+            prop("Quest Exclusive", "string", ""),
+            prop("Quest State", "string", "active"),
+
+            -- FootBomb-specific behavior
+            prop("Instance Map", "string", "footbomb"),
+            prop("Intro Message", "string", "Hey! Want to play a round of FootBomb?"),
+            prop("Question", "string", "Would you like to join a FootBomb party and enter the field?"),
+            prop("Declined Message", "string", "No problem. Come back when you're ready."),
+            prop("Started Message", "string", "All right! I'll get your party onto the field."),
+            prop("Spawn X", "number", 26),
+            prop("Spawn Y", "number", 21),
+            prop("Spawn Z", "number", 0),
+        }
+    },
+
     {
         name = "Waypoint",
         color = "#55ff55",
@@ -295,6 +384,7 @@ local object_types = {
             prop("Quest Name", "string", ""),
             prop("Event Value", "string", ""),
             prop("Dont Notify", "bool", false),
+
             -- Email-specific properties
             prop("Email Id", "string", ""),
             prop("Email Icon", "number", 1),
@@ -315,30 +405,34 @@ local object_types = {
             prop("Mug Texture Path", "string", ""),
             prop("Mug Animation Path", "string", ""),
             prop("Persist", "bool", true),
+
             -- Battle NPC properties
             prop("Encounter Name", "string", ""),
             prop("Failure Message", "string", ""),
         }
     },
+
     -- Explosion Trigger
     {
         name = "Explosion Trigger",
         color = "#ff6600",
         members = {
-            prop("Target", "string", ""),      -- optional object ID to explode (defaults to self)
-            prop("Follow", "bool", false),     -- if true, track target movement
-            prop("Once", "bool", false),       -- remove after first trigger
+            prop("Target", "string", ""),
+            prop("Follow", "bool", false),
+            prop("Once", "bool", false),
         }
     },
+
     -- Rush Road (for ezrushroads)
     {
         name = "Rush Road",
         color = "#ffaa00",
         members = {
-            prop("Rush Object", "object", ""),   -- linked object where the permanent bot appears
-            prop("Direction", "string", "Down Left", "Direction"), -- animation direction
+            prop("Rush Object", "object", ""),
+            prop("Direction", "string", "Down Left", "Direction"),
         }
     },
+
     -- Compression Tile (for ezpress)
     {
         name = "Compression Tile",
@@ -348,13 +442,179 @@ local object_types = {
             prop("Decompress", "bool", false),
         }
     },
+
     -- Admin Console (for ezusers)
     {
         name = "Admin Console",
         color = "#ffaa00",
         members = {
             -- No custom properties needed (uses global password hash)
-            -- You could optionally add a "Password" property for per‑console passwords
+        }
+    },
+
+    -- Button Bot Details – stores the visual/animation properties for an OW Button
+    {
+        name = "Button Bot Details",
+        color = "#99ddff",
+        members = {
+            prop("Asset Name", "string", ""),
+            prop("Direction", "string", "Down", "Direction"),
+            prop("Animation Name", "string", ""),
+            prop("Mug Animation Name", "string", ""),
+            prop("Active Animation", "string", "ACTIVE"),
+            prop("Inactive Animation", "string", "INACTIVE"),
+            prop("Activated Animation", "string", ""),
+            prop("Deactivated Animation", "string", ""),
+            prop("Activation Animation Duration", "number", 0.5),
+            prop("Deactivation Animation Duration", "number", 0.5),
+        }
+    },
+
+    -- OW Button (from ezbuttons)
+    {
+        name = "OW Button",
+        color = "#66ccff",
+        members = {
+            prop("Bot Details", "object", ""),
+            prop("Next 1", "object", ""),
+            prop("Button Behavior", "string", "One-Time", "ButtonBehavior"),
+            prop("Script Path", "file", ""),
+            prop("Trigger Object", "object", ""),
+            prop("Button Activated Behavior", "object", ""),
+            prop("Button Deactivated Behavior", "object", ""),
+            prop("Button Chain Type", "string", "Any", "ButtonChainType"),
+            prop("Trigger Type", "string", "rect", "TriggerShape"),
+            prop("Trigger Width", "number", 4),
+            prop("Trigger Height", "number", 4),
+            prop("Activated Time", "number", 1),
+        }
+    },
+
+    -- OW Button Group Member – shares button visuals/trigger behavior but has no individual checkpoint actions.
+    {
+        name = "OW Button Group Member",
+        color = "#66ddbb",
+        members = {
+            prop("Bot Details", "object", ""),
+            prop("Button Behavior", "string", "One-Time", "ButtonBehavior"),
+            prop("Script Path", "file", ""),
+            prop("Trigger Object", "object", ""),
+            prop("Trigger Type", "string", "rect", "TriggerShape"),
+            prop("Trigger Width", "number", 4),
+            prop("Trigger Height", "number", 4),
+            prop("Activated Time", "number", 1),
+        }
+    },
+
+    -- Unlock Behavior – defines unlock action for an individual OW Button
+    {
+        name = "Unlock Behavior",
+        color = "#ffcc00",
+        members = {
+            prop("Unlock This", "object", ""),
+            prop("Unlock Permanently", "bool", false),
+            prop("Area Wide", "bool", false),
+        }
+    },
+
+    -- Relock Behavior – defines relock action triggered when a button deactivates
+    {
+        name = "Relock Behavior",
+        color = "#ff8888",
+        members = {
+            prop("Relock This", "object", ""),
+            prop("Area Wide", "bool", false),
+        }
+    },
+
+    -- Button Trigger – defines the detection area for an OW Button
+    {
+        name = "Button Trigger",
+        color = "#aaddff",
+        members = {
+            prop("Trigger Type", "string", "rect", "TriggerShape"),
+        }
+    },
+
+    -- Button Group – lists member buttons and the rule for considering the group satisfied.
+    {
+        name = "Button Group",
+        color = "#66dd99",
+        members = {
+            prop("Group ID", "string", ""),
+            prop("Group Mode", "string", "all_active", "ButtonGroupMode"),
+
+            -- Required/active button references
+            prop("Button 1", "object", ""),
+
+            -- For combination groups, populated Forbidden Button references must be inactive.
+            prop("Forbidden Button 1", "object", ""),
+
+            -- Checkpoint target template; add numbered properties as needed.
+            prop("Unlock Checkpoint 1", "object", ""),
+
+            -- Shared settings for all unlock targets.
+            prop("Unlock Permanently", "bool", true),
+            prop("Unlock Area Wide", "bool", false),
+
+            -- Checkpoint target template; add numbered properties as needed.
+            prop("Relock Checkpoint 1", "object", ""),
+
+            -- Shared setting for all relock targets.
+            prop("Relock Area Wide", "bool", false),
+
+        }
+    },
+
+    -- Button Effect – a button state transition applies an action to another button.
+    -- Button Combo – one button pattern plus the actions to perform when it matches.
+    -- Numbered properties are templates; map makers can add more in Tiled.
+    {
+        name = "Button Combo",
+        color = "#66bbdd",
+        members = {
+            prop("Button 1", "object", ""),
+            prop("Forbidden Button 1", "object", ""),
+            prop("Unlock Checkpoint 1", "object", ""),
+            prop("Unlock Permanently", "bool", true),
+            prop("Unlock Area Wide", "bool", false),
+            prop("Relock Checkpoint 1", "object", ""),
+            prop("Relock Area Wide", "bool", false)
+        }
+    },
+
+    -- Combo Button Group – any referenced Button Combo can satisfy the group.
+    -- Combo Mode controls matching for every referenced combo.
+    {
+        name = "Combo Button Group",
+        color = "#44bb88",
+        members = {
+            prop("Group ID", "string", ""),
+            prop("Combo Mode", "string", "Inclusive", "ButtonComboMode"),
+            prop("Button Combo 1", "object", "")
+        }
+    },
+
+    {
+        name = "Button Effect",
+        color = "#ffbb66",
+        members = {
+            prop("Source Button", "object", ""),
+            prop("Event", "string", "activated", "ButtonEffectEvent"),
+            prop("Target Button", "object", ""),
+            prop("Action", "string", "activate", "ButtonEffectAction")
+        }
+    },
+
+    -- Button Group Effect – a group transition applies an action to a target button.
+    {
+        name = "Button Group Effect",
+        color = "#ff9966",
+        members = {
+            prop("Button Group", "object", ""),
+            prop("Event", "string", "completed", "ButtonGroupEvent"),
+            prop("Target Button", "object", ""),
+            prop("Action", "string", "activate", "ButtonEffectAction")
         }
     }
 }
@@ -396,13 +656,14 @@ end
 
 -- ----------------------------------------------------------------------
 -- Main execution
-local function main(output_path)
+local function main(output_path, pretty)
     if not output_path then
         output_path = "ezlibs-tiled-types.json"
     end
 
+    local pretty = pretty or false
     local types = build_tiled_types()
-    local json_str = json.encode(types)
+    local json_str = json.encode(types, pretty)
 
     local file, err = io.open(output_path, "w")
     if not file then
@@ -413,7 +674,7 @@ local function main(output_path)
     print("Generated Tiled types: " .. output_path)
 end
 
-if arg and arg[0] and arg[0]:find("generate_tiled_types_json.lua") then
+if arg and arg[0] and (arg[0]:find("generate%-ezlibs%-tiled%.lua") or arg[0]:find("generate_tiled_types_json.lua")) then
     local out = arg[1]
     main(out)
 else

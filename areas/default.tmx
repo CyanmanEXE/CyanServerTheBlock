@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="100" height="100" tilewidth="64" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="184">
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="100" height="100" tilewidth="64" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="185">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/custom/backgrounds/crimsonhp/highway.animation"/>
@@ -24,25 +24,25 @@
  <tileset firstgid="98" source="../assets/tiles/Screen2.tsx"/>
  <tileset firstgid="101" source="../assets/tiles/bn6_securitycube.tsx"/>
  <tileset firstgid="115" source="../../../../../../Downloads/ServerBackup-main (2)/ServerBackup-main/Server_12_22_2021/assets/tiles/vendor_desk.tsx"/>
- <tileset firstgid="119" source="../assets/tiles/vendor_desk.tsx"/>
- <tileset firstgid="123" source="../assets/tiles/gate.tsx"/>
- <tileset firstgid="128" source="../assets/tiles/train.tsx"/>
- <tileset firstgid="130" source="../assets/tiles/Toy.tsx"/>
- <tileset firstgid="131" source="../assets/tiles/Mid Claw.tsx"/>
- <tileset firstgid="132" source="../assets/indy-trains/platforms.tsx"/>
- <tileset firstgid="136" source="../assets/tiles/hp_warp.tsx"/>
- <tileset firstgid="141" source="../assets/tiles/Quadragon Warp.tsx"/>
- <tileset firstgid="153" source="../assets/tiles/pipe2.tsx"/>
- <tileset firstgid="154" source="../assets/tiles/Pad2.tsx"/>
- <tileset firstgid="159" source="../assets/tiles/BookShelfs.tsx"/>
- <tileset firstgid="162" source="../assets/tiles/BookShelfsV2.tsx"/>
- <tileset firstgid="168" source="../assets/tiles/BookShelfsV3.tsx"/>
- <tileset firstgid="174" source="../assets/tiles/SnowPile.tsx"/>
- <tileset firstgid="175" source="../assets/tiles/GreenMysteryData.tsx"/>
- <tileset firstgid="183" source="../assets/tiles/speaker.tsx"/>
- <tileset firstgid="184" source="../assets/tiles/table4.tsx"/>
- <tileset firstgid="185" source="../assets/tiles/Blocker.tsx"/>
- <tileset firstgid="186" source="../assets/tiles/SoccorTiles.tsx"/>
+ <tileset firstgid="115" source="../assets/tiles/vendor_desk.tsx"/>
+ <tileset firstgid="119" source="../assets/tiles/gate.tsx"/>
+ <tileset firstgid="124" source="../assets/tiles/train.tsx"/>
+ <tileset firstgid="126" source="../assets/tiles/Toy.tsx"/>
+ <tileset firstgid="127" source="../assets/tiles/Mid Claw.tsx"/>
+ <tileset firstgid="128" source="../assets/indy-trains/platforms.tsx"/>
+ <tileset firstgid="132" source="../assets/tiles/hp_warp.tsx"/>
+ <tileset firstgid="137" source="../assets/tiles/Quadragon Warp.tsx"/>
+ <tileset firstgid="149" source="../assets/tiles/pipe2.tsx"/>
+ <tileset firstgid="150" source="../assets/tiles/Pad2.tsx"/>
+ <tileset firstgid="155" source="../assets/tiles/BookShelfs.tsx"/>
+ <tileset firstgid="158" source="../assets/tiles/BookShelfsV2.tsx"/>
+ <tileset firstgid="164" source="../assets/tiles/BookShelfsV3.tsx"/>
+ <tileset firstgid="170" source="../assets/tiles/SnowPile.tsx"/>
+ <tileset firstgid="171" source="../assets/tiles/GreenMysteryData.tsx"/>
+ <tileset firstgid="179" source="../assets/tiles/speaker.tsx"/>
+ <tileset firstgid="180" source="../assets/tiles/table4.tsx"/>
+ <tileset firstgid="181" source="../assets/tiles/Blocker.tsx"/>
+ <tileset firstgid="182" source="../assets/tiles/SoccorTiles.tsx"/>
  <layer id="1" name="Tile Layer 1" width="100" height="100" opacity="0.9">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -396,7 +396,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,132,133,133,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,128,129,129,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,57,57,57,0,0,0,0,57,57,57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,57,57,57,57,57,57,57,57,57,57,57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,57,57,57,0,0,0,0,57,57,57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -414,7 +414,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,132,133,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,128,129,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,57,57,57,0,0,0,0,0,0,0,0,0,57,57,57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,57,57,57,57,57,57,57,0,0,0,0,0,0,0,0,0,57,57,57,57,57,57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,57,57,57,0,57,57,57,0,57,0,0,0,57,57,57,0,0,0,0,0,0,0,0,0,57,57,57,0,0,57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -446,16 +446,16 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,204,201,2147483853,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,204,202,187,196,2147483853,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,204,195,196,196,187,196,2147483853,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,204,202,196,187,199,196,187,196,2147483853,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,200,187,196,194,188,187,199,187,196,2147483853,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,205,196,186,196,187,192,187,187,187,199,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,205,197,186,194,187,203,189,195,206,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,205,197,187,187,193,198,187,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,205,197,187,195,187,186,187,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,205,194,206,0,190,191,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,200,197,2147483849,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,200,198,183,192,2147483849,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,200,191,192,192,183,192,2147483849,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,200,198,192,183,195,192,183,192,2147483849,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,196,183,192,190,184,183,195,183,192,2147483849,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,201,192,182,192,183,188,183,183,183,195,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,201,193,182,190,183,199,185,191,202,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,201,193,183,183,189,194,183,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,201,193,183,191,183,182,183,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,201,190,202,0,186,187,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -566,27 +566,27 @@
    </properties>
    <point/>
   </object>
-  <object id="40" gid="2147483767" x="1621" y="1552.5" width="35" height="45">
+  <object id="40" gid="2147483763" x="1621" y="1552.5" width="35" height="45">
    <properties>
     <property name="Interact Relay" type="object" value="33"/>
    </properties>
   </object>
-  <object id="41" gid="2147483768" x="1619.5" y="1586" width="35" height="45">
+  <object id="41" gid="2147483764" x="1619.5" y="1586" width="35" height="45">
    <properties>
     <property name="Interact Relay" type="object" value="33"/>
    </properties>
   </object>
-  <object id="43" gid="2147483769" x="1615" y="1622.5" width="35" height="45">
+  <object id="43" gid="2147483765" x="1615" y="1622.5" width="35" height="45">
    <properties>
     <property name="Interact Relay" type="object" value="33"/>
    </properties>
   </object>
-  <object id="44" gid="2147483768" x="1619.5" y="1606" width="35" height="45">
+  <object id="44" gid="2147483764" x="1619.5" y="1606" width="35" height="45">
    <properties>
     <property name="Interact Relay" type="object" value="33"/>
    </properties>
   </object>
-  <object id="75" gid="130" x="1780" y="1621.5" width="32" height="24">
+  <object id="75" gid="126" x="1780" y="1621.5" width="32" height="24">
    <properties>
     <property name="Flavor" value="A golden Moloko looks for you..."/>
    </properties>
@@ -618,7 +618,7 @@
    </properties>
    <point/>
   </object>
-  <object id="82" name="PortTown" type="Custom Warp" gid="141" x="1732" y="1734" width="64" height="36">
+  <object id="82" name="PortTown" type="Custom Warp" gid="137" x="1732" y="1734" width="64" height="36">
    <properties>
     <property name="Direction" value="Up Right"/>
     <property name="Target Area" value="porttown1"/>
@@ -627,8 +627,8 @@
     <property name="Warp Out" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="88" gid="2147483801" x="1704" y="1728" width="50" height="78"/>
-  <object id="89" gid="2147483801" x="1704" y="1792" width="50" height="78"/>
+  <object id="88" gid="2147483797" x="1704" y="1728" width="50" height="78"/>
+  <object id="89" gid="2147483797" x="1704" y="1792" width="50" height="78"/>
   <object id="90" name="Prog-633" type="NPC" x="1553.94" y="1397.69">
    <properties>
     <property name="Asset Name" value="prog"/>
@@ -692,7 +692,7 @@
    </properties>
    <point/>
   </object>
-  <object id="104" name="To Chiki1" type="Custom Warp" gid="141" x="2024" y="1736" width="64" height="36">
+  <object id="104" name="To Chiki1" type="Custom Warp" gid="137" x="2024" y="1736" width="64" height="36">
    <properties>
     <property name="Direction" value="Up Right"/>
     <property name="Target Area" value="Chichi"/>
@@ -907,103 +907,103 @@
    </properties>
    <point/>
   </object>
-  <object id="122" type="Mystery Datum" gid="175" x="1936" y="1392" width="14" height="43">
+  <object id="122" type="Mystery Datum" gid="171" x="1936" y="1392" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="120"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="123" type="Mystery Datum" gid="175" x="1360" y="1456" width="14" height="43">
+  <object id="123" type="Mystery Datum" gid="171" x="1360" y="1456" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="120"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="124" type="Mystery Datum" gid="175" x="1776" y="1712" width="14" height="43">
+  <object id="124" type="Mystery Datum" gid="171" x="1776" y="1712" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="121"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="125" type="Mystery Datum" gid="175" x="2000" y="1392" width="14" height="43">
+  <object id="125" type="Mystery Datum" gid="171" x="2000" y="1392" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="121"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="126" type="Mystery Datum" gid="175" x="2064" y="1712" width="14" height="43">
+  <object id="126" type="Mystery Datum" gid="171" x="2064" y="1712" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="121"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="127" type="Mystery Datum" gid="175" x="1296" y="1456" width="14" height="43">
+  <object id="127" type="Mystery Datum" gid="171" x="1296" y="1456" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="120"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="128" type="Mystery Datum" gid="175" x="1776" y="1776" width="14" height="43">
+  <object id="128" type="Mystery Datum" gid="171" x="1776" y="1776" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="120"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="129" type="Mystery Datum" gid="175" x="1552" y="1328" width="14" height="43">
+  <object id="129" type="Mystery Datum" gid="171" x="1552" y="1328" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="120"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="130" type="Mystery Datum" gid="175" x="1616" y="1392" width="14" height="43">
+  <object id="130" type="Mystery Datum" gid="171" x="1616" y="1392" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="120"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="131" type="Mystery Datum" gid="175" x="1296" y="1392" width="14" height="43">
+  <object id="131" type="Mystery Datum" gid="171" x="1296" y="1392" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="120"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="132" type="Mystery Datum" gid="175" x="2000" y="1328" width="14" height="43">
+  <object id="132" type="Mystery Datum" gid="171" x="2000" y="1328" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="121"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="133" type="Mystery Datum" gid="175" x="2160" y="1488" width="14" height="43">
+  <object id="133" type="Mystery Datum" gid="171" x="2160" y="1488" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="120"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="134" type="Mystery Datum" gid="175" x="1712" y="1424" width="14" height="43">
+  <object id="134" type="Mystery Datum" gid="171" x="1712" y="1424" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="120"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="135" type="Mystery Datum" gid="175" x="1904" y="1616" width="14" height="43">
+  <object id="135" type="Mystery Datum" gid="171" x="1904" y="1616" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="121"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="136" type="Mystery Datum" gid="175" x="2224" y="1424" width="14" height="43">
+  <object id="136" type="Mystery Datum" gid="171" x="2224" y="1424" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="121"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="137" type="Mystery Datum" gid="175" x="2000" y="1776" width="14" height="43">
+  <object id="137" type="Mystery Datum" gid="171" x="2000" y="1776" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="121"/>
     <property name="Type" value="random"/>
    </properties>
   </object>
-  <object id="138" type="Mystery Datum" gid="175" x="1840" y="1552" width="14" height="43">
+  <object id="138" type="Mystery Datum" gid="171" x="1840" y="1552" width="14" height="43">
    <properties>
     <property name="Next 1" type="object" value="121"/>
     <property name="Type" value="random"/>
@@ -1022,7 +1022,7 @@
     <property name="Unlocked Message" value="Thank you! Have a pleasent day!"/>
    </properties>
   </object>
-  <object id="140" name="To Hood1" type="Custom Warp" gid="141" x="2184" y="1448" width="64" height="36">
+  <object id="140" name="To Hood1" type="Custom Warp" gid="137" x="2184" y="1448" width="64" height="36">
    <properties>
     <property name="Direction" value="Up Left"/>
     <property name="Target Area" value="Hood1"/>
@@ -1044,15 +1044,15 @@
     <property name="Unlocked Message" value="Thank you! Have a pleasent day!"/>
    </properties>
   </object>
-  <object id="142" gid="174" x="1900.5" y="2033.5" width="60" height="60"/>
-  <object id="143" gid="2147483822" x="1942.5" y="1997.5" width="60" height="60"/>
-  <object id="144" gid="183" x="1812" y="2102" width="91" height="77"/>
-  <object id="145" gid="2147483831" x="1824" y="2104" width="91" height="77"/>
-  <object id="146" gid="184" x="2004" y="2034" width="55" height="62"/>
-  <object id="147" gid="2147483832" x="2011" y="2099" width="55" height="62"/>
-  <object id="148" gid="185" x="1897.5" y="1968.5" width="44" height="34"/>
-  <object id="149" gid="2147483833" x="2064" y="1990" width="44" height="34"/>
-  <object id="151" name="fdghjk" type="Custom Warp" gid="141" x="1312" y="1536" width="64" height="36">
+  <object id="142" gid="170" x="1900.5" y="2033.5" width="60" height="60"/>
+  <object id="143" gid="2147483818" x="1942.5" y="1997.5" width="60" height="60"/>
+  <object id="144" gid="179" x="1812" y="2102" width="91" height="77"/>
+  <object id="145" gid="2147483827" x="1824" y="2104" width="91" height="77"/>
+  <object id="146" gid="180" x="2004" y="2034" width="55" height="62"/>
+  <object id="147" gid="2147483828" x="2011" y="2099" width="55" height="62"/>
+  <object id="148" gid="181" x="1897.5" y="1968.5" width="44" height="34"/>
+  <object id="149" gid="2147483829" x="2064" y="1990" width="44" height="34"/>
+  <object id="151" name="fdghjk" type="Custom Warp" gid="137" x="1312" y="1536" width="64" height="36">
    <properties>
     <property name="Direction" value="Up Right"/>
     <property name="Target Area" value="default"/>
@@ -1316,25 +1316,34 @@
    </properties>
    <point/>
   </object>
-  <object id="181" name="fdghjk" type="Custom Warp" gid="141" x="1192" y="1416" width="64" height="36">
+  <object id="181" name="fdghjk" type="Custom Warp" gid="137" x="1192" y="1416" width="64" height="36">
    <properties>
     <property name="Direction" value="Down Right"/>
     <property name="Target Area" value="Mall1"/>
     <property name="Target Object" value="25"/>
    </properties>
   </object>
-  <object id="182" name="fdghjk" type="Custom Warp" gid="141" x="1256" y="1000" width="64" height="36">
+  <object id="182" name="fdghjk" type="Custom Warp" gid="137" x="1256" y="1000" width="64" height="36">
    <properties>
     <property name="Direction" value="Up Right"/>
     <property name="Target Area" value="default"/>
     <property name="Target Object" value="151"/>
    </properties>
   </object>
-  <object id="183" name="fdghjk" type="Custom Warp" gid="141" x="1448" y="864" width="64" height="36">
+  <object id="183" name="fdghjk" type="Custom Warp" gid="137" x="1448" y="864" width="64" height="36">
    <properties>
     <property name="Direction" value="Up Right"/>
     <property name="Target Area" value="Okuden"/>
     <property name="Target Object" value="1"/>
+   </properties>
+  </object>
+  <object id="184" name="FootBomb" type="Custom Warp" gid="137" x="1864" y="1544" width="64" height="36">
+   <properties>
+    <property name="Direction" value="Down Left"/>
+    <property name="Target Area" value="footbomb"/>
+    <property name="Target Object" value="149"/>
+    <property name="Warp In" type="bool" value="true"/>
+    <property name="Warp Out" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

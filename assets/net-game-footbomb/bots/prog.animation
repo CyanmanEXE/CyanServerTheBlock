@@ -1,0 +1,57 @@
+animation state="FOOTBOMB_IDLE_DEFENSE"
+frame duration="0.183333" x="2" y="84" w="16" h="31" originx="8" originy="30"
+
+animation state="FOOTBOMB_JUMP_LEFT"
+frame duration="0.183333" x="36" y="76" w="29" h="39" originx="12" originy="38" flipx="1"
+point label="Ball" x="21" y="8"
+frame duration="0.133333" x="67" y="76" w="29" h="39" originx="12" originy="38" flipx="1"
+point label="Ball" x="21" y="11"
+frame duration="0.283333" x="98" y="76" w="29" h="39" originx="12" originy="38" flipx="1"
+point label="Ball" x="21" y="14"
+frame duration="0.133333" x="129" y="76" w="29" h="39" originx="12" originy="38" flipx="1"
+point label="Ball" x="21" y="17"
+frame duration="0.5" x="160" y="76" w="29" h="39" originx="12" originy="38" flipx="1"
+point label="Ball" x="21" y="20"
+
+animation state="FOOTBOMB_JUMP_LEFT_END"
+frame duration="0.183333" x="160" y="76" w="29" h="39" originx="12" originy="38" flipx="1"
+point label="Ball" x="21" y="20"
+
+animation state="FOOTBOMB_JUMP_RIGHT"
+frame duration="0.183333" x="36" y="76" w="29" h="39" originx="12" originy="38"
+point label="Ball" x="21" y="8"
+frame duration="0.133333" x="67" y="76" w="29" h="39" originx="12" originy="38"
+point label="Ball" x="21" y="11"
+frame duration="0.283333" x="98" y="76" w="29" h="39" originx="12" originy="38"
+point label="Ball" x="21" y="14"
+frame duration="0.133333" x="129" y="76" w="29" h="39" originx="12" originy="38"
+point label="Ball" x="21" y="17"
+frame duration="0.5" x="160" y="76" w="29" h="39" originx="12" originy="38"
+point label="Ball" x="21" y="20"
+
+animation state="FOOTBOMB_JUMP_RIGHT_END"
+frame duration="0.183333" x="160" y="76" w="29" h="39" originx="12" originy="38"
+point label="Ball" x="21" y="20"
+
+animation state="FOOTBOMB_READY_DEFENSE"
+frame duration="0.183333" x="19" y="84" w="16" h="31" originx="8" originy="30"
+point label="Ball" x="8" y="7"
+
+animation state="IDLE_D"
+frame duration="0.183333" x="2" y="84" w="16" h="31" originx="8" originy="30"
+
+animation state="IDLE_U"
+frame duration="0.0833333" x="3" y="2" w="14" h="34" originx="7" originy="33"
+
+animation state="IDLE_UR"
+frame duration="0.0833333" x="3" y="38" w="14" h="35" originx="7" originy="34"
+
+animation state="WALK_U"
+frame duration="0.0833333" x="3" y="2" w="14" h="34" originx="7" originy="33"
+frame duration="0.0833333" x="18" y="2" w="14" h="34" originx="7" originy="33"
+frame duration="0.0833333" x="33" y="2" w="14" h="34" originx="7" originy="33"
+
+animation state="WALK_UR"
+frame duration="0.0833333" x="3" y="38" w="14" h="35" originx="7" originy="34"
+frame duration="0.0833333" x="18" y="38" w="14" h="35" originx="7" originy="34"
+frame duration="0.0833333" x="33" y="38" w="14" h="35" originx="7" originy="34"  

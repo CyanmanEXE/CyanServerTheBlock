@@ -1,3 +1,4 @@
+local logger = require('scripts/ezlibs-scripts/ezlogger').get('ezlibs-main')
 local startup_start = os.clock()
 
 local helpers = require('scripts/ezlibs-scripts/helpers')
@@ -11,6 +12,7 @@ local ezmystery = require('scripts/ezlibs-scripts/ezmystery')
 local ezweather = require('scripts/ezlibs-scripts/ezweather')
 local ezwarps = require('scripts/ezlibs-scripts/ezwarps/main')
 local ezfarms = require('scripts/ezlibs-scripts/ezfarms')
+helpers.safe_require('scripts/events/eznpcs_onceitem')
 local ezcheckpoints = require('scripts/ezlibs-scripts/ezcheckpoints')
 local ezannouncement = require('scripts/ezlibs-scripts/ezannounce/ezannounce')
 local ezemail = require('scripts/ezlibs-scripts/ezemail')
@@ -18,7 +20,8 @@ local ezexplosions = require('scripts/ezlibs-scripts/ezexplosions')
 local ezrushroads = require('scripts/ezlibs-scripts/ezrushroads')
 local ezpress = require('scripts/ezlibs-scripts/ezpress')
 local ezusers = require('scripts/ezlibs-scripts/ezusers')
-local ezbbs = require('scripts/ezlibs-scripts/ezbbs')   -- NEW BBS plugin
+local ezbbs = require('scripts/ezlibs-scripts/ezbbs')
+local ezbuttons = require('scripts/ezlibs-scripts/ezbuttons')
 
 local plugins = { 
     ezweather, 
@@ -34,7 +37,8 @@ local plugins = {
     ezrushroads,
     ezpress,
     ezusers,
-    ezbbs,   -- add to plugin list
+    ezbbs,
+    ezbuttons
 }
 
 local sfx = {
@@ -63,7 +67,7 @@ Net:on("battle_results", function(event)
     local stats = {
         health=event.health,
         time=event.time,
-        reason=event.reason,
+        ran=event.ran,
         emotion=event.emotion,
         turns=event.turns,
         enemies=event.enemies,
@@ -72,6 +76,18 @@ Net:on("battle_results", function(event)
     for i, plugin in ipairs(plugins) do
         if plugin.handle_battle_results then
             plugin.handle_battle_results(event.player_id, stats)
+        end
+    end
+end)
+
+Net:on("battle_exit", function(event)
+    --local player_id = event.player_id
+    print(tostring(event))
+    print(event.player_id)
+
+    for i, plugin in ipairs(plugins) do 
+        if plugin.handle_battle_exit then
+            plugin.handle_battle_exit(event.player_id)
         end
     end
 end)
@@ -217,4 +233,4 @@ Net:on("textbox_response", function(event)
     end
 end)
 
-print("[main] ezlibs loaded in " .. (os.clock() - startup_start) .. "s")
+logger:info("[main] ezlibs loaded in " .. (os.clock() - startup_start) .. "s")

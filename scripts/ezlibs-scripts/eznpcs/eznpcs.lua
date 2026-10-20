@@ -1,3 +1,4 @@
+local logger = require('scripts/ezlibs-scripts/ezlogger').get('eznpcs')
 local Direction = require("scripts/ezlibs-scripts/direction")
 local helpers = require('scripts/ezlibs-scripts/helpers')
 local ezmemory = require('scripts/ezlibs-scripts/ezmemory')
@@ -29,7 +30,7 @@ local npc_required_properties = {"Direction","Asset Name"}
 
 local function printd(...)
     local arg={...}
-    print('[eznpcs]',table.unpack(arg))
+    logger:info('[eznpcs]',table.unpack(arg))
 end
 
 -- Helper to safely evaluate boolean properties from Tiled (can be boolean or string)
@@ -237,95 +238,13 @@ function add_behaviour(npc,behaviour)
     end
 end
 
-local idle_anim_by_direction = {
-    ["Up Right"] = "IDLE_UR",
-    ["Up Left"] = "IDLE_UL",
-    ["Down Right"] = "IDLE_DR",
-    ["Down Left"] = "IDLE_DL",
-
-    -- Four-direction NPC sheets do not have cardinal idle states.
-    ["Up"] = "IDLE_UR",
-    ["Right"] = "IDLE_DR",
-    ["Down"] = "IDLE_DL",
-    ["Left"] = "IDLE_UL",
-}
-
-local function set_npc_facing(npc, direction)
-    if not npc or not npc.bot_id or not direction then
-        return
-    end
-
-    Net.set_bot_direction(
-        npc.bot_id,
-        direction
-    )
-
-    local idle_state =
-        idle_anim_by_direction[
-            direction
-        ]
-
-    if idle_state then
-        pcall(
-            Net.animate_bot,
-            npc.bot_id,
-            idle_state,
-            true
-        )
-    end
-end
-
-local function face_npc_toward_player(
-    npc,
-    player_id
-)
-    local player_pos =
-        Net.get_player_position(
-            player_id
-        )
-
-    if not player_pos then
-        return
-    end
-
-    local npc_pos = npc
-
-    if Net.get_bot_position then
-        local ok, live_pos =
-            pcall(
-                Net.get_bot_position,
-                npc.bot_id
-            )
-
-        if ok and live_pos then
-            npc_pos = live_pos
-        end
-    end
-
-    local direction =
-        Direction.from_points(
-            npc_pos,
-            player_pos
-        )
-
-    set_npc_facing(
-        npc,
-        direction
-    )
-end
-
-
 function clear_player_conversation(player_id)
     Net.unlock_player_input(player_id)
     local bot_id = current_player_conversation[player_id]
     if bot_id then
         local npc = npcs[bot_id]
         if npc and not npc.dont_face_player then
-            set_npc_facing(
-                npc,
-                npc.direction
-            )
-
+            Net.set_bot_direction(npc.bot_id, npc.direction)
         end
         current_player_conversation[player_id] = nil
         ezbus:emit("dialogue_ended", {
@@ -347,11 +266,11 @@ function chat_behaviour()
                 current_player_conversation[player_id] = npc.bot_id
 
                 if not npc.dont_face_player then
-                   face_npc_toward_player(
-                        npc,
-                        player_id
-                    )
-
+                    local player_pos = Net.get_player_position(player_id)
+                    local dir = player_pos and Direction.from_points(npc, player_pos) or nil
+                    if dir then
+                        Net.set_bot_direction(npc.bot_id, dir)
+                    end
                 end
 
                 local dialogue = npc.first_dialogue
@@ -605,8 +524,13 @@ function eznpcs.on_tick(delta_time)
     end
 end
 
-function eznpcs.create_npc(area_id,asset_name,x,y,z,direction,bot_name,animation_name,mug_animation_name)
-    return create_npc(area_id,asset_name,x,y,z,direction,bot_name,animation_name,mug_animation_name)
+function eznpcs.create_npc(area_id,asset_name,x,y,z,direction,bot_name,animation_name,mug_animation_name,dont_face_player)
+    -- Preserve the legacy default when callers omit the optional flag, while
+    -- allowing custom typed NPC references to honor their Tiled property.
+    if dont_face_player == nil then
+        dont_face_player = true
+    end
+    return create_npc(area_id,asset_name,x,y,z,direction,bot_name,animation_name,mug_animation_name,dont_face_player)
 end
 
 function eznpcs.handle_player_transfer(player_id)
@@ -742,6 +666,14 @@ function eznpcs.remove_exclusive_npc(player_id, placeholder_id)
             printd("Removed exclusive NPC bot", bot_id, "for player", player_id)
         end
     end
+end
+
+function eznpcs.handle_battle_exit()
+
+end
+
+function eznpcs.handle_battle_results()
+    
 end
 
 -- Helper to remove a quest‑exclusive NPC (can be called when quest state changes)
