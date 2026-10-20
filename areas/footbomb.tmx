@@ -343,13 +343,13 @@
 </data>
  </layer>
  <objectgroup id="15" name="Object Layer 2" offsetx="0" offsety="-64">
-  <object id="166" name="Bomb 1" x="768" y="688">
+  <object id="166" name="Bomb 1" x="784" y="704">
    <point/>
   </object>
-  <object id="167" name="Bomb 2" x="792" y="664">
+  <object id="167" name="Bomb 2" x="808" y="680">
    <point/>
   </object>
-  <object id="168" name="Bomb 3" x="816" y="640">
+  <object id="168" name="Bomb 3" x="832" y="656">
    <point/>
   </object>
  </objectgroup>
