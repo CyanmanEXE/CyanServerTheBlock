@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "areas/FootBombers.tmx",
+    "activeFile": "areas/footbomb.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -546,8 +546,8 @@
             "scale": 3.3115,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 273.1390608485581,
-                "y": 121.24414917711007
+                "x": 367.96013890985955,
+                "y": 184.0555639438321
             }
         },
         "areas/DenTown1.tmx": {
@@ -579,8 +579,8 @@
             "scale": 3.0446,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 303.9808184983249,
-                "y": 134.1719766143336
+                "x": 320.07488668462196,
+                "y": 160.1195559350982
             }
         },
         "areas/Hood1.tmx": {
@@ -681,8 +681,8 @@
             "scale": 0.5916,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1660.7505070993911,
-                "y": 763.1845841784989
+                "x": 1599.8985801217036,
+                "y": 776.707234617985
             }
         },
         "areas/Sewer.tmx": {
@@ -922,8 +922,8 @@
             "scale": 0.6944,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 3376.2960829493086,
-                "y": 1724.5103686635944
+                "x": 3200.604838709677,
+                "y": 1574.7407834101382
             }
         },
         "areas/devroom.tmx": {
@@ -961,11 +961,11 @@
                 21,
                 7
             ],
-            "scale": 1.4458,
-            "selectedLayer": 1,
+            "scale": 6.0612,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 1463.2037626227695,
-                "y": 1183.7736893069582
+                "x": 1360.0442156668646,
+                "y": 647.9739985481423
             }
         },
         "areas/headdm.tmx": {
@@ -1006,8 +1006,8 @@
             "scale": 3.175,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2816.850393700787,
-                "y": 1231.9685039370079
+                "x": 2640.1574803149606,
+                "y": 1232.283464566929
             }
         },
         "areas/ponddrive2.tmx": {
@@ -1039,8 +1039,8 @@
             "scale": 3.9862,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1573.5537604736342,
-                "y": 806.9088354824144
+                "x": 1344.0118408509359,
+                "y": 671.9432040539864
             }
         },
         "areas/porttown2.tmx": {
@@ -1187,7 +1187,28 @@
                 "y": 456.388538475401
             }
         },
+        "assets/ezlibs-assets/ezmystery/BlueMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/ezlibs-assets/ezmystery/GreenMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/ezlibs-assets/ezmystery/OrangeMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/ezlibs-assets/ezmystery/PurpleMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/ezlibs-assets/ezmystery/SapphireMysteryData.tsx": {
+            "scaleInDock": 1
+        },
         "assets/indy-trains/platforms.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/net-game-footbomb/goal-post/goal-net.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/net-game-footbomb/tiles/SoccorTiles.tsx": {
             "scaleInDock": 1
         },
         "assets/tiles/ACDC.tsx": {
@@ -1944,23 +1965,28 @@
     "map.width": 20,
     "openFiles": [
         "areas/default.tmx",
-        "areas/FootBombers.tmx"
+        "areas/FootBombers.tmx",
+        "areas/porttown1.tmx",
+        "areas/footbomb.tmx",
+        "areas/Ponddrive1.tmx",
+        "areas/DEBUGLIB.tmx",
+        "areas/ooo.tmx"
     ],
     "project": "CyberSpace.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "areas/undernet1.tmx",
-        "areas/DEBUGLIB.tmx",
-        "areas/testlib.tmx",
         "areas/default.tmx",
         "areas/FootBombers.tmx",
+        "areas/porttown1.tmx",
+        "areas/ooo.tmx",
+        "areas/DEBUGLIB.tmx",
+        "areas/Ponddrive1.tmx",
+        "areas/footbomb.tmx",
+        "areas/undernet1.tmx",
+        "areas/testlib.tmx",
         "areas/DenTown1.tmx",
         "areas/Okuden.tmx",
-        "areas/VastTraveler1.tmx",
-        "areas/Hood2.tmx",
-        "areas/Hood1.tmx",
-        "areas/dungeon.tmx",
-        "areas/Chichi3.tmx"
+        "areas/VastTraveler1.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
