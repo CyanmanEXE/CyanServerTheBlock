@@ -11,12 +11,13 @@ local function has_dark_panel(instance, x, y, z)
   local panel = instance:get_panel_at(x, y, z)
   if not panel then return false end
   local panel_type_table = {"Dark Panel", "Dark Hole", "Indestructible Panel", "Item Panel", "Trap Panel"}
-  function includes(table, value)
-    for _, v in ipairs(table) do
-      if value == v then
+  local function includes(values, value)
+    for _, candidate in ipairs(values) do
+      if value == candidate then
         return true
       end
     end
+    return false
   end
   return includes(panel_type_table, panel.type)
 end

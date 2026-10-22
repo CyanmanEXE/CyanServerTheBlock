@@ -13,14 +13,13 @@ function BigBrute:new(instance, position, direction)
     instance = instance,
     id = nil,
     battle_name = "BigBrute",
-    health = 300,
-    max_health = 300,
+    health = 120,
+    max_health = 120,
     x = math.floor(position.x),
     y = math.floor(position.y),
     z = math.floor(position.z),
     selection = EnemySelection:new(instance),
-    encounter = "/server/assets/encounters/big_brute_encounter.zip",
-    is_engaged = false
+    encounter = "/server/assets/encounters/big_brute_encounter.zip"
   }
 
   setmetatable(bigbrute, self)
