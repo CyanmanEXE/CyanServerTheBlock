@@ -23,6 +23,343 @@
             ]
         },
         {
+            "color": "#ff99ddff",
+            "drawFill": true,
+            "id": 37,
+            "members": [
+                {
+                    "name": "Activated Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Activation Animation Duration",
+                    "type": "float",
+                    "value": 0.5
+                },
+                {
+                    "name": "Active Animation",
+                    "type": "string",
+                    "value": "ACTIVE"
+                },
+                {
+                    "name": "Animation Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Asset Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Deactivated Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Deactivation Animation Duration",
+                    "type": "float",
+                    "value": 0.5
+                },
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": "Down"
+                },
+                {
+                    "name": "Inactive Animation",
+                    "type": "string",
+                    "value": "INACTIVE"
+                },
+                {
+                    "name": "Mug Animation Name",
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "name": "Button Bot Details",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ff66bbdd",
+            "drawFill": true,
+            "id": 44,
+            "members": [
+                {
+                    "name": "Button 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Forbidden Button 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Relock Area Wide",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Relock Checkpoint 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Unlock Area Wide",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Unlock Checkpoint 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Unlock Permanently",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "name": "Button Combo",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffffbb66",
+            "drawFill": true,
+            "id": 46,
+            "members": [
+                {
+                    "name": "Action",
+                    "propertyType": "ButtonEffectAction",
+                    "type": "string",
+                    "value": "activate"
+                },
+                {
+                    "name": "Event",
+                    "propertyType": "ButtonEffectEvent",
+                    "type": "string",
+                    "value": "activated"
+                },
+                {
+                    "name": "Source Button",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Target Button",
+                    "type": "object",
+                    "value": 0
+                }
+            ],
+            "name": "Button Effect",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ff66dd99",
+            "drawFill": true,
+            "id": 43,
+            "members": [
+                {
+                    "name": "Button 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Forbidden Button 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Group ID",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Group Mode",
+                    "propertyType": "ButtonGroupMode",
+                    "type": "string",
+                    "value": "all_active"
+                },
+                {
+                    "name": "Relock Area Wide",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Relock Checkpoint 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Unlock Area Wide",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Unlock Checkpoint 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Unlock Permanently",
+                    "type": "bool",
+                    "value": true
+                }
+            ],
+            "name": "Button Group",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffff9966",
+            "drawFill": true,
+            "id": 47,
+            "members": [
+                {
+                    "name": "Action",
+                    "propertyType": "ButtonEffectAction",
+                    "type": "string",
+                    "value": "activate"
+                },
+                {
+                    "name": "Button Group",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Event",
+                    "propertyType": "ButtonGroupEvent",
+                    "type": "string",
+                    "value": "completed"
+                },
+                {
+                    "name": "Target Button",
+                    "type": "object",
+                    "value": 0
+                }
+            ],
+            "name": "Button Group Effect",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffaaddff",
+            "drawFill": true,
+            "id": 42,
+            "members": [
+                {
+                    "name": "Trigger Type",
+                    "propertyType": "TriggerShape",
+                    "type": "string",
+                    "value": "rect"
+                }
+            ],
+            "name": "Button Trigger",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "id": 28,
+            "name": "ButtonBehavior",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Pressure Plate",
+                "One-Time",
+                "Toggle",
+                "Custom",
+                "Timed"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 34,
+            "name": "ButtonChainType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Any",
+                "Exclusive"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 32,
+            "name": "ButtonComboMode",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Inclusive",
+                "Exclusive"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 29,
+            "name": "ButtonEffectAction",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "activate",
+                "deactivate",
+                "toggle",
+                "reset"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 27,
+            "name": "ButtonEffectEvent",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "activated",
+                "deactivated"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 35,
+            "name": "ButtonGroupEvent",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "completed",
+                "incomplete"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 33,
+            "name": "ButtonGroupMode",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "all_active",
+                "any_active",
+                "combination"
+            ],
+            "valuesAsFlags": false
+        },
+        {
             "color": "#ffffaa00",
             "drawFill": true,
             "id": 8,
@@ -101,19 +438,43 @@
             ]
         },
         {
+            "color": "#ff44bb88",
+            "drawFill": true,
+            "id": 45,
+            "members": [
+                {
+                    "name": "Button Combo 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Combo Mode",
+                    "propertyType": "ButtonComboMode",
+                    "type": "string",
+                    "value": "Inclusive"
+                },
+                {
+                    "name": "Group ID",
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "name": "Combo Button Group",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
             "color": "#ff88aaff",
             "drawFill": true,
             "id": 25,
             "members": [
                 {
-                    "name": "Compress",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Decompress",
-                    "type": "bool",
-                    "value": false
+                    "name": "Mode",
+                    "propertyType": "CompressionMode",
+                    "type": "string",
+                    "value": "Compress"
                 }
             ],
             "name": "Compression Tile",
@@ -459,6 +820,190 @@
             ]
         },
         {
+            "color": "#ffffcc66",
+            "drawFill": true,
+            "id": 36,
+            "members": [
+                {
+                    "name": "Animation Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Asset Name",
+                    "type": "string",
+                    "value": "male-navi-exe6_teal"
+                },
+                {
+                    "name": "Date",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Declined Message",
+                    "type": "string",
+                    "value": "No problem. Come back when you're ready."
+                },
+                {
+                    "name": "Dialogue Type",
+                    "propertyType": "DialogueType",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": "Down"
+                },
+                {
+                    "name": "Dont Face Player",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Dont Notify",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Encounter Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Event Value",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Failure Message",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Instance Map",
+                    "type": "string",
+                    "value": "footbomb"
+                },
+                {
+                    "name": "Intro Message",
+                    "type": "string",
+                    "value": "Hey! Want to play a round of FootBomb?"
+                },
+                {
+                    "name": "Item 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Item 2",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Mug Animation Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Mugshot",
+                    "type": "string",
+                    "value": "male-navi-exe6_teal"
+                },
+                {
+                    "name": "Next 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 2",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next Waypoint 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Player Exclusive",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Quest Exclusive",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Quest NPC",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Quest Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Quest State",
+                    "type": "string",
+                    "value": "active"
+                },
+                {
+                    "name": "Question",
+                    "type": "string",
+                    "value": "Would you like to join a FootBomb party and enter the field?"
+                },
+                {
+                    "name": "Spawn X",
+                    "type": "qlonglong",
+                    "value": 26
+                },
+                {
+                    "name": "Spawn Y",
+                    "type": "qlonglong",
+                    "value": 21
+                },
+                {
+                    "name": "Spawn Z",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Started Message",
+                    "type": "string",
+                    "value": "All right! I'll get your party onto the field."
+                },
+                {
+                    "name": "Take Item",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Text 1",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Text 2",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Text 3",
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "name": "FootBomb Ref",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
             "color": "#ffff8888",
             "drawFill": true,
             "id": 15,
@@ -560,6 +1105,20 @@
                 "money",
                 "fragments",
                 "tokens"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 31,
+            "name": "KeyType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "money",
+                "fragments",
+                "tokens",
+                "item",
+                "bossgate"
             ],
             "valuesAsFlags": false
         },
@@ -903,6 +1462,135 @@
             ]
         },
         {
+            "color": "#ff66ccff",
+            "drawFill": true,
+            "id": 38,
+            "members": [
+                {
+                    "name": "Activated Time",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Bot Details",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Button Activated Behavior",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Button Behavior",
+                    "propertyType": "ButtonBehavior",
+                    "type": "string",
+                    "value": "One-Time"
+                },
+                {
+                    "name": "Button Chain Type",
+                    "propertyType": "ButtonChainType",
+                    "type": "string",
+                    "value": "Any"
+                },
+                {
+                    "name": "Button Deactivated Behavior",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Script Path",
+                    "type": "file",
+                    "value": ""
+                },
+                {
+                    "name": "Trigger Height",
+                    "type": "qlonglong",
+                    "value": 4
+                },
+                {
+                    "name": "Trigger Object",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Trigger Type",
+                    "propertyType": "TriggerShape",
+                    "type": "string",
+                    "value": "rect"
+                },
+                {
+                    "name": "Trigger Width",
+                    "type": "qlonglong",
+                    "value": 4
+                }
+            ],
+            "name": "OW Button",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ff66ddbb",
+            "drawFill": true,
+            "id": 39,
+            "members": [
+                {
+                    "name": "Activated Time",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Bot Details",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Button Behavior",
+                    "propertyType": "ButtonBehavior",
+                    "type": "string",
+                    "value": "One-Time"
+                },
+                {
+                    "name": "Script Path",
+                    "type": "file",
+                    "value": ""
+                },
+                {
+                    "name": "Trigger Height",
+                    "type": "qlonglong",
+                    "value": 4
+                },
+                {
+                    "name": "Trigger Object",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Trigger Type",
+                    "propertyType": "TriggerShape",
+                    "type": "string",
+                    "value": "rect"
+                },
+                {
+                    "name": "Trigger Width",
+                    "type": "qlonglong",
+                    "value": 4
+                }
+            ],
+            "name": "OW Button Group Member",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
             "color": "#ffaa66cc",
             "drawFill": true,
             "id": 10,
@@ -1105,6 +1793,28 @@
             ]
         },
         {
+            "color": "#ffff8888",
+            "drawFill": true,
+            "id": 41,
+            "members": [
+                {
+                    "name": "Area Wide",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Relock This",
+                    "type": "object",
+                    "value": 0
+                }
+            ],
+            "name": "Relock Behavior",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
             "color": "#ffffaa00",
             "drawFill": true,
             "id": 24,
@@ -1180,6 +1890,44 @@
                 }
             ],
             "name": "Server Warp",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "id": 30,
+            "name": "TriggerShape",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "rect",
+                "ellipse"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "color": "#ffffcc00",
+            "drawFill": true,
+            "id": 40,
+            "members": [
+                {
+                    "name": "Area Wide",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Unlock Permanently",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Unlock This",
+                    "type": "object",
+                    "value": 0
+                }
+            ],
+            "name": "Unlock Behavior",
             "type": "class",
             "useAs": [
                 "object"
@@ -1270,117 +2018,32 @@
             "valuesAsFlags": false
         },
         {
-            "id": 27,
-            "name": "ButtonEffectEvent",
+            "id": 48,
+            "name": "CompressionMode",
             "storageType": "string",
             "type": "enum",
             "values": [
-                "activated",
-                "deactivated"
+                "Compress",
+                "Normalize",
+                "Enlarge"
             ],
             "valuesAsFlags": false
         },
         {
-            "id": 28,
-            "name": "ButtonBehavior",
+            "id": 49,
+            "name": "SizeModeScope",
             "storageType": "string",
             "type": "enum",
             "values": [
-                "Pressure Plate",
-                "One-Time",
-                "Toggle",
-                "Custom",
-                "Timed"
+                "Player",
+                "Area Wide"
             ],
             "valuesAsFlags": false
         },
         {
-            "id": 29,
-            "name": "ButtonEffectAction",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "activate",
-                "deactivate",
-                "toggle",
-                "reset"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "id": 30,
-            "name": "TriggerShape",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "rect",
-                "ellipse"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "id": 31,
-            "name": "KeyType",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "money",
-                "fragments",
-                "tokens",
-                "item",
-                "bossgate"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "id": 32,
-            "name": "ButtonComboMode",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "Inclusive",
-                "Exclusive"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "id": 33,
-            "name": "ButtonGroupMode",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "all_active",
-                "any_active",
-                "combination"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "id": 34,
-            "name": "ButtonChainType",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "Any",
-                "Exclusive"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "id": 35,
-            "name": "ButtonGroupEvent",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "completed",
-                "incomplete"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "color": "#ffffcc66",
+            "color": "#ffff6666",
             "drawFill": true,
-            "id": 36,
+            "id": 50,
             "members": [
                 {
                     "name": "Animation Name",
@@ -1393,14 +2056,24 @@
                     "value": "male-navi-exe6_teal"
                 },
                 {
+                    "name": "Collision Enabled",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "Collision Height",
+                    "type": "float",
+                    "value": 1.5
+                },
+                {
+                    "name": "Collision Width",
+                    "type": "float",
+                    "value": 1.5
+                },
+                {
                     "name": "Date",
                     "type": "string",
                     "value": ""
-                },
-                {
-                    "name": "Declined Message",
-                    "type": "string",
-                    "value": "No problem. Come back when you're ready."
                 },
                 {
                     "name": "Dialogue Type",
@@ -1440,16 +2113,6 @@
                     "value": ""
                 },
                 {
-                    "name": "Instance Map",
-                    "type": "string",
-                    "value": "footbomb"
-                },
-                {
-                    "name": "Intro Message",
-                    "type": "string",
-                    "value": "Hey! Want to play a round of FootBomb?"
-                },
-                {
                     "name": "Item 1",
                     "type": "object",
                     "value": 0
@@ -1458,6 +2121,11 @@
                     "name": "Item 2",
                     "type": "object",
                     "value": 0
+                },
+                {
+                    "name": "Move Animation State",
+                    "type": "string",
+                    "value": "MOVE"
                 },
                 {
                     "name": "Mug Animation Name",
@@ -1490,6 +2158,21 @@
                     "value": false
                 },
                 {
+                    "name": "Push Cooldown",
+                    "type": "float",
+                    "value": 0.75
+                },
+                {
+                    "name": "Push Distance",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Push Duration",
+                    "type": "float",
+                    "value": 0.28
+                },
+                {
                     "name": "Quest Exclusive",
                     "type": "string",
                     "value": ""
@@ -1508,31 +2191,6 @@
                     "name": "Quest State",
                     "type": "string",
                     "value": "active"
-                },
-                {
-                    "name": "Question",
-                    "type": "string",
-                    "value": "Would you like to join a FootBomb party and enter the field?"
-                },
-                {
-                    "name": "Spawn X",
-                    "type": "qlonglong",
-                    "value": 26
-                },
-                {
-                    "name": "Spawn Y",
-                    "type": "qlonglong",
-                    "value": 21
-                },
-                {
-                    "name": "Spawn Z",
-                    "type": "qlonglong",
-                    "value": 0
-                },
-                {
-                    "name": "Started Message",
-                    "type": "string",
-                    "value": "All right! I'll get your party onto the field."
                 },
                 {
                     "name": "Take Item",
@@ -1555,467 +2213,7 @@
                     "value": ""
                 }
             ],
-            "name": "FootBomb Ref",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ff99ddff",
-            "drawFill": true,
-            "id": 37,
-            "members": [
-                {
-                    "name": "Activated Animation",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Activation Animation Duration",
-                    "type": "float",
-                    "value": 0.5
-                },
-                {
-                    "name": "Active Animation",
-                    "type": "string",
-                    "value": "ACTIVE"
-                },
-                {
-                    "name": "Animation Name",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Asset Name",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Deactivated Animation",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Deactivation Animation Duration",
-                    "type": "float",
-                    "value": 0.5
-                },
-                {
-                    "name": "Direction",
-                    "propertyType": "Direction",
-                    "type": "string",
-                    "value": "Down"
-                },
-                {
-                    "name": "Inactive Animation",
-                    "type": "string",
-                    "value": "INACTIVE"
-                },
-                {
-                    "name": "Mug Animation Name",
-                    "type": "string",
-                    "value": ""
-                }
-            ],
-            "name": "Button Bot Details",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ff66ccff",
-            "drawFill": true,
-            "id": 38,
-            "members": [
-                {
-                    "name": "Activated Time",
-                    "type": "qlonglong",
-                    "value": 1
-                },
-                {
-                    "name": "Bot Details",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Button Activated Behavior",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Button Behavior",
-                    "propertyType": "ButtonBehavior",
-                    "type": "string",
-                    "value": "One-Time"
-                },
-                {
-                    "name": "Button Chain Type",
-                    "propertyType": "ButtonChainType",
-                    "type": "string",
-                    "value": "Any"
-                },
-                {
-                    "name": "Button Deactivated Behavior",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Next 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Script Path",
-                    "type": "file",
-                    "value": ""
-                },
-                {
-                    "name": "Trigger Height",
-                    "type": "qlonglong",
-                    "value": 4
-                },
-                {
-                    "name": "Trigger Object",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Trigger Type",
-                    "propertyType": "TriggerShape",
-                    "type": "string",
-                    "value": "rect"
-                },
-                {
-                    "name": "Trigger Width",
-                    "type": "qlonglong",
-                    "value": 4
-                }
-            ],
-            "name": "OW Button",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ff66ddbb",
-            "drawFill": true,
-            "id": 39,
-            "members": [
-                {
-                    "name": "Activated Time",
-                    "type": "qlonglong",
-                    "value": 1
-                },
-                {
-                    "name": "Bot Details",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Button Behavior",
-                    "propertyType": "ButtonBehavior",
-                    "type": "string",
-                    "value": "One-Time"
-                },
-                {
-                    "name": "Script Path",
-                    "type": "file",
-                    "value": ""
-                },
-                {
-                    "name": "Trigger Height",
-                    "type": "qlonglong",
-                    "value": 4
-                },
-                {
-                    "name": "Trigger Object",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Trigger Type",
-                    "propertyType": "TriggerShape",
-                    "type": "string",
-                    "value": "rect"
-                },
-                {
-                    "name": "Trigger Width",
-                    "type": "qlonglong",
-                    "value": 4
-                }
-            ],
-            "name": "OW Button Group Member",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ffffcc00",
-            "drawFill": true,
-            "id": 40,
-            "members": [
-                {
-                    "name": "Area Wide",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Unlock Permanently",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Unlock This",
-                    "type": "object",
-                    "value": 0
-                }
-            ],
-            "name": "Unlock Behavior",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ffff8888",
-            "drawFill": true,
-            "id": 41,
-            "members": [
-                {
-                    "name": "Area Wide",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Relock This",
-                    "type": "object",
-                    "value": 0
-                }
-            ],
-            "name": "Relock Behavior",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ffaaddff",
-            "drawFill": true,
-            "id": 42,
-            "members": [
-                {
-                    "name": "Trigger Type",
-                    "propertyType": "TriggerShape",
-                    "type": "string",
-                    "value": "rect"
-                }
-            ],
-            "name": "Button Trigger",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ff66dd99",
-            "drawFill": true,
-            "id": 43,
-            "members": [
-                {
-                    "name": "Button 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Forbidden Button 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Group ID",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Group Mode",
-                    "propertyType": "ButtonGroupMode",
-                    "type": "string",
-                    "value": "all_active"
-                },
-                {
-                    "name": "Relock Area Wide",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Relock Checkpoint 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Unlock Area Wide",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Unlock Checkpoint 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Unlock Permanently",
-                    "type": "bool",
-                    "value": true
-                }
-            ],
-            "name": "Button Group",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ff66bbdd",
-            "drawFill": true,
-            "id": 44,
-            "members": [
-                {
-                    "name": "Button 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Forbidden Button 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Relock Area Wide",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Relock Checkpoint 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Unlock Area Wide",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Unlock Checkpoint 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Unlock Permanently",
-                    "type": "bool",
-                    "value": true
-                }
-            ],
-            "name": "Button Combo",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ff44bb88",
-            "drawFill": true,
-            "id": 45,
-            "members": [
-                {
-                    "name": "Button Combo 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Combo Mode",
-                    "propertyType": "ButtonComboMode",
-                    "type": "string",
-                    "value": "Inclusive"
-                },
-                {
-                    "name": "Group ID",
-                    "type": "string",
-                    "value": ""
-                }
-            ],
-            "name": "Combo Button Group",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ffffbb66",
-            "drawFill": true,
-            "id": 46,
-            "members": [
-                {
-                    "name": "Action",
-                    "propertyType": "ButtonEffectAction",
-                    "type": "string",
-                    "value": "activate"
-                },
-                {
-                    "name": "Event",
-                    "propertyType": "ButtonEffectEvent",
-                    "type": "string",
-                    "value": "activated"
-                },
-                {
-                    "name": "Source Button",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Target Button",
-                    "type": "object",
-                    "value": 0
-                }
-            ],
-            "name": "Button Effect",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ffff9966",
-            "drawFill": true,
-            "id": 47,
-            "members": [
-                {
-                    "name": "Action",
-                    "propertyType": "ButtonEffectAction",
-                    "type": "string",
-                    "value": "activate"
-                },
-                {
-                    "name": "Button Group",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Event",
-                    "propertyType": "ButtonGroupEvent",
-                    "type": "string",
-                    "value": "completed"
-                },
-                {
-                    "name": "Target Button",
-                    "type": "object",
-                    "value": 0
-                }
-            ],
-            "name": "Button Group Effect",
+            "name": "Pushback NPC",
             "type": "class",
             "useAs": [
                 "object"

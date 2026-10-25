@@ -590,7 +590,7 @@
             "scale": 3.3115,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 367.96013890985955,
+                "x": 368.2621168654688,
                 "y": 184.0555639438321
             }
         },
@@ -623,8 +623,8 @@
             "scale": 3.0446,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 303.9808184983249,
-                "y": 134.1719766143336
+                "x": 319.9106614990475,
+                "y": 160.11955593509822
             }
         },
         "areas/Hood1.tmx": {
@@ -678,22 +678,22 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.1445,
+            "scale": 5.3483,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1042.8134556574923,
-                "y": 511.5771079073831
+                "x": 828.581044444029,
+                "y": 323.7477329244807
             }
         },
         "areas/MasterPath.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.8901,
+            "scale": 0.9358,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 535.3331086394787,
-                "y": 653.2973823165937
+                "x": 1214.468903611883,
+                "y": 898.1620004274419
             }
         },
         "areas/Okuden.tmx": {
@@ -725,8 +725,8 @@
             "scale": 0.5916,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1660.7505070993911,
-                "y": 763.1845841784989
+                "x": 1600.7437457741717,
+                "y": 776.7072346179851
             }
         },
         "areas/Sewer.tmx": {
@@ -963,11 +963,11 @@
                 8,
                 2
             ],
-            "scale": 1.0425,
+            "scale": 0.4439,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 3564.028776978417,
-                "y": 1668.5851318944847
+                "x": 3231.583690020275,
+                "y": 1499.2115341293083
             }
         },
         "areas/devroom.tmx": {
@@ -1002,14 +1002,14 @@
         },
         "areas/footbomb.tmx": {
             "expandedObjectLayers": [
-                19,
-                7
+                7,
+                19
             ],
-            "scale": 0.6306,
+            "scale": 0.3554,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1239.2959086584206,
-                "y": 1099.7462733904217
+                "x": 1208.4974676420934,
+                "y": 1050.9285312324141
             }
         },
         "areas/footbombZ.tmx": {
@@ -1056,14 +1056,14 @@
         },
         "areas/ooo.tmx": {
             "expandedObjectLayers": [
-                12,
-                2
+                2,
+                12
             ],
-            "scale": 3.175,
+            "scale": 1.6804,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2816.850393700787,
-                "y": 1279.8425196850394
+                "x": 2659.7833849083554,
+                "y": 1339.8595572482745
             }
         },
         "areas/ponddrive2.tmx": {
@@ -1092,11 +1092,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 3.9862,
+            "scale": 2.2392,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1344.0118408509359,
-                "y": 671.9432040539864
+                "x": 1447.6152197213291,
+                "y": 235.57520543051092
             }
         },
         "areas/porttown2.tmx": {
@@ -1243,7 +1243,17 @@
                 "y": 456.388538475401
             }
         },
+        "assets/demo/Custom_Central_Tiles.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "assets/demo/warp.tsx": {
+            "scaleInDock": 1
+        },
         "assets/ezlibs-assets/ezmystery/BlueMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "assets/ezlibs-assets/ezmystery/Dark Mystery Data.tsx": {
             "scaleInDock": 1
         },
         "assets/ezlibs-assets/ezmystery/GreenMysteryData.tsx": {
@@ -1489,6 +1499,7 @@
             "scaleInEditor": 10.0498
         },
         "assets/tiles/Custom_Central_Tiles2.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "assets/tiles/Custom_Central_Tiles_yes.tsx": {
@@ -2007,6 +2018,9 @@
         },
         "assets/tiles/waterP.tsx": {
             "scaleInDock": 1
+        },
+        "assets/tourney/ow-tourney-board.tsx": {
+            "scaleInDock": 1
         }
     },
     "frame.defaultDuration": 300,
@@ -2032,13 +2046,13 @@
     "property.type": "string",
     "recentFiles": [
         "areas/footbomb.tmx",
+        "areas/DEBUGLIB.tmx",
         "areas/ooo.tmx",
         "areas/Ponddrive1.tmx",
+        "areas/FootBombers.tmx",
         "C:/Users/ddson/Downloads/footbomb (1).tmx",
         "areas/default.tmx",
-        "areas/FootBombers.tmx",
         "areas/porttown1.tmx",
-        "areas/DEBUGLIB.tmx",
         "areas/undernet1.tmx",
         "areas/testlib.tmx",
         "areas/DenTown1.tmx",

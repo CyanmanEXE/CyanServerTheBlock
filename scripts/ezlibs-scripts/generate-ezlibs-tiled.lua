@@ -1,5 +1,5 @@
 -- generate_tiled_types_json.lua
--- Generates a Tiled-compatible JSON file containing all custom object types used by ezlibs.
+-- Generates a Tiled-compatible JSON file containing all custom types used by ezlibs.
 -- Output file: ezlibs-tiled-types.json (or specify path as argument)
 -- Run with: lua generate_tiled_types_json.lua [output_path]
 
@@ -75,6 +75,26 @@ local Enums = {
     ButtonEffectAction = {
         type = "string",
         values = {"activate", "deactivate", "toggle", "reset"}
+    },
+
+    -- ezpress scale modes. Used by:
+    --   * Compression Tile object property "Mode"
+    --   * Map property "Size Mode" (add manually in Tiled: map -> Custom
+    --     Properties -> add new property "Size Mode", type = enum, then choose
+    --     "CompressionMode"; pick Compress / Normalize / Enlarge per area)
+    CompressionMode = {
+        type = "string",
+        values = {"Compress", "Normalize", "Enlarge"}
+    },
+
+    -- ezpress scope. Used by:
+    --   * Map property "Size Mode Scope" (add manually in Tiled: map -> Custom
+    --     Properties -> add new property "Size Mode Scope", type = enum, then
+    --     choose "SizeModeScope"). "Area Wide" also applies the area's Size
+    --     Mode to NPCs / bots in that area; "Player" limits it to players.
+    SizeModeScope = {
+        type = "string",
+        values = {"Player", "Area Wide"}
     }
 }
 
@@ -275,6 +295,47 @@ local object_types = {
             prop("Quest State", "string", "active"),
         }
     },
+    -- Pushback NPC – a normal eznpcs NPC with a moving collision zone.
+    {
+        name = "Pushback NPC",
+        color = "#ff6666",
+        members = {
+            prop("Direction", "string", "Down", "Direction"),
+            prop("Asset Name", "string", "male-navi-exe6_teal"),
+            prop("Animation Name", "string", ""),
+            prop("Mug Animation Name", "string", ""),
+            prop("Dont Face Player", "bool", false),
+            prop("Next Waypoint 1", "object", ""),
+            prop("Dialogue Type", "string", "", "DialogueType"),
+            prop("Mugshot", "string", "male-navi-exe6_teal"),
+            prop("Text 1", "string", ""),
+            prop("Text 2", "string", ""),
+            prop("Text 3", "string", ""),
+            prop("Next 1", "object", ""),
+            prop("Next 2", "object", ""),
+            prop("Item 1", "object", ""),
+            prop("Item 2", "object", ""),
+            prop("Take Item", "bool", false),
+            prop("Date", "string", ""),
+            prop("Quest Name", "string", ""),
+            prop("Event Value", "string", ""),
+            prop("Dont Notify", "bool", false),
+            prop("Encounter Name", "string", ""),
+            prop("Failure Message", "string", ""),
+            prop("Player Exclusive", "bool", false),
+            prop("Quest NPC", "bool", false),
+            prop("Quest Exclusive", "string", ""),
+            prop("Quest State", "string", "active"),
+            prop("Collision Enabled", "bool", true),
+            prop("Collision Width", "number", 1.5),
+            prop("Collision Height", "number", 1.5),
+            prop("Push Distance", "number", 1.0),
+            prop("Push Duration", "number", 0.28),
+            prop("Push Cooldown", "number", 0.75),
+            prop("Move Animation State", "string", "MOVE"),
+        }
+    },
+
     -- FootBomb Ref – a custom NPC reference that starts a private FootBomb match.
     -- This intentionally includes the full NPC property set so Tiled can configure
     -- the reference as an NPC, plus the FootBomb instance/dialogue/spawn settings.
@@ -434,12 +495,14 @@ local object_types = {
     },
 
     -- Compression Tile (for ezpress)
+    -- A single enum selects the target scale state for any player entering the tile.
+    -- The legacy "Compress"/"Decompress" booleans are still honored by ezpress.lua
+    -- so existing maps keep working, but new maps should use Mode.
     {
         name = "Compression Tile",
         color = "#88aaff",
         members = {
-            prop("Compress", "bool", false),
-            prop("Decompress", "bool", false),
+            prop("Mode", "string", "Compress", "CompressionMode"),
         }
     },
 
