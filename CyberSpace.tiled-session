@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "areas/footbomb.tmx",
+    "activeFile": "areas/DenTown1.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -129,6 +129,55 @@
             "scaleInDock": 1
         },
         "C:/Users/ddson/Downloads/Bn3_revamped-main/Bn3_revamped-main/assets/tiles/square.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-feature-animation-fixes-footbomb/Internal_Test_Server-feature-animation-fixes-footbomb/areas/default.tmx": {
+            "expandedObjectLayers": [
+                7
+            ],
+            "scale": 1.3793,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1542.4490683680128,
+                "y": 710.1428260711955
+            }
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/areas/default.tmx": {
+            "scale": 1.8616,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1429.6841426729695,
+                "y": 693.2208852599914
+            }
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/assets/demo/Custom_Central_Tiles.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/assets/demo/warp.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/assets/ezlibs-assets/ezmystery/BlueMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/assets/ezlibs-assets/ezmystery/Dark Mystery Data.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/assets/ezlibs-assets/ezmystery/GreenMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/assets/ezlibs-assets/ezmystery/OrangeMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/assets/ezlibs-assets/ezmystery/PurpleMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/assets/ezlibs-assets/ezmystery/SapphireMysteryData.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/assets/tiles/coffee.tsx": {
+            "scaleInDock": 1
+        },
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/assets/tourney/ow-tourney-board.tsx": {
             "scaleInDock": 1
         },
         "C:/Users/ddson/Downloads/ServerBackup-main (2)/ServerBackup-main/Server_12_22_2021/assets/tiles/vendor_desk.tsx": {
@@ -450,36 +499,36 @@
         },
         "areas/ACDC1.tmx": {
             "expandedObjectLayers": [
-                10,
-                2
+                2,
+                10
             ],
-            "scale": 0.707,
+            "scale": 0.4882,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1241.1598302687412,
-                "y": 703.6775106082038
+                "x": 771.200327734535,
+                "y": 793.7320770176157
             }
         },
         "areas/ACDC2.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.6118,
-            "selectedLayer": 0,
+            "scale": 0.8388,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 733.0827067669173,
-                "y": 447.0415168355672
+                "x": 891.1540295660467,
+                "y": 423.81974248927037
             }
         },
         "areas/ACDC3.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.715,
-            "selectedLayer": 0,
+            "scale": 0.4735,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1025.8741258741259,
-                "y": 597.902097902098
+                "x": 934.5300950369589,
+                "y": 387.5395987328406
             }
         },
         "areas/AirShoes.tmx": {
@@ -598,11 +647,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.4482,
+            "scale": 0.7868,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 699.4645247657295,
-                "y": 333.5564480142792
+                "x": 774.6568378240977,
+                "y": 399.7203863751906
             }
         },
         "areas/FlavesCurry.tmx": {
@@ -689,11 +738,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.9358,
+            "scale": 0.832,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1214.468903611883,
-                "y": 898.1620004274419
+                "x": 1043.8701923076924,
+                "y": 1148.4375
             }
         },
         "areas/Okuden.tmx": {
@@ -725,8 +774,8 @@
             "scale": 0.5916,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1600.7437457741717,
-                "y": 776.7072346179851
+                "x": 1601.5889114266397,
+                "y": 776.707234617985
             }
         },
         "areas/Sewer.tmx": {
@@ -943,11 +992,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.2746,
+            "scale": 1.6511,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2514.566642388929,
-                "y": 1593.2265112891475
+                "x": 4097.571316092302,
+                "y": 1487.7960147780266
             }
         },
         "areas/deep.tmx": {
@@ -963,11 +1012,11 @@
                 8,
                 2
             ],
-            "scale": 0.4439,
+            "scale": 2.4752,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 3231.583690020275,
-                "y": 1499.2115341293083
+                "x": 3353.4663865546217,
+                "y": 1556.035875888817
             }
         },
         "areas/devroom.tmx": {
@@ -1005,11 +1054,11 @@
                 7,
                 19
             ],
-            "scale": 0.3554,
+            "scale": 0.7722,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1208.4974676420934,
-                "y": 1050.9285312324141
+                "x": 1282.6987826987827,
+                "y": 1045.713545713546
             }
         },
         "areas/footbombZ.tmx": {
@@ -1056,14 +1105,14 @@
         },
         "areas/ooo.tmx": {
             "expandedObjectLayers": [
-                2,
-                12
+                12,
+                2
             ],
             "scale": 1.6804,
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 2659.7833849083554,
-                "y": 1339.8595572482745
+                "y": 1430.3142109021665
             }
         },
         "areas/ponddrive2.tmx": {
@@ -1092,11 +1141,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 2.2392,
+            "scale": 0.4947,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1447.6152197213291,
-                "y": 235.57520543051092
+                "x": 1628.2595512431776,
+                "y": 478.0675156660602
             }
         },
         "areas/porttown2.tmx": {
@@ -1156,11 +1205,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.7126,
+            "scale": 0.1832,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 3260.5950042099357,
-                "y": 893.2079708111143
+                "x": 3927.4017467248914,
+                "y": 1378.2751091703058
             }
         },
         "areas/undernet0.tmx": {
@@ -1168,23 +1217,23 @@
                 8,
                 2
             ],
-            "scale": 1.532,
-            "selectedLayer": 7,
+            "scale": 3.2551,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 2109.986945169713,
-                "y": 521.2140992167102
+                "x": 665.2637399772664,
+                "y": 574.6367239101717
             }
         },
         "areas/undernet1.tmx": {
             "expandedObjectLayers": [
-                12,
-                3
+                3,
+                12
             ],
-            "scale": 1.0804,
+            "scale": 2.2217,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1610.9774157719362,
-                "y": 1263.883746760459
+                "x": 1941.081154071207,
+                "y": 1331.637934914705
             }
         },
         "areas/undernet2.tmx": {
@@ -1248,6 +1297,7 @@
             "scaleInDock": 1
         },
         "assets/demo/warp.tsx": {
+            "dynamicWrapping": true,
             "scaleInDock": 1
         },
         "assets/ezlibs-assets/ezmystery/BlueMysteryData.tsx": {
@@ -1498,6 +1548,9 @@
             "scaleInDock": 1,
             "scaleInEditor": 10.0498
         },
+        "assets/tiles/Custom_Central_Tiles.tsx": {
+            "scaleInDock": 1
+        },
         "assets/tiles/Custom_Central_Tiles2.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1
@@ -1606,6 +1659,7 @@
             "scaleInEditor": 1
         },
         "assets/tiles/Pad2.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "assets/tiles/Podium.tsx": {
@@ -2011,6 +2065,7 @@
             "scaleInDock": 1
         },
         "assets/tiles/warp.tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1
         },
         "assets/tiles/water.tsx": {
@@ -2020,13 +2075,14 @@
             "scaleInDock": 1
         },
         "assets/tourney/ow-tourney-board.tsx": {
+            "dynamicWrapping": true,
             "scaleInDock": 1
         }
     },
     "frame.defaultDuration": 300,
     "last.externalTilesetPath": "C:/Users/ddson/OneDrive/Desktop/Megaman ONB related/test ground/CyanServerTheBlock/assets/tiles",
     "last.imagePath": "C:/Users/ddson/OneDrive/Desktop/Megaman ONB related/test ground/CyanServerTheBlock/assets/tiles",
-    "last.objectTypesPath": "C:/Users/ddson/OneDrive/Desktop/Megaman ONB related/test ground/CyanServerTheBlock/scripts/ezlibs-types.json",
+    "last.objectTypesPath": "C:/Users/ddson/OneDrive/Desktop/Megaman ONB related/test ground/CyanServerTheBlock/scripts/ezlibs-scripts/ezlibs-types.json",
     "map.fixedSize": true,
     "map.height": 20,
     "map.lastUsedFormat": "tmx",
@@ -2037,26 +2093,28 @@
         "areas/default.tmx",
         "areas/FootBombers.tmx",
         "areas/porttown1.tmx",
-        "areas/footbomb.tmx",
-        "areas/Ponddrive1.tmx",
-        "areas/DEBUGLIB.tmx",
-        "areas/ooo.tmx"
+        "areas/MasterPath.tmx",
+        "areas/ACDC1.tmx",
+        "areas/ACDC2.tmx",
+        "areas/ACDC3.tmx",
+        "assets/tiles/Bench.tsx",
+        "areas/DenTown1.tmx"
     ],
     "project": "CyberSpace.tiled-project",
     "property.type": "string",
     "recentFiles": [
         "areas/footbomb.tmx",
-        "areas/DEBUGLIB.tmx",
-        "areas/ooo.tmx",
-        "areas/Ponddrive1.tmx",
-        "areas/FootBombers.tmx",
-        "C:/Users/ddson/Downloads/footbomb (1).tmx",
-        "areas/default.tmx",
-        "areas/porttown1.tmx",
-        "areas/undernet1.tmx",
-        "areas/testlib.tmx",
         "areas/DenTown1.tmx",
-        "areas/Okuden.tmx"
+        "assets/tiles/Bench.tsx",
+        "areas/ACDC3.tmx",
+        "areas/ACDC2.tmx",
+        "areas/ACDC1.tmx",
+        "areas/MasterPath.tmx",
+        "areas/porttown1.tmx",
+        "areas/FootBombers.tmx",
+        "C:/Users/ddson/Downloads/Internal_Test_Server-main (1)/Internal_Test_Server-main/areas/default.tmx",
+        "areas/ooo.tmx",
+        "areas/default.tmx"
     ],
     "resizeMap.removeObjects": false,
     "tileset.lastUsedFormat": "tsx",

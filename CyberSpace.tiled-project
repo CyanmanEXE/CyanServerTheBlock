@@ -177,6 +177,21 @@
                     "value": 0
                 },
                 {
+                    "name": "Cinematic Duration",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Cinematic Unlock",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Cinematic on Bot Trigger",
+                    "type": "bool",
+                    "value": false
+                },
+                {
                     "name": "Forbidden Button 1",
                     "type": "object",
                     "value": 0
@@ -386,6 +401,67 @@
                     "value": "money"
                 },
                 {
+                    "name": "Navi 1",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Navi 10",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Navi 2",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Navi 3",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Navi 4",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Navi 5",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Navi 6",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Navi 7",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Navi 8",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Navi 9",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Navi Element",
+                    "propertyType": "NaviElement",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Navi Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
                     "name": "Once",
                     "type": "bool",
                     "value": false
@@ -448,6 +524,21 @@
                     "value": 0
                 },
                 {
+                    "name": "Cinematic Duration",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Cinematic Unlock",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Cinematic on Bot Trigger",
+                    "type": "bool",
+                    "value": false
+                },
+                {
                     "name": "Combo Mode",
                     "propertyType": "ButtonComboMode",
                     "type": "string",
@@ -482,6 +573,18 @@
             "useAs": [
                 "object"
             ]
+        },
+        {
+            "id": 48,
+            "name": "CompressionMode",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Compress",
+                "Normalize",
+                "Enlarge"
+            ],
+            "valuesAsFlags": false
         },
         {
             "id": 3,
@@ -645,6 +748,11 @@
                     "value": ""
                 },
                 {
+                    "name": "Event Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
                     "name": "Event Value",
                     "type": "string",
                     "value": ""
@@ -663,6 +771,11 @@
                     "name": "Item 2",
                     "type": "object",
                     "value": 0
+                },
+                {
+                    "name": "Kick On Loss",
+                    "type": "bool",
+                    "value": true
                 },
                 {
                     "name": "Mug Animation Path",
@@ -1118,7 +1231,10 @@
                 "fragments",
                 "tokens",
                 "item",
-                "bossgate"
+                "bossgate",
+                "navi_name",
+                "navi_element",
+                "navi_list"
             ],
             "valuesAsFlags": false
         },
@@ -1333,13 +1449,7 @@
                     "value": ""
                 },
                 {
-                    "name": "Date",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Dialogue Type",
-                    "propertyType": "DialogueType",
+                    "name": "Cutscene",
                     "type": "string",
                     "value": ""
                 },
@@ -1355,32 +1465,7 @@
                     "value": false
                 },
                 {
-                    "name": "Dont Notify",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Encounter Name",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Event Value",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Failure Message",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Item 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Item 2",
+                    "name": "First Dialogue",
                     "type": "object",
                     "value": 0
                 },
@@ -1388,21 +1473,6 @@
                     "name": "Mug Animation Name",
                     "type": "string",
                     "value": ""
-                },
-                {
-                    "name": "Mugshot",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Next 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Next 2",
-                    "type": "object",
-                    "value": 0
                 },
                 {
                     "name": "Next Waypoint 1",
@@ -1425,34 +1495,14 @@
                     "value": false
                 },
                 {
-                    "name": "Quest Name",
-                    "type": "string",
-                    "value": ""
-                },
-                {
                     "name": "Quest State",
                     "type": "string",
                     "value": "active"
                 },
                 {
-                    "name": "Take Item",
+                    "name": "Template Only",
                     "type": "bool",
                     "value": false
-                },
-                {
-                    "name": "Text 1",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Text 2",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Text 3",
-                    "type": "string",
-                    "value": ""
                 }
             ],
             "name": "NPC",
@@ -1477,6 +1527,11 @@
                     "value": 0
                 },
                 {
+                    "name": "Bots Can Trigger",
+                    "type": "bool",
+                    "value": false
+                },
+                {
                     "name": "Button Activated Behavior",
                     "type": "object",
                     "value": 0
@@ -1497,6 +1552,21 @@
                     "name": "Button Deactivated Behavior",
                     "type": "object",
                     "value": 0
+                },
+                {
+                    "name": "Cinematic Duration",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Cinematic Unlock",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Cinematic on Bot Trigger",
+                    "type": "bool",
+                    "value": false
                 },
                 {
                     "name": "Next 1",
@@ -1552,6 +1622,11 @@
                     "value": 0
                 },
                 {
+                    "name": "Bots Can Trigger",
+                    "type": "bool",
+                    "value": false
+                },
+                {
                     "name": "Button Behavior",
                     "propertyType": "ButtonBehavior",
                     "type": "string",
@@ -1585,6 +1660,114 @@
                 }
             ],
             "name": "OW Button Group Member",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffff6666",
+            "drawFill": true,
+            "id": 50,
+            "members": [
+                {
+                    "name": "Animation Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Asset Name",
+                    "type": "string",
+                    "value": "male-navi-exe6_teal"
+                },
+                {
+                    "name": "Collision Enabled",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "Collision Height",
+                    "type": "float",
+                    "value": 1.5
+                },
+                {
+                    "name": "Collision Width",
+                    "type": "float",
+                    "value": 1.5
+                },
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": "Down"
+                },
+                {
+                    "name": "Dont Face Player",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "First Dialogue",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Move Animation State",
+                    "type": "string",
+                    "value": "MOVE"
+                },
+                {
+                    "name": "Mug Animation Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Next Waypoint 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Player Exclusive",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Push Cooldown",
+                    "type": "float",
+                    "value": 0.75
+                },
+                {
+                    "name": "Push Distance",
+                    "type": "qlonglong",
+                    "value": 1
+                },
+                {
+                    "name": "Push Duration",
+                    "type": "float",
+                    "value": 0.28
+                },
+                {
+                    "name": "Quest Exclusive",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Quest NPC",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Quest State",
+                    "type": "string",
+                    "value": "active"
+                },
+                {
+                    "name": "Template Only",
+                    "type": "bool",
+                    "value": false
+                }
+            ],
+            "name": "Pushback NPC",
             "type": "class",
             "useAs": [
                 "object"
@@ -1896,6 +2079,17 @@
             ]
         },
         {
+            "id": 49,
+            "name": "SizeModeScope",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Player",
+                "Area Wide"
+            ],
+            "valuesAsFlags": false
+        },
+        {
             "id": 30,
             "name": "TriggerShape",
             "storageType": "string",
@@ -1962,6 +2156,27 @@
                     "value": ""
                 },
                 {
+                    "name": "Move Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Move Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Move Duration",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Move Loop",
+                    "type": "bool",
+                    "value": true
+                },
+                {
                     "name": "Next Waypoint 1",
                     "type": "object",
                     "value": 0
@@ -1985,6 +2200,16 @@
                     "name": "Next Waypoint 5",
                     "type": "object",
                     "value": 0
+                },
+                {
+                    "name": "Wait Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Wait Loop",
+                    "type": "bool",
+                    "value": true
                 },
                 {
                     "name": "Wait Time",
@@ -2018,47 +2243,69 @@
             "valuesAsFlags": false
         },
         {
-            "id": 48,
-            "name": "CompressionMode",
+            "id": 51,
+            "name": "CutsceneStepType",
             "storageType": "string",
             "type": "enum",
             "values": [
-                "Compress",
-                "Normalize",
-                "Enlarge"
+                "Wait",
+                "Move Actor",
+                "Set Pose",
+                "Show Message",
+                "Ask Quiz",
+                "Prompt Player",
+                "Play Sound",
+                "Fade Camera",
+                "Move Camera",
+                "Emit Event"
             ],
             "valuesAsFlags": false
         },
         {
-            "id": 49,
-            "name": "SizeModeScope",
+            "id": 52,
+            "name": "NPCSpawnMode",
             "storageType": "string",
             "type": "enum",
             "values": [
-                "Player",
-                "Area Wide"
+                "Once",
+                "Interval"
             ],
             "valuesAsFlags": false
         },
         {
-            "color": "#ffff6666",
+            "id": 53,
+            "name": "NaviElement",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "None",
+                "Fire",
+                "Aqua",
+                "Elec",
+                "Wood",
+                "Sword",
+                "Break",
+                "Cursor",
+                "Wind",
+                "Summon",
+                "Plus"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "color": "#ff88bbdd",
             "drawFill": true,
-            "id": 50,
+            "id": 54,
             "members": [
                 {
-                    "name": "Animation Name",
-                    "type": "string",
-                    "value": ""
+                    "name": "Attached NPC",
+                    "type": "object",
+                    "value": 0
                 },
                 {
-                    "name": "Asset Name",
+                    "name": "Behavior",
                     "type": "string",
-                    "value": "male-navi-exe6_teal"
-                },
-                {
-                    "name": "Collision Enabled",
-                    "type": "bool",
-                    "value": true
+                    "value": "Pushback"
                 },
                 {
                     "name": "Collision Height",
@@ -2071,91 +2318,14 @@
                     "value": 1.5
                 },
                 {
-                    "name": "Date",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Dialogue Type",
-                    "propertyType": "DialogueType",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Direction",
-                    "propertyType": "Direction",
-                    "type": "string",
-                    "value": "Down"
-                },
-                {
-                    "name": "Dont Face Player",
+                    "name": "Enabled",
                     "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Dont Notify",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Encounter Name",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Event Value",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Failure Message",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Item 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Item 2",
-                    "type": "object",
-                    "value": 0
+                    "value": true
                 },
                 {
                     "name": "Move Animation State",
                     "type": "string",
                     "value": "MOVE"
-                },
-                {
-                    "name": "Mug Animation Name",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Mugshot",
-                    "type": "string",
-                    "value": "male-navi-exe6_teal"
-                },
-                {
-                    "name": "Next 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Next 2",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Next Waypoint 1",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "Player Exclusive",
-                    "type": "bool",
-                    "value": false
                 },
                 {
                     "name": "Push Cooldown",
@@ -2171,49 +2341,368 @@
                     "name": "Push Duration",
                     "type": "float",
                     "value": 0.28
-                },
-                {
-                    "name": "Quest Exclusive",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Quest NPC",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Quest Name",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Quest State",
-                    "type": "string",
-                    "value": "active"
-                },
-                {
-                    "name": "Take Item",
-                    "type": "bool",
-                    "value": false
-                },
-                {
-                    "name": "Text 1",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Text 2",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Text 3",
-                    "type": "string",
-                    "value": ""
                 }
             ],
-            "name": "Pushback NPC",
+            "name": "NPC Behavior",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffffcc88",
+            "drawFill": true,
+            "id": 55,
+            "members": [
+                {
+                    "name": "Max Alive",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "NPC Template",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Once",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Spawn Interval",
+                    "type": "qlonglong",
+                    "value": 3
+                },
+                {
+                    "name": "Spawn Mode",
+                    "propertyType": "NPCSpawnMode",
+                    "type": "string",
+                    "value": "Once"
+                },
+                {
+                    "name": "Trigger Radius",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Warp Out Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Warp Out Animation Duration",
+                    "type": "float",
+                    "value": 0.5
+                },
+                {
+                    "name": "Warp Out At End",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Warp Out Delay",
+                    "type": "qlonglong",
+                    "value": 0
+                }
+            ],
+            "name": "NPC Spawner",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffffcc66",
+            "drawFill": true,
+            "id": 56,
+            "members": [
+                {
+                    "name": "Animation Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Asset Name",
+                    "type": "string",
+                    "value": "male-navi-exe6_teal"
+                },
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": "Down"
+                },
+                {
+                    "name": "Dont Face Player",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Instance Map",
+                    "type": "string",
+                    "value": "footbomb"
+                },
+                {
+                    "name": "Mug Animation Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Mugshot",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Points to Win",
+                    "type": "qlonglong",
+                    "value": 10
+                }
+            ],
+            "name": "FootBomb Controller",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffc678dd",
+            "drawFill": true,
+            "id": 57,
+            "members": [
+                {
+                    "name": "Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Once",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "Start Step",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Trigger Radius",
+                    "type": "qlonglong",
+                    "value": 0
+                }
+            ],
+            "name": "Cutscene",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffe5c07b",
+            "drawFill": true,
+            "id": 58,
+            "members": [
+                {
+                    "name": "Actor",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Color A",
+                    "type": "qlonglong",
+                    "value": 255
+                },
+                {
+                    "name": "Color B",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Color G",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Color R",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Duration",
+                    "type": "float",
+                    "value": 0.8
+                },
+                {
+                    "name": "End Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "End Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "End Hold Seconds",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "End Loop",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "Event Name",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Expected",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Fail Next",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Hold Seconds",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Loop",
+                    "type": "bool",
+                    "value": true
+                },
+                {
+                    "name": "Message",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Move Animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Move Direction",
+                    "propertyType": "Direction",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Move Speed",
+                    "type": "qlonglong",
+                    "value": 3
+                },
+                {
+                    "name": "Mugshot Override",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Next 1",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 2",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next 3",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Next Step",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Option 1",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Option 2",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Option 3",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Question",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Sound Path",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Speaker",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Target",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "Target X",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Target Y",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Target Z",
+                    "type": "qlonglong",
+                    "value": 0
+                },
+                {
+                    "name": "Text",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Type",
+                    "propertyType": "CutsceneStepType",
+                    "type": "string",
+                    "value": "Wait"
+                },
+                {
+                    "name": "Wait Seconds",
+                    "type": "qlonglong",
+                    "value": 1
+                }
+            ],
+            "name": "Cutscene Step",
             "type": "class",
             "useAs": [
                 "object"
