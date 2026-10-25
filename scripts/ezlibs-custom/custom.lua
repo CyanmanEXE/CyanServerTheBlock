@@ -5,7 +5,6 @@
 local plugins = {
     require("scripts/ezlibs-custom/nebulous-liberations/main"),
     require("scripts/ezlibs-custom/footbomb/main"),
-    require("scripts/ezlibs-custom/compression")
 }
 
 local custom = {}
