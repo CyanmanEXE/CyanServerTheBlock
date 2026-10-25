@@ -5,6 +5,15 @@ local fontSystem = require("scripts/displayer/font-system")
 
 local TextLayout = {}
 
+-- Font scale controls glyph size; the virtual-to-rendered coordinate ratio is
+-- still fixed at 2 in FontSystem. Keep scale values numeric and positive so
+-- measurement and drawing cannot silently diverge for 0/negative/string scales.
+local function normalize_scale(value, fallback)
+    local scale = tonumber(value)
+    if not scale or scale <= 0 then return fallback or 2.0 end
+    return scale
+end
+
 local function normalize_text(text)
     text = tostring(text or "")
     text = text:gsub("\r", "")
@@ -67,16 +76,13 @@ function TextLayout.parseMarkup(text)
 end
 
 local function glyph_advance(font, char, scale)
-    local w = fontSystem:getGlyphDimensions(font, char)
-    local spacing = fontSystem:isBattleFont(font) and 0 or 1
-    -- FontSystem doubles virtual positions before rendering. Convert rendered pixels back to virtual units.
-    return ((w + spacing) * scale) / 2
+    return fontSystem:getVirtualAdvance(font, char, scale)
 end
 
 function TextLayout.measureLine(text, options)
     options = options or {}
     local font = options.font or "THICK"
-    local scale = options.scale or 2.0
+    local scale = normalize_scale(options.scale, 2.0)
     local width = 0
     for i = 1, #tostring(text or "") do
         local ch = text:sub(i, i)
@@ -157,7 +163,7 @@ end
 function TextLayout.layout(text, options)
     options = options or {}
     local font = options.font or "THICK"
-    local scale = tonumber(options.scale) or 2.0
+    local scale = normalize_scale(options.scale, 2.0)
     local x = tonumber(options.x) or 0
     local y = tonumber(options.y) or 0
     local width = tonumber(options.width)
@@ -167,7 +173,8 @@ function TextLayout.layout(text, options)
 
     local plain, pauses = TextLayout.parseMarkup(text)
     local source_pages = split_preserve_empty(plain, "\f")
-    local line_height = (tonumber(options.line_height) or (12 * scale / 2))
+    local line_height = tonumber(options.line_height) or (12 * scale / 2)
+    if line_height <= 0 then line_height = 12 * scale / 2 end
     local max_lines = tonumber(options.max_lines)
     if not max_lines and height and line_height > 0 then
         max_lines = math.max(1, math.floor(height / line_height + 0.0001))

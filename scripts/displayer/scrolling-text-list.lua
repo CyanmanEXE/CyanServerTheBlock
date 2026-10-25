@@ -11,6 +11,12 @@ local AnimationEngine = require("scripts/animation-engine/animation-engine")
 
 local BACKDROP_TEXTURE = "/server/assets/net-games/displayer/empty_white.png"
 
+local function normalize_scale(value, fallback)
+    local scale = tonumber(value)
+    if not scale or scale <= 0 then return fallback or 1.0 end
+    return scale
+end
+
 local function getFontHeight(font_name, scale)
     local _, h = fontSystem:getGlyphDimensions(font_name, 'A')
     if h == 0 then h = 12 end
@@ -31,7 +37,7 @@ function TextEntry:new(list_obj, player_id, list_id, index, text, config)
     o.index = index
     o.text = text
     o.font = config.font or "THICK"
-    o.scale = config.scale or 1.0
+    o.scale = normalize_scale(config.scale, 1.0)
     o.z = config.z_order or 100
     o.props = { r = 255, g = 255, b = 255, a = 255, ro = 0, color_mode = 0 }
     o.glyph_data = nil
@@ -64,13 +70,15 @@ function TextEntry:_createGlyphs(y_offset)
     local total_width = 0
     for i = 1, #self.text do
         local ch = self.text:sub(i,i)
-        local w, _ = fontSystem:getGlyphDimensions(self.font, ch)
-        total_width = total_width + w * self.scale
-        if i < #self.text then
-            local spacing = fontSystem:isBattleFont(self.font) and 0 or 1
-            total_width = total_width + spacing * self.scale
-        end
+        total_width = total_width + fontSystem:getScreenAdvance(self.font, ch, self.scale)
     end
+    -- getScreenAdvance includes the trailing inter-glyph spacing; subtract it
+    -- so total_width matches the visible span of the text.
+    if #self.text > 0 then
+        local last_spacing = (fontSystem:isBattleFont(self.font) and 0 or 1) * self.scale
+        total_width = total_width - last_spacing
+    end
+
     local base_x = bounds_left + (bounds_width - total_width) / 2
     local base_y = self.grid_y + (y_offset or 0)
 
@@ -96,9 +104,7 @@ function TextEntry:_createGlyphs(y_offset)
                 table.insert(glyph_data, { id = inst_id, x = cx })
             end
         end
-        local w, _ = fontSystem:getGlyphDimensions(self.font, ch)
-        local spacing = fontSystem:isBattleFont(self.font) and 0 or 1
-        cx = cx + w * self.scale + spacing * self.scale
+        cx = cx + fontSystem:getScreenAdvance(self.font, ch, self.scale)
     end
     self.glyph_data = glyph_data
 end
@@ -138,7 +144,7 @@ function TextEntry:setColor(r, g, b, a)
 end
 
 function TextEntry:setScale(scale)
-    self.scale = scale
+    self.scale = normalize_scale(scale, self.scale)
     if self.state == "scrolling" then
         self:_createGlyphs(0)
     end
@@ -412,6 +418,12 @@ function ScrollingTextList:createScrollingList(player_id, list_id, x, y, width, 
 
     function list_object:setTexts(texts)
         self.config.texts = texts or {}
+        self:_recreateEntries()
+    end
+
+    function list_object:setScale(scale)
+        scale = normalize_scale(scale, self.config.scale)
+        self.config.scale = scale
         self:_recreateEntries()
     end
 

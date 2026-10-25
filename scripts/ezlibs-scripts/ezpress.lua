@@ -28,13 +28,13 @@
 -- re-checking the entity's current position, mirroring eztriggers/ezbottriggers.
 
 local logger = require('scripts/ezlibs-scripts/ezlogger').get('ezpress')
-local eztriggers = require('scripts/ezlibs-scripts/eztriggers')
+local eztriggers = require('scripts/ezlibs-scripts/eztriggers/eztriggers')
 local ezbus = require('scripts/ezlibs-scripts/ezbus')
 local EventEmitter = require('scripts/ezlibs-scripts/ezemitter')
 
 -- ezbottriggers is a hard requirement for the bot-side tile triggers. If it
 -- ever fails to load, keep player behavior working and disable bot tiles.
-local ok_bottriggers, ezbottriggers = pcall(require, 'scripts/ezlibs-scripts/ezbottriggers')
+local ok_bottriggers, ezbottriggers = pcall(require, 'scripts/ezlibs-scripts/eztriggers/ezbottriggers')
 if not ok_bottriggers then
     logger:warn("[ezpress] ezbottriggers could not be loaded; bot tile triggers disabled.", tostring(ezbottriggers))
     ezbottriggers = nil
@@ -322,6 +322,19 @@ local function get_matching_tile(area_id, pos)
         end
     end
     return nil
+end
+
+-- Public: read-only lookup for external modules that need to know what scale
+-- a player "should" be at for a given world position. Returns the tile's
+-- scale state ("normal" | "compressed" | "enlarged"), or nil when no tile
+-- overlaps the position. Does not mutate any internal state, does not write
+-- to the player, and does not fire events. ezpushback uses this to compute
+-- the correct restore scale after a pushback teleport, since the engine has
+-- no reader for the player's actual ScaleX/ScaleY.
+function ezpress.get_tile_state_at(area_id, pos)
+    if area_id == nil or type(pos) ~= "table" then return nil end
+    local tile = get_matching_tile(area_id, pos)
+    return tile and tile.type or nil
 end
 
 -- ---------------------------------------------------------------------------

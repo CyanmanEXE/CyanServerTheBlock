@@ -326,25 +326,24 @@ end
 -- explicit context transition (for example, entering a minigame) and not for
 -- competing systems to repeatedly steal control from each other.
 function InputController:claim_input(owner, force)
-    if self.destroyed or owner == nil then
-        print("[InputController] claim denied player=" .. tostring(self.player_id)
-            .. " instance=" .. tostring(self) .. " reason=destroyed_or_nil_owner")
+    if (self.destroyed or owner == nil) and InputController.DEBUG then
+        -- Ownership diagnostic silenced to keep server console usable.
+        -- print("[InputController] claim denied player=" .. tostring(self.player_id)
+        --     .. " instance=" .. tostring(self) .. " reason=destroyed_or_nil_owner")
         return false
     end
     if self.input_owner == owner then return true end
-    if self.input_owner ~= nil and force ~= true then
-        print("[InputController] claim denied player=" .. tostring(self.player_id)
-            .. " instance=" .. tostring(self) .. " current_owner=" .. tostring(self.input_owner)
-            .. " requested_owner=" .. tostring(owner))
+    if (self.input_owner ~= nil and force ~= true)  and InputController.DEBUG then
+        -- Ownership diagnostic silenced to keep server console usable.
+        -- print("[InputController] claim denied player=" .. tostring(self.player_id)
+        --     .. " instance=" .. tostring(self) .. " current_owner=" .. tostring(self.input_owner)
+        --     .. " requested_owner=" .. tostring(owner))
         return false
     end
 
     local previous_owner = self.input_owner
     self.input_owner = owner
-    print("[InputController] ownership changed player=" .. tostring(self.player_id)
-        .. " instance=" .. tostring(self) .. " previous_owner=" .. tostring(previous_owner)
-        .. " new_owner=" .. tostring(owner) .. " forced=" .. tostring(force == true))
-
+    -- Ownership-change logging silenced; the event remains available to listeners.
     -- Discard edge flags from the previous owner and require currently-held
     -- actions to be released before the new owner can act on them.
     for action, state in pairs(self.logical) do
@@ -364,16 +363,14 @@ end
 
 function InputController:release_input(owner)
     if owner == nil or self.input_owner ~= owner then
-        print("[InputController] release ignored player=" .. tostring(self.player_id)
-            .. " instance=" .. tostring(self) .. " current_owner=" .. tostring(self.input_owner)
-            .. " requested_owner=" .. tostring(owner))
+        -- Intentionally no log here: release_input may be polled by cleanup
+        -- code, and rejected releases are expected when another module owns input.
         return false
     end
 
     local previous_owner = self.input_owner
     self.input_owner = nil
-    print("[InputController] ownership released player=" .. tostring(self.player_id)
-        .. " instance=" .. tostring(self) .. " previous_owner=" .. tostring(previous_owner))
+    -- Ownership-release logging silenced; the event remains available to listeners.
     for action, state in pairs(self.logical) do
         if state and state.down then
             self.release_required[action] = true

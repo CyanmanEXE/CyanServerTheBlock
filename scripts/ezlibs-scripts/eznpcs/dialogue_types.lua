@@ -6,13 +6,107 @@ local ezemail = require('scripts/ezlibs-scripts/ezemail')
 local condition = require('scripts/ezlibs-scripts/condition')
 local ezbus = require('scripts/ezlibs-scripts/ezbus')
 local ezencounters = require('scripts/ezlibs-scripts/ezencounters/main')
+local ezexplosions = require('scripts/ezlibs-scripts/ezexplosions')
+local tu = require('scripts/ezlibs-scripts/utils/eztiledutils')
 
--- Helper for boolean properties (copied from eznpcs.lua to avoid circular dependency)
-local function is_property_true(val)
-    if val == true then return true end
-    if type(val) == "string" then return val:lower() == "true" end
-    if type(val) == "number" then return val ~= 0 end
-    return false
+-- Canonical boolean normalizer. Identical contract to the old local
+-- is_property_true; centralized in tiled_utils so eznpcs, eznpcs/dialogue_types,
+-- ezpushback, and FootBomb all agree on how Tiled properties are read.
+local is_property_true = tu.is_true
+
+-- ==========================================================================
+-- Server clock for diagnostic timing
+--
+-- os.clock() reports CPU time on Unix, which drifts whenever an async flow
+-- yields (Async.sleep, await, network round-trips) because no CPU is being
+-- consumed during the wait. That makes it useless for measuring wall-time
+-- gaps like "how long between last explosion blast and kick".
+--
+-- Accumulating event.delta_time from the engine tick gives wall time on a
+-- single, monotonic scale that matches what the player perceives. The
+-- accumulator starts at 0 on module load; all markers subtract from each
+-- other, so the absolute offset doesn't matter — only deltas do.
+-- ==========================================================================
+local server_time = 0
+
+Net:on("tick", function(event)
+    local dt = event and event.delta_time
+    if type(dt) == "number" and dt > 0 then
+        server_time = server_time + dt
+    end
+end)
+
+local function now()
+    return server_time
+end
+
+-- ==========================================================================
+-- Battle result classification
+--
+-- Mirrors net-game-tourney/tournament-flow.lua
+-- (stats_says_player_won_encounter). That module is the authoritative
+-- consumer of Net:on("battle_results") in this codebase, so its rules are
+-- reproduced here verbatim so battle_npc and tournaments agree on
+-- win/loss semantics.
+--
+-- Fields available on the battle_results payload:
+--
+--   reason      1  → player won (definitive; health is ignored)
+--               2  → player lost
+--               3  → player lost
+--               4  → player lost
+--               0 / nil → unknown; fall back to health + enemies
+--   ran         true → player fled; treated as loss
+--   fled        alias for ran in some code paths
+--   escape      alias for ran in some code paths
+--   health      Player's post-battle HP (aliased player_hp / hp)
+--   enemies     Array of { health = N, ... }; any > 0 means an enemy
+--               survived → loss
+--   time        Battle duration, informational only
+--   emotion     Battle end emotion, informational only
+--   turns       Turn count, informational only
+--   score       Battle score, informational only
+-- ==========================================================================
+local function player_won_from_stats(stats)
+    if not stats then return false end
+
+    if stats.ran or stats.fled or stats.escape then
+        return false
+    end
+
+    local reason = tonumber(stats.reason or 0) or 0
+    if reason == 1 then return true end
+    if reason == 2 or reason == 3 or reason == 4 then return false end
+
+    local hp = tonumber(stats.health or stats.player_hp or stats.hp or 0) or 0
+    if hp <= 0 then return false end
+
+    if type(stats.enemies) == "table" then
+        for _, enemy in ipairs(stats.enemies) do
+            if tonumber(enemy.health or 0) > 0 then
+                return false
+            end
+        end
+    end
+
+    return true
+end
+
+-- Merge result fields from exit_results into stats when present. Used so
+-- a partial battle_exit payload updates only what it carries, and never
+-- silently drops a ran/fled flag from the source that set it.
+local RESULT_FIELDS = {
+    "reason", "health", "player_hp", "hp",
+    "ran", "fled", "escape", "enemies",
+}
+
+local function merge_result_fields(stats, exit_results)
+    if not exit_results then return end
+    for _, key in ipairs(RESULT_FIELDS) do
+        if exit_results[key] ~= nil then
+            stats[key] = exit_results[key]
+        end
+    end
 end
 
 --Dialogue Types
@@ -77,7 +171,7 @@ local dialogue_types = {
                 local area_id = Net.get_player_area(player_id)
                 local required_items = helpers.extract_numbered_properties(dialogue,"Item ")
                 local next_dialogues = helpers.extract_numbered_properties(dialogue,"Next ")
-                local take_item = dialogue.custom_properties["Take Item"] == "true"
+                local take_item = tu.is_true(dialogue.custom_properties["Take Item"])
                 local next_dialogue_id = nil
 
                 local all_passed = true
@@ -113,7 +207,7 @@ local dialogue_types = {
                     value = dialogue.custom_properties["Flag Value"],
                     op = dialogue.custom_properties["Operator"] or dialogue.custom_properties["Op"],
                 }
-                local invert = dialogue.custom_properties["Invert"] == "true"
+                local invert = tu.is_true(dialogue.custom_properties["Invert"])
                 local passed = condition.evaluate(player_id, cond)
                 if invert then passed = not passed end
                 return passed and next_dialogues[1] or next_dialogues[2]
@@ -166,7 +260,6 @@ local dialogue_types = {
                 local mugshot = eznpcs.get_dialogue_mugshot(npc,player_id,dialogue)
                 local shop_items = {}
 
-                --create list of items for sale
                 for i, item_object_id in ipairs(shop_item_object_ids) do
                     local item_info = helpers.read_item_information(area_id,item_object_id)
                     if item_info then
@@ -204,8 +297,6 @@ local dialogue_types = {
         name = "quest_switch",
         action = function(npc, player_id, dialogue, relay_object)
             return async(function ()
-                --returns a different next dialogue based on current quest state
-                --specify a quest name as a property
                 local quest_name = dialogue.custom_properties["Quest Name"]
                 local quest_state = ezquests.get_player_quest_state(player_id,quest_name)
                 if dialogue.custom_properties[quest_state] then
@@ -239,7 +330,7 @@ local dialogue_types = {
             return async(function ()
                 local area_id = Net.get_player_area(player_id)
                 local gift_item_ids = helpers.extract_numbered_properties(dialogue,"Item ")
-                local notify_player = dialogue.custom_properties["Dont Notify"] ~= "true"
+                local notify_player = not tu.is_true(dialogue.custom_properties["Dont Notify"])
                 for index, item_id in ipairs(gift_item_ids) do
                     ezmemory.give_item_with_optional_notify(player_id,area_id,item_id,nil,notify_player)
                 end
@@ -267,18 +358,15 @@ local dialogue_types = {
 
                 local function ensure_ext(p, ext)
                     if not p or p == "" then return nil end
-                    -- if it already has an extension, leave it
                     if p:match("%.[%w]+$") then return p end
                     return p .. ext
                 end
 
                 local function resolve_texture(raw)
                     if not raw or raw == "" then return nil end
-                    -- full path provided
                     if raw:find("/") then
                         return ensure_ext(raw, ".png")
                     end
-                    -- shorthand name
                     local name = raw
                     if not name:match("%.png$") then name = name .. ".png" end
                     return MUG_DIR .. name
@@ -302,7 +390,7 @@ local dialogue_types = {
                     return next_id
                 end
 
-                local icon  = tonumber(dialogue.custom_properties["Email Icon"] or "1") or 1
+                local icon  = tu.get_number_from(dialogue.custom_properties, "Email Icon", 1)
                 local title = dialogue.custom_properties["Email Title"] or "Mail"
                 local from  = dialogue.custom_properties["Email From"] or "???"
 
@@ -314,12 +402,11 @@ local dialogue_types = {
                     body = dialogue.custom_properties["Email Body"] or ""
                 end
 
-                local notify = (dialogue.custom_properties["Dont Notify"] ~= "true")
-                local delay  = tonumber(dialogue.custom_properties["Notify Delay"])
-                local msg    = dialogue.custom_properties["Notify Message"] or "Looks like you got an e-mail."
-                local persist = (dialogue.custom_properties["Persist"] ~= "false")
+                local notify  = not tu.is_true(dialogue.custom_properties["Dont Notify"])
+                local delay   = tu.to_number(dialogue.custom_properties["Notify Delay"], nil)
+                local msg     = dialogue.custom_properties["Notify Message"] or "Looks like you got an e-mail."
+                local persist = tu.is_true(dialogue.custom_properties["Persist"], true)
 
-                -- Mug rules
                 local tex_raw  = dialogue.custom_properties["Mug Texture Path"]
                 local anim_raw = dialogue.custom_properties["Mug Animation Path"]
 
@@ -329,7 +416,6 @@ local dialogue_types = {
                 if tex_path then
                     anim_path = resolve_anim(anim_raw)
 
-                    -- If either is missing, send with no mug + warn
                     if not has_asset(tex_path) or not has_asset(anim_path) then
                         logger:warn("[eznpcs] email mug asset missing. tex=", tex_path, "anim=", anim_path, " -> sending without mug")
                         tex_path = nil
@@ -351,7 +437,6 @@ local dialogue_types = {
                 end
 
                 if persist then
-                    -- guarded by ezemail memory (won't create duplicates)
                     ezemail.send_once(player_id, mail, {
                         notify = notify,
                         notify_message = msg,
@@ -378,74 +463,172 @@ local dialogue_types = {
                 local question = dialogue.custom_properties["Text 2"] or "Ready to fight?"
                 local encounter_name = dialogue.custom_properties["Encounter Name"]
                 local fail_msg = dialogue.custom_properties["Failure Message"] or "You hesitated..."
+                -- Kick is optional; defaults to true so existing maps keep
+                -- their behavior. Set Kick On Loss = false on the Dialogue
+                -- node to leave the player in place (input still unlocked).
+                local kick_on_loss = tu.get_boolean_from(
+                    dialogue.custom_properties, "Kick On Loss", true)
 
                 if not encounter_name then
                     logger:warn("[eznpcs] battle_npc missing Encounter Name")
                     return
                 end
 
-                -- Show mugshot message if provided
                 if intro_message and intro_message ~= "" then
                     local mugshot = eznpcs.get_dialogue_mugshot(npc, player_id, dialogue)
                     await(Async.message_player(player_id, intro_message, mugshot.texture_path, mugshot.animation_path))
                 end
 
-                -- Ask Yes/No
                 local choice = await(Async.question_player(player_id, question))
                 if choice == 0 then
-                    -- Player declined
                     return
                 end
 
-                -- Start encounter
+                eznpcs.prepare_battle_exit_wait(player_id)
+
                 local stats = await(ezencounters.begin_encounter_by_name(player_id, encounter_name))
                 if not stats then
+                    eznpcs.cancel_battle_exit_wait(player_id)
                     await(Async.message_player(player_id, "The challenge could not be initiated."))
                     return
                 end
 
-                logger:for_player(player_id):info_data("[battle_npc] encounter completed", {stats = stats})
+                logger:for_player(player_id):info(string.format(
+                    "[battle_npc] encounter completed t=%.3f initial_reason=%s initial_health=%s initial_ran=%s",
+                    now(),
+                    tostring(stats.reason),
+                    tostring(stats.health or stats.player_hp or stats.hp),
+                    tostring(stats.ran or stats.fled or stats.escape)))
 
-                -- Determine win/loss based on reason field
-                -- reason 0 = normal victory, anything else = loss (2,3,4 as per request)
-                local won = (stats.reason == 1) and (stats.health and stats.health > 0)
+                -- Wait for the engine's battle_exit. Returns (nil, nil) when
+                -- the wait is cancelled — typically because the player
+                -- disconnected or "panicked out" mid-battle.
+                local exit_results, exit_event = await(eznpcs.wait_for_battle_exit(player_id))
 
-                logger:for_player(player_id):info_data("[battle_npc] result", {won = won, reason = stats.reason, health = stats.health, bot_id = npc.bot_id, placeholder_id = npc.first_dialogue.id})
-                await(eznpcs.handle_battle_exit)
-                -- Wait a moment for the player to return to the game world
-                await(Async.sleep(1.0))
-                -- local mugshot = eznpcs.get_dialogue_mugshot(npc, player_id, dialogue)
-                -- local after_battle_message = await(Async.message_player(player_id, "AHHHHHHHHHHHHHH!!!!!!", mugshot.texture_path, mugshot.animation_path))
-                -- if after_battle_message then
-                --     
-                -- end
-                if won then
-                    -- Explode the NPC (on its bot)
-                    ezbus:emit("explode", {
-                        actor_id = npc.bot_id,
-                        area_id = area_id,
-                        max_explosions = 3
-                    })
-                    -- Remove the exclusive NPC (if it's exclusive)
-                    if npc.first_dialogue.custom_properties and is_property_true(npc.first_dialogue.custom_properties["Player Exclusive"]) then
-                        eznpcs.remove_exclusive_npc(player_id, npc.first_dialogue.id)
+                logger:for_player(player_id):info(string.format(
+                    "[battle_npc] battle_exit received t=%.3f had_exit=%s",
+                    now(), tostring(exit_results ~= nil)))
+
+                -- Merge (rather than replace) the exit payload into stats.
+                -- A partial battle_exit event should only update the fields
+                -- it actually carries; wholesale replacement could drop a
+                -- ran flag from the initial stats or vice versa.
+                merge_result_fields(stats, exit_results)
+
+                -- If the wait was cancelled (no clean exit) and we don't
+                -- have a definitive win signal, treat this as an
+                -- interrupted battle rather than awarding a win from
+                -- partial data. This is the panic-out path: engine may
+                -- still report full HP for a player who left mid-battle.
+                --
+                -- Exception: reason == 1 is definitive. A player who
+                -- genuinely won then disconnected before battle_exit still
+                -- gets the win.
+                if not exit_results then
+                    local reason_num = tonumber(stats.reason or 0) or 0
+                    local ran_flag = stats.ran or stats.fled or stats.escape
+                    if not ran_flag and reason_num ~= 1 then
+                        logger:for_player(player_id):info(string.format(
+                            "[battle_npc] battle interrupted (no battle_exit); " ..
+                            "reason=%s ran=%s → treating as loss",
+                            tostring(reason_num), tostring(ran_flag)))
+                        return
                     end
-                    -- Permanently hide the placeholder for this player
-                    ezmemory.hide_object_from_player(player_id, area_id, npc.first_dialogue.id)
+                end
 
-                    -- Wait for explosion to complete before continuing (explosion lasts ~2 seconds)
-                    await(Async.sleep(2.5))
+                local won = player_won_from_stats(stats)
+
+                logger:for_player(player_id):info(string.format(
+                    "[battle_npc] result won=%s reason=%s ran=%s fled=%s escape=%s " ..
+                    "health=%s enemies=%s had_exit=%s kick_on_loss=%s bot_id=%s placeholder_id=%s",
+                    tostring(won),
+                    tostring(stats.reason),
+                    tostring(stats.ran),
+                    tostring(stats.fled),
+                    tostring(stats.escape),
+                    tostring(stats.health or stats.player_hp or stats.hp),
+                    tostring(stats.enemies and #stats.enemies or 0),
+                    tostring(exit_results ~= nil),
+                    tostring(kick_on_loss),
+                    tostring(npc.bot_id),
+                    tostring(npc.placeholder_id)))
+
+                if won then
+                    -- Win path. Always hide the NPC placeholder even if the
+                    -- player disconnected mid-effect, so their progression
+                    -- persists across reconnects. Visible effects only play
+                    -- when the player is still around.
+                    if Net.is_player(player_id) then
+                        local t_start = now()
+                        logger:for_player(player_id):info(string.format(
+                            "[battle_npc] win explosion starting t=%.3f", t_start))
+                        await(ezexplosions.explode_and_wait(npc.bot_id, area_id, 3))
+                        logger:for_player(player_id):info(string.format(
+                            "[battle_npc] win explosion done t=%.3f duration=%.3f",
+                            now(), now() - t_start))
+                    end
+
+                    local npc_properties = npc.placeholder_custom_properties or {}
+                    if is_property_true(npc_properties["Player Exclusive"]) then
+                        pcall(eznpcs.remove_exclusive_npc, player_id, npc.placeholder_id)
+                    end
+                    pcall(ezmemory.hide_object_from_player, player_id, area_id, npc.placeholder_id)
                 else
-                    -- Explode player
-                    ezbus:emit("explode", {
-                        actor_id = player_id,
-                        area_id = area_id,
-                        max_explosions = 3
-                    })
-                    -- Wait for explosion to complete before kicking
-                    await(Async.sleep(2.5))
-                    -- Kick player
-                    Net.kick_player(player_id, "You were defeated!", true)
+                    -- Loss path. If the player is already gone, skip the
+                    -- effect and any post-effects entirely.
+                    if not Net.is_player(player_id) then
+                        logger:for_player(player_id):info(
+                            "[battle_npc] player disconnected after loss; skipping effects")
+                        return
+                    end
+
+                    local t_explode_start = now()
+                    logger:for_player(player_id):info(string.format(
+                        "[battle_npc] loss explosion starting t=%.3f", t_explode_start))
+                    await(ezexplosions.explode_and_wait(player_id, area_id, 3))
+                    logger:for_player(player_id):info(string.format(
+                        "[battle_npc] loss explosion done t=%.3f duration=%.3f",
+                        now(), now() - t_explode_start))
+
+                    if kick_on_loss then
+                        -- Kick path: try to kick, tracking whether it
+                        -- actually succeeded so we can fall back to an
+                        -- explicit unlock if the kick silently failed.
+                        local t_kick_start = now()
+                        logger:for_player(player_id):info(string.format(
+                            "[battle_npc] kicking t=%.3f", t_kick_start))
+                        local kicked = false
+                        if Net.is_player(player_id) then
+                            local ok_pcall, result = pcall(
+                                Net.kick_player, player_id, "You were defeated!", true)
+                            kicked = ok_pcall and (result ~= false)
+                        end
+                        logger:for_player(player_id):info(string.format(
+                            "[battle_npc] kick done t=%.3f duration=%.3f kicked=%s",
+                            now(), now() - t_kick_start, tostring(kicked)))
+
+                        if not kicked then
+                            if Net.is_player(player_id) then
+                                logger:for_player(player_id):warn(
+                                    "[battle_npc] kick did not run or failed; " ..
+                                    "unlocking input as fallback")
+                                pcall(Net.unlock_player_input, player_id)
+                            else
+                                logger:for_player(player_id):info(
+                                    "[battle_npc] player disconnected during loss explosion; " ..
+                                    "no live player to unlock")
+                            end
+                        end
+                    else
+                        -- Kick On Loss disabled. Leave the player in place
+                        -- (e.g. for scripted losses where they stay in the
+                        -- map), but always unlock input so they aren't
+                        -- stuck at 0 HP with locked controls.
+                        logger:for_player(player_id):info(
+                            "[battle_npc] Kick On Loss disabled; leaving " ..
+                            "player in place with input unlocked")
+                        pcall(Net.unlock_player_input, player_id)
+                    end
                 end
             end)
         end
@@ -454,7 +637,15 @@ local dialogue_types = {
 
 Net:on("battle_results", function (event)
     Net.is_player_battling(event.player_id)
-    logger:for_player(event.player_id):debug("[battle_npc] battle_results received; is_player_battling =", Net.is_player_battling(event.player_id))
+    logger:for_player(event.player_id):info(string.format(
+        "[battle_npc] battle_results received t=%.3f reason=%s health=%s ran=%s fled=%s escape=%s is_battling=%s",
+        now(),
+        tostring(event.reason),
+        tostring(event.health),
+        tostring(event.ran),
+        tostring(event.fled),
+        tostring(event.escape),
+        tostring(Net.is_player_battling(event.player_id))))
 end)
 
 return dialogue_types
