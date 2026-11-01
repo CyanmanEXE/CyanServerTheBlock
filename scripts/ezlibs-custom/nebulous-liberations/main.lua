@@ -615,7 +615,7 @@ local function initialize_areas()
             if obj and obj.data and obj.data.gid and obj.type then
                 local panel_type = obj.type
                 if panel_type == Constants.PanelTypes.ItemPanel or
-                   Constants.is_dark_hole_type(panel_type) or
+                   panel_type == Constants.PanelTypes.DarkHole or
                    panel_type == Constants.PanelTypes.IndestructiblePanel or
                    panel_type == Constants.PanelTypes.BonusPanel or
                    panel_type == Constants.PanelTypes.TrapPanel or
@@ -721,20 +721,11 @@ local function initialize_areas()
     end
 end
 
--- Complete the filesystem/asset preparation first, then inspect loaded areas
--- and register panel GIDs and gates. Async.promisify is already used elsewhere
--- in this project to run coroutine-based asynchronous work.
-local startup_co = coroutine.create(function()
-    local embed_ok, embed_error = pcall(function()
-        Async.await(TilesetEmbedder.run())
-    end)
-    if not embed_ok then
-        log:error_data("Liberation tileset embedding failed during startup", {
-            error = tostring(embed_error),
-        })
-    end
+-- TilesetEmbedder.run() already returns the promise created by
+-- Async.promisify(). Chain initialization directly to that promise instead of
+-- wrapping it in another coroutine and awaiting it again.
+TilesetEmbedder.run().and_then(function()
     initialize_areas()
 end)
-Async.promisify(startup_co)
 
 return LibPlugin

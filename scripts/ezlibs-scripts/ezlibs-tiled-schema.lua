@@ -3131,32 +3131,32 @@ return {
     ["Dark Hole Buffed Virus"] = {
       color = "#8844aa",
       category    = "gameplay",
-      description = "Dark Hole variant with the same liberation and encounter behavior, but its spawned overworld virus bot is scaled by the numeric scale multiplier (1.0 is normal size).",
+      description = "Dark Hole variant that retains normal Dark Hole liberation behavior but scales its overworld bot using the scale multiplier.",
       members = {
         {
           ["category"] = "gameplay",
-          ["description"] = "First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement.",
+          ["description"] = "First boss-group identifier, matching the Dark Hole property.",
           ["name"] = "Boss ID 1",
           ["type"] = "string",
           ["value"] = ""
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement.",
+          ["description"] = "Optional second boss-group identifier, matching the Dark Hole property.",
           ["name"] = "Boss ID 2",
           ["type"] = "string",
           ["value"] = ""
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Optional starting battle HP for the enemy spawned by this Dark Hole. Zero or blank keeps the encounter-defined HP.",
+          ["description"] = "Optional starting battle HP for the enemy spawned by this Dark Hole.",
           ["name"] = "Minion Health Override",
           ["type"] = "number",
           ["value"] = 0
         },
         {
-          ["category"] = "appearance",
-          ["description"] = "Overworld bot sprite scale multiplier. 1.0 is normal size; values greater than 1 enlarge the bot and values between 0 and 1 shrink it.",
+          ["category"] = "gameplay",
+          ["description"] = "Overworld bot sprite scale multiplier. 1 is normal size; 2 is double size. Applied after the bot is created and again on respawn.",
           ["name"] = "scale",
           ["type"] = "number",
           ["value"] = 1

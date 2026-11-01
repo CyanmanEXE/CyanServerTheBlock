@@ -81,17 +81,9 @@ Constants.LiberatablePanelTypes = {
     Constants.PanelTypes.DarkPanel,
     Constants.PanelTypes.ItemPanel,
     Constants.PanelTypes.DarkHole,
-    Constants.PanelTypes.DarkHoleBuffedVirus,
     Constants.PanelTypes.BonusPanel,
     Constants.PanelTypes.TrapPanel,
 }
-
--- Both Dark Hole variants share the same liberation mechanics. The buffed
--- variant adds a configurable overworld bot scale at spawn time.
-function Constants.is_dark_hole_type(type_name)
-    return type_name == Constants.PanelTypes.DarkHole
-        or type_name == Constants.PanelTypes.DarkHoleBuffedVirus
-end
 
 -- Panel types that are walkable (for enemy movement)
 Constants.WalkablePanelTypes = {

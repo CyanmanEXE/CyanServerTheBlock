@@ -471,7 +471,7 @@ local function liberate_panel(self, player_session)
             selection:clear()
             Async.await(Loot.loot_bonus_panel(self, player_session, panel))
             Net.unlock_player_input(player.id)
-        elseif Constants.is_dark_hole_type(panel.type) then
+        elseif panel.type == Constants.PanelTypes.DarkHole then
             if panel.custom_properties[Constants.CustomProperties.Message] then
                 Async.await(player:message_with_mug(panel.custom_properties[Constants.CustomProperties.Message]))
             else
@@ -902,14 +902,10 @@ local function take_enemy_turn(self)
                         destination_x = destination.x,
                         destination_y = destination.y,
                     })
-                    local spawn_options = nil
-                    if dark_hole.type == Constants.PanelTypes.DarkHoleBuffedVirus then
-                        spawn_options = {
-                            scale = tonumber((dark_hole.custom_properties or {})[
-                                Constants.CustomProperties.Scale]) or 1.0,
-                        }
-                    end
-                    dark_hole.enemy = Enemy.from(self, dark_hole, direction, name, spawn_options)
+                    dark_hole.enemy = Enemy.from(self, dark_hole, direction, name, {
+                        scale = dark_hole.scale,
+                        source_panel_type = dark_hole.source_type or dark_hole.type,
+                    })
                     apply_dark_hole_minion_health_to_bot(dark_hole, dark_hole.enemy)
                     self.enemies[#self.enemies+1] = dark_hole.enemy
                     Async.await(Async.sleep(.5))
@@ -1156,9 +1152,19 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
             mission.points_of_interest[#mission.points_of_interest + 1] = object
             Net.remove_object(mission.area_id, object_id)
         elseif is_panel(mission, object) then
-            local panel_type = PanelRegistry.get_type_by_gid(object.data.gid)
+            local registered_panel_type = PanelRegistry.get_type_by_gid(object.data.gid)
+            local object_type = object.type
+            -- PanelRegistry maps visual GIDs, but multiple Tiled object classes
+            -- can intentionally share the same Dark Hole artwork. Preserve the
+            -- object class separately and normalize Buffed Virus to Dark Hole
+            -- gameplay so all existing liberation behavior remains intact.
+            local is_buffed_virus = object_type == Constants.PanelTypes.DarkHoleBuffedVirus
+            local panel_type = is_buffed_virus
+                and Constants.PanelTypes.DarkHole or registered_panel_type
             local new_panel = {
-                name = "", type = panel_type, visible = true,
+                name = "", type = panel_type, source_type = object_type,
+                scale = is_buffed_virus and (tonumber((object.custom_properties or {})[Constants.CustomProperties.Scale]) or 1) or nil,
+                visible = true,
                 x = object.x, y = object.y, z = object.z, width = object.width, height = object.height,
                 data = { type = "tile", gid = Net.get_tileset(base_area_id, "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx").first_gid },
                 custom_properties = object.custom_properties,
@@ -1182,7 +1188,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 else
                     new_panel.loot = Loot.DEFAULT_POOL[math.random(#Loot.DEFAULT_POOL)]
                 end
-            elseif Constants.is_dark_hole_type(panel_type) then
+            elseif panel_type == Constants.PanelTypes.DarkHole then
                 if not includes(mission.DARK_HOLE_GID_LIST, object.data.gid) then
                     table.insert(mission.DARK_HOLE_GID_LIST, object.data.gid)
                     TOTAL_PANEL_GIDS = TOTAL_PANEL_GIDS + 1
@@ -1273,14 +1279,10 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
         local position = EnemyHelpers.offset_position_with_direction(
             pending.position, pending.direction)
         if EnemyHelpers.can_spawn_on(mission, position.x, position.y, position.z) then
-            local spawn_options = nil
-            if pending.source_panel.type == Constants.PanelTypes.DarkHoleBuffedVirus then
-                spawn_options = {
-                    scale = tonumber((pending.source_panel.custom_properties or {})[
-                        Constants.CustomProperties.Scale]) or 1.0,
-                }
-            end
-            local enemy = Enemy.from(mission, position, pending.direction, pending.name, spawn_options)
+            local enemy = Enemy.from(mission, position, pending.direction, pending.name, {
+                scale = pending.source_panel.scale,
+                source_panel_type = pending.source_panel.source_type or pending.source_panel.type,
+            })
             if enemy then
                 -- The override belongs to this source Dark Hole, not to the
                 -- enemy template. Different Dark Holes can therefore spawn
@@ -1293,7 +1295,9 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                     base_area_id = mission.base_area_id,
                     instance_area_id = mission.area_id,
                     source_object_id = pending.source_object_id,
-                    source_panel_type = pending.source_panel.type,
+                    source_panel_type = pending.source_panel.source_type or pending.source_panel.type,
+                    panel_behavior_type = pending.source_panel.type,
+                    requested_bot_scale = pending.source_panel.scale,
                     enemy_name = pending.name,
                     direction = tostring(pending.direction),
                     x = position.x, y = position.y, z = position.z,
@@ -1314,7 +1318,9 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 enemy_name = pending.name,
                 x = position.x, y = position.y, z = position.z,
                 source_object_id = pending.source_object_id,
-                source_panel_type = pending.source_panel.type,
+                source_panel_type = pending.source_panel.source_type or pending.source_panel.type,
+                    panel_behavior_type = pending.source_panel.type,
+                    requested_bot_scale = pending.source_panel.scale,
             })
         end
     end
@@ -1942,7 +1948,7 @@ function Mission:remove_panel(panel)
     Net.remove_object(self.area_id, panel.visual_object_id)
     Net.remove_object(self.area_id, panel.id)
     row[x] = nil
-    if Constants.is_dark_hole_type(panel.type) then
+    if panel.type == Constants.PanelTypes.DarkHole then
         for i, dark_hole in ipairs(self.dark_holes) do
             if panel == dark_hole then
                 table.remove(self.dark_holes, i)

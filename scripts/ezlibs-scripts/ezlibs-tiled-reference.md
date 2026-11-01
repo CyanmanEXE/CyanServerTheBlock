@@ -1005,14 +1005,14 @@ Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole
 
 ### Dark Hole Buffed Virus
 **Category:** gameplay
-Dark Hole variant with the same liberation and encounter behavior, but its spawned overworld virus bot is scaled by the numeric scale multiplier (1.0 is normal size).
+Dark Hole variant that retains normal Dark Hole liberation behavior but scales its overworld bot using the scale multiplier.
 
 | Property | Type | Required | Default | Category | Description |
 |---|---|---|---|---|---|
-| `scale` | number |  | 1 | appearance | Overworld bot sprite scale multiplier. 1.0 is normal size; values greater than 1 enlarge the bot and values between 0 and 1 shrink it. |
-| `Boss ID 1` | string |  | `""` | gameplay | First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement. |
-| `Boss ID 2` | string |  | `""` | gameplay | Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement. |
-| `Minion Health Override` | number |  | 0 | gameplay | Optional starting battle HP for the enemy spawned by this Dark Hole. Zero or blank keeps the encounter-defined HP. |
+| `Boss ID 1` | string |  | `""` | gameplay | First boss-group identifier, matching the Dark Hole property. |
+| `Boss ID 2` | string |  | `""` | gameplay | Optional second boss-group identifier, matching the Dark Hole property. |
+| `Minion Health Override` | number |  | 0 | gameplay | Optional starting battle HP for the enemy spawned by this Dark Hole. |
+| `scale` | number |  | 1 | gameplay | Overworld bot sprite scale multiplier. 1 is normal size; 2 is double size. Applied after the bot is created and again on respawn. |
 
 ### Indestructible Panel
 **Category:** gameplay

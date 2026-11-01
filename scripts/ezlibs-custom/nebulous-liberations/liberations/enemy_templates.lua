@@ -11,6 +11,8 @@ local GuardInterception = require("scripts/ezlibs-custom/nebulous-liberations/li
 local Preloader = require("scripts/ezlibs-custom/nebulous-liberations/liberations/preloader")
 local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberations/constants")
 local Direction = require("scripts/libs/direction")
+local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
+local log = ezlogger.get("nebulous-liberations")
 
 local EnemyTemplates = {}
 
@@ -55,6 +57,8 @@ function EnemyTemplates.create(instance, position, direction, template_name, spa
         death_message = template.death_message,
         preload_assets = template.preload_assets,
         auto_face_player = spawn_options == nil or spawn_options.auto_face_player ~= false,
+        scale = spawn_options and tonumber(spawn_options.scale) or nil,
+        source_panel_type = spawn_options and spawn_options.source_panel_type or nil,
     }
     setmetatable(enemy, EnemyTemplates.metatable)
     EnemyTemplates.metatable.__index = EnemyTemplates.metatable
@@ -99,6 +103,49 @@ EnemyTemplates.metatable = {
             y = self.y + .5,
             z = self.z
         })
+
+        -- Apply custom Buffed Virus scale only after Net.create_bot has
+        -- returned the real bot ID. This mirrors ezpress.animate_bot_scale:
+        -- ScaleX/ScaleY keyframes, zero duration for an immediate change.
+        if self.id and self.scale and self.scale > 0
+            and self.scale == self.scale
+            and self.scale ~= math.huge and self.scale ~= -math.huge then
+            local scale_config = {
+                {
+                    properties = {
+                        { property = "ScaleX", value = self.scale, ease = "Linear" },
+                        { property = "ScaleY", value = self.scale, ease = "Linear" },
+                    },
+                    duration = 0,
+                },
+            }
+            local scale_ok, scale_error = pcall(Net.animate_bot_properties, self.id, scale_config)
+            if not scale_ok then
+                log:warn_data("Buffed Virus bot scale animation failed", {
+                    bot_id = tostring(self.id),
+                    scale = self.scale,
+                    source_panel_type = self.source_panel_type,
+                    error = tostring(scale_error),
+                })
+                -- Match ezpress.lua's existing fallback only if animation throws.
+                local fallback_ok, fallback_error = pcall(Net.set_bot_scale, self.id, self.scale, self.scale)
+                if not fallback_ok then
+                    log:warn_data("Buffed Virus bot scale fallback failed", {
+                        bot_id = tostring(self.id),
+                        scale = self.scale,
+                        error = tostring(fallback_error),
+                    })
+                end
+            else
+                log:info_data("Buffed Virus bot scale applied", {
+                    bot_id = tostring(self.id),
+                    scale = self.scale,
+                    source_panel_type = self.source_panel_type,
+                    area_id = self.instance.area_id,
+                })
+            end
+        end
+
         local color = self.is_boss and EnemyHelpers.boss_minimap_color or EnemyHelpers.guardian_minimap_marker
         Net.set_bot_minimap_color(self.id, color)
     end,

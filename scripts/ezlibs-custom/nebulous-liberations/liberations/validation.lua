@@ -21,7 +21,7 @@ local function validate_object(area_id, object)
     end
 
     -- Dark Hole validation
-    if Constants.is_dark_hole_type(type) then
+    if type == Constants.PanelTypes.DarkHole or type == Constants.PanelTypes.DarkHoleBuffedVirus then
         if not object.custom_properties[Constants.CustomProperties.Spawns] then
             log("ERROR", "Dark Hole at ("..object.x..","..object.y..") missing 'Spawns' property")
             return false
@@ -39,7 +39,7 @@ local function validate_object(area_id, object)
         if type == Constants.PanelTypes.DarkHoleBuffedVirus then
             local scale = tonumber(object.custom_properties[Constants.CustomProperties.Scale])
             if scale ~= nil and (scale <= 0 or scale ~= scale or scale == math.huge) then
-                log("ERROR", "Dark Hole Buffed Virus at ("..object.x..","..object.y..") has invalid 'scale'; expected a finite number greater than zero")
+                log("ERROR", "Dark Hole Buffed Virus at ("..object.x..","..object.y..") has an invalid 'scale' value")
                 return false
             end
         end
@@ -137,7 +137,7 @@ function Validation.validate_area(area_id)
 
         if obj.custom_properties then
             local properties = obj.custom_properties
-            local is_boss_association_object = Constants.is_dark_hole_type(obj.type)
+            local is_boss_association_object = obj.type == Constants.PanelTypes.DarkHole
                 or obj.type == Constants.PanelTypes.IndestructiblePanel
 
             if is_boss_association_object then

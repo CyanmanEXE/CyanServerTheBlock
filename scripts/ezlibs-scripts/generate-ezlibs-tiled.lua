@@ -785,7 +785,7 @@ local object_types = {
             prop("Boss ID 1", "string", ""),
             prop("Boss ID 2", "string", ""),
             prop("Minion Health Override", "number", 0),
-            prop("scale", "number", 1.0),
+            prop("scale", "number", 1),
         }
     },
     {
@@ -838,7 +838,7 @@ local META = {
         ["Dark Hole"] = { category = "gameplay",
             description = "Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole with one or two boss groups. Minion Health Override controls the starting battle HP of the enemy spawned by this Dark Hole, such as its BigBrute." },
         ["Dark Hole Buffed Virus"] = { category = "gameplay",
-            description = "Dark Hole variant with the same liberation and encounter behavior, but its spawned overworld virus bot is scaled by the numeric scale multiplier (1.0 is normal size)." },
+            description = "Dark Hole variant that retains normal Dark Hole liberation behavior but scales its overworld bot using the scale multiplier." },
         ["Indestructible Panel"] = { category = "gameplay",
             description = "Placed Liberation panel object. Boss ID 1/2 define boss-group unlock requirements; Type selects All or Any when both are set. Shared=true waits for all Dark Holes in the mission." },
         ["Waypoint"] = { category = "gameplay",
@@ -932,10 +932,10 @@ local META = {
             ["Minion Health Override"] = { category = "gameplay", description = "Optional starting battle HP for the enemy spawned by this Dark Hole (for example, its BigBrute). Applies only to the matching enemy entry in this Dark Hole's encounter; other encounter enemies keep their configured HP. Zero or blank keeps the encounter-defined HP." },
         },
         ["Dark Hole Buffed Virus"] = {
-            ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement." },
-            ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement." },
-            ["Minion Health Override"] = { category = "gameplay", description = "Optional starting battle HP for the enemy spawned by this Dark Hole. Zero or blank keeps the encounter-defined HP." },
-            ["scale"] = { category = "appearance", description = "Overworld bot sprite scale multiplier. 1.0 is normal size; values greater than 1 enlarge the bot and values between 0 and 1 shrink it." },
+            ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier, matching the Dark Hole property." },
+            ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier, matching the Dark Hole property." },
+            ["Minion Health Override"] = { category = "gameplay", description = "Optional starting battle HP for the enemy spawned by this Dark Hole." },
+            ["scale"] = { category = "gameplay", description = "Overworld bot sprite scale multiplier. 1 is normal size; 2 is double size. Applied after the bot is created and again on respawn." },
         },
         ["Indestructible Panel"] = {
             ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier required to unlock this panel." },

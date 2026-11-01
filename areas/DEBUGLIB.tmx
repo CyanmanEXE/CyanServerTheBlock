@@ -53,7 +53,7 @@
    <properties>
     <property name="Boss ID 1" value="ShadeMan_02"/>
     <property name="Direction" value="Down Right"/>
-    <property name="Minion Health Override" value="240"/>
+    <property name="Minion Health Override" value="120"/>
     <property name="Spawns" value="BigBrute"/>
    </properties>
   </object>
@@ -289,7 +289,7 @@
     <property name="Direction" value="Down Right"/>
     <property name="Minion Health Override" value="240"/>
     <property name="Spawns" value="BigBrute"/>
-    <property name="scale" value="2.0"/>
+    <property name="scale" value="1.5"/>
    </properties>
   </object>
  </objectgroup>
