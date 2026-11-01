@@ -615,7 +615,7 @@ local function initialize_areas()
             if obj and obj.data and obj.data.gid and obj.type then
                 local panel_type = obj.type
                 if panel_type == Constants.PanelTypes.ItemPanel or
-                   panel_type == Constants.PanelTypes.DarkHole or
+                   Constants.is_dark_hole_type(panel_type) or
                    panel_type == Constants.PanelTypes.IndestructiblePanel or
                    panel_type == Constants.PanelTypes.BonusPanel or
                    panel_type == Constants.PanelTypes.TrapPanel or

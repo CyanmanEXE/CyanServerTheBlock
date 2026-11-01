@@ -338,7 +338,7 @@ Some of these properties are read by other files only in specific mission flows.
 |---|---|
 | `Boss` | Enemy template key used by a Boss Dark Panel definition. |
 | `Boss ID` | Optional unique boss-group identifier on a Boss Dark Panel. Dark Holes and Indestructible Panels refer to it using `Boss ID 1` and `Boss ID 2`. |
-| `Boss ID 1` / `Boss ID 2` | Boss-group identifiers on Dark Holes and Indestructible Panels. A Dark Hole assigned to two IDs counts toward both boss groups' Dark Hole requirements. |
+| `Boss ID 1` / `Boss ID 2` | Boss-group identifiers on Dark Holes, Dark Hole Buffed Virus panels, and Indestructible Panels. A Dark Hole assigned to two IDs counts toward both boss groups' Dark Hole requirements. |
 | `Type` | Indestructible Panel requirement: `All` waits for every assigned boss group; `Any` waits for at least one. Only meaningful when both Boss IDs are set. |
 | `Spawn Mode` | Boss spawn timing: Immediate, On Dark Hole Cleared, Manual, or After Boss Defeated. |
 | `Trigger Boss` | Tiled Object reference to the boss that must be defeated before an After Boss Defeated boss spawns. |
@@ -348,8 +348,9 @@ Some of these properties are read by other files only in specific mission flows.
 | `Spawn Enabled` | Disables automatic spawning while leaving the definition available for a manual spawn call. |
 | `Boss Display Name` | Optional bot display name; does not replace the enemy template key used by battle encounter matching. |
 | `Shared` | Makes an Indestructible Panel wait for every Dark Hole in the mission. |
-| `Spawns` | Enemy template/name used by a Dark Hole. |
+| `Spawns` | Enemy template/name used by a Dark Hole or Dark Hole Buffed Virus. |
 | `Direction` | Enemy or boss facing direction. |
+| `scale` | Numeric overworld bot scale multiplier for Dark Hole Buffed Virus. `1.0` is normal size; values above `1.0` enlarge the bot and values between `0` and `1` shrink it. Must be greater than zero. |
 | `Gate Key` | Gate requirement metadata. |
 | `Gate ID` | Gate/cutscene linkage metadata. |
 | `isBoss` | Used by the mission's point-of-interest checks. |
@@ -388,6 +389,7 @@ Dark Hole and Indestructible Panel objects support `Boss ID 1` and `Boss ID 2`. 
 |---|---|
 | `Dark Panel` | Ordinary liberatable panel and a walkable panel for enemy movement. |
 | `Dark Hole` | Special panel that spawns/hosts an enemy and can generate another enemy after its current one is defeated. |
+| `Dark Hole Buffed Virus` | Same liberation, battle, boss association, health override, and respawn behavior as Dark Hole, with an additional `scale` property for its overworld bot sprite. |
 | `Indestructible Panel` | Panel that is converted after all Dark Holes are cleared in the relevant sequence. |
 | `Item Panel` | Liberatable panel with item/loot behavior. |
 | `Panel Gate` | Gate panel with a `Gate Key` property. |
@@ -688,7 +690,7 @@ The resolver inspects adjacent and diagonal panels around the player. It returns
 - `even` — no preceding condition matched, but a diagonal panel exists.
 - `advantage` — no relevant adjacent/diagonal panel was found.
 
-The module checks for Dark Panel, Dark Hole, Indestructible Panel, Item Panel, and Trap Panel when deciding whether a neighboring tile counts as a panel.
+The module checks for Dark Panel, Dark Hole, Dark Hole Buffed Virus, Indestructible Panel, Item Panel, and Trap Panel when deciding whether a neighboring tile counts as a panel.
 
 ### Initialization caveat
 
@@ -1134,3 +1136,7 @@ These are source-level corrections. They still require validation in the target 
 | Explosion/paralysis/recovery effects | `utils/*_effect.lua` |
 | Shared player memory and health | `scripts/ezlibs-scripts/ezmemory.lua` |
 | Shared helper functions | `scripts/ezlibs-scripts/helpers.lua` |
+
+### Dark Hole Buffed Virus
+
+`Dark Hole Buffed Virus` is a Dark Hole panel variant. It uses the same spawn, encounter, health-override, boss-association, and liberation flow as `Dark Hole`. Its additional numeric `scale` custom property controls only the spawned overworld bot sprite scale; `1.0` is normal size, values above `1.0` enlarge it, and values between `0` and `1` shrink it. The configured scale is reapplied when the Dark Hole respawns its bot.

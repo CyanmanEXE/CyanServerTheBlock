@@ -65,7 +65,7 @@ local corner_offsets = {
 local function has_dark_panel(instance, x, y, z)
   local panel = instance:get_panel_at(x, y, z)
   if not panel then return false end
-  local panel_type_table = {"Dark Panel", "Dark Hole", "Indestructible Panel", "Item Panel", "Trap Panel"}
+  local panel_type_table = {"Dark Panel", "Dark Hole", "Dark Hole Buffed Virus", "Indestructible Panel", "Item Panel", "Trap Panel"}
   local function includes(values, value)
     for _, candidate in ipairs(values) do
       if value == candidate then

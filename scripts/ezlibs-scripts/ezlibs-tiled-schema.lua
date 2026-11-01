@@ -3128,6 +3128,41 @@ return {
         },
       },
     },
+    ["Dark Hole Buffed Virus"] = {
+      color = "#8844aa",
+      category    = "gameplay",
+      description = "Dark Hole variant with the same liberation and encounter behavior, but its spawned overworld virus bot is scaled by the numeric scale multiplier (1.0 is normal size).",
+      members = {
+        {
+          ["category"] = "gameplay",
+          ["description"] = "First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement.",
+          ["name"] = "Boss ID 1",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement.",
+          ["name"] = "Boss ID 2",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Optional starting battle HP for the enemy spawned by this Dark Hole. Zero or blank keeps the encounter-defined HP.",
+          ["name"] = "Minion Health Override",
+          ["type"] = "number",
+          ["value"] = 0
+        },
+        {
+          ["category"] = "appearance",
+          ["description"] = "Overworld bot sprite scale multiplier. 1.0 is normal size; values greater than 1 enlarge the bot and values between 0 and 1 shrink it.",
+          ["name"] = "scale",
+          ["type"] = "number",
+          ["value"] = 1
+        },
+      },
+    },
     ["Indestructible Panel"] = {
       color = "#9966cc",
       category    = "gameplay",

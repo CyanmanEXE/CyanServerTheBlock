@@ -8,12 +8,103 @@ local HPIndicators = require("scripts/ezlibs-custom/nebulous-liberations/liberat
 
 local Enemy = {}
 
+local function apply_bot_scale_after_spawn(enemy, requested_scale)
+    if not enemy or enemy.id == nil then return end
+    if type(requested_scale) ~= "number" or requested_scale <= 0
+        or requested_scale ~= requested_scale or requested_scale == math.huge then
+        return
+    end
+
+    -- Match the exact keyframe format used by ezpress.lua and the existing
+    -- net-games bot scaling code. Do not call Net.set_bot_scale first: this
+    -- project applies bot ScaleX/ScaleY through Net.animate_bot_properties.
+    if type(Net.animate_bot_properties) ~= "function" then
+        log:warn_data("Cannot apply overworld enemy bot scale: Net.animate_bot_properties is unavailable", {
+            enemy_id = tostring(enemy.id),
+            scale = requested_scale,
+        })
+        return
+    end
+
+    -- Net.create_bot returns the ID before the newly-created bot is always
+    -- ready to receive property animation. Defer the animation until after
+    -- creation has completed, then verify the bot exists. Retry briefly in
+    -- case the engine has not registered it on the first check.
+    local co = coroutine.create(function()
+        for attempt = 1, 3 do
+            Async.await(Async.sleep(0.1))
+
+            local exists_ok, exists = pcall(Net.is_bot, enemy.id)
+            if exists_ok and exists then
+                local keyframes = {{
+                    properties = {
+                        { property = "ScaleX", value = requested_scale, ease = "Linear" },
+                        { property = "ScaleY", value = requested_scale, ease = "Linear" },
+                    },
+                    duration = 0,
+                }}
+
+                local ok, result = pcall(
+                    Net.animate_bot_properties,
+                    enemy.id,
+                    keyframes
+                )
+
+                if ok and result ~= false then
+                    log:info_data("Applied overworld enemy bot scale after creation", {
+                        enemy_id = tostring(enemy.id),
+                        enemy_name = tostring(enemy.battle_name or enemy.name or "Enemy"),
+                        scale = requested_scale,
+                        attempt = attempt,
+                    })
+                    return
+                end
+
+                log:warn_data("Bot scale animation failed after bot creation", {
+                    enemy_id = tostring(enemy.id),
+                    scale = requested_scale,
+                    attempt = attempt,
+                    error = tostring(result),
+                })
+            else
+                log:debug_data("Waiting for newly-created enemy bot before applying scale", {
+                    enemy_id = tostring(enemy.id),
+                    scale = requested_scale,
+                    attempt = attempt,
+                    exists_check_ok = exists_ok,
+                    exists = exists,
+                })
+            end
+        end
+
+        log:warn_data("Could not apply overworld enemy bot scale after creation", {
+            enemy_id = tostring(enemy.id),
+            scale = requested_scale,
+        })
+    end)
+
+    local promise = Async.promisify(co)
+    promise:and_then(nil, function(err)
+        log:error_data("Enemy bot scale task failed", {
+            enemy_id = tostring(enemy.id),
+            scale = requested_scale,
+            error = tostring(err),
+        })
+    end)
+end
+
 function Enemy.from(instance, position, direction, name, spawn_options)
     -- `name` is the registered enemy-template key. The template stores its
     -- display name in `battle_name`; it does not necessarily define `enemy.name`.
     local enemy = EnemyTemplates.create(instance, position, direction, name, spawn_options)
     local display_name = enemy.battle_name or enemy.name or name or "Enemy"
     Net.set_bot_name(enemy.id, tostring(display_name) .. ": " .. tostring(enemy.health or 0))
+
+    local requested_scale = spawn_options and tonumber(spawn_options.scale)
+    if requested_scale then
+        apply_bot_scale_after_spawn(enemy, requested_scale)
+    end
+
     HPIndicators.add_enemy(instance, enemy)
     return enemy
 end

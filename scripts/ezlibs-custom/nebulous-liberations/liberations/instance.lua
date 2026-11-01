@@ -471,7 +471,7 @@ local function liberate_panel(self, player_session)
             selection:clear()
             Async.await(Loot.loot_bonus_panel(self, player_session, panel))
             Net.unlock_player_input(player.id)
-        elseif panel.type == Constants.PanelTypes.DarkHole then
+        elseif Constants.is_dark_hole_type(panel.type) then
             if panel.custom_properties[Constants.CustomProperties.Message] then
                 Async.await(player:message_with_mug(panel.custom_properties[Constants.CustomProperties.Message]))
             else
@@ -902,7 +902,14 @@ local function take_enemy_turn(self)
                         destination_x = destination.x,
                         destination_y = destination.y,
                     })
-                    dark_hole.enemy = Enemy.from(self, dark_hole, direction, name)
+                    local spawn_options = nil
+                    if dark_hole.type == Constants.PanelTypes.DarkHoleBuffedVirus then
+                        spawn_options = {
+                            scale = tonumber((dark_hole.custom_properties or {})[
+                                Constants.CustomProperties.Scale]) or 1.0,
+                        }
+                    end
+                    dark_hole.enemy = Enemy.from(self, dark_hole, direction, name, spawn_options)
                     apply_dark_hole_minion_health_to_bot(dark_hole, dark_hole.enemy)
                     self.enemies[#self.enemies+1] = dark_hole.enemy
                     Async.await(Async.sleep(.5))
@@ -1175,7 +1182,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 else
                     new_panel.loot = Loot.DEFAULT_POOL[math.random(#Loot.DEFAULT_POOL)]
                 end
-            elseif panel_type == Constants.PanelTypes.DarkHole then
+            elseif Constants.is_dark_hole_type(panel_type) then
                 if not includes(mission.DARK_HOLE_GID_LIST, object.data.gid) then
                     table.insert(mission.DARK_HOLE_GID_LIST, object.data.gid)
                     TOTAL_PANEL_GIDS = TOTAL_PANEL_GIDS + 1
@@ -1266,7 +1273,14 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
         local position = EnemyHelpers.offset_position_with_direction(
             pending.position, pending.direction)
         if EnemyHelpers.can_spawn_on(mission, position.x, position.y, position.z) then
-            local enemy = Enemy.from(mission, position, pending.direction, pending.name)
+            local spawn_options = nil
+            if pending.source_panel.type == Constants.PanelTypes.DarkHoleBuffedVirus then
+                spawn_options = {
+                    scale = tonumber((pending.source_panel.custom_properties or {})[
+                        Constants.CustomProperties.Scale]) or 1.0,
+                }
+            end
+            local enemy = Enemy.from(mission, position, pending.direction, pending.name, spawn_options)
             if enemy then
                 -- The override belongs to this source Dark Hole, not to the
                 -- enemy template. Different Dark Holes can therefore spawn
@@ -1928,7 +1942,7 @@ function Mission:remove_panel(panel)
     Net.remove_object(self.area_id, panel.visual_object_id)
     Net.remove_object(self.area_id, panel.id)
     row[x] = nil
-    if panel.type == Constants.PanelTypes.DarkHole then
+    if Constants.is_dark_hole_type(panel.type) then
         for i, dark_hole in ipairs(self.dark_holes) do
             if panel == dark_hole then
                 table.remove(self.dark_holes, i)

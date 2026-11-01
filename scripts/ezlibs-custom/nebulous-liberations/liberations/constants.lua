@@ -41,6 +41,7 @@ Constants.CustomProperties = {
     AutoFacePlayer = "Auto Face Player",
     BossHealthOverride = "Boss Health Override",
     MinionHealthOverride = "Minion Health Override",
+    Scale = "scale",
     SpawnEnabled = "Spawn Enabled",
     BossDisplayName = "Boss Display Name",
     Shared = "Shared",
@@ -67,6 +68,7 @@ Constants.CustomProperties = {
 Constants.PanelTypes = {
     DarkPanel = "Dark Panel",
     DarkHole = "Dark Hole",
+    DarkHoleBuffedVirus = "Dark Hole Buffed Virus",
     IndestructiblePanel = "Indestructible Panel",
     ItemPanel = "Item Panel",
     PanelGate = "Panel Gate",
@@ -79,9 +81,17 @@ Constants.LiberatablePanelTypes = {
     Constants.PanelTypes.DarkPanel,
     Constants.PanelTypes.ItemPanel,
     Constants.PanelTypes.DarkHole,
+    Constants.PanelTypes.DarkHoleBuffedVirus,
     Constants.PanelTypes.BonusPanel,
     Constants.PanelTypes.TrapPanel,
 }
+
+-- Both Dark Hole variants share the same liberation mechanics. The buffed
+-- variant adds a configurable overworld bot scale at spawn time.
+function Constants.is_dark_hole_type(type_name)
+    return type_name == Constants.PanelTypes.DarkHole
+        or type_name == Constants.PanelTypes.DarkHoleBuffedVirus
+end
 
 -- Panel types that are walkable (for enemy movement)
 Constants.WalkablePanelTypes = {
