@@ -887,7 +887,7 @@ local META = {
             ["Spawn Offset Y"] = { category = "gameplay", description = "Vertical tile offset from this object's position." },
             ["Spawn Offset Z"] = { category = "gameplay", description = "Layer offset from this object's position." },
             ["Auto Face Player"] = { category = "gameplay", description = "When true, the boss faces the nearest player on spawn. When false, Direction is respected." },
-            ["Boss Health Override"] = { category = "gameplay", description = "Optional positive health value. Zero keeps the enemy template's configured health." },
+            ["Boss Health Override"] = { category = "gameplay", description = "Optional positive maximum HP for this boss. Does not change the template's starting/current HP used in battle. Zero keeps the enemy template's configured maximum HP." },
             ["Spawn Enabled"] = { category = "gameplay", description = "When false, this boss definition is registered but will not spawn automatically. It can still be spawned manually." },
             ["Boss Display Name"] = { category = "gameplay", description = "Optional name shown above the spawned bot. Empty uses the enemy template's display name." },
         },

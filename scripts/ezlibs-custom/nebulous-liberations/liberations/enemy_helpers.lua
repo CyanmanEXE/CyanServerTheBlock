@@ -1,5 +1,6 @@
 local RecoverEffect = require("scripts/ezlibs-custom/nebulous-liberations/utils/recover_effect")
 local Direction = require("scripts/libs/direction")
+local HPIndicators = require("scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators")
 
 local EnemyHelpers = {
   guardian_minimap_marker = { r = 230, g = 50, b = 40 },
@@ -26,6 +27,7 @@ function EnemyHelpers.update_name(enemy)
   if not enemy or enemy.id == nil then return end
   local display_name = enemy.display_name or enemy.battle_name or enemy.name or "Enemy"
   Net.set_bot_name(enemy.id, tostring(display_name) .. ": " .. tostring(enemy.health or 0))
+  HPIndicators.update_enemy_hp_for_enemy(enemy)
 end
 
 function EnemyHelpers.heal(enemy, amount)
@@ -111,6 +113,7 @@ function EnemyHelpers.move(instance, enemy, x, y, z, direction)
 
   local co = coroutine.create(function()
     Async.await(Async.sleep(hold_time))
+    HPIndicators.hide_enemy(instance, enemy)
 
     for _, player in ipairs(instance.players) do
       Net.slide_player_camera(player.id, x + .5, y + .5, z, slide_time)
@@ -160,14 +163,17 @@ function EnemyHelpers.move(instance, enemy, x, y, z, direction)
     -- move the enemy
     Net.transfer_bot(enemy.id, area_id, false, x + .5, y + .5, z)
 
+    -- The enemy has entered its destination tile. Restore its HP digits
+    -- there before the post-move hold.
+    enemy.x = x
+    enemy.y = y
+    enemy.z = z
+    HPIndicators.show_enemy(instance, enemy)
+
     -- delete the blur bot
     Net.remove_bot(blur_bot_id)
 
     Async.await(Async.sleep(hold_time))
-
-    enemy.x = x
-    enemy.y = y
-    enemy.z = z
   end)
 
   return Async.promisify(co)

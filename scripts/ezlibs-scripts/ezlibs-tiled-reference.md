@@ -974,7 +974,7 @@ A Liberation boss spawn point. Select an enemy template, spawn mode, optional bo
 | `Auto Face Player` | bool |  | false | gameplay | When true, the boss faces the nearest player on spawn. When false, Direction is respected. |
 | `Boss` | string |  | `""` | gameplay | Required enemy template key registered in Liberation enemy_templates.lua. |
 | `Boss Display Name` | string |  | `""` | gameplay | Optional name shown above the spawned bot. Empty uses the enemy template's display name. |
-| `Boss Health Override` | number |  | 0 | gameplay | Optional positive health value. Zero keeps the enemy template's configured health. |
+| `Boss Health Override` | number |  | 0 | gameplay | Optional positive maximum HP for this boss. Does not change the template's starting/current HP used in battle. Zero keeps the enemy template's configured maximum HP. |
 | `Boss ID` | string |  | `""` | gameplay | Unique group identifier. Dark Holes and Indestructible Panels use the same value to associate with this boss. If empty, the Tiled object ID is used internally. |
 | `Direction` | string (Direction) |  | `Down` | gameplay | Initial facing direction. Auto Face Player overrides this when enabled. |
 | `Spawn Enabled` | bool |  | true | gameplay | When false, this boss definition is registered but will not spawn automatically. It can still be spawned manually. |

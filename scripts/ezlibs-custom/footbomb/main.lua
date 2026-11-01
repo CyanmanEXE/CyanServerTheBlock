@@ -9,6 +9,7 @@ local UISafe = require("scripts/net-games/ui-safe")
 local EzExplosions = require("scripts/ezlibs-scripts/ezexplosions")
 local TextLayout = require("scripts/displayer/text-layout")
 local InputAPI = require("scripts/input-controller/main")
+local UISuppression = require("scripts/net-games/ui-suppression")
 local Boom = require("scripts/boom/main")
 local EzBus = require("scripts/ezlibs-scripts/ezbus")
 local EventEmitter = require("scripts/ezlibs-scripts/ezemitter")
@@ -744,7 +745,7 @@ local function transfer_match_players(instance, player_ids, spawn_points)
         local spawn = spawn_points[slot]
         local ok, result = pcall(
             EzMapInstance.transfer_player,
-            instance.id, player_id, spawn.x, spawn.y, spawn.z, false
+            instance.id, player_id, spawn.x, spawn.y, spawn.z, true
         )
         if ok and result ~= false then
             transferred[#transferred + 1] = player_id
@@ -1336,9 +1337,18 @@ local function remove_representation(player_id)
     if rep.score_player_two_text_id then pcall(games.remove_text, rep.score_player_two_text_id, player_id) end
     if rep.role_text_id then pcall(games.remove_text, rep.role_text_id, player_id) end
     if rep.role_panel_id then pcall(Displayer.SlicedPanel.remove, player_id, rep.role_panel_id) end
-    if rep.hud_hidden and type(Net.toggle_player_hud) == "function" then
-        pcall(Net.toggle_player_hud, player_id)
+    if rep.hud_handle then
+        pcall(UISuppression.release, rep.hud_handle)
+        rep.hud_handle = nil
         rep.hud_hidden = false
+    end
+    if rep.input_locked and type(Net.unlock_player_input) == "function" then
+        local ok, err = pcall(Net.unlock_player_input, player_id)
+        if not ok then
+            log("Could not unlock player input during FootBomb cleanup: "
+                .. tostring(err))
+        end
+        rep.input_locked = false
     end
     local input = rep.input or InputAPI.get_controller(player_id)
     if input and rep.input_owner then
@@ -1349,13 +1359,6 @@ local function remove_representation(player_id)
     end
     if type(Net.track_with_player_camera) == "function" then
         pcall(Net.track_with_player_camera, player_id)
-    end
-    if type(Net.unlock_player_input) == "function" then
-        local ok, err = pcall(Net.unlock_player_input, player_id)
-        if not ok then
-            log("Could not unlock player input during FootBomb cleanup: "
-                .. tostring(err))
-        end
     end
     State.player_representations[player_id] = nil
 end
@@ -1449,25 +1452,33 @@ local function setup_player_representation(player_id, instance, bot_record)
     }
     State.player_representations[player_id] = rep
     fade_player_to_black(player_id)
-    if type(Net.toggle_player_hud) == "function" then
-        local ok, err = pcall(Net.toggle_player_hud, player_id)
-        if ok then rep.hud_hidden = true
-        else
-            log("Could not hide player HUD for "
-                .. tostring(player_id) .. ": " .. tostring(err))
-        end
+    local hud_handle, hud_err = UISuppression.acquire_engine_hud(
+        player_id, rep.input_owner .. ":hud"
+    )
+    if hud_handle then
+        rep.hud_handle = hud_handle
+        rep.hud_hidden = true
+    else
+        log("Could not hide player HUD for " .. tostring(player_id)
+            .. ": " .. tostring(hud_err))
     end
+
     if type(Net.lock_player_input) == "function" then
         local ok, err = pcall(Net.lock_player_input, player_id)
         if ok then
+            rep.input_locked = true
             log("selector locked player input for virtual_input player="
                 .. tostring(player_id))
         else
             log("Could not lock player input for selector player="
                 .. tostring(player_id) .. ": " .. tostring(err))
         end
+    else
+        log("Could not lock player input: Net.lock_player_input unavailable")
     end
+
     if rep.input then
+        rep.input:activate()
         local claimed = rep.input:claim_input(rep.input_owner, true)
         if claimed then
             rep.input:consume(rep.input_owner)
@@ -4600,6 +4611,19 @@ Net:on("tick", function(event)
         if Net.get_player_area(player_id) == rep.area_id then
             update_direction_selector_bob(player_id, rep)
             local input = rep.input or InputAPI.get_controller(player_id)
+            if input and rep.input_owner
+                and not input:has_input_control(rep.input_owner)
+                and input:get_input_owner() == nil then
+                if input:claim_input(rep.input_owner) then
+                    input:consume(rep.input_owner)
+                    input:require_release(
+                        { "Up", "Down", "Left", "Right", "Confirm", "Cancel" },
+                        rep.input_owner
+                    )
+                    log("INPUT_FLOW: reclaimed FootBomb input ownership player="
+                        .. tostring(player_id))
+                end
+            end
             if input and rep.input_owner
                 and input:has_input_control(rep.input_owner)
                 and rep.direction_selection_active

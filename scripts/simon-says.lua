@@ -6,6 +6,7 @@
 ]]--
 
 local games = require("scripts/net-games/main")
+local InputAPI = require("scripts/input-controller/main")
 
 local simon_cache = {}
 local simon_players = {}
@@ -339,6 +340,8 @@ end)
 Net:on("virtual_input", function(event)
   return async(function()
     local pid = event.player_id
+    local controller = InputAPI.get_controller(pid)
+    if controller and controller:get_input_owner() ~= nil then return end
     local p = simon_players[pid]
     if not p or p.active ~= true then return end
 

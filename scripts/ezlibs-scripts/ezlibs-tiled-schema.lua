@@ -3057,7 +3057,7 @@ return {
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Optional positive health value. Zero keeps the enemy template's configured health.",
+          ["description"] = "Optional positive maximum HP for this boss. Does not change the template's starting/current HP used in battle. Zero keeps the enemy template's configured maximum HP.",
           ["name"] = "Boss Health Override",
           ["type"] = "number",
           ["value"] = 0

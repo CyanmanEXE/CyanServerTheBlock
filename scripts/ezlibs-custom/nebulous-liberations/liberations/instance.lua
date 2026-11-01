@@ -13,6 +13,7 @@ local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberation
 local PanelRegistry = require("scripts/ezlibs-custom/nebulous-liberations/liberations/panel_registry")
 local CameraSequence = require("scripts/ezlibs-custom/nebulous-liberations/liberations/camera_sequence")
 local PointsGauge = require("scripts/ezlibs-custom/nebulous-liberations/liberations/points_gauge")
+local HPIndicators = require("scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators")
 local Emotes = require("scripts/libs/emotes")
 local ezmemory = require("scripts/ezlibs-scripts/ezmemory")
 local helpers = require('scripts/ezlibs-scripts/helpers')
@@ -117,6 +118,7 @@ local function boot_player(player, isVictory, mapName)
 end
 
 local function liberate(self)
+    HPIndicators.destroy(self)
     for _, layer in pairs(self.panels) do
         for _, row in pairs(layer) do
             for _, panel in pairs(row) do
@@ -1044,7 +1046,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                     offset_z = tonumber(properties[Constants.CustomProperties.SpawnOffsetZ]) or 0,
                     auto_face_player = properties[Constants.CustomProperties.AutoFacePlayer] == true
                         or properties[Constants.CustomProperties.AutoFacePlayer] == "true",
-                    health_override = tonumber(properties[Constants.CustomProperties.BossHealthOverride]) or 0,
+                    max_health_override = tonumber(properties[Constants.CustomProperties.BossHealthOverride]) or 0,
                     spawn_enabled = not (properties[Constants.CustomProperties.SpawnEnabled] == false
                         or properties[Constants.CustomProperties.SpawnEnabled] == "false"),
                     display_name = tostring(properties[Constants.CustomProperties.BossDisplayName] or ""),
@@ -1177,9 +1179,10 @@ function Mission:spawn_boss(boss_id, force, triggered)
     enemy.boss_id = definition.boss_id
     enemy.boss_object_id = definition.object_id
     enemy.boss_definition = definition
-    if definition.health_override > 0 then
-        enemy.health = definition.health_override
-        enemy.max_health = definition.health_override
+    if definition.max_health_override > 0 then
+        -- This Tiled override changes the boss' maximum HP only. Preserve the
+        -- template's starting/current HP used when the enemy enters battle.
+        enemy.max_health = definition.max_health_override
     end
     if definition.display_name ~= "" then
         enemy.display_name = definition.display_name
@@ -1224,6 +1227,7 @@ function Mission:handle_boss_defeated(enemy)
     end
 
     local defeated_definition = enemy.boss_definition
+    HPIndicators.remove_enemy(self, enemy)
     defeated_definition.defeated = true
     defeated_definition.enemy = nil
     if Enemy.is_alive(enemy) then Net.remove_bot(enemy.id, false) end
@@ -1298,6 +1302,7 @@ function Mission:clean_up()
         gauge:destroy()
     end
     self.points_gauges = {}
+    HPIndicators.destroy(self)
     for _, id in ipairs(Net.list_bots(self.area_id)) do
         Net.remove_bot(id)
     end
@@ -1362,6 +1367,9 @@ function Mission:begin()
             end
         end
     end
+
+    -- Create viewer-private HP indicators for players and active enemies.
+    HPIndicators.register(self)
 
     -- Create one order-points gauge per participating player. Each draws to
     -- its own logical ids, so a party of N sees N independent HUDs showing
@@ -1615,6 +1623,7 @@ function Mission:handle_player_disconnect(player_id)
         player_id = player_id,
         remaining_players = #self.players - 1,
     })
+    HPIndicators.remove_player(self, player_id)
     if self.points_gauges[player_id] then
         self.points_gauges[player_id]:destroy()
         self.points_gauges[player_id] = nil

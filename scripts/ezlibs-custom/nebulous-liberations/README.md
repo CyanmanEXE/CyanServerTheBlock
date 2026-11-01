@@ -344,7 +344,7 @@ Some of these properties are read by other files only in specific mission flows.
 | `Trigger Boss` | Tiled Object reference to the boss that must be defeated before an After Boss Defeated boss spawns. |
 | `Spawn Offset X/Y/Z` | Tile/layer offsets applied to the Boss Dark Panel spawn location. |
 | `Auto Face Player` | When true, overrides Direction and faces the nearest player. |
-| `Boss Health Override` | Positive value overrides the enemy template's health; zero preserves template health. |
+| `Boss Health Override` | Positive value overrides the boss' maximum HP only. It does not replace the template's starting/current HP passed into battle; zero preserves the template's configured maximum HP. |
 | `Spawn Enabled` | Disables automatic spawning while leaving the definition available for a manual spawn call. |
 | `Boss Display Name` | Optional bot display name; does not replace the enemy template key used by battle encounter matching. |
 | `Shared` | Makes an Indestructible Panel wait for every Dark Hole in the mission. |
@@ -378,7 +378,7 @@ Apply the `Boss Dark Panel` Tiled Object Definition to a placed Dark Panel objec
 
 `LibPlugin.spawn_boss(instance_area_id, boss_id)` accepts the active Liberation instance area ID and the configured Boss ID (or the Tiled object ID when Boss ID is blank). It returns true when the boss was spawned. This is intended for Manual mode and can also force a definition whose `Spawn Enabled` property is false. The plugin module exports this function, so a script with access to the active instance area ID can call it through the returned plugin table.
 
-Spawn offsets are measured in the same tile/layer coordinate system used by Liberation panel objects. `Auto Face Player` defaults to false so the configured Direction is respected. `Boss Health Override` defaults to zero, which preserves the template's configured health. `Boss Display Name` only changes the bot's displayed name; the registered template name remains the battle identity.
+Spawn offsets are measured in the same tile/layer coordinate system used by Liberation panel objects. `Auto Face Player` defaults to false so the configured Direction is respected. `Boss Health Override` defaults to zero, which preserves the template's configured maximum HP. A positive value changes only `enemy.max_health`; the template's current/start `enemy.health` remains unchanged and is the value used when the boss enters battle. `Boss Display Name` only changes the bot's displayed name; the registered template name remains the battle identity.
 
 Dark Hole and Indestructible Panel objects support `Boss ID 1` and `Boss ID 2`. Each assigned Dark Hole is counted independently by every referenced boss group. Indestructible Panels evaluate their assigned groups using `Type`: `All` (the default) waits until every referenced boss group has no remaining Dark Holes; `Any` unlocks when at least one referenced boss group has no remaining Dark Holes. With only one Boss ID assigned, Type has no effect. `Shared=true` takes precedence and waits until every Dark Hole in the mission is cleared, regardless of Boss IDs or Type. Panels without Boss IDs retain mission-wide conversion behavior.
 

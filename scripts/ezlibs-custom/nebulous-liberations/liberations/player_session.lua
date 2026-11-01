@@ -11,6 +11,7 @@ local RecoverEffect = require("scripts/ezlibs-custom/nebulous-liberations/utils/
 local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberations/constants")
 local ezmemory = require("scripts/ezlibs-scripts/ezmemory")
 local Emotes = require("scripts/libs/emotes")
+local HPIndicators = require("scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators")
 
 -- Battle end reasons supplied by the battle engine.
 local BattleReason = {
@@ -129,6 +130,7 @@ function PlayerSession:initiate_encounter(encounter_path, data)
             end
 
             self.health = results.health
+            HPIndicators.update_player_hp(self.instance, self.player.id, self.health)
             ezmemory.set_player_max_health(self.player.id, self.max_health, true)
             ezmemory.set_player_health(self.player.id, self.health)
             Net.set_player_emotion(self.player.id, results.emotion)
@@ -183,6 +185,7 @@ function PlayerSession:heal(amount)
     self.health = math.min(math.ceil(self.health + amount), self.max_health)
     ezmemory.set_player_max_health(self.player.id, self.max_health, true)
     ezmemory.set_player_health(self.player.id, self.health)
+    HPIndicators.update_player_hp(self.instance, self.player.id, self.health)
     if previous_health < self.health then
         log:debug_data("Player healed", {
             base_area_id = self.instance.base_area_id,
@@ -256,6 +259,7 @@ function PlayerSession:hurt(amount, attacker)
     self.health = math.max(math.ceil(self.health - amount), 0)
     ezmemory.set_player_max_health(self.player.id, self.max_health, true)
     ezmemory.set_player_health(self.player.id, self.health)
+    HPIndicators.update_player_hp(self.instance, self.player.id, self.health)
     log:debug_data("Player hurt", {
         base_area_id = self.instance.base_area_id,
         instance_area_id = self.instance.area_id,

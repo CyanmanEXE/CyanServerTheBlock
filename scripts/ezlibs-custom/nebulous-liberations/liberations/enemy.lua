@@ -4,6 +4,7 @@ local log = ezlogger.get("nebulous-liberations")
 
 local EnemyTemplates = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_templates")
 local ExplodingEffect = require("scripts/ezlibs-custom/nebulous-liberations/utils/exploding_effect")
+local HPIndicators = require("scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators")
 
 local Enemy = {}
 
@@ -13,6 +14,7 @@ function Enemy.from(instance, position, direction, name, spawn_options)
     local enemy = EnemyTemplates.create(instance, position, direction, name, spawn_options)
     local display_name = enemy.battle_name or enemy.name or name or "Enemy"
     Net.set_bot_name(enemy.id, tostring(display_name) .. ": " .. tostring(enemy.health or 0))
+    HPIndicators.add_enemy(instance, enemy)
     return enemy
 end
 
@@ -34,6 +36,7 @@ function Enemy.destroy(instance, enemy)
     if not enemy then
         return Async.create_promise(function(resolve) resolve() end)
     end
+    HPIndicators.remove_enemy(instance, enemy)
     if not Enemy.is_alive(enemy) then
         return Async.create_promise(function(resolve) resolve() end)
     end

@@ -183,7 +183,7 @@ local navi_ability_map = {
 }
 
 function Ability.resolve_for_player(player)
-    local ability = Ability.Guard
+    local ability = Ability.LongSwrd
     for key,value in pairs(navi_ability_map) do
         if ezmemory.count_player_item(player.id, key) > 0 then
             ability = navi_ability_map[key]
