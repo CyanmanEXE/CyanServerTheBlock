@@ -1,8 +1,8 @@
 # `ezmemory.lua`
 
 > **Source:** `scripts/ezlibs-scripts/ezmemory.lua`  
-> **Source lines:** 1143  
-> **Functions detected:** 61  
+> **Source lines:** 1233  
+> **Functions detected:** 65  
 > **Table declarations detected:** 18
 
 ## Contents
@@ -44,125 +44,133 @@ No module-level description was present in the source. The reference below docum
 | 123 | `ezmemory_save_file` | `file_path, value` |
 | 149 | `printd` | `...` |
 | 154 | `normalize_player_memory` | `mem` |
-| 167 | `initialize_area_memory_file` | `area_id` |
-| 173 | `_read` | `path` |
-| 213 | `load_all_memory` | `(none)` |
-| 254 | `update_player_health` | `player_id` |
-| 290 | `ezmemory.wait_until_loaded` | `(none)` |
-| 298 | `ezmemory.is_loaded` | `(none)` |
-| 307 | `ezmemory.get_item_info` | `item_id` |
-| 314 | `ezmemory.create_or_update_item` | `item_name, item_description, is_key` |
-| 339 | `ezmemory.get_item_id_by_name` | `item_name` |
-| 350 | `ezmemory.get_or_create_item` | `item_name, item_description, is_key` |
-| 358 | `ezmemory.save_items` | `(none)` |
-| 362 | `ezmemory.save_area_memory` | `area_id` |
-| 366 | `ezmemory.save_player_memory` | `safe_secret` |
-| 370 | `ezmemory.dangerously_override_player_memory` | `safe_secret, new_memory` |
-| 376 | `ezmemory.get_area_memory` | `area_id` |
-| 383 | `_read` | `path` |
-| 420 | `ezmemory.get_player_memory` | `safe_secret` |
-| 440 | `ezmemory.get_player_area_memory` | `safe_secret, area_id` |
-| 454 | `ezmemory.update_player_list` | `safe_secret, name` |
-| 459 | `ezmemory.get_player_name_from_safesecret` | `safe_secret` |
-| 468 | `ezmemory.give_player_item` | `player_id, name, amount` |
-| 504 | `ezmemory.remove_player_item` | `player_id, name, remove_quant` |
-| 539 | `ezmemory.get_player_money` | `player_id` |
-| 564 | `ezmemory.spend_player_money` | `player_id, amount` |
-| 582 | `ezmemory.set_player_money` | `player_id, money` |
-| 594 | `ezmemory.get_player_fragments` | `player_id` |
-| 619 | `ezmemory.set_player_fragments` | `player_id, fragments` |
-| 635 | `ezmemory.add_player_fragments` | `player_id, amount` |
-| 651 | `ezmemory.spend_player_fragments` | `player_id, amount` |
-| 676 | `_normalize_tokens` | `value` |
-| 683 | `ezmemory.get_player_tokens` | `player_id` |
-| 693 | `ezmemory.set_player_tokens` | `player_id, tokens` |
-| 706 | `ezmemory.add_player_tokens` | `player_id, amount` |
-| 721 | `ezmemory.spend_player_tokens` | `player_id, amount` |
-| 752 | `ezmemory.count_player_item` | `player_id, item_name` |
-| 765 | `ezmemory.open_shop_async` | `player_id, shop_items, mugshot_texture_path, mugshot_animation_path` |
-| 786 | `ezmemory.hide_object_from_player_till_disconnect` | `player_id, area_id, object_id` |
-| 810 | `get_player_area_safely` | `player_id` |
-| 829 | `ezmemory.unhide_object_from_player_till_disconnect` | `player_id, area_id, object_id` |
-| 851 | `ezmemory.unhide_object_from_player` | `player_id, area_id, object_id` |
-| 879 | `ezmemory.hide_object_from_player` | `player_id, area_id, object_id` |
-| 899 | `ezmemory.object_is_hidden_from_player` | `player_id, area_id, object_id` |
-| 916 | `ezmemory.object_is_hidden_from_player_till_disconnect` | `player_id, area_id, object_id` |
-| 925 | `ezmemory.handle_player_disconnect` | `player_id` |
-| 929 | `ezmemory.handle_player_join` | `player_id` |
-| 971 | `ezmemory.handle_player_transfer` | `player_id` |
-| 1011 | `ezmemory.calculate_player_modified_max_hp` | `player_id, base_max_hp, hp_memory_modifier, hp_memory_item` |
-| 1017 | `ezmemory.get_player_max_health` | `player_id` |
-| 1023 | `ezmemory.get_player_health` | `player_id` |
-| 1029 | `ezmemory.set_player_max_health` | `player_id, new_max_health, should_heal_by_increase` |
-| 1056 | `ezmemory.set_player_health` | `player_id, new_health` |
-| 1075 | `ezmemory.handle_player_avatar_change` | `player_id, details` |
-| 1080 | `ezmemory.give_item_with_optional_notify` | `player_id, area_id, item_object_id, item_info, notify_player` |
-| 1119 | `ezmemory.play_anim_get` | `player_id` |
-| 1136 | `ezmemory.set_direction_anim` | `player_id, direction` |
+| 167 | `is_instance_area_id` | `area_id` |
+| 173 | `remove_area_memory_files` | `area_id` |
+| 195 | `prune_stale_instance_memory` | `active_area_ids` |
+| 229 | `initialize_area_memory_file` | `area_id` |
+| 236 | `_read` | `path` |
+| 275 | `load_all_memory` | `(none)` |
+| 317 | `update_player_health` | `player_id` |
+| 353 | `ezmemory.wait_until_loaded` | `(none)` |
+| 361 | `ezmemory.is_loaded` | `(none)` |
+| 370 | `ezmemory.get_item_info` | `item_id` |
+| 377 | `ezmemory.create_or_update_item` | `item_name, item_description, is_key` |
+| 402 | `ezmemory.get_item_id_by_name` | `item_name` |
+| 413 | `ezmemory.get_or_create_item` | `item_name, item_description, is_key` |
+| 421 | `ezmemory.save_items` | `(none)` |
+| 425 | `ezmemory.save_area_memory` | `area_id` |
+| 429 | `ezmemory.save_player_memory` | `safe_secret` |
+| 436 | `ezmemory.clear_area_memory` | `area_id` |
+| 460 | `ezmemory.dangerously_override_player_memory` | `safe_secret, new_memory` |
+| 466 | `ezmemory.get_area_memory` | `area_id` |
+| 473 | `_read` | `path` |
+| 510 | `ezmemory.get_player_memory` | `safe_secret` |
+| 530 | `ezmemory.get_player_area_memory` | `safe_secret, area_id` |
+| 544 | `ezmemory.update_player_list` | `safe_secret, name` |
+| 549 | `ezmemory.get_player_name_from_safesecret` | `safe_secret` |
+| 558 | `ezmemory.give_player_item` | `player_id, name, amount` |
+| 594 | `ezmemory.remove_player_item` | `player_id, name, remove_quant` |
+| 629 | `ezmemory.get_player_money` | `player_id` |
+| 654 | `ezmemory.spend_player_money` | `player_id, amount` |
+| 672 | `ezmemory.set_player_money` | `player_id, money` |
+| 684 | `ezmemory.get_player_fragments` | `player_id` |
+| 709 | `ezmemory.set_player_fragments` | `player_id, fragments` |
+| 725 | `ezmemory.add_player_fragments` | `player_id, amount` |
+| 741 | `ezmemory.spend_player_fragments` | `player_id, amount` |
+| 766 | `_normalize_tokens` | `value` |
+| 773 | `ezmemory.get_player_tokens` | `player_id` |
+| 783 | `ezmemory.set_player_tokens` | `player_id, tokens` |
+| 796 | `ezmemory.add_player_tokens` | `player_id, amount` |
+| 811 | `ezmemory.spend_player_tokens` | `player_id, amount` |
+| 842 | `ezmemory.count_player_item` | `player_id, item_name` |
+| 855 | `ezmemory.open_shop_async` | `player_id, shop_items, mugshot_texture_path, mugshot_animation_path` |
+| 876 | `ezmemory.hide_object_from_player_till_disconnect` | `player_id, area_id, object_id` |
+| 900 | `get_player_area_safely` | `player_id` |
+| 919 | `ezmemory.unhide_object_from_player_till_disconnect` | `player_id, area_id, object_id` |
+| 941 | `ezmemory.unhide_object_from_player` | `player_id, area_id, object_id` |
+| 969 | `ezmemory.hide_object_from_player` | `player_id, area_id, object_id` |
+| 989 | `ezmemory.object_is_hidden_from_player` | `player_id, area_id, object_id` |
+| 1006 | `ezmemory.object_is_hidden_from_player_till_disconnect` | `player_id, area_id, object_id` |
+| 1015 | `ezmemory.handle_player_disconnect` | `player_id` |
+| 1019 | `ezmemory.handle_player_join` | `player_id` |
+| 1061 | `ezmemory.handle_player_transfer` | `player_id` |
+| 1101 | `ezmemory.calculate_player_modified_max_hp` | `player_id, base_max_hp, hp_memory_modifier, hp_memory_item` |
+| 1107 | `ezmemory.get_player_max_health` | `player_id` |
+| 1113 | `ezmemory.get_player_health` | `player_id` |
+| 1119 | `ezmemory.set_player_max_health` | `player_id, new_max_health, should_heal_by_increase` |
+| 1146 | `ezmemory.set_player_health` | `player_id, new_health` |
+| 1165 | `ezmemory.handle_player_avatar_change` | `player_id, details` |
+| 1170 | `ezmemory.give_item_with_optional_notify` | `player_id, area_id, item_object_id, item_info, notify_player` |
+| 1209 | `ezmemory.play_anim_get` | `player_id` |
+| 1226 | `ezmemory.set_direction_anim` | `player_id, direction` |
 
 ### Function notes
 
+- **`is_instance_area_id(area_id)`** — Identifies cloned Liberation and FootBomb area IDs for targeted stale-memory pruning. *(source line 167)*
+- **`remove_area_memory_files(area_id)`** — Removes an area's main and backup memory files after validating the area ID as a safe filename component. *(source line 173)*
+- **`prune_stale_instance_memory(active_area_ids)`** — Removes persisted Liberation/FootBomb memory for clone IDs not present in the active engine area list, including each affected player's area-memory entry. *(source line 195)*
 - **`ensure_file(path, default_content)`** — Helper to create a file with default content if it doesn't exist *(source line 59)*
 - **`get_file_paths(base)`** — Given a base path, returns the main file path and backup file path. If base already ends with ".json", backup is base with "_backup" inserted before .json. Otherwise, main is base .. ".json", backup is base .. "_backup.json". *(source line 90)*
 - **`ezmemory_load_file(file_path)`** *(source line 104)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
 - **`ezmemory_save_file(file_path, value)`** *(source line 123)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
 - **`printd(...)`** *(source line 149)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
 - **`normalize_player_memory(mem)`** *(source line 154)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`initialize_area_memory_file(area_id)`** *(source line 167)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`_read(path)`** *(source line 173)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`load_all_memory()`** *(source line 213)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`update_player_health(player_id)`** *(source line 254)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.wait_until_loaded()`** *(source line 290)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.is_loaded()`** *(source line 298)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_item_info(item_id)`** *(source line 307)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.create_or_update_item(item_name, item_description, is_key)`** *(source line 314)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_item_id_by_name(item_name)`** *(source line 339)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_or_create_item(item_name, item_description, is_key)`** *(source line 350)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.save_items()`** *(source line 358)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.save_area_memory(area_id)`** *(source line 362)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.save_player_memory(safe_secret)`** *(source line 366)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.dangerously_override_player_memory(safe_secret, new_memory)`** *(source line 370)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_area_memory(area_id)`** *(source line 376)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`_read(path)`** *(source line 383)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_player_memory(safe_secret)`** *(source line 420)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_player_area_memory(safe_secret, area_id)`** *(source line 440)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.update_player_list(safe_secret, name)`** *(source line 454)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_player_name_from_safesecret(safe_secret)`** *(source line 459)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.give_player_item(player_id, name, amount)`** *(source line 468)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.remove_player_item(player_id, name, remove_quant)`** *(source line 504)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_player_money(player_id)`** *(source line 539)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.spend_player_money(player_id, amount)`** *(source line 564)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.set_player_money(player_id, money)`** *(source line 582)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_player_fragments(player_id)`** *(source line 594)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.set_player_fragments(player_id, fragments)`** *(source line 619)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.add_player_fragments(player_id, amount)`** *(source line 635)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.spend_player_fragments(player_id, amount)`** *(source line 651)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`_normalize_tokens(value)`** *(source line 676)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_player_tokens(player_id)`** *(source line 683)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.set_player_tokens(player_id, tokens)`** *(source line 693)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.add_player_tokens(player_id, amount)`** *(source line 706)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.spend_player_tokens(player_id, amount)`** *(source line 721)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.count_player_item(player_id, item_name)`** *(source line 752)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.open_shop_async(player_id, shop_items, mugshot_texture_path, mugshot_animation_path)`** *(source line 765)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.hide_object_from_player_till_disconnect(player_id, area_id, object_id)`** *(source line 786)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`get_player_area_safely(player_id)`** — Net player IDs can become stale while a delayed button/group callback is running. Keep these cleanup paths defensive: get_player_area can throw for an ID that has already disconnected. *(source line 810)*
-- **`ezmemory.unhide_object_from_player_till_disconnect(player_id, area_id, object_id)`** *(source line 829)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.unhide_object_from_player(player_id, area_id, object_id)`** *(source line 851)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.hide_object_from_player(player_id, area_id, object_id)`** *(source line 879)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.object_is_hidden_from_player(player_id, area_id, object_id)`** *(source line 899)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.object_is_hidden_from_player_till_disconnect(player_id, area_id, object_id)`** *(source line 916)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.handle_player_disconnect(player_id)`** *(source line 925)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.handle_player_join(player_id)`** *(source line 929)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.handle_player_transfer(player_id)`** *(source line 971)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.calculate_player_modified_max_hp(player_id, base_max_hp, hp_memory_modifier, hp_memory_item)`** *(source line 1011)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_player_max_health(player_id)`** *(source line 1017)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.get_player_health(player_id)`** *(source line 1023)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.set_player_max_health(player_id, new_max_health, should_heal_by_increase)`** *(source line 1029)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.set_player_health(player_id, new_health)`** *(source line 1056)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.handle_player_avatar_change(player_id, details)`** *(source line 1075)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.give_item_with_optional_notify(player_id, area_id, item_object_id, item_info, notify_player)`** *(source line 1080)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmemory.play_anim_get(player_id)`** — ===================== Missing Animation Helpers ===================== *(source line 1119)*
-- **`ezmemory.set_direction_anim(player_id, direction)`** *(source line 1136)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`initialize_area_memory_file(area_id)`** *(source line 230)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`_read(path)`** *(source line 236)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`load_all_memory()`** *(source line 276)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`update_player_health(player_id)`** *(source line 317)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.wait_until_loaded()`** *(source line 353)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.is_loaded()`** *(source line 361)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_item_info(item_id)`** *(source line 370)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.create_or_update_item(item_name, item_description, is_key)`** *(source line 377)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_item_id_by_name(item_name)`** *(source line 402)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_or_create_item(item_name, item_description, is_key)`** *(source line 413)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.save_items()`** *(source line 421)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.save_area_memory(area_id)`** *(source line 425)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.save_player_memory(safe_secret)`** *(source line 429)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.clear_area_memory(area_id)`** — Removes the area's in-memory record, main/backup files, and matching `area_memory` entries from every loaded player; saves changed player records. Used after cloned-area removal. *(source line 436)*
+- **`ezmemory.dangerously_override_player_memory(safe_secret, new_memory)`** *(source line 460)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_area_memory(area_id)`** *(source line 466)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`_read(path)`** *(source line 473)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_player_memory(safe_secret)`** *(source line 510)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_player_area_memory(safe_secret, area_id)`** *(source line 530)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.update_player_list(safe_secret, name)`** *(source line 544)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_player_name_from_safesecret(safe_secret)`** *(source line 549)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.give_player_item(player_id, name, amount)`** *(source line 558)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.remove_player_item(player_id, name, remove_quant)`** *(source line 594)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_player_money(player_id)`** *(source line 629)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.spend_player_money(player_id, amount)`** *(source line 654)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.set_player_money(player_id, money)`** *(source line 672)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_player_fragments(player_id)`** *(source line 684)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.set_player_fragments(player_id, fragments)`** *(source line 709)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.add_player_fragments(player_id, amount)`** *(source line 725)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.spend_player_fragments(player_id, amount)`** *(source line 741)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`_normalize_tokens(value)`** *(source line 766)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_player_tokens(player_id)`** *(source line 773)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.set_player_tokens(player_id, tokens)`** *(source line 783)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.add_player_tokens(player_id, amount)`** *(source line 796)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.spend_player_tokens(player_id, amount)`** *(source line 811)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.count_player_item(player_id, item_name)`** *(source line 842)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.open_shop_async(player_id, shop_items, mugshot_texture_path, mugshot_animation_path)`** *(source line 855)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.hide_object_from_player_till_disconnect(player_id, area_id, object_id)`** *(source line 876)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`get_player_area_safely(player_id)`** — Net player IDs can become stale while a delayed button/group callback is running. Keep these cleanup paths defensive: get_player_area can throw for an ID that has already disconnected. *(source line 900)*
+- **`ezmemory.unhide_object_from_player_till_disconnect(player_id, area_id, object_id)`** *(source line 919)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.unhide_object_from_player(player_id, area_id, object_id)`** *(source line 941)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.hide_object_from_player(player_id, area_id, object_id)`** *(source line 969)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.object_is_hidden_from_player(player_id, area_id, object_id)`** *(source line 989)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.object_is_hidden_from_player_till_disconnect(player_id, area_id, object_id)`** *(source line 1006)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.handle_player_disconnect(player_id)`** *(source line 1015)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.handle_player_join(player_id)`** *(source line 1019)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.handle_player_transfer(player_id)`** *(source line 1061)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.calculate_player_modified_max_hp(player_id, base_max_hp, hp_memory_modifier, hp_memory_item)`** *(source line 1101)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_player_max_health(player_id)`** *(source line 1107)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.get_player_health(player_id)`** *(source line 1113)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.set_player_max_health(player_id, new_max_health, should_heal_by_increase)`** *(source line 1119)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.set_player_health(player_id, new_health)`** *(source line 1146)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.handle_player_avatar_change(player_id, details)`** *(source line 1165)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.give_item_with_optional_notify(player_id, area_id, item_object_id, item_info, notify_player)`** *(source line 1170)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **`ezmemory.play_anim_get(player_id)`** — ===================== Missing Animation Helpers ===================== *(source line 1209)*
+- **`ezmemory.set_direction_anim(player_id, direction)`** *(source line 1226)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
 
 ## Tables and data structures
 
@@ -263,6 +271,8 @@ Table initializer detected; no simple direct-level keys could be statically enum
 
 ## Implementation notes
 
+- On startup, stale `liberation_` and `footbomb_` area-memory entries are pruned when their cloned area IDs are absent from `Net.list_areas()`. Matching area files and player-memory references are removed; active clones are preserved.
+- `ezmemory.clear_area_memory(area_id)` is called by `EzMapInstance.remove()` after the engine confirms area removal.
 - This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezmemory.lua`.
 - Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
 - Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.

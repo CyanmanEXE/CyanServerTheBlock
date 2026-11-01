@@ -1,7 +1,7 @@
 # `ezmapinstance.lua`
 
 > **Source:** `scripts/ezlibs-scripts/ezmapinstance.lua`  
-> **Source lines:** 531  
+> **Source lines:** 555  
 > **Functions detected:** 42  
 > **Table declarations detected:** 7
 
@@ -20,7 +20,7 @@ ezmapinstance.lua Reusable map cloning, instance ownership, host/party metadata,
 
 ## Dependencies
 
-- No `require(...)` dependency was detected.
+- `scripts/ezlibs-scripts/ezmemory` — loaded defensively during successful instance removal to clear per-area and per-player memory.
 
 ## Events
 
@@ -116,7 +116,7 @@ ezmapinstance.lua Reusable map cloning, instance ownership, host/party metadata,
 - **`EzMapInstance.add_player(instance_id, player_id)`** — Naming aliases make membership intent clearer for callers while preserving the original register/unregister API used by FootBomb. *(source line 444)*
 - **`EzMapInstance.remove_player(instance_id, player_id)`** *(source line 448)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
 - **`EzMapInstance.transfer_player(instance_id, player_id, x, y, z, warp_in)`** — - Transfer a player to the cloned area at an explicit position. - Coordinates are required because spawn selection belongs to the caller. - Emits "player_joined" (via register_player) and "player_transferred". *(source line 455)*
-- **`EzMapInstance.remove(instance_id)`** — - Remove the cloned area and its registry entries. - Removal is idempotent for records created through this module. - Emits "removed" on both surfaces before state is torn down. *(source line 490)*
+- **`EzMapInstance.remove(instance_id)`** — Removes the cloned area and its registry entries. After the engine confirms removal, clears the area's global memory files and every loaded player's matching `area_memory` entry, then emits `removed` before registry state is torn down. *(source line 490)*
 
 ## Tables and data structures
 

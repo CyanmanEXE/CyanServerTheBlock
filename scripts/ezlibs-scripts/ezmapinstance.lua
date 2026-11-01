@@ -512,6 +512,30 @@ function EzMapInstance.remove(instance_id)
         return false, "Net.remove_area is unavailable"
     end
 
+    -- Instance memory is scoped to the cloned area ID. Once the engine has
+    -- confirmed area removal, discard both global and per-player ezmemory data.
+    -- Keep this optional/defensive so ezmapinstance remains usable if memory
+    -- support is unavailable during an unusual startup or test environment.
+    local memory_ok, ezmemory = pcall(
+        require, "scripts/ezlibs-scripts/ezmemory"
+    )
+    if memory_ok and type(ezmemory) == "table"
+        and type(ezmemory.clear_area_memory) == "function" then
+        local clear_ok, clear_result, clear_detail = pcall(
+            ezmemory.clear_area_memory, instance_id
+        )
+        if not clear_ok or clear_result == false then
+            pcall(error_handler,
+                "ezmapinstance: could not clear memory for "
+                .. tostring(instance_id) .. ": "
+                .. tostring(clear_detail or clear_result))
+        end
+    elseif not memory_ok then
+        pcall(error_handler,
+            "ezmapinstance: ezmemory unavailable during cleanup: "
+            .. tostring(ezmemory))
+    end
+
     -- Fire before tearing down state so listeners can still inspect the record.
     emit_event(record, EzMapInstance.EVENT.REMOVED)
 

@@ -16,6 +16,7 @@ local PointsGauge = require("scripts/ezlibs-custom/nebulous-liberations/liberati
 local HPIndicators = require("scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators")
 local Emotes = require("scripts/libs/emotes")
 local ezmemory = require("scripts/ezlibs-scripts/ezmemory")
+local EzMapInstance = require("scripts/ezlibs-scripts/ezmapinstance")
 local helpers = require('scripts/ezlibs-scripts/helpers')
 
 local function includes(table, value)
@@ -1306,7 +1307,13 @@ function Mission:clean_up()
     for _, id in ipairs(Net.list_bots(self.area_id)) do
         Net.remove_bot(id)
     end
-    Net.remove_area(self.area_id)
+    local removed, remove_error = EzMapInstance.remove(self.area_id)
+    if not removed then
+        log:error_data("Could not remove Liberation map instance", {
+            instance_area_id = self.area_id,
+            error = tostring(remove_error),
+        })
+    end
     self.resolve_disposal()
     return self.disposal_promise
 end
