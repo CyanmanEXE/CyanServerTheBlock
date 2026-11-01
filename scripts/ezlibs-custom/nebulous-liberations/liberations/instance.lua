@@ -952,11 +952,6 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
         })
     end
 
-    -- Enemy spawn requests are deferred until every panel has been indexed.
-    -- Otherwise a spawn can be rejected simply because its destination panel
-    -- appears later in Net.list_objects() order (notably Dark Hole + Direction).
-    local pending_enemy_spawns = {}
-
     local object_ids = Net.list_objects(mission.area_id)
     for _, object_id in ipairs(object_ids) do
         local object = Net.get_object_by_id(mission.area_id, object_id)
@@ -1062,73 +1057,29 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 mission.boss_definitions[#mission.boss_definitions + 1] = definition
             end
             if object.custom_properties[Constants.CustomProperties.Spawns] then
-                pending_enemy_spawns[#pending_enemy_spawns + 1] = {
-                    source_object_id = object.id,
-                    source_panel = new_panel,
-                    name = object.custom_properties[Constants.CustomProperties.Spawns],
-                    direction = object.custom_properties[Constants.CustomProperties.Direction],
-                    position = { x = object.x, y = object.y, z = object.z },
-                }
+                local name = object.custom_properties[Constants.CustomProperties.Spawns]
+                local direction = object.custom_properties[Constants.CustomProperties.Direction]
+                local position = { x = object.x, y = object.y, z = object.z }
+                position = EnemyHelpers.offset_position_with_direction(position, direction)
+                if EnemyHelpers.can_spawn_on(mission, position.x, position.y, position.z) then
+                    local enemy = Enemy.from(mission, position, direction, name)
+                    if enemy then
+                        new_panel.enemy = enemy
+                        mission.enemies[#mission.enemies + 1] = enemy
+                    end
+                else
+                    log:warn_data("Skipping enemy spawn on a non-enemy or occupied panel", {
+                        base_area_id = mission.base_area_id,
+                        instance_area_id = mission.area_id,
+                        enemy_name = name,
+                        x = position.x,
+                        y = position.y,
+                        z = position.z,
+                        source_object_id = object.id,
+                        source_panel_type = new_panel.type,
+                    })
+                end
             end
-        end
-    end
-
-    -- Resolve configured panel spawns only after the complete panel grid exists.
-    -- This makes spawn validation independent of the order returned by
-    -- Net.list_objects(), so each Dark Hole can find its configured adjacent panel.
-    for _, spawn_request in ipairs(pending_enemy_spawns) do
-        local position = EnemyHelpers.offset_position_with_direction(
-            spawn_request.position,
-            spawn_request.direction
-        )
-
-        if EnemyHelpers.can_spawn_on(mission, position.x, position.y, position.z) then
-            local enemy = Enemy.from(
-                mission,
-                position,
-                spawn_request.direction,
-                spawn_request.name
-            )
-            if enemy then
-                spawn_request.source_panel.enemy = enemy
-                mission.enemies[#mission.enemies + 1] = enemy
-                log:info_data("Configured panel enemy spawned", {
-                    base_area_id = mission.base_area_id,
-                    instance_area_id = mission.area_id,
-                    source_object_id = spawn_request.source_object_id,
-                    source_panel_type = spawn_request.source_panel.type,
-                    enemy_name = spawn_request.name,
-                    direction = spawn_request.direction,
-                    x = position.x,
-                    y = position.y,
-                    z = position.z,
-                })
-            else
-                log:warn_data("Configured panel enemy creation returned nil", {
-                    base_area_id = mission.base_area_id,
-                    instance_area_id = mission.area_id,
-                    source_object_id = spawn_request.source_object_id,
-                    enemy_name = spawn_request.name,
-                    x = position.x,
-                    y = position.y,
-                    z = position.z,
-                })
-            end
-        else
-            local destination_panel = mission:get_panel_at(position.x, position.y, position.z)
-            log:warn_data("Skipping configured panel enemy spawn: destination is not an available enemy panel", {
-                base_area_id = mission.base_area_id,
-                instance_area_id = mission.area_id,
-                source_object_id = spawn_request.source_object_id,
-                source_panel_type = spawn_request.source_panel.type,
-                enemy_name = spawn_request.name,
-                direction = spawn_request.direction,
-                x = position.x,
-                y = position.y,
-                z = position.z,
-                destination_panel_type = destination_panel and destination_panel.type or nil,
-                occupied = EnemyHelpers.is_occupied_by_enemy(mission, position.x, position.y, position.z),
-            })
         end
     end
 
@@ -1229,8 +1180,14 @@ function Mission:spawn_boss(boss_id, force, triggered)
     enemy.boss_object_id = definition.object_id
     enemy.boss_definition = definition
     if definition.max_health_override > 0 then
-        -- This Tiled override changes the boss' maximum HP only. Preserve the
-        -- template's starting/current HP used when the enemy enters battle.
+        -- Boss Health Override defines the boss' starting HP as well as its
+        -- maximum HP. Initialize both values here, before the boss can enter
+        -- battle. After the first battle, EnemyHelpers.sync_health() updates
+        -- enemy.health from the battle results; build_encounter_data() then
+        -- forwards that current value into later encounters. Do not reapply
+        -- this override during subsequent encounters, or defeated damage
+        -- would be lost.
+        enemy.health = definition.max_health_override
         enemy.max_health = definition.max_health_override
     end
     if definition.display_name ~= "" then
