@@ -7,6 +7,33 @@ local EnemyHelpers = {
   boss_minimap_color = { r = 170, g = 50, b = 170 }
 }
 
+-- Liberation movement briefly collapses the enemy bot, then restores the
+-- scale captured from its template/spawn options after the destination
+-- transfer. This also overrides any scale reconciliation caused by the
+-- bot's ezbottriggers movement event.
+local function animate_enemy_scale(bot_id, scale)
+  if bot_id == nil or type(Net.animate_bot_properties) ~= "function" then
+    return false
+  end
+
+  local config = {
+    {
+      properties = {
+        { property = "ScaleX", value = scale, ease = "Linear" },
+        { property = "ScaleY", value = scale, ease = "Linear" }
+      },
+      duration = 0
+    }
+  }
+
+  local ok, err = pcall(Net.animate_bot_properties, bot_id, config)
+  if not ok then
+    print("[nebulous-liberations] Could not set moving enemy scale:", tostring(bot_id), tostring(err))
+    return false
+  end
+  return true
+end
+
 local direction_suffix_map = {
   [Direction.DOWN_LEFT] = "DL",
   [Direction.DOWN_RIGHT] = "DR",
@@ -137,6 +164,16 @@ function EnemyHelpers.move(instance, enemy, x, y, z, direction)
 
     Async.await(Async.sleep(animation_time))
 
+    -- Collapse the enemy during the panel transition. Keep its intended
+    -- scale on the enemy instance so 1.0 and 1.5-sized enemies both restore
+    -- correctly after the destination transfer.
+    local restore_scale = tonumber(enemy.scale) or 1.0
+    if restore_scale <= 0 or restore_scale ~= restore_scale
+        or restore_scale == math.huge or restore_scale == -math.huge then
+      restore_scale = 1.0
+    end
+    animate_enemy_scale(enemy.id, 0)
+
     -- move this bot off screen
     local area_width = Net.get_width(area_id)
     Net.transfer_bot(enemy.id, area_id, false, area_width + 100, 0, 0)
@@ -162,6 +199,10 @@ function EnemyHelpers.move(instance, enemy, x, y, z, direction)
 
     -- move the enemy
     Net.transfer_bot(enemy.id, area_id, false, x + .5, y + .5, z)
+
+    -- Restore its original Liberation scale after the destination transfer,
+    -- overriding any size-tile trigger transition caused by that transfer.
+    animate_enemy_scale(enemy.id, restore_scale)
 
     -- The enemy has entered its destination tile. Restore its HP digits
     -- there before the post-move hold.
