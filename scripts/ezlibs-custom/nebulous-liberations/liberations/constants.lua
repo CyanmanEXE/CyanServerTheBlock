@@ -40,6 +40,7 @@ Constants.CustomProperties = {
     SpawnOffsetZ = "Spawn Offset Z",
     AutoFacePlayer = "Auto Face Player",
     BossHealthOverride = "Boss Health Override",
+    MinionHealthOverride = "Minion Health Override",
     SpawnEnabled = "Spawn Enabled",
     BossDisplayName = "Boss Display Name",
     Shared = "Shared",

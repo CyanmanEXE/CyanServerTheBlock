@@ -28,6 +28,10 @@ function EnemyTemplates.create(instance, position, direction, template_name, spa
     local enemy = {
         instance = instance,
         id = nil,
+        -- Preserve the ezencounters enemy_packages alias (the key used in
+        -- data.enemies[index].name). Display names are not guaranteed to be
+        -- identical to that alias, so battle HP must match against this key.
+        template_name = template_name,
         battle_name = template.battle_name,
         health = template.health,
         max_health = template.max_health,

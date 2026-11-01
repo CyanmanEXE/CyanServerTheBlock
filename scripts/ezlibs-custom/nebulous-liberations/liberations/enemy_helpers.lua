@@ -246,8 +246,14 @@ function EnemyHelpers.sync_health(enemy, results)
     return false
   end
 
-  local expected_name = normalize_enemy_name(enemy.battle_name or enemy.name)
-  if not expected_name then return false end
+  local expected_names = {}
+  local template_name = normalize_enemy_name(enemy.template_name)
+  local battle_name = normalize_enemy_name(enemy.battle_name or enemy.name)
+  if template_name then expected_names[#expected_names + 1] = template_name end
+  if battle_name and battle_name ~= template_name then
+    expected_names[#expected_names + 1] = battle_name
+  end
+  if #expected_names == 0 then return false end
 
   for _, data in ipairs(reported_enemies) do
     if type(data) == "table" then
@@ -262,14 +268,33 @@ function EnemyHelpers.sync_health(enemy, results)
       local reported_health = tonumber(data.Health)
       if reported_health == nil then reported_health = tonumber(data.health) end
       for _, reported_name in ipairs(reported_names) do
-        if reported_name == expected_name and reported_health ~= nil then
-          enemy.health = math.max(0, reported_health)
-          EnemyHelpers.update_name(enemy)
-          return true
+        for _, expected_name in ipairs(expected_names) do
+          if reported_name == expected_name and reported_health ~= nil then
+            enemy.health = math.max(0, reported_health)
+            EnemyHelpers.update_name(enemy)
+            return true
+          end
         end
       end
     end
   end
+
+  -- Some encounter result payloads identify the sole remaining enemy by an
+  -- engine/package ID rather than the template alias or visible bot name.
+  -- When there is exactly one result entry, mapping it to this persistent
+  -- enemy is unambiguous.
+  if #reported_enemies == 1 and type(reported_enemies[1]) == "table" then
+    local reported_health = tonumber(reported_enemies[1].Health)
+    if reported_health == nil then
+      reported_health = tonumber(reported_enemies[1].health)
+    end
+    if reported_health ~= nil then
+      enemy.health = math.max(0, reported_health)
+      EnemyHelpers.update_name(enemy)
+      return true
+    end
+  end
+
   return false
 end
 

@@ -36,6 +36,78 @@ local function normalize_enemy_name(value)
     return string.lower(tostring(value):gsub("%s*:%s*%-?%d+%s*$", ""))
 end
 
+-- A Dark Hole's Minion Health Override controls the battle HP of the enemy
+-- spawned by that Dark Hole (for example, its BigBrute). It intentionally
+-- does not change the other entries in the shared encounter definition.
+-- Apply a Dark Hole's Minion Health Override to its own persistent world bot.
+-- EnemyHelpers.update_name also refreshes the viewer-specific HP indicators,
+-- so the map bot, its displayed name, and its associated encounter stay aligned.
+local function apply_dark_hole_minion_health_to_bot(dark_hole, enemy)
+    if not dark_hole or not enemy then return 0 end
+
+    local properties = dark_hole.custom_properties or {}
+    local health_override = tonumber(
+        properties[Constants.CustomProperties.MinionHealthOverride]) or 0
+    if health_override <= 0 then return 0 end
+
+    enemy.health = health_override
+    enemy.max_health = health_override
+    EnemyHelpers.update_name(enemy)
+
+    log:info_data("Dark Hole Minion Health Override applied to world bot", {
+        dark_hole_x = dark_hole.x,
+        dark_hole_y = dark_hole.y,
+        enemy_id = enemy.id,
+        enemy_template = enemy.template_name,
+        enemy_name = enemy.battle_name or enemy.name,
+        health = enemy.health,
+        max_health = enemy.max_health,
+    })
+
+    return health_override
+end
+
+local function apply_dark_hole_minion_health_override(encounter_data, dark_hole, enemy)
+    local properties = dark_hole and dark_hole.custom_properties or {}
+    local health_override = tonumber(
+        properties[Constants.CustomProperties.MinionHealthOverride]) or 0
+    if health_override <= 0 then
+        return 0, nil
+    end
+
+    -- Legacy custom encounter packages (for example, the NebuLibs BigBrute
+    -- package) consume a top-level data.health value rather than
+    -- data.enemies[].health. Keep both payload shapes synchronized.
+    if type(encounter_data) == "table" then
+        encounter_data.health = health_override
+    end
+
+    local expected_alias = enemy and normalize_enemy_name(enemy.template_name)
+    local expected_display_name = enemy
+        and normalize_enemy_name(enemy.battle_name or enemy.name)
+
+    for _, enemy_info in ipairs(encounter_data and encounter_data.enemies or {}) do
+        if type(enemy_info) == "table" then
+            local encounter_alias = normalize_enemy_name(enemy_info.name)
+            if (expected_alias and encounter_alias == expected_alias)
+                or (expected_display_name and encounter_alias == expected_display_name) then
+                enemy_info.health = health_override
+                return 1, enemy_info.name
+            end
+        end
+    end
+
+    -- A one-entry encounter has only one possible enemy. This also supports
+    -- encounter aliases that intentionally differ from the world-bot template.
+    local entries = encounter_data and encounter_data.enemies
+    if type(entries) == "table" and #entries == 1 and type(entries[1]) == "table" then
+        entries[1].health = health_override
+        return 1, entries[1].name
+    end
+
+    return 0, nil
+end
+
 local function build_encounter_data(encounter_definition, overrides, persistent_enemy)
     local data = {}
 
@@ -77,23 +149,85 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
     end
 
     local health_applied = false
+    local matched_enemy_alias = nil
+
+    -- Legacy custom encounter packages receive their associated enemy's
+    -- current HP through the top-level `health` field. The shared ezencounters
+    -- package receives the same value on the matching data.enemies entry below.
+    if persistent_enemy and persistent_enemy.health ~= nil then
+        data.health = persistent_enemy.health
+    end
+
+    local expected_alias = persistent_enemy
+        and normalize_enemy_name(persistent_enemy.template_name)
+    local expected_display_name = persistent_enemy
+        and normalize_enemy_name(persistent_enemy.battle_name or persistent_enemy.name)
+
     if persistent_enemy and persistent_enemy.health ~= nil and type(data.enemies) == "table" then
-        local expected_name = normalize_enemy_name(persistent_enemy.battle_name or persistent_enemy.name)
-        if expected_name then
-            for _, enemy_info in ipairs(data.enemies) do
-                if type(enemy_info) == "table"
-                    and normalize_enemy_name(enemy_info.name) == expected_name then
-                    -- The ezencounters mob package consumes this field from
-                    -- data.enemies and calls character:set_health(...).
+        -- ezencounters resolves data.enemies[index].name through its
+        -- enemy_packages table. Prefer the exact template registry key, which
+        -- is that package alias; only fall back to the display name for older
+        -- enemy objects that do not carry template_name.
+        for _, enemy_info in ipairs(data.enemies) do
+            if type(enemy_info) == "table" then
+                local encounter_alias = normalize_enemy_name(enemy_info.name)
+                local alias_matches = expected_alias and encounter_alias == expected_alias
+                local display_name_matches = expected_display_name
+                    and encounter_alias == expected_display_name
+                if alias_matches or display_name_matches then
                     enemy_info.health = persistent_enemy.health
+                    -- Current HP is passed through `health`. Maximum HP is
+                    -- still controlled by the character package's configured
+                    -- capacity; ezencounters cannot raise that capacity through
+                    -- the character API currently used by this project.
                     health_applied = true
+                    matched_enemy_alias = enemy_info.name
                     break
                 end
             end
         end
     end
 
-    return data, health_applied
+    -- A single-entry encounter has only one possible target. This fallback
+    -- handles package aliases that intentionally differ from the world-bot
+    -- template without risking HP being assigned to an unrelated enemy in a
+    -- multi-enemy encounter.
+    if persistent_enemy and not health_applied
+        and type(data.enemies) == "table"
+        and #data.enemies == 1
+        and type(data.enemies[1]) == "table" then
+        data.enemies[1].health = persistent_enemy.health
+        health_applied = true
+        matched_enemy_alias = data.enemies[1].name
+    end
+
+    local entry_summary = {}
+    for index, enemy_info in ipairs(data.enemies or {}) do
+        if type(enemy_info) == "table" then
+            entry_summary[#entry_summary + 1] = string.format(
+                "%d:%s health=%s max_hp=%s starting_hp=%s rank=%s",
+                index,
+                tostring(enemy_info.name),
+                tostring(enemy_info.health),
+                tostring(enemy_info.max_hp),
+                tostring(enemy_info.starting_hp),
+                tostring(enemy_info.rank)
+            )
+        end
+    end
+
+    if persistent_enemy and not health_applied then
+        log:warn_data("Persistent enemy did not match an ezencounters enemy entry", {
+            template_name = tostring(persistent_enemy.template_name),
+            battle_name = tostring(persistent_enemy.battle_name or persistent_enemy.name),
+            persistent_health = persistent_enemy.health,
+            expected_alias = tostring(expected_alias),
+            expected_display_name = tostring(expected_display_name),
+            encounter_entries = table.concat(entry_summary, " | "),
+        })
+    end
+
+    return data, health_applied, matched_enemy_alias
 end
 
 local debug = false
@@ -344,8 +478,9 @@ local function liberate_panel(self, player_session)
                 Async.await(player:message_with_mug("A Dark Hole! Begin liberation!"))
             end
             local enemy = panel.enemy
-            -- A Dark Hole fight is transient. Its battle HP must not read from
-            -- or write back to the persistent bot standing on the Dark Hole.
+            -- Initialize the transient Dark Hole battle from its associated
+            -- persistent world bot. Battle results are deliberately not written
+            -- back to that bot after this encounter.
             local data = {
                 terrain = PanelEncounters.resolve_terrain(self, player)
             }
@@ -372,15 +507,48 @@ local function liberate_panel(self, player_session)
                 player_session:complete_turn()
                 return
             end
-            local encounter_data = build_encounter_data(
-                encounter_definition, data, nil)
+            local encounter_data, persistent_health_applied, persistent_health_alias =
+                build_encounter_data(encounter_definition, data, enemy)
+            local minion_health_applied_count, minion_health_matched_alias =
+                apply_dark_hole_minion_health_override(encounter_data, panel, enemy)
+            local minion_health_override = tonumber(
+                (panel.custom_properties or {})[Constants.CustomProperties.MinionHealthOverride]) or 0
             log:info_data("Prepared dark hole encounter data", {
                 encounter_name = encounter_definition.name,
                 persistent_enemy = enemy.battle_name or enemy.name,
                 persistent_health = enemy.health,
-                persistent_health_applied = false,
+                persistent_health_applied = persistent_health_applied,
+                persistent_health_matched_alias = persistent_health_alias,
+                minion_health_override = minion_health_override,
+                minion_health_applied_count = minion_health_applied_count,
+                minion_health_matched_alias = minion_health_matched_alias,
+                encounter_enemy_entries = (function()
+                    local entries = {}
+                    for index, enemy_info in ipairs(encounter_data.enemies or {}) do
+                        if type(enemy_info) == "table" then
+                            entries[#entries + 1] = {
+                                index = index,
+                                name = enemy_info.name,
+                                health = enemy_info.health,
+                                starting_hp = enemy_info.starting_hp,
+                                rank = enemy_info.rank,
+                            }
+                        end
+                    end
+                    return entries
+                end)(),
                 freedom_mission = encounter_data.freedom_mission ~= nil,
             })
+            if minion_health_override > 0 and minion_health_applied_count == 0 then
+                log:warn_data("Dark Hole Minion Health Override did not match an encounter enemy", {
+                    dark_hole_x = panel.x,
+                    dark_hole_y = panel.y,
+                    spawned_enemy_template = enemy.template_name,
+                    spawned_enemy_name = enemy.battle_name or enemy.name,
+                    encounter_name = encounter_definition.name,
+                    minion_health_override = minion_health_override,
+                })
+            end
             local results = Async.await(player_session:initiate_encounter(encounter_definition.path, encounter_data))
             -- Deliberately do not synchronize Dark Hole battle results to the
             -- persistent bot. Only a battle started directly on an active bot
@@ -466,13 +634,29 @@ local function liberate_panel(self, player_session)
                 player_session:complete_turn()
                 return
             end
-            local encounter_data, encounter_health_applied = build_encounter_data(
+            local encounter_data, encounter_health_applied, matched_enemy_alias = build_encounter_data(
                 encounter_definition, data, enemy)
+            local encounter_enemy_entries = {}
+            for index, enemy_info in ipairs(encounter_data.enemies or {}) do
+                if type(enemy_info) == "table" then
+                    encounter_enemy_entries[#encounter_enemy_entries + 1] = {
+                        index = index,
+                        name = enemy_info.name,
+                        health = enemy_info.health,
+                        max_hp = enemy_info.max_hp,
+                        starting_hp = enemy_info.starting_hp,
+                        rank = enemy_info.rank,
+                    }
+                end
+            end
             log:info_data("Prepared panel encounter data", {
                 encounter_name = encounter_definition.name,
                 persistent_enemy = enemy and (enemy.battle_name or enemy.name),
+                persistent_enemy_template = enemy and enemy.template_name,
                 persistent_health = enemy and enemy.health,
+                matched_enemy_alias = matched_enemy_alias,
                 enemy_entry_health_applied = encounter_health_applied,
+                encounter_enemy_entries = encounter_enemy_entries,
                 freedom_mission = encounter_data.freedom_mission ~= nil,
             })
             local results = Async.await(player_session:initiate_encounter(encounter_definition.path, encounter_data))
@@ -719,6 +903,7 @@ local function take_enemy_turn(self)
                         destination_y = destination.y,
                     })
                     dark_hole.enemy = Enemy.from(self, dark_hole, direction, name)
+                    apply_dark_hole_minion_health_to_bot(dark_hole, dark_hole.enemy)
                     self.enemies[#self.enemies+1] = dark_hole.enemy
                     Async.await(Async.sleep(.5))
                     Async.await(EnemyHelpers.move(self, dark_hole.enemy, destination.x, destination.y, destination.z))
@@ -952,6 +1137,11 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
         })
     end
 
+    -- Enemy spawns are deferred until every panel has been registered in
+    -- mission.panels. Dark Hole spawn offsets can point at panels whose Tiled
+    -- objects appear later in Net.list_objects(), so spawning during this
+    -- indexing pass makes the result depend on object iteration order.
+    local pending_enemy_spawns = {}
     local object_ids = Net.list_objects(mission.area_id)
     for _, object_id in ipairs(object_ids) do
         local object = Net.get_object_by_id(mission.area_id, object_id)
@@ -1057,31 +1247,70 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 mission.boss_definitions[#mission.boss_definitions + 1] = definition
             end
             if object.custom_properties[Constants.CustomProperties.Spawns] then
-                local name = object.custom_properties[Constants.CustomProperties.Spawns]
-                local direction = object.custom_properties[Constants.CustomProperties.Direction]
-                local position = { x = object.x, y = object.y, z = object.z }
-                position = EnemyHelpers.offset_position_with_direction(position, direction)
-                if EnemyHelpers.can_spawn_on(mission, position.x, position.y, position.z) then
-                    local enemy = Enemy.from(mission, position, direction, name)
-                    if enemy then
-                        new_panel.enemy = enemy
-                        mission.enemies[#mission.enemies + 1] = enemy
-                    end
-                else
-                    log:warn_data("Skipping enemy spawn on a non-enemy or occupied panel", {
-                        base_area_id = mission.base_area_id,
-                        instance_area_id = mission.area_id,
-                        enemy_name = name,
-                        x = position.x,
-                        y = position.y,
-                        z = position.z,
-                        source_object_id = object.id,
-                        source_panel_type = new_panel.type,
-                    })
-                end
+                pending_enemy_spawns[#pending_enemy_spawns + 1] = {
+                    source_object_id = object.id,
+                    source_panel = new_panel,
+                    name = object.custom_properties[Constants.CustomProperties.Spawns],
+                    direction = object.custom_properties[Constants.CustomProperties.Direction],
+                    position = { x = object.x, y = object.y, z = object.z },
+                }
             end
         end
     end
+
+    -- Now that the complete panel grid is available, resolve each configured
+    -- panel enemy spawn. This ensures every Dark Hole checks its actual adjacent
+    -- destination panel, regardless of Tiled object ordering.
+    local spawned_panel_enemy_count = 0
+    for _, pending in ipairs(pending_enemy_spawns) do
+        local position = EnemyHelpers.offset_position_with_direction(
+            pending.position, pending.direction)
+        if EnemyHelpers.can_spawn_on(mission, position.x, position.y, position.z) then
+            local enemy = Enemy.from(mission, position, pending.direction, pending.name)
+            if enemy then
+                -- The override belongs to this source Dark Hole, not to the
+                -- enemy template. Different Dark Holes can therefore spawn
+                -- the same bot type with different HP values.
+                apply_dark_hole_minion_health_to_bot(pending.source_panel, enemy)
+                pending.source_panel.enemy = enemy
+                mission.enemies[#mission.enemies + 1] = enemy
+                spawned_panel_enemy_count = spawned_panel_enemy_count + 1
+                log:info_data("Configured panel enemy spawned", {
+                    base_area_id = mission.base_area_id,
+                    instance_area_id = mission.area_id,
+                    source_object_id = pending.source_object_id,
+                    source_panel_type = pending.source_panel.type,
+                    enemy_name = pending.name,
+                    direction = tostring(pending.direction),
+                    x = position.x, y = position.y, z = position.z,
+                })
+            else
+                log:warn_data("Configured panel enemy creation returned nil", {
+                    base_area_id = mission.base_area_id,
+                    instance_area_id = mission.area_id,
+                    source_object_id = pending.source_object_id,
+                    enemy_name = pending.name,
+                    x = position.x, y = position.y, z = position.z,
+                })
+            end
+        else
+            log:warn_data("Skipping enemy spawn on a non-enemy or occupied panel after panel indexing", {
+                base_area_id = mission.base_area_id,
+                instance_area_id = mission.area_id,
+                enemy_name = pending.name,
+                x = position.x, y = position.y, z = position.z,
+                source_object_id = pending.source_object_id,
+                source_panel_type = pending.source_panel.type,
+            })
+        end
+    end
+
+    log:info_data("Completed configured panel enemy spawns", {
+        base_area_id = mission.base_area_id,
+        instance_area_id = mission.area_id,
+        configured_spawn_count = #pending_enemy_spawns,
+        spawned_count = spawned_panel_enemy_count,
+    })
 
     -- Spawn modes are resolved only after all panel objects have been indexed,
     -- so On Dark Hole Cleared can correctly inspect its full group.
@@ -1180,15 +1409,14 @@ function Mission:spawn_boss(boss_id, force, triggered)
     enemy.boss_object_id = definition.object_id
     enemy.boss_definition = definition
     if definition.max_health_override > 0 then
-        -- Boss Health Override defines the boss' starting HP as well as its
-        -- maximum HP. Initialize both values here, before the boss can enter
-        -- battle. After the first battle, EnemyHelpers.sync_health() updates
-        -- enemy.health from the battle results; build_encounter_data() then
-        -- forwards that current value into later encounters. Do not reapply
-        -- this override during subsequent encounters, or defeated damage
-        -- would be lost.
+        -- Apply the Tiled override once at spawn. ezencounters consumes the
+        -- persistent current HP through data.enemies[index].health and calls
+        -- character:set_health() during package_build. max_health remains the
+        -- persistent bot's healing/UI cap; ezencounters' max_hp field is not
+        -- currently applied by its entry script.
         enemy.health = definition.max_health_override
         enemy.max_health = definition.max_health_override
+        EnemyHelpers.update_name(enemy)
     end
     if definition.display_name ~= "" then
         enemy.display_name = definition.display_name
@@ -1208,9 +1436,12 @@ function Mission:spawn_boss(boss_id, force, triggered)
         boss_id = definition.boss_id,
         object_id = definition.object_id,
         enemy_name = definition.enemy_name,
+        enemy_template = enemy.template_name,
         spawn_mode = definition.spawn_mode,
         x = position.x, y = position.y, z = position.z,
         health = enemy.health,
+        max_health = enemy.max_health,
+        health_override = definition.max_health_override,
     })
     return true
 end

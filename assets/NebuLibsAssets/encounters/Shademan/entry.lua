@@ -11,7 +11,9 @@ function package_init(package)
     package:set_description("Don't underestimate the Darkloids!")
     package:set_speed(1)
     package:set_attack(40)
-    package:set_health(600)
+    -- Match the character's highest built-in rank (SP = 1200 HP).
+    -- Liberation passes persistent current HP through data.health.
+    package:set_health(1200)
     package:set_preview_texture_path(_modpath.."preview.png")
 end
 

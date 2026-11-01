@@ -3103,7 +3103,7 @@ return {
     ["Dark Hole"] = {
       color = "#663366",
       category    = "gameplay",
-      description = "Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole with one or two boss groups.",
+      description = "Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole with one or two boss groups. Minion Health Override controls the starting battle HP of the enemy spawned by this Dark Hole, such as its BigBrute.",
       members = {
         {
           ["category"] = "gameplay",
@@ -3118,6 +3118,13 @@ return {
           ["name"] = "Boss ID 2",
           ["type"] = "string",
           ["value"] = ""
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Optional starting battle HP for the enemy spawned by this Dark Hole (for example, its BigBrute). Applies only to the matching enemy entry in this Dark Hole's encounter; other encounter enemies keep their configured HP. Zero or blank keeps the encounter-defined HP.",
+          ["name"] = "Minion Health Override",
+          ["type"] = "number",
+          ["value"] = 0
         },
       },
     },

@@ -30,6 +30,12 @@ local function validate_object(area_id, object)
             log("ERROR", "Dark Hole at ("..object.x..","..object.y..") missing 'Direction' property")
             return false
         end
+        local minion_health_override = tonumber(
+            object.custom_properties[Constants.CustomProperties.MinionHealthOverride])
+        if minion_health_override and minion_health_override < 0 then
+            log("ERROR", "Dark Hole at ("..object.x..","..object.y..") has a negative 'Minion Health Override'")
+            return false
+        end
     end
 
     -- Boss Dark Panel validation (also accepts legacy objects carrying Boss).

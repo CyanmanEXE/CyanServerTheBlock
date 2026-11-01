@@ -511,10 +511,10 @@ end
 function package_init(self)
     --meta
     self:set_name("Shademan")
-    local rank = self:get_rank()
-    local health = 600
-    if rank == Rank.EX then health = 1000 elseif rank == Rank.SP then health = 1200 end
-    self:set_health(health)
+    -- Give ShadeMan enough natural HP capacity for persistent liberation
+    -- boss overrides. The encounter mutator assigns the actual starting HP.
+    -- Rank still controls ShadeMan's attacks; it no longer limits HP capacity.
+    self:set_health(1200)
     self:set_texture(Engine.load_texture(_modpath.."shademan.png"))
     self.anim = self:get_animation()
     local previous_tile = nil

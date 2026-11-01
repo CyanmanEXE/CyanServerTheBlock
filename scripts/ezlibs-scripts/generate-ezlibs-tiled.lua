@@ -774,6 +774,7 @@ local object_types = {
         members = {
             prop("Boss ID 1", "string", ""),
             prop("Boss ID 2", "string", ""),
+            prop("Minion Health Override", "number", 0),
         }
     },
     {
@@ -824,7 +825,7 @@ local META = {
         ["Boss Dark Panel"] = { category = "gameplay",
             description = "A Liberation boss spawn point. Select an enemy template, spawn mode, optional boss dependency, position offsets, facing, health override, and display name." },
         ["Dark Hole"] = { category = "gameplay",
-            description = "Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole with one or two boss groups." },
+            description = "Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole with one or two boss groups. Minion Health Override controls the starting battle HP of the enemy spawned by this Dark Hole, such as its BigBrute." },
         ["Indestructible Panel"] = { category = "gameplay",
             description = "Placed Liberation panel object. Boss ID 1/2 define boss-group unlock requirements; Type selects All or Any when both are set. Shared=true waits for all Dark Holes in the mission." },
         ["Waypoint"] = { category = "gameplay",
@@ -915,6 +916,7 @@ local META = {
         ["Dark Hole"] = {
             ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement." },
             ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement." },
+            ["Minion Health Override"] = { category = "gameplay", description = "Optional starting battle HP for the enemy spawned by this Dark Hole (for example, its BigBrute). Applies only to the matching enemy entry in this Dark Hole's encounter; other encounter enemies keep their configured HP. Zero or blank keeps the encounter-defined HP." },
         },
         ["Indestructible Panel"] = {
             ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier required to unlock this panel." },

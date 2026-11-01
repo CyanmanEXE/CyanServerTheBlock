@@ -995,12 +995,13 @@ A Liberation boss spawn point. Select an enemy template, spawn mode, optional bo
 
 ### Dark Hole
 **Category:** gameplay
-Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole with one or two boss groups.
+Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole with one or two boss groups. Minion Health Override controls the starting battle HP of the enemy spawned by this Dark Hole, such as its BigBrute.
 
 | Property | Type | Required | Default | Category | Description |
 |---|---|---|---|---|---|
 | `Boss ID 1` | string |  | `""` | gameplay | First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement. |
 | `Boss ID 2` | string |  | `""` | gameplay | Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement. |
+| `Minion Health Override` | number |  | 0 | gameplay | Optional starting battle HP for the enemy spawned by this Dark Hole (for example, its BigBrute). Applies only to the matching enemy entry in this Dark Hole's encounter; other encounter enemies keep their configured HP. Zero or blank keeps the encounter-defined HP. |
 
 ### Indestructible Panel
 **Category:** gameplay
