@@ -149,6 +149,7 @@
    <properties>
     <property name="Auto Face Player" type="bool" value="true"/>
     <property name="Boss" value="ShadeMan"/>
+    <property name="Boss Health Override" value="1200"/>
     <property name="Boss ID" value="ShadeMan_01"/>
     <property name="Direction" value="Up Left"/>
    </properties>

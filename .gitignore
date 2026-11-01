@@ -1,5 +1,7 @@
 memory/**
 assets/avatars/**
-scripts/ezlibs-types.json
+scripts/ezlibs-scripts/ezlibs-types.json
+scripts/ezlibs-scripts/ezlibs-tiled-schema.lua
+scripts/ezlibs-scripts/ezlibs-tiled-reference.md
 CyberSpace.tiled-project
 CyberSpace.tiled-session
