@@ -2985,6 +2985,28 @@ return {
         },
       },
     },
+    ["Spawn Point"] = {
+      color = "#66ccff",
+      category    = "gameplay",
+      description = "Player arrival point for Liberation missions. The assigned player faces this direction after transfer; Next Spawn links to the next player's Spawn Point.",
+      members = {
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Optional Tiled Object reference to the next Spawn Point in the player assignment order. If empty, the mission returns to the default object named Spawn.",
+          ["name"] = "Next Spawn",
+          ["type"] = "object",
+          ["value"] = ""
+        },
+        {
+          ["category"] = "appearance",
+          ["description"] = "Direction the player assigned to this Spawn Point faces immediately after transferring into the Liberation instance. Supports all eight directions; defaults to Down.",
+          ["name"] = "Facing Direction",
+          ["propertyType"] = "Direction",
+          ["type"] = "string",
+          ["value"] = "Down"
+        },
+      },
+    },
     ["Boss Dark Panel"] = {
       color = "#cc3366",
       category    = "gameplay",

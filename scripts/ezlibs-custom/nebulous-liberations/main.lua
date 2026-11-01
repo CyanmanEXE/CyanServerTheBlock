@@ -38,6 +38,29 @@ local gate_to_area_map = {}
 local instances = {}
 local players = {}
 
+local SPAWN_DIRECTIONS = {
+    ["Up"] = true,
+    ["Down"] = true,
+    ["Left"] = true,
+    ["Right"] = true,
+    ["Up Left"] = true,
+    ["Up Right"] = true,
+    ["Down Left"] = true,
+    ["Down Right"] = true,
+}
+
+local function get_spawn_direction(spawn)
+    local custom_properties = spawn and spawn.custom_properties
+    local direction = custom_properties
+        and custom_properties[Constants.CustomProperties.FacingDirection]
+
+    if type(direction) == "string" and SPAWN_DIRECTIONS[direction] then
+        return direction
+    end
+
+    return "Down"
+end
+
 local remove_instance
 
 local function transfer_players_to_new_instance(base_area, player_ids)
@@ -144,13 +167,15 @@ local function transfer_players_to_new_instance(base_area, player_ids)
             player_id = player.id,
             instance_area_id = instance_id,
         })
+        local spawn_direction = get_spawn_direction(spawn)
         local transferred, transfer_error = EzMapInstance.transfer_player(
             instance_id,
             player.id,
             spawn.x,
             spawn.y,
             spawn.z,
-            true
+            true,
+            spawn_direction
         )
         if not transferred then
             log:error_data("Liberation player transfer request failed", {

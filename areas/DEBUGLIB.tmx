@@ -28,18 +28,21 @@
  <objectgroup id="2" name="Object Layer 1">
   <object id="1" name="Spawn" type="Spawn Point" x="144" y="112">
    <properties>
+    <property name="Facing Direction" propertytype="Direction" value="Down Right"/>
     <property name="Next Spawn" type="int" value="2"/>
    </properties>
    <point/>
   </object>
   <object id="2" name="Spawn2" type="Spawn Point" x="112" y="80">
    <properties>
+    <property name="Facing Direction" propertytype="Direction" value="Down Right"/>
     <property name="Next Spawn" type="int" value="3"/>
    </properties>
    <point/>
   </object>
   <object id="3" name="Spawn3" type="Spawn Point" x="112" y="144">
    <properties>
+    <property name="Facing Direction" propertytype="Direction" value="Right"/>
     <property name="Next Spawn" type="int" value="1"/>
    </properties>
    <point/>

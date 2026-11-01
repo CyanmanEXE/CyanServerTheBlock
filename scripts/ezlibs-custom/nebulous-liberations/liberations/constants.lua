@@ -57,6 +57,7 @@ Constants.CustomProperties = {
     DamageDealt = "Damage Dealt",
     Money = "Money",
     NextSpawn = "Next Spawn",
+    FacingDirection = "Facing Direction",
     GateToRemove = "Gate To Remove",
     LiberationMapName = "Liberation Map Name",
 }

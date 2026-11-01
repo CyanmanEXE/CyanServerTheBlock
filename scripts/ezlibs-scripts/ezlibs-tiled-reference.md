@@ -965,6 +965,15 @@ Interactive gate that starts the liberation mission named by `Liberation Map Fil
 |---|---|---|---|---|---|
 | `Liberation Map File Name` | string |  | `""` | gameplay | Area ID of the liberation mission this gate starts. Must match the mission map's area ID. |
 
+### Spawn Point
+**Category:** gameplay
+Player arrival point for Liberation missions. The assigned player faces this direction after transfer; Next Spawn links to the next player's Spawn Point.
+
+| Property | Type | Required | Default | Category | Description |
+|---|---|---|---|---|---|
+| `Facing Direction` | string (Direction) |  | `Down` | appearance | Direction the player assigned to this Spawn Point faces immediately after transferring into the Liberation instance. Supports all eight directions; defaults to Down. |
+| `Next Spawn` | object |  | `""` | gameplay | Optional Tiled Object reference to the next Spawn Point in the player assignment order. If empty, the mission returns to the default object named Spawn. |
+
 ### Boss Dark Panel
 **Category:** gameplay
 A Liberation boss spawn point. Select an enemy template, spawn mode, optional boss dependency, position offsets, facing, health override, and display name.

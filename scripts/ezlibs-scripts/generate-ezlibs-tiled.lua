@@ -735,6 +735,15 @@ local object_types = {
             prop("Liberation Map File Name", "string", ""),
         }
     },
+    {
+        name = "Spawn Point",
+        color = "#66ccff",
+        useAs = { "object" },
+        members = {
+            prop("Next Spawn", "object", ""),
+            prop("Facing Direction", "string", "Down", "Direction"),
+        }
+    },
     -- Boss Dark Panel is a placed tile object. The boss settings live here,
     -- rather than being repeated across map-specific scripts.
     {
@@ -810,6 +819,8 @@ local META = {
             description = "Configuration object for a liberation mission. Liberation Tileset and Max Order Points are read from this object. Target phase/player counts, background, music, and other legacy settings are still read from area custom properties." },
         ["Liberation Gate"] = { category = "gameplay",
             description = "Interactive gate that starts the liberation mission named by `Liberation Map File Name`." },
+        ["Spawn Point"] = { category = "gameplay",
+            description = "Player arrival point for Liberation missions. The assigned player faces this direction after transfer; Next Spawn links to the next player's Spawn Point." },
         ["Boss Dark Panel"] = { category = "gameplay",
             description = "A Liberation boss spawn point. Select an enemy template, spawn mode, optional boss dependency, position offsets, facing, health override, and display name." },
         ["Dark Hole"] = { category = "gameplay",
@@ -875,6 +886,16 @@ local META = {
             ["Liberation Map File Name"] = {
                 category = "gameplay",
                 description = "Area ID of the liberation mission this gate starts. Must match the mission map's area ID.",
+            },
+        },
+        ["Spawn Point"] = {
+            ["Next Spawn"] = {
+                category = "gameplay",
+                description = "Optional Tiled Object reference to the next Spawn Point in the player assignment order. If empty, the mission returns to the default object named Spawn.",
+            },
+            ["Facing Direction"] = {
+                category = "appearance",
+                description = "Direction the player assigned to this Spawn Point faces immediately after transferring into the Liberation instance. Supports all eight directions; defaults to Down.",
             },
         },
         ["Boss Dark Panel"] = {
