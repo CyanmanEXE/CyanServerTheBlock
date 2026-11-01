@@ -16,7 +16,6 @@ local PointsGauge = require("scripts/ezlibs-custom/nebulous-liberations/liberati
 local HPIndicators = require("scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators")
 local Emotes = require("scripts/libs/emotes")
 local ezmemory = require("scripts/ezlibs-scripts/ezmemory")
-local EzMapInstance = require("scripts/ezlibs-scripts/ezmapinstance")
 local helpers = require('scripts/ezlibs-scripts/helpers')
 
 local function includes(table, value)
@@ -953,6 +952,11 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
         })
     end
 
+    -- Enemy spawn requests are deferred until every panel has been indexed.
+    -- Otherwise a spawn can be rejected simply because its destination panel
+    -- appears later in Net.list_objects() order (notably Dark Hole + Direction).
+    local pending_enemy_spawns = {}
+
     local object_ids = Net.list_objects(mission.area_id)
     for _, object_id in ipairs(object_ids) do
         local object = Net.get_object_by_id(mission.area_id, object_id)
@@ -1058,29 +1062,73 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 mission.boss_definitions[#mission.boss_definitions + 1] = definition
             end
             if object.custom_properties[Constants.CustomProperties.Spawns] then
-                local name = object.custom_properties[Constants.CustomProperties.Spawns]
-                local direction = object.custom_properties[Constants.CustomProperties.Direction]
-                local position = { x = object.x, y = object.y, z = object.z }
-                position = EnemyHelpers.offset_position_with_direction(position, direction)
-                if EnemyHelpers.can_spawn_on(mission, position.x, position.y, position.z) then
-                    local enemy = Enemy.from(mission, position, direction, name)
-                    if enemy then
-                        new_panel.enemy = enemy
-                        mission.enemies[#mission.enemies + 1] = enemy
-                    end
-                else
-                    log:warn_data("Skipping enemy spawn on a non-enemy or occupied panel", {
-                        base_area_id = mission.base_area_id,
-                        instance_area_id = mission.area_id,
-                        enemy_name = name,
-                        x = position.x,
-                        y = position.y,
-                        z = position.z,
-                        source_object_id = object.id,
-                        source_panel_type = new_panel.type,
-                    })
-                end
+                pending_enemy_spawns[#pending_enemy_spawns + 1] = {
+                    source_object_id = object.id,
+                    source_panel = new_panel,
+                    name = object.custom_properties[Constants.CustomProperties.Spawns],
+                    direction = object.custom_properties[Constants.CustomProperties.Direction],
+                    position = { x = object.x, y = object.y, z = object.z },
+                }
             end
+        end
+    end
+
+    -- Resolve configured panel spawns only after the complete panel grid exists.
+    -- This makes spawn validation independent of the order returned by
+    -- Net.list_objects(), so each Dark Hole can find its configured adjacent panel.
+    for _, spawn_request in ipairs(pending_enemy_spawns) do
+        local position = EnemyHelpers.offset_position_with_direction(
+            spawn_request.position,
+            spawn_request.direction
+        )
+
+        if EnemyHelpers.can_spawn_on(mission, position.x, position.y, position.z) then
+            local enemy = Enemy.from(
+                mission,
+                position,
+                spawn_request.direction,
+                spawn_request.name
+            )
+            if enemy then
+                spawn_request.source_panel.enemy = enemy
+                mission.enemies[#mission.enemies + 1] = enemy
+                log:info_data("Configured panel enemy spawned", {
+                    base_area_id = mission.base_area_id,
+                    instance_area_id = mission.area_id,
+                    source_object_id = spawn_request.source_object_id,
+                    source_panel_type = spawn_request.source_panel.type,
+                    enemy_name = spawn_request.name,
+                    direction = spawn_request.direction,
+                    x = position.x,
+                    y = position.y,
+                    z = position.z,
+                })
+            else
+                log:warn_data("Configured panel enemy creation returned nil", {
+                    base_area_id = mission.base_area_id,
+                    instance_area_id = mission.area_id,
+                    source_object_id = spawn_request.source_object_id,
+                    enemy_name = spawn_request.name,
+                    x = position.x,
+                    y = position.y,
+                    z = position.z,
+                })
+            end
+        else
+            local destination_panel = mission:get_panel_at(position.x, position.y, position.z)
+            log:warn_data("Skipping configured panel enemy spawn: destination is not an available enemy panel", {
+                base_area_id = mission.base_area_id,
+                instance_area_id = mission.area_id,
+                source_object_id = spawn_request.source_object_id,
+                source_panel_type = spawn_request.source_panel.type,
+                enemy_name = spawn_request.name,
+                direction = spawn_request.direction,
+                x = position.x,
+                y = position.y,
+                z = position.z,
+                destination_panel_type = destination_panel and destination_panel.type or nil,
+                occupied = EnemyHelpers.is_occupied_by_enemy(mission, position.x, position.y, position.z),
+            })
         end
     end
 
@@ -1307,13 +1355,7 @@ function Mission:clean_up()
     for _, id in ipairs(Net.list_bots(self.area_id)) do
         Net.remove_bot(id)
     end
-    local removed, remove_error = EzMapInstance.remove(self.area_id)
-    if not removed then
-        log:error_data("Could not remove Liberation map instance", {
-            instance_area_id = self.area_id,
-            error = tostring(remove_error),
-        })
-    end
+    Net.remove_area(self.area_id)
     self.resolve_disposal()
     return self.disposal_promise
 end

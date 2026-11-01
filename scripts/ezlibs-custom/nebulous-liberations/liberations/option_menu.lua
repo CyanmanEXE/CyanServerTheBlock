@@ -23,6 +23,11 @@ local INPUT_SETTLE_SECONDS = 0.10
 local TEXT_SCALE = 1.5
 local SLICE_SCALE = 1.5
 local MENU_MAX_WIDTH = 220
+-- Every Liberation menu uses the width measured from the widest known menu
+-- title. Panel interaction is currently the widest menu, so all menus share
+-- that width instead of resizing to their individual contents.
+local SHARED_MENU_TITLE = "Panel interaction"
+local shared_menu_width = nil
 local SCREEN_MARGIN = 12
 -- Keep the header and body edges touching. A positive gap creates a
 -- visible horizontal line between the two separate panel sprites.
@@ -43,8 +48,27 @@ local body_style = Displayer.Builder.sliceStyle9(
 )
 
 local active_menus = {}
-local MENU_ACTIONS = { "Up", "Down", "Confirm", "Cancel" }
+-- Direction actions are generated dynamically by the input controller. A
+-- diagonal is a distinct action (for example, UpRight), not a simultaneous
+-- Up + Right action, so include every direction in the menu's release guard.
+local MENU_ACTIONS = {
+    "Up", "Down", "Left", "Right",
+    "UpLeft", "UpRight", "DownLeft", "DownRight",
+    "Confirm", "Cancel",
+}
 local CANCEL_OPTION = "Cancel"
+
+local function is_menu_up_pressed(controller, owner)
+    return controller:is_action_pressed("Up", owner)
+        or controller:is_action_pressed("UpLeft", owner)
+        or controller:is_action_pressed("UpRight", owner)
+end
+
+local function is_menu_down_pressed(controller, owner)
+    return controller:is_action_pressed("Down", owner)
+        or controller:is_action_pressed("DownLeft", owner)
+        or controller:is_action_pressed("DownRight", owner)
+end
 
 local function make_header_children(title)
     return {
@@ -158,27 +182,29 @@ local function cleanup(player_id, menu, result)
 end
 
 local function apply_shared_width(menu)
-    local header_width = menu.header_panel:getSize()
-    local body_width = menu.body_panel:getSize()
+    if not shared_menu_width then
+        -- Measure the reference title, not whichever menu happened to open
+        -- first. This makes the width deterministic across all menu types.
+        local measured_width = menu.header_panel:getSize()
+        measured_width = tonumber(measured_width) or 0
+        shared_menu_width = math.min(
+            math.max(measured_width, 1),
+            MENU_MAX_WIDTH
+        )
+    end
 
-    local shared_width = math.max(
-        tonumber(header_width) or 0,
-        tonumber(body_width) or 0
-    )
-    shared_width = math.min(shared_width, MENU_MAX_WIDTH)
-    shared_width = math.max(shared_width, 1)
+    menu.shared_width = shared_menu_width
 
-    -- The sliced-sprite TextPanel layout now supports a fixed width with an
-    -- independently measured height. This lets wrapped options grow vertically.
-    menu.shared_width = shared_width
+    -- Fix both 9-slice panels to the same width. Their heights remain measured
+    -- independently from their own title/options and can grow when text wraps.
     menu.header_panel:setOptions({
         auto_size = false,
-        width = shared_width,
+        width = shared_menu_width,
     })
 
     menu.body_panel:setOptions({
         auto_size = false,
-        width = shared_width,
+        width = shared_menu_width,
     })
 end
 
@@ -199,7 +225,9 @@ local function create_panels(player_id, menu)
         child_padding = initial_options.child_padding,
         slice_scale = initial_options.slice_scale,
         z = initial_options.z,
-        children = make_header_children(menu.title),
+        -- The first menu establishes the shared width using the widest title.
+        -- Its real title is restored after the fixed width has been applied.
+        children = make_header_children(shared_menu_width and menu.title or SHARED_MENU_TITLE),
     })
 
     local body_options = Displayer.Builder.columnPanelOptions({
@@ -246,6 +274,9 @@ local function create_panels(player_id, menu)
     menu.body_panel = body_panel
 
     apply_shared_width(menu)
+    if menu.title ~= SHARED_MENU_TITLE then
+        menu.header_panel:setChildren(make_header_children(menu.title))
+    end
     position_panels(menu)
     return true
 end
@@ -256,13 +287,21 @@ Net:on("tick", function(event)
         if menu.active and not menu.finished then
             if not Net.is_player(player_id) then
                 cleanup(player_id, menu, nil)
-            elseif menu.controller:is_action_pressed("Up", menu.owner) then
+            elseif menu.waiting_for_direction_release then
+                -- A menu can open while a cardinal or diagonal direction is
+                -- already held. Wait until the complete directional input is
+                -- neutral before accepting navigation, including transitions
+                -- such as UpRight -> Up when only Right is released.
+                if not menu.controller:get_active_direction(menu.owner) then
+                    menu.waiting_for_direction_release = false
+                end
+            elseif is_menu_up_pressed(menu.controller, menu.owner) then
                 menu.selected = menu.selected - 1
                 if menu.selected < 1 then
                     menu.selected = #menu.options
                 end
                 refresh_body(menu)
-            elseif menu.controller:is_action_pressed("Down", menu.owner) then
+            elseif is_menu_down_pressed(menu.controller, menu.owner) then
                 menu.selected = menu.selected + 1
                 if menu.selected > #menu.options then
                     menu.selected = 1
@@ -374,6 +413,11 @@ function OptionMenu.select(player_id, options, title)
 
             controller:consume(owner)
             controller:require_release(MENU_ACTIONS, owner)
+            -- require_release protects action edges; this additional neutral
+            -- check protects against a held diagonal changing into a cardinal
+            -- action without the player's remaining direction being released.
+            menu.waiting_for_direction_release =
+                controller:get_active_direction(owner) ~= nil
             menu.active = true
         end)
     end)
