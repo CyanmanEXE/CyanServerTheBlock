@@ -23,7 +23,9 @@ function EnemyHelpers.play_attack_animation(enemy)
 end
 
 function EnemyHelpers.update_name(enemy)
-  Net.set_bot_name(enemy.id, enemy.battle_name .. ": " .. enemy.health)
+  if not enemy or enemy.id == nil then return end
+  local display_name = enemy.display_name or enemy.battle_name or enemy.name or "Enemy"
+  Net.set_bot_name(enemy.id, tostring(display_name) .. ": " .. tostring(enemy.health or 0))
 end
 
 function EnemyHelpers.heal(enemy, amount)
@@ -49,14 +51,51 @@ function EnemyHelpers.face_position(enemy, x, y)
   Net.set_bot_direction(enemy.id, Direction.diagonal_from_offset(x, y))
 end
 
-function EnemyHelpers.can_move_to(instance, x, y, z)
-  local panel = instance:get_panel_at(x, y, z)
-
-  return panel and (
+local function is_enemy_team_panel(panel)
+  return panel ~= nil and (
     panel.type == "Dark Panel" or
     panel.type == "Item Panel" or
     panel.type == "Trap Panel"
   )
+end
+
+function EnemyHelpers.is_occupied_by_enemy(instance, x, y, z, ignored_enemy)
+  if not instance or type(instance.enemies) ~= "table" then
+    return false
+  end
+
+  x = math.floor(x)
+  y = math.floor(y)
+  z = math.floor(z)
+
+  for _, enemy in ipairs(instance.enemies) do
+    if enemy and enemy ~= ignored_enemy and enemy.id ~= nil
+      and enemy.x ~= nil and enemy.y ~= nil and enemy.z ~= nil
+      and math.floor(enemy.x) == x
+      and math.floor(enemy.y) == y
+      and math.floor(enemy.z) == z then
+      local ok, alive = pcall(Net.is_bot, enemy.id)
+      if ok and alive then
+        return true
+      end
+    end
+  end
+
+  return false
+end
+
+-- Liberation's enemy-owned territory is represented by the panel types
+-- already used by enemy movement. Keep spawning and movement on the same rule.
+function EnemyHelpers.can_spawn_on(instance, x, y, z)
+  local panel = instance and instance:get_panel_at(x, y, z)
+  return is_enemy_team_panel(panel)
+    and not EnemyHelpers.is_occupied_by_enemy(instance, x, y, z)
+end
+
+function EnemyHelpers.can_move_to(instance, x, y, z, moving_enemy)
+  local panel = instance and instance:get_panel_at(x, y, z)
+  return is_enemy_team_panel(panel)
+    and not EnemyHelpers.is_occupied_by_enemy(instance, x, y, z, moving_enemy)
 end
 
 -- takes instance to move player cameras
@@ -148,7 +187,7 @@ function EnemyHelpers.offset_position_with_direction(position, direction)
   elseif direction == Direction.UP_LEFT then
     position.x = position.x - 1
   elseif direction == Direction.UP_RIGHT then
-    position.x = position.y - 1
+    position.y = position.y - 1
   end
 
   return position
@@ -185,14 +224,47 @@ function EnemyHelpers.find_closest_player_session(instance, enemy)
   return closest_session
 end
 
+local function normalize_enemy_name(value)
+  if value == nil then return nil end
+  local name = tostring(value)
+  -- Some battle packages expose the visible bot name (e.g. "BigBrute: 80")
+  -- instead of the registered enemy alias.
+  name = name:gsub("%s*:%s*%-?%d+%s*$", "")
+  return string.lower(name)
+end
+
 function EnemyHelpers.sync_health(enemy, results)
-  for _, data in ipairs(results.enemies) do
-    if enemy.battle_name == data.id then
-      enemy.health = data.health
-      EnemyHelpers.update_name(enemy)
-      break
+  if not enemy or type(results) ~= "table" then return false end
+  local reported_enemies = results.enemies or results.Enemies
+  if type(reported_enemies) ~= "table" or #reported_enemies == 0 then
+    return false
+  end
+
+  local expected_name = normalize_enemy_name(enemy.battle_name or enemy.name)
+  if not expected_name then return false end
+
+  for _, data in ipairs(reported_enemies) do
+    if type(data) == "table" then
+      local reported_names = {}
+      -- Lua's ipairs stops at the first nil, so append the fields explicitly.
+      for _, field_name in ipairs({"ID", "id", "name", "Name", "bot_name", "enemy_name", "EnemyName"}) do
+        local normalized = normalize_enemy_name(data[field_name])
+        if normalized then
+          reported_names[#reported_names + 1] = normalized
+        end
+      end
+      local reported_health = tonumber(data.Health)
+      if reported_health == nil then reported_health = tonumber(data.health) end
+      for _, reported_name in ipairs(reported_names) do
+        if reported_name == expected_name and reported_health ~= nil then
+          enemy.health = math.max(0, reported_health)
+          EnemyHelpers.update_name(enemy)
+          return true
+        end
+      end
     end
   end
+  return false
 end
 
 return EnemyHelpers

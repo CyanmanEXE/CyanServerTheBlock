@@ -43,6 +43,9 @@
  <tileset firstgid="487" source="../assets/tiles/fangs.tsx"/>
  <tileset firstgid="490" source="../assets/tiles/fountain.tsx"/>
  <tileset firstgid="496" source="../assets/tiles/Beyblade.tsx"/>
+ <tileset firstgid="502" source="../assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx"/>
+ <tileset firstgid="503" source="../assets/ezlibs-custom/nebulous-liberations/selected tile.tsx"/>
+ <tileset firstgid="509" source="../assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx"/>
  <layer id="1" name="Tile Layer 1" width="105" height="60">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -381,7 +384,6 @@
   <object id="60" name="GATE TEST" type="Liberation Gate" gid="141" x="1952" y="888" width="63" height="92">
    <properties>
     <property name="Liberation Map File Name" value="testlib"/>
-    <property name="Liberation Map Name" value="PracticeArea"/>
    </properties>
   </object>
   <object id="61" name="Syrup" type="NPC" x="1880" y="1008">

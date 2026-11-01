@@ -1338,7 +1338,6 @@
   <object id="185" name="WiltMan Liberation" type="Liberation Gate" gid="211" x="1840" y="2008" width="63" height="92">
    <properties>
     <property name="Liberation Map File Name" value="DEBUGLIB"/>
-    <property name="Liberation Map Name" value="DEBUGIN"/>
    </properties>
   </object>
   <object id="186" name="Help Spawn" type="Liberation Tutorial" x="1816" y="2112">

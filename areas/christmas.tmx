@@ -29,7 +29,10 @@
  <tileset firstgid="335" source="../assets/tiles/bn6_securitycube.tsx"/>
  <tileset firstgid="349" source="../assets/tiles/SnowPile.tsx"/>
  <tileset firstgid="350" source="../assets/tiles/Quadragon Warp.tsx"/>
- <layer id="1" name="Tile Layer 1" width="50" height="45">
+  <tileset firstgid="362" source="../assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx"/>
+ <tileset firstgid="363" source="../assets/ezlibs-custom/nebulous-liberations/selected tile.tsx"/>
+ <tileset firstgid="369" source="../assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx"/>
+<layer id="1" name="Tile Layer 1" width="50" height="45">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

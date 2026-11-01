@@ -3,12 +3,18 @@
 
 local Constants = {}
 
+-- Defaults used when a Liberation Config object omits optional settings.
+Constants.Defaults = {
+    MaxOrderPoints = 9,
+}
+
 -- Map custom property keys
 Constants.CustomProperties = {
     RespawnArea = "Respawn Area",
     WaitingArea = "Waiting Area",
     LiberationMapFileName = "Liberation Map File Name",
     LiberationTileset = "Liberation Tileset",
+    MaxOrderPoints = "Max Order Points",
     LiberationEncounters = "Liberation Encounters",
     TargetPhaseCount = "Target Phase Count",
     TargetPlayerCount = "Target Player Count",
@@ -23,6 +29,20 @@ Constants.CustomProperties = {
     Compress = "Compress",
     Decompress = "Decompress",
     Boss = "Boss",
+    BossID = "Boss ID",
+    BossID1 = "Boss ID 1",
+    BossID2 = "Boss ID 2",
+    Type = "Type",
+    SpawnMode = "Spawn Mode",
+    TriggerBoss = "Trigger Boss",
+    SpawnOffsetX = "Spawn Offset X",
+    SpawnOffsetY = "Spawn Offset Y",
+    SpawnOffsetZ = "Spawn Offset Z",
+    AutoFacePlayer = "Auto Face Player",
+    BossHealthOverride = "Boss Health Override",
+    SpawnEnabled = "Spawn Enabled",
+    BossDisplayName = "Boss Display Name",
+    Shared = "Shared",
     Spawns = "Spawns",
     Direction = "Direction",
     GateKey = "Gate Key",
@@ -101,6 +121,15 @@ Constants.AbilityIDs = {
 
 -- Asset paths for preloading
 Constants.PreloadAssets = {
+    "/server/assets/ezlibs-custom/nebulous-liberations/options-ui.png",
+    "/server/assets/ezlibs-custom/nebulous-liberations/options-ui.animation",
+    "/server/assets/ezlibs-custom/nebulous-liberations/attack indicator.png",
+    "/server/assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx",
+    "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.png",
+    "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx",
+    "/server/assets/ezlibs-custom/nebulous-liberations/selected tile.png",
+    "/server/assets/ezlibs-custom/nebulous-liberations/selected tile.tsx",
+
     "/server/assets/NebuLibsAssets/bots/blur.png",
     "/server/assets/NebuLibsAssets/bots/blur.animation",
     "/server/assets/NebuLibsAssets/bots/explosion.png",
@@ -115,6 +144,12 @@ Constants.PreloadAssets = {
     "/server/assets/NebuLibsAssets/sound effects/explode.ogg",
     "/server/assets/NebuLibsAssets/sound effects/paralyze.ogg",
     "/server/assets/NebuLibsAssets/sound effects/recover.ogg",
+    "/server/assets/net-games/meters/liberation-order-points/base-guage-3slice.png",
+    "/server/assets/net-games/meters/liberation-order-points/base-guage-3slice.animation",
+    "/server/assets/net-games/meters/liberation-order-points/points-3slice.png",
+    "/server/assets/net-games/meters/liberation-order-points/points-3slice.animation",
+    "/server/assets/net-games/meters/liberation-order-points/point-total-3slice.png",
+    "/server/assets/net-games/meters/liberation-order-points/point-total-3slice.animation",
 }
 
 return Constants

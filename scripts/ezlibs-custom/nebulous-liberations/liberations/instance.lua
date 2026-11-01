@@ -12,6 +12,7 @@ local Preloader = require("scripts/ezlibs-custom/nebulous-liberations/liberation
 local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberations/constants")
 local PanelRegistry = require("scripts/ezlibs-custom/nebulous-liberations/liberations/panel_registry")
 local CameraSequence = require("scripts/ezlibs-custom/nebulous-liberations/liberations/camera_sequence")
+local PointsGauge = require("scripts/ezlibs-custom/nebulous-liberations/liberations/points_gauge")
 local Emotes = require("scripts/libs/emotes")
 local ezmemory = require("scripts/ezlibs-scripts/ezmemory")
 local helpers = require('scripts/ezlibs-scripts/helpers')
@@ -23,6 +24,75 @@ local function includes(table, value)
         end
     end
     return false
+end
+
+-- Build a per-battle copy of an encounter definition. Enemy entries are copied
+-- individually because persistent liberation enemies may override `health`;
+-- mutating the cached area encounter definition would leak that HP into later
+-- encounters that use the same definition.
+local function normalize_enemy_name(value)
+    if value == nil then return nil end
+    return string.lower(tostring(value):gsub("%s*:%s*%-?%d+%s*$", ""))
+end
+
+local function build_encounter_data(encounter_definition, overrides, persistent_enemy)
+    local data = {}
+
+    for key, value in pairs(encounter_definition or {}) do
+        if key ~= "path" and key ~= "weight" then
+            if key == "enemies" and type(value) == "table" then
+                data.enemies = {}
+                for index, enemy_info in ipairs(value) do
+                    local enemy_copy = {}
+                    for enemy_key, enemy_value in pairs(enemy_info) do
+                        enemy_copy[enemy_key] = enemy_value
+                    end
+                    data.enemies[index] = enemy_copy
+                end
+            elseif key == "freedom_mission" and type(value) == "table" then
+                data.freedom_mission = {}
+                for mission_key, mission_value in pairs(value) do
+                    data.freedom_mission[mission_key] = mission_value
+                end
+            else
+                data[key] = value
+            end
+        end
+    end
+
+    for key, value in pairs(overrides or {}) do
+        if key == "freedom_mission" and type(value) == "table" then
+            local mission = {}
+            for mission_key, mission_value in pairs(data.freedom_mission or {}) do
+                mission[mission_key] = mission_value
+            end
+            for mission_key, mission_value in pairs(value) do
+                mission[mission_key] = mission_value
+            end
+            data.freedom_mission = mission
+        elseif key ~= "enemies" then
+            data[key] = value
+        end
+    end
+
+    local health_applied = false
+    if persistent_enemy and persistent_enemy.health ~= nil and type(data.enemies) == "table" then
+        local expected_name = normalize_enemy_name(persistent_enemy.battle_name or persistent_enemy.name)
+        if expected_name then
+            for _, enemy_info in ipairs(data.enemies) do
+                if type(enemy_info) == "table"
+                    and normalize_enemy_name(enemy_info.name) == expected_name then
+                    -- The ezencounters mob package consumes this field from
+                    -- data.enemies and calls character:set_health(...).
+                    enemy_info.health = persistent_enemy.health
+                    health_applied = true
+                    break
+                end
+            end
+        end
+    end
+
+    return data, health_applied
 end
 
 local debug = false
@@ -87,19 +157,114 @@ local function liberate(self)
     end
 end
 
+local function normalized_reference(value)
+    if value == nil or value == "" then return nil end
+    return tostring(value)
+end
+
+local function boss_group_ids_from_properties(properties)
+    local ids = {}
+    local seen = {}
+    properties = properties or {}
+
+    for _, property_name in ipairs({
+        Constants.CustomProperties.BossID1,
+        Constants.CustomProperties.BossID2,
+    }) do
+        local boss_id = normalized_reference(properties[property_name])
+        if boss_id and not seen[boss_id] then
+            seen[boss_id] = true
+            ids[#ids + 1] = boss_id
+        end
+    end
+
+    return ids
+end
+
+local function object_is_associated_with_boss(properties, boss_group_id)
+    for _, boss_id in ipairs(boss_group_ids_from_properties(properties)) do
+        if boss_id == tostring(boss_group_id) then
+            return true
+        end
+    end
+    return false
+end
+
+local function count_dark_holes_for_boss(self, boss_definition)
+    local count = 0
+    for _, dark_hole in ipairs(self.dark_holes or {}) do
+        if object_is_associated_with_boss(dark_hole.custom_properties, boss_definition.group_id) then
+            count = count + 1
+        end
+    end
+    return count
+end
+
 local function convert_indestructible_panels(self)
     local slide_time = .5
     local hold_time = 2
+    local converting = {}
+    local remaining = {}
+
+    for _, panel in ipairs(self.indestructible_panels or {}) do
+        local properties = panel.custom_properties or {}
+        local shared = properties[Constants.CustomProperties.Shared] == true
+            or properties[Constants.CustomProperties.Shared] == "true"
+        local panel_boss_ids = boss_group_ids_from_properties(properties)
+        local should_convert = false
+        if shared then
+            should_convert = #self.dark_holes == 0
+        elseif #panel_boss_ids > 0 then
+            local requirement_type = properties[Constants.CustomProperties.Type] or "All"
+            if requirement_type ~= "Any" then
+                requirement_type = "All"
+            end
+
+            local cleared_count = 0
+            for _, panel_boss_id in ipairs(panel_boss_ids) do
+                local boss_definition
+                for _, definition in ipairs(self.boss_definitions or {}) do
+                    if definition.group_id == panel_boss_id then
+                        boss_definition = definition
+                        break
+                    end
+                end
+
+                if boss_definition and count_dark_holes_for_boss(self, boss_definition) == 0 then
+                    cleared_count = cleared_count + 1
+                end
+            end
+
+            if requirement_type == "Any" then
+                should_convert = cleared_count > 0
+            else
+                should_convert = cleared_count == #panel_boss_ids
+            end
+        else
+            -- Unassociated panels retain mission-wide behavior.
+            should_convert = #self.dark_holes == 0
+        end
+        if should_convert then
+            converting[#converting + 1] = panel
+        else
+            remaining[#remaining + 1] = panel
+        end
+    end
+
+    if #converting == 0 then return end
 
     for _, player_session in pairs(self.player_sessions) do
         if Net.get_area_custom_properties(self.area_id)[Constants.CustomProperties.VictoryLapSong] then
             Net.set_song(self.area_id, Net.get_area_custom_properties(self.area_id)[Constants.CustomProperties.VictoryLapSong])
         end
-        player_session.player:say("No more DarkHoles! Nothing will save the Darkloids now!")
+        player_session.player:say("Indestructible Panels have been unlocked!")
         local player = player_session.player
         Net.lock_player_input(player.id)
-        Net.slide_player_camera(player.id, self.boss.x, self.boss.y, self.boss.z, slide_time)
-        Net.move_player_camera(player.id, self.boss.x, self.boss.y, self.boss.z, hold_time)
+        local focus = self.boss
+        if focus then
+            Net.slide_player_camera(player.id, focus.x, focus.y, focus.z, slide_time)
+            Net.move_player_camera(player.id, focus.x, focus.y, focus.z, hold_time)
+        end
         Net.slide_player_camera(player.id, player.x, player.y, player.z, slide_time)
         Net.unlock_player_camera(player.id)
     end
@@ -107,21 +272,24 @@ local function convert_indestructible_panels(self)
     log:info_data("Converting indestructible panels", {
         base_area_id = self.base_area_id,
         instance_area_id = self.area_id,
-        panel_count = #self.indestructible_panels,
+        panel_count = #converting,
+        remaining_count = #remaining,
     })
 
     Async.await(Async.sleep(slide_time + hold_time / 2))
 
-    for _, panel in ipairs(self.indestructible_panels) do
+    for _, panel in ipairs(converting) do
         local actual_panel = Net.get_object_by_id(self.area_id, panel.visual_object_id)
-        actual_panel.data.gid = self.BASIC_PANEL_GID_LIST[#self.BASIC_PANEL_GID_LIST]
-        actual_panel.type = Constants.PanelTypes.DarkPanel
-        panel.type = Constants.PanelTypes.DarkPanel
-        panel.visual_gid = self.BASIC_PANEL_GID_LIST[#self.BASIC_PANEL_GID_LIST]
-        Net.set_object_data(self.area_id, actual_panel.id, actual_panel.data)
-        Net.set_object_data(self.area_id, panel.id, panel.data)
+        if actual_panel then
+            actual_panel.data.gid = self.BASIC_PANEL_GID_LIST[#self.BASIC_PANEL_GID_LIST]
+            actual_panel.type = Constants.PanelTypes.DarkPanel
+            panel.type = Constants.PanelTypes.DarkPanel
+            panel.visual_gid = self.BASIC_PANEL_GID_LIST[#self.BASIC_PANEL_GID_LIST]
+            Net.set_object_data(self.area_id, actual_panel.id, actual_panel.data)
+            Net.set_object_data(self.area_id, panel.id, panel.data)
+        end
     end
-    self.indestructible_panels = nil
+    self.indestructible_panels = remaining
 
     Async.await(Async.sleep(hold_time / 2 + slide_time))
 
@@ -174,18 +342,22 @@ local function liberate_panel(self, player_session)
                 Async.await(player:message_with_mug("A Dark Hole! Begin liberation!"))
             end
             local enemy = panel.enemy
+            -- A Dark Hole fight is transient. Its battle HP must not read from
+            -- or write back to the persistent bot standing on the Dark Hole.
             local data = {
-                terrain = PanelEncounters.resolve_terrain(self, player),
-                health = enemy.max_health
+                terrain = PanelEncounters.resolve_terrain(self, player)
             }
-            local encounter_definition = PanelEncounters.resolve_encounter(self.base_area_id)
+            local encounter_category = enemy.is_boss and "bosses"
+                or enemy.is_special_encounter and "special_encounters"
+                or nil
+            local encounter_definition = PanelEncounters.resolve_encounter(self.base_area_id, encounter_category)
             log:info_data("Initiating dark hole encounter", {
                 base_area_id = self.base_area_id,
                 instance_area_id = self.area_id,
                 area_name = self.area_name,
                 player_id = player.id,
                 enemy_name = enemy.battle_name,
-                enemy_health = enemy.max_health,
+                enemy_health = enemy.health,
                 encounter_path = encounter_definition and encounter_definition.path,
                 terrain = data.terrain,
                 phase = self.phase,
@@ -198,12 +370,19 @@ local function liberate_panel(self, player_session)
                 player_session:complete_turn()
                 return
             end
-            local encounter_data = {}
-            for key, value in pairs(encounter_definition) do
-                if key ~= "path" and key ~= "weight" then encounter_data[key] = value end
-            end
-            for key, value in pairs(data) do encounter_data[key] = value end
+            local encounter_data = build_encounter_data(
+                encounter_definition, data, nil)
+            log:info_data("Prepared dark hole encounter data", {
+                encounter_name = encounter_definition.name,
+                persistent_enemy = enemy.battle_name or enemy.name,
+                persistent_health = enemy.health,
+                persistent_health_applied = false,
+                freedom_mission = encounter_data.freedom_mission ~= nil,
+            })
             local results = Async.await(player_session:initiate_encounter(encounter_definition.path, encounter_data))
+            -- Deliberately do not synchronize Dark Hole battle results to the
+            -- persistent bot. Only a battle started directly on an active bot
+            -- panel may change that bot's saved HP.
             log:info_data("Dark hole encounter results", {
                 base_area_id = self.base_area_id,
                 instance_area_id = self.area_id,
@@ -215,20 +394,28 @@ local function liberate_panel(self, player_session)
                 escape = tostring(results.escape),
                 fled = tostring(results.fled),
                 health = results.health,
-                enemy_count = #(results.enemies or {}),
+                enemy_count = #(results.enemies or results.Enemies or {}),
+                persistent_health_synced = false,
+                retained_enemy_health = enemy.health,
             })
             if not results.success then
                 player_session:complete_turn()
                 return
             end
+            -- On a successful Dark Hole battle, liberate every adjacent
+            -- liberatable panel, except panels occupied by any bot. The
+            -- selection filter is broadened only for this operation.
+            selection:set_include_all_liberatable_panels(true)
             selection:set_shape(DARK_HOLE_SHAPE, 0, -1)
             local panels = selection:get_panels()
+            selection:set_include_all_liberatable_panels(false)
             Async.await(player_session:liberate_panels(panels, results))
             Async.await(Enemy.destroy(self, panel.enemy))
             Async.await(player_session:loot_panels(panels, false, false))
-            if #self.dark_holes == 0 then
-                convert_indestructible_panels(self)
-            end
+            self:spawn_bosses_for_cleared_dark_holes()
+            -- Evaluate every Indestructible Panel against its configured Boss
+            -- ID 1/2 requirements after each successful Dark Hole liberation.
+            convert_indestructible_panels(self)
             player_session:complete_turn()
         else
             if panel.custom_properties[Constants.CustomProperties.Message] then
@@ -243,7 +430,10 @@ local function liberate_panel(self, player_session)
                 encounter_definition = PanelEncounters.resolve_encounter_value(
                     panel.custom_properties[Constants.CustomProperties.EncounterPath])
             else
-                encounter_definition = PanelEncounters.resolve_encounter(self.base_area_id)
+                local encounter_category = enemy and enemy.is_boss and "bosses"
+                    or enemy and enemy.is_special_encounter and "special_encounters"
+                    or nil
+                encounter_definition = PanelEncounters.resolve_encounter(self.base_area_id, encounter_category)
             end
             if enemy then
                 data.health = enemy.health
@@ -274,12 +464,22 @@ local function liberate_panel(self, player_session)
                 player_session:complete_turn()
                 return
             end
-            local encounter_data = {}
-            for key, value in pairs(encounter_definition) do
-                if key ~= "path" and key ~= "weight" then encounter_data[key] = value end
-            end
-            for key, value in pairs(data) do encounter_data[key] = value end
+            local encounter_data, encounter_health_applied = build_encounter_data(
+                encounter_definition, data, enemy)
+            log:info_data("Prepared panel encounter data", {
+                encounter_name = encounter_definition.name,
+                persistent_enemy = enemy and (enemy.battle_name or enemy.name),
+                persistent_health = enemy and enemy.health,
+                enemy_entry_health_applied = encounter_health_applied,
+                freedom_mission = encounter_data.freedom_mission ~= nil,
+            })
             local results = Async.await(player_session:initiate_encounter(encounter_definition.path, encounter_data))
+            -- Synchronize before branching: survivors retain their health on
+            -- both wins and losses whenever the battle engine reports them.
+            local enemy_health_synced = false
+            if enemy then
+                enemy_health_synced = EnemyHelpers.sync_health(enemy, results)
+            end
             log:info_data("Panel encounter results", {
                 base_area_id = self.base_area_id,
                 instance_area_id = self.area_id,
@@ -292,19 +492,22 @@ local function liberate_panel(self, player_session)
                 escape = tostring(results.escape),
                 fled = tostring(results.fled),
                 health = results.health,
-                enemy_count = #(results.enemies or {}),
+                enemy_count = #(results.enemies or results.Enemies or {}),
+                enemy_health_synced = enemy_health_synced,
+                retained_enemy_health = enemy and enemy.health,
             })
             if not results.success then
-                if enemy then
-                    EnemyHelpers.sync_health(enemy, results)
-                end
                 player_session:complete_turn()
                 return
             end
 
-            -- Post-battle: use pcall around sync calls so a silent coroutine
-            -- death cannot leave the player stuck with locked input.
-            if results.turns >= 1 and not results.ran then
+            -- The 3x3 one-turn pattern is only earned by an actual one-turn
+            -- victory. For multi-turn wins, the original single-panel shape
+            -- remains in place.
+            if results.success
+                and tonumber(results.reason) == 1
+                and tonumber(results.turns) == 1
+                and not results.ran then
                 log:debug_data("liberate_panel: set_shape enter", {
                     base_area_id = self.base_area_id,
                     instance_area_id = self.area_id,
@@ -390,7 +593,10 @@ local function liberate_panel(self, player_session)
                 })
             end
             if enemy and enemy.is_boss then
-                liberate(self)
+                local mission_complete = self:handle_boss_defeated(enemy)
+                if not mission_complete then
+                    player_session:complete_turn()
+                end
             else
                 player_session:complete_turn()
             end
@@ -465,7 +671,7 @@ local function take_enemy_turn(self)
             end
             Async.await(Async.sleep(slide_time))
             if enemy.is_boss then
-                Async.await(EnemyHelpers.heal(enemy, enemy.max_health / 2))
+                Async.await(EnemyHelpers.heal(enemy, enemy.max_health * .10))
             end
             log:debug_data("Enemy taking turn", {
                 base_area_id = self.base_area_id,
@@ -489,7 +695,7 @@ local function take_enemy_turn(self)
                 local neighbors = {}
                 for _, neighbor_offset in ipairs(neighbor_offsets) do
                     local panel = self:get_panel_at(dark_hole.x + neighbor_offset[1], dark_hole.y + neighbor_offset[2], dark_hole.z)
-                    if panel and PanelRegistry.is_walkable(panel.visual_gid) then
+                    if panel and EnemyHelpers.can_spawn_on(self, panel.x, panel.y, panel.z) then
                         table.insert(neighbors, panel)
                     end
                 end
@@ -550,15 +756,88 @@ local function take_enemy_turn(self)
     Async.promisify(co)
 end
 
+
 local Mission = {}
 
-function Mission:new(base_area_id, new_area_id, players)
-    local FIRST_PANEL_GID = Net.get_tileset(base_area_id, Net.get_area_custom_property(base_area_id, Constants.CustomProperties.LiberationTileset)).first_gid
+function Mission:new(base_area_id, new_area_id, players, max_order_points)
+    -- Liberation Tileset is configured on the Tiled "Liberation Config"
+    -- object, not in the map/area custom properties.
+    local liberation_tileset_path
+    local configured_max_order_points
+    local config_object_found = false
+    local object_ids = Net.list_objects(base_area_id) or {}
+
+    for _, object_id in ipairs(object_ids) do
+        local object = Net.get_object_by_id(base_area_id, object_id)
+        if object and object.type == "Liberation Config" then
+            config_object_found = true
+            local properties = object.custom_properties or {}
+            local object_max_order_points = tonumber(properties[Constants.CustomProperties.MaxOrderPoints])
+            if object_max_order_points then
+                configured_max_order_points = object_max_order_points
+            end
+            local configured_path = properties[Constants.CustomProperties.LiberationTileset]
+            if type(configured_path) == "string" and configured_path ~= "" then
+                liberation_tileset_path = configured_path
+                break
+            end
+        end
+    end
+
+    if type(liberation_tileset_path) ~= "string" or liberation_tileset_path == "" then
+        log:error_data("Cannot create liberation mission: Liberation Tileset missing from Liberation Config", {
+            base_area_id = tostring(base_area_id),
+            base_area_name = tostring(Net.get_area_name(base_area_id)),
+            config_object_found = config_object_found,
+            property_name = Constants.CustomProperties.LiberationTileset,
+        })
+        error(
+            "Liberation mission area '" .. tostring(base_area_id) ..
+            "' has no valid Liberation Tileset property on its Liberation Config object."
+        )
+    end
+
+    local tileset_lookup_ok, liberation_tileset = pcall(function()
+        return Net.get_tileset(base_area_id, liberation_tileset_path)
+    end)
+
+    if not tileset_lookup_ok then
+        log:error_data("Cannot create liberation mission: tileset lookup raised an error", {
+            base_area_id = tostring(base_area_id),
+            base_area_name = tostring(Net.get_area_name(base_area_id)),
+            tileset_path = liberation_tileset_path,
+            error = tostring(liberation_tileset),
+        })
+        error("Failed to look up Liberation Tileset '" .. liberation_tileset_path ..
+            "' for area '" .. tostring(base_area_id) .. "': " .. tostring(liberation_tileset))
+    end
+
+    if type(liberation_tileset) ~= "table" or liberation_tileset.first_gid == nil then
+        log:error_data("Cannot create liberation mission: tileset lookup returned no first_gid", {
+            base_area_id = tostring(base_area_id),
+            base_area_name = tostring(Net.get_area_name(base_area_id)),
+            tileset_path = liberation_tileset_path,
+            result_type = type(liberation_tileset),
+        })
+        error("Liberation Tileset '" .. liberation_tileset_path ..
+            "' was not found or has no first_gid in area '" .. tostring(base_area_id) .. "'.")
+    end
+
+    local FIRST_PANEL_GID = liberation_tileset.first_gid
     local TOTAL_PANEL_GIDS = 1
     local solo_target = tonumber(Net.get_area_custom_property(base_area_id, Constants.CustomProperties.TargetPhaseCount)) or 13
     local desired_players = tonumber(Net.get_area_custom_property(base_area_id, Constants.CustomProperties.TargetPlayerCount)) or 3
     local minimum_phases = tonumber(Net.get_area_custom_property(base_area_id, Constants.CustomProperties.MinimumTargetPhaseCount)) or 1
     local player_difference = #players - desired_players
+    -- The Liberation Config object is the source of truth when Max Order Points
+    -- is set. The caller-provided value and shared default are fallbacks for
+    -- older maps/config objects that do not contain the property.
+    local MAX_ORDER_POINTS = math.max(1, math.floor(
+        configured_max_order_points
+        or tonumber(max_order_points)
+        or Constants.Defaults.MaxOrderPoints
+        or 9
+    ))
     local mission = {
         area_id = new_area_id,
         base_area_id = base_area_id,
@@ -568,11 +847,18 @@ function Mission:new(base_area_id, new_area_id, players)
         phase = 1,
         ready_count = 0,
         order_points = 3,
-        MAX_ORDER_POINTS = 8,
+        MAX_ORDER_POINTS = MAX_ORDER_POINTS,
+        points_gauges = {},
         points_of_interest = {},
         players = players,
         player_sessions = {},
+        -- Mission startup is deferred until every requested player transfer
+        -- has completed and the player_transfer events confirm the new area.
+        pending_transfer_players = {},
+        begin_started = false,
         boss = nil,
+        bosses = {},
+        boss_definitions = {},
         enemies = {},
         panels = {},
         dark_holes = {},
@@ -601,8 +887,68 @@ function Mission:new(base_area_id, new_area_id, players)
     setmetatable(mission, self)
     self.__index = self
 
-    Net.clone_area(base_area_id, new_area_id)
-    Preloader.update(new_area_id)
+    -- Structured diagnostics: these should appear in the same ezlogger output
+    -- as the rest of the liberation logs, unlike a bare print() call.
+    log:info_data("Collision tileset diagnostic: before clone", {
+        base_area_id = tostring(base_area_id),
+        mission_area_id = tostring(new_area_id),
+        diagnostic = "collision_tileset_preload_v2",
+    })
+
+    local clone_ok, clone_error = pcall(function()
+        Net.clone_area(base_area_id, new_area_id)
+    end)
+    if not clone_ok then
+        log:error_data("Collision tileset diagnostic: clone failed", {
+            base_area_id = tostring(base_area_id),
+            mission_area_id = tostring(new_area_id),
+            error = tostring(clone_error),
+        })
+        error(clone_error)
+    end
+    log:info_data("Collision tileset diagnostic: clone complete", {
+        base_area_id = tostring(base_area_id),
+        mission_area_id = tostring(new_area_id),
+    })
+
+    local preload_ok, preload_error = pcall(function()
+        Preloader.update(new_area_id)
+    end)
+    if not preload_ok then
+        log:error_data("Collision tileset diagnostic: preload failed", {
+            mission_area_id = tostring(new_area_id),
+            error = tostring(preload_error),
+        })
+        error(preload_error)
+    end
+    log:info_data("Collision tileset diagnostic: preload complete", {
+        mission_area_id = tostring(new_area_id),
+        collision_tileset_path = "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx",
+    })
+
+    -- Diagnostic only: verify the new collision tileset can be retrieved from
+    -- the cloned/provisioned mission area. Keep the old panel GID lookup below
+    -- unchanged until this result is confirmed in a live server session.
+    local collision_tileset_path = "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx"
+    local collision_tileset_ok, collision_tileset = pcall(function()
+        return Net.get_tileset(mission.area_id, collision_tileset_path)
+    end)
+    if collision_tileset_ok and type(collision_tileset) == "table" and collision_tileset.first_gid ~= nil then
+        log:info_data("Collision tileset lookup OK", {
+            area_id = tostring(mission.area_id),
+            path = collision_tileset_path,
+            first_gid = tostring(collision_tileset.first_gid),
+        })
+    else
+        log:error_data("Collision tileset lookup FAILED", {
+            area_id = tostring(mission.area_id),
+            path = collision_tileset_path,
+            lookup_succeeded = collision_tileset_ok,
+            result_type = type(collision_tileset),
+            result = tostring(collision_tileset),
+            error = collision_tileset_ok and nil or tostring(collision_tileset),
+        })
+    end
 
     local object_ids = Net.list_objects(mission.area_id)
     for _, object_id in ipairs(object_ids) do
@@ -615,7 +961,7 @@ function Mission:new(base_area_id, new_area_id, players)
             local new_panel = {
                 name = "", type = panel_type, visible = true,
                 x = object.x, y = object.y, z = object.z, width = object.width, height = object.height,
-                data = { type = "tile", gid = Net.get_tileset(base_area_id, "/server/assets/tiles/Liberation Collision.tsx").first_gid },
+                data = { type = "tile", gid = Net.get_tileset(base_area_id, "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx").first_gid },
                 custom_properties = object.custom_properties,
                 visual_object_id = object.id,
                 visual_gid = object.data.gid
@@ -678,23 +1024,82 @@ function Mission:new(base_area_id, new_area_id, players)
             local z = math.floor(object.z) + 1
             mission.panels[z][y][x] = new_panel
 
-            if object.custom_properties[Constants.CustomProperties.Boss] then
-                local name = object.custom_properties[Constants.CustomProperties.Boss]
-                local direction = object.custom_properties[Constants.CustomProperties.Direction]
-                local enemy = Enemy.from(mission, object, direction, name)
-                enemy.is_boss = true
-                mission.boss = enemy
-                table.insert(mission.enemies, 1, enemy)
+            local configured_boss_name = object.custom_properties
+                and object.custom_properties[Constants.CustomProperties.Boss]
+            if configured_boss_name and configured_boss_name ~= "" then
+                local properties = object.custom_properties or {}
+                local object_id_string = tostring(object.id)
+                local configured_boss_id = normalized_reference(properties[Constants.CustomProperties.BossID])
+                local definition = {
+                    object_id = object.id,
+                    boss_id = configured_boss_id or object_id_string,
+                    group_id = configured_boss_id or object_id_string,
+                    enemy_name = tostring(configured_boss_name),
+                    direction = properties[Constants.CustomProperties.Direction] or "Down",
+                    spawn_mode = properties[Constants.CustomProperties.SpawnMode] or "Immediate",
+                    trigger_boss_object_id = normalized_reference(properties[Constants.CustomProperties.TriggerBoss]),
+                    x = object.x, y = object.y, z = object.z,
+                    offset_x = tonumber(properties[Constants.CustomProperties.SpawnOffsetX]) or 0,
+                    offset_y = tonumber(properties[Constants.CustomProperties.SpawnOffsetY]) or 0,
+                    offset_z = tonumber(properties[Constants.CustomProperties.SpawnOffsetZ]) or 0,
+                    auto_face_player = properties[Constants.CustomProperties.AutoFacePlayer] == true
+                        or properties[Constants.CustomProperties.AutoFacePlayer] == "true",
+                    health_override = tonumber(properties[Constants.CustomProperties.BossHealthOverride]) or 0,
+                    spawn_enabled = not (properties[Constants.CustomProperties.SpawnEnabled] == false
+                        or properties[Constants.CustomProperties.SpawnEnabled] == "false"),
+                    display_name = tostring(properties[Constants.CustomProperties.BossDisplayName] or ""),
+                    panel = new_panel,
+                    spawned = false,
+                    defeated = false,
+                }
+                mission.boss_definitions[#mission.boss_definitions + 1] = definition
             end
             if object.custom_properties[Constants.CustomProperties.Spawns] then
                 local name = object.custom_properties[Constants.CustomProperties.Spawns]
                 local direction = object.custom_properties[Constants.CustomProperties.Direction]
                 local position = { x = object.x, y = object.y, z = object.z }
                 position = EnemyHelpers.offset_position_with_direction(position, direction)
-                local enemy = Enemy.from(mission, position, direction, name)
-                new_panel.enemy = enemy
-                mission.enemies[#mission.enemies + 1] = enemy
+                if EnemyHelpers.can_spawn_on(mission, position.x, position.y, position.z) then
+                    local enemy = Enemy.from(mission, position, direction, name)
+                    if enemy then
+                        new_panel.enemy = enemy
+                        mission.enemies[#mission.enemies + 1] = enemy
+                    end
+                else
+                    log:warn_data("Skipping enemy spawn on a non-enemy or occupied panel", {
+                        base_area_id = mission.base_area_id,
+                        instance_area_id = mission.area_id,
+                        enemy_name = name,
+                        x = position.x,
+                        y = position.y,
+                        z = position.z,
+                        source_object_id = object.id,
+                        source_panel_type = new_panel.type,
+                    })
+                end
             end
+        end
+    end
+
+    -- Spawn modes are resolved only after all panel objects have been indexed,
+    -- so On Dark Hole Cleared can correctly inspect its full group.
+    for _, definition in ipairs(mission.boss_definitions) do
+        if definition.spawn_mode == "Immediate" then
+            mission:spawn_boss(definition.boss_id, false)
+        elseif definition.spawn_mode == "On Dark Hole Cleared" then
+            mission:spawn_boss(definition.boss_id, false)
+        elseif definition.spawn_mode == "After Boss Defeated" then
+            if not definition.trigger_boss_object_id then
+                log:warn_data("Boss uses After Boss Defeated without Trigger Boss reference", {
+                    boss_id = definition.boss_id,
+                    object_id = definition.object_id,
+                })
+            end
+        elseif definition.spawn_mode ~= "Manual" then
+            log:warn_data("Unknown boss Spawn Mode; boss will remain dormant", {
+                boss_id = definition.boss_id,
+                spawn_mode = definition.spawn_mode,
+            })
         end
     end
 
@@ -705,16 +1110,174 @@ function Mission:new(base_area_id, new_area_id, players)
         player_count = #players,
         target_phase = mission.target_phase,
         desired_player_count = desired_players,
+        max_order_points = mission.MAX_ORDER_POINTS,
         honor_hp_mem = mission.honor_hp_mem,
         enemy_count = #mission.enemies,
         dark_hole_count = #mission.dark_holes,
         indestructible_panel_count = #mission.indestructible_panels,
         panel_gate_count = #mission.panel_gates,
         points_of_interest_count = #mission.points_of_interest,
-        has_boss = mission.boss ~= nil,
+        has_boss = #mission.boss_definitions > 0,
+        boss_definition_count = #mission.boss_definitions,
     })
 
     return mission
+end
+
+function Mission:spawn_boss(boss_id, force, triggered)
+    local requested_id = tostring(boss_id or "")
+    local definition = nil
+    for _, candidate in ipairs(self.boss_definitions or {}) do
+        if candidate.boss_id == requested_id or tostring(candidate.object_id) == requested_id then
+            definition = candidate
+            break
+        end
+    end
+    if not definition then
+        log:warn_data("Requested boss definition was not found", {
+            base_area_id = self.base_area_id,
+            instance_area_id = self.area_id,
+            boss_id = requested_id,
+        })
+        return false
+    end
+    if definition.defeated then return false end
+    if definition.spawned then return true end
+    if not force and not definition.spawn_enabled then return false end
+
+    local mode = definition.spawn_mode
+    if not force and mode == "Manual" then return false end
+    if not force and mode == "After Boss Defeated" and not triggered then return false end
+    if not force and mode == "On Dark Hole Cleared"
+        and count_dark_holes_for_boss(self, definition) > 0 then
+        return false
+    end
+
+    local position = {
+        x = definition.x + definition.offset_x,
+        y = definition.y + definition.offset_y,
+        z = definition.z + definition.offset_z,
+    }
+    if not EnemyHelpers.can_spawn_on(self, position.x, position.y, position.z) then
+        log:warn_data("Boss spawn deferred because its destination is occupied or invalid", {
+            boss_id = definition.boss_id,
+            enemy_name = definition.enemy_name,
+            x = position.x, y = position.y, z = position.z,
+        })
+        return false
+    end
+
+    local enemy = Enemy.from(self, position, definition.direction, definition.enemy_name, {
+        auto_face_player = definition.auto_face_player,
+        is_boss = true,
+    })
+    if not enemy then return false end
+
+    enemy.is_boss = true
+    enemy.boss_id = definition.boss_id
+    enemy.boss_object_id = definition.object_id
+    enemy.boss_definition = definition
+    if definition.health_override > 0 then
+        enemy.health = definition.health_override
+        enemy.max_health = definition.health_override
+    end
+    if definition.display_name ~= "" then
+        enemy.display_name = definition.display_name
+    end
+    Net.set_bot_name(enemy.id, tostring(enemy.display_name or enemy.battle_name or enemy.name or definition.enemy_name)
+        .. ": " .. tostring(enemy.health or 0))
+
+    definition.spawned = true
+    definition.enemy = enemy
+    self.bosses[#self.bosses + 1] = definition
+    self.boss = enemy -- compatibility alias for existing camera/UI code
+    table.insert(self.enemies, 1, enemy)
+
+    log:info_data("Boss spawned", {
+        base_area_id = self.base_area_id,
+        instance_area_id = self.area_id,
+        boss_id = definition.boss_id,
+        object_id = definition.object_id,
+        enemy_name = definition.enemy_name,
+        spawn_mode = definition.spawn_mode,
+        x = position.x, y = position.y, z = position.z,
+        health = enemy.health,
+    })
+    return true
+end
+
+function Mission:spawn_bosses_for_cleared_dark_holes()
+    for _, definition in ipairs(self.boss_definitions or {}) do
+        if definition.spawn_mode == "On Dark Hole Cleared"
+            and not definition.spawned and not definition.defeated
+            and count_dark_holes_for_boss(self, definition) == 0 then
+            self:spawn_boss(definition.boss_id, false)
+        end
+    end
+end
+
+function Mission:handle_boss_defeated(enemy)
+    if not enemy or not enemy.boss_definition then
+        -- Preserve the original single-boss completion behavior for older maps.
+        liberate(self)
+        return true
+    end
+
+    local defeated_definition = enemy.boss_definition
+    defeated_definition.defeated = true
+    defeated_definition.enemy = nil
+    if Enemy.is_alive(enemy) then Net.remove_bot(enemy.id, false) end
+    for index, active_enemy in ipairs(self.enemies) do
+        if active_enemy == enemy then
+            table.remove(self.enemies, index)
+            break
+        end
+    end
+
+    log:info_data("Boss defeated", {
+        base_area_id = self.base_area_id,
+        instance_area_id = self.area_id,
+        boss_id = defeated_definition.boss_id,
+        object_id = defeated_definition.object_id,
+    })
+
+    -- Spawn bosses whose Trigger Boss object reference points to the boss just defeated.
+    for _, definition in ipairs(self.boss_definitions or {}) do
+        if definition.spawn_mode == "After Boss Defeated"
+            and not definition.spawned and not definition.defeated
+            and tostring(definition.trigger_boss_object_id or "") == tostring(defeated_definition.object_id) then
+            self:spawn_boss(definition.boss_id, false, true)
+        end
+    end
+
+    local all_defeated = #self.boss_definitions > 0
+    for _, definition in ipairs(self.boss_definitions) do
+        if not definition.defeated then
+            all_defeated = false
+            break
+        end
+    end
+    if all_defeated then
+        liberate(self)
+        return true
+    else
+        self.boss = nil
+        for _, definition in ipairs(self.boss_definitions) do
+            if definition.spawned and not definition.defeated and definition.enemy then
+                self.boss = definition.enemy
+                break
+            end
+        end
+        return false
+    end
+end
+
+function Mission:set_order_points(value)
+    local clamped = math.max(0, math.min(math.floor(tonumber(value) or 0), self.MAX_ORDER_POINTS))
+    self.order_points = clamped
+    for _, gauge in pairs(self.points_gauges) do
+        gauge:set_value(clamped)
+    end
 end
 
 function Mission:clean_up()
@@ -731,6 +1294,10 @@ function Mission:clean_up()
         base_area_id = self.base_area_id,
         instance_area_id = self.area_id,
     })
+    for _, gauge in pairs(self.points_gauges) do
+        gauge:destroy()
+    end
+    self.points_gauges = {}
     for _, id in ipairs(Net.list_bots(self.area_id)) do
         Net.remove_bot(id)
     end
@@ -744,6 +1311,15 @@ function Mission:cleaning_up()
 end
 
 function Mission:begin()
+    if self.begin_started then
+        log:warn_data("Ignoring duplicate liberation mission begin", {
+            base_area_id = self.base_area_id,
+            instance_area_id = self.area_id,
+        })
+        return
+    end
+    self.begin_started = true
+
     local spawn = self:get_spawn_position()
     local hold_time = .7
     local slide_time = .7
@@ -768,7 +1344,10 @@ function Mission:begin()
         if not debug then
             Net.lock_player_input(player.id)
             if self.points_of_interest and #self.points_of_interest > 0 then
-                CameraSequence.play(self, player, spawn)
+                -- CameraSequence.play returns the full duration of its
+                -- movement/hold sequence. Include it so input is not
+                -- unlocked before the camera has returned to the spawn.
+                total_camera_time = total_camera_time + CameraSequence.play(self, player, spawn)
             else
                 Net.move_player_camera(player.id, spawn.x, spawn.y, spawn.z, hold_time)
                 total_camera_time = total_camera_time + hold_time
@@ -784,6 +1363,16 @@ function Mission:begin()
         end
     end
 
+    -- Create one order-points gauge per participating player. Each draws to
+    -- its own logical ids, so a party of N sees N independent HUDs showing
+    -- the same shared value.
+    for _, player in ipairs(self.players) do
+        local gauge = PointsGauge:new(player.id, self.MAX_ORDER_POINTS)
+        gauge:set_value(self.order_points)
+        gauge:show()
+        self.points_gauges[player.id] = gauge
+    end
+
     log:info_data("Beginning liberation mission", {
         base_area_id = self.base_area_id,
         base_area_name = self.area_name,
@@ -792,6 +1381,8 @@ function Mission:begin()
         player_count = #self.players,
         start_health = start_health,
         spawn_found = spawn ~= nil,
+        order_points = self.order_points,
+        max_order_points = self.MAX_ORDER_POINTS,
     })
 
     if not debug then
@@ -846,12 +1437,17 @@ function Mission:handle_tile_interaction(player_id, x, y, z, button)
     if button == 1 then return end
     if player_session.completed_turn or Net.is_player_in_widget(player_id) then return end
     Net.lock_player_input(player_id)
-    local quiz_promise = player_session:quiz_with_points("Pass", "Cancel")
+    local quiz_promise = player_session.player:select_mission_option({ "Pass", "Cancel" }, "Panel interaction")
     quiz_promise.and_then(function(response)
         if response == 0 then
             player_session:get_pass_turn_permission()
         elseif response == 1 then
             Net.unlock_player_input(player_id)
+        else
+            -- A failed/interrupted menu must not leave the player movement-locked.
+            if Net.is_player(player_id) then
+                Net.unlock_player_input(player_id)
+            end
         end
     end)
 end
@@ -899,12 +1495,16 @@ function Mission:handle_object_interaction(player_id, object_id, button)
     end
     local can_liberate = not panel_already_selected and PanelRegistry.is_liberatable(panel.visual_gid)
     if not can_liberate then
-        local quiz_promise = player_session:quiz_with_points("Pass", "Cancel")
+        local quiz_promise = player_session.player:select_mission_option({ "Pass", "Cancel" }, "Panel interaction")
         quiz_promise.and_then(function(response)
             if response == 0 then
                 player_session:get_pass_turn_permission()
             elseif response == 1 then
                 Net.unlock_player_input(player_id)
+            else
+                if Net.is_player(player_id) then
+                    Net.unlock_player_input(player_id)
+                end
             end
         end)
         return
@@ -920,7 +1520,7 @@ function Mission:handle_object_interaction(player_id, object_id, button)
     local can_use_ability = (ability.question and not has_enemy and self.order_points >= ability.cost and (panel.type == Constants.PanelTypes.DarkPanel or panel.type == Constants.PanelTypes.ItemPanel or panel.type == Constants.PanelTypes.TrapPanel))
     if not can_use_ability then
         player_session.selection:select_panel(panel)
-        local quiz_promise = player_session:quiz_with_points("Liberation", "Pass", "Cancel")
+        local quiz_promise = player_session.player:select_mission_option({ "Liberation", "Pass", "Cancel" }, "Panel interaction")
         quiz_promise.and_then(function(response)
             if response == 0 then
                 liberate_panel(self, player_session)
@@ -930,12 +1530,17 @@ function Mission:handle_object_interaction(player_id, object_id, button)
             elseif response == 2 then
                 player_session.selection:clear()
                 Net.unlock_player_input(player_id)
+            else
+                player_session.selection:clear()
+                if Net.is_player(player_id) then
+                    Net.unlock_player_input(player_id)
+                end
             end
         end)
         return
     end
     player_session.selection:select_panel(panel)
-    local quiz_promise = player_session:quiz_with_points("Liberation", ability.name, "Pass")
+    local quiz_promise = player_session.player:select_mission_option({ "Liberation", ability.name, "Pass" }, "Panel ability")
     quiz_promise.and_then(function(response)
         if response == 0 then
             liberate_panel(self, player_session)
@@ -946,6 +1551,11 @@ function Mission:handle_object_interaction(player_id, object_id, button)
         elseif response == 2 then
             player_session.selection:clear()
             player_session:get_pass_turn_permission()
+        else
+            player_session.selection:clear()
+            if Net.is_player(player_id) then
+                Net.unlock_player_input(player_id)
+            end
         end
     end)
 end
@@ -960,7 +1570,43 @@ function Mission:handle_player_avatar_change(player_id)
     player:boot_to_lobby(false, self.area_name)
 end
 
-function Mission:handle_player_transfer(player_id) end
+function Mission:handle_player_transfer(player_id)
+    if not self.pending_transfer_players or not self.pending_transfer_players[player_id] then
+        return
+    end
+
+    local current_area_id = Net.get_player_area(player_id)
+    if current_area_id ~= self.area_id then
+        log:debug_data("Liberation transfer event did not reach target instance", {
+            player_id = player_id,
+            expected_area_id = self.area_id,
+            actual_area_id = current_area_id,
+        })
+        return
+    end
+
+    self.pending_transfer_players[player_id] = nil
+
+    local remaining = 0
+    for _ in pairs(self.pending_transfer_players) do
+        remaining = remaining + 1
+    end
+
+    log:info_data("Liberation player transfer completed", {
+        player_id = player_id,
+        instance_area_id = self.area_id,
+        remaining_transfers = remaining,
+    })
+
+    if remaining == 0 then
+        log:info_data("All liberation players transferred; beginning mission", {
+            base_area_id = self.base_area_id,
+            instance_area_id = self.area_id,
+            player_count = #self.players,
+        })
+        self:begin()
+    end
+end
 
 function Mission:handle_player_disconnect(player_id)
     log:info_data("Player disconnected from liberation", {
@@ -969,6 +1615,10 @@ function Mission:handle_player_disconnect(player_id)
         player_id = player_id,
         remaining_players = #self.players - 1,
     })
+    if self.points_gauges[player_id] then
+        self.points_gauges[player_id]:destroy()
+        self.points_gauges[player_id] = nil
+    end
     for i, player in ipairs(self.players) do
         if player_id == player.id then
             table.remove(self.players, i)

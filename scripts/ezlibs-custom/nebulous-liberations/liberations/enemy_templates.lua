@@ -7,6 +7,7 @@
 -- path — it will be ignored by instance.lua.
 local EnemySelection = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_selection")
 local EnemyHelpers = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_helpers")
+local GuardInterception = require("scripts/ezlibs-custom/nebulous-liberations/liberations/guard_interception")
 local Preloader = require("scripts/ezlibs-custom/nebulous-liberations/liberations/preloader")
 local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberations/constants")
 local Direction = require("scripts/libs/direction")
@@ -19,7 +20,7 @@ function EnemyTemplates.register(name, template)
 end
 
 -- Create an enemy instance from a template
-function EnemyTemplates.create(instance, position, direction, template_name)
+function EnemyTemplates.create(instance, position, direction, template_name, spawn_options)
     local template = EnemyTemplates[template_name]
     if not template then
         error("Unknown enemy template: " .. template_name)
@@ -35,7 +36,8 @@ function EnemyTemplates.create(instance, position, direction, template_name)
         z = math.floor(position.z),
         selection = EnemySelection:new(instance),
         mug = template.mug,
-        is_boss = template.is_boss or false,
+        is_boss = (spawn_options and spawn_options.is_boss == true) or template.is_boss or false,
+        is_special_encounter = template.is_special_encounter or false,
         ai_type = template.ai_type or "simple_charge",
         ai_params = template.ai_params or {},
         -- These fields are read from `self` at runtime (spawn, attack,
@@ -48,6 +50,7 @@ function EnemyTemplates.create(instance, position, direction, template_name)
         attack_damage = template.attack_damage,
         death_message = template.death_message,
         preload_assets = template.preload_assets,
+        auto_face_player = spawn_options == nil or spawn_options.auto_face_player ~= false,
     }
     setmetatable(enemy, EnemyTemplates.metatable)
     EnemyTemplates.metatable.__index = EnemyTemplates.metatable
@@ -72,6 +75,15 @@ end
 -- Metatable with default methods
 EnemyTemplates.metatable = {
     spawn = function(self, direction)
+        local closest_session = EnemyHelpers.find_closest_player_session(self.instance, self)
+        if self.auto_face_player and closest_session and closest_session.player then
+            local player = closest_session.player
+            direction = Direction.diagonal_from_offset(
+                player.x - (self.x + .5),
+                player.y - (self.y + .5)
+            )
+        end
+
         self.direction = direction
         self.id = Net.create_bot({
             texture_path = self.texture_path,
@@ -127,7 +139,7 @@ function EnemyTemplates.ai.simple_charge(self)
                 local limit = math.min(math.abs(diff), 2)
                 local offset = 0
                 for i = limit, 1, -1 do
-                    if EnemyHelpers.can_move_to(self.instance, self.x + xstep * i, self.y + ystep * i, self.z) then
+                    if EnemyHelpers.can_move_to(self.instance, self.x + xstep * i, self.y + ystep * i, self.z, self) then
                         offset = i
                         break
                     end
@@ -163,29 +175,31 @@ function EnemyTemplates.ai.simple_charge(self)
             EnemyHelpers.face_position(self, closest.player.x, closest.player.y)
             self.selection:indicate()
             Async.await(Async.sleep(1))
+            local attack_records = GuardInterception.prepare_attack(self.instance, self, caught_sessions, 0.5)
             EnemyHelpers.play_attack_animation(self)
             local spawned_bots = {}
-            for _, player_session in ipairs(caught_sessions) do
-                local player = player_session.player
+            for _, record in ipairs(attack_records) do
+                local position = record.visual_position
+                if position then
                 local bot_id = Net.create_bot({
                     texture_path = self.attack_texture or "/server/assets/NebuLibsAssets/bots/beast breath.png",
                     animation_path = self.attack_animation_path or "/server/assets/NebuLibsAssets/bots/beast breath.animation",
                     animation = "ANIMATE",
                     area_id = self.instance.area_id,
                     warp_in = false,
-                    x = player.x + 1/32,
-                    y = player.y + 1/32,
-                    z = player.z
+                    x = position.x + 1/32,
+                    y = position.y + 1/32,
+                    z = position.z
                 })
                 table.insert(spawned_bots, bot_id)
+                end
             end
             Async.await(Async.sleep(.5))
             for _, player in ipairs(self.instance.players) do
                 Net.shake_player_camera(player.id, 2, .5)
             end
-            for _, player_session in ipairs(caught_sessions) do
-                player_session:hurt(self.attack_damage or 20)
-            end
+            GuardInterception.apply_damage(attack_records, self.attack_damage or 20, self)
+            GuardInterception.finish_attack(self.instance, attack_records)
             Async.await(Async.sleep(.5))
             for _, bot_id in ipairs(spawned_bots) do
                 Net.remove_bot(bot_id, false)
@@ -216,6 +230,7 @@ EnemyTemplates.register("BigBrute", {
     attack_texture = "/server/assets/NebuLibsAssets/bots/beast breath.png",
     attack_animation_path = "/server/assets/NebuLibsAssets/bots/beast breath.animation",
     ai_type = "simple_charge",
+    is_special_encounter = true,
     preload_assets = { "/server/assets/NebuLibsAssets/bots/bigbrute.animation","/server/assets/NebuLibsAssets/bots/beast breath.png", "/server/assets/NebuLibsAssets/bots/beast breath.animation","/server/assets/NebuLibsAssets/bots/bigbrute.png", },
 })
 

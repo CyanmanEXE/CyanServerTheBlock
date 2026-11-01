@@ -12,16 +12,27 @@ local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberation
 local ezmemory = require("scripts/ezlibs-scripts/ezmemory")
 local Emotes = require("scripts/libs/emotes")
 
--- HP penalty applied when the player force-exits a battle (panic / debug
--- escape). A normal fled/ran action is not penalised beyond the loss itself.
+-- Battle end reasons supplied by the battle engine.
+local BattleReason = {
+    DRAW = 0,
+    WIN = 1,
+    LOSE = 2,
+    RUN = 3,
+    USER_PANIC = 4,
+}
+
+-- The 20 HP penalty applies only when the player runs or explicitly panics.
+-- DRAW and LOSE are not forced exits and must not be penalized.
 local PANIC_HP_PENALTY = 20
+
+-- Guard protects players within this many tiles (Chebyshev distance) of a
+-- player whose currently equipped ability is Guard.
+local GUARD_RANGE_TILES = 2
 
 local function stats_indicate_panic(results)
     if not results then return false end
-    if results.reason ~= nil and results.reason ~= 1 then return true end
-    if results.escape == true then return true end
-    if results.fled == true then return true end
-    return false
+    local reason = tonumber(results.reason)
+    return reason == BattleReason.RUN or reason == BattleReason.USER_PANIC
 end
 
 local PlayerSession = {}
@@ -60,34 +71,6 @@ function PlayerSession:emote_state()
     end
 end
 
-local order_points_mug_texture = "/server/assets/NebuLibsAssets/mugs/order pts.png"
-local order_points_mug_animations = {
-    "/server/assets/NebuLibsAssets/mugs/order pts 0.animation",
-    "/server/assets/NebuLibsAssets/mugs/order pts 1.animation",
-    "/server/assets/NebuLibsAssets/mugs/order pts 2.animation",
-    "/server/assets/NebuLibsAssets/mugs/order pts 3.animation",
-    "/server/assets/NebuLibsAssets/mugs/order pts 4.animation",
-    "/server/assets/NebuLibsAssets/mugs/order pts 5.animation",
-    "/server/assets/NebuLibsAssets/mugs/order pts 6.animation",
-    "/server/assets/NebuLibsAssets/mugs/order pts 7.animation",
-    "/server/assets/NebuLibsAssets/mugs/order pts 8.animation",
-}
-
-function PlayerSession:message_with_points(message)
-    local mug_animation = order_points_mug_animations[self.instance.order_points + 1]
-    return self.player:message(message, order_points_mug_texture, mug_animation)
-end
-
-function PlayerSession:question_with_points(question)
-    local mug_animation = order_points_mug_animations[self.instance.order_points + 1]
-    return self.player:question(question, order_points_mug_texture, mug_animation)
-end
-
-function PlayerSession:quiz_with_points(a, b, c)
-    local mug_animation = order_points_mug_animations[self.instance.order_points + 1]
-    return self.player:quiz(a, b, c, order_points_mug_texture, mug_animation)
-end
-
 function PlayerSession:get_ability_permission()
     local question_promise = self.player:question_with_mug(self.ability.question)
     question_promise.and_then(function(response)
@@ -108,7 +91,7 @@ function PlayerSession:get_ability_permission()
             })
             return
         end
-        self.instance.order_points = self.instance.order_points - self.ability.cost
+        self.instance:set_order_points(self.instance.order_points - self.ability.cost)
         log:info_data("Player activated ability", {
             base_area_id = self.instance.base_area_id,
             instance_area_id = self.instance.area_id,
@@ -150,9 +133,7 @@ function PlayerSession:initiate_encounter(encounter_path, data)
             ezmemory.set_player_health(self.player.id, self.health)
             Net.set_player_emotion(self.player.id, results.emotion)
 
-            -- Panic / force-exit branch. Applies before the normal failure
-            -- branch so the debug escape can't be used as a free retry: it
-            -- costs the liberation attempt AND a fixed HP penalty.
+            local reason = tonumber(results.reason)
             if stats_indicate_panic(results) then
                 local health_before_penalty = self.health
                 if self.health > 0 then
@@ -162,17 +143,16 @@ function PlayerSession:initiate_encounter(encounter_path, data)
                     self:paralyze()
                 end
                 results.success = false
+                local exit_message = reason == BattleReason.RUN and "Ran away!" or "Panicked out!"
                 self.player:say_with_mug(
-                    "Panicked out!\nLiberation failed. (-" ..
+                    exit_message .. "\nLiberation failed. (-" ..
                     tostring(PANIC_HP_PENALTY) .. " HP)"
                 )
-                log:info_data("Player panicked out of battle", {
+                log:info_data("Player ran or panicked out of battle", {
                     base_area_id = self.instance.base_area_id,
                     instance_area_id = self.instance.area_id,
                     player_id = self.player.id,
-                    reason = results.reason,
-                    escape = results.escape,
-                    fled = results.fled,
+                    reason = reason,
                     turns = results.turns,
                     health_before_penalty = health_before_penalty,
                     health_after_penalty = self.health,
@@ -185,14 +165,15 @@ function PlayerSession:initiate_encounter(encounter_path, data)
             if self.health == 0 then
                 self:paralyze()
             end
-            if total_enemy_health > 0 or results.ran then
-                results.success = false
+
+            -- A panel is liberated only for the explicit WIN reason. A draw,
+            -- loss, or missing/unknown reason must fail even if no surviving
+            -- enemy-health entries were returned by the battle engine.
+            results.success = reason == BattleReason.WIN
+            if not results.success then
                 self.player:say_with_mug("Oh, no!\nLiberation failed!")
-                resolve(results)
-            else
-                results.success = true
-                resolve(results)
             end
+            resolve(results)
         end)
     end)
 end
@@ -217,8 +198,60 @@ function PlayerSession:heal(amount)
     end
 end
 
-function PlayerSession:hurt(amount)
+local function is_guardable_attacker(attacker)
+    return type(attacker) == "table"
+        and (attacker.is_boss == true or attacker.is_special_encounter == true)
+end
+
+local function guard_is_covering_target(instance, target_session)
+    local target = target_session and target_session.player
+    if not target then return false end
+
+    local target_x = math.floor(target.x)
+    local target_y = math.floor(target.y)
+
+    for _, guard_session in pairs(instance.player_sessions or {}) do
+        if guard_session.health > 0
+            and guard_session.ability
+            and guard_session.ability.name == "Guard" then
+            local guard_player = guard_session.player
+            if guard_player and guard_player.z == target.z then
+                local distance_x = math.abs(math.floor(guard_player.x) - target_x)
+                local distance_y = math.abs(math.floor(guard_player.y) - target_y)
+                if math.max(distance_x, distance_y) <= GUARD_RANGE_TILES then
+                    return true, guard_session
+                end
+            end
+        end
+    end
+
+    return false
+end
+
+function PlayerSession:hurt(amount, attacker)
     if self.invincible or self.health == 0 or amount <= 0 then return end
+
+    -- Guard only negates damage caused by boss and special-encounter enemies.
+    -- Check at the point damage is applied so every supported attack path gets
+    -- the same protection, including attacks aimed at the Guard user.
+    if is_guardable_attacker(attacker) then
+        local guarded, guard_session = guard_is_covering_target(self.instance, self)
+        if guarded then
+            log:debug_data("Guard blocked enemy damage", {
+                base_area_id = self.instance.base_area_id,
+                instance_area_id = self.instance.area_id,
+                player_id = self.player.id,
+                guard_player_id = guard_session.player.id,
+                attacker = tostring(attacker.battle_name or attacker.name or "Enemy"),
+                attacker_is_boss = attacker.is_boss == true,
+                attacker_is_special_encounter = attacker.is_special_encounter == true,
+                range_tiles = GUARD_RANGE_TILES,
+                amount_blocked = amount,
+            })
+            return
+        end
+    end
+
     Net.play_sound_for_player(self.player.id, "/server/assets/NebuLibsAssets/sound effects/hurt.ogg")
     self.health = math.max(math.ceil(self.health - amount), 0)
     ezmemory.set_player_max_health(self.player.id, self.max_health, true)
@@ -364,7 +397,7 @@ function PlayerSession:liberate_panels(panels, results)
     local co = coroutine.create(function()
         Async.await(Async.sleep(1))
         local msg
-        if results and results.turns == 1 and not results.ran then
+        if results and tonumber(results.reason) == 1 and results.turns == 1 and not results.ran then
             msg = "One turn liberation!"
         else
             msg = "Yeah!\nI liberated it!"
@@ -389,27 +422,30 @@ function PlayerSession:liberate_panels(panels, results)
 end
 
 function PlayerSession:get_cash(panel, destroy_items)
-    if self.get_monies then
-        if destroy_items ~= true then
-            local cash = Net.get_player_money(self.player.id)
-            local bonus = 100
-            if panel.custom_properties[Constants.CustomProperties.Money] then
-                bonus = tonumber(panel.custom_properties[Constants.CustomProperties.Money])
+    local co = coroutine.create(function()
+        if self.get_monies then
+            if destroy_items ~= true then
+                local cash = Net.get_player_money(self.player.id)
+                local bonus = 100
+                if panel.custom_properties[Constants.CustomProperties.Money] then
+                    bonus = tonumber(panel.custom_properties[Constants.CustomProperties.Money])
+                end
+                log:info_data("Player found money", {
+                    base_area_id = self.instance.base_area_id,
+                    instance_area_id = self.instance.area_id,
+                    player_id = self.player.id,
+                    bonus = bonus,
+                    panel_x = panel.x,
+                    panel_y = panel.y,
+                })
+                Async.await(self.player:message_with_mug("Obtained $" .. tostring(bonus) .. "!"))
+                Net.set_player_money(self.player.id, cash + bonus)
+                ezmemory.set_player_money(self.player.id, Net.get_player_money(self.player.id))
             end
-            log:info_data("Player found money", {
-                base_area_id = self.instance.base_area_id,
-                instance_area_id = self.instance.area_id,
-                player_id = self.player.id,
-                bonus = bonus,
-                panel_x = panel.x,
-                panel_y = panel.y,
-            })
-            self.player:say("Obtained $"..tostring(bonus).."!")
-            Net.set_player_money(self.player.id, cash + bonus)
-            ezmemory.set_player_money(self.player.id, Net.get_player_money(self.player.id))
+            self.get_monies = false
         end
-        self.get_monies = false
-    end
+    end)
+    return Async.promisify(co)
 end
 
 function PlayerSession:loot_panels(panels, remove_traps, destroy_items)
@@ -426,14 +462,19 @@ function PlayerSession:loot_panels(panels, remove_traps, destroy_items)
             })
             if panel.loot then
                 Async.await(Loot.loot_item_panel(self.instance, self, panel, destroy_items))
-                self:get_cash(panel, destroy_items)
+                Async.await(self:get_cash(panel, destroy_items))
             elseif panel.type == Constants.PanelTypes.TrapPanel then
                 local slide_time = .1
                 local spawn_x = math.floor(panel.x) + .5
                 local spawn_y = math.floor(panel.y) + .5
                 local spawn_z = panel.z
+                local was_input_locked = Net.is_player_input_locked(self.player.id)
+                Net.lock_player_input(self.player.id)
                 Net.slide_player_camera(self.player.id, spawn_x, spawn_y, spawn_z, slide_time)
                 Async.await(Async.sleep(slide_time))
+                if not was_input_locked then
+                    Net.unlock_player_input(self.player.id)
+                end
                 if remove_traps then
                     log:info_data("Player removed trap", {
                         base_area_id = self.instance.base_area_id,

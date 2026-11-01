@@ -7,10 +7,10 @@ local ExplodingEffect = require("scripts/ezlibs-custom/nebulous-liberations/util
 
 local Enemy = {}
 
-function Enemy.from(instance, position, direction, name)
+function Enemy.from(instance, position, direction, name, spawn_options)
     -- `name` is the registered enemy-template key. The template stores its
     -- display name in `battle_name`; it does not necessarily define `enemy.name`.
-    local enemy = EnemyTemplates.create(instance, position, direction, name)
+    local enemy = EnemyTemplates.create(instance, position, direction, name, spawn_options)
     local display_name = enemy.battle_name or enemy.name or name or "Enemy"
     Net.set_bot_name(enemy.id, tostring(display_name) .. ": " .. tostring(enemy.health or 0))
     return enemy

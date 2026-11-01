@@ -19,9 +19,9 @@
  <tileset firstgid="4" source="../assets/tiles/block-undernet.tsx"/>
  <tileset firstgid="52" source="../assets/tiles/central_arrows3.tsx"/>
  <tileset firstgid="56" source="../assets/tiles/invis tile.tsx"/>
- <tileset firstgid="57" source="../assets/tiles/attack indicator.tsx"/>
- <tileset firstgid="58" source="../assets/tiles/Liberation Collision.tsx"/>
- <tileset firstgid="59" source="../assets/tiles/selected tile.tsx"/>
+ <tileset firstgid="57" source="../assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx"/>
+ <tileset firstgid="58" source="../assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx"/>
+ <tileset firstgid="59" source="../assets/ezlibs-custom/nebulous-liberations/selected tile.tsx"/>
  <tileset firstgid="65" source="../assets/tiles/LiberationTileset.tsx"/>
  <tileset firstgid="110" source="../assets/tiles/panels.tsx"/>
  <layer id="1" name="Tile Layer 1" width="45" height="40">

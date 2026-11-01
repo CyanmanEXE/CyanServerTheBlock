@@ -17,9 +17,9 @@
  </properties>
  <tileset firstgid="1" source="../assets/tiles/panel base.tsx"/>
  <tileset firstgid="4" source="../assets/tiles/panels.tsx"/>
- <tileset firstgid="74" source="../assets/tiles/Liberation Collision.tsx"/>
- <tileset firstgid="75" source="../assets/tiles/attack indicator.tsx"/>
- <tileset firstgid="76" source="../assets/tiles/selected tile.tsx"/>
+ <tileset firstgid="74" source="../assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx"/>
+ <tileset firstgid="75" source="../assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx"/>
+ <tileset firstgid="76" source="../assets/ezlibs-custom/nebulous-liberations/selected tile.tsx"/>
  <layer id="1" name="Tile Layer 1" width="30" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,

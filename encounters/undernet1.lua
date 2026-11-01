@@ -1,5 +1,5 @@
 local Robber = {
-    name="Robber",
+    name="undernet1_Robber",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -35,7 +35,7 @@ local Robber = {
 }
 
 local Encounter2 = {
-    name="Encounter2",
+    name="undernet1_Encounter2",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -71,7 +71,7 @@ local Encounter2 = {
 }
 
 local Encounter3 = {
-    name="Encounter3",
+    name="undernet1_Encounter3",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -107,7 +107,7 @@ local Encounter3 = {
 }
 
 local Encounter4 = {
-    name="Encounter4",
+    name="undernet1_Encounter4",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -145,7 +145,7 @@ local Encounter4 = {
 }
 
 local Encounter5 = {
-    name="Encounter5",
+    name="undernet1_Encounter5",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -181,7 +181,7 @@ local Encounter5 = {
 }
 
 local Encounter6 = {
-    name="Encounter6",
+    name="undernet1_Encounter6",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -217,7 +217,7 @@ local Encounter6 = {
 }
 
 local Encounter7 = {
-    name="Encounter7",
+    name="undernet1_Encounter7",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -256,7 +256,7 @@ local Encounter7 = {
 }
 
 local Encounter8 = {
-    name="Encounter8",
+    name="undernet1_Encounter8",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -292,7 +292,7 @@ local Encounter8 = {
 }
 
 local Encounter9 = {
-    name="Encounter9",
+    name="undernet1_Encounter9",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -330,7 +330,7 @@ local Encounter9 = {
 }
 
 local Encounter10 = {
-    name="Encounter10",
+    name="undernet1_Encounter10",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -368,7 +368,7 @@ local Encounter10 = {
 }
 
 local Encounter11 = {
-    name="Encounter11",
+    name="undernet1_Encounter11",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -406,7 +406,7 @@ local Encounter11 = {
 }
 
 local Encounter12 = {
-    name="Encounter12",
+    name="undernet1_Encounter12",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -445,7 +445,7 @@ local Encounter12 = {
 }
 
 local Encounter13 = {
-    name="Encounter13",
+    name="undernet1_Encounter13",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -481,7 +481,7 @@ local Encounter13 = {
 }
 
 local Encounter14 = {
-    name="Encounter14",
+    name="undernet1_Encounter14",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -517,7 +517,7 @@ local Encounter14 = {
 }
 
 local Encounter15 = {
-    name="Encounter15",
+    name="undernet1_Encounter15",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -553,7 +553,7 @@ local Encounter15 = {
 }
 
 local Encounter16 = {
-    name="Encounter16",
+    name="undernet1_Encounter16",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -590,7 +590,7 @@ local Encounter16 = {
 }
 
 local Encounter17 = {
-    name="Encounter17",
+    name="undernet1_Encounter17",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -627,7 +627,7 @@ local Encounter17 = {
 }
 
 local Encounter18 = {
-    name="Encounter18",
+    name="undernet1_Encounter18",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -664,7 +664,7 @@ local Encounter18 = {
 }
 
 local Encounter19 = {
-    name="Encounter19",
+    name="undernet1_Encounter19",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -704,7 +704,7 @@ local Encounter19 = {
 }
 
 local Encounter20 = {
-    name="Encounter20",
+    name="undernet1_Encounter20",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -740,7 +740,7 @@ local Encounter20 = {
 }
 
 local Encounter21 = {
-    name="Encounter21",
+    name="undernet1_Encounter21",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -776,7 +776,7 @@ local Encounter21 = {
 }
 
 local Encounter22 = {
-    name="Encounter22",
+    name="undernet1_Encounter22",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -812,7 +812,7 @@ local Encounter22 = {
 }
 
 local Encounter23 = {
-    name="Encounter23",
+    name="undernet1_Encounter23",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -848,7 +848,7 @@ local Encounter23 = {
 }
 
 local Encounter24 = {
-    name="Encounter24",
+    name="undernet1_Encounter24",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -884,7 +884,7 @@ local Encounter24 = {
 }
 
 local Encounter25 = {
-    name="Encounter25",
+    name="undernet1_Encounter25",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -920,7 +920,7 @@ local Encounter25 = {
 }
 
 local Encounter26 = {
-    name="Encounter26",
+    name="undernet1_Encounter26",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -956,7 +956,7 @@ local Encounter26 = {
 }
 
 local Encounter27 = {
-    name="Encounter27",
+    name="undernet1_Encounter27",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -994,7 +994,7 @@ local Encounter27 = {
 }
 
 local Encounter28 = {
-    name="Encounter28",
+    name="undernet1_Encounter28",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -1031,7 +1031,7 @@ local Encounter28 = {
 }
 
 local Encounter29 = {
-    name="Encounter29",
+    name="undernet1_Encounter29",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -1067,7 +1067,7 @@ local Encounter29 = {
 }
 
 local Encounter30 = {
-    name="Encounter30",
+    name="undernet1_Encounter30",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -1107,5 +1107,7 @@ local Encounter30 = {
 return {
     minimum_steps_before_encounter=80,
     encounter_chance_per_step=0.05,
-    encounters={Robber,Encounter2,Encounter3,Encounter4,Encounter5,Encounter6,Encounter7,Encounter8,Encounter9,Encounter10,Encounter11,Encounter12,Encounter13,Encounter14,Encounter15,Encounter16,Encounter17,Encounter18,Encounter19,Encounter20,Encounter21,Encounter22,Encounter23,Encounter24,Encounter25,Encounter26,Encounter27,Encounter28,Encounter29,Encounter30}
+    encounters={Robber,Encounter2,Encounter3,Encounter4,Encounter5,Encounter6,Encounter7,Encounter8,Encounter9,Encounter10,Encounter11,Encounter12,Encounter13,Encounter14,Encounter15,Encounter16,Encounter17,Encounter18,Encounter19,Encounter20,Encounter21,Encounter22,Encounter23,Encounter24,Encounter25,Encounter26,Encounter27,Encounter28,Encounter29,Encounter30},
+    bosses={},
+    special_encounters={}
 }

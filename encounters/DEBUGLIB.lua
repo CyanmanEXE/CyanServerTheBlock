@@ -3,20 +3,20 @@ local Encounter1 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Swordy",rank=1},
-        {name="Zomon",rank=1},
+        {name="Mettaur",rank=1},
+        {name="Cannodumb",rank=1},
+        {name="Rabiree",rank=1},
     },
     obstacles={
-        {name="Rock"},
     },
     positions={
-        {0,0,0,2,0,0},
-        {0,0,0,0,0,0},
-        {0,0,0,1,0,0},
+        {0,0,0,3,0,0},
+        {0,0,0,0,0,2},
+        {0,0,0,0,1,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
-        {0,0,0,0,1,0},
+        {0,0,0,0,0,0},
         {0,0,0,0,0,0},
     },
     player_positions={
@@ -26,13 +26,18 @@ local Encounter1 = {
     },
     tiles={
         {1,1,1,1,1,1},
-        {11,11,11,11,11,11},
+        {1,1,1,1,1,1},
         {1,1,1,1,1,1},
     },
     teams={
         {2,2,2,1,1,1},
         {2,2,2,1,1,1},
         {2,2,2,1,1,1},
+    },
+    freedom_mission={
+        enabled=true,
+        turn_count=3,
+        player_can_flip=true
     },
 }
 
@@ -41,24 +46,20 @@ local Encounter2 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Metrid",rank=1},
-        {name="Fishy",rank=1},
+        {name="Cannodumb",rank=1},
+        {name="Mettaur",rank=1},
     },
     obstacles={
-        {name="IceCube"},
-        {name="Rock"},
-        {name="Rock"},
-        {name="Rock"},
     },
     positions={
         {0,0,0,0,0,0},
         {0,0,0,0,0,2},
-        {0,0,0,1,0,0},
+        {0,0,0,0,1,0},
     },
     obstacle_positions={
-        {0,0,0,0,4,0},
         {0,0,0,0,0,0},
-        {0,3,0,0,0,0},
+        {0,0,0,0,0,0},
+        {0,0,0,0,0,0},
     },
     player_positions={
         {0,0,0,0,0,0},
@@ -66,14 +67,19 @@ local Encounter2 = {
         {0,0,0,0,0,0},
     },
     tiles={
-        {11,1,11,11,1,1},
-        {1,1,1,1,8,1},
-        {11,1,1,11,1,11},
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
     },
     teams={
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
+        {2,2,2,2,1,1},
+        {2,2,2,2,1,1},
+        {2,2,2,2,1,1},
+    },
+    freedom_mission={
+        enabled=true,
+        turn_count=3,
+        player_can_flip=true
     },
 }
 
@@ -82,37 +88,40 @@ local Encounter3 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Zomon / Zaemon",rank=1},
-        {name="Beetank",rank=1},
-        {name="Zomon",rank=1},
+        {name="Mettaur",rank=1},
+        {name="Rabiree",rank=1},
     },
     obstacles={
-        {name="Rock"},
     },
     positions={
         {0,0,0,0,0,0},
-        {0,0,0,0,3,1},
-        {0,0,0,2,0,0},
+        {0,0,1,0,2,0},
+        {0,0,0,0,0,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
-        {0,0,1,0,0,0},
+        {0,0,0,0,0,0},
         {0,0,0,0,0,0},
     },
     player_positions={
         {0,0,0,0,0,0},
-        {0,1,0,0,0,0},
+        {1,0,0,0,0,0},
         {0,0,0,0,0,0},
     },
     tiles={
-        {11,1,11,1,11,1},
         {1,1,1,1,1,1},
-        {1,11,1,11,1,11},
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
     },
     teams={
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
+        {2,2,1,1,1,1},
+        {2,2,1,1,1,1},
+        {2,2,1,1,1,1},
+    },
+    freedom_mission={
+        enabled=true,
+        turn_count=3,
+        player_can_flip=true
     },
 }
 
@@ -121,16 +130,15 @@ local Encounter4 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="FighterPlane",rank=1},
-        {name="Fishy",rank=1},
-        {name="Fishy",rank=1},
+        {name="Mettaur",rank=1},
+        {name="Cannodumb",rank=1},
     },
     obstacles={
     },
     positions={
-        {0,0,0,0,0,3},
-        {0,0,0,0,1,0},
         {0,0,0,0,0,2},
+        {0,0,0,0,0,0},
+        {1,0,0,0,0,0},
     },
     obstacle_positions={
         {0,0,0,0,0,0},
@@ -139,23 +147,116 @@ local Encounter4 = {
     },
     player_positions={
         {0,0,0,0,0,0},
-        {0,1,0,0,0,0},
+        {0,0,0,1,0,0},
         {0,0,0,0,0,0},
     },
     tiles={
-        {1,1,11,11,1,1},
-        {11,1,8,8,1,11},
-        {1,1,11,11,1,1},
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
+        {1,1,1,1,1,1},
     },
     teams={
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
-        {2,2,2,1,1,1},
+        {1,1,2,2,1,1},
+        {1,1,2,2,1,1},
+        {1,1,2,2,1,1},
+    },
+    freedom_mission={
+        enabled=true,
+        turn_count=3,
+        player_can_flip=true
+    },
+}
+
+local special_encounters = {
+    {
+        name="BigBrute",
+        path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+        weight=10,
+        enemies={
+            {name="BigBrute",rank=1},
+        },
+        obstacles={
+        },
+        positions={
+            {0,0,0,0,0,0},
+            {0,0,0,0,1,0},
+            {0,0,0,0,0,0},
+        },
+        obstacle_positions={
+            {0,0,0,0,0,0},
+            {0,0,0,0,0,0},
+            {0,0,0,0,0,0},
+        },
+        player_positions={
+            {0,0,0,0,0,0},
+            {0,1,0,0,0,0},
+            {0,0,0,0,0,0},
+        },
+        tiles={
+            {1,1,1,1,1,1},
+            {1,1,1,1,1,1},
+            {1,1,1,1,1,1},
+        },
+        teams={
+            {2,2,2,1,1,1},
+            {2,2,2,1,1,1},
+            {2,2,2,1,1,1},
+        },
+        freedom_mission={
+            enabled=true,
+            turn_count=3,
+            player_can_flip=true
+        },    
+    },
+}
+
+local bosses = {
+    {
+        name="ShadeMan",
+        path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+        weight=10,
+        enemies={
+            {name="ShadeMan",rank=1},
+        },
+        obstacles={
+        },
+        positions={
+            {0,0,0,0,0,0},
+            {0,0,0,0,1,0},
+            {0,0,0,0,0,0},
+        },
+        obstacle_positions={
+            {0,0,0,0,0,0},
+            {0,0,0,0,0,0},
+            {0,0,0,0,0,0},
+        },
+        player_positions={
+            {0,0,0,0,0,0},
+            {0,1,0,0,0,0},
+            {0,0,0,0,0,0},
+        },
+        tiles={
+            {1,1,1,1,1,1},
+            {1,1,1,1,1,1},
+            {1,1,1,1,1,1},
+        },
+        teams={
+            {2,2,2,1,1,1},
+            {2,2,2,1,1,1},
+            {2,2,2,1,1,1},
+        },
+        freedom_mission={
+        enabled=true,
+        turn_count=3,
+        player_can_flip=true
+        },
     },
 }
 
 return {
-    minimum_steps_before_encounter=0,
-    encounter_chance_per_step=0,
-    encounters={Encounter1,Encounter2,Encounter3,Encounter4}
+    minimum_steps_before_encounter=80,
+    encounter_chance_per_step=0.05,
+    encounters={Encounter1,Encounter2,Encounter3,Encounter4,},
+    special_encounters = special_encounters,
+    bosses = bosses
 }

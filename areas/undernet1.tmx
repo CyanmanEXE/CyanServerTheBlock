@@ -47,7 +47,10 @@
  <tileset firstgid="346" source="../assets/tiles/Cyber_Rail.tsx"/>
  <tileset firstgid="347" source="../assets/tiles/warp.tsx"/>
  <tileset firstgid="353" source="../assets/indy-trains/platforms.tsx"/>
- <layer id="1" name="Tile Layer 1" width="46" height="80">
+  <tileset firstgid="357" source="../assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx"/>
+ <tileset firstgid="358" source="../assets/ezlibs-custom/nebulous-liberations/selected tile.tsx"/>
+ <tileset firstgid="364" source="../assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx"/>
+<layer id="1" name="Tile Layer 1" width="46" height="80">
   <data encoding="csv">
 0,2147483994,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,2147483994,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

@@ -38,6 +38,15 @@ function BigBrute:new(instance, position, direction)
 end
 
 function BigBrute:spawn(direction)
+  local closest_session = EnemyHelpers.find_closest_player_session(self.instance, self)
+  if closest_session and closest_session.player then
+    local player = closest_session.player
+    direction = Direction.diagonal_from_offset(
+      player.x - (self.x + .5),
+      player.y - (self.y + .5)
+    )
+  end
+
   self.id = Net.create_bot({
     texture_path = "/server/assets/NebuLibsAssets/bots/bigbrute.png",
     animation_path = "/server/assets/NebuLibsAssets/bots/bigbrute.animation",
@@ -69,7 +78,7 @@ local function find_offset(self, xstep, ystep, limit)
   local step = math.abs(xstep + ystep)
 
   for i = limit, 1, -step do
-    if EnemyHelpers.can_move_to(self.instance, self.x + xstep * i, self.y + ystep * i, self.z) then
+    if EnemyHelpers.can_move_to(self.instance, self.x + xstep * i, self.y + ystep * i, self.z, self) then
       offset = step * i
       break
     end

@@ -108,6 +108,14 @@ local Enums = {
         type = "string",
         values = {"Once", "Interval"}
     },
+    BossSpawnMode = {
+        type = "string",
+        values = {"Immediate", "On Dark Hole Cleared", "Manual", "After Boss Defeated"}
+    },
+    BossRequirementType = {
+        type = "string",
+        values = {"All", "Any"}
+    },
 }
 
 -- ----------------------------------------------------------------------
@@ -702,6 +710,74 @@ local object_types = {
             prop("Event Name", "string", ""),
         }
     },
+    {
+        name = "Liberation Config",
+        color = "#cc66ff",
+        members = {
+            -- These are liberation-specific settings. Background texture, animation,
+            -- velocity, and the default Song remain map-level properties.
+            -- Runtime reads for these settings are still area-property based.
+            prop("Respawn Area", "string", ""),
+            prop("Waiting Area", "string", ""),
+            prop("Liberation Tileset", "string", ""),
+            prop("Max Order Points", "number", 9),
+            prop("Target Phase Count", "number", 13),
+            prop("Target Player Count", "number", 3),
+            prop("Minimum Target Phase Count", "number", 1),
+            prop("Victory Lap Song", "string", ""),
+            prop("Honor HPMem", "bool", false),
+        }
+    },
+    {
+        name = "Liberation Gate",
+        color = "#cc66ff",
+        members = {
+            prop("Liberation Map File Name", "string", ""),
+        }
+    },
+    -- Boss Dark Panel is a placed tile object. The boss settings live here,
+    -- rather than being repeated across map-specific scripts.
+    {
+        name = "Boss Dark Panel",
+        color = "#cc3366",
+        useAs = { "object" },
+        members = {
+            prop("Boss", "string", ""),
+            prop("Boss ID", "string", ""),
+            prop("Direction", "string", "Down", "Direction"),
+            prop("Spawn Mode", "string", "Immediate", "BossSpawnMode"),
+            prop("Trigger Boss", "object", ""),
+            prop("Spawn Offset X", "number", 0),
+            prop("Spawn Offset Y", "number", 0),
+            prop("Spawn Offset Z", "number", 0),
+            prop("Auto Face Player", "bool", false),
+            prop("Boss Health Override", "number", 0),
+            prop("Spawn Enabled", "bool", true),
+            prop("Boss Display Name", "string", ""),
+        }
+    },
+    -- These classes are applied to placed tile objects on the map's object
+    -- layer. Boss ID 1/2 associate the object with one or two boss groups.
+    {
+        name = "Dark Hole",
+        color = "#663366",
+        useAs = { "object" },
+        members = {
+            prop("Boss ID 1", "string", ""),
+            prop("Boss ID 2", "string", ""),
+        }
+    },
+    {
+        name = "Indestructible Panel",
+        color = "#9966cc",
+        useAs = { "object" },
+        members = {
+            prop("Boss ID 1", "string", ""),
+            prop("Boss ID 2", "string", ""),
+            prop("Type", "string", "All", "BossRequirementType"),
+            prop("Shared", "bool", false),
+        }
+    },
 }
 
 -- ----------------------------------------------------------------------
@@ -730,6 +806,16 @@ local META = {
             description = "Spawns NPCs from a template object, lets them follow a waypoint path, and optionally warps them out when the path completes. Supports one-per-entry spawning (Once mode) and continuous spawning at an interval while a player stays inside (Interval mode)." },
         ["FootBomb Controller"] = { category = "gameplay",
             description = "Interaction actor for the FootBomb minigame." },
+        ["Liberation Config"] = { category = "gameplay",
+            description = "Configuration object for a liberation mission. Liberation Tileset and Max Order Points are read from this object. Target phase/player counts, background, music, and other legacy settings are still read from area custom properties." },
+        ["Liberation Gate"] = { category = "gameplay",
+            description = "Interactive gate that starts the liberation mission named by `Liberation Map File Name`." },
+        ["Boss Dark Panel"] = { category = "gameplay",
+            description = "A Liberation boss spawn point. Select an enemy template, spawn mode, optional boss dependency, position offsets, facing, health override, and display name." },
+        ["Dark Hole"] = { category = "gameplay",
+            description = "Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole with one or two boss groups." },
+        ["Indestructible Panel"] = { category = "gameplay",
+            description = "Placed Liberation panel object. Boss ID 1/2 define boss-group unlock requirements; Type selects All or Any when both are set. Shared=true waits for all Dark Holes in the mission." },
         ["Waypoint"] = { category = "gameplay",
             description = "Navigation node for NPCs. Move Animation handles travel; Wait Animation handles the arrival hold. Set Move Duration > 0 for scripted (jump-style) movement where the animation has intrinsic timing.",
             numberedTemplates = { "Next Waypoint " } },
@@ -779,6 +865,42 @@ local META = {
     },
 
     properties = {
+        ["Liberation Config"] = {
+            ["Max Order Points"] = {
+                category = "gameplay",
+                description = "Maximum order points available in this liberation mission. Defaults to 9 when omitted; values below 1 are clamped to 1.",
+            },
+        },
+        ["Liberation Gate"] = {
+            ["Liberation Map File Name"] = {
+                category = "gameplay",
+                description = "Area ID of the liberation mission this gate starts. Must match the mission map's area ID.",
+            },
+        },
+        ["Boss Dark Panel"] = {
+            ["Boss"] = { category = "gameplay", description = "Required enemy template key registered in Liberation enemy_templates.lua." },
+            ["Boss ID"] = { category = "gameplay", description = "Unique group identifier. Dark Holes and Indestructible Panels use the same value to associate with this boss. If empty, the Tiled object ID is used internally." },
+            ["Direction"] = { category = "gameplay", description = "Initial facing direction. Auto Face Player overrides this when enabled." },
+            ["Spawn Mode"] = { category = "gameplay", description = "Immediate: mission startup. On Dark Hole Cleared: after all Dark Holes with this Boss ID are liberated. Manual: only when Mission:spawn_boss(Boss ID) is called. After Boss Defeated: after the boss selected by Trigger Boss is defeated." },
+            ["Trigger Boss"] = { category = "gameplay", description = "Required Tiled Object reference when Spawn Mode is After Boss Defeated. Select the other Boss Dark Panel object that must be defeated first." },
+            ["Spawn Offset X"] = { category = "gameplay", description = "Horizontal tile offset from this object's position." },
+            ["Spawn Offset Y"] = { category = "gameplay", description = "Vertical tile offset from this object's position." },
+            ["Spawn Offset Z"] = { category = "gameplay", description = "Layer offset from this object's position." },
+            ["Auto Face Player"] = { category = "gameplay", description = "When true, the boss faces the nearest player on spawn. When false, Direction is respected." },
+            ["Boss Health Override"] = { category = "gameplay", description = "Optional positive health value. Zero keeps the enemy template's configured health." },
+            ["Spawn Enabled"] = { category = "gameplay", description = "When false, this boss definition is registered but will not spawn automatically. It can still be spawned manually." },
+            ["Boss Display Name"] = { category = "gameplay", description = "Optional name shown above the spawned bot. Empty uses the enemy template's display name." },
+        },
+        ["Dark Hole"] = {
+            ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement." },
+            ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement." },
+        },
+        ["Indestructible Panel"] = {
+            ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier required to unlock this panel." },
+            ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier required according to Type." },
+            ["Type"] = { category = "gameplay", description = "All requires every assigned boss group to have no remaining Dark Holes. Any requires at least one assigned boss group to have no remaining Dark Holes. Only meaningful when both Boss IDs are set." },
+            ["Shared"] = { category = "gameplay", description = "When true, this panel waits until every Dark Hole in the mission has been liberated, regardless of Boss IDs or Type." },
+        },
         -- Checkpoint ----------------------------------------------------
         ["Checkpoint"] = {
             ["Password"] = { category = "gameplay",
@@ -1573,7 +1695,7 @@ local function build_tiled_types()
             color = ot.color,
             drawFill = true,
             type = "class",
-            useAs = { "object" },
+            useAs = ot.useAs or { "object" },
             members = strip_class_members(ot.members),
         })
         id = id + 1

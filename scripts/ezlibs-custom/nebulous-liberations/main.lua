@@ -1,12 +1,25 @@
 -- main.lua
 -- Nebulous Liberations ezlibs custom plugin entry point.
+--
+-- This module follows scripts/ezlibs-scripts/main.lua's plugin contract:
+-- it returns a table of handle_* functions and does not register its own Net
+-- event listeners. The ezlibs dispatcher passes event fields to these methods.
 
 math.randomseed(os.time())
 
 local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
+local EzMapInstance = require("scripts/ezlibs-scripts/ezmapinstance")
 local log = ezlogger.get("nebulous-liberations")
 
+-- Fallback for the liberation order-points cap. A Liberation Config object
+-- can override this with its Max Order Points custom property. The resolved
+-- value is stored on each mission as MAX_ORDER_POINTS and sizes the point gauge.
+local MAX_ORDER_POINTS = 9
+
 local LibPlugin = {}
+
+-- Exposed for debug tooling and any future modules that need to know the cap.
+LibPlugin.MAX_ORDER_POINTS = MAX_ORDER_POINTS
 
 local Player = require("scripts/ezlibs-custom/nebulous-liberations/player")
 local Instance = require("scripts/ezlibs-custom/nebulous-liberations/liberations/instance")
@@ -15,21 +28,17 @@ local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberation
 local Validation = require("scripts/ezlibs-custom/nebulous-liberations/liberations/validation")
 local PanelRegistry = require("scripts/ezlibs-custom/nebulous-liberations/liberations/panel_registry")
 
+-- The startup coroutine below awaits this pass before registering panel GIDs
+-- and Liberation Gates, so the area scan sees the completed TMX asset updates.
+local TilesetEmbedder = require("scripts/ezlibs-custom/nebulous-liberations/liberations/tileset_embedder")
+
 local waiting_area_map = {}
 local respawn_table = {}
 local gate_to_area_map = {}
 local instances = {}
 local players = {}
 
-local function find_available_instance_id(start_id)
-    local number = 1
-    local instance_id = start_id
-    while instances[instance_id] do
-        number = number + 1
-        instance_id = start_id .. tostring(number)
-    end
-    return instance_id
-end
+local remove_instance
 
 local function transfer_players_to_new_instance(base_area, player_ids)
     if type(base_area) ~= "string" or base_area == "" then
@@ -40,12 +49,13 @@ local function transfer_players_to_new_instance(base_area, player_ids)
         return
     end
 
-    local instance_id = find_available_instance_id(tostring(player_ids[1]))
     local instance_players = {}
+    local instance_player_ids = {}
     for _, player_id in ipairs(player_ids) do
         local player = players[player_id]
         if player and not player.disconnected then
             instance_players[#instance_players + 1] = player
+            instance_player_ids[#instance_player_ids + 1] = player_id
         end
     end
     if #instance_players == 0 then
@@ -56,15 +66,53 @@ local function transfer_players_to_new_instance(base_area, player_ids)
         return
     end
 
+    local preferred_instance_id = "liberation_" .. tostring(instance_player_ids[1])
+    local shared_instance, create_error = EzMapInstance.create(
+        base_area,
+        preferred_instance_id,
+        {
+            host_id = instance_player_ids[1],
+            player_ids = instance_player_ids,
+            metadata = { game = "nebulous-liberations" },
+        }
+    )
+    if not shared_instance then
+        log:error_data("Cannot create shared Liberation instance", {
+            base_area_id = base_area,
+            preferred_instance_id = preferred_instance_id,
+            error = tostring(create_error),
+        })
+        return
+    end
+
+    local instance_id = shared_instance.id
     log:info_data("Starting liberation mission", {
         base_area = base_area,
         base_area_name = Net.get_area_name(base_area),
         instance_area_id = instance_id,
         player_count = #instance_players,
-        player_ids = player_ids,
+        player_ids = instance_player_ids,
     })
 
-    local instance = Instance:new(base_area, instance_id, instance_players)
+    local constructor_ok, instance_or_error = pcall(
+        Instance.new,
+        Instance,
+        base_area,
+        instance_id,
+        instance_players,
+        MAX_ORDER_POINTS,
+        shared_instance
+    )
+    if not constructor_ok then
+        log:error_data("Cannot initialize Liberation mission", {
+            base_area_id = base_area,
+            instance_area_id = instance_id,
+            error = tostring(instance_or_error),
+        })
+        EzMapInstance.remove(instance_id)
+        return
+    end
+    local instance = instance_or_error
     local spawn = instance:get_spawn_position()
     if not spawn then
         log:error_data("Cannot start mission: no spawn position", {
@@ -76,15 +124,64 @@ local function transfer_players_to_new_instance(base_area, player_ids)
     end
 
     instances[instance_id] = instance
+
+    -- Preserve Liberation's transfer barrier: register the entire pending set
+    -- and player activity before requesting any transfer event can arrive.
     for _, player in ipairs(instance_players) do
-        Net.transfer_player(player.id, instance_id, true, spawn.x, spawn.y, spawn.z)
+        instance.pending_transfer_players[player.id] = true
+        player.activity = instance
+    end
+
+    log:info_data("Liberation mission transfers starting", {
+        base_area_id = base_area,
+        instance_area_id = instance_id,
+        player_count = #instance_players,
+        player_ids = instance_player_ids,
+    })
+
+    for _, player in ipairs(instance_players) do
+        log:info_data("Liberation mission transfer requested", {
+            player_id = player.id,
+            instance_area_id = instance_id,
+        })
+        local transferred, transfer_error = EzMapInstance.transfer_player(
+            instance_id,
+            player.id,
+            spawn.x,
+            spawn.y,
+            spawn.z,
+            true
+        )
+        if not transferred then
+            log:error_data("Liberation player transfer request failed", {
+                player_id = player.id,
+                instance_area_id = instance_id,
+                error = tostring(transfer_error),
+            })
+            -- Reuse the normal mission teardown/return path for a partial setup.
+            remove_instance(instance_id)
+            return
+        end
         local next_spawn = instance:get_next_spawn_from_object(spawn.id)
         if next_spawn then
             spawn = next_spawn
         end
-        player.activity = instance
     end
-    instance:begin()
+end
+
+-- Spawn a boss configured with Spawn Mode = Manual (or force a dormant
+-- boss definition) in an active Liberation instance. boss_id accepts the
+-- configured Boss ID or the Tiled object ID when Boss ID is blank.
+function LibPlugin.spawn_boss(instance_area_id, boss_id)
+    local instance = instances[instance_area_id]
+    if not instance then
+        log:warn_data("Cannot spawn boss: Liberation instance was not found", {
+            instance_area_id = instance_area_id,
+            boss_id = boss_id,
+        })
+        return false
+    end
+    return instance:spawn_boss(boss_id, true)
 end
 
 function LibPlugin.start_game_for_player(player_id, liberation_id)
@@ -146,7 +243,7 @@ local function leave_party(player)
     end
 end
 
-local function remove_instance(area_id)
+remove_instance = function(area_id)
     local instance = instances[area_id]
     if not instance then return end
 
@@ -180,7 +277,11 @@ local function remove_instance(area_id)
     else
         for _, player in ipairs(instance:get_players()) do
             if player then
-                Net.transfer_player(player.id, respawn_area, true, spawn.x, spawn.y, spawn.z)
+                -- Do not pull members who never completed their transfer out of
+                -- the waiting area during a partial-start rollback.
+                if Net.get_player_area(player.id) == area_id then
+                    Net.transfer_player(player.id, respawn_area, true, spawn.x, spawn.y, spawn.z)
+                end
                 player.activity = nil
             end
         end
@@ -228,6 +329,15 @@ end
 
 function LibPlugin.handle_object_interaction(player_id, object_id, button)
     local area_id = Net.get_player_area(player_id)
+    local area_gates = gate_to_area_map[area_id]
+
+    -- Liberation Gate objects are registered by object id. Check them directly
+    -- instead of requiring the area to also be marked as a waiting area.
+    if area_gates and area_gates[object_id] ~= nil then
+        detect_door_interaction(area_id, player_id, object_id, button)
+        return
+    end
+
     if waiting_area_map[area_id] ~= nil then
         detect_door_interaction(area_id, player_id, object_id, button)
     elseif instances[area_id] ~= nil then
@@ -341,6 +451,12 @@ function LibPlugin.handle_player_transfer(player_id)
     local player = players[player_id]
     if not player then return end
 
+    local current_area_id = Net.get_player_area(player_id)
+    local shared_instance = EzMapInstance.get_for_player(player_id)
+    if shared_instance and current_area_id ~= shared_instance.area_id then
+        EzMapInstance.unregister_player(shared_instance.id, player_id)
+    end
+
     local player_pos = Net.get_player_position(player_id)
     if player_pos then
         player.x = player_pos.x
@@ -348,10 +464,6 @@ function LibPlugin.handle_player_transfer(player_id)
         player.z = player_pos.z
     end
 
-    -- Fast-path battle exit: if we captured battle_results but battle_exit
-    -- hasn't fired and the player has transferred back into their liberation
-    -- instance area, the battle scene is gone. This resolves within ~1s of
-    -- the actual exit and lets us skip the fallback timer entirely.
     if player.pending_battle_stats and player.resolve_battle then
         local area_id = Net.get_player_area(player_id)
         if player.activity and area_id == player.activity.area_id then
@@ -379,6 +491,10 @@ function LibPlugin.handle_player_disconnect(player_id)
     local player = players[player_id]
     if not player then return end
     player:handle_disconnect()
+    local shared_instance = EzMapInstance.get_for_player(player_id)
+    if shared_instance then
+        EzMapInstance.unregister_player(shared_instance.id, player_id)
+    end
     leave_party(player)
     players[player_id] = nil
 end
@@ -386,9 +502,6 @@ end
 function LibPlugin.handle_player_move(player_id, x, y, z)
     local player = players[player_id]
     if not player then return end
-    -- Fast path: if a battle outcome was captured but the exit promise
-    -- hasn't been resolved yet, the player having moved proves they're back
-    -- on the map. Resolve immediately instead of waiting for the fallback.
     if player.pending_battle_stats and player.resolve_battle then
         log:info_data("handle_player_move: battle exit detected via movement", {
             player_id = player_id,
@@ -404,53 +517,199 @@ function LibPlugin.handle_player_move(player_id, x, y, z)
     player.z = z
 end
 
-local areas = Net.list_areas()
-for _, area_id in ipairs(areas) do
-    local custom_parameters = Net.get_area_custom_properties(area_id) or {}
-    if custom_parameters[Constants.CustomProperties.RespawnArea] then
-        respawn_table[Net.get_area_name(area_id)] = custom_parameters[Constants.CustomProperties.RespawnArea]
-        local waiting_area = custom_parameters[Constants.CustomProperties.WaitingArea]
-            or custom_parameters[Constants.CustomProperties.RespawnArea]
-        waiting_area_map[waiting_area] = custom_parameters[Constants.CustomProperties.RespawnArea]
+local function resolve_area_reference(area_reference, area_ids)
+    if type(area_reference) ~= "string" or area_reference == "" then
+        return nil
     end
 
-    local objects = Net.list_objects(area_id) or {}
-    for _, obj_id in ipairs(objects) do
-        local obj = Net.get_object_by_id(area_id, obj_id)
-        if obj and obj.data and obj.data.gid and obj.type then
-            local panel_type = obj.type
-            if panel_type == Constants.PanelTypes.ItemPanel or
-               panel_type == Constants.PanelTypes.DarkHole or
-               panel_type == Constants.PanelTypes.IndestructiblePanel or
-               panel_type == Constants.PanelTypes.BonusPanel or
-               panel_type == Constants.PanelTypes.TrapPanel or
-               panel_type == Constants.PanelTypes.PanelGate or
-               panel_type == Constants.PanelTypes.DarkPanel then
-                PanelRegistry.register(panel_type, { gids = { obj.data.gid } })
-            end
+    -- Area custom properties and Tiled object properties may contain either
+    -- the runtime area ID or the human-readable area name. Interaction
+    -- callbacks use the runtime ID returned by Net.get_player_area().
+    for _, candidate_id in ipairs(area_ids) do
+        if tostring(candidate_id) == area_reference then
+            return candidate_id
         end
     end
 
-    local tileset_path = custom_parameters[Constants.CustomProperties.LiberationTileset]
-    if tileset_path then
-        local tileset = Net.get_tileset(area_id, tileset_path)
-        if tileset and tileset.first_gid and tileset.tilecount then
-            for gid = tileset.first_gid, tileset.first_gid + tileset.tilecount - 1 do
-                if PanelRegistry.get_type_by_gid(gid) == nil then
-                    PanelRegistry.register(Constants.PanelTypes.DarkPanel, { gids = { gid } })
+    for _, candidate_id in ipairs(area_ids) do
+        if Net.get_area_name(candidate_id) == area_reference then
+            return candidate_id
+        end
+    end
+
+    return nil
+end
+
+local function register_waiting_area(source_area_id, source_area_name, waiting_area, respawn_area, area_ids)
+    if type(waiting_area) ~= "string" or waiting_area == "" then
+        return
+    end
+
+    local waiting_area_id = resolve_area_reference(waiting_area, area_ids)
+    if waiting_area_id then
+        waiting_area_map[waiting_area_id] = true
+        log:debug_data("Registered Liberation party area", {
+            source_area_id = source_area_id,
+            source_area_name = source_area_name,
+            configured_waiting_area = waiting_area,
+            resolved_waiting_area_id = waiting_area_id,
+            respawn_area = respawn_area,
+        })
+    else
+        log:warn_data("Could not resolve Liberation Waiting Area", {
+            source_area_id = source_area_id,
+            source_area_name = source_area_name,
+            configured_waiting_area = waiting_area,
+            respawn_area = respawn_area,
+        })
+    end
+end
+
+local function initialize_areas()
+    local areas = Net.list_areas() or {}
+    for _, area_id in ipairs(areas) do
+        local area_name = Net.get_area_name(area_id)
+        local custom_parameters = Net.get_area_custom_properties(area_id) or {}
+        local area_respawn = custom_parameters[Constants.CustomProperties.RespawnArea]
+        local area_waiting = custom_parameters[Constants.CustomProperties.WaitingArea]
+
+        -- Keep support for legacy map-level properties, but Liberation Config
+        -- object properties are the current source for mission map settings.
+        if area_respawn and area_respawn ~= "" then
+            respawn_table[area_name] = area_respawn
+        end
+        if area_waiting and area_waiting ~= "" then
+            register_waiting_area(area_id, area_name, area_waiting, area_respawn, areas)
+        elseif area_respawn and area_respawn ~= "" then
+            register_waiting_area(area_id, area_name, area_respawn, area_respawn, areas)
+        end
+
+        local objects = Net.list_objects(area_id) or {}
+        for _, obj_id in ipairs(objects) do
+            local obj = Net.get_object_by_id(area_id, obj_id)
+            if obj and obj.data and obj.data.gid and obj.type then
+                local panel_type = obj.type
+                if panel_type == Constants.PanelTypes.ItemPanel or
+                   panel_type == Constants.PanelTypes.DarkHole or
+                   panel_type == Constants.PanelTypes.IndestructiblePanel or
+                   panel_type == Constants.PanelTypes.BonusPanel or
+                   panel_type == Constants.PanelTypes.TrapPanel or
+                   panel_type == Constants.PanelTypes.PanelGate or
+                   panel_type == Constants.PanelTypes.DarkPanel then
+                    PanelRegistry.register(panel_type, { gids = { obj.data.gid } })
                 end
             end
         end
-        Validation.report(area_id)
-    end
 
-    gate_to_area_map[area_id] = gate_to_area_map[area_id] or {}
-    for _, obj_id in ipairs(objects) do
-        local obj = Net.get_object_by_id(area_id, obj_id)
-        if obj and obj.custom_properties and obj.custom_properties[Constants.CustomProperties.LiberationMapFileName] then
-            gate_to_area_map[area_id][obj_id] = obj.custom_properties[Constants.CustomProperties.LiberationMapFileName]
+        -- Liberation Tileset belongs to the Tiled "Liberation Config" object,
+        -- not to the map/area custom properties.
+        local config_tileset_path
+        for _, obj_id in ipairs(objects) do
+            local obj = Net.get_object_by_id(area_id, obj_id)
+            if obj and obj.type == "Liberation Config" then
+                local properties = obj.custom_properties or {}
+                local configured_path = properties[Constants.CustomProperties.LiberationTileset]
+                local config_respawn = properties[Constants.CustomProperties.RespawnArea]
+                local config_waiting = properties[Constants.CustomProperties.WaitingArea]
+
+                -- Waiting Area is authored on each Liberation Config object in
+                -- the mission map. It points back to the lobby/waiting map, so
+                -- register that destination area for party recruitment here.
+                if config_respawn and config_respawn ~= "" then
+                    respawn_table[area_name] = config_respawn
+                end
+                if config_waiting and config_waiting ~= "" then
+                    register_waiting_area(
+                        area_id,
+                        area_name,
+                        config_waiting,
+                        config_respawn,
+                        areas
+                    )
+                elseif config_respawn and config_respawn ~= "" then
+                    register_waiting_area(
+                        area_id,
+                        area_name,
+                        config_respawn,
+                        config_respawn,
+                        areas
+                    )
+                end
+
+                if type(configured_path) == "string" and configured_path ~= "" then
+                    config_tileset_path = configured_path
+                end
+            end
+        end
+
+        if config_tileset_path then
+            local tileset_ok, tileset = pcall(function()
+                return Net.get_tileset(area_id, config_tileset_path)
+            end)
+            if tileset_ok and tileset and tileset.first_gid and tileset.tilecount then
+                for gid = tileset.first_gid, tileset.first_gid + tileset.tilecount - 1 do
+                    if PanelRegistry.get_type_by_gid(gid) == nil then
+                        PanelRegistry.register(Constants.PanelTypes.DarkPanel, { gids = { gid } })
+                    end
+                end
+                Validation.report(area_id)
+            else
+                log:warn_data("Could not register Liberation Tileset panels from Liberation Config", {
+                    area_id = area_id,
+                    tileset_path = config_tileset_path,
+                    lookup_succeeded = tileset_ok,
+                    error = tileset_ok and nil or tostring(tileset),
+                })
+            end
+        end
+
+        gate_to_area_map[area_id] = gate_to_area_map[area_id] or {}
+        for _, obj_id in ipairs(objects) do
+            local obj = Net.get_object_by_id(area_id, obj_id)
+            if obj and obj.custom_properties then
+                local properties = obj.custom_properties
+                local mission_area = properties[Constants.CustomProperties.LiberationMapFileName]
+                    or properties[Constants.CustomProperties.LiberationMapName]
+
+                -- The class/type check makes the intended Tiled object explicit,
+                -- while the property check preserves compatibility with maps whose
+                -- gate objects were authored before the type was registered.
+                if mission_area and (obj.type == "Liberation Gate"
+                    or properties[Constants.CustomProperties.LiberationMapFileName]
+                    or properties[Constants.CustomProperties.LiberationMapName]) then
+                    gate_to_area_map[area_id][obj_id] = mission_area
+                    log:debug_data("Registered Liberation Gate", {
+                        area_id = area_id,
+                        object_id = obj_id,
+                        object_type = obj.type,
+                        mission_area = mission_area,
+                    })
+                elseif obj.type == "Liberation Gate" then
+                    log:warn_data("Liberation Gate has no mission destination property", {
+                        area_id = area_id,
+                        object_id = obj_id,
+                        property_name = Constants.CustomProperties.LiberationMapFileName,
+                    })
+                end
+            end
         end
     end
 end
+
+-- Complete the filesystem/asset preparation first, then inspect loaded areas
+-- and register panel GIDs and gates. Async.promisify is already used elsewhere
+-- in this project to run coroutine-based asynchronous work.
+local startup_co = coroutine.create(function()
+    local embed_ok, embed_error = pcall(function()
+        Async.await(TilesetEmbedder.run())
+    end)
+    if not embed_ok then
+        log:error_data("Liberation tileset embedding failed during startup", {
+            error = tostring(embed_error),
+        })
+    end
+    initialize_areas()
+end)
+Async.promisify(startup_co)
 
 return LibPlugin

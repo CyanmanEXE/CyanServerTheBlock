@@ -1,5 +1,5 @@
 local Encounter1 = {
-    name="Encounter1",
+    name="SnowPark3_Encounter1",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -35,7 +35,7 @@ local Encounter1 = {
 }
 
 local Encounter2 = {
-    name="Encounter2",
+    name="SnowPark3_Encounter2",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -74,7 +74,7 @@ local Encounter2 = {
 }
 
 local Encounter3 = {
-    name="Encounter3",
+    name="SnowPark3_Encounter3",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -112,7 +112,7 @@ local Encounter3 = {
 }
 
 local Encounter4 = {
-    name="Encounter4",
+    name="SnowPark3_Encounter4",
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
@@ -151,5 +151,7 @@ local Encounter4 = {
 return {
     minimum_steps_before_encounter=80,
     encounter_chance_per_step=0.05,
-    encounters={Encounter1,Encounter2,Encounter3,Encounter4}
+    encounters={Encounter1,Encounter2,Encounter3,Encounter4},
+    bosses={},
+    special_encounters={}
 }

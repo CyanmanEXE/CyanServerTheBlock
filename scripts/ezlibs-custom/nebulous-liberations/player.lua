@@ -2,6 +2,7 @@ local ezmemory = require("scripts/ezlibs-scripts/ezmemory")
 local helpers = require('scripts/ezlibs-scripts/helpers')
 local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
 local log = ezlogger.get("nebulous-liberations")
+local OptionMenu = require("scripts/ezlibs-custom/nebulous-liberations/liberations/option_menu")
 
 -- private functions
 
@@ -17,16 +18,20 @@ local function create_textbox_promise(self)
   end)
 end
 
--- Panic / force-exit detection. `reason` is 1 for a normal battle end
--- (whether the player won or lost by health). Any other value, or an
--- explicit escape/fled flag, indicates the player force-exited via a
--- debug command or the client's escape hotkey.
+local BattleReason = {
+  DRAW = 0,
+  WIN = 1,
+  LOSE = 2,
+  RUN = 3,
+  USER_PANIC = 4,
+}
+
+-- Only these two explicit end reasons are considered a forced exit.
+-- DRAW and LOSE are ordinary battle outcomes, not panics.
 local function stats_indicate_panic(stats)
   if not stats then return false end
-  if stats.reason ~= nil and stats.reason ~= 1 then return true end
-  if stats.escape == true then return true end
-  if stats.fled == true then return true end
-  return false
+  local reason = tonumber(stats.reason)
+  return reason == BattleReason.RUN or reason == BattleReason.USER_PANIC
 end
 
 -- public
@@ -90,6 +95,19 @@ end
 function Player:quiz(a, b, c, texture_path, animation_path)
   Net.quiz_player(self.id, a, b, c, texture_path, animation_path)
   return create_textbox_promise(self)
+end
+
+-- Mugshot-flavored quiz. Used by the liberation flow so the player's own
+-- portrait accompanies the "Liberation / Pass / Cancel" prompts; the
+-- order-points value is now shown by PointsGauge, not by the mugshot.
+function Player:quiz_with_mug(a, b, c)
+  return self:quiz(a, b, c, self.mug.texture_path, self.mug.animation_path)
+end
+
+-- Controller-driven sliced option menu used by mission interactions.
+-- Returns a zero-based index to preserve the existing mission response handling.
+function Player:select_mission_option(options, title)
+  return OptionMenu.select(self.id, options, title)
 end
 
 function Player:is_battling()
@@ -162,12 +180,6 @@ function Player:handle_battle_results(stats)
   end
   self.pending_battle_stats = stats
 
-  -- Panic exits do not fire battle_exit, so the fallback is the only escape
-  -- hatch. Use a short delay for panics (fast retry loop for debug use) and
-  -- the longer safety net for normal battles in case battle_exit ever starts
-  -- firing in a future ezlibs version. Resolve immediately once the delay
-  -- has elapsed — the player is by definition back on the overworld at that
-  -- point, so no additional sleep is needed.
   local fallback_delay = is_panic and 3.0 or 20.0
   local token = {}
   self.battle_exit_fallback_token = token

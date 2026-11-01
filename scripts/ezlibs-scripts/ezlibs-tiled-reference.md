@@ -4,6 +4,18 @@ Auto-generated from `generate-ezlibs-tiled.lua`. Do not edit by hand.
 
 ## Enums
 
+### BossRequirementType
+
+- `All`
+- `Any`
+
+### BossSpawnMode
+
+- `Immediate`
+- `On Dark Hole Cleared`
+- `Manual`
+- `After Boss Defeated`
+
 ### ButtonBehavior
 
 - `Pressure Plate`
@@ -928,4 +940,67 @@ One action in a cutscene chain. Chain via Next Step; branch via Next N / Fail Ne
 - `Target Z`: Only used when Target is empty and Type is Move Actor or Move Camera. If Target X/Y/Z are all empty, the step node's own Tiled position is used. Only meaningful when `Type` in {`Move Actor`, `Move Camera`}.
 - `Wait Seconds`: Only used when Type == 'Wait'. Only meaningful when `Type` == `Wait`.
 - `Event Name`: Only used by Emit Event. Only meaningful when `Type` == `Emit Event`.
+
+### Liberation Config
+**Category:** gameplay
+Configuration object for a liberation mission. Liberation Tileset and Max Order Points are read from this object. Target phase/player counts, background, music, and other legacy settings are still read from area custom properties.
+
+| Property | Type | Required | Default | Category | Description |
+|---|---|---|---|---|---|
+| `Honor HPMem` | bool |  | false | gameplay |  |
+| `Liberation Tileset` | string |  | `""` | gameplay |  |
+| `Max Order Points` | number |  | 9 | gameplay | Maximum order points available in this liberation mission. Defaults to 9 when omitted; values below 1 are clamped to 1. |
+| `Minimum Target Phase Count` | number |  | 1 | gameplay |  |
+| `Respawn Area` | string |  | `""` | gameplay |  |
+| `Target Phase Count` | number |  | 13 | gameplay |  |
+| `Target Player Count` | number |  | 3 | gameplay |  |
+| `Victory Lap Song` | string |  | `""` | gameplay |  |
+| `Waiting Area` | string |  | `""` | gameplay |  |
+
+### Liberation Gate
+**Category:** gameplay
+Interactive gate that starts the liberation mission named by `Liberation Map File Name`.
+
+| Property | Type | Required | Default | Category | Description |
+|---|---|---|---|---|---|
+| `Liberation Map File Name` | string |  | `""` | gameplay | Area ID of the liberation mission this gate starts. Must match the mission map's area ID. |
+
+### Boss Dark Panel
+**Category:** gameplay
+A Liberation boss spawn point. Select an enemy template, spawn mode, optional boss dependency, position offsets, facing, health override, and display name.
+
+| Property | Type | Required | Default | Category | Description |
+|---|---|---|---|---|---|
+| `Auto Face Player` | bool |  | false | gameplay | When true, the boss faces the nearest player on spawn. When false, Direction is respected. |
+| `Boss` | string |  | `""` | gameplay | Required enemy template key registered in Liberation enemy_templates.lua. |
+| `Boss Display Name` | string |  | `""` | gameplay | Optional name shown above the spawned bot. Empty uses the enemy template's display name. |
+| `Boss Health Override` | number |  | 0 | gameplay | Optional positive health value. Zero keeps the enemy template's configured health. |
+| `Boss ID` | string |  | `""` | gameplay | Unique group identifier. Dark Holes and Indestructible Panels use the same value to associate with this boss. If empty, the Tiled object ID is used internally. |
+| `Direction` | string (Direction) |  | `Down` | gameplay | Initial facing direction. Auto Face Player overrides this when enabled. |
+| `Spawn Enabled` | bool |  | true | gameplay | When false, this boss definition is registered but will not spawn automatically. It can still be spawned manually. |
+| `Spawn Mode` | string (BossSpawnMode) |  | `Immediate` | gameplay | Immediate: mission startup. On Dark Hole Cleared: after all Dark Holes with this Boss ID are liberated. Manual: only when Mission:spawn_boss(Boss ID) is called. After Boss Defeated: after the boss selected by Trigger Boss is defeated. |
+| `Spawn Offset X` | number |  | 0 | gameplay | Horizontal tile offset from this object's position. |
+| `Spawn Offset Y` | number |  | 0 | gameplay | Vertical tile offset from this object's position. |
+| `Spawn Offset Z` | number |  | 0 | gameplay | Layer offset from this object's position. |
+| `Trigger Boss` | object |  | `""` | gameplay | Required Tiled Object reference when Spawn Mode is After Boss Defeated. Select the other Boss Dark Panel object that must be defeated first. |
+
+### Dark Hole
+**Category:** gameplay
+Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole with one or two boss groups.
+
+| Property | Type | Required | Default | Category | Description |
+|---|---|---|---|---|---|
+| `Boss ID 1` | string |  | `""` | gameplay | First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement. |
+| `Boss ID 2` | string |  | `""` | gameplay | Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement. |
+
+### Indestructible Panel
+**Category:** gameplay
+Placed Liberation panel object. Boss ID 1/2 define boss-group unlock requirements; Type selects All or Any when both are set. Shared=true waits for all Dark Holes in the mission.
+
+| Property | Type | Required | Default | Category | Description |
+|---|---|---|---|---|---|
+| `Boss ID 1` | string |  | `""` | gameplay | First boss-group identifier required to unlock this panel. |
+| `Boss ID 2` | string |  | `""` | gameplay | Optional second boss-group identifier required according to Type. |
+| `Shared` | bool |  | false | gameplay | When true, this panel waits until every Dark Hole in the mission has been liberated, regardless of Boss IDs or Type. |
+| `Type` | string (BossRequirementType) |  | `All` | gameplay | All requires every assigned boss group to have no remaining Dark Holes. Any requires at least one assigned boss group to have no remaining Dark Holes. Only meaningful when both Boss IDs are set. |
 

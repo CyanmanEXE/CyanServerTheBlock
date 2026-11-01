@@ -17,9 +17,9 @@
  </properties>
  <tileset firstgid="1" source="../assets/tiles/panel base.tsx"/>
  <tileset firstgid="4" source="../assets/tiles/panels.tsx"/>
- <tileset firstgid="74" source="../assets/tiles/selected tile.tsx"/>
- <tileset firstgid="80" source="../assets/tiles/Liberation Collision.tsx"/>
- <tileset firstgid="81" source="../assets/tiles/attack indicator.tsx"/>
+ <tileset firstgid="74" source="../assets/ezlibs-custom/nebulous-liberations/selected tile.tsx"/>
+ <tileset firstgid="80" source="../assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx"/>
+ <tileset firstgid="81" source="../assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx"/>
  <tileset firstgid="82" source="../assets/tiles/Netopia_Tileset_directional_paths.tsx"/>
  <tileset firstgid="118" source="../assets/tiles/IceTileTopper.tsx"/>
  <tileset firstgid="130" source="../assets/tiles/tree.tsx"/>
