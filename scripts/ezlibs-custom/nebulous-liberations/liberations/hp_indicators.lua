@@ -256,8 +256,8 @@ function HPIndicators.add_enemy(instance, enemy)
     add_target(instance, "enemy", enemy.id, enemy.health, {
         -- Enemy bot placement uses enemy.x + 0.5 / enemy.y + 0.5, but the
         -- requested HP anchor is the bot's world origin, not tile center.
-        x = tonumber(enemy.x) or 0,
-        y = tonumber(enemy.y) or 0,
+        x = (tonumber(enemy.x) or 0) + 0.5,
+        y = (tonumber(enemy.y) or 0) + 0.6,
         z = tonumber(enemy.z) or 0,
     })
     local target = instance.hp_indicator_state.targets[target_key("enemy", enemy.id)]
@@ -310,8 +310,8 @@ function HPIndicators.show_enemy(instance, enemy)
     local target = state and enemy and state.targets[target_key("enemy", enemy.id)]
     if not target then return end
     target.position = {
-        x = tonumber(enemy.x) or 0,
-        y = tonumber(enemy.y) or 0,
+        x = (tonumber(enemy.x) or 0) + 0.5,
+        y = (tonumber(enemy.y) or 0) + 0.6,
         z = tonumber(enemy.z) or 0,
     }
     target.hidden = false
@@ -323,8 +323,8 @@ function HPIndicators.update_enemy_position(instance, enemy)
     local target = state and enemy and state.targets[target_key("enemy", enemy.id)]
     if not target then return end
     target.position = {
-        x = tonumber(enemy.x) or 0,
-        y = tonumber(enemy.y) or 0,
+        x = (tonumber(enemy.x) or 0) + 0.5,
+        y = (tonumber(enemy.y) or 0) + 0.6,
         z = tonumber(enemy.z) or 0,
     }
     if target.hidden then return end

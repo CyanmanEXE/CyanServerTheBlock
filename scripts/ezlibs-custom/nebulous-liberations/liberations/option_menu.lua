@@ -44,6 +44,7 @@ local body_style = Displayer.Builder.sliceStyle9(
 
 local active_menus = {}
 local MENU_ACTIONS = { "Up", "Down", "Confirm", "Cancel" }
+local CANCEL_OPTION = "Cancel"
 
 local function make_header_children(title)
     return {
@@ -111,6 +112,16 @@ local function position_panels(menu)
 
     menu.header_panel:setPosition(x, math.floor(header_y))
     menu.body_panel:setPosition(x, math.floor(body_y))
+end
+
+local function find_cancel_option(options)
+    for index, label in ipairs(options) do
+        if type(label) == "string"
+            and string.lower(string.gsub(label, "^%s*(.-)%s*$", "%1")) == "cancel" then
+            return index
+        end
+    end
+    return nil
 end
 
 local function refresh_body(menu)
@@ -257,6 +268,13 @@ Net:on("tick", function(event)
                     menu.selected = 1
                 end
                 refresh_body(menu)
+            elseif menu.controller:is_action_pressed("Cancel", menu.owner) then
+                -- The Cancel button activates the visible Cancel row directly.
+                -- Keep the same zero-based response contract as Confirm.
+                local cancel_index = menu.cancel_index
+                if cancel_index then
+                    cleanup(player_id, menu, cancel_index - 1)
+                end
             elseif menu.controller:is_action_pressed("Confirm", menu.owner) then
                 -- Preserve the zero-based response expected by instance.lua.
                 cleanup(player_id, menu, menu.selected - 1)
@@ -266,10 +284,23 @@ Net:on("tick", function(event)
 end)
 
 function OptionMenu.select(player_id, options, title)
-    if type(options) ~= "table" or #options == 0 then
+    if type(options) ~= "table" then
         return Async.create_promise(function(resolve)
             resolve(nil)
         end)
+    end
+
+    -- Work on a copy so adding the fallback Cancel row never mutates a
+    -- caller-owned options table or changes the indexes of existing choices.
+    local menu_options = {}
+    for index, label in ipairs(options) do
+        menu_options[index] = label
+    end
+
+    local cancel_index = find_cancel_option(menu_options)
+    if not cancel_index then
+        menu_options[#menu_options + 1] = CANCEL_OPTION
+        cancel_index = #menu_options
     end
 
     if active_menus[player_id] then
@@ -299,7 +330,8 @@ function OptionMenu.select(player_id, options, title)
             header_id = header_id,
             body_id = body_id,
             title = title,
-            options = options,
+            options = menu_options,
+            cancel_index = cancel_index,
             selected = 1,
             active = false,
             finished = false,
