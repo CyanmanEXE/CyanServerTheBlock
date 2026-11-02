@@ -232,8 +232,40 @@ end
 
 local debug = false
 
+-- Tiled object classes are authoritative when they identify a known panel.
+-- GID lookup remains the fallback for tile-based panel objects and legacy maps.
+local function resolve_panel_type(object)
+    if type(object) ~= "table" then
+        return nil
+    end
+
+    local object_type = object.type
+    local panel_types = Constants.PanelTypes
+
+    if object_type == panel_types.DarkPanel
+        or object_type == panel_types.DarkHole
+        or object_type == panel_types.IndestructiblePanel
+        or object_type == panel_types.ItemPanel
+        or object_type == panel_types.PanelGate
+        or object_type == panel_types.BonusPanel
+        or object_type == panel_types.TrapPanel then
+        return object_type
+    end
+
+    if object_type == panel_types.DarkHoleBuffedVirus then
+        return panel_types.DarkHole
+    end
+
+    local gid = object.data and object.data.gid
+    if gid ~= nil then
+        return PanelRegistry.get_type_by_gid(gid)
+    end
+
+    return nil
+end
+
 local function is_panel(self, object)
-    return PanelRegistry.get_type_by_gid(object.data.gid) ~= nil
+    return resolve_panel_type(object) ~= nil
 end
 
 local function is_adjacent(position_a, position_b)
@@ -1152,15 +1184,13 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
             mission.points_of_interest[#mission.points_of_interest + 1] = object
             Net.remove_object(mission.area_id, object_id)
         elseif is_panel(mission, object) then
-            local registered_panel_type = PanelRegistry.get_type_by_gid(object.data.gid)
             local object_type = object.type
-            -- PanelRegistry maps visual GIDs, but multiple Tiled object classes
-            -- can intentionally share the same Dark Hole artwork. Preserve the
-            -- object class separately and normalize Buffed Virus to Dark Hole
-            -- gameplay so all existing liberation behavior remains intact.
+            -- Explicit Tiled panel classes take precedence over visual GIDs.
+            -- This is important when Item Panels and other panel classes use
+            -- artwork whose GID has not been registered (or is shared).
+            -- Tile-based/legacy objects still resolve through PanelRegistry.
             local is_buffed_virus = object_type == Constants.PanelTypes.DarkHoleBuffedVirus
-            local panel_type = is_buffed_virus
-                and Constants.PanelTypes.DarkHole or registered_panel_type
+            local panel_type = resolve_panel_type(object)
             local new_panel = {
                 name = "", type = panel_type, source_type = object_type,
                 scale = is_buffed_virus and (tonumber((object.custom_properties or {})[Constants.CustomProperties.Scale]) or 1) or nil,
@@ -1178,12 +1208,23 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                     TOTAL_PANEL_GIDS = TOTAL_PANEL_GIDS + 1
                 end
                 if object.custom_properties[Constants.CustomProperties.SpecificLoot] then
-                    local check_loot = object.custom_properties[Constants.CustomProperties.SpecificLoot]
+                    local check_loot = tostring(object.custom_properties[Constants.CustomProperties.SpecificLoot])
+                        :upper()
+                        :gsub("[%s%-]+", "_")
                     for i = 1, #Loot.FULL_POOL do
                         if Loot.FULL_POOL[i].animation == check_loot then
                             new_panel.loot = Loot.FULL_POOL[i]
                             break
                         end
+                    end
+                    if not new_panel.loot then
+                        log:warn_data("Unknown Specific Loot value on Item Panel", {
+                            base_area_id = self.base_area_id,
+                            instance_area_id = self.area_id,
+                            specific_loot = object.custom_properties[Constants.CustomProperties.SpecificLoot],
+                            panel_x = object.x,
+                            panel_y = object.y,
+                        })
                     end
                 else
                     new_panel.loot = Loot.DEFAULT_POOL[math.random(#Loot.DEFAULT_POOL)]

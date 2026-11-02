@@ -1,3 +1,4 @@
+
 -- input-controller.lua
 -- Unified sticky-state input controller with release/repeat edges and UI handoff guards.
 -- Timing is driven only by tick(delta_time); missing packet keys never imply release.
@@ -326,24 +327,34 @@ end
 -- explicit context transition (for example, entering a minigame) and not for
 -- competing systems to repeatedly steal control from each other.
 function InputController:claim_input(owner, force)
-    if (self.destroyed or owner == nil) and InputController.DEBUG then
-        -- Ownership diagnostic silenced to keep server console usable.
-        -- print("[InputController] claim denied player=" .. tostring(self.player_id)
-        --     .. " instance=" .. tostring(self) .. " reason=destroyed_or_nil_owner")
+    -- These checks must not depend on DEBUG. DEBUG controls logging only.
+    if self.destroyed or owner == nil then
+        if InputController.DEBUG then
+            print("[InputController] claim denied player="
+                .. tostring(self.player_id)
+                .. " reason=destroyed_or_nil_owner")
+        end
         return false
     end
-    if self.input_owner == owner then return true end
-    if (self.input_owner ~= nil and force ~= true)  and InputController.DEBUG then
-        -- Ownership diagnostic silenced to keep server console usable.
-        -- print("[InputController] claim denied player=" .. tostring(self.player_id)
-        --     .. " instance=" .. tostring(self) .. " current_owner=" .. tostring(self.input_owner)
-        --     .. " requested_owner=" .. tostring(owner))
+
+    if self.input_owner == owner then
+        return true
+    end
+
+    -- Ownership is exclusive unless the caller explicitly forces a transfer.
+    if self.input_owner ~= nil and force ~= true then
+        if InputController.DEBUG then
+            print("[InputController] claim denied player="
+                .. tostring(self.player_id)
+                .. " current_owner=" .. tostring(self.input_owner)
+                .. " requested_owner=" .. tostring(owner))
+        end
         return false
     end
 
     local previous_owner = self.input_owner
     self.input_owner = owner
-    -- Ownership-change logging silenced; the event remains available to listeners.
+
     -- Discard edge flags from the previous owner and require currently-held
     -- actions to be released before the new owner can act on them.
     for action, state in pairs(self.logical) do
@@ -351,6 +362,7 @@ function InputController:claim_input(owner, force)
             self.release_required[action] = true
         end
     end
+
     self:consume(owner)
 
     self.emitter:emit("input_owner_changed", {

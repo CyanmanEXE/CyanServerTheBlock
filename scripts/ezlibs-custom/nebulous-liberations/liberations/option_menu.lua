@@ -1,3 +1,4 @@
+
 -- Controller-driven option menu for Nebulous Liberations mission interactions.
 -- The title and option list use separate 9-slice panels:
 --   options-header: title
@@ -287,36 +288,55 @@ Net:on("tick", function(event)
         if menu.active and not menu.finished then
             if not Net.is_player(player_id) then
                 cleanup(player_id, menu, nil)
-            elseif menu.waiting_for_direction_release then
-                -- A menu can open while a cardinal or diagonal direction is
-                -- already held. Wait until the complete directional input is
-                -- neutral before accepting navigation, including transitions
-                -- such as UpRight -> Up when only Right is released.
-                if not menu.controller:get_active_direction(menu.owner) then
-                    menu.waiting_for_direction_release = false
+            else
+                local navigation_blocked = false
+
+                if menu.waiting_for_direction_release then
+                    navigation_blocked =
+                        menu.controller:get_active_direction(menu.owner) ~= nil
+
+                    if not navigation_blocked then
+                        menu.waiting_for_direction_release = false
+                    end
                 end
-            elseif is_menu_up_pressed(menu.controller, menu.owner) then
-                menu.selected = menu.selected - 1
-                if menu.selected < 1 then
-                    menu.selected = #menu.options
+
+                -- Directional navigation waits for a neutral direction state.
+                -- Confirm and Cancel remain available during that wait.
+                if not navigation_blocked
+                    and is_menu_up_pressed(menu.controller, menu.owner) then
+
+                    menu.selected = menu.selected - 1
+
+                    if menu.selected < 1 then
+                        menu.selected = #menu.options
+                    end
+
+                    refresh_body(menu)
+
+                elseif not navigation_blocked
+                    and is_menu_down_pressed(menu.controller, menu.owner) then
+
+                    menu.selected = menu.selected + 1
+
+                    if menu.selected > #menu.options then
+                        menu.selected = 1
+                    end
+
+                    refresh_body(menu)
+
+                elseif menu.controller:is_action_pressed("Cancel", menu.owner) then
+                    -- The Cancel button activates the visible Cancel row directly.
+                    -- Keep the same zero-based response contract as Confirm.
+                    local cancel_index = menu.cancel_index
+
+                    if cancel_index then
+                        cleanup(player_id, menu, cancel_index - 1)
+                    end
+
+                elseif menu.controller:is_action_pressed("Confirm", menu.owner) then
+                    -- Preserve the zero-based response expected by instance.lua.
+                    cleanup(player_id, menu, menu.selected - 1)
                 end
-                refresh_body(menu)
-            elseif is_menu_down_pressed(menu.controller, menu.owner) then
-                menu.selected = menu.selected + 1
-                if menu.selected > #menu.options then
-                    menu.selected = 1
-                end
-                refresh_body(menu)
-            elseif menu.controller:is_action_pressed("Cancel", menu.owner) then
-                -- The Cancel button activates the visible Cancel row directly.
-                -- Keep the same zero-based response contract as Confirm.
-                local cancel_index = menu.cancel_index
-                if cancel_index then
-                    cleanup(player_id, menu, cancel_index - 1)
-                end
-            elseif menu.controller:is_action_pressed("Confirm", menu.owner) then
-                -- Preserve the zero-based response expected by instance.lua.
-                cleanup(player_id, menu, menu.selected - 1)
             end
         end
     end
@@ -413,11 +433,13 @@ function OptionMenu.select(player_id, options, title)
 
             controller:consume(owner)
             controller:require_release(MENU_ACTIONS, owner)
-            -- require_release protects action edges; this additional neutral
-            -- check protects against a held diagonal changing into a cardinal
-            -- action without the player's remaining direction being released.
+
+            -- This additional neutral check protects against a held diagonal
+            -- changing into a cardinal action without the player's remaining
+            -- direction being released.
             menu.waiting_for_direction_release =
                 controller:get_active_direction(owner) ~= nil
+
             menu.active = true
         end)
     end)

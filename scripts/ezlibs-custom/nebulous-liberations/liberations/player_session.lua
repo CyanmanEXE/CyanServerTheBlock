@@ -26,6 +26,17 @@ local BattleReason = {
 -- DRAW and LOSE are not forced exits and must not be penalized.
 local PANIC_HP_PENALTY = 20
 
+-- Tiled custom properties can arrive as booleans, numbers, or strings.
+-- Normalize them before checking flags or comparing linked identifiers.
+local function is_enabled(value)
+    return value == true or value == 1 or (type(value) == "string" and value:lower() == "true")
+end
+
+local function normalize_identifier(value)
+    if value == nil then return nil end
+    return tostring(value):lower()
+end
+
 -- Guard protects players within this many tiles (Chebyshev distance) of a
 -- player whose currently equipped ability is Guard.
 local GUARD_RANGE_TILES = 2
@@ -363,7 +374,13 @@ function PlayerSession:find_matching_gates()
         for j = 1, #self.instance.panel_gates do
             local check_selection = selection:get_panels()[i]
             local check_gate = self.instance.panel_gates[j]
-            if check_selection.custom_properties[Constants.CustomProperties.GateKey] == check_gate.custom_properties[Constants.CustomProperties.GateKey] then
+            local selected_key = normalize_identifier(
+                check_selection.custom_properties[Constants.CustomProperties.GateKey]
+            )
+            local gate_key = normalize_identifier(
+                check_gate.custom_properties[Constants.CustomProperties.GateKey]
+            )
+            if selected_key ~= nil and gate_key ~= nil and selected_key == gate_key then
                 table.insert(gates, check_gate)
             end
         end
@@ -375,7 +392,10 @@ function PlayerSession:find_gate_points(id)
     local points = {}
     for i = 1, #self.instance.points_of_interest do
         local point = self.instance.points_of_interest[i]
-        if point.custom_properties[Constants.CustomProperties.GateID] == id then
+        local point_gate_id = normalize_identifier(
+            point.custom_properties[Constants.CustomProperties.GateID]
+        )
+        if point_gate_id ~= nil and point_gate_id == normalize_identifier(id) then
             table.insert(points, point)
         end
     end
@@ -406,7 +426,7 @@ function PlayerSession:liberate_panels(panels, results)
         else
             msg = "Yeah!\nI liberated it!"
         end
-        log:info_data("liberate_panels: firing message (fire-and-forget)", {
+        log:info_data("liberate_panels: waiting for message dismissal before loot", {
             base_area_id = self.instance.base_area_id,
             instance_area_id = self.instance.area_id,
             player_id = self.player.id,
@@ -415,8 +435,10 @@ function PlayerSession:liberate_panels(panels, results)
             ran = results and results.ran,
             message = msg,
         })
-        self.player:say_with_mug(msg)
-        log:info_data("liberate_panels: proceeding to loot", {
+        -- Keep the reward sequence behind the textbox response. This prevents
+        -- the loot camera sequence from taking over while this message is open.
+        Async.await(self.player:message_with_mug(msg))
+        log:info_data("liberate_panels: message dismissed; proceeding to loot", {
             base_area_id = self.instance.base_area_id,
             instance_area_id = self.instance.area_id,
             player_id = self.player.id,
@@ -488,7 +510,7 @@ function PlayerSession:loot_panels(panels, remove_traps, destroy_items)
                         panel_y = panel.y,
                     })
                     self.player:say_with_mug("I found a trap! It's been removed.")
-                elseif panel.custom_properties[Constants.CustomProperties.DamageTrap] == "true" then
+                elseif is_enabled(panel.custom_properties[Constants.CustomProperties.DamageTrap]) then
                     if panel.custom_properties[Constants.CustomProperties.TrapMessage] then
                         self.player:say_with_mug(panel.custom_properties[Constants.CustomProperties.TrapMessage])
                     else
@@ -503,7 +525,7 @@ function PlayerSession:loot_panels(panels, remove_traps, destroy_items)
                         panel_y = panel.y,
                     })
                     self:hurt(tonumber(panel.custom_properties[Constants.CustomProperties.DamageDealt]))
-                elseif panel.custom_properties[Constants.CustomProperties.StunTrap] == "true" then
+                elseif is_enabled(panel.custom_properties[Constants.CustomProperties.StunTrap]) then
                     if panel.custom_properties[Constants.CustomProperties.TrapMessage] then
                         self.player:say_with_mug(panel.custom_properties[Constants.CustomProperties.TrapMessage])
                     else

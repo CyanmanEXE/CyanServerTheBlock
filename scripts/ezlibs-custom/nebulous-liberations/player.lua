@@ -26,6 +26,34 @@ local BattleReason = {
   USER_PANIC = 4,
 }
 
+-- Diagnostic helper for inspecting the complete battle-results payload.
+-- This intentionally does not assume any undocumented battle-effect fields.
+local function debug_print_battle_data(value, prefix, depth)
+  prefix = prefix or "battle"
+  depth = depth or 0
+
+  if type(value) ~= "table" then
+    print("[Battle Debug] " .. prefix .. " = " .. tostring(value))
+    return
+  end
+
+  if depth >= 8 then
+    print("[Battle Debug] " .. prefix .. " = <maximum depth>")
+    return
+  end
+
+  for key, entry in pairs(value) do
+    local field = prefix .. "." .. tostring(key)
+
+    if type(entry) == "table" then
+      print("[Battle Debug] " .. field .. " = {")
+      debug_print_battle_data(entry, field, depth + 1)
+    else
+      print("[Battle Debug] " .. field .. " = " .. tostring(entry))
+    end
+  end
+end
+
 -- Only these two explicit end reasons are considered a forced exit.
 -- DRAW and LOSE are ordinary battle outcomes, not panics.
 local function stats_indicate_panic(stats)
@@ -165,6 +193,11 @@ function Player:handle_textbox_response(response)
 end
 
 function Player:handle_battle_results(stats)
+  -- Print the actual payload before any result handling changes it.
+  print("[Battle Debug] battle_results received for player " .. tostring(self.id))
+  print("[Battle Debug] stats type = " .. type(stats))
+  debug_print_battle_data(stats, "results")
+
   local is_panic = stats_indicate_panic(stats)
   log:info_data("handle_battle_results: captured", {
     player_id = self.id,

@@ -99,13 +99,23 @@ local Loot = {
           Async.await(player_session.player:message_with_mug("But it doesn't open anything..."))
           return
         end
-        local id = gates[1].custom_properties["Gate Key"]
+        -- Gate Key links the liberated item panel to the gate. Gate ID links
+        -- the gate to its camera/point-of-interest markers, so use that when
+        -- configured and fall back to Gate Key for older maps.
+        local gate_properties = gates[1].custom_properties or {}
+        local id = gate_properties["Gate ID"] or gate_properties["Gate Key"]
         local points = player_session:find_gate_points(id)
         local function unlock_gates()
           for i = 1, #gates, 1 do
             instance:remove_panel(gates[i])
           end
         end
+        -- The item-panel camera/reveal has already completed before this
+        -- activation callback runs. The key is now visible and its reward
+        -- message has been dismissed, so unlock the matching gates before
+        -- beginning the separate gate-point camera sequence.
+        unlock_gates()
+
         if #points > 0 then
           local player_id = player_session.player.id
           local was_input_locked = Net.is_player_input_locked(player_id)
@@ -122,7 +132,6 @@ local Loot = {
             if point == points[1] then
               Net.move_player_camera(player_session.player.id, point.x, point.y, point.z, hold_time)
               total_camera_time = total_camera_time + hold_time
-              unlock_gates()
             end
           end
           total_camera_time = total_camera_time + slide_time
@@ -134,8 +143,6 @@ local Loot = {
           if not was_input_locked then
             Net.unlock_player_input(player_id)
           end
-        else
-          unlock_gates()
         end
       end)
       return Async.promisify(co)
