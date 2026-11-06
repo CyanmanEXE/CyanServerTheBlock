@@ -6,6 +6,7 @@ local eztriggers = require('scripts/ezlibs-scripts/eztriggers/eztriggers')
 local object_registry = require('scripts/ezlibs-scripts/object_registry')
 local ezbus = require('scripts/ezlibs-scripts/ezbus')
 local ezconfig = require('scripts/ezlibs-scripts/ezconfig')
+local RewardProcessor = require('scripts/ezlibs-scripts/ezencounters/rewards')
 
 local ezencounters = {}
 local players_in_encounters = {}
@@ -18,6 +19,8 @@ local named_encounters_by_area = {}
 local ambiguous_named_encounters = {}
 local provided_encounter_assets = {}
 local encounter_finished_callbacks = {}
+local external_battles = {}
+local encounter_areas = setmetatable({}, { __mode = "k" })
 
 -- Ensure encounters directory exists
 helpers.ensure_directory(ezconfig.ENCOUNTERS_PATH)
@@ -46,6 +49,7 @@ local load_encounters_for_areas = function ()
                 local section = area_encounter_tables[area_id][section_name]
                 if type(section) == "table" then
                     for index, encounter_info in ipairs(section) do
+                        encounter_areas[encounter_info] = area_id
                         if encounter_info.path and not provided_encounter_assets[area_id][encounter_info.path] then
                             logger:info('[ezencounters] providing mob package '..encounter_info.path..' to '..tostring(area_id))
                             Net.provide_asset(area_id, encounter_info.path)
@@ -94,6 +98,36 @@ ezencounters.get_encounter_by_name = function(encounter_name, area_id)
         return nil
     end
     return named_encounters[name]
+end
+
+
+-- Opt-in bridge for other external game modes that WANT battle rewards.
+-- Nebulous Liberations deliberately does not register its battles here:
+-- liberation victories yield panel/mission loot, never battle-result drops.
+-- A token avoids clearing a newer context after an older promise completes.
+local next_external_token = 0
+ezencounters.register_external_battle = function(player_id, encounter_data, options)
+    options = options or {}
+    next_external_token = next_external_token + 1
+    local token = next_external_token
+    external_battles[player_id] = {
+        token = token,
+        encounter_info = encounter_data,
+        encounter_data = encounter_data,
+        area_id = options.area_id,
+        options = options,
+        external = true,
+    }
+    return token
+end
+
+ezencounters.clear_external_battle = function(player_id, token)
+    local context = external_battles[player_id]
+    if context and (token == nil or context.token == token) then
+        external_battles[player_id] = nil
+        return true
+    end
+    return false
 end
 
 -- Named definitions resolve within their explicit area. Direct package paths
@@ -237,7 +271,11 @@ end
 ezencounters.begin_encounter = function (player_id,encounter_info,trigger_object,runtime_data)
     return async(function ()
         --print('[ezencounters] beginning encounter for',player_id)
-        players_in_encounters[player_id] = {encounter_info=encounter_info}
+        players_in_encounters[player_id] = {
+            encounter_info = encounter_info,
+            area_id = (runtime_data and runtime_data._base_area_id)
+                or encounter_areas[encounter_info] or Net.get_player_area(player_id),
+        }
         ezencounters.clear_tiles_since_encounter(player_id)
 
         -- Runtime-only encounter context (such as terrain) is merged into a
@@ -249,6 +287,8 @@ ezencounters.begin_encounter = function (player_id,encounter_info,trigger_object
         for key, value in pairs(runtime_data or {}) do
             encounter_data[key] = value
         end
+
+        players_in_encounters[player_id].encounter_data = encounter_data
 
         ezbus:emit("encounter_started", {
             player_id = player_id,
@@ -274,22 +314,79 @@ end
 
 Net:on("battle_results", function(event)
     local player_id = event.player_id
-    if players_in_encounters[player_id] then
-        local player_encounter = players_in_encounters[player_id]
-        if encounter_finished_callbacks[player_id] then
-            encounter_finished_callbacks[player_id](event)
-            encounter_finished_callbacks[player_id] = nil
-        end
-        if player_encounter.encounter_info.results_callback then
-            player_encounter.encounter_info.results_callback(player_id,player_encounter.encounter_info,event)
-        end
+    local context = players_in_encounters[player_id] or external_battles[player_id]
+    local packets, totals, reward_source = nil, nil, nil
+    if context then
+        -- Remove context first: even an unexpected duplicate event/callback
+        -- cannot grant these rewards twice.
         players_in_encounters[player_id] = nil
+        external_battles[player_id] = nil
+
+        if encounter_finished_callbacks[player_id] then
+            local handler = encounter_finished_callbacks[player_id]
+            encounter_finished_callbacks[player_id] = nil
+            local ok, err = pcall(handler, event)
+            if not ok then
+                print('[ezencounters] encounter_finished callback error: '..tostring(err))
+            end
+        end
+
+        local encounter_info = context.encounter_info or {}
+        local encounter_data = context.encounter_data or encounter_info
+        local area_id = context.area_id or encounter_areas[encounter_info]
+        local area_table = area_id and area_encounter_tables[tostring(area_id)] or nil
+        local options = context.options or {}
+        local no_results = encounter_data.no_results == true
+            or encounter_info.no_results == true
+
+        -- External battle health remains owned by its calling game mode.
+        -- Regular encounters only allow persistent HP rewards when explicitly
+        -- opted in via persistent_health=true.
+        local persistent_health = not context.external
+            and (encounter_data.persistent_health == true
+                or encounter_info.persistent_health == true
+                or (area_table and area_table.persistent_health == true))
+        local reward_options = {
+            disable_rewards = no_results or options.disable_rewards == true,
+            disable_health_rewards = options.disable_health_rewards == true
+                or not persistent_health,
+            persistent_health = persistent_health,
+        }
+        local callbacks, seen = {}, {}
+        local function append_callback(callback, info)
+            if type(callback) == 'function' and not seen[callback] then
+                seen[callback] = true
+                callbacks[#callbacks + 1] = {fn = callback, info = info}
+            end
+        end
+        append_callback(encounter_info.results_callback, encounter_info)
+        append_callback(encounter_data.results_callback, encounter_data)
+        if area_table then append_callback(area_table.results_callback, encounter_info) end
+
+        local ok, result1, result2, result3 = pcall(
+            RewardProcessor.finish, player_id, area_table, encounter_info,
+            encounter_data, event, reward_options, callbacks)
+        if ok then
+            packets, totals, reward_source = result1, result2, result3
+        else
+            print('[ezencounters] WARNING: battle reward processing failed: '
+                .. tostring(result1))
+        end
     end
-    -- stats = { health: number, score: number, time: number, ran: bool, emotion: number, turns: number, npcs: { id: String, health: number }[] }
+
+    -- Keep the existing event fields; additional metadata is optional and
+    -- only populated for battles registered with ezencounters.
     ezbus:emit("encounter_finished", {
         player_id = player_id,
+        managed = context ~= nil,
+        area_id = context and context.area_id,
+        encounter_info = context and context.encounter_info,
+        rewards = packets,
+        reward_totals = totals,
+        reward_source = reward_source,
         stats = {
             health = event.health,
+            reason = event.reason,
             time = event.time,
             ran = event.ran,
             emotion = event.emotion,
@@ -304,6 +401,7 @@ ezencounters.handle_player_transfer = ezencounters.clear_last_position
 
 ezencounters.handle_player_disconnect = function (player_id)
     encounter_finished_callbacks[player_id] = nil
+    external_battles[player_id] = nil
     ezencounters.clear_last_position(player_id)
 end
 

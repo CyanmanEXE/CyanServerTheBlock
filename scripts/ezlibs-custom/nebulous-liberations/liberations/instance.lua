@@ -185,6 +185,16 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
         end
     end
 
+    -- Liberation flipping belongs to the WORLD formation, never to an
+    -- encounter's authored flip flag. The editor can carry these same
+    -- encounter definitions to regular ezencounters / the Endless Runner,
+    -- but those games should keep their own flip behavior.
+    -- `terrain` is resolved by PanelEncounters.resolve_terrain() before
+    -- build_encounter_data is called for each liberation battle.
+    if type(data.freedom_mission) == "table" then
+        data.freedom_mission.player_can_flip = (data.terrain == "surrounded")
+    end
+
     local health_applied = false
     local matched_enemy_alias = nil
 
@@ -751,6 +761,9 @@ local function liberate_panel(self, player_session)
                     return entries
                 end)(),
                 freedom_mission = encounter_data.freedom_mission ~= nil,
+                resolved_terrain = encounter_data.terrain,
+                player_can_flip = encounter_data.freedom_mission
+                    and encounter_data.freedom_mission.player_can_flip or false,
             })
             if battle_bot and minion_health_override > 0 and minion_health_applied_count == 0 then
                 log:warn_data("Dark Hole Minion Health Override did not match an encounter enemy", {
@@ -880,6 +893,9 @@ local function liberate_panel(self, player_session)
                 enemy_entry_health_applied = encounter_health_applied,
                 encounter_enemy_entries = encounter_enemy_entries,
                 freedom_mission = encounter_data.freedom_mission ~= nil,
+                resolved_terrain = encounter_data.terrain,
+                player_can_flip = encounter_data.freedom_mission
+                    and encounter_data.freedom_mission.player_can_flip or false,
             })
             local results = Async.await(player_session:initiate_encounter(encounter_definition.path, encounter_data))
             -- Synchronize before branching: survivors retain their health on

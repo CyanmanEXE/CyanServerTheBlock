@@ -167,7 +167,9 @@ end
 local function is_instance_area_id(area_id)
     return type(area_id) == "string"
         and (area_id:match("^liberation_") ~= nil
-            or area_id:match("^footbomb_") ~= nil)
+            or area_id:match("^footbomb_") ~= nil
+            -- Runner clones use <base>_runner_<player>_f<floor>.
+            or area_id:match("_runner_.+_f%d+$") ~= nil)
 end
 
 local function remove_area_memory_files(area_id)
@@ -189,7 +191,7 @@ local function remove_area_memory_files(area_id)
     return removed_any
 end
 
--- Remove persisted memory for destroyed Liberation and FootBomb clones. The
+-- Remove persisted memory for destroyed Liberation, FootBomb, and runner clones. The
 -- active-area set prevents startup cleanup from touching an instance that is
 -- still present in the engine after a restart/reload.
 local function prune_stale_instance_memory(active_area_ids)
@@ -667,6 +669,31 @@ function ezmemory.spend_player_money(player_id, amount)
         return true
     end
     return false
+end
+
+-- Increase a player's persistent money balance without using negative "spend"
+-- calls (which incorrectly emit a money_spent event). Returns the new balance,
+-- or nil and an error message when the amount or money API is unavailable.
+-- Only whole, non-negative amounts are accepted.
+function ezmemory.add_player_money(player_id, amount)
+    amount = tonumber(amount)
+    if not amount or amount ~= amount or amount < 0 or amount % 1 ~= 0 then
+        return nil, "amount must be a non-negative integer"
+    end
+    if type(Net.get_player_money) ~= "function"
+        or type(Net.set_player_money) ~= "function" then
+        return nil, "player money APIs are unavailable"
+    end
+
+    local current = ezmemory.get_player_money(player_id)
+    if current == nil then
+        return nil, "player money balance is unavailable"
+    end
+    if amount == 0 then return current end
+
+    local new_balance = current + amount
+    ezmemory.set_player_money(player_id, new_balance)
+    return new_balance
 end
 
 function ezmemory.set_player_money(player_id, money)
@@ -1189,8 +1216,12 @@ function ezmemory.give_item_with_optional_notify(player_id, area_id, item_object
                 get_message = "Got " .. item_info.amount .. " " .. item_info.name .. "!"
             end
         elseif item_info.type == "money" then
-            ezmemory.spend_player_money(player_id, -item_info.amount)
-            get_message = "Got " .. item_info.amount .. "$!"
+            local balance, award_error = ezmemory.add_player_money(player_id, item_info.amount)
+            if balance == nil then
+                logger:warn("[ezmemory] Could not award money: " .. tostring(award_error))
+            else
+                get_message = "Got " .. item_info.amount .. "$!"
+            end
         elseif item_info.type == "fragments" then
             ezmemory.add_player_fragments(player_id, item_info.amount)
             get_message = "Got " .. item_info.amount .. " Bug Fragments!"
