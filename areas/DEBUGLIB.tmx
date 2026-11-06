@@ -295,8 +295,8 @@
     <property name="Boss ID 1" value="ShadeMan_02"/>
     <property name="Direction" value="Down Right"/>
     <property name="Minion Health Override" value="240"/>
-    <property name="OW Bot Encounter" value="BigBrute"/>
-    <property name="Spawns" value="BigBrute"/>
+    <property name="OW Bot Encounter" value="Mettaur"/>
+    <property name="Spawns" value="Mettaur"/>
     <property name="scale" value="1.5"/>
    </properties>
   </object>

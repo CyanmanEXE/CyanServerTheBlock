@@ -81,7 +81,11 @@ local function assign_dark_hole_bot_encounter(dark_hole, enemy)
         value = properties[Constants.CustomProperties.LegacyBossEncounter]
         name = value ~= nil and tostring(value):match("^%s*(.-)%s*$") or ""
     end
-    enemy.ow_bot_encounter_name = name ~= "" and name or nil
+    -- Explicit Tiled OW Bot Encounter always wins. A template may supply a
+    -- named default for a newly-added enemy (Mettaur), without requiring an
+    -- otherwise identical property on every Dark Hole object.
+    enemy.ow_bot_encounter_name = name ~= "" and name
+        or enemy.default_ow_bot_encounter_name
 end
 
 local function apply_dark_hole_minion_health_override(encounter_data, dark_hole, enemy)
