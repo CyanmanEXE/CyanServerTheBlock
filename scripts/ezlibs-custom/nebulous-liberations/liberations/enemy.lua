@@ -128,14 +128,16 @@ function Enemy.destroy(instance, enemy)
         return Async.create_promise(function(resolve) resolve() end)
     end
     HPIndicators.remove_enemy(instance, enemy)
-    if not Enemy.is_alive(enemy) then
-        return Async.create_promise(function(resolve) resolve() end)
-    end
-    for i, stored_enemy in pairs(instance.enemies) do
+    -- Remove stale world-state records even if the engine already removed the
+    -- bot. Otherwise occupancy and enemy-turn processing still see this bot.
+    for i, stored_enemy in ipairs(instance.enemies or {}) do
         if enemy == stored_enemy then
             table.remove(instance.enemies, i)
             break
         end
+    end
+    if not Enemy.is_alive(enemy) then
+        return Async.create_promise(function(resolve) resolve() end)
     end
     local co = coroutine.create(function()
         -- ExplodingEffect:new can return nil if the effect bot fails to spawn

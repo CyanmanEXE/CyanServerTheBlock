@@ -348,7 +348,9 @@ Some of these properties are read by other files only in specific mission flows.
 | `Spawn Enabled` | Disables automatic spawning while leaving the definition available for a manual spawn call. |
 | `Boss Display Name` | Optional bot display name; does not replace the enemy template key used by battle encounter matching. |
 | `Shared` | Makes an Indestructible Panel wait for every Dark Hole in the mission. |
-| `Spawns` | Enemy template/name used by a Dark Hole. |
+| `Spawns` | Enemy template/name used by a Dark Hole's overworld bot. |
+| `Boss Encounter` | Optional named encounter for that bot. Looked up within the base area's `bosses`, `special_encounters`, or `encounters` according to the bot template. Blank uses the legacy category selection. |
+| `Liberation Encounters` (Dark Hole property) | Optional Tiled object reference to a `Dark Hole Encounter List`. Its `Name 1`, `Name 2`, etc. entries name encounters from the base area's `special_encounters` section for fighting the Dark Hole itself. |
 | `Direction` | Enemy or boss facing direction. |
 | `Gate Key` | Gate requirement metadata. |
 | `Gate ID` | Gate/cutscene linkage metadata. |
@@ -381,6 +383,33 @@ Apply the `Boss Dark Panel` Tiled Object Definition to a placed Dark Panel objec
 Spawn offsets are measured in the same tile/layer coordinate system used by Liberation panel objects. `Auto Face Player` defaults to false so the configured Direction is respected. `Boss Health Override` defaults to zero, which preserves the template's configured maximum HP. A positive value changes only `enemy.max_health`; the template's current/start `enemy.health` remains unchanged and is the value used when the boss enters battle. `Boss Display Name` only changes the bot's displayed name; the registered template name remains the battle identity.
 
 Dark Hole and Indestructible Panel objects support `Boss ID 1` and `Boss ID 2`. Each assigned Dark Hole is counted independently by every referenced boss group. Indestructible Panels evaluate their assigned groups using `Type`: `All` (the default) waits until every referenced boss group has no remaining Dark Holes; `Any` unlocks when at least one referenced boss group has no remaining Dark Holes. With only one Boss ID assigned, Type has no effect. `Shared=true` takes precedence and waits until every Dark Hole in the mission is cleared, regardless of Boss IDs or Type. Panels without Boss IDs retain mission-wide conversion behavior.
+
+### Dark Hole battle setup (two separate encounters)
+
+The `Dark Hole` and `Dark Hole Buffed Virus` Tiled classes support two independent battle configurations:
+
+1. Set **`Spawns`** to the registered enemy template, and optionally **`Boss Encounter`** to the encounter's exact `name` in the base area's appropriate encounter category. That named encounter is used when players fight the spawned bot on a normal panel; it also serves as the Dark Hole liberation fallback. A blank `Boss Encounter` preserves category-based selection on older maps.
+2. Create a Tiled object of class **`Dark Hole Encounter List`** in the base area. Fill any number of `Name 1`, `Name 2`, `Name 3`, etc. fields with exact encounter names from the same area's **`special_encounters`** section. Leave unused fields blank. Set the Dark Hole's **`Liberation Encounters`** object property to reference this object.
+
+When the player liberates the Dark Hole, the runtime gathers the nonblank, resolvable names, selects one **uniformly at random**, and uses its entire encounter definition (battle package, enemies, battlefield configuration, Freedom Mission, etc.). Invalid names are logged and skipped. If the reference is missing, the object contains no valid names, or no reference was assigned, the Dark Hole uses the bot's `Boss Encounter` (or the old category-based fallback when `Boss Encounter` is blank).
+
+The named special liberation encounter is a **separate battle** from the bot. Its authored enemy HP is preserved; the Dark Hole's `Minion Health Override` and the persistent bot's current HP are applied only when fighting the bot or using the bot encounter as the fallback. Respawned bots retain their source Dark Hole's `Boss Encounter` setting.
+
+For example, a map can declare:
+
+```lua
+-- encounters/<base-area-id>.lua
+return {
+    encounters = {},
+    special_encounters = {
+        { name = "BigBruteBattle", path = "/server/assets/ezlibs-assets/ezencounters/ezencounters.zip", enemies = { { name = "BigBrute" } } },
+        { name = "HoleAmbushA", path = "/server/assets/ezlibs-assets/ezencounters/ezencounters.zip", enemies = { { name = "NormalNavi" } } },
+        { name = "HoleAmbushB", path = "/server/assets/ezlibs-assets/ezencounters/ezencounters.zip", enemies = { { name = "NormalNavi" } } },
+    },
+}
+```
+
+Set the Dark Hole's `Boss Encounter` to `BigBruteBattle` and its `Liberation Encounters` reference to a `Dark Hole Encounter List` with `Name 1 = HoleAmbushA` and `Name 2 = HoleAmbushB`.
 
 ### Panel types
 
@@ -667,17 +696,21 @@ area tables because the named encounter registry is global.
 
 ### Persistent enemy health across battles
 
-When an enemy's battle results include surviving entries in `results.enemies`,
-NebuLibs matches the result by enemy alias/name, updates the stored enemy
-health, and updates the visible bot name (for example, `BigBrute: 80`). The
-next encounter passes that stored value as `data.health`. Dark Hole battles
-use current health too; they no longer reset the enemy to `max_health`.
+When an overworld enemy's battle results include surviving entries in `results.enemies`,
+NebuLibs matches the result by enemy alias/name, updates stored health, and
+updates the visible bot name (for example, `BigBrute: 80`). The next bot
+encounter passes that value as `data.health`. When a Dark Hole instead chooses
+a separately authored `special_encounters` entry from `Liberation Encounters`,
+its enemies retain their configured HP; the overworld bot is not synchronized
+to or from that separate liberation battle.
 
 ### Public API
 
 | Function | Parameters | Returns | Notes |
 |---|---|---|---|
 | `PanelEncounters.resolve_terrain(instance, player)` | mission instance, player wrapper | terrain string | Determines encounter terrain based on neighboring panel placement. |
+| `PanelEncounters.resolve_named_encounter(base_area_id, category, reference)` | base area, `encounters` / `special_encounters` / `bosses`, exact name | encounter definition or `nil` | Looks up a name only in the requested base-area section; unknown names never become paths. |
+| `PanelEncounters.resolve_dark_hole_liberation_encounters(base_area_id, object_reference)` | base area, Tiled object ID | array of encounter definitions | Reads numbered `Name N` properties on a `Dark Hole Encounter List`, resolves valid special encounters, and discards blank/invalid entries. |
 | `PanelEncounters[area_name]` | area name key | encounter path or `nil` | Populated at module initialization from area custom properties. |
 
 ### Terrain classification

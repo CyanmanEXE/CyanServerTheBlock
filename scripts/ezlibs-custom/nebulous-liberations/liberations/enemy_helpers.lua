@@ -280,7 +280,7 @@ local function normalize_enemy_name(value)
   return string.lower(name)
 end
 
-function EnemyHelpers.sync_health(enemy, results)
+function EnemyHelpers.sync_health(enemy, results, encounter_data)
   if not enemy or type(results) ~= "table" then return false end
   local reported_enemies = results.enemies or results.Enemies
   if type(reported_enemies) ~= "table" or #reported_enemies == 0 then
@@ -320,11 +320,13 @@ function EnemyHelpers.sync_health(enemy, results)
     end
   end
 
-  -- Some encounter result payloads identify the sole remaining enemy by an
-  -- engine/package ID rather than the template alias or visible bot name.
-  -- When there is exactly one result entry, mapping it to this persistent
-  -- enemy is unambiguous.
-  if #reported_enemies == 1 and type(reported_enemies[1]) == "table" then
+  -- Engine IDs are not always the template alias. A single surviving enemy
+  -- from a MULTI-enemy battle is NOT necessarily the persistent world bot.
+  -- Only allow the ID fallback when the encounter definition confirms that
+  -- exactly one enemy was spawned in the first place.
+  local configured_enemies = encounter_data and encounter_data.enemies
+  if type(configured_enemies) == "table" and #configured_enemies == 1
+      and #reported_enemies == 1 and type(reported_enemies[1]) == "table" then
     local reported_health = tonumber(reported_enemies[1].Health)
     if reported_health == nil then
       reported_health = tonumber(reported_enemies[1].health)

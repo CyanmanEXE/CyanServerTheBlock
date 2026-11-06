@@ -30,6 +30,15 @@ local function validate_object(area_id, object)
             log("ERROR", "Dark Hole at ("..object.x..","..object.y..") missing 'Direction' property")
             return false
         end
+        local liberation_ref = object.custom_properties[Constants.CustomProperties.DarkHoleLiberationEncounters]
+        if liberation_ref ~= nil and tostring(liberation_ref) ~= "" and tostring(liberation_ref) ~= "0" then
+            local list_object = Net.get_object_by_id(area_id, tonumber(liberation_ref) or liberation_ref)
+            if not list_object or list_object.type ~= "Dark Hole Encounter List" then
+                log("ERROR", "Dark Hole at ("..object.x..","..object.y
+                    ..") has a 'Liberation Encounters' reference that is not a Dark Hole Encounter List")
+                return false
+            end
+        end
         local minion_health_override = tonumber(
             object.custom_properties[Constants.CustomProperties.MinionHealthOverride])
         if minion_health_override and minion_health_override < 0 then

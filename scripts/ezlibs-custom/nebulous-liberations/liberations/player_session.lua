@@ -135,16 +135,23 @@ end
 function PlayerSession:initiate_encounter(encounter_path, data)
     return Async.create_promise(function(resolve)
         self.player:initiate_encounter(encounter_path, data).and_then(function(results)
-            local total_enemy_health = 0
-            for _, enemy in ipairs(results.enemies or {}) do
-                total_enemy_health = total_enemy_health + (enemy.health or 0)
+            -- Exit/disconnect fallbacks may have no health, emotion, or reason.
+            -- Never replace stored HP with nil or silently award a victory.
+            if type(results) ~= "table" then
+                results = { reason = BattleReason.DRAW, missing_battle_results = true }
             end
-
-            self.health = results.health
+            local reported_health = tonumber(results.health)
+            if reported_health and reported_health == reported_health
+                and reported_health ~= math.huge and reported_health ~= -math.huge then
+                self.health = math.max(0, math.min(reported_health, self.max_health))
+            end
+            results.health = self.health
             HPIndicators.update_player_hp(self.instance, self.player.id, self.health)
             ezmemory.set_player_max_health(self.player.id, self.max_health, true)
             ezmemory.set_player_health(self.player.id, self.health)
-            Net.set_player_emotion(self.player.id, results.emotion)
+            if results.emotion ~= nil then
+                Net.set_player_emotion(self.player.id, results.emotion)
+            end
 
             local reason = tonumber(results.reason)
             if stats_indicate_panic(results) then
@@ -183,6 +190,8 @@ function PlayerSession:initiate_encounter(encounter_path, data)
             -- loss, or missing/unknown reason must fail even if no surviving
             -- enemy-health entries were returned by the battle engine.
             results.success = reason == BattleReason.WIN
+                and results.ran ~= true
+                and not results.missing_battle_results
             if not results.success then
                 self.player:say_with_mug("Oh, no!\nLiberation failed!")
             end

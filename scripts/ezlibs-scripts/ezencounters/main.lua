@@ -11,7 +11,11 @@ local ezencounters = {}
 local players_in_encounters = {}
 local player_last_position = {}
 local player_steps_since_encounter = {}
+-- Keep names isolated per area. Names like Encounter1 occur in many area
+-- tables; the legacy global lookup is allowed only for unique names.
 local named_encounters = {}
+local named_encounters_by_area = {}
+local ambiguous_named_encounters = {}
 local provided_encounter_assets = {}
 local encounter_finished_callbacks = {}
 
@@ -35,6 +39,9 @@ local load_encounters_for_areas = function ()
                 "special_encounters",
             }
             provided_encounter_assets[area_id] = provided_encounter_assets[area_id] or {}
+            local area_named = {}
+            local area_ambiguous = {}
+            named_encounters_by_area[tostring(area_id)] = area_named
             for _, section_name in ipairs(encounter_sections) do
                 local section = area_encounter_tables[area_id][section_name]
                 if type(section) == "table" then
@@ -46,7 +53,20 @@ local load_encounters_for_areas = function ()
                         end
                         if encounter_info.name then
                             logger:info('[ezencounters] loaded named encounter '..encounter_info.name..' ('..section_name..')')
-                            named_encounters[encounter_info.name] = encounter_info
+                            if area_named[encounter_info.name] or area_ambiguous[encounter_info.name] then
+                                area_ambiguous[encounter_info.name] = true
+                                area_named[encounter_info.name] = nil
+                                logger:info('[ezencounters] duplicate name within area: '..tostring(area_id)..' / '..encounter_info.name)
+                            else
+                                area_named[encounter_info.name] = encounter_info
+                            end
+                            if named_encounters[encounter_info.name]
+                                and named_encounters[encounter_info.name] ~= encounter_info then
+                                ambiguous_named_encounters[encounter_info.name] = true
+                                named_encounters[encounter_info.name] = nil
+                            elseif not ambiguous_named_encounters[encounter_info.name] then
+                                named_encounters[encounter_info.name] = encounter_info
+                            end
                         end
                     end
                 end
@@ -62,20 +82,32 @@ local area_encounter_tables = load_encounters_for_areas()
 -- Public lookup for systems that need the canonical encounter definition but
 -- must retain their own battle/session wrapper (for example, NebuLibs terrain
 -- and health handling). The returned table is the registered definition itself.
-ezencounters.get_encounter_by_name = function(encounter_name)
+ezencounters.get_encounter_by_name = function(encounter_name, area_id)
     if encounter_name == nil then return nil end
-    return named_encounters[tostring(encounter_name)]
+    local name = tostring(encounter_name)
+    if area_id ~= nil then
+        local area_named = named_encounters_by_area[tostring(area_id)]
+        return area_named and area_named[name] or nil
+    end
+    if ambiguous_named_encounters[name] then
+        logger:info('[ezencounters] ambiguous encounter name; provide area_id: '..name)
+        return nil
+    end
+    return named_encounters[name]
 end
 
--- Resolve a name or a direct encounter package path into the shape used by
--- Net.initiate_encounter. Named definitions always win over treating a string
--- as a raw path; callers may pass additional battle data to merge separately.
-ezencounters.resolve_encounter = function(encounter_reference)
+-- Named definitions resolve within their explicit area. Direct package paths
+-- remain valid overrides; an unknown name must not resolve into another area.
+ezencounters.resolve_encounter = function(encounter_reference, area_id)
     if encounter_reference == nil then return nil end
-    local reference = tostring(encounter_reference)
-    local definition = named_encounters[reference]
+    local reference = tostring(encounter_reference):match('^%s*(.-)%s*$')
+    if reference == '' then return nil end
+    local definition = ezencounters.get_encounter_by_name(reference, area_id)
     if definition then return definition end
-    if reference ~= "" then return { path = reference } end
+    -- Only actual package paths fall back to a direct path definition.
+    if reference:find('/') or reference:find('\\') or reference:match('%.zip$') then
+        return { path = reference }
+    end
     return nil
 end
 
@@ -114,8 +146,9 @@ ezencounters.increment_steps_since_encounter = function (player_id)
         player_steps_since_encounter[player_id] = player_steps_since_encounter[player_id] + 1
     end
     if encounter_table then
-        if player_steps_since_encounter[player_id] >= encounter_table.minimum_steps_before_encounter then
-            ezencounters.try_random_encounter(player_id,encounter_table)
+        local minimum_steps = tonumber(encounter_table.minimum_steps_before_encounter) or 0
+        if player_steps_since_encounter[player_id] >= minimum_steps then
+            ezencounters.try_random_encounter(player_id, encounter_table)
         end
     end
 end
@@ -126,15 +159,20 @@ ezencounters.handle_player_move = function(player_id, x, y, z)
     local rounded_pos_y = floor(y)
     local rounded_pos_z = floor(z)
     local last_tile = player_last_position[player_id]
-    if last_tile then
-        if last_tile.x ~= rounded_pos_x or last_tile.y ~= rounded_pos_y or last_tile.z ~= rounded_pos_z then
-            --player has moved to a different tile
-            player_last_position[player_id] = {x=rounded_pos_x,y=rounded_pos_y,z=rounded_pos_z}
-        end
-    else
+    if not last_tile then
+        -- Initial position is an anchor, not a walked step.
         player_last_position[player_id] = {x=rounded_pos_x,y=rounded_pos_y,z=rounded_pos_z}
+        return
     end
+    if last_tile.x == rounded_pos_x and last_tile.y == rounded_pos_y
+        and last_tile.z == rounded_pos_z then
+        return
+    end
+    -- Check the tile being LEFT (not the destination) for conveyors before
+    -- updating the stored position. A movement packet within one tile should
+    -- never increase the encounter counter.
     ezencounters.increment_steps_since_encounter(player_id)
+    player_last_position[player_id] = {x=rounded_pos_x,y=rounded_pos_y,z=rounded_pos_z}
 end
 
 ezencounters.pick_encounter_from_table = function (encounter_table)
@@ -177,11 +215,17 @@ ezencounters.try_random_encounter = function (player_id,encounter_table)
 end
 
 -- FIXED: Now returns the stats
-ezencounters.begin_encounter_by_name = function(player_id,encounter_name,trigger_object)
+ezencounters.begin_encounter_by_name = function(player_id,encounter_name,trigger_object,runtime_data)
     return async(function ()
-        local encounter_info = named_encounters[encounter_name]
+        local area_id = Net.get_player_area(player_id)
+        local encounter_info = ezencounters.get_encounter_by_name(encounter_name, area_id)
+        -- Cloned areas may not have their own encounter table. A globally
+        -- unique name is safe there; an ambiguous name is not.
+        if not encounter_info and not named_encounters_by_area[tostring(area_id)] then
+            encounter_info = ezencounters.get_encounter_by_name(encounter_name)
+        end
         if encounter_info then
-            local stats = await(ezencounters.begin_encounter(player_id,encounter_info,trigger_object))
+            local stats = await(ezencounters.begin_encounter(player_id,encounter_info,trigger_object,runtime_data))
             return stats
         else
             logger:info('[ezencounters] no encounter with name ',encounter_name,' has been added to any encounter tables!')
@@ -190,17 +234,29 @@ ezencounters.begin_encounter_by_name = function(player_id,encounter_name,trigger
     end)
 end
 
-ezencounters.begin_encounter = function (player_id,encounter_info,trigger_object)
+ezencounters.begin_encounter = function (player_id,encounter_info,trigger_object,runtime_data)
     return async(function ()
         --print('[ezencounters] beginning encounter for',player_id)
         players_in_encounters[player_id] = {encounter_info=encounter_info}
         ezencounters.clear_tiles_since_encounter(player_id)
+
+        -- Runtime-only encounter context (such as terrain) is merged into a
+        -- fresh payload. It is not written back to the cached area definition.
+        local encounter_data = {}
+        for key, value in pairs(encounter_info or {}) do
+            encounter_data[key] = value
+        end
+        for key, value in pairs(runtime_data or {}) do
+            encounter_data[key] = value
+        end
+
         ezbus:emit("encounter_started", {
             player_id = player_id,
             encounter_info = encounter_info,
+            encounter_data = encounter_data,
             trigger_object = trigger_object
         })
-        local stats = await(Async.initiate_encounter(player_id,encounter_info.path,encounter_info))
+        local stats = await(Async.initiate_encounter(player_id,encounter_info.path,encounter_data))
         return stats
     end)
 end

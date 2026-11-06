@@ -711,12 +711,23 @@ local object_types = {
         }
     },
     {
+        name = "Music Definition",
+        color = "#66aacc",
+        useAs = { "object" },
+        members = {
+            prop("Path", "string", ""),
+            prop("Loop Start", "number", 0),
+            prop("Loop End", "number", 0),
+        }
+    },
+    {
         name = "Liberation Config",
         color = "#cc66ff",
         members = {
-            -- These are liberation-specific settings. Background texture, animation,
-            -- velocity, and the default Song remain map-level properties.
-            -- Runtime reads for these settings are still area-property based.
+            -- Liberation-specific settings. Encounter Music references a
+            -- reusable Music Definition object placed in the base area.
+            -- Background texture, animation, velocity, and the default Song
+            -- remain map-level properties.
             prop("Respawn Area", "string", ""),
             prop("Waiting Area", "string", ""),
             prop("Liberation Tileset", "string", ""),
@@ -725,6 +736,7 @@ local object_types = {
             prop("Target Player Count", "number", 3),
             prop("Minimum Target Phase Count", "number", 1),
             prop("Victory Lap Song", "string", ""),
+            prop("Encounter Music", "object", ""),
             prop("Honor HPMem", "bool", false),
         }
     },
@@ -765,6 +777,20 @@ local object_types = {
             prop("Boss Display Name", "string", ""),
         }
     },
+    -- Reusable, object-referenced list of named special encounters for a
+    -- Dark Hole liberation battle. Empty Name fields are ignored.
+    {
+        name = "Dark Hole Encounter List",
+        color = "#9955aa",
+        useAs = { "object" },
+        members = (function()
+            local fields = {}
+            for index = 1, 20 do
+                fields[#fields + 1] = prop("Name " .. index, "string", "")
+            end
+            return fields
+        end)(),
+    },
     -- These classes are applied to placed tile objects on the map's object
     -- layer. Boss ID 1/2 associate the object with one or two boss groups.
     {
@@ -774,6 +800,8 @@ local object_types = {
         members = {
             prop("Boss ID 1", "string", ""),
             prop("Boss ID 2", "string", ""),
+            prop("OW Bot Encounter", "string", ""),
+            prop("Liberation Encounters", "object", ""),
             prop("Minion Health Override", "number", 0),
         }
     },
@@ -784,6 +812,8 @@ local object_types = {
         members = {
             prop("Boss ID 1", "string", ""),
             prop("Boss ID 2", "string", ""),
+            prop("OW Bot Encounter", "string", ""),
+            prop("Liberation Encounters", "object", ""),
             prop("Minion Health Override", "number", 0),
             prop("scale", "number", 1),
         }
@@ -827,18 +857,23 @@ local META = {
             description = "Spawns NPCs from a template object, lets them follow a waypoint path, and optionally warps them out when the path completes. Supports one-per-entry spawning (Once mode) and continuous spawning at an interval while a player stays inside (Interval mode)." },
         ["FootBomb Controller"] = { category = "gameplay",
             description = "Interaction actor for the FootBomb minigame." },
+        ["Music Definition"] = { category = "gameplay",
+            description = "Reusable encounter music settings. Path is a song name relative to the encounter package's music directory, without the .mid extension. Empty Path disables the music override." },
         ["Liberation Config"] = { category = "gameplay",
-            description = "Configuration object for a liberation mission. Liberation Tileset and Max Order Points are read from this object. Target phase/player counts, background, music, and other legacy settings are still read from area custom properties." },
+            description = "Configuration object for a liberation mission. Liberation Tileset, Max Order Points, and Encounter Music are read from this object. Target phase/player counts, background, and other legacy settings are still read from area custom properties." },
         ["Liberation Gate"] = { category = "gameplay",
             description = "Interactive gate that starts the liberation mission named by `Liberation Map File Name`." },
         ["Spawn Point"] = { category = "gameplay",
             description = "Player arrival point for Liberation missions. The assigned player faces this direction after transfer; Next Spawn links to the next player's Spawn Point." },
         ["Boss Dark Panel"] = { category = "gameplay",
             description = "A Liberation boss spawn point. Select an enemy template, spawn mode, optional boss dependency, position offsets, facing, health override, and display name." },
+        ["Dark Hole Encounter List"] = { category = "gameplay",
+            description = "Reusable list of named encounters from this area's special_encounters section, used only when liberating a linked Dark Hole. Leave entries blank to ignore them.",
+            numberedTemplates = { "Name " } },
         ["Dark Hole"] = { category = "gameplay",
-            description = "Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole with one or two boss groups. Minion Health Override controls the starting battle HP of the enemy spawned by this Dark Hole, such as its BigBrute." },
+            description = "Placed Liberation panel. OW Bot Encounter names the overworld bot's battle; Liberation Encounters references a Dark Hole Encounter List for the Dark Hole liberation battle. An empty list falls back to the bot encounter." },
         ["Dark Hole Buffed Virus"] = { category = "gameplay",
-            description = "Dark Hole variant that retains normal Dark Hole liberation behavior but scales its overworld bot using the scale multiplier." },
+            description = "Dark Hole variant with the same bot and liberation encounter settings, plus a visual scale multiplier applied to its overworld bot and matching ezencounters battle sprite." },
         ["Indestructible Panel"] = { category = "gameplay",
             description = "Placed Liberation panel object. Boss ID 1/2 define boss-group unlock requirements; Type selects All or Any when both are set. Shared=true waits for all Dark Holes in the mission." },
         ["Waypoint"] = { category = "gameplay",
@@ -890,7 +925,25 @@ local META = {
     },
 
     properties = {
+        ["Music Definition"] = {
+            ["Path"] = {
+                category = "appearance",
+                description = "Song filename without extension, resolved under the encounter package's music directory with the .mid extension. Empty disables music playback.",
+            },
+            ["Loop Start"] = {
+                category = "appearance",
+                description = "Music loop start value passed to mob:stream_music(). Defaults to 0.",
+            },
+            ["Loop End"] = {
+                category = "appearance",
+                description = "Music loop end value passed to mob:stream_music(). Defaults to 0.",
+            },
+        },
         ["Liberation Config"] = {
+            ["Encounter Music"] = {
+                category = "appearance",
+                description = "Tiled Object reference to a Music Definition used for every encounter in this liberation mission.",
+            },
             ["Max Order Points"] = {
                 category = "gameplay",
                 description = "Maximum order points available in this liberation mission. Defaults to 9 when omitted; values below 1 are clamped to 1.",
@@ -926,16 +979,23 @@ local META = {
             ["Spawn Enabled"] = { category = "gameplay", description = "When false, this boss definition is registered but will not spawn automatically. It can still be spawned manually." },
             ["Boss Display Name"] = { category = "gameplay", description = "Optional name shown above the spawned bot. Empty uses the enemy template's display name." },
         },
+        ["Dark Hole Encounter List"] = {
+            -- All numbered Name fields refer to special_encounters by name.
+        },
         ["Dark Hole"] = {
+            ["OW Bot Encounter"] = { category = "gameplay", description = "Encounter name for the spawned overworld bot, resolved within the base area's bosses, special_encounters, or encounters category according to that bot's template. When blank, legacy category-based selection remains." },
+            ["Liberation Encounters"] = { category = "gameplay", description = "Optional Tiled Object reference to a Dark Hole Encounter List in this area. Randomly selects among its nonblank, valid Name entries from special_encounters when liberating the Dark Hole; empty or missing list falls back to OW Bot Encounter." },
             ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement." },
             ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement." },
-            ["Minion Health Override"] = { category = "gameplay", description = "Optional starting battle HP for the enemy spawned by this Dark Hole (for example, its BigBrute). Applies only to the matching enemy entry in this Dark Hole's encounter; other encounter enemies keep their configured HP. Zero or blank keeps the encounter-defined HP." },
+            ["Minion Health Override"] = { category = "gameplay", description = "Optional starting HP for the overworld bot spawned by this Dark Hole and its bot encounter fallback. It never overrides enemies in the separate Liberation Encounters list. Zero or blank keeps the encounter-defined HP." },
         },
         ["Dark Hole Buffed Virus"] = {
+            ["OW Bot Encounter"] = { category = "gameplay", description = "Named encounter for the spawned overworld bot, using the same lookup rules as Dark Hole." },
+            ["Liberation Encounters"] = { category = "gameplay", description = "Optional reference to a Dark Hole Encounter List of special_encounters; falls back to the bot encounter when empty." },
             ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier, matching the Dark Hole property." },
             ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier, matching the Dark Hole property." },
-            ["Minion Health Override"] = { category = "gameplay", description = "Optional starting battle HP for the enemy spawned by this Dark Hole." },
-            ["scale"] = { category = "gameplay", description = "Overworld bot sprite scale multiplier. 1 is normal size; 2 is double size. Applied after the bot is created and again on respawn." },
+            ["Minion Health Override"] = { category = "gameplay", description = "Optional starting HP for this Dark Hole's overworld bot and bot encounter fallback, not for separate liberation list battles." },
+            ["scale"] = { category = "gameplay", description = "Visual scale multiplier for the spawned overworld bot and its matching ezencounters battle enemy. Battle sprites use Entity:sprite() width/height scaled to whole pixel dimensions. Does not scale unrelated Liberation Encounters list enemies; 1 is normal size." },
         },
         ["Indestructible Panel"] = {
             ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier required to unlock this panel." },

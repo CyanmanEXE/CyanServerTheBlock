@@ -67,6 +67,23 @@ local function apply_dark_hole_minion_health_to_bot(dark_hole, enemy)
     return health_override
 end
 
+-- A Dark Hole's bot has its own named encounter, independent of the set
+-- offered when liberating its source panel. Keep the name attached to the
+-- persistent bot so moving and respawning it do not lose that association.
+local function assign_dark_hole_bot_encounter(dark_hole, enemy)
+    if not dark_hole or not enemy then return end
+    local properties = dark_hole.custom_properties or {}
+    local value = properties[Constants.CustomProperties.OWBotEncounter]
+    local name = value ~= nil and tostring(value):match("^%s*(.-)%s*$") or ""
+    if name == "" then
+        -- Existing Tiled maps retain their old Boss Encounter property until
+        -- map makers migrate them to OW Bot Encounter.
+        value = properties[Constants.CustomProperties.LegacyBossEncounter]
+        name = value ~= nil and tostring(value):match("^%s*(.-)%s*$") or ""
+    end
+    enemy.ow_bot_encounter_name = name ~= "" and name or nil
+end
+
 local function apply_dark_hole_minion_health_override(encounter_data, dark_hole, enemy)
     local properties = dark_hole and dark_hole.custom_properties or {}
     local health_override = tonumber(
@@ -92,6 +109,7 @@ local function apply_dark_hole_minion_health_override(encounter_data, dark_hole,
             if (expected_alias and encounter_alias == expected_alias)
                 or (expected_display_name and encounter_alias == expected_display_name) then
                 enemy_info.health = health_override
+                enemy_info.max_hp = health_override
                 return 1, enemy_info.name
             end
         end
@@ -102,10 +120,21 @@ local function apply_dark_hole_minion_health_override(encounter_data, dark_hole,
     local entries = encounter_data and encounter_data.enemies
     if type(entries) == "table" and #entries == 1 and type(entries[1]) == "table" then
         entries[1].health = health_override
+        entries[1].max_hp = health_override
         return 1, entries[1].name
     end
 
     return 0, nil
+end
+
+
+local function copy_music_definition(music)
+    if type(music) ~= "table" then return nil end
+    return {
+        path = type(music.path) == "string" and music.path or "",
+        loop_start = tonumber(music.loop_start) or 0,
+        loop_end = tonumber(music.loop_end) or 0,
+    }
 end
 
 local function build_encounter_data(encounter_definition, overrides, persistent_enemy)
@@ -127,6 +156,8 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
                 for mission_key, mission_value in pairs(value) do
                     data.freedom_mission[mission_key] = mission_value
                 end
+            elseif key == "music" then
+                data.music = copy_music_definition(value)
             else
                 data[key] = value
             end
@@ -134,7 +165,9 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
     end
 
     for key, value in pairs(overrides or {}) do
-        if key == "freedom_mission" and type(value) == "table" then
+        if key == "music" then
+            data.music = copy_music_definition(value)
+        elseif key == "freedom_mission" and type(value) == "table" then
             local mission = {}
             for mission_key, mission_value in pairs(data.freedom_mission or {}) do
                 mission[mission_key] = mission_value
@@ -176,10 +209,14 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
                     and encounter_alias == expected_display_name
                 if alias_matches or display_name_matches then
                     enemy_info.health = persistent_enemy.health
-                    -- Current HP is passed through `health`. Maximum HP is
-                    -- still controlled by the character package's configured
-                    -- capacity; ezencounters cannot raise that capacity through
-                    -- the character API currently used by this project.
+                    -- A separate max_hp request lets ezencounters choose a
+                    -- compatible character package whose first set_health()
+                    -- call establishes this maximum. A mutator cannot raise
+                    -- an already initialized character's maximum HP.
+                    local maximum = tonumber(persistent_enemy.max_health)
+                    if maximum and maximum > 0 then
+                        enemy_info.max_hp = maximum
+                    end
                     health_applied = true
                     matched_enemy_alias = enemy_info.name
                     break
@@ -197,6 +234,10 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
         and #data.enemies == 1
         and type(data.enemies[1]) == "table" then
         data.enemies[1].health = persistent_enemy.health
+        local maximum = tonumber(persistent_enemy.max_health)
+        if maximum and maximum > 0 then
+            data.enemies[1].max_hp = maximum
+        end
         health_applied = true
         matched_enemy_alias = data.enemies[1].name
     end
@@ -205,14 +246,46 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
     for index, enemy_info in ipairs(data.enemies or {}) do
         if type(enemy_info) == "table" then
             entry_summary[#entry_summary + 1] = string.format(
-                "%d:%s health=%s max_hp=%s starting_hp=%s rank=%s",
+                "%d:%s health=%s max_hp=%s starting_hp=%s rank=%s scale=%s",
                 index,
                 tostring(enemy_info.name),
                 tostring(enemy_info.health),
                 tostring(enemy_info.max_hp),
                 tostring(enemy_info.starting_hp),
-                tostring(enemy_info.rank)
+                tostring(enemy_info.rank),
+                tostring(enemy_info.scale)
             )
+        end
+    end
+
+    -- Forward the source overworld bot's visual scale to its matching battle
+    -- enemy. The ezencounters package scales Entity:sprite() using the current
+    -- sprite dimensions, rounded to whole pixels. Unrelated liberation-list
+    -- encounters retain their authored appearance and scale.
+    local requested_scale = persistent_enemy and tonumber(persistent_enemy.scale)
+    if requested_scale and requested_scale > 0 and requested_scale < math.huge
+        and requested_scale == requested_scale and type(data.enemies) == "table" then
+        local scale_applied = false
+        for _, enemy_info in ipairs(data.enemies) do
+            if type(enemy_info) == "table" then
+                local alias = normalize_enemy_name(enemy_info.name)
+                if (expected_alias and alias == expected_alias)
+                    or (expected_display_name and alias == expected_display_name) then
+                    -- A normal-size overworld bot must not erase an
+                    -- explicitly authored scale in the encounter definition.
+                    -- A non-default overworld scale takes precedence.
+                    if requested_scale ~= 1 or enemy_info.scale == nil then
+                        enemy_info.scale = requested_scale
+                    end
+                    scale_applied = true
+                    break
+                end
+            end
+        end
+        if not scale_applied and #data.enemies == 1 and type(data.enemies[1]) == "table" then
+            if requested_scale ~= 1 or data.enemies[1].scale == nil then
+                data.enemies[1].scale = requested_scale
+            end
         end
     end
 
@@ -373,6 +446,17 @@ local function convert_indestructible_panels(self)
     local hold_time = 2
     local converting = {}
     local remaining = {}
+    local camera_bosses = {}
+    local camera_boss_seen = {}
+
+    local function add_camera_focus(definition)
+        if definition and not camera_boss_seen[definition.group_id] then
+            camera_boss_seen[definition.group_id] = true
+            -- Camera focuses on this group's Boss Dark Panel, even if its
+            -- overworld bot has not spawned or another boss spawned afterward.
+            camera_bosses[#camera_bosses + 1] = definition
+        end
+    end
 
     for _, panel in ipairs(self.indestructible_panels or {}) do
         local properties = panel.custom_properties or {}
@@ -380,29 +464,24 @@ local function convert_indestructible_panels(self)
             or properties[Constants.CustomProperties.Shared] == "true"
         local panel_boss_ids = boss_group_ids_from_properties(properties)
         local should_convert = false
+        local satisfied_bosses = {}
         if shared then
             should_convert = #self.dark_holes == 0
         elseif #panel_boss_ids > 0 then
             local requirement_type = properties[Constants.CustomProperties.Type] or "All"
-            if requirement_type ~= "Any" then
-                requirement_type = "All"
-            end
-
+            if requirement_type ~= "Any" then requirement_type = "All" end
             local cleared_count = 0
             for _, panel_boss_id in ipairs(panel_boss_ids) do
-                local boss_definition
                 for _, definition in ipairs(self.boss_definitions or {}) do
                     if definition.group_id == panel_boss_id then
-                        boss_definition = definition
+                        if count_dark_holes_for_boss(self, definition) == 0 then
+                            cleared_count = cleared_count + 1
+                            satisfied_bosses[#satisfied_bosses + 1] = definition
+                        end
                         break
                     end
                 end
-
-                if boss_definition and count_dark_holes_for_boss(self, boss_definition) == 0 then
-                    cleared_count = cleared_count + 1
-                end
             end
-
             if requirement_type == "Any" then
                 should_convert = cleared_count > 0
             else
@@ -414,6 +493,22 @@ local function convert_indestructible_panels(self)
         end
         if should_convert then
             converting[#converting + 1] = panel
+            if shared then
+                -- A shared panel may also name a specific boss group. Prefer
+                -- that group over the last spawned boss or unrelated bosses.
+                for _, definition in ipairs(self.boss_definitions or {}) do
+                    if count_dark_holes_for_boss(self, definition) == 0 then
+                        if #panel_boss_ids == 0
+                            or object_is_associated_with_boss(properties, definition.group_id) then
+                            add_camera_focus(definition)
+                        end
+                    end
+                end
+            else
+                for _, definition in ipairs(satisfied_bosses) do
+                    add_camera_focus(definition)
+                end
+            end
         else
             remaining[#remaining + 1] = panel
         end
@@ -421,20 +516,25 @@ local function convert_indestructible_panels(self)
 
     if #converting == 0 then return end
 
-    for _, player_session in pairs(self.player_sessions) do
+    local sessions = {}
+    for _, session in pairs(self.player_sessions) do
+        sessions[#sessions + 1] = session
         if Net.get_area_custom_properties(self.area_id)[Constants.CustomProperties.VictoryLapSong] then
             Net.set_song(self.area_id, Net.get_area_custom_properties(self.area_id)[Constants.CustomProperties.VictoryLapSong])
         end
-        player_session.player:say("Indestructible Panels have been unlocked!")
-        local player = player_session.player
-        Net.lock_player_input(player.id)
-        local focus = self.boss
-        if focus then
-            Net.slide_player_camera(player.id, focus.x, focus.y, focus.z, slide_time)
-            Net.move_player_camera(player.id, focus.x, focus.y, focus.z, hold_time)
+        Net.lock_player_input(session.player.id)
+    end
+
+    -- Visit every distinct associated boss once. With multiple boss groups,
+    -- using `self.boss` points to whichever one spawned last, which can be
+    -- unrelated to the panels just converted.
+    for _, definition in ipairs(camera_bosses) do
+        local x, y, z = definition.x + .5, definition.y + .5, definition.z
+        for _, session in ipairs(sessions) do
+            Net.slide_player_camera(session.player.id, x, y, z, slide_time)
+            Net.move_player_camera(session.player.id, x, y, z, hold_time)
         end
-        Net.slide_player_camera(player.id, player.x, player.y, player.z, slide_time)
-        Net.unlock_player_camera(player.id)
+        Async.await(Async.sleep(slide_time + hold_time))
     end
 
     log:info_data("Converting indestructible panels", {
@@ -442,9 +542,8 @@ local function convert_indestructible_panels(self)
         instance_area_id = self.area_id,
         panel_count = #converting,
         remaining_count = #remaining,
+        boss_camera_focus_count = #camera_bosses,
     })
-
-    Async.await(Async.sleep(slide_time + hold_time / 2))
 
     for _, panel in ipairs(converting) do
         local actual_panel = Net.get_object_by_id(self.area_id, panel.visual_object_id)
@@ -459,12 +558,28 @@ local function convert_indestructible_panels(self)
     end
     self.indestructible_panels = remaining
 
-    Async.await(Async.sleep(hold_time / 2 + slide_time))
-
-    for _, player_session in pairs(self.player_sessions) do
-        if not player_session.completed_turn then
-            Net.unlock_player_input(player_session.player.id)
+    -- Hold on the associated boss long enough to display the unlock.
+    if #camera_bosses > 0 then
+        for _, session in ipairs(sessions) do
+            local definition = camera_bosses[#camera_bosses]
+            Net.move_player_camera(session.player.id,
+                definition.x + .5, definition.y + .5, definition.z, .5)
         end
+        Async.await(Async.sleep(.5))
+    end
+
+    for _, session in ipairs(sessions) do
+        local player = session.player
+        Net.slide_player_camera(player.id, player.x, player.y, player.z, slide_time)
+    end
+    Async.await(Async.sleep(slide_time))
+    for _, session in ipairs(sessions) do
+        local player = session.player
+        Net.unlock_player_camera(player.id)
+        if not session.completed_turn then
+            Net.unlock_player_input(player.id)
+        end
+        player:say("Indestructible Panels have been unlocked!")
     end
 end
 
@@ -516,17 +631,63 @@ local function liberate_panel(self, player_session)
             local data = {
                 terrain = PanelEncounters.resolve_terrain(self, player)
             }
-            local encounter_category = enemy.is_boss and "bosses"
-                or enemy.is_special_encounter and "special_encounters"
-                or nil
-            local encounter_definition = PanelEncounters.resolve_encounter(self.base_area_id, encounter_category)
+            local encounter_category = enemy and enemy.is_boss and "bosses"
+                or enemy and enemy.is_special_encounter and "special_encounters"
+                or "encounters"
+            local properties = panel.custom_properties or {}
+            local liberation_candidates = PanelEncounters.resolve_dark_hole_liberation_encounters(
+                self.base_area_id, properties[Constants.CustomProperties.DarkHoleLiberationEncounters])
+            local uses_liberation_list = #liberation_candidates > 0
+            local encounter_definition
+            if uses_liberation_list then
+                encounter_definition = liberation_candidates[math.random(#liberation_candidates)]
+            else
+                local ow_bot_encounter = enemy and enemy.ow_bot_encounter_name
+                if not ow_bot_encounter then
+                    -- The source panel still knows its encounter even if the
+                    -- overworld bot failed to spawn. Accept legacy map data.
+                    local value = properties[Constants.CustomProperties.OWBotEncounter]
+                    local name = value ~= nil and tostring(value):match("^%s*(.-)%s*$") or ""
+                    if name == "" then
+                        value = properties[Constants.CustomProperties.LegacyBossEncounter]
+                        name = value ~= nil and tostring(value):match("^%s*(.-)%s*$") or ""
+                    end
+                    ow_bot_encounter = name ~= "" and name or nil
+                end
+                if ow_bot_encounter then
+                    encounter_definition = PanelEncounters.resolve_named_encounter(
+                        self.base_area_id, encounter_category, ow_bot_encounter)
+                    -- Without a spawned bot, its intended encounter category
+                    -- cannot be inferred from the enemy template. Only in
+                    -- that case check the other sections for the named entry.
+                    if not encounter_definition and not enemy then
+                        for _, fallback_category in ipairs({"bosses", "special_encounters", "encounters"}) do
+                            if fallback_category ~= encounter_category then
+                                encounter_definition = PanelEncounters.resolve_named_encounter(
+                                    self.base_area_id, fallback_category, ow_bot_encounter)
+                                if encounter_definition then break end
+                            end
+                        end
+                    end
+                else
+                    -- Legacy maps without OW Bot Encounter retain their original
+                    -- category-based battle selection.
+                    encounter_definition = PanelEncounters.resolve_encounter(self.base_area_id, encounter_category)
+                end
+            end
             log:info_data("Initiating dark hole encounter", {
+                encounter_source = uses_liberation_list and "liberation_list" or "bot_encounter",
+                liberation_candidate_count = #liberation_candidates,
+                selected_encounter_name = encounter_definition and encounter_definition.name,
+                ow_bot_encounter_name = enemy and enemy.ow_bot_encounter_name
+                    or properties[Constants.CustomProperties.OWBotEncounter]
+                    or properties[Constants.CustomProperties.LegacyBossEncounter],
                 base_area_id = self.base_area_id,
                 instance_area_id = self.area_id,
                 area_name = self.area_name,
                 player_id = player.id,
-                enemy_name = enemy.battle_name,
-                enemy_health = enemy.health,
+                enemy_name = enemy and enemy.battle_name,
+                enemy_health = enemy and enemy.health,
                 encounter_path = encounter_definition and encounter_definition.path,
                 terrain = data.terrain,
                 phase = self.phase,
@@ -539,16 +700,30 @@ local function liberate_panel(self, player_session)
                 player_session:complete_turn()
                 return
             end
+            if self.encounter_music then
+                data.music = self.encounter_music
+            end
+            -- The dedicated liberation list is a separate battle; its
+            -- enemies must retain their authored HP rather than inherit HP
+            -- from the Dark Hole's persistent overworld bot.
+            local battle_bot = nil
+            if not uses_liberation_list then
+                battle_bot = enemy
+            end
             local encounter_data, persistent_health_applied, persistent_health_alias =
-                build_encounter_data(encounter_definition, data, enemy)
-            local minion_health_applied_count, minion_health_matched_alias =
-                apply_dark_hole_minion_health_override(encounter_data, panel, enemy)
+                build_encounter_data(encounter_definition, data, battle_bot)
+            local minion_health_applied_count, minion_health_matched_alias = 0, nil
+            if battle_bot then
+                minion_health_applied_count, minion_health_matched_alias =
+                    apply_dark_hole_minion_health_override(encounter_data, panel, battle_bot)
+            end
             local minion_health_override = tonumber(
                 (panel.custom_properties or {})[Constants.CustomProperties.MinionHealthOverride]) or 0
             log:info_data("Prepared dark hole encounter data", {
                 encounter_name = encounter_definition.name,
-                persistent_enemy = enemy.battle_name or enemy.name,
-                persistent_health = enemy.health,
+                persistent_enemy = enemy and (enemy.battle_name or enemy.name),
+                persistent_health = enemy and enemy.health,
+                persistent_scale = battle_bot and battle_bot.scale,
                 persistent_health_applied = persistent_health_applied,
                 persistent_health_matched_alias = persistent_health_alias,
                 minion_health_override = minion_health_override,
@@ -562,8 +737,10 @@ local function liberate_panel(self, player_session)
                                 index = index,
                                 name = enemy_info.name,
                                 health = enemy_info.health,
+                                max_hp = enemy_info.max_hp,
                                 starting_hp = enemy_info.starting_hp,
                                 rank = enemy_info.rank,
+                                scale = enemy_info.scale,
                             }
                         end
                     end
@@ -571,12 +748,12 @@ local function liberate_panel(self, player_session)
                 end)(),
                 freedom_mission = encounter_data.freedom_mission ~= nil,
             })
-            if minion_health_override > 0 and minion_health_applied_count == 0 then
+            if battle_bot and minion_health_override > 0 and minion_health_applied_count == 0 then
                 log:warn_data("Dark Hole Minion Health Override did not match an encounter enemy", {
                     dark_hole_x = panel.x,
                     dark_hole_y = panel.y,
-                    spawned_enemy_template = enemy.template_name,
-                    spawned_enemy_name = enemy.battle_name or enemy.name,
+                    spawned_enemy_template = enemy and enemy.template_name,
+                    spawned_enemy_name = enemy and (enemy.battle_name or enemy.name),
                     encounter_name = encounter_definition.name,
                     minion_health_override = minion_health_override,
                 })
@@ -598,7 +775,7 @@ local function liberate_panel(self, player_session)
                 health = results.health,
                 enemy_count = #(results.enemies or results.Enemies or {}),
                 persistent_health_synced = false,
-                retained_enemy_health = enemy.health,
+                retained_enemy_health = enemy and enemy.health,
             })
             if not results.success then
                 player_session:complete_turn()
@@ -630,12 +807,17 @@ local function liberate_panel(self, player_session)
             local encounter_definition
             if panel.custom_properties[Constants.CustomProperties.EncounterPath] then
                 encounter_definition = PanelEncounters.resolve_encounter_value(
-                    panel.custom_properties[Constants.CustomProperties.EncounterPath])
+                    panel.custom_properties[Constants.CustomProperties.EncounterPath], self.base_area_id)
             else
                 local encounter_category = enemy and enemy.is_boss and "bosses"
                     or enemy and enemy.is_special_encounter and "special_encounters"
-                    or nil
-                encounter_definition = PanelEncounters.resolve_encounter(self.base_area_id, encounter_category)
+                    or "encounters"
+                if enemy and enemy.ow_bot_encounter_name then
+                    encounter_definition = PanelEncounters.resolve_named_encounter(
+                        self.base_area_id, encounter_category, enemy.ow_bot_encounter_name)
+                else
+                    encounter_definition = PanelEncounters.resolve_encounter(self.base_area_id, encounter_category)
+                end
             end
             if enemy then
                 data.health = enemy.health
@@ -666,6 +848,9 @@ local function liberate_panel(self, player_session)
                 player_session:complete_turn()
                 return
             end
+            if self.encounter_music then
+                data.music = self.encounter_music
+            end
             local encounter_data, encounter_health_applied, matched_enemy_alias = build_encounter_data(
                 encounter_definition, data, enemy)
             local encounter_enemy_entries = {}
@@ -678,6 +863,7 @@ local function liberate_panel(self, player_session)
                         max_hp = enemy_info.max_hp,
                         starting_hp = enemy_info.starting_hp,
                         rank = enemy_info.rank,
+                        scale = enemy_info.scale,
                     }
                 end
             end
@@ -696,7 +882,7 @@ local function liberate_panel(self, player_session)
             -- both wins and losses whenever the battle engine reports them.
             local enemy_health_synced = false
             if enemy then
-                enemy_health_synced = EnemyHelpers.sync_health(enemy, results)
+                enemy_health_synced = EnemyHelpers.sync_health(enemy, results, encounter_data)
             end
             log:info_data("Panel encounter results", {
                 base_area_id = self.base_area_id,
@@ -894,10 +1080,10 @@ local function take_enemy_turn(self)
             log:debug_data("Enemy taking turn", {
                 base_area_id = self.base_area_id,
                 instance_area_id = self.area_id,
-                enemy_name = enemy.battle_name,
-                enemy_health = enemy.health,
-                enemy_x = enemy.x,
-                enemy_y = enemy.y,
+                enemy_name = enemy and enemy.battle_name,
+                enemy_health = enemy and enemy.health,
+                enemy_x = enemy and enemy.x,
+                enemy_y = enemy and enemy.y,
                 enemy_z = enemy.z,
                 is_boss = enemy.is_boss,
             })
@@ -938,6 +1124,7 @@ local function take_enemy_turn(self)
                         scale = dark_hole.scale,
                         source_panel_type = dark_hole.source_type or dark_hole.type,
                     })
+                    assign_dark_hole_bot_encounter(dark_hole, dark_hole.enemy)
                     apply_dark_hole_minion_health_to_bot(dark_hole, dark_hole.enemy)
                     self.enemies[#self.enemies+1] = dark_hole.enemy
                     Async.await(Async.sleep(.5))
@@ -986,6 +1173,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
     -- object, not in the map/area custom properties.
     local liberation_tileset_path
     local configured_max_order_points
+    local configured_encounter_music
     local config_object_found = false
     local object_ids = Net.list_objects(base_area_id) or {}
 
@@ -999,9 +1187,27 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 configured_max_order_points = object_max_order_points
             end
             local configured_path = properties[Constants.CustomProperties.LiberationTileset]
+            local music_object_id = properties[Constants.CustomProperties.EncounterMusic]
+            if music_object_id ~= nil and tostring(music_object_id) ~= "" then
+                local music_object = Net.get_object_by_id(base_area_id, tonumber(music_object_id) or music_object_id)
+                if music_object and music_object.type == "Music Definition" then
+                    local music_properties = music_object.custom_properties or {}
+                    configured_encounter_music = {
+                        path = type(music_properties[Constants.CustomProperties.MusicPath]) == "string"
+                            and music_properties[Constants.CustomProperties.MusicPath] or "",
+                        loop_start = tonumber(music_properties[Constants.CustomProperties.MusicLoopStart]) or 0,
+                        loop_end = tonumber(music_properties[Constants.CustomProperties.MusicLoopEnd]) or 0,
+                    }
+                else
+                    log:warn_data("Liberation Config Encounter Music reference is not a Music Definition", {
+                        base_area_id = base_area_id,
+                        object_id = music_object_id,
+                        resolved_type = music_object and music_object.type,
+                    })
+                end
+            end
             if type(configured_path) == "string" and configured_path ~= "" then
                 liberation_tileset_path = configured_path
-                break
             end
         end
     end
@@ -1064,6 +1270,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
         area_id = new_area_id,
         base_area_id = base_area_id,
         area_name = Net.get_area_name(base_area_id),
+        encounter_music = configured_encounter_music,
         emote_timer = 0,
         target_phase = math.max(minimum_phases, math.ceil(solo_target / math.max(1, player_difference))),
         phase = 1,
@@ -1328,6 +1535,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 -- The override belongs to this source Dark Hole, not to the
                 -- enemy template. Different Dark Holes can therefore spawn
                 -- the same bot type with different HP values.
+                assign_dark_hole_bot_encounter(pending.source_panel, enemy)
                 apply_dark_hole_minion_health_to_bot(pending.source_panel, enemy)
                 pending.source_panel.enemy = enemy
                 mission.enemies[#mission.enemies + 1] = enemy

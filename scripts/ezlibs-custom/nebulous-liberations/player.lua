@@ -142,16 +142,15 @@ function Player:is_battling()
   return self.resolve_battle ~= nil
 end
 
+-- A missing battle_results payload must never be interpreted as a victory,
+-- a run, or a new HP value. The player session retains its current HP when
+-- health is absent and never applies the panic penalty for a missing result.
 local function create_default_results()
   return {
-    reason = 1,
-    health = 1,
-    time = 0,
-    ran = true,
-    emotion = 0,
+    reason = BattleReason.DRAW,
+    ran = false,
     enemies = {},
-    turns = 3,
-    score = 0,
+    missing_battle_results = true,
   }
 end
 
@@ -241,12 +240,16 @@ end
 function Player:handle_battle_exit(stats)
   self.battle_exit_fallback_token = nil
 
-  local resolved = stats or self.pending_battle_stats
+  -- battle_exit can contain only an ID or other partial data. Preserve the
+  -- complete battle_results payload whenever it exists, rather than letting
+  -- an incomplete exit event replace the authoritative WIN/LOSE reason and HP.
+  local pending = self.pending_battle_stats
+  local resolved = pending or stats
   local source
-  if stats ~= nil then
-    source = "battle_exit_event"
-  elseif self.pending_battle_stats ~= nil then
+  if pending ~= nil then
     source = "pending_from_results"
+  elseif stats ~= nil then
+    source = "battle_exit_event"
   else
     source = "defaults"
   end
@@ -276,7 +279,9 @@ function Player:handle_disconnect()
   if self.resolve_battle then
     local resolve = self.resolve_battle
     self.resolve_battle = nil
-    resolve(self.pending_battle_stats or create_default_results())
+    -- Disconnecting while an encounter promise is pending cannot award an
+    -- encounter victory, even when a results event arrived before the exit.
+    resolve(create_default_results())
   end
   self.pending_battle_stats = nil
 

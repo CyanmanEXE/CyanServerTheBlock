@@ -941,12 +941,23 @@ One action in a cutscene chain. Chain via Next Step; branch via Next N / Fail Ne
 - `Wait Seconds`: Only used when Type == 'Wait'. Only meaningful when `Type` == `Wait`.
 - `Event Name`: Only used by Emit Event. Only meaningful when `Type` == `Emit Event`.
 
-### Liberation Config
+### Music Definition
 **Category:** gameplay
-Configuration object for a liberation mission. Liberation Tileset and Max Order Points are read from this object. Target phase/player counts, background, music, and other legacy settings are still read from area custom properties.
+Reusable encounter music settings. Path is a song name relative to the encounter package's music directory, without the .mid extension. Empty Path disables the music override.
 
 | Property | Type | Required | Default | Category | Description |
 |---|---|---|---|---|---|
+| `Loop End` | number |  | 0 | appearance | Music loop end value passed to mob:stream_music(). Defaults to 0. |
+| `Loop Start` | number |  | 0 | appearance | Music loop start value passed to mob:stream_music(). Defaults to 0. |
+| `Path` | string |  | `""` | appearance | Song filename without extension, resolved under the encounter package's music directory with the .mid extension. Empty disables music playback. |
+
+### Liberation Config
+**Category:** gameplay
+Configuration object for a liberation mission. Liberation Tileset, Max Order Points, and Encounter Music are read from this object. Target phase/player counts, background, and other legacy settings are still read from area custom properties.
+
+| Property | Type | Required | Default | Category | Description |
+|---|---|---|---|---|---|
+| `Encounter Music` | object |  | `""` | appearance | Tiled Object reference to a Music Definition used for every encounter in this liberation mission. |
 | `Honor HPMem` | bool |  | false | gameplay |  |
 | `Liberation Tileset` | string |  | `""` | gameplay |  |
 | `Max Order Points` | number |  | 9 | gameplay | Maximum order points available in this liberation mission. Defaults to 9 when omitted; values below 1 are clamped to 1. |
@@ -993,26 +1004,59 @@ A Liberation boss spawn point. Select an enemy template, spawn mode, optional bo
 | `Spawn Offset Z` | number |  | 0 | gameplay | Layer offset from this object's position. |
 | `Trigger Boss` | object |  | `""` | gameplay | Required Tiled Object reference when Spawn Mode is After Boss Defeated. Select the other Boss Dark Panel object that must be defeated first. |
 
+### Dark Hole Encounter List
+**Category:** gameplay
+Reusable list of named encounters from this area's special_encounters section, used only when liberating a linked Dark Hole. Leave entries blank to ignore them.
+
+| Property | Type | Required | Default | Category | Description |
+|---|---|---|---|---|---|
+| `Name 1` | string |  | `""` | gameplay |  |
+| `Name 10` | string |  | `""` | gameplay |  |
+| `Name 11` | string |  | `""` | gameplay |  |
+| `Name 12` | string |  | `""` | gameplay |  |
+| `Name 13` | string |  | `""` | gameplay |  |
+| `Name 14` | string |  | `""` | gameplay |  |
+| `Name 15` | string |  | `""` | gameplay |  |
+| `Name 16` | string |  | `""` | gameplay |  |
+| `Name 17` | string |  | `""` | gameplay |  |
+| `Name 18` | string |  | `""` | gameplay |  |
+| `Name 19` | string |  | `""` | gameplay |  |
+| `Name 2` | string |  | `""` | gameplay |  |
+| `Name 20` | string |  | `""` | gameplay |  |
+| `Name 3` | string |  | `""` | gameplay |  |
+| `Name 4` | string |  | `""` | gameplay |  |
+| `Name 5` | string |  | `""` | gameplay |  |
+| `Name 6` | string |  | `""` | gameplay |  |
+| `Name 7` | string |  | `""` | gameplay |  |
+| `Name 8` | string |  | `""` | gameplay |  |
+| `Name 9` | string |  | `""` | gameplay |  |
+
+**Template properties:** `Name N` — add additional numbered instances manually in Tiled.
+
 ### Dark Hole
 **Category:** gameplay
-Placed Liberation panel object. Boss ID 1 and Boss ID 2 associate this Dark Hole with one or two boss groups. Minion Health Override controls the starting battle HP of the enemy spawned by this Dark Hole, such as its BigBrute.
+Placed Liberation panel. OW Bot Encounter names the overworld bot's battle; Liberation Encounters references a Dark Hole Encounter List for the Dark Hole liberation battle. An empty list falls back to the bot encounter.
 
 | Property | Type | Required | Default | Category | Description |
 |---|---|---|---|---|---|
 | `Boss ID 1` | string |  | `""` | gameplay | First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement. |
 | `Boss ID 2` | string |  | `""` | gameplay | Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement. |
-| `Minion Health Override` | number |  | 0 | gameplay | Optional starting battle HP for the enemy spawned by this Dark Hole (for example, its BigBrute). Applies only to the matching enemy entry in this Dark Hole's encounter; other encounter enemies keep their configured HP. Zero or blank keeps the encounter-defined HP. |
+| `Liberation Encounters` | object |  | `""` | gameplay | Optional Tiled Object reference to a Dark Hole Encounter List in this area. Randomly selects among its nonblank, valid Name entries from special_encounters when liberating the Dark Hole; empty or missing list falls back to OW Bot Encounter. |
+| `Minion Health Override` | number |  | 0 | gameplay | Optional starting HP for the overworld bot spawned by this Dark Hole and its bot encounter fallback. It never overrides enemies in the separate Liberation Encounters list. Zero or blank keeps the encounter-defined HP. |
+| `OW Bot Encounter` | string |  | `""` | gameplay | Encounter name for the spawned overworld bot, resolved within the base area's bosses, special_encounters, or encounters category according to that bot's template. When blank, legacy category-based selection remains. |
 
 ### Dark Hole Buffed Virus
 **Category:** gameplay
-Dark Hole variant that retains normal Dark Hole liberation behavior but scales its overworld bot using the scale multiplier.
+Dark Hole variant with the same bot and liberation encounter settings, plus a visual scale multiplier applied to its overworld bot and matching ezencounters battle sprite.
 
 | Property | Type | Required | Default | Category | Description |
 |---|---|---|---|---|---|
 | `Boss ID 1` | string |  | `""` | gameplay | First boss-group identifier, matching the Dark Hole property. |
 | `Boss ID 2` | string |  | `""` | gameplay | Optional second boss-group identifier, matching the Dark Hole property. |
-| `Minion Health Override` | number |  | 0 | gameplay | Optional starting battle HP for the enemy spawned by this Dark Hole. |
-| `scale` | number |  | 1 | gameplay | Overworld bot sprite scale multiplier. 1 is normal size; 2 is double size. Applied after the bot is created and again on respawn. |
+| `Liberation Encounters` | object |  | `""` | gameplay | Optional reference to a Dark Hole Encounter List of special_encounters; falls back to the bot encounter when empty. |
+| `Minion Health Override` | number |  | 0 | gameplay | Optional starting HP for this Dark Hole's overworld bot and bot encounter fallback, not for separate liberation list battles. |
+| `OW Bot Encounter` | string |  | `""` | gameplay | Named encounter for the spawned overworld bot, using the same lookup rules as Dark Hole. |
+| `scale` | number |  | 1 | gameplay | Visual scale multiplier for the spawned overworld bot and its matching ezencounters battle enemy. Battle sprites use Entity:sprite() width/height scaled to whole pixel dimensions. Does not scale unrelated Liberation Encounters list enemies; 1 is normal size. |
 
 ### Indestructible Panel
 **Category:** gameplay
