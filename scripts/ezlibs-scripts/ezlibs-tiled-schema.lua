@@ -3114,10 +3114,17 @@ return {
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Optional positive maximum HP for this boss. Does not change the template's starting/current HP used in battle. Zero keeps the enemy template's configured maximum HP.",
+          ["description"] = "Optional positive maximum HP for this boss overworld bot and its matching battle enemy when the character package supports deferred HP. Zero keeps the template's default maximum; the current HP tracks persistent mission health.",
           ["name"] = "Boss Health Override",
           ["type"] = "number",
           ["value"] = 0
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Optional visual scale for this boss overworld bot and matching battle enemy. 1 is normal size; custom max HP requires a deferred-HP-compatible enemy package.",
+          ["name"] = "scale",
+          ["type"] = "number",
+          ["value"] = 1
         },
         {
           ["category"] = "gameplay",
@@ -3277,10 +3284,17 @@ return {
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Optional starting HP for the overworld bot spawned by this Dark Hole and its bot encounter fallback. It never overrides enemies in the separate Liberation Encounters list. Zero or blank keeps the encounter-defined HP.",
+          ["description"] = "Optional persistent current/max HP for this Dark Hole's spawned bot and its matching OW Bot Encounter enemy. An arbitrary battle maximum requires a deferred-HP-compatible enemy package. Never applies to the separate Liberation Encounters list. Zero keeps the default.",
           ["name"] = "Minion Health Override",
           ["type"] = "number",
           ["value"] = 0
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Optional visual scale multiplier for the spawned Dark Hole bot and its matching battle enemy; unrelated Liberation Encounters entries are unaffected. 1 is normal size.",
+          ["name"] = "scale",
+          ["type"] = "number",
+          ["value"] = 1
         },
       },
     },
@@ -3319,7 +3333,7 @@ return {
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Optional starting HP for this Dark Hole's overworld bot and bot encounter fallback, not for separate liberation list battles.",
+          ["description"] = "Optional persistent current/max HP for this Dark Hole's bot and its matching OW Bot Encounter enemy. Dynamic battle maxima require a deferred-HP-compatible enemy package; separate liberation list battles are unaffected.",
           ["name"] = "Minion Health Override",
           ["type"] = "number",
           ["value"] = 0

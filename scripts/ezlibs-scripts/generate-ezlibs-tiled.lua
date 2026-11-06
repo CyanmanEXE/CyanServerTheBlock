@@ -773,6 +773,7 @@ local object_types = {
             prop("Spawn Offset Z", "number", 0),
             prop("Auto Face Player", "bool", false),
             prop("Boss Health Override", "number", 0),
+            prop("scale", "number", 1),
             prop("Spawn Enabled", "bool", true),
             prop("Boss Display Name", "string", ""),
         }
@@ -803,6 +804,7 @@ local object_types = {
             prop("OW Bot Encounter", "string", ""),
             prop("Liberation Encounters", "object", ""),
             prop("Minion Health Override", "number", 0),
+            prop("scale", "number", 1),
         }
     },
     {
@@ -975,7 +977,8 @@ local META = {
             ["Spawn Offset Y"] = { category = "gameplay", description = "Vertical tile offset from this object's position." },
             ["Spawn Offset Z"] = { category = "gameplay", description = "Layer offset from this object's position." },
             ["Auto Face Player"] = { category = "gameplay", description = "When true, the boss faces the nearest player on spawn. When false, Direction is respected." },
-            ["Boss Health Override"] = { category = "gameplay", description = "Optional positive maximum HP for this boss. Does not change the template's starting/current HP used in battle. Zero keeps the enemy template's configured maximum HP." },
+            ["Boss Health Override"] = { category = "gameplay", description = "Optional positive maximum HP for this boss overworld bot and its matching battle enemy when the character package supports deferred HP. Zero keeps the template's default maximum; the current HP tracks persistent mission health." },
+            ["scale"] = { category = "gameplay", description = "Optional visual scale for this boss overworld bot and matching battle enemy. 1 is normal size; custom max HP requires a deferred-HP-compatible enemy package." },
             ["Spawn Enabled"] = { category = "gameplay", description = "When false, this boss definition is registered but will not spawn automatically. It can still be spawned manually." },
             ["Boss Display Name"] = { category = "gameplay", description = "Optional name shown above the spawned bot. Empty uses the enemy template's display name." },
         },
@@ -987,14 +990,15 @@ local META = {
             ["Liberation Encounters"] = { category = "gameplay", description = "Optional Tiled Object reference to a Dark Hole Encounter List in this area. Randomly selects among its nonblank, valid Name entries from special_encounters when liberating the Dark Hole; empty or missing list falls back to OW Bot Encounter." },
             ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement." },
             ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement." },
-            ["Minion Health Override"] = { category = "gameplay", description = "Optional starting HP for the overworld bot spawned by this Dark Hole and its bot encounter fallback. It never overrides enemies in the separate Liberation Encounters list. Zero or blank keeps the encounter-defined HP." },
+            ["Minion Health Override"] = { category = "gameplay", description = "Optional persistent current/max HP for this Dark Hole's spawned bot and its matching OW Bot Encounter enemy. An arbitrary battle maximum requires a deferred-HP-compatible enemy package. Never applies to the separate Liberation Encounters list. Zero keeps the default." },
+            ["scale"] = { category = "gameplay", description = "Optional visual scale multiplier for the spawned Dark Hole bot and its matching battle enemy; unrelated Liberation Encounters entries are unaffected. 1 is normal size." },
         },
         ["Dark Hole Buffed Virus"] = {
             ["OW Bot Encounter"] = { category = "gameplay", description = "Named encounter for the spawned overworld bot, using the same lookup rules as Dark Hole." },
             ["Liberation Encounters"] = { category = "gameplay", description = "Optional reference to a Dark Hole Encounter List of special_encounters; falls back to the bot encounter when empty." },
             ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier, matching the Dark Hole property." },
             ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier, matching the Dark Hole property." },
-            ["Minion Health Override"] = { category = "gameplay", description = "Optional starting HP for this Dark Hole's overworld bot and bot encounter fallback, not for separate liberation list battles." },
+            ["Minion Health Override"] = { category = "gameplay", description = "Optional persistent current/max HP for this Dark Hole's bot and its matching OW Bot Encounter enemy. Dynamic battle maxima require a deferred-HP-compatible enemy package; separate liberation list battles are unaffected." },
             ["scale"] = { category = "gameplay", description = "Visual scale multiplier for the spawned overworld bot and its matching ezencounters battle enemy. Battle sprites use Entity:sprite() width/height scaled to whole pixel dimensions. Does not scale unrelated Liberation Encounters list enemies; 1 is normal size." },
         },
         ["Indestructible Panel"] = {

@@ -1417,10 +1417,21 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
             -- artwork whose GID has not been registered (or is shared).
             -- Tile-based/legacy objects still resolve through PanelRegistry.
             local is_buffed_virus = object_type == Constants.PanelTypes.DarkHoleBuffedVirus
+            local properties = object.custom_properties or {}
+            local requested_panel_scale = tonumber(properties[Constants.CustomProperties.Scale])
+            if requested_panel_scale and (requested_panel_scale <= 0
+                or requested_panel_scale ~= requested_panel_scale
+                or requested_panel_scale == math.huge) then
+                log:warn_data("Ignoring invalid panel scale", {
+                    object_id = object.id,
+                    requested_scale = tostring(properties[Constants.CustomProperties.Scale]),
+                })
+                requested_panel_scale = nil
+            end
             local panel_type = resolve_panel_type(object)
             local new_panel = {
                 name = "", type = panel_type, source_type = object_type,
-                scale = is_buffed_virus and (tonumber((object.custom_properties or {})[Constants.CustomProperties.Scale]) or 1) or nil,
+                scale = requested_panel_scale or (is_buffed_virus and 1 or nil),
                 visible = true,
                 x = object.x, y = object.y, z = object.z, width = object.width, height = object.height,
                 data = { type = "tile", gid = Net.get_tileset(base_area_id, "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx").first_gid },
@@ -1518,6 +1529,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                     auto_face_player = properties[Constants.CustomProperties.AutoFacePlayer] == true
                         or properties[Constants.CustomProperties.AutoFacePlayer] == "true",
                     max_health_override = tonumber(properties[Constants.CustomProperties.BossHealthOverride]) or 0,
+                    scale = new_panel.scale,
                     spawn_enabled = not (properties[Constants.CustomProperties.SpawnEnabled] == false
                         or properties[Constants.CustomProperties.SpawnEnabled] == "false"),
                     display_name = tostring(properties[Constants.CustomProperties.BossDisplayName] or ""),
@@ -1689,6 +1701,7 @@ function Mission:spawn_boss(boss_id, force, triggered)
 
     local enemy = Enemy.from(self, position, definition.direction, definition.enemy_name, {
         auto_face_player = definition.auto_face_player,
+        scale = definition.scale,
         is_boss = true,
     })
     if not enemy then return false end
