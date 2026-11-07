@@ -231,7 +231,10 @@ function GuardInterception.apply_damage(records, amount, attacker)
             -- teammate with Guard), that player must be protected from this hit
             -- as well. PlayerSession:hurt only blocks damage; it does not start
             -- another interception, so this cannot bounce the hit between players.
-            session:hurt(amount, attacker)
+            local multiplier = attacker and tonumber(attacker.ow_damage_multiplier) or 1
+            if multiplier <= 0 or multiplier ~= multiplier or multiplier == math.huge then multiplier = 1 end
+            local damage = math.max(0, math.floor((tonumber(amount) or 0) * multiplier + 0.5))
+            session:hurt(damage, attacker)
         end
     end
 end

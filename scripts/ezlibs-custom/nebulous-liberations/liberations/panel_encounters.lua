@@ -1,5 +1,5 @@
 local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
-local log = ezlogger.get("nebulous-liberations")
+local log = require("scripts/ezlibs-custom/nebulous-liberations/liberations/logger").encounters
 local ezconfig = require("scripts/ezlibs-scripts/ezconfig")
 
 local PanelEncounters = {}
@@ -181,6 +181,31 @@ local function pick_encounter(encounter_table, category)
   return options[#options]
 end
 
+-- Weighted selection is also used by the separate Dark Hole liberation list.
+-- Never mutate cached area encounter definitions when assigning pool weights.
+function PanelEncounters.pick_weighted(candidates)
+  if type(candidates) ~= "table" then return nil end
+  local total = 0
+  local valid = {}
+  for _, entry in ipairs(candidates) do
+    if type(entry) == "table" and type(entry.path) == "string" and entry.path ~= "" then
+      local weight = tonumber(entry.weight)
+      if weight == nil then weight = 1 end
+      if weight > 0 and weight < math.huge then
+        valid[#valid + 1] = {definition = entry, weight = weight}
+        total = total + weight
+      end
+    end
+  end
+  if total <= 0 then return nil end
+  local choice = math.random() * total
+  for _, item in ipairs(valid) do
+    choice = choice - item.weight
+    if choice <= 0 then return item.definition end
+  end
+  return valid[#valid].definition
+end
+
 -- Used by instance.lua for the per-panel "Encounter Path" custom property
 -- override. Routes through the area-scoped ezencounters.resolve_encounter
 -- lookup so names resolve to the current base area's full definition.
@@ -269,6 +294,125 @@ function PanelEncounters.resolve_dark_hole_liberation_encounters(base_area_id, o
     end
   end
   return candidates
+end
+
+-- New Tiled encounter selection modes apply to the OW bot encounter only.
+-- The separate "Liberation Encounters" list is selected by instance.lua and
+-- intentionally keeps its own authored battle HP.
+local function nonempty(value)
+  if value == nil then return nil end
+  local name = tostring(value):match("^%s*(.-)%s*$")
+  if name == "" or name == "0" or name == "Auto" then return nil end
+  return name
+end
+
+local function normalize_category(value, fallback)
+  if value == "encounters" or value == "special_encounters" or value == "bosses" then
+    return value
+  end
+  return fallback or "encounters"
+end
+
+local function weighted_pool(base_area_id, reference, inherited_category)
+  local pool_id = tonumber(reference)
+  if not pool_id or pool_id <= 0 then
+    log:warn_data("Encounter Pool missing a valid Tiled object reference", {
+      base_area_id = base_area_id, pool_reference = tostring(reference),
+    })
+    return nil
+  end
+  local ok, pool = pcall(Net.get_object_by_id, base_area_id, pool_id)
+  if not ok or type(pool) ~= "table" or pool.type ~= "Liberation Encounter Pool" then
+    log:warn_data("Encounter Pool reference is not a Liberation Encounter Pool", {
+      base_area_id = base_area_id, pool_reference = tostring(reference),
+      actual_type = pool and pool.type,
+    })
+    return nil
+  end
+  local properties = pool.custom_properties or {}
+  local category = normalize_category(properties["Encounter Category"], inherited_category)
+  local entries = {}
+  for index = 1, 20 do
+    local name = nonempty(properties["Name " .. index])
+    local weight = tonumber(properties["Weight " .. index])
+    if name then
+      if weight == nil then weight = 1 end
+      if weight > 0 and weight < math.huge then
+        local found = PanelEncounters.resolve_named_encounter(base_area_id, category, name)
+        if found then
+          found.weight = weight
+          entries[#entries + 1] = found
+        end
+      elseif weight < 0 then
+        log:warn_data("Encounter Pool has negative weight; entry ignored", {
+          base_area_id = base_area_id, pool_id = pool_id,
+          encounter_name = name, weight = weight,
+        })
+      end
+    end
+  end
+  local selected = PanelEncounters.pick_weighted(entries)
+  log:info_data("Encounter Pool resolved", {
+    base_area_id = base_area_id, pool_id = pool_id, category = category,
+    candidate_count = #entries, selected_encounter = selected and selected.name,
+  })
+  return selected
+end
+
+-- Resolves fixed, pool or category-based overworld encounters using the
+-- base area's encounter data. Config values were already merged by
+-- EnemyConfig.resolve (local > shared > category > global).
+-- If a setting is unavailable/invalid, fall back to the normal category.
+function PanelEncounters.resolve_enemy_encounter(base_area_id, default_category, enemy, properties, config)
+  properties = properties or {}
+  config = config or {}
+  local category = normalize_category(
+    config.encounter_category or (enemy and enemy.encounter_category)
+      or properties["Encounter Category"], default_category)
+  local mode = nonempty(config.encounter_mode)
+    or nonempty(enemy and enemy.encounter_mode)
+    or nonempty(properties["Encounter Mode"]) or "Auto"
+  local name = nonempty(config.encounter_name)
+    or nonempty(enemy and enemy.ow_bot_encounter_name)
+    or nonempty(properties["OW Bot Encounter"])
+    or nonempty(properties["Boss Encounter"])
+    or nonempty(enemy and enemy.default_ow_bot_encounter_name)
+  local pool = config.encounter_pool
+    or (enemy and enemy.encounter_pool)
+    or properties["OW Encounter Pool"]
+
+  local resolved = nil
+  if mode == "Category" then
+    resolved = PanelEncounters.resolve_encounter(base_area_id, category)
+  elseif mode == "Fixed" then
+    if name then resolved = PanelEncounters.resolve_named_encounter(base_area_id, category, name) end
+    if not resolved then
+      log:warn_data("Fixed encounter missing; falling back to category", {
+        base_area_id = base_area_id, requested_name = tostring(name), category = category,
+      })
+    end
+  elseif mode == "Pool" then
+    resolved = weighted_pool(base_area_id, pool, category)
+    if not resolved then
+      log:warn_data("Encounter Pool could not select an encounter; falling back to category", {
+        base_area_id = base_area_id, pool_reference = tostring(pool), category = category,
+      })
+    end
+  else -- Auto (including unknown/legacy values)
+    if name then resolved = PanelEncounters.resolve_named_encounter(base_area_id, category, name) end
+    if not resolved and tonumber(pool) and tonumber(pool) > 0 then
+      resolved = weighted_pool(base_area_id, pool, category)
+    end
+  end
+  if not resolved then
+    resolved = PanelEncounters.resolve_encounter(base_area_id, category)
+  end
+  log:info_data("Resolved enemy encounter selection", {
+    base_area_id = base_area_id, category = category, mode = mode,
+    requested_name = name, pool = pool,
+    selected_name = resolved and resolved.name,
+  })
+  return resolved
 end
 
 function PanelEncounters.resolve_encounter(base_area_id, category)

@@ -116,6 +116,30 @@ local Enums = {
         type = "string",
         values = {"All", "Any"}
     },
+
+    -- Liberation configuration selectors. These are authored here so future
+    -- schema regeneration retains the selectable options.
+    LiberationEncounterMode = {
+        type = "string",
+        values = {"Auto", "Fixed", "Pool", "Category"}
+    },
+    LiberationEncounterCategory = {
+        type = "string",
+        values = {"Auto", "encounters", "special_encounters", "bosses"}
+    },
+    LiberationEnemyCategory = {
+        type = "string",
+        values = {"All", "Dark Hole", "Buffed Virus", "Boss"}
+    },
+    LiberationAIType = {
+        type = "string",
+        values = {"Auto", "simple_charge", "ranged", "shockwave_line"}
+    },
+    -- Matching is safe for composite encounters; All is an explicit opt-in.
+    LiberationBattleScaleScope = {
+        type = "string",
+        values = {"Auto", "Matching", "All"}
+    },
 }
 
 -- ----------------------------------------------------------------------
@@ -128,6 +152,33 @@ local function prop(name, typ, default, enumName)
 end
 
 -- ----------------------------------------------------------------------
+-- Common field definition: Dark Hole and Buffed Virus use exactly the
+-- same property schema. Override values of 0 mean "inherit".
+local function dark_hole_members()
+    return {
+        prop("Spawns", "string", ""),
+        prop("Direction", "string", "Down", "Direction"),
+        prop("Boss ID 1", "string", ""),
+        prop("Boss ID 2", "string", ""),
+        prop("OW Bot Encounter", "string", ""),
+        prop("Liberation Encounters", "object", 0),
+        prop("Enemy Config", "object", 0),
+        prop("Encounter Mode", "string", "Auto", "LiberationEncounterMode"),
+        prop("Encounter Category", "string", "Auto", "LiberationEncounterCategory"),
+        prop("OW Encounter Pool", "object", 0),
+        prop("Max HP", "int", 0),
+        prop("Starting HP", "int", 0),
+        prop("OW Scale", "float", 0),
+        prop("Battle Scale", "float", 0),
+        prop("Battle Scale Scope", "string", "Auto", "LiberationBattleScaleScope"),
+        prop("OW Attack Damage", "int", 0),
+        prop("OW Damage Multiplier", "float", 0),
+        prop("Battle Attack Multiplier", "float", 0),
+        prop("Battle Defense Multiplier", "float", 0),
+        prop("AI Type", "string", "Auto", "LiberationAIType"),
+    }
+end
+
 -- Object types
 local object_types = {
     {
@@ -776,6 +827,21 @@ local object_types = {
             prop("scale", "number", 1),
             prop("Spawn Enabled", "bool", true),
             prop("Boss Display Name", "string", ""),
+            prop("Enemy Config", "object", 0),
+            prop("Encounter Mode", "string", "Auto", "LiberationEncounterMode"),
+            prop("Encounter Category", "string", "Auto", "LiberationEncounterCategory"),
+            prop("OW Encounter Pool", "object", 0),
+            prop("Max HP", "int", 0),
+            prop("Starting HP", "int", 0),
+            prop("OW Scale", "float", 0),
+            prop("Battle Scale", "float", 0),
+            prop("Battle Scale Scope", "string", "Auto", "LiberationBattleScaleScope"),
+            prop("OW Attack Damage", "int", 0),
+            prop("OW Damage Multiplier", "float", 0),
+            prop("Battle Attack Multiplier", "float", 0),
+            prop("Battle Defense Multiplier", "float", 0),
+            prop("AI Type", "string", "Auto", "LiberationAIType"),
+            prop("OW Bot Encounter", "string", ""),
         }
     },
     -- Reusable, object-referenced list of named special encounters for a
@@ -794,31 +860,20 @@ local object_types = {
     },
     -- These classes are applied to placed tile objects on the map's object
     -- layer. Boss ID 1/2 associate the object with one or two boss groups.
+    -- The two Dark Hole variants intentionally share one complete set of
+    -- map-author-facing properties. Older "scale" / "Minion Health Override"
+    -- values are still accepted by Lua but should not appear on new objects.
     {
         name = "Dark Hole",
         color = "#663366",
         useAs = { "object" },
-        members = {
-            prop("Boss ID 1", "string", ""),
-            prop("Boss ID 2", "string", ""),
-            prop("OW Bot Encounter", "string", ""),
-            prop("Liberation Encounters", "object", ""),
-            prop("Minion Health Override", "number", 0),
-            prop("scale", "number", 1),
-        }
+        members = dark_hole_members(),
     },
     {
         name = "Dark Hole Buffed Virus",
         color = "#8844aa",
         useAs = { "object" },
-        members = {
-            prop("Boss ID 1", "string", ""),
-            prop("Boss ID 2", "string", ""),
-            prop("OW Bot Encounter", "string", ""),
-            prop("Liberation Encounters", "object", ""),
-            prop("Minion Health Override", "number", 0),
-            prop("scale", "number", 1),
-        }
+        members = dark_hole_members(),
     },
     {
         name = "Indestructible Panel",
@@ -830,6 +885,100 @@ local object_types = {
             prop("Type", "string", "All", "BossRequirementType"),
             prop("Shared", "bool", false),
         }
+    },
+
+    -- Reusable Liberation configuration and weighted encounter pool objects.
+    {
+        name = "Liberation Enemy Config",
+        color = "#37a7b5",
+        useAs = { "object" },
+        members = {
+            prop("Spawns", "string", ""),
+            prop("Max HP", "int", 0),
+            prop("Starting HP", "int", 0),
+            prop("OW Scale", "float", 0),
+            prop("Battle Scale", "float", 0),
+            prop("Battle Scale Scope", "string", "Auto", "LiberationBattleScaleScope"),
+            prop("OW Attack Damage", "int", 0),
+            prop("OW Damage Multiplier", "float", 0),
+            prop("Battle Attack Multiplier", "float", 0),
+            prop("Battle Defense Multiplier", "float", 0),
+            prop("AI Type", "string", "Auto", "LiberationAIType"),
+            prop("Encounter Mode", "string", "Auto", "LiberationEncounterMode"),
+            prop("Encounter Category", "string", "Auto", "LiberationEncounterCategory"),
+            prop("OW Bot Encounter", "string", ""),
+            prop("OW Encounter Pool", "object", 0),
+        },
+    },
+    {
+        name = "Liberation Enemy Defaults",
+        color = "#4c9e72",
+        useAs = { "object" },
+        members = {
+            prop("Category", "string", "All", "LiberationEnemyCategory"),
+            prop("Max HP", "int", 0),
+            prop("Starting HP", "int", 0),
+            prop("OW Scale", "float", 0),
+            prop("Battle Scale", "float", 0),
+            prop("Battle Scale Scope", "string", "Auto", "LiberationBattleScaleScope"),
+            prop("OW Attack Damage", "int", 0),
+            prop("OW Damage Multiplier", "float", 0),
+            prop("Battle Attack Multiplier", "float", 0),
+            prop("Battle Defense Multiplier", "float", 0),
+            prop("AI Type", "string", "Auto", "LiberationAIType"),
+            prop("Encounter Mode", "string", "Auto", "LiberationEncounterMode"),
+            prop("Encounter Category", "string", "Auto", "LiberationEncounterCategory"),
+            prop("OW Bot Encounter", "string", ""),
+            prop("OW Encounter Pool", "object", 0),
+        },
+    },
+    {
+        name = "Liberation Encounter Pool",
+        color = "#bd8844",
+        useAs = { "object" },
+        members = {
+            prop("Encounter Category", "string", "Auto", "LiberationEncounterCategory"),
+            prop("Name 1", "string", ""),
+            prop("Weight 1", "float", 1),
+            prop("Name 2", "string", ""),
+            prop("Weight 2", "float", 1),
+            prop("Name 3", "string", ""),
+            prop("Weight 3", "float", 1),
+            prop("Name 4", "string", ""),
+            prop("Weight 4", "float", 1),
+            prop("Name 5", "string", ""),
+            prop("Weight 5", "float", 1),
+            prop("Name 6", "string", ""),
+            prop("Weight 6", "float", 1),
+            prop("Name 7", "string", ""),
+            prop("Weight 7", "float", 1),
+            prop("Name 8", "string", ""),
+            prop("Weight 8", "float", 1),
+            prop("Name 9", "string", ""),
+            prop("Weight 9", "float", 1),
+            prop("Name 10", "string", ""),
+            prop("Weight 10", "float", 1),
+            prop("Name 11", "string", ""),
+            prop("Weight 11", "float", 1),
+            prop("Name 12", "string", ""),
+            prop("Weight 12", "float", 1),
+            prop("Name 13", "string", ""),
+            prop("Weight 13", "float", 1),
+            prop("Name 14", "string", ""),
+            prop("Weight 14", "float", 1),
+            prop("Name 15", "string", ""),
+            prop("Weight 15", "float", 1),
+            prop("Name 16", "string", ""),
+            prop("Weight 16", "float", 1),
+            prop("Name 17", "string", ""),
+            prop("Weight 17", "float", 1),
+            prop("Name 18", "string", ""),
+            prop("Weight 18", "float", 1),
+            prop("Name 19", "string", ""),
+            prop("Weight 19", "float", 1),
+            prop("Name 20", "string", ""),
+            prop("Weight 20", "float", 1),
+        },
     },
 }
 
@@ -873,9 +1022,9 @@ local META = {
             description = "Reusable list of named encounters from this area's special_encounters section, used only when liberating a linked Dark Hole. Leave entries blank to ignore them.",
             numberedTemplates = { "Name " } },
         ["Dark Hole"] = { category = "gameplay",
-            description = "Placed Liberation panel. OW Bot Encounter names the overworld bot's battle; Liberation Encounters references a Dark Hole Encounter List for the Dark Hole liberation battle. An empty list falls back to the bot encounter." },
+            description = "Placed Liberation panel. Spawns/Direction define its overworld bot. OW Bot Encounter or OW Encounter Pool select that bot's battle, while Liberation Encounters selects the separate panel-liberation battle." },
         ["Dark Hole Buffed Virus"] = { category = "gameplay",
-            description = "Dark Hole variant with the same bot and liberation encounter settings, plus a visual scale multiplier applied to its overworld bot and matching ezencounters battle sprite." },
+            description = "Dark Hole variant sharing the same OW template, encounter selection, HP and scaling fields. Use OW Scale/Battle Scale instead of the legacy scale property." },
         ["Indestructible Panel"] = { category = "gameplay",
             description = "Placed Liberation panel object. Boss ID 1/2 define boss-group unlock requirements; Type selects All or Any when both are set. Shared=true waits for all Dark Holes in the mission." },
         ["Waypoint"] = { category = "gameplay",
@@ -986,20 +1135,34 @@ local META = {
             -- All numbered Name fields refer to special_encounters by name.
         },
         ["Dark Hole"] = {
-            ["OW Bot Encounter"] = { category = "gameplay", description = "Encounter name for the spawned overworld bot, resolved within the base area's bosses, special_encounters, or encounters category according to that bot's template. When blank, legacy category-based selection remains." },
-            ["Liberation Encounters"] = { category = "gameplay", description = "Optional Tiled Object reference to a Dark Hole Encounter List in this area. Randomly selects among its nonblank, valid Name entries from special_encounters when liberating the Dark Hole; empty or missing list falls back to OW Bot Encounter." },
-            ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement." },
-            ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement." },
-            ["Minion Health Override"] = { category = "gameplay", description = "Optional persistent current/max HP for this Dark Hole's spawned bot and its matching OW Bot Encounter enemy. An arbitrary battle maximum requires a deferred-HP-compatible enemy package. Never applies to the separate Liberation Encounters list. Zero keeps the default." },
-            ["scale"] = { category = "gameplay", description = "Optional visual scale multiplier for the spawned Dark Hole bot and its matching battle enemy; unrelated Liberation Encounters entries are unaffected. 1 is normal size." },
+            ["Spawns"] = { category = "gameplay", description = "Registered overworld enemy template key (e.g. Mettaur). Required unless provided by the referenced Enemy Config. Encounter names select battles, not bot templates." },
+            ["Direction"] = { category = "gameplay", description = "Overworld bot spawn direction and adjacent tile. Defaults to Down." },
+            ["OW Bot Encounter"] = { category = "gameplay", description = "Fixed encounter name in the selected Encounter Category. Auto mode prefers this name before the pool or category selection." },
+            ["Liberation Encounters"] = { category = "gameplay", description = "Optional object reference to a Dark Hole Encounter List for liberation battles. Uses special_encounters and preserves that encounter's authored HP; takes priority over OW bot encounter selection when nonempty." },
+            ["Boss ID 1"] = { category = "gameplay", description = "First linked boss group." },
+            ["Boss ID 2"] = { category = "gameplay", description = "Optional second linked boss group." },
+            ["Encounter Mode"] = { category = "gameplay", description = "Auto: named encounter, then pool, then category. Fixed: named encounter. Pool: weighted encounter pool. Category: random encounter in the category. Failed Fixed/Pool lookups fall back to category." },
+            ["Encounter Category"] = { category = "gameplay", description = "Area encounter table section; Auto follows the overworld template's Boss/Special/Normal classification." },
+            ["OW Encounter Pool"] = { category = "gameplay", description = "Object reference to a Liberation Encounter Pool. Each Name/Weight pair is resolved inside that area's selected encounter category." },
+            ["Max HP"] = { category = "gameplay", description = "Maximum persistent overworld bot HP. Zero inherits from shared/category/template settings. Battle mods may restrict native maxima." },
+            ["Starting HP"] = { category = "gameplay", description = "Initial overworld bot HP; zero inherits. Capped at effective Max HP." },
+            ["OW Scale"] = { category = "appearance", description = "Persistent overworld bot scale. Zero inherits template/shared/default settings." },
+            ["Battle Scale"] = { category = "appearance", description = "Battle visual scale. Zero inherits effective OW Scale." },
+            ["Battle Scale Scope"] = { category = "appearance", description = "Matching affects matching enemy aliases or one-entry battles. All affects every enemy in the battle." },
         },
         ["Dark Hole Buffed Virus"] = {
-            ["OW Bot Encounter"] = { category = "gameplay", description = "Named encounter for the spawned overworld bot, using the same lookup rules as Dark Hole." },
-            ["Liberation Encounters"] = { category = "gameplay", description = "Optional reference to a Dark Hole Encounter List of special_encounters; falls back to the bot encounter when empty." },
-            ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier, matching the Dark Hole property." },
-            ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier, matching the Dark Hole property." },
-            ["Minion Health Override"] = { category = "gameplay", description = "Optional persistent current/max HP for this Dark Hole's bot and its matching OW Bot Encounter enemy. Dynamic battle maxima require a deferred-HP-compatible enemy package; separate liberation list battles are unaffected." },
-            ["scale"] = { category = "gameplay", description = "Visual scale multiplier for the spawned overworld bot and its matching ezencounters battle enemy. Battle sprites use Entity:sprite() width/height scaled to whole pixel dimensions. Does not scale unrelated Liberation Encounters list enemies; 1 is normal size." },
+            ["Spawns"] = { category = "gameplay", description = "Registered overworld enemy template key. Required unless the referenced Enemy Config supplies Spawns. Encounter names do not create a bot." },
+            ["Direction"] = { category = "gameplay", description = "Overworld bot spawn direction and adjacent tile. Defaults to Down." },
+            ["OW Bot Encounter"] = { category = "gameplay", description = "Optional named OW bot encounter for the base area." },
+            ["Liberation Encounters"] = { category = "gameplay", description = "Optional Dark Hole Encounter List reference. Liberation-list HP remains independent of the persistent overworld bot." },
+            ["Encounter Mode"] = { category = "gameplay", description = "Auto, Fixed, Pool, or Category; selects the overworld bot battle only." },
+            ["Encounter Category"] = { category = "gameplay", description = "Base-area encounter section; Auto follows the overworld template classification." },
+            ["OW Encounter Pool"] = { category = "gameplay", description = "Object reference to a weighted Liberation Encounter Pool." },
+            ["Max HP"] = { category = "gameplay", description = "Persistent overworld max HP; zero inherits." },
+            ["Starting HP"] = { category = "gameplay", description = "Initial overworld HP; zero inherits." },
+            ["OW Scale"] = { category = "appearance", description = "Overworld visual scale; zero inherits." },
+            ["Battle Scale"] = { category = "appearance", description = "Battle scale; zero follows effective OW Scale." },
+            ["Battle Scale Scope"] = { category = "appearance", description = "Matching (safe default) or All enemies." },
         },
         ["Indestructible Panel"] = {
             ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier required to unlock this panel." },
@@ -1732,6 +1895,23 @@ local function validate_schema()
                 if p.propertyType and not Enums[p.propertyType] then
                     err("%s.%s: propertyType '%s' not declared in Enums",
                         ot.name, p.name, tostring(p.propertyType))
+                end
+                if p.propertyType and Enums[p.propertyType] then
+                    local enum = Enums[p.propertyType]
+                    if enum.type ~= p.type then
+                        err("%s.%s: enum '%s' storage type mismatch (%s vs %s)",
+                            ot.name, p.name, p.propertyType, p.type, enum.type)
+                    end
+                    if p.value ~= nil and p.value ~= "" then
+                        local valid = false
+                        for _, value in ipairs(enum.values) do
+                            if value == p.value then valid = true; break end
+                        end
+                        if not valid then
+                            err("%s.%s: default '%s' is not a value of enum '%s'",
+                                ot.name, p.name, tostring(p.value), p.propertyType)
+                        end
+                    end
                 end
             end
         end

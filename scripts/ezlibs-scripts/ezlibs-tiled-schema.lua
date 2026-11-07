@@ -17,6 +17,11 @@ return {
     ["Direction"] = { type = "string", values = { "Up", "Down", "Left", "Right", "Up Left", "Up Right", "Down Left", "Down Right" } },
     ["ItemType"] = { type = "string", values = { "item", "keyitem", "money", "fragments", "tokens" } },
     ["KeyType"] = { type = "string", values = { "money", "fragments", "tokens", "item", "bossgate", "navi_name", "navi_element", "navi_list" } },
+    ["LiberationAIType"] = { type = "string", values = { "Auto", "simple_charge", "ranged", "shockwave_line" } },
+    ["LiberationBattleScaleScope"] = { type = "string", values = { "Auto", "Matching", "All" } },
+    ["LiberationEncounterCategory"] = { type = "string", values = { "Auto", "encounters", "special_encounters", "bosses" } },
+    ["LiberationEncounterMode"] = { type = "string", values = { "Auto", "Fixed", "Pool", "Category" } },
+    ["LiberationEnemyCategory"] = { type = "string", values = { "All", "Dark Hole", "Buffed Virus", "Boss" } },
     ["MysteryType"] = { type = "string", values = { "keyitem", "item", "money", "random", "quiz", "fragments", "tokens", "encounter" } },
     ["NPCSpawnMode"] = { type = "string", values = { "Once", "Interval" } },
     ["NaviElement"] = { type = "string", values = { "None", "Fire", "Aqua", "Elec", "Wood", "Sword", "Break", "Cursor", "Wind", "Summon", "Plus" } },
@@ -3140,6 +3145,85 @@ return {
           ["type"] = "string",
           ["value"] = ""
         },
+        {
+          ["name"] = "Enemy Config",
+          ["type"] = "object",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Encounter Mode",
+          ["propertyType"] = "LiberationEncounterMode",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "Encounter Category",
+          ["propertyType"] = "LiberationEncounterCategory",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "OW Encounter Pool",
+          ["type"] = "object",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Max HP",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Starting HP",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "OW Scale",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Scale",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Scale Scope",
+          ["propertyType"] = "LiberationBattleScaleScope",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "OW Attack Damage",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "OW Damage Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Attack Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Defense Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "AI Type",
+          ["propertyType"] = "LiberationAIType",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "OW Bot Encounter",
+          ["type"] = "string",
+          ["value"] = ""
+        },
       },
     },
     ["Dark Hole Encounter List"] = {
@@ -3252,98 +3336,276 @@ return {
     ["Dark Hole"] = {
       color = "#663366",
       category    = "gameplay",
-      description = "Placed Liberation panel. OW Bot Encounter names the overworld bot's battle; Liberation Encounters references a Dark Hole Encounter List for the Dark Hole liberation battle. An empty list falls back to the bot encounter.",
+      description = "Placed Liberation panel. Spawns/Direction define its overworld bot. OW Bot Encounter or OW Encounter Pool select that bot's battle, while Liberation Encounters selects the separate panel-liberation battle.",
       members = {
         {
           ["category"] = "gameplay",
-          ["description"] = "First boss-group identifier. This Dark Hole counts toward this boss group's On Dark Hole Cleared requirement.",
+          ["description"] = "Registered overworld enemy template key (e.g. Mettaur). Required unless provided by the referenced Enemy Config. Encounter names select battles, not bot templates.",
+          ["name"] = "Spawns",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Overworld bot spawn direction and adjacent tile. Defaults to Down.",
+          ["name"] = "Direction",
+          ["propertyType"] = "Direction",
+          ["type"] = "string",
+          ["value"] = "Down"
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "First linked boss group.",
           ["name"] = "Boss ID 1",
           ["type"] = "string",
           ["value"] = ""
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Optional second boss-group identifier. This Dark Hole also counts toward this boss group's On Dark Hole Cleared requirement.",
+          ["description"] = "Optional second linked boss group.",
           ["name"] = "Boss ID 2",
           ["type"] = "string",
           ["value"] = ""
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Encounter name for the spawned overworld bot, resolved within the base area's bosses, special_encounters, or encounters category according to that bot's template. When blank, legacy category-based selection remains.",
+          ["description"] = "Fixed encounter name in the selected Encounter Category. Auto mode prefers this name before the pool or category selection.",
           ["name"] = "OW Bot Encounter",
           ["type"] = "string",
           ["value"] = ""
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Optional Tiled Object reference to a Dark Hole Encounter List in this area. Randomly selects among its nonblank, valid Name entries from special_encounters when liberating the Dark Hole; empty or missing list falls back to OW Bot Encounter.",
+          ["description"] = "Optional object reference to a Dark Hole Encounter List for liberation battles. Uses special_encounters and preserves that encounter's authored HP; takes priority over OW bot encounter selection when nonempty.",
           ["name"] = "Liberation Encounters",
           ["type"] = "object",
-          ["value"] = ""
+          ["value"] = 0
         },
         {
-          ["category"] = "gameplay",
-          ["description"] = "Optional persistent current/max HP for this Dark Hole's spawned bot and its matching OW Bot Encounter enemy. An arbitrary battle maximum requires a deferred-HP-compatible enemy package. Never applies to the separate Liberation Encounters list. Zero keeps the default.",
-          ["name"] = "Minion Health Override",
-          ["type"] = "number",
+          ["name"] = "Enemy Config",
+          ["type"] = "object",
           ["value"] = 0
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Optional visual scale multiplier for the spawned Dark Hole bot and its matching battle enemy; unrelated Liberation Encounters entries are unaffected. 1 is normal size.",
-          ["name"] = "scale",
-          ["type"] = "number",
-          ["value"] = 1
+          ["description"] = "Auto: named encounter, then pool, then category. Fixed: named encounter. Pool: weighted encounter pool. Category: random encounter in the category. Failed Fixed/Pool lookups fall back to category.",
+          ["name"] = "Encounter Mode",
+          ["propertyType"] = "LiberationEncounterMode",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Area encounter table section; Auto follows the overworld template's Boss/Special/Normal classification.",
+          ["name"] = "Encounter Category",
+          ["propertyType"] = "LiberationEncounterCategory",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Object reference to a Liberation Encounter Pool. Each Name/Weight pair is resolved inside that area's selected encounter category.",
+          ["name"] = "OW Encounter Pool",
+          ["type"] = "object",
+          ["value"] = 0
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Maximum persistent overworld bot HP. Zero inherits from shared/category/template settings. Battle mods may restrict native maxima.",
+          ["name"] = "Max HP",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Initial overworld bot HP; zero inherits. Capped at effective Max HP.",
+          ["name"] = "Starting HP",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["category"] = "appearance",
+          ["description"] = "Persistent overworld bot scale. Zero inherits template/shared/default settings.",
+          ["name"] = "OW Scale",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["category"] = "appearance",
+          ["description"] = "Battle visual scale. Zero inherits effective OW Scale.",
+          ["name"] = "Battle Scale",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["category"] = "appearance",
+          ["description"] = "Matching affects matching enemy aliases or one-entry battles. All affects every enemy in the battle.",
+          ["name"] = "Battle Scale Scope",
+          ["propertyType"] = "LiberationBattleScaleScope",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "OW Attack Damage",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "OW Damage Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Attack Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Defense Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "AI Type",
+          ["propertyType"] = "LiberationAIType",
+          ["type"] = "string",
+          ["value"] = "Auto"
         },
       },
     },
     ["Dark Hole Buffed Virus"] = {
       color = "#8844aa",
       category    = "gameplay",
-      description = "Dark Hole variant with the same bot and liberation encounter settings, plus a visual scale multiplier applied to its overworld bot and matching ezencounters battle sprite.",
+      description = "Dark Hole variant sharing the same OW template, encounter selection, HP and scaling fields. Use OW Scale/Battle Scale instead of the legacy scale property.",
       members = {
         {
           ["category"] = "gameplay",
-          ["description"] = "First boss-group identifier, matching the Dark Hole property.",
-          ["name"] = "Boss ID 1",
+          ["description"] = "Registered overworld enemy template key. Required unless the referenced Enemy Config supplies Spawns. Encounter names do not create a bot.",
+          ["name"] = "Spawns",
           ["type"] = "string",
           ["value"] = ""
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Optional second boss-group identifier, matching the Dark Hole property.",
+          ["description"] = "Overworld bot spawn direction and adjacent tile. Defaults to Down.",
+          ["name"] = "Direction",
+          ["propertyType"] = "Direction",
+          ["type"] = "string",
+          ["value"] = "Down"
+        },
+        {
+          ["name"] = "Boss ID 1",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
           ["name"] = "Boss ID 2",
           ["type"] = "string",
           ["value"] = ""
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Named encounter for the spawned overworld bot, using the same lookup rules as Dark Hole.",
+          ["description"] = "Optional named OW bot encounter for the base area.",
           ["name"] = "OW Bot Encounter",
           ["type"] = "string",
           ["value"] = ""
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Optional reference to a Dark Hole Encounter List of special_encounters; falls back to the bot encounter when empty.",
+          ["description"] = "Optional Dark Hole Encounter List reference. Liberation-list HP remains independent of the persistent overworld bot.",
           ["name"] = "Liberation Encounters",
           ["type"] = "object",
-          ["value"] = ""
+          ["value"] = 0
         },
         {
-          ["category"] = "gameplay",
-          ["description"] = "Optional persistent current/max HP for this Dark Hole's bot and its matching OW Bot Encounter enemy. Dynamic battle maxima require a deferred-HP-compatible enemy package; separate liberation list battles are unaffected.",
-          ["name"] = "Minion Health Override",
-          ["type"] = "number",
+          ["name"] = "Enemy Config",
+          ["type"] = "object",
           ["value"] = 0
         },
         {
           ["category"] = "gameplay",
-          ["description"] = "Visual scale multiplier for the spawned overworld bot and its matching ezencounters battle enemy. Battle sprites use Entity:sprite() width/height scaled to whole pixel dimensions. Does not scale unrelated Liberation Encounters list enemies; 1 is normal size.",
-          ["name"] = "scale",
-          ["type"] = "number",
-          ["value"] = 1
+          ["description"] = "Auto, Fixed, Pool, or Category; selects the overworld bot battle only.",
+          ["name"] = "Encounter Mode",
+          ["propertyType"] = "LiberationEncounterMode",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Base-area encounter section; Auto follows the overworld template classification.",
+          ["name"] = "Encounter Category",
+          ["propertyType"] = "LiberationEncounterCategory",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Object reference to a weighted Liberation Encounter Pool.",
+          ["name"] = "OW Encounter Pool",
+          ["type"] = "object",
+          ["value"] = 0
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Persistent overworld max HP; zero inherits.",
+          ["name"] = "Max HP",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["category"] = "gameplay",
+          ["description"] = "Initial overworld HP; zero inherits.",
+          ["name"] = "Starting HP",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["category"] = "appearance",
+          ["description"] = "Overworld visual scale; zero inherits.",
+          ["name"] = "OW Scale",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["category"] = "appearance",
+          ["description"] = "Battle scale; zero follows effective OW Scale.",
+          ["name"] = "Battle Scale",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["category"] = "appearance",
+          ["description"] = "Matching (safe default) or All enemies.",
+          ["name"] = "Battle Scale Scope",
+          ["propertyType"] = "LiberationBattleScaleScope",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "OW Attack Damage",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "OW Damage Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Attack Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Defense Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "AI Type",
+          ["propertyType"] = "LiberationAIType",
+          ["type"] = "string",
+          ["value"] = "Auto"
         },
       },
     },
@@ -3380,6 +3642,386 @@ return {
           ["name"] = "Shared",
           ["type"] = "bool",
           ["value"] = false
+        },
+      },
+    },
+    ["Liberation Enemy Config"] = {
+      color = "#37a7b5",
+      members = {
+        {
+          ["name"] = "Spawns",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Max HP",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Starting HP",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "OW Scale",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Scale",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Scale Scope",
+          ["propertyType"] = "LiberationBattleScaleScope",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "OW Attack Damage",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "OW Damage Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Attack Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Defense Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "AI Type",
+          ["propertyType"] = "LiberationAIType",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "Encounter Mode",
+          ["propertyType"] = "LiberationEncounterMode",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "Encounter Category",
+          ["propertyType"] = "LiberationEncounterCategory",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "OW Bot Encounter",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "OW Encounter Pool",
+          ["type"] = "object",
+          ["value"] = 0
+        },
+      },
+    },
+    ["Liberation Enemy Defaults"] = {
+      color = "#4c9e72",
+      members = {
+        {
+          ["name"] = "Category",
+          ["propertyType"] = "LiberationEnemyCategory",
+          ["type"] = "string",
+          ["value"] = "All"
+        },
+        {
+          ["name"] = "Max HP",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Starting HP",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "OW Scale",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Scale",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Scale Scope",
+          ["propertyType"] = "LiberationBattleScaleScope",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "OW Attack Damage",
+          ["type"] = "int",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "OW Damage Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Attack Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "Battle Defense Multiplier",
+          ["type"] = "float",
+          ["value"] = 0
+        },
+        {
+          ["name"] = "AI Type",
+          ["propertyType"] = "LiberationAIType",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "Encounter Mode",
+          ["propertyType"] = "LiberationEncounterMode",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "Encounter Category",
+          ["propertyType"] = "LiberationEncounterCategory",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "OW Bot Encounter",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "OW Encounter Pool",
+          ["type"] = "object",
+          ["value"] = 0
+        },
+      },
+    },
+    ["Liberation Encounter Pool"] = {
+      color = "#bd8844",
+      members = {
+        {
+          ["name"] = "Encounter Category",
+          ["propertyType"] = "LiberationEncounterCategory",
+          ["type"] = "string",
+          ["value"] = "Auto"
+        },
+        {
+          ["name"] = "Name 1",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 1",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 2",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 2",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 3",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 3",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 4",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 4",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 5",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 5",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 6",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 6",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 7",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 7",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 8",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 8",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 9",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 9",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 10",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 10",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 11",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 11",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 12",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 12",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 13",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 13",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 14",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 14",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 15",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 15",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 16",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 16",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 17",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 17",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 18",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 18",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 19",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 19",
+          ["type"] = "float",
+          ["value"] = 1
+        },
+        {
+          ["name"] = "Name 20",
+          ["type"] = "string",
+          ["value"] = ""
+        },
+        {
+          ["name"] = "Weight 20",
+          ["type"] = "float",
+          ["value"] = 1
         },
       },
     },

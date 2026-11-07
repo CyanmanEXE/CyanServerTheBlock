@@ -5,6 +5,7 @@
 return {
     minimum_steps_before_encounter = 80,
     encounter_chance_per_step = 0.05,
+    persistent_health = false,
     encounters = {
         {
             name = "Encounter1",
@@ -22,7 +23,7 @@ return {
             freedom_mission = {
                 enabled = true,
                 turn_count = 3,
-                player_can_flip = true,
+                player_can_flip = false,
             },
         },
     },
@@ -43,7 +44,7 @@ return {
             freedom_mission = {
                 enabled = true,
                 turn_count = 3,
-                player_can_flip = true,
+                player_can_flip = false,
             },
         },
         {
@@ -63,7 +64,7 @@ return {
             freedom_mission = {
                 enabled = true,
                 turn_count = 3,
-                player_can_flip = true,
+                player_can_flip = false,
             },
         },
         {
@@ -84,7 +85,7 @@ return {
             freedom_mission = {
                 enabled = true,
                 turn_count = 3,
-                player_can_flip = true,
+                player_can_flip = false,
             },
         },
         {
@@ -105,7 +106,7 @@ return {
             freedom_mission = {
                 enabled = true,
                 turn_count = 3,
-                player_can_flip = true,
+                player_can_flip = false,
             },
         },
         {
@@ -124,7 +125,26 @@ return {
             freedom_mission = {
                 enabled = true,
                 turn_count = 3,
-                player_can_flip = true,
+                player_can_flip = false,
+            },
+        },
+        {
+            name = "Roll",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+            weight = 10,
+            enemies = {
+                { name = "Roll", rank = 1 },
+            },
+            obstacles = {},
+            player_positions = {
+                { 0, 0, 0, 0, 0, 0 },
+                { 0, 1, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0 },
+            },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
             },
         },
     },

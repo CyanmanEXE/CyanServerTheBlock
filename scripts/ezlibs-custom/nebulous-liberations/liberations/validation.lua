@@ -1,11 +1,18 @@
 -- validation.lua
 local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberations/constants")
+local EnemyConfig = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_config")
+local validation_log = require("scripts/ezlibs-custom/nebulous-liberations/liberations/logger").validation
 
 local Validation = {}
 
--- Log a warning or error (replace with proper logging)
+-- Separate mission validation output from generic server console logging.
 local function log(level, message)
-    print(string.format("[%s] %s", level, message))
+    local details = {message = message}
+    if level == "ERROR" then
+        validation_log:error_data("Liberation validation error", details)
+    else
+        validation_log:warn_data("Liberation validation warning", details)
+    end
 end
 
 -- Validate a single object
@@ -22,13 +29,36 @@ local function validate_object(area_id, object)
 
     -- Dark Hole validation
     if type == Constants.PanelTypes.DarkHole or type == Constants.PanelTypes.DarkHoleBuffedVirus then
-        if not object.custom_properties[Constants.CustomProperties.Spawns] then
-            log("ERROR", "Dark Hole at ("..object.x..","..object.y..") missing 'Spawns' property")
+        local properties = object.custom_properties or {}
+        local category = object.type == Constants.PanelTypes.DarkHoleBuffedVirus
+            and "Buffed Virus" or "Dark Hole"
+        local resolved = EnemyConfig.resolve(area_id, object,
+            Constants.CustomProperties.MinionHealthOverride, category)
+        if not resolved.template_name then
+            log("ERROR", "Dark Hole object " .. tostring(object.id)
+                .. " at (" .. tostring(object.x) .. "," .. tostring(object.y)
+                .. ") has no OW template (Spawns or shared Enemy Config)")
             return false
         end
-        if not object.custom_properties[Constants.CustomProperties.Direction] then
-            log("ERROR", "Dark Hole at ("..object.x..","..object.y..") missing 'Direction' property")
-            return false
+        -- Direction defaults to Down if not explicitly configured; the
+        -- spawning code applies the same fallback to initial and respawns.
+        if not properties[Constants.CustomProperties.Direction]
+            or properties[Constants.CustomProperties.Direction] == "" then
+            log("WARN", "Dark Hole object " .. tostring(object.id)
+                .. " has no Direction; using Down")
+        end
+        for _, field in ipairs({"Max HP", "Starting HP", "OW Scale", "Battle Scale",
+                "OW Attack Damage", "OW Damage Multiplier",
+                "Battle Attack Multiplier", "Battle Defense Multiplier"}) do
+            local raw = properties[field]
+            if raw ~= nil and raw ~= "" then
+                local value = tonumber(raw)
+                if not value or value < 0 or value ~= value or value == math.huge then
+                    log("ERROR", "Dark Hole object " .. tostring(object.id)
+                        .. " has invalid " .. field .. " value: " .. tostring(raw))
+                    return false
+                end
+            end
         end
         local liberation_ref = object.custom_properties[Constants.CustomProperties.DarkHoleLiberationEncounters]
         if liberation_ref ~= nil and tostring(liberation_ref) ~= "" and tostring(liberation_ref) ~= "0" then
@@ -147,6 +177,7 @@ function Validation.validate_area(area_id)
         if obj.custom_properties then
             local properties = obj.custom_properties
             local is_boss_association_object = obj.type == Constants.PanelTypes.DarkHole
+                or obj.type == Constants.PanelTypes.DarkHoleBuffedVirus
                 or obj.type == Constants.PanelTypes.IndestructiblePanel
 
             if is_boss_association_object then

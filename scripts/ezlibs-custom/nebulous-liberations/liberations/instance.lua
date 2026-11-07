@@ -10,6 +10,12 @@ local PanelEncounters = require("scripts/ezlibs-custom/nebulous-liberations/libe
 local Loot = require("scripts/ezlibs-custom/nebulous-liberations/liberations/loot")
 local Preloader = require("scripts/ezlibs-custom/nebulous-liberations/liberations/preloader")
 local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberations/constants")
+local EnemyConfig = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_config")
+local BattleScale = require("scripts/ezlibs-custom/nebulous-liberations/liberations/battle_scale")
+local EnemyTemplates = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_templates")
+local SubsystemLogger = require("scripts/ezlibs-custom/nebulous-liberations/liberations/logger")
+local spawn_log = SubsystemLogger.spawning
+local encounter_log = SubsystemLogger.encounters
 local PanelRegistry = require("scripts/ezlibs-custom/nebulous-liberations/liberations/panel_registry")
 local CameraSequence = require("scripts/ezlibs-custom/nebulous-liberations/liberations/camera_sequence")
 local PointsGauge = require("scripts/ezlibs-custom/nebulous-liberations/liberations/points_gauge")
@@ -42,13 +48,23 @@ end
 -- Apply a Dark Hole's Minion Health Override to its own persistent world bot.
 -- EnemyHelpers.update_name also refreshes the viewer-specific HP indicators,
 -- so the map bot, its displayed name, and its associated encounter stay aligned.
+local function apply_panel_enemy_config(panel, enemy)
+    if not panel or not enemy then return end
+    local cfg = panel.enemy_config
+    if cfg then
+        EnemyConfig.apply(enemy, cfg)
+        enemy.configured_max_hp = cfg.max_hp ~= nil
+        EnemyHelpers.update_name(enemy)
+    end
+end
+
 local function apply_dark_hole_minion_health_to_bot(dark_hole, enemy)
     if not dark_hole or not enemy then return 0 end
 
     local properties = dark_hole.custom_properties or {}
     local health_override = tonumber(
         properties[Constants.CustomProperties.MinionHealthOverride]) or 0
-    if health_override <= 0 then return 0 end
+    if health_override <= 0 or enemy.configured_max_hp then return 0 end
 
     enemy.health = health_override
     enemy.max_health = health_override
@@ -72,27 +88,19 @@ end
 -- persistent bot so moving and respawning it do not lose that association.
 local function assign_dark_hole_bot_encounter(dark_hole, enemy)
     if not dark_hole or not enemy then return end
-    local properties = dark_hole.custom_properties or {}
-    local value = properties[Constants.CustomProperties.OWBotEncounter]
-    local name = value ~= nil and tostring(value):match("^%s*(.-)%s*$") or ""
-    if name == "" then
-        -- Existing Tiled maps retain their old Boss Encounter property until
-        -- map makers migrate them to OW Bot Encounter.
-        value = properties[Constants.CustomProperties.LegacyBossEncounter]
-        name = value ~= nil and tostring(value):match("^%s*(.-)%s*$") or ""
-    end
-    -- Explicit Tiled OW Bot Encounter always wins. A template may supply a
-    -- named default for a newly-added enemy (Mettaur), without requiring an
-    -- otherwise identical property on every Dark Hole object.
-    enemy.ow_bot_encounter_name = name ~= "" and name
-        or enemy.default_ow_bot_encounter_name
+    local cfg = dark_hole.enemy_config or {}
+    local props = dark_hole.custom_properties or {}
+    enemy.ow_bot_encounter_name = cfg.encounter_name
+        or (props[Constants.CustomProperties.OWBotEncounter] ~= "" and props[Constants.CustomProperties.OWBotEncounter])
+        or (props[Constants.CustomProperties.LegacyBossEncounter] ~= "" and props[Constants.CustomProperties.LegacyBossEncounter])
+        or enemy.ow_bot_encounter_name or enemy.default_ow_bot_encounter_name
 end
 
 local function apply_dark_hole_minion_health_override(encounter_data, dark_hole, enemy)
     local properties = dark_hole and dark_hole.custom_properties or {}
     local health_override = tonumber(
         properties[Constants.CustomProperties.MinionHealthOverride]) or 0
-    if health_override <= 0 then
+    if health_override <= 0 or (enemy and enemy.configured_max_hp) then
         return 0, nil
     end
 
@@ -272,33 +280,20 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
         end
     end
 
-    -- Forward the source overworld bot's visual scale to its matching battle
-    -- enemy. The ezencounters package scales Entity:sprite() using the current
-    -- sprite dimensions, rounded to whole pixels. Unrelated liberation-list
-    -- encounters retain their authored appearance and scale.
-    local requested_scale = persistent_enemy and tonumber(persistent_enemy.scale)
-    if requested_scale and requested_scale > 0 and requested_scale < math.huge
-        and requested_scale == requested_scale and type(data.enemies) == "table" then
-        local scale_applied = false
-        for _, enemy_info in ipairs(data.enemies) do
-            if type(enemy_info) == "table" then
-                local alias = normalize_enemy_name(enemy_info.name)
-                if (expected_alias and alias == expected_alias)
-                    or (expected_display_name and alias == expected_display_name) then
-                    -- A normal-size overworld bot must not erase an
-                    -- explicitly authored scale in the encounter definition.
-                    -- A non-default overworld scale takes precedence.
-                    if requested_scale ~= 1 or enemy_info.scale == nil then
-                        enemy_info.scale = requested_scale
-                    end
-                    scale_applied = true
-                    break
-                end
-            end
-        end
-        if not scale_applied and #data.enemies == 1 and type(data.enemies[1]) == "table" then
-            if requested_scale ~= 1 or data.enemies[1].scale == nil then
-                data.enemies[1].scale = requested_scale
+    -- Battle scaling is applied after this builder by BattleScale.apply().
+    -- HP synchronization and visual scale must remain independent because
+    -- Dark Hole liberation-list battles do not inherit the source bot's HP.
+
+    -- Battle modifiers are metadata for compatible encounter/character packages.
+    -- These are intentionally not applied as unverified global damage hooks.
+    if persistent_enemy and type(data.enemies) == "table" then
+        for _, entry in ipairs(data.enemies) do
+            local alias = normalize_enemy_name(entry.name)
+            if (expected_alias and alias == expected_alias) or
+                (expected_display_name and alias == expected_display_name) or #data.enemies == 1 then
+                entry.attack_multiplier = persistent_enemy.battle_attack_multiplier or 1
+                entry.defense_multiplier = persistent_enemy.battle_defense_multiplier or 1
+                break
             end
         end
     end
@@ -315,6 +310,19 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
     end
 
     return data, health_applied, matched_enemy_alias
+end
+
+-- Preserve HP independence: list encounters build without a persistent bot,
+-- but may still inherit visual scale from the Dark Hole's Tiled configuration.
+local function apply_battle_visuals(data, source, mission, panel, encounter_definition, encounter_source)
+    return BattleScale.apply(data, source, {
+        base_area_id = mission.base_area_id,
+        source_object_id = panel and panel.visual_object_id,
+        encounter_name = encounter_definition and encounter_definition.name,
+        encounter_source = encounter_source,
+        scope = source and source.battle_scale_scope
+            or panel and panel.enemy_config and panel.enemy_config.battle_scale_scope,
+    })
 end
 
 local debug = false
@@ -651,43 +659,13 @@ local function liberate_panel(self, player_session)
             local properties = panel.custom_properties or {}
             local liberation_candidates = PanelEncounters.resolve_dark_hole_liberation_encounters(
                 self.base_area_id, properties[Constants.CustomProperties.DarkHoleLiberationEncounters])
-            local uses_liberation_list = #liberation_candidates > 0
-            local encounter_definition
-            if uses_liberation_list then
-                encounter_definition = liberation_candidates[math.random(#liberation_candidates)]
-            else
-                local ow_bot_encounter = enemy and enemy.ow_bot_encounter_name
-                if not ow_bot_encounter then
-                    -- The source panel still knows its encounter even if the
-                    -- overworld bot failed to spawn. Accept legacy map data.
-                    local value = properties[Constants.CustomProperties.OWBotEncounter]
-                    local name = value ~= nil and tostring(value):match("^%s*(.-)%s*$") or ""
-                    if name == "" then
-                        value = properties[Constants.CustomProperties.LegacyBossEncounter]
-                        name = value ~= nil and tostring(value):match("^%s*(.-)%s*$") or ""
-                    end
-                    ow_bot_encounter = name ~= "" and name or nil
-                end
-                if ow_bot_encounter then
-                    encounter_definition = PanelEncounters.resolve_named_encounter(
-                        self.base_area_id, encounter_category, ow_bot_encounter)
-                    -- Without a spawned bot, its intended encounter category
-                    -- cannot be inferred from the enemy template. Only in
-                    -- that case check the other sections for the named entry.
-                    if not encounter_definition and not enemy then
-                        for _, fallback_category in ipairs({"bosses", "special_encounters", "encounters"}) do
-                            if fallback_category ~= encounter_category then
-                                encounter_definition = PanelEncounters.resolve_named_encounter(
-                                    self.base_area_id, fallback_category, ow_bot_encounter)
-                                if encounter_definition then break end
-                            end
-                        end
-                    end
-                else
-                    -- Legacy maps without OW Bot Encounter retain their original
-                    -- category-based battle selection.
-                    encounter_definition = PanelEncounters.resolve_encounter(self.base_area_id, encounter_category)
-                end
+            -- An empty/disabled/invalid weighted list falls back to the OW
+            -- encounter instead of leaving the liberation action unplayable.
+            local encounter_definition = PanelEncounters.pick_weighted(liberation_candidates)
+            local uses_liberation_list = encounter_definition ~= nil
+            if not uses_liberation_list then
+                encounter_definition = PanelEncounters.resolve_enemy_encounter(
+                    self.base_area_id, encounter_category, enemy, properties, panel.enemy_config)
             end
             log:info_data("Initiating dark hole encounter", {
                 encounter_source = uses_liberation_list and "liberation_list" or "bot_encounter",
@@ -726,6 +704,9 @@ local function liberate_panel(self, player_session)
             end
             local encounter_data, persistent_health_applied, persistent_health_alias =
                 build_encounter_data(encounter_definition, data, battle_bot)
+            local scale_result = apply_battle_visuals(encounter_data,
+                enemy or panel.enemy_config, self, panel, encounter_definition,
+                uses_liberation_list and "liberation_list" or "bot_encounter")
             local minion_health_applied_count, minion_health_matched_alias = 0, nil
             if battle_bot then
                 minion_health_applied_count, minion_health_matched_alias =
@@ -737,7 +718,11 @@ local function liberate_panel(self, player_session)
                 encounter_name = encounter_definition.name,
                 persistent_enemy = enemy and (enemy.battle_name or enemy.name),
                 persistent_health = enemy and enemy.health,
-                persistent_scale = battle_bot and battle_bot.scale,
+                persistent_scale = enemy and enemy.scale,
+                resolved_battle_scale = scale_result.scale,
+                battle_scale_scope = scale_result.scope,
+                battle_scale_target = scale_result.target,
+                battle_scale_updated_count = scale_result.count,
                 persistent_health_applied = persistent_health_applied,
                 persistent_health_matched_alias = persistent_health_alias,
                 minion_health_override = minion_health_override,
@@ -829,12 +814,8 @@ local function liberate_panel(self, player_session)
                 local encounter_category = enemy and enemy.is_boss and "bosses"
                     or enemy and enemy.is_special_encounter and "special_encounters"
                     or "encounters"
-                if enemy and enemy.ow_bot_encounter_name then
-                    encounter_definition = PanelEncounters.resolve_named_encounter(
-                        self.base_area_id, encounter_category, enemy.ow_bot_encounter_name)
-                else
-                    encounter_definition = PanelEncounters.resolve_encounter(self.base_area_id, encounter_category)
-                end
+                encounter_definition = PanelEncounters.resolve_enemy_encounter(
+                    self.base_area_id, encounter_category, enemy, panel.custom_properties, panel.enemy_config)
             end
             if enemy then
                 data.health = enemy.health
@@ -870,6 +851,11 @@ local function liberate_panel(self, player_session)
             end
             local encounter_data, encounter_health_applied, matched_enemy_alias = build_encounter_data(
                 encounter_definition, data, enemy)
+            -- A normal panel has no Dark Hole scale source unless it holds a
+            -- configured enemy. Avoid leaking Dark Hole category defaults to
+            -- unrelated generic panel encounters.
+            local scale_result = apply_battle_visuals(encounter_data,
+                enemy, self, panel, encounter_definition, "panel")
             local encounter_enemy_entries = {}
             for index, enemy_info in ipairs(encounter_data.enemies or {}) do
                 if type(enemy_info) == "table" then
@@ -891,6 +877,10 @@ local function liberate_panel(self, player_session)
                 persistent_health = enemy and enemy.health,
                 matched_enemy_alias = matched_enemy_alias,
                 enemy_entry_health_applied = encounter_health_applied,
+                resolved_battle_scale = scale_result.scale,
+                battle_scale_scope = scale_result.scope,
+                battle_scale_target = scale_result.target,
+                battle_scale_updated_count = scale_result.count,
                 encounter_enemy_entries = encounter_enemy_entries,
                 freedom_mission = encounter_data.freedom_mission ~= nil,
                 resolved_terrain = encounter_data.terrain,
@@ -1129,27 +1119,41 @@ local function take_enemy_turn(self)
                         Net.slide_player_camera(player.id, dark_hole.x + .5, dark_hole.y + .5, dark_hole.z, slide_time)
                     end
                     Async.await(Async.sleep(slide_time))
-                    local name = dark_hole.custom_properties[Constants.CustomProperties.Spawns]
-                    local direction = dark_hole.custom_properties[Constants.CustomProperties.Direction]
-                    log:info_data("Dark hole spawning new enemy", {
-                        base_area_id = self.base_area_id,
-                        instance_area_id = self.area_id,
-                        dark_hole_x = dark_hole.x,
-                        dark_hole_y = dark_hole.y,
-                        enemy_name = name,
-                        destination_x = destination.x,
-                        destination_y = destination.y,
-                    })
-                    dark_hole.enemy = Enemy.from(self, dark_hole, direction, name, {
-                        scale = dark_hole.scale,
-                        source_panel_type = dark_hole.source_type or dark_hole.type,
-                    })
-                    assign_dark_hole_bot_encounter(dark_hole, dark_hole.enemy)
-                    apply_dark_hole_minion_health_to_bot(dark_hole, dark_hole.enemy)
-                    self.enemies[#self.enemies+1] = dark_hole.enemy
-                    Async.await(Async.sleep(.5))
-                    Async.await(EnemyHelpers.move(self, dark_hole.enemy, destination.x, destination.y, destination.z))
-                    Async.await(Async.sleep(.5))
+                    local name = (dark_hole.enemy_config and dark_hole.enemy_config.template_name)
+                        or (dark_hole.custom_properties or {})[Constants.CustomProperties.Spawns]
+                    local direction = (dark_hole.custom_properties or {})[Constants.CustomProperties.Direction] or "Down"
+                    if not EnemyTemplates.has(name) then
+                        spawn_log:warn_data("Dark Hole respawn skipped: missing/unknown OW template", {
+                            area_id = self.area_id, source_object_id = dark_hole.visual_object_id,
+                            panel_type = dark_hole.source_type, spawns = tostring(name),
+                            encounter_mode = dark_hole.enemy_config and dark_hole.enemy_config.encounter_mode,
+                            x = dark_hole.x, y = dark_hole.y,
+                            remediation = "Set Spawns to a registered overworld enemy template; encounters and pools select battles only",
+                        })
+                    else
+                        spawn_log:info_data("Dark Hole respawn requested", {
+                            area_id = self.area_id, source_object_id = dark_hole.visual_object_id,
+                            template_name = name, destination_x = destination.x, destination_y = destination.y,
+                        })
+                        local enemy = Enemy.from(self, dark_hole, direction, name, {
+                            scale = dark_hole.scale,
+                            source_panel_type = dark_hole.source_type or dark_hole.type,
+                        })
+                        if enemy then
+                            dark_hole.enemy = enemy
+                            apply_panel_enemy_config(dark_hole, enemy)
+                            assign_dark_hole_bot_encounter(dark_hole, enemy)
+                            apply_dark_hole_minion_health_to_bot(dark_hole, enemy)
+                            self.enemies[#self.enemies+1] = enemy
+                            Async.await(Async.sleep(.5))
+                            Async.await(EnemyHelpers.move(self, enemy, destination.x, destination.y, destination.z))
+                            Async.await(Async.sleep(.5))
+                            spawn_log:info_data("Dark Hole respawn completed", {
+                                area_id = self.area_id, source_object_id = dark_hole.visual_object_id,
+                                template_name = name, enemy_id = enemy.id,
+                            })
+                        end
+                    end
                 end
             end
         end
@@ -1432,6 +1436,9 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
             local new_panel = {
                 name = "", type = panel_type, source_type = object_type,
                 scale = requested_panel_scale or (is_buffed_virus and 1 or nil),
+                enemy_config = EnemyConfig.resolve(mission.area_id, object,
+                    Constants.CustomProperties.MinionHealthOverride,
+                    is_buffed_virus and "Buffed Virus" or "Dark Hole"),
                 visible = true,
                 x = object.x, y = object.y, z = object.z, width = object.width, height = object.height,
                 data = { type = "tile", gid = Net.get_tileset(base_area_id, "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx").first_gid },
@@ -1439,6 +1446,8 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 visual_object_id = object.id,
                 visual_gid = object.data.gid
             }
+
+            if new_panel.enemy_config.ow_scale then new_panel.scale = new_panel.enemy_config.ow_scale end
 
             if panel_type == Constants.PanelTypes.ItemPanel then
                 if not includes(mission.ITEM_PANEL_GID_LIST, object.data.gid) then
@@ -1530,6 +1539,8 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                         or properties[Constants.CustomProperties.AutoFacePlayer] == "true",
                     max_health_override = tonumber(properties[Constants.CustomProperties.BossHealthOverride]) or 0,
                     scale = new_panel.scale,
+                    enemy_config = EnemyConfig.resolve(mission.area_id, object,
+                        Constants.CustomProperties.BossHealthOverride, "Boss"),
                     spawn_enabled = not (properties[Constants.CustomProperties.SpawnEnabled] == false
                         or properties[Constants.CustomProperties.SpawnEnabled] == "false"),
                     display_name = tostring(properties[Constants.CustomProperties.BossDisplayName] or ""),
@@ -1539,14 +1550,25 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 }
                 mission.boss_definitions[#mission.boss_definitions + 1] = definition
             end
-            if object.custom_properties[Constants.CustomProperties.Spawns] then
-                pending_enemy_spawns[#pending_enemy_spawns + 1] = {
+            if panel_type == Constants.PanelTypes.DarkHole then
+                local template_name = new_panel.enemy_config and new_panel.enemy_config.template_name
+                    or object.custom_properties[Constants.CustomProperties.Spawns]
+                if not EnemyTemplates.has(template_name) then
+                    spawn_log:warn_data("Panel overworld spawn unavailable", {
+                        area_id = mission.area_id, source_object_id = object.id,
+                        panel_type = object_type, template_name = tostring(template_name),
+                        has_encounter_pool = new_panel.enemy_config and new_panel.enemy_config.encounter_pool ~= nil,
+                        remediation = "Set Spawns to a registered overworld enemy template",
+                    })
+                else
+                    pending_enemy_spawns[#pending_enemy_spawns + 1] = {
                     source_object_id = object.id,
                     source_panel = new_panel,
-                    name = object.custom_properties[Constants.CustomProperties.Spawns],
-                    direction = object.custom_properties[Constants.CustomProperties.Direction],
+                    name = template_name,
+                    direction = object.custom_properties[Constants.CustomProperties.Direction] or "Down",
                     position = { x = object.x, y = object.y, z = object.z },
-                }
+                    }
+                end
             end
         end
     end
@@ -1554,6 +1576,10 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
     -- Now that the complete panel grid is available, resolve each configured
     -- panel enemy spawn. This ensures every Dark Hole checks its actual adjacent
     -- destination panel, regardless of Tiled object ordering.
+    spawn_log:info_data("Panel overworld spawn queue constructed", {
+        area_id = mission.area_id, configured_count = #pending_enemy_spawns,
+        dark_hole_count = #mission.dark_holes,
+    })
     local spawned_panel_enemy_count = 0
     for _, pending in ipairs(pending_enemy_spawns) do
         local position = EnemyHelpers.offset_position_with_direction(
@@ -1567,12 +1593,13 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 -- The override belongs to this source Dark Hole, not to the
                 -- enemy template. Different Dark Holes can therefore spawn
                 -- the same bot type with different HP values.
+                apply_panel_enemy_config(pending.source_panel, enemy)
                 assign_dark_hole_bot_encounter(pending.source_panel, enemy)
                 apply_dark_hole_minion_health_to_bot(pending.source_panel, enemy)
                 pending.source_panel.enemy = enemy
                 mission.enemies[#mission.enemies + 1] = enemy
                 spawned_panel_enemy_count = spawned_panel_enemy_count + 1
-                log:info_data("Configured panel enemy spawned", {
+                spawn_log:info_data("Configured panel enemy spawned", {
                     base_area_id = mission.base_area_id,
                     instance_area_id = mission.area_id,
                     source_object_id = pending.source_object_id,
@@ -1584,7 +1611,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                     x = position.x, y = position.y, z = position.z,
                 })
             else
-                log:warn_data("Configured panel enemy creation returned nil", {
+                spawn_log:warn_data("Configured panel enemy creation returned nil", {
                     base_area_id = mission.base_area_id,
                     instance_area_id = mission.area_id,
                     source_object_id = pending.source_object_id,
@@ -1593,7 +1620,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 })
             end
         else
-            log:warn_data("Skipping enemy spawn on a non-enemy or occupied panel after panel indexing", {
+            spawn_log:warn_data("Skipping enemy spawn on a non-enemy or occupied panel after panel indexing", {
                 base_area_id = mission.base_area_id,
                 instance_area_id = mission.area_id,
                 enemy_name = pending.name,
@@ -1606,7 +1633,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
         end
     end
 
-    log:info_data("Completed configured panel enemy spawns", {
+    spawn_log:info_data("Completed configured panel enemy spawns", {
         base_area_id = mission.base_area_id,
         instance_area_id = mission.area_id,
         configured_spawn_count = #pending_enemy_spawns,
@@ -1710,7 +1737,15 @@ function Mission:spawn_boss(boss_id, force, triggered)
     enemy.boss_id = definition.boss_id
     enemy.boss_object_id = definition.object_id
     enemy.boss_definition = definition
-    if definition.max_health_override > 0 then
+    if definition.enemy_config then
+        EnemyConfig.apply(enemy, definition.enemy_config)
+        enemy.configured_max_hp = definition.enemy_config.max_hp ~= nil
+        if not enemy.ow_bot_encounter_name then
+            enemy.ow_bot_encounter_name = enemy.default_ow_bot_encounter_name
+        end
+        EnemyHelpers.update_name(enemy)
+    end
+    if definition.max_health_override > 0 and not enemy.configured_max_hp then
         -- Apply the Tiled override once at spawn. ezencounters consumes the
         -- persistent current HP through data.enemies[index].health and calls
         -- character:set_health() during package_build. max_health remains the
