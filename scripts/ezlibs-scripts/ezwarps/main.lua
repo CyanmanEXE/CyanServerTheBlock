@@ -6,6 +6,7 @@ local eztriggers = require('scripts/ezlibs-scripts/eztriggers/eztriggers')
 local object_registry = require('scripts/ezlibs-scripts/object_registry')
 local ezbus = require('scripts/ezlibs-scripts/ezbus')
 local ezcache = require('scripts/ezlibs-scripts/ezcache')
+local DefaultSpawnGuard = require('scripts/ezlibs-scripts/ezwarps/default_spawn_guard')
 
 local ezwarps = {}
 
@@ -182,6 +183,8 @@ function prepare_player_arrival(player_id,x,y,z,special_animation_name)
 end
 
 function ezwarps.handle_player_request(player_id, data)
+    -- Ensure the default area's landing is usable before initial entry.
+    DefaultSpawnGuard.ensure_default_spawn()
     log('player '..player_id..' requested connection with data: '..data)
     if data == nil or data == "" then
         return
@@ -315,6 +318,8 @@ function ezwarps.handle_custom_warp(player_id, object_id)
 end
 
 function ezwarps.handle_player_join(player_id)
+    -- Rescue only players stranded at the empty origin of the default map.
+    DefaultSpawnGuard.recover_new_arrival(player_id)
     if player_animations[player_id] then
         doAnimationForWarp(player_id,player_animations[player_id],false)
         player_animations[player_id] = nil
@@ -333,6 +338,9 @@ function ezwarps.handle_player_transfer(player_id)
         doAnimationForWarp(player_id,player_animations[player_id])
     end
 end
+
+-- The server may construct the first player immediately after plugin startup.
+DefaultSpawnGuard.ensure_default_spawn()
 
 log('Loaded')
 
