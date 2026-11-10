@@ -52,7 +52,7 @@ local DEFAULTS = {
   CP_WrongPasswordMessage     = "Incorrect password.",
   CP_OwnerUnlockedMessage     = "Access granted.",
   CP_LeaseInactiveMessage     = "This HP is not currently rented.",
-  CP_UnlockingAssetName       = "bn5cubegreen_bot",
+  CP_UnlockingAssetName       = "bn5cubegreen",
   CP_UnlockingAnimationTimeMS = "0",
   CP_UnlockingSoundPath       = "/server/assets/ezlibs-assets/sfx/panel_change.ogg",
 }

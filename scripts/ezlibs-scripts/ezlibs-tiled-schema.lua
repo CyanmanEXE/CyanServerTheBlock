@@ -89,7 +89,7 @@ return {
           ["description"] = "Asset played during the unlock animation.",
           ["name"] = "Unlocking Asset Name",
           ["type"] = "string",
-          ["value"] = "bn5cubegreen_bot"
+          ["value"] = "bn5cubegreen"
         },
         {
           ["category"] = "appearance",

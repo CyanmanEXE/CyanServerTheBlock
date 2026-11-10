@@ -84,8 +84,8 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `x` | expression/reference | `object.x` |
 | `y` | expression/reference | `object.y` |
 | `z` | expression/reference | `object.z` |
-| `texture_path` | string literal | `"/server/assets/ezlibs-assets/ezcheckpoints/" .. unlocking_asset_name .. ".png"` |
-| `animation_path` | string literal | `"/server/assets/ezlibs-assets/ezcheckpoints/" .. unlocking_asset_name .. ".animation"` |
+| `texture_path` | string literal | `"/server/assets/ezlibs-assets/ezcheckpoints/bots/" .. unlocking_asset_name .. ".png"` |
+| `animation_path` | string literal | `"/server/assets/ezlibs-assets/ezcheckpoints/bots/" .. unlocking_asset_name .. ".animation"` |
 | `animation` | string literal | `"UNLOCKING"` |
 | `warp_in` | boolean literal | `false` |
 | `area_id` | expression/reference | `area_id` |

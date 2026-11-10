@@ -191,7 +191,7 @@ local object_types = {
             prop("Required Keys", "number", 1),
             prop("Consume", "bool", false),
             prop("Once", "bool", false),
-            prop("Unlocking Asset Name", "string", "bn5cubegreen_bot"),
+            prop("Unlocking Asset Name", "string", "bn5cubegreen"),
             prop("Unlocking Animation Time", "number", 0),
             prop("Unlocking Sound Path", "string", "/server/assets/ezlibs-assets/sfx/panel_change.ogg"),
             prop("Skip Prompt", "bool", false),

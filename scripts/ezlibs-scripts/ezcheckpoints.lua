@@ -178,6 +178,11 @@ end
 --     interrupted for an action they did not take.
 function ezcheckpoints.unlock_checkpoint_for_player(player_id, area_id, object_id, unlocking_asset_name, unlocking_sound_path, unlocking_animation_time, once, opts)
     opts = opts or {}
+    -- Compatibility for older Tiled maps/objects that still explicitly use the
+    -- previous asset basename. All current files are named bn5cubegreen.*.
+    if unlocking_asset_name == "bn5cubegreen_bot" then
+        unlocking_asset_name = "bn5cubegreen"
+    end
     local should_lock_input = opts.lock_input ~= false
 
     return async(function ()
@@ -220,8 +225,8 @@ function ezcheckpoints.unlock_checkpoint_for_player(player_id, area_id, object_i
                         x = object.x,
                         y = object.y,
                         z = object.z,
-                        texture_path = "/server/assets/ezlibs-assets/ezcheckpoints/" .. unlocking_asset_name .. ".png",
-                        animation_path = "/server/assets/ezlibs-assets/ezcheckpoints/" .. unlocking_asset_name .. ".animation",
+                        texture_path = "/server/assets/ezlibs-assets/ezcheckpoints/bots/" .. unlocking_asset_name .. ".png",
+                        animation_path = "/server/assets/ezlibs-assets/ezcheckpoints/bots/" .. unlocking_asset_name .. ".animation",
                         animation = "UNLOCKING",
                         warp_in = false,
                         area_id = area_id
@@ -267,7 +272,7 @@ function ezcheckpoints.force_unlock_checkpoint(player_id, area_id, object_id, on
         return false
     end
     local props = obj.custom_properties or {}
-    local asset = tu.get_string_from(props, "Unlocking Asset Name", "bn5cubegreen_bot")
+    local asset = tu.get_string_from(props, "Unlocking Asset Name", "bn5cubegreen")
     local sound = tu.get_string_from(props, "Unlocking Sound Path", "/server/assets/ezlibs-assets/sfx/panel_change.ogg")
     local anim_time = tu.get_number_from(props, "Unlocking Animation Time", 0)
     return ezcheckpoints.unlock_checkpoint_for_player(player_id, area_id, object_id, asset, sound, anim_time, once, opts)
@@ -368,7 +373,7 @@ Net:on("object_interaction", function(event)
     local required_keys            = tu.get_number_from(cp, "Required Keys", 1)
     local consume                  = tu.is_true(cp["Consume"])
     local once                     = tu.is_true(cp["Once"])
-    local unlocking_asset_name     = tu.get_string_from(cp, "Unlocking Asset Name", "bn5cubegreen_bot")
+    local unlocking_asset_name     = tu.get_string_from(cp, "Unlocking Asset Name", "bn5cubegreen")
     local unlocking_animation_time = tu.get_number_from(cp, "Unlocking Animation Time", 0)
     local unlocking_sound_path     = tu.get_string_from(cp, "Unlocking Sound Path",
                                          "/server/assets/ezlibs-assets/sfx/panel_change.ogg")

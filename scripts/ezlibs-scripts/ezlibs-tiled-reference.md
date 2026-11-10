@@ -227,7 +227,7 @@ Lockable Security Cube that gates progression.
 | Property | Type | Required | Default | Category | Description |
 |---|---|---|---|---|---|
 | `Unlocking Animation Time` | number |  | 0 | appearance | Seconds to play the unlock animation; 0 skips it. |
-| `Unlocking Asset Name` | string |  | `bn5cubegreen_bot` | appearance | Asset played during the unlock animation. |
+| `Unlocking Asset Name` | string |  | `bn5cubegreen` | appearance | Asset played during the unlock animation. |
 | `Unlocking Sound Path` | string |  | `/server/assets/ezlibs-assets/sfx/panel_change.ogg` | appearance | Sound asset to play when the checkpoint unlocks. |
 | `Consume` | bool |  | false | gameplay | Whether to consume the key on unlock. |
 | `Description` | string |  | `It's a Security Cube` | gameplay | Shown to the player before the unlock check. |

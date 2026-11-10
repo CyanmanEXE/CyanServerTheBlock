@@ -335,7 +335,7 @@ scripts/events/eznpcs_onceitem.lua Dialogue Type "onceitem": unique, server-wide
 | `CP_WrongPasswordMessage` | string literal | `"Incorrect password."` |
 | `CP_OwnerUnlockedMessage` | string literal | `"Access granted."` |
 | `CP_LeaseInactiveMessage` | string literal | `"This HP is not currently rented."` |
-| `CP_UnlockingAssetName` | string literal | `"bn5cubegreen_bot"` |
+| `CP_UnlockingAssetName` | string literal | `"bn5cubegreen"` |
 | `CP_UnlockingAnimationTimeMS` | string literal | `"0"` |
 | `CP_UnlockingSoundPath` | string literal | `"/server/assets/ezlibs-assets/sfx/panel_change.ogg"` |
 

@@ -576,7 +576,7 @@ generate-ezlibs-tiled.lua Generates three artifacts from a single source of trut
 | `[19]` | expression/reference | `false)` |
 | `[20]` | call/expression | `prop("Unlocking Asset Name"` |
 | `[21]` | string literal | `"string"` |
-| `[22]` | string literal | `"bn5cubegreen_bot")` |
+| `[22]` | string literal | `"bn5cubegreen")` |
 | `[23]` | call/expression | `prop("Unlocking Animation Time"` |
 | `[24]` | string literal | `"number"` |
 | `[25]` | number literal | `0)` |
