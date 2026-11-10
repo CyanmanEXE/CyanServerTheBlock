@@ -64,7 +64,7 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `x` | call/expression | `math.floor(position.x)` |
 | `y` | call/expression | `math.floor(position.y)` |
 | `z` | call/expression | `math.floor(position.z)` |
-| `mug` | table | `{ texture_path = "/server/assets/NebuLibsAssets/mugs/shademan.png", animation_path = "/server/assets/NebuLibsAssets/mugs/shademan.animation"…` |
+| `mug` | table | `{ texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.png", animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.animation"…` |
 | `encounter` | string literal | `"/server/assets/ezlibs-assets/ezencounters/Shademan.zip"` |
 | `selection` | call/expression | `EnemySelection:new(instance)` |
 
@@ -72,8 +72,8 @@ Table initializer detected; no simple direct-level keys could be statically enum
 
 | Field / key | Value category | Initializer expression (source) |
 |---|---|---|
-| `texture_path` | string literal | `"/server/assets/NebuLibsAssets/mugs/shademan.png"` |
-| `animation_path` | string literal | `"/server/assets/NebuLibsAssets/mugs/shademan.animation"` |
+| `texture_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.png"` |
+| `animation_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.animation"` |
 
 ### `shape` *(line 29)*
 

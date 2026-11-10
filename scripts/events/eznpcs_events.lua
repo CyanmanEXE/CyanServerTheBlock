@@ -228,7 +228,7 @@ local GrantLiberationAbility = {
 					--Heal to max
 					--ezmemory.set_player_health(player_id, modified_hp)
 					--Provide a recover SFX from the server so that we guarantee it exists.
-					Net.play_sound_for_player(player_id, "/server/assets/NebuLibsAssets/sound effects/recover.ogg")
+					Net.play_sound_for_player(player_id, "/server/assets/ezlibs-custom/nebulous-liberations/sound effects/recover.ogg")
 					--Give the player 500 Monies!
 					Async.await(Async.message_player(player_id, "Please, take this for your trouble.", mug.texture_path, mug.animation_path))
 					Async.await(Async.message_player(player_id, "Got $500!"))
@@ -253,7 +253,7 @@ local GrantLiberationAbility = {
 					--Heal to max
 					ezmemory.set_player_health(player_id, modified_hp)
 					--Provide a recover SFX from the server so that we guarantee it exists.
-					Net.play_sound_for_player(player_id, "/server/assets/NebuLibsAssets/sound effects/recover.ogg")
+					Net.play_sound_for_player(player_id, "/server/assets/ezlibs-custom/nebulous-liberations/sound effects/recover.ogg")
 					Async.await(Async.message_player(player_id, "I'll log this incident right away.", mug.texture_path, mug.animation_path))
 					Async.await(Async.message_player(player_id, "Come back in an hour if you're still willing to help me with my research.", mug.texture_path, mug.animation_path))
 					Net.unlock_player_input(player_id)

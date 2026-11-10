@@ -63,7 +63,7 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `x` | call/expression | `math.floor(position.x)` |
 | `y` | call/expression | `math.floor(position.y)` |
 | `z` | call/expression | `math.floor(position.z)` |
-| `mug` | table | `{ texture_path = "/server/assets/NebuLibsAssets/mugs/blizzardman.png", animation_path = "/server/assets/NebuLibsAssets/mugs/blizzardman.anim…` |
+| `mug` | table | `{ texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/mugs/blizzardman.png", animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/mugs/blizzardman.anim…` |
 | `encounter` | string literal | `"/server/assets/encounters/big_brute_encounter.zip"` |
 | `selection` | call/expression | `EnemySelection:new(instance)` |
 
@@ -71,8 +71,8 @@ Table initializer detected; no simple direct-level keys could be statically enum
 
 | Field / key | Value category | Initializer expression (source) |
 |---|---|---|
-| `texture_path` | string literal | `"/server/assets/NebuLibsAssets/mugs/blizzardman.png"` |
-| `animation_path` | string literal | `"/server/assets/NebuLibsAssets/mugs/blizzardman.animation"` |
+| `texture_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/mugs/blizzardman.png"` |
+| `animation_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/mugs/blizzardman.animation"` |
 
 ### `shape` *(line 31)*
 

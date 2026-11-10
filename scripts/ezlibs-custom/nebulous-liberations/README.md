@@ -1021,20 +1021,20 @@ The shared `ezlibs-scripts/generate-ezlibs-tiled.lua` script generates the Tiled
 The following paths are hard-coded in `Constants.PreloadAssets`:
 
 ```text
-/server/assets/NebuLibsAssets/bots/blur.png
-/server/assets/NebuLibsAssets/bots/blur.animation
-/server/assets/NebuLibsAssets/bots/explosion.png
-/server/assets/NebuLibsAssets/bots/explosion.animation
-/server/assets/NebuLibsAssets/bots/paralyze.png
-/server/assets/NebuLibsAssets/bots/paralyze.animation
-/server/assets/NebuLibsAssets/bots/recover.png
-/server/assets/NebuLibsAssets/bots/recover.animation
-/server/assets/NebuLibsAssets/bots/item.png
-/server/assets/NebuLibsAssets/bots/item.animation
-/server/assets/NebuLibsAssets/sound effects/hurt.ogg
-/server/assets/NebuLibsAssets/sound effects/explode.ogg
-/server/assets/NebuLibsAssets/sound effects/paralyze.ogg
-/server/assets/NebuLibsAssets/sound effects/recover.ogg
+/server/assets/ezlibs-custom/nebulous-liberations/bots/blur.png
+/server/assets/ezlibs-custom/nebulous-liberations/bots/blur.animation
+/server/assets/ezlibs-custom/nebulous-liberations/bots/explosion.png
+/server/assets/ezlibs-custom/nebulous-liberations/bots/explosion.animation
+/server/assets/ezlibs-custom/nebulous-liberations/bots/paralyze.png
+/server/assets/ezlibs-custom/nebulous-liberations/bots/paralyze.animation
+/server/assets/ezlibs-custom/nebulous-liberations/bots/recover.png
+/server/assets/ezlibs-custom/nebulous-liberations/bots/recover.animation
+/server/assets/ezlibs-custom/nebulous-liberations/bots/item.png
+/server/assets/ezlibs-custom/nebulous-liberations/bots/item.animation
+/server/assets/ezlibs-custom/nebulous-liberations/sound effects/hurt.ogg
+/server/assets/ezlibs-custom/nebulous-liberations/sound effects/explode.ogg
+/server/assets/ezlibs-custom/nebulous-liberations/sound effects/paralyze.ogg
+/server/assets/ezlibs-custom/nebulous-liberations/sound effects/recover.ogg
 ```
 
 ### Additional known asset dependency

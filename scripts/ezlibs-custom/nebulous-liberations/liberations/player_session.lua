@@ -275,7 +275,7 @@ function PlayerSession:hurt(amount, attacker)
         end
     end
 
-    Net.play_sound_for_player(self.player.id, "/server/assets/NebuLibsAssets/sound effects/hurt.ogg")
+    Net.play_sound_for_player(self.player.id, "/server/assets/ezlibs-custom/nebulous-liberations/sound effects/hurt.ogg")
     self.health = math.max(math.ceil(self.health - amount), 0)
     ezmemory.set_player_max_health(self.player.id, self.max_health, true)
     ezmemory.set_player_health(self.player.id, self.health)

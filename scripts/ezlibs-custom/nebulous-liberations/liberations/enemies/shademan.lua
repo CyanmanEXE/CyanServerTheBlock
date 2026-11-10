@@ -17,8 +17,8 @@ function ShadeMan:new(instance, position, direction)
     y = math.floor(position.y),
     z = math.floor(position.z),
     mug = {
-      texture_path = "/server/assets/NebuLibsAssets/mugs/shademan.png",
-      animation_path = "/server/assets/NebuLibsAssets/mugs/shademan.animation",
+      texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.png",
+      animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.animation",
     },
     encounter = "/server/assets/ezlibs-assets/ezencounters/Shademan.zip",
     selection = EnemySelection:new(instance)
@@ -40,8 +40,8 @@ end
 function ShadeMan:spawn(direction)
   self.direction = direction
   self.id = Net.create_bot({
-    texture_path = "/server/assets/NebuLibsAssets/bots/shademan.png",
-    animation_path = "/server/assets/NebuLibsAssets/bots/shademan.animation",
+    texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/shademan.png",
+    animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/shademan.animation",
     area_id = self.instance.area_id,
     direction = direction,
     warp_in = false,

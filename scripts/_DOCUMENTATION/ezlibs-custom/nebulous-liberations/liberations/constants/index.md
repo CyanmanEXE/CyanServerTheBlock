@@ -172,20 +172,20 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `[6]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx"` |
 | `[7]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/selected tile.png"` |
 | `[8]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/selected tile.tsx"` |
-| `[9]` | string literal | `"/server/assets/NebuLibsAssets/bots/blur.png"` |
-| `[10]` | string literal | `"/server/assets/NebuLibsAssets/bots/blur.animation"` |
-| `[11]` | string literal | `"/server/assets/NebuLibsAssets/bots/explosion.png"` |
-| `[12]` | string literal | `"/server/assets/NebuLibsAssets/bots/explosion.animation"` |
-| `[13]` | string literal | `"/server/assets/NebuLibsAssets/bots/paralyze.png"` |
-| `[14]` | string literal | `"/server/assets/NebuLibsAssets/bots/paralyze.animation"` |
-| `[15]` | string literal | `"/server/assets/NebuLibsAssets/bots/recover.png"` |
-| `[16]` | string literal | `"/server/assets/NebuLibsAssets/bots/recover.animation"` |
-| `[17]` | string literal | `"/server/assets/NebuLibsAssets/bots/item.png"` |
-| `[18]` | string literal | `"/server/assets/NebuLibsAssets/bots/item.animation"` |
-| `[19]` | string literal | `"/server/assets/NebuLibsAssets/sound effects/hurt.ogg"` |
-| `[20]` | string literal | `"/server/assets/NebuLibsAssets/sound effects/explode.ogg"` |
-| `[21]` | string literal | `"/server/assets/NebuLibsAssets/sound effects/paralyze.ogg"` |
-| `[22]` | string literal | `"/server/assets/NebuLibsAssets/sound effects/recover.ogg"` |
+| `[9]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/blur.png"` |
+| `[10]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/blur.animation"` |
+| `[11]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/explosion.png"` |
+| `[12]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/explosion.animation"` |
+| `[13]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/paralyze.png"` |
+| `[14]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/paralyze.animation"` |
+| `[15]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/recover.png"` |
+| `[16]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/recover.animation"` |
+| `[17]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.png"` |
+| `[18]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.animation"` |
+| `[19]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/sound effects/hurt.ogg"` |
+| `[20]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/sound effects/explode.ogg"` |
+| `[21]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/sound effects/paralyze.ogg"` |
+| `[22]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/sound effects/recover.ogg"` |
 | `[23]` | string literal | `"/server/assets/net-games/meters/liberation-order-points/base-guage-3slice.png"` |
 | `[24]` | string literal | `"/server/assets/net-games/meters/liberation-order-points/base-guage-3slice.animation"` |
 | `[25]` | string literal | `"/server/assets/net-games/meters/liberation-order-points/points-3slice.png"` |

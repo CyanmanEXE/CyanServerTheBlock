@@ -231,8 +231,8 @@ Loot reward messages are part of the reward sequence. Awaiting the message promi
 | Field / key | Value category | Initializer expression (source) |
 |---|---|---|
 | `area_id` | expression/reference | `area_id` |
-| `texture_path` | string literal | `"/server/assets/NebuLibsAssets/bots/item.png"` |
-| `animation_path` | string literal | `"/server/assets/NebuLibsAssets/bots/item.animation"` |
+| `texture_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.png"` |
+| `animation_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.animation"` |
 | `animation` | expression/reference | `item.animation` |
 | `warp_in` | boolean literal | `false` |
 | `x` | expression/reference | `x` |
@@ -256,8 +256,8 @@ Loot reward messages are part of the reward sequence. Awaiting the message promi
 | Field / key | Value category | Initializer expression (source) |
 |---|---|---|
 | `area_id` | expression/reference | `area_id` |
-| `texture_path` | string literal | `"/server/assets/NebuLibsAssets/bots/item.png"` |
-| `animation_path` | string literal | `"/server/assets/NebuLibsAssets/bots/item.animation"` |
+| `texture_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.png"` |
+| `animation_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.animation"` |
 | `animation` | expression/reference | `loot_pool[start_index].animation` |
 | `warp_in` | boolean literal | `false` |
 | `x` | expression/reference | `x` |

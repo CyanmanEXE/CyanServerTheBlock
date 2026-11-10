@@ -122,10 +122,10 @@ Table initializer detected; no simple direct-level keys could be statically enum
 
 | Field / key | Value category | Initializer expression (source) |
 |---|---|---|
-| `[1]` | string literal | `"/server/assets/NebuLibsAssets/bots/bigbrute.animation"` |
-| `[2]` | string literal | `"/server/assets/NebuLibsAssets/bots/beast breath.png"` |
-| `[3]` | string literal | `"/server/assets/NebuLibsAssets/bots/beast breath.animation"` |
-| `[4]` | string literal | `"/server/assets/NebuLibsAssets/bots/bigbrute.png"` |
+| `[1]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/bigbrute.animation"` |
+| `[2]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/beast breath.png"` |
+| `[3]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/beast breath.animation"` |
+| `[4]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/bigbrute.png"` |
 
 ### `shape` *(line 243)*
 
@@ -140,15 +140,15 @@ Table initializer detected; no simple direct-level keys could be statically enum
 
 | Field / key | Value category | Initializer expression (source) |
 |---|---|---|
-| `texture_path` | string literal | `"/server/assets/NebuLibsAssets/mugs/blizzardman.png"` |
-| `animation_path` | string literal | `"/server/assets/NebuLibsAssets/mugs/blizzardman.animation"` |
+| `texture_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/mugs/blizzardman.png"` |
+| `animation_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/mugs/blizzardman.animation"` |
 
 ### `preload_assets` *(line 256)*
 
 | Field / key | Value category | Initializer expression (source) |
 |---|---|---|
-| `[1]` | string literal | `"/server/assets/NebuLibsAssets/bots/snowball.png"` |
-| `[2]` | string literal | `"/server/assets/NebuLibsAssets/bots/snowball.animation"` |
+| `[1]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/snowball.png"` |
+| `[2]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/snowball.animation"` |
 
 ### `shape` *(line 265)*
 
@@ -160,17 +160,17 @@ Table initializer detected; no simple direct-level keys could be statically enum
 
 | Field / key | Value category | Initializer expression (source) |
 |---|---|---|
-| `texture_path` | string literal | `"/server/assets/NebuLibsAssets/mugs/shademan.png"` |
-| `animation_path` | string literal | `"/server/assets/NebuLibsAssets/mugs/shademan.animation"` |
+| `texture_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.png"` |
+| `animation_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.animation"` |
 
 ### `preload_assets` *(line 276)*
 
 | Field / key | Value category | Initializer expression (source) |
 |---|---|---|
-| `[1]` | string literal | `"/server/assets/NebuLibsAssets/bots/shademan.animation"` |
-| `[2]` | string literal | `"/server/assets/NebuLibsAssets/bots/shademan.png"` |
-| `[3]` | string literal | `"/server/assets/NebuLibsAssets/mugs/shademan.png"` |
-| `[4]` | string literal | `"/server/assets/NebuLibsAssets/mugs/shademan.animation"` |
+| `[1]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/shademan.animation"` |
+| `[2]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/shademan.png"` |
+| `[3]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.png"` |
+| `[4]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.animation"` |
 
 ## Implementation notes
 

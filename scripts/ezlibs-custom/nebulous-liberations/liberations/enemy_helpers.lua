@@ -150,8 +150,8 @@ function EnemyHelpers.move(instance, enemy, x, y, z, direction)
 
     -- create blur
     local blur_bot_id = Net.create_bot({
-      texture_path = "/server/assets/NebuLibsAssets/bots/blur.png",
-      animation_path = "/server/assets/NebuLibsAssets/bots/blur.animation",
+      texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/blur.png",
+      animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/blur.animation",
       area_id = area_id,
       warp_in = false,
       x = enemy.x + .5 + (1 / 32),
