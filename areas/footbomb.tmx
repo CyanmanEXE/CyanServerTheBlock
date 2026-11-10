@@ -149,7 +149,7 @@
     <property name="Warp Out" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="186" type="Custom Warp" gid="89" x="904" y="960" width="61" height="32">
+  <object id="186" type="Custom Warp" gid="89" x="424" y="944" width="61" height="32">
    <properties>
     <property name="Direction" value="Up Right"/>
     <property name="Dont Teleport" type="bool" value="false"/>
