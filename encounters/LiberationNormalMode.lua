@@ -26,6 +26,11 @@ return {
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
             },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
         },
         {
             name = "Encounter2",
@@ -46,6 +51,11 @@ return {
                 { 0, 0, 0, 0, 0, 0 },
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
+            },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
             },
         },
         {
@@ -68,6 +78,11 @@ return {
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
             },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
         },
         {
             name = "Encounter4",
@@ -88,6 +103,11 @@ return {
                 { 0, 0, 0, 0, 0, 0 },
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
+            },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
             },
         },
         {
@@ -110,6 +130,11 @@ return {
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
             },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
         },
         {
             name = "Encounter6",
@@ -130,6 +155,11 @@ return {
                 { 0, 0, 0, 0, 0, 0 },
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
+            },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
             },
         },
         {
@@ -152,6 +182,11 @@ return {
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
             },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
         },
         {
             name = "Encounter8",
@@ -172,6 +207,11 @@ return {
                 { 0, 0, 0, 0, 0, 0 },
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
+            },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
             },
         },
     },

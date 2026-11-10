@@ -2177,6 +2177,407 @@
             ]
         },
         {
+            "color": "#ffbd8844",
+            "drawFill": true,
+            "id": 77,
+            "members": [
+                {
+                    "name": "Encounter Category",
+                    "propertyType": "LiberationEncounterCategory",
+                    "type": "string",
+                    "value": "Auto"
+                },
+                {
+                    "name": "Name 1",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 10",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 11",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 12",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 13",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 14",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 15",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 16",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 17",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 18",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 19",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 2",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 20",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 3",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 4",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 5",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 6",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 7",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 8",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Name 9",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Weight 1",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 10",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 11",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 12",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 13",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 14",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 15",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 16",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 17",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 18",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 19",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 2",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 20",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 3",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 4",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 5",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 6",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 7",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 8",
+                    "type": "float",
+                    "value": 1
+                },
+                {
+                    "name": "Weight 9",
+                    "type": "float",
+                    "value": 1
+                }
+            ],
+            "name": "Liberation Encounter Pool",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ff37a7b5",
+            "drawFill": true,
+            "id": 75,
+            "members": [
+                {
+                    "name": "AI Type",
+                    "propertyType": "LiberationAIType",
+                    "type": "string",
+                    "value": "Auto"
+                },
+                {
+                    "name": "Battle Attack Multiplier",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "Battle Defense Multiplier",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "Battle Scale",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "Battle Scale Scope",
+                    "propertyType": "LiberationBattleScaleScope",
+                    "type": "string",
+                    "value": "Auto"
+                },
+                {
+                    "name": "Encounter Category",
+                    "propertyType": "LiberationEncounterCategory",
+                    "type": "string",
+                    "value": "Auto"
+                },
+                {
+                    "name": "Encounter Mode",
+                    "propertyType": "LiberationEncounterMode",
+                    "type": "string",
+                    "value": "Auto"
+                },
+                {
+                    "name": "Max HP",
+                    "type": "int",
+                    "value": 0
+                },
+                {
+                    "name": "OW Attack Damage",
+                    "type": "int",
+                    "value": 0
+                },
+                {
+                    "name": "OW Bot Encounter",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "OW Damage Multiplier",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "OW Encounter Pool",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "OW Scale",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "Spawns",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "Starting HP",
+                    "type": "int",
+                    "value": 0
+                }
+            ],
+            "name": "Liberation Enemy Config",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ff4c9e72",
+            "drawFill": true,
+            "id": 76,
+            "members": [
+                {
+                    "name": "AI Type",
+                    "propertyType": "LiberationAIType",
+                    "type": "string",
+                    "value": "Auto"
+                },
+                {
+                    "name": "Battle Attack Multiplier",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "Battle Defense Multiplier",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "Battle Scale",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "Battle Scale Scope",
+                    "propertyType": "LiberationBattleScaleScope",
+                    "type": "string",
+                    "value": "Auto"
+                },
+                {
+                    "name": "Category",
+                    "propertyType": "LiberationEnemyCategory",
+                    "type": "string",
+                    "value": "All"
+                },
+                {
+                    "name": "Encounter Category",
+                    "propertyType": "LiberationEncounterCategory",
+                    "type": "string",
+                    "value": "Auto"
+                },
+                {
+                    "name": "Encounter Mode",
+                    "propertyType": "LiberationEncounterMode",
+                    "type": "string",
+                    "value": "Auto"
+                },
+                {
+                    "name": "Max HP",
+                    "type": "int",
+                    "value": 0
+                },
+                {
+                    "name": "OW Attack Damage",
+                    "type": "int",
+                    "value": 0
+                },
+                {
+                    "name": "OW Bot Encounter",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "OW Damage Multiplier",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "OW Encounter Pool",
+                    "type": "object",
+                    "value": 0
+                },
+                {
+                    "name": "OW Scale",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "Starting HP",
+                    "type": "int",
+                    "value": 0
+                }
+            ],
+            "name": "Liberation Enemy Defaults",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
             "color": "#ffcc66ff",
             "drawFill": true,
             "id": 62,
@@ -2192,6 +2593,70 @@
             "useAs": [
                 "object"
             ]
+        },
+        {
+            "id": 70,
+            "name": "LiberationAIType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Auto",
+                "simple_charge",
+                "ranged",
+                "shockwave_line"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 71,
+            "name": "LiberationBattleScaleScope",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Auto",
+                "Matching",
+                "All"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 72,
+            "name": "LiberationEncounterCategory",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Auto",
+                "encounters",
+                "special_encounters",
+                "bosses"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 73,
+            "name": "LiberationEncounterMode",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "Auto",
+                "Fixed",
+                "Pool",
+                "Category"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 74,
+            "name": "LiberationEnemyCategory",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "All",
+                "Dark Hole",
+                "Buffed Virus",
+                "Boss"
+            ],
+            "valuesAsFlags": false
         },
         {
             "color": "#ff88ff88",
@@ -3397,471 +3862,6 @@
                 "after"
             ],
             "valuesAsFlags": false
-        },
-        {
-            "id": 70,
-            "name": "LiberationAIType",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "Auto",
-                "simple_charge",
-                "ranged",
-                "shockwave_line"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "id": 71,
-            "name": "LiberationBattleScaleScope",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "Auto",
-                "Matching",
-                "All"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "id": 72,
-            "name": "LiberationEncounterCategory",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "Auto",
-                "encounters",
-                "special_encounters",
-                "bosses"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "id": 73,
-            "name": "LiberationEncounterMode",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "Auto",
-                "Fixed",
-                "Pool",
-                "Category"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "id": 74,
-            "name": "LiberationEnemyCategory",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "All",
-                "Dark Hole",
-                "Buffed Virus",
-                "Boss"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "color": "#ff37a7b5",
-            "drawFill": true,
-            "id": 75,
-            "members": [
-                {
-                    "name": "AI Type",
-                    "propertyType": "LiberationAIType",
-                    "type": "string",
-                    "value": "Auto"
-                },
-                {
-                    "name": "Battle Attack Multiplier",
-                    "type": "float",
-                    "value": 0
-                },
-                {
-                    "name": "Battle Defense Multiplier",
-                    "type": "float",
-                    "value": 0
-                },
-                {
-                    "name": "Battle Scale",
-                    "type": "float",
-                    "value": 0
-                },
-                {
-                    "name": "Battle Scale Scope",
-                    "propertyType": "LiberationBattleScaleScope",
-                    "type": "string",
-                    "value": "Auto"
-                },
-                {
-                    "name": "Encounter Category",
-                    "propertyType": "LiberationEncounterCategory",
-                    "type": "string",
-                    "value": "Auto"
-                },
-                {
-                    "name": "Encounter Mode",
-                    "propertyType": "LiberationEncounterMode",
-                    "type": "string",
-                    "value": "Auto"
-                },
-                {
-                    "name": "Max HP",
-                    "type": "int",
-                    "value": 0
-                },
-                {
-                    "name": "OW Attack Damage",
-                    "type": "int",
-                    "value": 0
-                },
-                {
-                    "name": "OW Bot Encounter",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "OW Damage Multiplier",
-                    "type": "float",
-                    "value": 0
-                },
-                {
-                    "name": "OW Encounter Pool",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "OW Scale",
-                    "type": "float",
-                    "value": 0
-                },
-                {
-                    "name": "Spawns",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Starting HP",
-                    "type": "int",
-                    "value": 0
-                }
-            ],
-            "name": "Liberation Enemy Config",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ff4c9e72",
-            "drawFill": true,
-            "id": 76,
-            "members": [
-                {
-                    "name": "AI Type",
-                    "propertyType": "LiberationAIType",
-                    "type": "string",
-                    "value": "Auto"
-                },
-                {
-                    "name": "Battle Attack Multiplier",
-                    "type": "float",
-                    "value": 0
-                },
-                {
-                    "name": "Battle Defense Multiplier",
-                    "type": "float",
-                    "value": 0
-                },
-                {
-                    "name": "Battle Scale",
-                    "type": "float",
-                    "value": 0
-                },
-                {
-                    "name": "Battle Scale Scope",
-                    "propertyType": "LiberationBattleScaleScope",
-                    "type": "string",
-                    "value": "Auto"
-                },
-                {
-                    "name": "Category",
-                    "propertyType": "LiberationEnemyCategory",
-                    "type": "string",
-                    "value": "All"
-                },
-                {
-                    "name": "Encounter Category",
-                    "propertyType": "LiberationEncounterCategory",
-                    "type": "string",
-                    "value": "Auto"
-                },
-                {
-                    "name": "Encounter Mode",
-                    "propertyType": "LiberationEncounterMode",
-                    "type": "string",
-                    "value": "Auto"
-                },
-                {
-                    "name": "Max HP",
-                    "type": "int",
-                    "value": 0
-                },
-                {
-                    "name": "OW Attack Damage",
-                    "type": "int",
-                    "value": 0
-                },
-                {
-                    "name": "OW Bot Encounter",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "OW Damage Multiplier",
-                    "type": "float",
-                    "value": 0
-                },
-                {
-                    "name": "OW Encounter Pool",
-                    "type": "object",
-                    "value": 0
-                },
-                {
-                    "name": "OW Scale",
-                    "type": "float",
-                    "value": 0
-                },
-                {
-                    "name": "Starting HP",
-                    "type": "int",
-                    "value": 0
-                }
-            ],
-            "name": "Liberation Enemy Defaults",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
-        },
-        {
-            "color": "#ffbd8844",
-            "drawFill": true,
-            "id": 77,
-            "members": [
-                {
-                    "name": "Encounter Category",
-                    "propertyType": "LiberationEncounterCategory",
-                    "type": "string",
-                    "value": "Auto"
-                },
-                {
-                    "name": "Name 1",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 10",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 11",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 12",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 13",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 14",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 15",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 16",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 17",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 18",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 19",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 2",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 20",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 3",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 4",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 5",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 6",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 7",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 8",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Name 9",
-                    "type": "string",
-                    "value": ""
-                },
-                {
-                    "name": "Weight 1",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 10",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 11",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 12",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 13",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 14",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 15",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 16",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 17",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 18",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 19",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 2",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 20",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 3",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 4",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 5",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 6",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 7",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 8",
-                    "type": "float",
-                    "value": 1
-                },
-                {
-                    "name": "Weight 9",
-                    "type": "float",
-                    "value": 1
-                }
-            ],
-            "name": "Liberation Encounter Pool",
-            "type": "class",
-            "useAs": [
-                "object"
-            ]
         }
     ]
 }

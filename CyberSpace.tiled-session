@@ -675,11 +675,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.5,
+            "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 367.66666666666663,
-                "y": 183.99999999999997
+                "x": 422.16666666666663,
+                "y": 185.33333333333331
             }
         },
         "areas/DenTown1.tmx": {
@@ -761,11 +761,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1383,
-                "y": 466
+                "x": 1038.5,
+                "y": 447
             }
         },
         "areas/LiberationHardMode.tmx": {
@@ -775,19 +775,19 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1120,
-                "y": 560.6666666666666
+                "x": 1272.6666666666667,
+                "y": 533.3333333333333
             }
         },
         "areas/LiberationNormalMode.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 880,
-                "y": 440.5
+                "x": 685,
+                "y": 489.33333333333337
             }
         },
         "areas/Mall1.tmx": {
@@ -1113,11 +1113,11 @@
                 8,
                 2
             ],
-            "scale": 0.5,
+            "scale": 1,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 3717,
-                "y": 1588
+                "x": 3677.5,
+                "y": 1845
             }
         },
         "areas/devroom.tmx": {
@@ -2214,18 +2214,18 @@
     "project": "CyberSpace.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "areas/undernet1.tmx",
+        "areas/PoliceStation.tmx",
         "areas/default.tmx",
         "areas/DEBUGLIB.tmx",
         "areas/LiberationHardMode.tmx",
         "areas/LiberationNormalMode.tmx",
         "areas/LiberationEasyMode.tmx",
         "areas/footbomb.tmx",
-        "areas/undernet1.tmx",
         "areas/porttown1.tmx",
         "areas/NewLiberation1.tmx",
         "areas/liberation1.tmx",
-        "areas/christmas.tmx",
-        "areas/Chichi4.tmx"
+        "areas/christmas.tmx"
     ],
     "resizeMap.removeObjects": false,
     "tileset.lastUsedFormat": "tsx",

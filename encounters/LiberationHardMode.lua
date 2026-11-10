@@ -26,6 +26,11 @@ return {
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
             },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
         },
         {
             name = "Encounter2",
@@ -46,6 +51,11 @@ return {
                 { 0, 0, 0, 0, 0, 0 },
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
+            },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
             },
         },
         {
@@ -68,6 +78,11 @@ return {
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
             },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
         },
         {
             name = "Encounter4",
@@ -88,6 +103,11 @@ return {
                 { 0, 0, 0, 0, 0, 0 },
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
+            },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
             },
         },
         {
@@ -110,6 +130,11 @@ return {
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
             },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
         },
         {
             name = "Encounter6",
@@ -130,6 +155,11 @@ return {
                 { 0, 0, 0, 0, 0, 0 },
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
+            },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
             },
         },
         {
@@ -152,6 +182,11 @@ return {
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
             },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
         },
         {
             name = "Encounter8",
@@ -173,6 +208,11 @@ return {
                 { 0, 1, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
             },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
         },
     },
     special_encounters = {
@@ -185,9 +225,9 @@ return {
             },
             obstacles = {},
             positions = {
-                { 0, 0, 0, 1, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 1 },
             },
             player_positions = {
                 { 0, 0, 0, 0, 0, 0 },
@@ -198,6 +238,107 @@ return {
                 enabled = true,
                 turn_count = 3,
                 player_can_flip = false,
+            },
+        },
+        {
+            name = "BigBrute1",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+            weight = 10,
+            enemies = {
+                { name = "BigBrute", rank = 1 },
+                { name = "Rabiree", rank = 3 },
+                { name = "Cragger", rank = 2 },
+            },
+            obstacles = {},
+            positions = {
+                { 0, 0, 0, 3, 0, 0 },
+                { 0, 0, 0, 0, 1, 0 },
+                { 0, 0, 0, 0, 2, 0 },
+            },
+            player_positions = {
+                { 0, 0, 0, 0, 0, 0 },
+                { 0, 1, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0 },
+            },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
+        },
+        {
+            name = "BigBrute2",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+            weight = 10,
+            enemies = {
+                { name = "BigBrute", rank = 1 },
+                { name = "HotHead", rank = 1 },
+                { name = "Zomon", rank = 4 },
+            },
+            obstacles = {},
+            positions = {
+                { 0, 0, 0, 0, 3, 0 },
+                { 0, 0, 0, 0, 0, 1 },
+                { 0, 0, 0, 0, 2, 0 },
+            },
+            player_positions = {
+                { 0, 0, 0, 0, 0, 0 },
+                { 0, 1, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0 },
+            },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
+        },
+        {
+            name = "BigBrute3",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+            weight = 10,
+            enemies = {
+                { name = "BigBrute", rank = 1 },
+                { name = "VacuumFan", rank = 3 },
+                { name = "Metrid", rank = 2 },
+            },
+            obstacles = {
+                { name = "Rock" },
+            },
+            positions = {
+                { 0, 0, 0, 0, 0, 3 },
+                { 0, 0, 0, 1, 0, 0 },
+                { 0, 0, 0, 0, 0, 2 },
+            },
+            player_positions = {
+                { 0, 0, 0, 0, 0, 0 },
+                { 0, 1, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0 },
+            },
+            freedom_mission = {
+                enabled = true,
+                turn_count = 3,
+                player_can_flip = false,
+            },
+        },
+        {
+            name = "BigBrute4",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
+            weight = 10,
+            enemies = {
+                { name = "BigBrute", rank = 1 },
+                { name = "ColdHead", rank = 1 },
+                { name = "Scuttle", rank = 1 },
+            },
+            obstacles = {},
+            positions = {
+                { 0, 0, 0, 3, 0, 0 },
+                { 0, 0, 0, 0, 2, 0 },
+                { 0, 0, 0, 1, 0, 0 },
+            },
+            player_positions = {
+                { 0, 0, 0, 0, 0, 0 },
+                { 0, 1, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 0, 0 },
             },
         },
     },
@@ -211,8 +352,8 @@ return {
             },
             obstacles = {},
             positions = {
-                { 0, 0, 0, 1, 0, 0 },
                 { 0, 0, 0, 0, 0, 0 },
+                { 0, 0, 0, 0, 1, 0 },
                 { 0, 0, 0, 0, 0, 0 },
             },
             player_positions = {
