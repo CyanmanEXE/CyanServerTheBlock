@@ -139,6 +139,10 @@
     <property name="Boss Health Override" value="1000"/>
     <property name="Boss ID" value="ShadeMan_01"/>
     <property name="Direction" value="Down Left"/>
+    <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="bosses"/>
+    <property name="Encounter Mode" propertytype="LiberationEncounterMode" value="Auto"/>
+    <property name="Max HP" type="int" value="1000"/>
+    <property name="Starting HP" type="int" value="1000"/>
    </properties>
   </object>
   <object id="50" type="Dark Hole" gid="6" x="1056" y="448" width="50" height="30">

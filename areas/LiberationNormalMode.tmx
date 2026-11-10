@@ -451,6 +451,10 @@
     <property name="Boss Health Override" value="1500"/>
     <property name="Boss ID" value="ShadeMan_01"/>
     <property name="Direction" value="Down Left"/>
+    <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="bosses"/>
+    <property name="Encounter Mode" propertytype="LiberationEncounterMode" value="Auto"/>
+    <property name="Max HP" type="int" value="1500"/>
+    <property name="Starting HP" type="int" value="1500"/>
    </properties>
   </object>
   <object id="137" name="Point of Interest" type="Point of Interest" x="800" y="168">
