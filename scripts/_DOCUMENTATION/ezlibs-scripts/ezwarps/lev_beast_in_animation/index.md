@@ -1,127 +1,75 @@
-# `lev_beast_in_animation.lua`
+# 📄 `lev_beast_in_animation.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezwarps/lev_beast_in_animation.lua`  
-> **Source lines:** 117  
-> **Functions detected:** 1  
-> **Table declarations detected:** 10
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezwarps/lev_beast_in_animation.lua`](../../../../ezlibs-scripts/ezwarps/lev_beast_in_animation.lua)  
+> **Source lines:** 118  
+> **SHA-256 (UTF-8):** `03ea6d3c1840958637074a3e0c2d6c47998a7eaf8a9cfc5cb5771beeefc7b424`  
+> **Named functions detected:** 1  
+> **Table initializers detected:** 10
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-these offsets will modify the warp landing location so that the player can animate from their spawn location nicely
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- No `require(...)` dependency was detected.
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No static literal subscriptions detected.
 
-## Functions
+## Functions and parameters
 
-| Line | Function / method | Parameters as declared |
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 9 | `animate` | `player_id` | assigned/declared |
+
+### Parameter inventory
+
+#### 1. `animate(player_id)`
+
+- **Line:** 9
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 8 | `animate` | `player_id` |
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-### Function notes
 
-- **`animate(player_id)`** *(source line 8)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+## Tables
 
-## Tables and data structures
+| Line | Identifier |
+|---:|---|
+| 2 | `lev_beast_in_animation` |
+| 4 | `pre_animation_offsets` |
+| 29 | `player_keyframes` |
+| 30 | `properties` |
+| 40 | `properties` |
+| 52 | `beast_keyframes` |
+| 53 | `properties` |
+| 63 | `properties` |
+| 75 | `properties` |
+| 85 | `properties` |
 
-### `lev_beast_in_animation` *(line 1)*
+## Net API calls
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `pre_animation_offsets` | table | `{ x=0, y=0, z=0 }` |
-| `animate` | function | `function(player_id) return async(function() local player_pos = Net.get_player_position(player_id) local area_id = Net.get_player_area(player…` |
-| `[3]` | table | `{ texture_path = "/server/assets/ezlibs-assets/ezwarps/lev-beast-64-65.png", animation_path = "/server/assets/ezlibs-assets/ezwarps/lev-beas…` |
-| `[4]` | number literal | `3` |
-| `[5]` | number literal | `1) Net.animate_player(player_id` |
-| `[6]` | string literal | `"IDLE_DL"` |
-| `[7]` | call/expression | `true) Net.animate_player_properties(player_id` |
-| `[8]` | call/expression | `player_keyframes) Net.animate_bot_properties(lev_beast_id` |
-| `[9]` | call/expression | `beast_keyframes) await(Async.sleep(0.1)) Net.play_sound(area_id` |
-| `[10]` | string literal | `'/server/assets/ezlibs-assets/ezwarps/lev-bus-arrive.ogg') await(Async.sleep(seconds_arriving)) Net.play_sound(area_id` |
-| `[11]` | string literal | `'resources/sfx/falzar.ogg') Net.shake_player_camera(player_id` |
-| `[12]` | number literal | `3` |
-| `[13]` | number literal | `1) await(Async.sleep(seconds_here)) Net.play_sound(area_id` |
-| `[14]` | string literal | `'/server/assets/ezlibs-assets/ezwarps/lev-bus-leave.ogg') Net.unlock_player_input(player_id) await(Async.sleep(seconds_leaving)) Net.remove_…` |
-
-### `pre_animation_offsets` *(line 3)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | number literal | `0` |
-| `y` | number literal | `0` |
-| `z` | number literal | `0` |
-
-### `player_keyframes` *(line 27)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ properties={{ property="Y", value=player_pos.y-3, },{ property="Z", value=player_pos.z+17 }}, duration=0 }` |
-
-### `properties` *(line 29)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property="Y", value=player_pos.y-3, }` |
-| `[2]` | table | `{ property="Z", value=player_pos.z+17 }` |
-
-### `properties` *(line 39)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property="Y", ease="Out", value=player_pos.y }` |
-| `[2]` | table | `{ property="Z", ease="Out", value=player_pos.z }` |
-
-### `beast_keyframes` *(line 50)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ properties={{ property="Y", value=player_pos.y-3, },{ property="Z", value=player_pos.z+17+beast_z_offset }}, duration=0 }` |
-
-### `properties` *(line 52)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property="Y", value=player_pos.y-3, }` |
-| `[2]` | table | `{ property="Z", value=player_pos.z+17+beast_z_offset }` |
-
-### `properties` *(line 62)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property="Y", ease="Out", value=player_pos.y }` |
-| `[2]` | table | `{ property="Z", ease="Out", value=player_pos.z+beast_z_offset }` |
-
-### `properties` *(line 74)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property="Y", value=player_pos.y }` |
-| `[2]` | table | `{ property="Z", value=player_pos.z+beast_z_offset }` |
-
-### `properties` *(line 84)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property="Y", ease="In", value=player_pos.y+3 }` |
-| `[2]` | table | `{ property="Z", ease="In", value=player_pos.z+17+beast_z_offset }` |
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezwarps/lev_beast_in_animation.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| API | Count | First line |
+|---|---:|---:|
+| `Net.animate_bot_properties` | 1 | 99 |
+| `Net.animate_player` | 1 | 97 |
+| `Net.animate_player_properties` | 1 | 98 |
+| `Net.create_bot` | 1 | 15 |
+| `Net.get_player_area` | 1 | 12 |
+| `Net.get_player_position` | 1 | 11 |
+| `Net.play_sound` | 3 | 102 |
+| `Net.remove_bot` | 1 | 113 |
+| `Net.shake_player_camera` | 2 | 96 |

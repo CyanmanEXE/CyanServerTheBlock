@@ -1,0 +1,63 @@
+[2026-11-11 19:21:36] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory
+[2026-11-11 19:21:36] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory
+[2026-11-11 19:21:36] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory
+[2026-11-11 19:21:36] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory/area
+[2026-11-11 19:21:37] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory/player
+[2026-11-11 19:21:37] [INFO ] [helpers] [helpers] Created directory via os.execute:	./encounters
+[2026-11-11 19:21:37] [WARN ] [helpers] (safe_require) error loading script scripts/ezlibs-custom/pets
+[2026-11-11 19:21:37] [WARN ] [helpers] (safe_require) reason ...de\CyanServerTheBlock\scripts/ezlibs-scripts/helpers.lua:80: module 'scripts/ezlibs-custom/pets' not found:
+    	no field package.preload['scripts/ezlibs-custom/pets']
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\lua\scripts/ezlibs-custom/pets.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\lua\scripts/ezlibs-custom/pets\init.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\scripts/ezlibs-custom/pets.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\scripts/ezlibs-custom/pets\init.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\..\share\lua\5.4\scripts/ezlibs-custom/pets.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\..\share\lua\5.4\scripts/ezlibs-custom/pets\init.lua'
+    	no file '.\scripts/ezlibs-custom/pets.lua'
+    	no file '.\scripts/ezlibs-custom/pets\init.lua'
+    	no file 'C:\Program Files (x86)\Lua\5.1\lua\scripts/ezlibs-custom/pets.luac'
+    	
+    	can't load C modules in safe mode
+[2026-11-11 19:21:37] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory/board
+[2026-11-11 19:21:47] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory
+[2026-11-11 19:21:47] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory
+[2026-11-11 19:21:47] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory
+[2026-11-11 19:21:47] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory/area
+[2026-11-11 19:21:47] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory/player
+[2026-11-11 19:21:47] [INFO ] [helpers] [helpers] Created directory via os.execute:	./encounters
+[2026-11-11 19:21:47] [WARN ] [helpers] (safe_require) error loading script scripts/ezlibs-custom/pets
+[2026-11-11 19:21:47] [WARN ] [helpers] (safe_require) reason ...de\CyanServerTheBlock\scripts/ezlibs-scripts/helpers.lua:80: module 'scripts/ezlibs-custom/pets' not found:
+    	no field package.preload['scripts/ezlibs-custom/pets']
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\lua\scripts/ezlibs-custom/pets.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\lua\scripts/ezlibs-custom/pets\init.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\scripts/ezlibs-custom/pets.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\scripts/ezlibs-custom/pets\init.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\..\share\lua\5.4\scripts/ezlibs-custom/pets.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\..\share\lua\5.4\scripts/ezlibs-custom/pets\init.lua'
+    	no file '.\scripts/ezlibs-custom/pets.lua'
+    	no file '.\scripts/ezlibs-custom/pets\init.lua'
+    	no file 'C:\Program Files (x86)\Lua\5.1\lua\scripts/ezlibs-custom/pets.luac'
+    	
+    	can't load C modules in safe mode
+[2026-11-11 19:21:47] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory/board
+[2026-11-11 19:25:15] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory
+[2026-11-11 19:25:15] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory
+[2026-11-11 19:25:15] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory
+[2026-11-11 19:25:15] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory/area
+[2026-11-11 19:25:15] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory/player
+[2026-11-11 19:25:15] [INFO ] [helpers] [helpers] Created directory via os.execute:	./encounters
+[2026-11-11 19:25:15] [WARN ] [helpers] (safe_require) error loading script scripts/ezlibs-custom/pets
+[2026-11-11 19:25:15] [WARN ] [helpers] (safe_require) reason ...de\CyanServerTheBlock\scripts/ezlibs-scripts/helpers.lua:80: module 'scripts/ezlibs-custom/pets' not found:
+    	no field package.preload['scripts/ezlibs-custom/pets']
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\lua\scripts/ezlibs-custom/pets.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\lua\scripts/ezlibs-custom/pets\init.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\scripts/ezlibs-custom/pets.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\scripts/ezlibs-custom/pets\init.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\..\share\lua\5.4\scripts/ezlibs-custom/pets.lua'
+    	no file 'C:\Users\aaron\Documents\Code\CyanServerTheBlock\..\share\lua\5.4\scripts/ezlibs-custom/pets\init.lua'
+    	no file '.\scripts/ezlibs-custom/pets.lua'
+    	no file '.\scripts/ezlibs-custom/pets\init.lua'
+    	no file 'C:\Program Files (x86)\Lua\5.1\lua\scripts/ezlibs-custom/pets.luac'
+    	
+    	can't load C modules in safe mode
+[2026-11-11 19:25:16] [INFO ] [helpers] [helpers] Created directory via os.execute:	./memory/board

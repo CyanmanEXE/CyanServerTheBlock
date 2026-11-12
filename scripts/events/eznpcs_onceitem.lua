@@ -1,3 +1,4 @@
+local PlayerControl = require("scripts/player-control/main")
 -- scripts/events/eznpcs_onceitem.lua
 -- Dialogue Type "onceitem": unique, server-wide rental with renewals
 -- Dialogue Type "oncepass": renter sets/clears a visitor password for the HP checkpoint
@@ -21,8 +22,9 @@ local ezmemory = require('scripts/ezlibs-scripts/ezmemory')
 local ezmenus  = require('scripts/ezlibs-scripts/ezmenus')
 local ezweather = require('scripts/ezlibs-scripts/ezweather')
 local custom   = require('scripts/ezlibs-custom/custom')
-local pets = require('scripts/ezlibs-custom/pets')
-local jukebox = require('scripts/ezlibs-custom/jukebox')
+local pets = helpers.safe_require('scripts/ezlibs-custom/pets')
+-- Optional Jukebox functionality is now provided via scripts/jukebox/main.
+-- This extension contains no direct Jukebox API calls; do not require the obsolete path.
 
 -- ====================== Text Defaults ======================
 local DEFAULTS = {
@@ -52,7 +54,7 @@ local DEFAULTS = {
   CP_WrongPasswordMessage     = "Incorrect password.",
   CP_OwnerUnlockedMessage     = "Access granted.",
   CP_LeaseInactiveMessage     = "This HP is not currently rented.",
-  CP_UnlockingAssetName       = "bn5cubegreen",
+  CP_UnlockingAssetName       = "bn5cubegreen_bot",
   CP_UnlockingAnimationTimeMS = "0",
   CP_UnlockingSoundPath       = "/server/assets/ezlibs-assets/sfx/panel_change.ogg",
 }
@@ -557,7 +559,7 @@ local function follow_preview_camera(pid, x, y, z)
 end
 
 local function lock_for_preview(pid, s)
-  if Net.lock_player_input then pcall(Net.lock_player_input, pid) end
+  if PlayerControl.acquire_capture then pcall(PlayerControl.acquire_capture, pid, "events/eznpcs_onceitem") end
   s._input_locked = true
 
   -- unlock camera once (follow_preview_camera will handle the rest)
@@ -570,7 +572,7 @@ end
 local function unlock_after_preview(pid, s)
   -- unlock input
   if s and s._input_locked then
-    if Net.unlock_player_input then pcall(Net.unlock_player_input, pid) end
+    if PlayerControl.release_capture then pcall(PlayerControl.release_capture, pid, "events/eznpcs_onceitem") end
     s._input_locked = nil
   end
 
@@ -3554,7 +3556,7 @@ Net:on("object_interaction", function(event)
         end
 
         ezmemory.hide_object_from_player_till_disconnect(player_id, area_id, object_id)
-        Net.unlock_player_input(player_id)
+        PlayerControl.release_capture(player_id, "events/eznpcs_onceitem")
 
         local ok_msg = is_owner
           and cprop(cp, "Owner Unlocked Message", DEFAULTS.CP_OwnerUnlockedMessage)

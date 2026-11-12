@@ -1,141 +1,98 @@
-# `main.lua`
+# 📄 `main.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/main.lua`  
-> **Source lines:** 255  
-> **Functions detected:** 0  
-> **Table declarations detected:** 4
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/ezlibs-scripts/main.lua`](../../../ezlibs-scripts/main.lua)  
+> **Source lines:** 257  
+> **SHA-256 (UTF-8):** `e5ce0a7a8ea7ec1042242a00031a99e7dfe81b5b635c6a2b4f4e63f87c12137a`  
+> **Named/assigned functions detected:** 0  
+> **Table initializers detected:** 4
 
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../logger/README.md) for logging semantics.
+
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Current source inventory for `scripts/ezlibs-scripts/main.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
-- `scripts/ezlibs-scripts/helpers` — line 4
-- `scripts/ezlibs-scripts/ezbus` — line 5
-- `scripts/ezlibs-scripts/eztriggers/eztriggers` — line 6
-- `scripts/ezlibs-scripts/ezcache` — line 7
-- `scripts/ezlibs-scripts/ezencounters/main` — line 8
-- `scripts/ezlibs-scripts/ezbattle_results` — line 9
-- `scripts/ezlibs-scripts/eznpcs/eznpcs` — line 10
-- `scripts/ezlibs-scripts/ezmemory` — line 11
-- `scripts/ezlibs-scripts/ezmystery` — line 12
-- `scripts/ezlibs-scripts/ezweather` — line 13
-- `scripts/ezlibs-scripts/ezwarps/main` — line 14
-- `scripts/ezlibs-scripts/ezfarms` — line 15
-- `scripts/events/eznpcs_onceitem` — line 16
-- `scripts/ezlibs-scripts/ezcheckpoints` — line 17
-- `scripts/ezlibs-scripts/ezannounce/ezannounce` — line 18
-- `scripts/ezlibs-scripts/ezemail` — line 19
-- `scripts/ezlibs-scripts/ezexplosions` — line 20
-- `scripts/ezlibs-scripts/ezrushroads` — line 21
-- `scripts/ezlibs-scripts/ezpress` — line 22
-- `scripts/ezlibs-scripts/ezusers` — line 23
-- `scripts/ezlibs-scripts/ezbbs` — line 24
-- `scripts/ezlibs-scripts/ezbuttons` — line 25
-- `scripts/ezlibs-scripts/eznpcs/ezpushback` — line 26
-- `scripts/ezlibs-scripts/eznpcs/npc_behaviors` — line 27
-- `scripts/ezlibs-scripts/eztriggers/ezbottriggers` — line 28
-- `scripts/ezlibs-scripts/ezcutscenes/ezcutscenes` — line 29
-- `scripts/ezlibs-scripts/object_registry` — line 68
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/logger/logger` |
+| 4 | `scripts/ezlibs-scripts/helpers` |
+| 5 | `scripts/ezlibs-scripts/ezbus` |
+| 6 | `scripts/ezlibs-scripts/eztriggers/eztriggers` |
+| 7 | `scripts/ezlibs-scripts/ezcache` |
+| 8 | `scripts/ezlibs-scripts/ezencounters/main` |
+| 9 | `scripts/ezlibs-scripts/ezbattle_results` |
+| 10 | `scripts/ezlibs-scripts/eznpcs/eznpcs` |
+| 11 | `scripts/ezlibs-scripts/ezmemory` |
+| 12 | `scripts/ezlibs-scripts/ezmystery` |
+| 13 | `scripts/ezlibs-scripts/ezweather` |
+| 14 | `scripts/ezlibs-scripts/ezwarps/main` |
+| 15 | `scripts/ezlibs-scripts/ezfarms` |
+| 17 | `scripts/ezlibs-scripts/ezcheckpoints` |
+| 18 | `scripts/ezlibs-scripts/ezannounce/ezannounce` |
+| 19 | `scripts/ezlibs-scripts/ezemail` |
+| 20 | `scripts/ezlibs-scripts/ezexplosions` |
+| 21 | `scripts/ezlibs-scripts/ezrushroads` |
+| 22 | `scripts/ezlibs-scripts/ezpress` |
+| 23 | `scripts/ezlibs-scripts/ezusers` |
+| 24 | `scripts/ezlibs-scripts/ezbbs` |
+| 25 | `scripts/ezlibs-scripts/ezbuttons` |
+| 26 | `scripts/ezlibs-scripts/eznpcs/ezpushback` |
+| 27 | `scripts/ezlibs-scripts/eznpcs/npc_behaviors` |
+| 28 | `scripts/ezlibs-scripts/eztriggers/ezbottriggers` |
+| 29 | `scripts/ezlibs-scripts/ezcutscenes/ezcutscenes` |
+| 70 | `scripts/ezlibs-scripts/object_registry` |
 
-## Events
+## Event hooks
 
-- `Net:on("battle_results", function(event) ...)` — line 75. The event name is taken directly from this source.
-- `Net:on("battle_exit", function(event) ...)` — line 98. The event name is taken directly from this source.
-- `Net:on("shop_purchase", function(event) ...)` — line 113. The event name is taken directly from this source.
-- `Net:on("shop_close", function(event) ...)` — line 121. The event name is taken directly from this source.
-- `Net:on("custom_warp", function(event) ...)` — line 129. The event name is taken directly from this source.
-- `Net:on("player_move", function(event) ...)` — line 137. The event name is taken directly from this source.
-- `Net:on("player_request", function(event) ...)` — line 145. The event name is taken directly from this source.
-- `Net:on("tile_interaction", function(event) ...)` — line 154. The event name is taken directly from this source.
-- `Net:on("post_selection", function(event) ...)` — line 162. The event name is taken directly from this source.
-- `Net:on("board_close", function(event) ...)` — line 170. The event name is taken directly from this source.
-- `Net:on("player_avatar_change", function(event) ...)` — line 178. The event name is taken directly from this source.
-- `Net:on("player_join", function(event) ...)` — line 194. The event name is taken directly from this source.
-- `Net:on("actor_interaction", function(event) ...)` — line 206. The event name is taken directly from this source.
-- `Net:on("tick", function(event) ...)` — line 214. The event name is taken directly from this source.
-- `Net:on("player_disconnect", function(event) ...)` — line 222. The event name is taken directly from this source.
-- `Net:on("object_interaction", function(event) ...)` — line 231. The event name is taken directly from this source.
-- `Net:on("player_area_transfer", function(event) ...)` — line 239. The event name is taken directly from this source.
-- `Net:on("textbox_response", function(event) ...)` — line 247. The event name is taken directly from this source.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 77 | `Net` | `battle_results` |
+| 100 | `Net` | `battle_exit` |
+| 115 | `Net` | `shop_purchase` |
+| 123 | `Net` | `shop_close` |
+| 131 | `Net` | `custom_warp` |
+| 139 | `Net` | `player_move` |
+| 147 | `Net` | `player_request` |
+| 156 | `Net` | `tile_interaction` |
+| 164 | `Net` | `post_selection` |
+| 172 | `Net` | `board_close` |
+| 180 | `Net` | `player_avatar_change` |
+| 196 | `Net` | `player_join` |
+| 208 | `Net` | `actor_interaction` |
+| 216 | `Net` | `tick` |
+| 224 | `Net` | `player_disconnect` |
+| 233 | `Net` | `object_interaction` |
+| 241 | `Net` | `player_area_transfer` |
+| 249 | `Net` | `textbox_response` |
 
 ## Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+No named function declarations matched. Anonymous callbacks may exist.
 
-## Tables and data structures
+## Tables
 
-### `plugins` *(line 30)*
+| Source line | Assignment |
+|---:|---|
+| 33 | `plugins` |
+| 54 | `sfx` |
+| 83 | `stats` |
+| 181 | `details` |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | expression/reference | `ezweather` |
-| `[2]` | expression/reference | `eznpcs` |
-| `[3]` | expression/reference | `ezmemory` |
-| `[4]` | expression/reference | `ezmystery` |
-| `[5]` | expression/reference | `ezwarps` |
-| `[6]` | expression/reference | `ezencounters` |
-| `[7]` | expression/reference | `eztriggers` |
-| `[8]` | expression/reference | `ezemail` |
-| `[9]` | expression/reference | `ezannouncement` |
-| `[10]` | expression/reference | `ezcheckpoints` |
-| `[11]` | expression/reference | `ezrushroads` |
-| `[12]` | expression/reference | `ezpress` |
-| `[13]` | expression/reference | `ezusers` |
-| `[14]` | expression/reference | `ezbbs` |
-| `[15]` | expression/reference | `ezbuttons` |
-| `[16]` | expression/reference | `ezpushback` |
-| `[17]` | expression/reference | `ezbottriggers` |
-| `[18]` | expression/reference | `ezcutscenes` |
+## Net API calls
 
-### `sfx` *(line 51)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `hurt` | string literal | `'/server/assets/ezlibs-assets/sfx/hurt.ogg'` |
-| `item_get` | string literal | `'/server/assets/ezlibs-assets/sfx/item_get.ogg'` |
-| `recover` | string literal | `'/server/assets/ezlibs-assets/sfx/recover.ogg'` |
-| `card_error` | string literal | `'/server/assets/ezlibs-assets/ezfarms/card_error.ogg'` |
-| `compressSfx` | string literal | `"/server/assets/ezlibs-assets/sfx/compress.ogg"` |
-
-### `stats` *(line 80)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `reason` | expression/reference | `event.reason` |
-| `health` | expression/reference | `event.health` |
-| `time` | expression/reference | `event.time` |
-| `ran` | expression/reference | `event.ran` |
-| `emotion` | expression/reference | `event.emotion` |
-| `turns` | expression/reference | `event.turns` |
-| `enemies` | expression/reference | `event.enemies` |
-| `score` | expression/reference | `event.score` |
-
-### `details` *(line 179)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `texture_path` | expression/reference | `event.texture_path` |
-| `animation_path` | expression/reference | `event.animation_path` |
-| `name` | expression/reference | `event.name` |
-| `element` | expression/reference | `event.element` |
-| `max_health` | expression/reference | `event.max_health` |
-| `prevent_default` | expression/reference | `event.prevent_default` |
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/main.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.on` | 18 | 77 |
+| `Net.provide_asset_for_player` | 1 | 204 |

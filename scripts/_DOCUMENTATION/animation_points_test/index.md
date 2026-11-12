@@ -1,62 +1,38 @@
-# `animation_points_test.lua`
+# 📄 `animation_points_test.lua` — Current Lua reference
 
-> **Source:** `scripts/animation_points_test.lua`  
-> **Source lines:** 22  
-> **Functions detected:** 1  
-> **Table declarations detected:** 2
+[🏠 Documentation home](../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/animation_points_test.lua`](../../animation_points_test.lua)  
+> **Source lines:** 3  
+> **SHA-256 (UTF-8):** `61902fa5e9836fab5f3e8279c8df550d11f99697bf32c837f9490793aedd7c7d`  
+> **Named functions detected:** 0  
+> **Table initializers detected:** 0
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/ezlibs-custom/footbomb/animation_points` — line 2
+No literal `require` calls detected.
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No static literal subscriptions detected.
 
-## Functions
+## Functions and parameters
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 4 | `check` | `label, frame, point, expected_x, expected_y` |
+No statically matched named functions.
 
-### Function notes
+## Tables
 
-- **`check(label, frame, point, expected_x, expected_y)`** *(source line 4)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+No simple table assignments matched.
 
-## Tables and data structures
+## Net API calls
 
-### `base` *(line 11)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `w` | number literal | `36` |
-| `h` | number literal | `36` |
-| `originx` | number literal | `19` |
-| `originy` | number literal | `35` |
-
-### `ball` *(line 13)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | number literal | `31` |
-| `y` | number literal | `11` |
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/animation_points_test.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+No direct Net API calls matched.

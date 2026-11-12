@@ -1,410 +1,260 @@
-# `main.lua`
+# 📄 `main.lua` — Current Lua reference
 
-> **Source:** `scripts/indy-trains/main.lua`  
-> **Source lines:** 1252  
-> **Functions detected:** 13  
-> **Table declarations detected:** 56
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/indy-trains/main.lua`](../../../indy-trains/main.lua)  
+> **Source lines:** 1255  
+> **SHA-256 (UTF-8):** `486503e4ae0d746b057b4561db38da5df57bd74768b71927fa3fc3d8039e4ac0`  
+> **Named functions detected:** 13  
+> **Table initializers detected:** 56
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-VERSION v1.10
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- No `require(...)` dependency was detected.
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
 
-## Events
+## Event hooks
 
-- `Net:on("actor_interaction", function(event) ...)` — line 1153. The event name is taken directly from this source.
-- `Net:on("player_disconnect", function(event) ...)` — line 1161. The event name is taken directly from this source.
-- `Net:on("post_selection", function(event) ...)` — line 1172. The event name is taken directly from this source.
-- `Net:on("player_area_transfer", function(event) ...)` — line 1180. The event name is taken directly from this source.
-- `Net:on("player_join", function(event) ...)` — line 1192. The event name is taken directly from this source.
-- `Net:on("player_request", function(event) ...)` — line 1204. The event name is taken directly from this source.
-- `Net:on("tick", function(event) ...)` — line 1236. The event name is taken directly from this source.
-
-## Functions
-
-| Line | Function / method | Parameters as declared |
+| Line | Subscriber | Event |
 |---:|---|---|
-| 51 | `splitter` | `inputstr, sep` |
-| 65 | `async` | `p` |
-| 71 | `await` | `v` |
-| 77 | `summon_arriving_passenger_train` | `player_id` |
-| 294 | `summon_departing_passenger_train` | `player_id,post_id` |
-| 602 | `validate_passenger_train` | `area_id,train_name` |
-| 718 | `greet_conductor` | `bot_id,player_id` |
-| 822 | `populate_server_list` | `(none)` |
-| 876 | `check_servers` | `(none)` |
-| 891 | `spawn_conductor` | `area_id, object_data` |
-| 941 | `validate_cargo_train` | `area_id,train_name` |
-| 1046 | `run_cargo_train` | `area_id,train_name` |
-| 1108 | `find_trains` | `(none)` |
-
-### Function notes
+| 1156 | `Net` | `actor_interaction` |
+| 1164 | `Net` | `player_disconnect` |
+| 1175 | `Net` | `post_selection` |
+| 1183 | `Net` | `player_area_transfer` |
+| 1195 | `Net` | `player_join` |
+| 1207 | `Net` | `player_request` |
+| 1239 | `Net` | `tick` |
 
-- **`splitter(inputstr, sep)`** — purpose: splits a string based on a delimiter usaged: used at various points to seperate values *(source line 51)*
-- **`async(p)`** — Shorthand for async *(source line 65)*
-- **`await(v)`** — Shorthand for await *(source line 71)*
-- **`summon_arriving_passenger_train(player_id)`** — usage: called when a player selects an option from a train menu purpose: to spawn a train, pickup player, and depart (if track is not already occupied) *(source line 77)*
-- **`summon_departing_passenger_train(player_id,post_id)`** *(source line 294)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`validate_passenger_train(area_id,train_name)`** — purpose: validates passenger train configuration, checks provided properties, and assigns necessary properties. usage: called on server boot for each passenger train object *(source line 602)*
-- **`greet_conductor(bot_id,player_id)`** — purpose: populates and opens train route selection menu usage: called when player interacts with conductor *(source line 718)*
-- **`populate_server_list()`** *(source line 822)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`check_servers()`** *(source line 876)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`spawn_conductor(area_id, object_data)`** — purpose: validates conductor configuration, checks provided properties, assigns necessary properties, and spawns bot. usage: called on server boot for each conductor object *(source line 891)*
-- **`validate_cargo_train(area_id,train_name)`** — purpose: validates cargo train configuraton, checks properties, assigns necessary properties, and spawns bots. usage: called on server boot for each cargo train object *(source line 941)*
-- **`run_cargo_train(area_id,train_name)`** — animate a given cargo train for one loop usage: called within the Net.on("tick") function whenever a given cargo train's animation ends *(source line 1046)*
-- **`find_trains()`** — Find all trains in all areas, removes placeholders, and triggers them to start usage: runs on server boot to find all train and conductor objects and handle setup *(source line 1108)*
+## Functions and parameters
 
-## Tables and data structures
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 52 | `splitter` | `inputstr, sep` | local |
+| 66 | `async` | `p` | assigned/declared |
+| 72 | `await` | `v` | assigned/declared |
+| 78 | `summon_arriving_passenger_train` | `player_id` | local |
+| 295 | `summon_departing_passenger_train` | `player_id,post_id` | local |
+| 603 | `validate_passenger_train` | `area_id,train_name` | local |
+| 719 | `greet_conductor` | `bot_id,player_id` | local |
+| 823 | `populate_server_list` | `(none)` | local |
+| 879 | `check_servers` | `(none)` | local |
+| 894 | `spawn_conductor` | `area_id, object_data` | local |
+| 944 | `validate_cargo_train` | `area_id,train_name` | local |
+| 1049 | `run_cargo_train` | `area_id,train_name` | local |
+| 1111 | `find_trains` | `(none)` | local |
 
-### `passenger_train_required_properties` *(line 22)*
+### Parameter inventory
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"Start"` |
-| `[2]` | string literal | `"End"` |
-| `[3]` | string literal | `"Direction"` |
-| `[4]` | string literal | `"Stop"` |
-| `[5]` | string literal | `"Platform Z"` |
-| `[6]` | string literal | `"Train Z"` |
+#### 1. `splitter(inputstr, sep)`
 
-### `passenger_train_optional_properties` *(line 23)*
+- **Line:** 52
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"Speed"` |
-| `[2]` | string literal | `"Color"` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `inputstr` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `sep` | Declared directly in the current Lua. Type not inferred. |
 
-### `cargo_train_required_properties` *(line 25)*
+#### 2. `async(p)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"Start"` |
-| `[2]` | string literal | `"End"` |
-| `[3]` | string literal | `"Direction"` |
-| `[4]` | string literal | `"Train Z"` |
+- **Line:** 66
+- **Declaration:** assigned/declared
 
-### `cargo_train_optional_properties` *(line 26)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `p` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"Speed"` |
-| `[2]` | string literal | `"Cars"` |
-| `[3]` | string literal | `"Color"` |
-| `[4]` | string literal | `"Driver Texture"` |
-| `[5]` | string literal | `"Driver Animation"` |
+#### 3. `await(v)`
 
-### `conductor_required_properties` *(line 28)*
+- **Line:** 72
+- **Declaration:** assigned/declared
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"Train"` |
-| `[2]` | string literal | `"1 Area"` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `v` | Declared directly in the current Lua. Type not inferred. |
 
-### `conductor_optional_properties` *(line 29)*
+#### 4. `summon_arriving_passenger_train(player_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"1 Type"` |
-| `[2]` | string literal | `"1 Name"` |
-| `[3]` | string literal | `"Animation"` |
-| `[4]` | string literal | `"Texture"` |
-| `[5]` | string literal | `"Mug"` |
-| `[6]` | string literal | `"Mug Animation"` |
-| `[7]` | string literal | `"Direction"` |
+- **Line:** 78
+- **Declaration:** local
 
-### `servers` *(line 39)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 5. `summon_departing_passenger_train(player_id,post_id)`
 
-### `train_cache` *(line 41)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `conductor_cache` *(line 42)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `cargo_schedule` *(line 43)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `passenger_cache` *(line 44)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `track_cache` *(line 45)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `player_using_train_menu` *(line 46)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `t` *(line 57)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `keyframes` *(line 176)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Out",value=(trainProps["startX"]+1.5-.5+trainProps["offset"…` |
-
-### `keyframes` *(line 181)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Out",value=(trainProps["startX"]+2.15+trainProps["offset"])…` |
-
-### `keyframes` *(line 185)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Out",value=(trainProps["startX"]+1.4+trainProps["offset"])}…` |
-
-### `keyframes` *(line 190)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Out",value=(trainProps["startX"]+1.3+trainProps["offset"])}…` |
-
-### `keyframes` *(line 197)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Out",value=trainProps["startX"]+.5+driver_offset_x},{proper…` |
-
-### `keyframes` *(line 200)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Out",value=trainProps["startX"]+.5+car_offset_x},{property=…` |
-
-### `keyframes` *(line 203)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Out",value=trainProps["startX"]+.5+train_offset_x},{propert…` |
-
-### `keyframes` *(line 208)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="X",ease="Out",value=trainProps["startX"]+.5+pedestal_offset_x},{property="Y",ease="Out",value=trainProps["startY"]+.…` |
-
-### `keyframes` *(line 218)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",value=trainProps["stopX"]+.5+light_offset_x},{property="Y",value=…` |
-
-### `keyframes` *(line 228)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="WALK_DL"},{property="X",ease="Linear",value=(trainProps["stopX"]+1+trainProps["offset"])},{propert…` |
-
-### `keyframes` *(line 233)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="WALK_DL"},{property="X",ease="Linear",value=(trainProps["stopX"]+2.15+trainProps["offset"])},{prop…` |
-
-### `keyframes` *(line 238)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="WALK_DR"},{property="X",ease="Linear",value=(trainProps["stopX"]+1.4+trainProps["offset"])},{prope…` |
-
-### `keyframes` *(line 243)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="WALK_DR"},{property="X",ease="Linear",value=(trainProps["stopX"]+1.3+trainProps["offset"])},{prope…` |
-
-### `keyframes` *(line 257)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=trainProps["stopX"]+.5+driver_offset_x},{property…` |
-
-### `keyframes` *(line 262)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=trainProps["stopX"]+.5+car_offset_x},{property="Y…` |
-
-### `keyframes` *(line 267)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=trainProps["stopX"]+.5+train_offset_x},{property=…` |
-
-### `keyframes` *(line 274)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=trainProps["stopX"]+.5+pedestal_offset_x},{proper…` |
-
-### `keyframes` *(line 429)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Out",value=trainProps["startX"]+.5+driver_offset_x},{proper…` |
-
-### `keyframes` *(line 432)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Out",value=trainProps["startX"]+.5+car_offset_x},{property=…` |
-
-### `keyframes` *(line 435)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Out",value=trainProps["startX"]+.5+train_offset_x},{propert…` |
-
-### `keyframes` *(line 441)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="X",ease="Out",value=trainProps["startX"]+.5+pedestal_offset_x},{property="Y",ease="Out",value=trainProps["startY"]+.…` |
-
-### `keyframes` *(line 451)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",value=trainProps["stopX"]+.5+light_offset_x},{property="Y",value=…` |
-
-### `keyframes` *(line 465)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="WALK_UR"},{property="X",ease="Linear",value=player_position.x},{property="Z",ease="Linear",value=p…` |
-
-### `keyframes` *(line 474)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=(trainProps["stopX"]+1.5-.5+trainProps["offset"])…` |
-
-### `keyframes` *(line 480)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="WALK_UR"},{property="X",ease="Linear",value=player_position.x},{property="Z",ease="Linear",value=p…` |
-
-### `keyframes` *(line 488)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=(trainProps["stopX"]+2.15+trainProps["offset"])},…` |
-
-### `keyframes` *(line 494)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="WALK_UL"},{property="X",ease="Linear",value=player_position.x},{property="Z",ease="Linear",value=p…` |
-
-### `keyframes` *(line 502)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=(trainProps["stopX"]+1.4+trainProps["offset"])},{…` |
-
-### `keyframes` *(line 507)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="WALK_UL"},{property="X",ease="Linear",value=player_position.x},{property="Z",ease="Linear",value=p…` |
-
-### `keyframes` *(line 515)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=(trainProps["stopX"]+1.3+trainProps["offset"])},{…` |
-
-### `keyframes` *(line 521)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=trainProps["stopX"]+.5+driver_offset_x},{property…` |
-
-### `keyframes` *(line 524)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=trainProps["stopX"]+.5+car_offset_x},{property="Y…` |
-
-### `keyframes` *(line 527)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=trainProps["stopX"]+.5+train_offset_x},{property=…` |
-
-### `keyframes` *(line 531)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="In",value=trainProps["stopX"]+.5+pedestal_offset_x},{proper…` |
-
-### `board_color` *(line 739)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | number literal | `120` |
-| `g` | number literal | `196` |
-| `b` | number literal | `159` |
-
-### `posts` *(line 740)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `servers2` *(line 855)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `hash` *(line 856)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `servers` *(line 863)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `keyframes` *(line 1088)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Linear",value=trainProps["startX"]+.5+driver_offset_x},{pro…` |
-
-### `keyframes` *(line 1092)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Linear",value=trainProps["startX"]+.5+car_offset_x},{proper…` |
-
-### `keyframes` *(line 1096)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{properties={{property="Animation",value="IDLE_"..direction},{property="X",ease="Linear",value=trainProps["startX"]+.5+train_offset_x},{prop…` |
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/indy-trains/main.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+- **Line:** 295
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `post_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 6. `validate_passenger_train(area_id,train_name)`
+
+- **Line:** 603
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `train_name` | Declared directly in the current Lua. Type not inferred. |
+
+#### 7. `greet_conductor(bot_id,player_id)`
+
+- **Line:** 719
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 8. `populate_server_list()`
+
+- **Line:** 823
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+#### 9. `check_servers()`
+
+- **Line:** 879
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+#### 10. `spawn_conductor(area_id, object_data)`
+
+- **Line:** 894
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_data` | Declared directly in the current Lua. Type not inferred. |
+
+#### 11. `validate_cargo_train(area_id,train_name)`
+
+- **Line:** 944
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `train_name` | Declared directly in the current Lua. Type not inferred. |
+
+#### 12. `run_cargo_train(area_id,train_name)`
+
+- **Line:** 1049
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `train_name` | Declared directly in the current Lua. Type not inferred. |
+
+#### 13. `find_trains()`
+
+- **Line:** 1111
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 23 | `passenger_train_required_properties` |
+| 24 | `passenger_train_optional_properties` |
+| 26 | `cargo_train_required_properties` |
+| 27 | `cargo_train_optional_properties` |
+| 29 | `conductor_required_properties` |
+| 30 | `conductor_optional_properties` |
+| 40 | `servers` |
+| 42 | `train_cache` |
+| 43 | `conductor_cache` |
+| 44 | `cargo_schedule` |
+| 45 | `passenger_cache` |
+| 46 | `track_cache` |
+| 47 | `player_using_train_menu` |
+| 59 | `t` |
+| 177 | `keyframes` |
+| 182 | `keyframes` |
+| 186 | `keyframes` |
+| 191 | `keyframes` |
+| 198 | `keyframes` |
+| 201 | `keyframes` |
+| 204 | `keyframes` |
+| 209 | `keyframes` |
+| 220 | `keyframes` |
+| 229 | `keyframes` |
+| 234 | `keyframes` |
+| 239 | `keyframes` |
+| 244 | `keyframes` |
+| 258 | `keyframes` |
+| 263 | `keyframes` |
+| 268 | `keyframes` |
+| 275 | `keyframes` |
+| 430 | `keyframes` |
+| 433 | `keyframes` |
+| 436 | `keyframes` |
+| 442 | `keyframes` |
+| 453 | `keyframes` |
+| 466 | `keyframes` |
+| 475 | `keyframes` |
+| 481 | `keyframes` |
+| 489 | `keyframes` |
+| 495 | `keyframes` |
+| 503 | `keyframes` |
+| 508 | `keyframes` |
+| 516 | `keyframes` |
+| 522 | `keyframes` |
+| 525 | `keyframes` |
+| 528 | `keyframes` |
+| 532 | `keyframes` |
+| 740 | `board_color` |
+| 741 | `posts` |
+| 856 | `servers2` |
+| 857 | `hash` |
+| 864 | `servers` |
+| 1091 | `keyframes` |
+| 1095 | `keyframes` |
+| 1099 | `keyframes` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.animate_bot_properties` | 21 | 200 |
+| `Net.animate_player` | 8 | 116 |
+| `Net.animate_player_properties` | 16 | 179 |
+| `Net.close_bbs` | 1 | 328 |
+| `Net.create_bot` | 14 | 98 |
+| `Net.fade_player_camera` | 6 | 82 |
+| `Net.get_object_by_id` | 2 | 1121 |
+| `Net.get_player_area` | 3 | 88 |
+| `Net.get_player_position` | 2 | 462 |
+| `Net.list_areas` | 1 | 1112 |
+| `Net.list_objects` | 2 | 1119 |
+| `Net.message_player` | 3 | 320 |
+| `Net.move_bot` | 4 | 542 |
+| `Net.on` | 7 | 1156 |
+| `Net.open_board` | 1 | 818 |
+| `Net.play_sound_for_player` | 6 | 83 |
+| `Net.remove_bot` | 13 | 255 |
+| `Net.remove_object` | 3 | 1126 |
+| `Net.slide_player_camera` | 1 | 540 |
+| `Net.transfer_player` | 5 | 572 |
+| `Net.transfer_server` | 1 | 591 |
+| `Net.unlock_player_camera` | 1 | 94 |

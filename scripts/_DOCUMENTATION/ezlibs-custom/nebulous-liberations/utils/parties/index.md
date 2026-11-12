@@ -1,85 +1,218 @@
-# `parties.lua`
+# 📄 `parties.lua`
 
-> **Source:** `scripts/ezlibs-custom/nebulous-liberations/utils/parties.lua`  
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/utils/parties.lua`](../../../../../ezlibs-custom/nebulous-liberations/utils/parties.lua)  
 > **Source lines:** 148  
-> **Functions detected:** 9  
-> **Table declarations detected:** 5
+> **SHA-256 (UTF-8):** `63a330050002d4…`  
+> **Declared/assigned functions detected:** 9  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 6
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Source-based reference for `scripts/ezlibs-custom/nebulous-liberations/utils/parties.lua`. No module-purpose prose was supplied in the leading source comments.
 
-## Dependencies
+## 🔗 Dependencies
 
-- `scripts/libs/emotes` — line 1
+| Line | Module string supplied to `require` |
+|---|---|
+| 1 | `scripts/libs/emotes` |
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 11 | `internal_find` | `player_id` |
-| 26 | `Parties.find` | `player_id` |
-| 36 | `Parties.is_in_same_party` | `player_a, player_b` |
-| 54 | `Parties.on_tick` | `elapsed` |
-| 82 | `Parties.request` | `requester, recruit` |
-| 91 | `internal_find_request` | `requester, recruit` |
-| 100 | `Parties.has_request` | `recruit, requester` |
-| 104 | `Parties.accept` | `recruit, requester` |
-| 131 | `Parties.leave` | `player_id` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 11 | `internal_find` | `player_id` | local |
+| 26 | `Parties.find` | `player_id` | declared |
+| 36 | `Parties.is_in_same_party` | `player_a, player_b` | declared |
+| 54 | `Parties.on_tick` | `elapsed` | declared |
+| 82 | `Parties.request` | `requester, recruit` | declared |
+| 91 | `internal_find_request` | `requester, recruit` | local |
+| 100 | `Parties.has_request` | `recruit, requester` | declared |
+| 104 | `Parties.accept` | `recruit, requester` | declared |
+| 131 | `Parties.leave` | `player_id` | declared |
 
-### Function notes
+### Function details
 
-- **`internal_find(player_id)`** *(source line 11)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Parties.find(player_id)`** *(source line 26)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Parties.is_in_same_party(player_a, player_b)`** *(source line 36)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Parties.on_tick(elapsed)`** *(source line 54)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Parties.request(requester, recruit)`** *(source line 82)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`internal_find_request(requester, recruit)`** *(source line 91)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Parties.has_request(recruit, requester)`** *(source line 100)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Parties.accept(recruit, requester)`** *(source line 104)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Parties.leave(player_id)`** *(source line 131)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `internal_find(player_id)`
 
-## Tables and data structures
+- **Location:** source line 11.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `Parties` *(line 2)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
 
-### `parties` *(line 4)*
+#### 2. `Parties.find(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 26.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `pending_requests` *(line 6)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
 
-### `dead_requests` *(line 59)*
+#### 3. `Parties.is_in_same_party(player_a, player_b)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 36.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `members` *(line 120)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-| Field / key | Value category | Initializer expression (source) |
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_a` | Not explicitly documented in adjacent source annotations. |
+| 2 | `player_b` | Not explicitly documented in adjacent source annotations. |
+
+#### 4. `Parties.on_tick(elapsed)`
+
+- **Location:** source line 54.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `elapsed` | Not explicitly documented in adjacent source annotations. |
+
+#### 5. `Parties.request(requester, recruit)`
+
+- **Location:** source line 82.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `requester` | Not explicitly documented in adjacent source annotations. |
+| 2 | `recruit` | Not explicitly documented in adjacent source annotations. |
+
+#### 6. `internal_find_request(requester, recruit)`
+
+- **Location:** source line 91.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `requester` | Not explicitly documented in adjacent source annotations. |
+| 2 | `recruit` | Not explicitly documented in adjacent source annotations. |
+
+#### 7. `Parties.has_request(recruit, requester)`
+
+- **Location:** source line 100.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `recruit` | Not explicitly documented in adjacent source annotations. |
+| 2 | `requester` | Not explicitly documented in adjacent source annotations. |
+
+#### 8. `Parties.accept(recruit, requester)`
+
+- **Location:** source line 104.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `recruit` | Not explicitly documented in adjacent source annotations. |
+| 2 | `requester` | Not explicitly documented in adjacent source annotations. |
+
+#### 9. `Parties.leave(player_id)`
+
+- **Location:** source line 131.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+*No anonymous `function(...)` expressions detected.*
+
+## 📦 Tables and data
+
+The following **6** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `Parties` — line 3
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `parties` — line 5
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 3. `pending_requests` — line 6
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 4. `return` — line 15
+
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `party_index` | expression/reference | `party_index` |
+| `player_index` | expression/reference | `i` |
+
+### 5. `dead_requests` — line 60
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 6. `members` — line 120
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | expression/reference | `requester` |
 | `[2]` | expression/reference | `recruit` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/nebulous-liberations/utils/parties.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+These are **statically detected call sites**, not API definitions or guaranteed successful runtime calls.
+
+| Call identifier | Occurrences |
+|---|---|
+| `Net.exclusive_player_emote` | 6 |
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

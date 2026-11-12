@@ -4,8 +4,8 @@ EnemyTemplates.register("ShadeMan", {
     battle_name = "ShadeMan",
     health = 600,
     max_health = 600,
-    texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/shademan.png",
-    animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/shademan.animation",
+    texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/npcs/shademan.png",
+    animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/npcs/shademan.animation",
     shape = { {1} },
     shape_offset_x = 0,
     shape_offset_y = -1,
@@ -17,6 +17,6 @@ EnemyTemplates.register("ShadeMan", {
         animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.animation",
     },
     death_message = "Grr! I can't\nbelieve I've been\ndisgraced again...!\nGyaaaahh!!",
-    preload_assets = { "/server/assets/ezlibs-custom/nebulous-liberations/bots/shademan.animation", "/server/assets/ezlibs-custom/nebulous-liberations/bots/shademan.png", "/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.png","/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.animation",}
+    preload_assets = { "/server/assets/ezlibs-custom/nebulous-liberations/bots/npcs/shademan.animation", "/server/assets/ezlibs-custom/nebulous-liberations/bots/npcs/shademan.png", "/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.png","/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.animation",}
 })
 end

@@ -1,107 +1,124 @@
-# `buttons.lua`
+# 📄 `buttons.lua`
 
-> **Source:** `scripts/input-controller/buttons.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/input-controller/buttons.lua`](../../../input-controller/buttons.lua)  
 > **Source lines:** 12  
-> **Functions detected:** 0  
-> **Table declarations detected:** 9
+> **SHA-256 (UTF-8):** `d2df61d2c2d669…`  
+> **Declared/assigned functions detected:** 0  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 9
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Source-based reference for `scripts/input-controller/buttons.lua`. No module-purpose prose was supplied in the leading source comments.
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+*No named function declaration or `= function(...)` assignment detected. Anonymous callbacks may still be present.*
 
-## Tables and data structures
+## 🪄 Anonymous closures
 
-### `Buttons` *(line 1)*
+*No anonymous `function(...)` expressions detected.*
 
-| Field / key | Value category | Initializer expression (source) |
+## 📦 Tables and data
+
+The following **9** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `Buttons` — line 1
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `ShoulderL` | table | `{"Shoulder L"}` |
-| `ShoulderR` | table | `{"Shoulder R"}` |
-| `Start` | table | `{"Pause"}` |
-| `Minimap` | table | `{"Minimap"}` |
-| `Confirm` | table | `{ "Confirm", "A", "Interact", "Use Card"}` |
-| `Cancel` | table | `{ "Cancel", "Shoot", "Run" }` |
-| `Options` | table | `{"Option", "Special"}` |
-| `CustomMenu` | table | `{"Cust"}` |
+| `ShoulderL` | nested table | `{"Shoulder L"}` |
+| `ShoulderR` | nested table | `{"Shoulder R"}` |
+| `Start` | nested table | `{"Pause"}` |
+| `Minimap` | nested table | `{"Minimap"}` |
+| `Confirm` | nested table | `{ "Confirm", "A", "Interact", "Use Card"}` |
+| `Cancel` | nested table | `{ "Cancel", "Shoot", "Run" }` |
+| `Options` | nested table | `{"Option", "Special"}` |
+| `CustomMenu` | nested table | `{"Cust"}` |
 
-### `ShoulderL` *(line 2)*
+### 2. `ShoulderL` — line 2
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | string literal | `"Shoulder L"` |
 
-### `ShoulderR` *(line 3)*
+### 3. `ShoulderR` — line 3
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | string literal | `"Shoulder R"` |
 
-### `Start` *(line 4)*
+### 4. `Start` — line 4
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | string literal | `"Pause"` |
 
-### `Minimap` *(line 5)*
+### 5. `Minimap` — line 5
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | string literal | `"Minimap"` |
 
-### `Confirm` *(line 6)*
+### 6. `Confirm` — line 6
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | string literal | `"Confirm"` |
 | `[2]` | string literal | `"A"` |
 | `[3]` | string literal | `"Interact"` |
 | `[4]` | string literal | `"Use Card"` |
 
-### `Cancel` *(line 7)*
+### 7. `Cancel` — line 7
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | string literal | `"Cancel"` |
 | `[2]` | string literal | `"Shoot"` |
 | `[3]` | string literal | `"Run"` |
 
-### `Options` *(line 8)*
+### 8. `Options` — line 8
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | string literal | `"Option"` |
 | `[2]` | string literal | `"Special"` |
 
-### `CustomMenu` *(line 9)*
+### 9. `CustomMenu` — line 9
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | string literal | `"Cust"` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/input-controller/buttons.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

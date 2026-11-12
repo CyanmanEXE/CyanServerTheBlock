@@ -1,107 +1,181 @@
-# `tileset_embedder.lua`
+# 📄 `tileset_embedder.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-custom/nebulous-liberations/liberations/tileset_embedder.lua`  
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/liberations/tileset_embedder.lua`](../../../../../ezlibs-custom/nebulous-liberations/liberations/tileset_embedder.lua)  
 > **Source lines:** 356  
-> **Functions detected:** 12  
-> **Table declarations detected:** 8
+> **SHA-256 (UTF-8):** `30b6d2c4f2b34fb381b435d1f8722decc5851d1a4d2b285d83156d2668ed7e3a`  
+> **Named/assigned functions detected:** 12  
+> **Table initializers detected:** 8
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-tileset_embedder.lua Ensures maps containing a Tiled "Liberation Config" object reference the shared Nebulous Liberations tilesets. Shared TSX/PNG assets are published before TMX files are modified. The caller can await Embedder.run().
+Current source inventory for `scripts/ezlibs-custom/nebulous-liberations/liberations/tileset_embedder.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 7
+| Line | `require` module |
+|---:|---|
+| 7 | `scripts/logger/logger` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No literal `:on` event registration detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 41 | `basename` | `path` | local |
+| 45 | `source_to_file_path` | `source` | local |
+| 55 | `parse_tilesets` | `tmx` | local |
+| 73 | `get_liberation_config` | `area_id` | local |
+| 85 | `publish_shared_assets` | `(none)` | local |
+| 129 | `read_tileset_tilecount` | `entry` | local |
+| 158 | `next_gid_after_existing_tilesets` | `entries` | local |
+| 172 | `normalize_shared_sources` | `tmx, entries` | local |
+| 191 | `insert_declarations` | `tmx, declarations` | local |
+| 208 | `write_updated_map` | `area_id, map_path, original, updated` | local |
+| 250 | `process_map` | `area_id` | local |
+| 322 | `Embedder.run` | `(none)` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `basename(path)`
+
+- **Line:** 41
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 41 | `basename` | `path` |
-| 45 | `source_to_file_path` | `source` |
-| 55 | `parse_tilesets` | `tmx` |
-| 73 | `get_liberation_config` | `area_id` |
-| 85 | `publish_shared_assets` | `(none)` |
-| 129 | `read_tileset_tilecount` | `entry` |
-| 158 | `next_gid_after_existing_tilesets` | `entries` |
-| 172 | `normalize_shared_sources` | `tmx, entries` |
-| 191 | `insert_declarations` | `tmx, declarations` |
-| 208 | `write_updated_map` | `area_id, map_path, original, updated` |
-| 250 | `process_map` | `area_id` |
-| 322 | `Embedder.run` | `(none)` |
+| 1 | `path` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `source_to_file_path(source)`
 
-- **`basename(path)`** *(source line 41)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`source_to_file_path(source)`** *(source line 45)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`parse_tilesets(tmx)`** — Tiled map tilesets are usually external, self-closing declarations. This parser also records inline tilesets so their tile ranges are not overlapped. *(source line 55)*
-- **`get_liberation_config(area_id)`** *(source line 73)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`publish_shared_assets()`** *(source line 85)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`read_tileset_tilecount(entry)`** *(source line 129)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`next_gid_after_existing_tilesets(entries)`** *(source line 158)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`normalize_shared_sources(tmx, entries)`** *(source line 172)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`insert_declarations(tmx, declarations)`** *(source line 191)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`write_updated_map(area_id, map_path, original, updated)`** *(source line 208)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`process_map(area_id)`** *(source line 250)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Embedder.run()`** *(source line 322)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 45
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `source` | Declared in this function; type not inferred. |
 
-### `Embedder` *(line 5)*
+#### 3. `parse_tilesets(tmx)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 55
+- **Declaration:** local
 
-### `SHARED_TILESETS` *(line 8)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `tmx` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ filename = "Liberation Collision.tsx", source = "../assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx", file_path = "asse…` |
-| `[2]` | table | `{ filename = "selected tile.tsx", source = "../assets/ezlibs-custom/nebulous-liberations/selected tile.tsx", file_path = "assets/ezlibs-cust…` |
-| `[3]` | table | `{ filename = "attack indicator.tsx", source = "../assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx", file_path = "assets/ezlib…` |
+#### 4. `get_liberation_config(area_id)`
 
-### `TARGET_BY_FILENAME` *(line 35)*
+- **Line:** 73
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
 
-### `entries` *(line 56)*
+#### 5. `publish_shared_assets()`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 85
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
 
-### `asset_files` *(line 88)*
+#### 6. `read_tileset_tilecount(entry)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ file_path = tileset.file_path, asset_path = tileset.asset_path }` |
-| `[2]` | table | `{ file_path = "assets/ezlibs-custom/nebulous-liberations/" .. tileset.image_filename, asset_path = "/server/assets/ezlibs-custom/nebulous-li…` |
+- **Line:** 129
+- **Declaration:** local
 
-### `found` *(line 174)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `entry` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 7. `next_gid_after_existing_tilesets(entries)`
 
-### `missing` *(line 277)*
+- **Line:** 158
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `entries` | Declared in this function; type not inferred. |
 
-### `declarations` *(line 298)*
+#### 8. `normalize_shared_sources(tmx, entries)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 172
+- **Declaration:** local
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `tmx` | Declared in this function; type not inferred. |
+| 2 | `entries` | Declared in this function; type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/nebulous-liberations/liberations/tileset_embedder.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 9. `insert_declarations(tmx, declarations)`
+
+- **Line:** 191
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `tmx` | Declared in this function; type not inferred. |
+| 2 | `declarations` | Declared in this function; type not inferred. |
+
+#### 10. `write_updated_map(area_id, map_path, original, updated)`
+
+- **Line:** 208
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `map_path` | Declared in this function; type not inferred. |
+| 3 | `original` | Declared in this function; type not inferred. |
+| 4 | `updated` | Declared in this function; type not inferred. |
+
+#### 11. `process_map(area_id)`
+
+- **Line:** 250
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+
+#### 12. `Embedder.run()`
+
+- **Line:** 322
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 6 | `Embedder` |
+| 9 | `SHARED_TILESETS` |
+| 36 | `TARGET_BY_FILENAME` |
+| 56 | `entries` |
+| 88 | `asset_files` |
+| 174 | `found` |
+| 277 | `missing` |
+| 299 | `declarations` |
+
+## Net API calls
+
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.get_object_by_id` | 1 | 76 |
+| `Net.list_objects` | 1 | 74 |
+| `Net.update_asset` | 2 | 108 |

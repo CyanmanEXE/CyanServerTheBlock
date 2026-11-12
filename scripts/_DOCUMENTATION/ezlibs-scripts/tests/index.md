@@ -1,18 +1,27 @@
-# 📁 scripts/ezlibs-scripts/tests
+# 📁 ezlibs-scripts/tests
 
-## Contents
+[🏠 Documentation home](../../index.md) · [⬆ Parent folder](../index.md)
 
-- [Collection contents](#collection-contents)
-- [Collection summary](#collection-summary)
+## 🗂️ Contents
 
-## Collection contents
+- [📚 Collection contents](#collection-contents)
+- [🔎 Module API overview](#module-api-overview)
+- [📊 Collection summary](#collection-summary)
+
+## 📚 Collection contents
 
 | Type | Entry | Lua files | Functions | Tables | Source lines | Documentation |
-|---|---|---:|---:|---:|---:|---|
-| 📄 Script | `test_utilities.lua` | 1 | 2 | 4 | 77 | [Open script index](./test_utilities/index.md) |
+|---|---|---|---|---|---|---|
+| 📄 Script | `test_utilities.lua` | 1 | 2 | 5 | 77 | [Open script reference](test_utilities/index.md) |
 
-## Collection summary
+## 🔎 Module API overview
 
-This collection contains **1 Lua files**, **2 detected named functions**, and **4 detected table initializers**.
+Named, qualified functions detected in direct files in this folder. Check each linked script reference for **all local and assigned functions**, parameters, initializer tables, and line numbers. A qualified name alone does not establish external accessibility.
 
-The individual script indexes document exact source paths, discovered `require` dependencies, direct `Net:on` event names, declared function signatures, and statically enumerable table keys.
+*No qualified function declarations detected in directly contained files.*
+
+## 📊 Collection summary
+
+This folder subtree contains **1 Lua source files**, **2 named/assigned function detections**, and **5 table initializer detections**.
+
+Counts represent static matching of archived code and may omit anonymous closures or dynamic table construction.

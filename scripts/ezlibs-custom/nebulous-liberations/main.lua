@@ -7,9 +7,9 @@
 
 math.randomseed(os.time())
 
-local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
+local SharedLogger = require("scripts/logger/logger")
 local EzMapInstance = require("scripts/ezlibs-scripts/ezmapinstance")
-local log = ezlogger.get("nebulous-liberations")
+local log = SharedLogger.register("nebulous-liberations"):register_subsystem("main")
 
 -- Fallback for the liberation order-points cap. A Liberation Config object
 -- can override this with its Max Order Points custom property. The resolved
@@ -720,6 +720,12 @@ local function initialize_areas()
         end
     end
 end
+
+-- The persistent Gold Prog is spawned by eznpcs from the default-map NPC
+-- placeholder. Its Dialogue event reuses this plugin's party-aware launcher.
+local MissionSelector = require(
+    "scripts/ezlibs-custom/nebulous-liberations/liberations/mission_selector")
+MissionSelector.register(LibPlugin)
 
 -- TilesetEmbedder.run() already returns the promise created by
 -- Async.promisify(). Chain initialization directly to that promise instead of

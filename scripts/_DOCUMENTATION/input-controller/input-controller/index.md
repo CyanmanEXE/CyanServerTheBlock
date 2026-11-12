@@ -1,227 +1,580 @@
-# `input-controller.lua`
+# 📄 `input-controller.lua` — Current source reference
 
-> **Source:** `scripts/input-controller/input-controller.lua`  
-> **Source lines:** 660  
-> **Functions detected:** 47  
-> **Table declarations detected:** 22
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/input-controller/input-controller.lua`](../../../input-controller/input-controller.lua)  
+> **Source lines:** 710  
+> **SHA-256:** `13dafddc35fba3aab09a5558e26ff647f96a170954633733228c790a8258c09a`  
+> **Declared/assigned functions:** 47 · **table initializers (simple patterns):** 22 · **event subscriptions detected:** 0
+
+> **Method:** Static source inventory. Parameters are spelled as in the source; no types, return values, or public accessibility are inferred from signatures alone. See the authored guides for behavioral descriptions.
+
+## 🧭 Contents
 
 - [Overview](#overview)
 - [Dependencies](#dependencies)
 - [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net APIs](#net-apis)
 
 ## Overview
 
-input-controller.lua Unified sticky-state input controller with release/repeat edges and UI handoff guards. Timing is driven only by tick(delta_time); missing packet keys never imply release. Lifecycle: local ctrl = InputController.new(player_id, button_mappings, dir_names, config) ctrl:activate()     -- begin processing (default unless config.auto_activate == false) ctrl:deactivate()   -- stop processing, clear transient state (no events emitted) ctrl:reset()        -- clear transient state, keep active flag as-is ctrl:reload(m, d)   -- swap in new mappings/dir-names and reset transient state ctrl:destroy()      -- permanent teardown Repeat cadence: Per-instance. `config.first_repeat_delay` and `config.repeat_delay` override the module defaults at construction. `:set_repeat_delays(first, repeat)` changes them at runtime; `:restore_repeat_delays()` reverts to the values used at construction. Extension: local MyController = InputController.extend({ _init = function(self, ...) InputController._init(self, ...); ... end, some_method = function(self) ... end, }) Cloning (same mappings, new instance): local copy = ctrl:clone(other_player_id_or_nil)
+Current reference for `input-controller/input-controller.lua` in the PlayerControl-patched November 11 snapshot.
 
 ## Dependencies
 
-- `scripts/utils/utility` — line 28
-- `scripts/input-controller/d-pad` — line 29
+| Line | Required module |
+|---:|---|
+| 28 | `scripts/utils/utility` |
+| 29 | `scripts/input-controller/d-pad` |
 
 ## Events
 
-- No direct `Net:on(...)` registration was detected.
+No literal named event registrations detected.
 
-## Functions
+## Functions and parameters
 
-| Line | Function / method | Parameters as declared |
+| Line | Declared/assigned function | Parameters (source) | Local |
+|---:|---|---|---|
+| 46 | `normalize_state` | `value` | yes |
+| 58 | `normalize_events` | `events` | yes |
+| 91 | `rebuild_action_tables` | `self` | yes |
+| 112 | `sanitize_delay` | `value, fallback` | yes |
+| 122 | `InputController.new` | `player_id, button_mappings, direction_raw_names, config` | no |
+| 128 | `InputController:_init` | `player_id, button_mappings, direction_raw_names, config` | no |
+| 169 | `InputController.extend` | `overrides` | no |
+| 177 | `subclass.new` | `player_id, button_mappings, direction_raw_names, config` | no |
+| 188 | `InputController:clone` | `player_id` | no |
+| 206 | `InputController:is_active` | `(none)` | no |
+| 210 | `InputController:activate` | `(none)` | no |
+| 215 | `InputController:deactivate` | `(none)` | no |
+| 220 | `InputController:reset` | `(none)` | no |
+| 225 | `InputController:reload` | `button_mappings, direction_raw_names` | no |
+| 238 | `InputController:_clear_transient_state` | `(none)` | no |
+| 250 | `InputController:destroy` | `(none)` | no |
+| 274 | `InputController:set_repeat_delays` | `first_repeat_delay, repeat_delay` | no |
+| 289 | `InputController:restore_repeat_delays` | `(none)` | no |
+| 299 | `InputController:get_repeat_delays` | `(none)` | no |
+| 307 | `InputController:on` | `event, callback` | no |
+| 314 | `InputController:off` | `event, callback` | no |
+| 321 | `InputController:remove_listener` | `event, callback` | no |
+| 328 | `InputController:claim_input` | `owner, force` | no |
+| 363 | `InputController:release_input` | `owner` | no |
+| 389 | `InputController:has_input_control` | `owner` | no |
+| 393 | `InputController:get_input_owner` | `(none)` | no |
+| 397 | `InputController:_swallowing` | `(none)` | no |
+| 401 | `InputController:_emit_edge` | `kind, action, state` | no |
+| 425 | `InputController:handle_raw_input` | `events` | no |
+| 446 | `InputController:_set_action_down` | `action, down` | no |
+| 459 | `InputController:_update_logical_states` | `(none)` | no |
+| 478 | `InputController:_update_direction` | `(none)` | no |
+| 507 | `InputController:_synthesize_non_direction_releases` | `(none)` | no |
+| 521 | `InputController:_process_holds` | `dt` | no |
+| 541 | `InputController:tick` | `delta_time` | no |
+| 559 | `can_access_input` | `self, owner` | yes |
+| 566 | `InputController:is_action_down` | `action, owner` | no |
+| 574 | `InputController:peek_action_pressed` | `action, owner` | no |
+| 581 | `InputController:peek_action_released` | `action, owner` | no |
+| 588 | `InputController:peek_action_repeated` | `action, owner` | no |
+| 595 | `InputController:is_action_pressed` | `action, owner` | no |
+| 604 | `InputController:is_action_released` | `action, owner` | no |
+| 613 | `InputController:is_action_repeated` | `action, owner` | no |
+| 622 | `InputController:get_active_direction` | `owner` | no |
+| 633 | `InputController:require_release` | `actions, owner` | no |
+| 645 | `InputController:swallow` | `seconds, owner` | no |
+| 653 | `InputController:consume` | `owner` | no |
+
+### Parameter details
+
+#### 1. `normalize_state(value)`
+
+- **Declared at:** source line 46.
+- **Scope syntax:** local.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
 |---:|---|---|
-| 46 | `normalize_state` | `value` |
-| 58 | `normalize_events` | `events` |
-| 91 | `rebuild_action_tables` | `self` |
-| 112 | `sanitize_delay` | `value, fallback` |
-| 122 | `InputController.new` | `player_id, button_mappings, direction_raw_names, config` |
-| 128 | `InputController:_init` | `player_id, button_mappings, direction_raw_names, config` |
-| 169 | `InputController.extend` | `overrides` |
-| 177 | `subclass.new` | `player_id, button_mappings, direction_raw_names, config` |
-| 188 | `InputController:clone` | `player_id` |
-| 206 | `InputController:is_active` | `(none)` |
-| 210 | `InputController:activate` | `(none)` |
-| 215 | `InputController:deactivate` | `(none)` |
-| 220 | `InputController:reset` | `(none)` |
-| 225 | `InputController:reload` | `button_mappings, direction_raw_names` |
-| 238 | `InputController:_clear_transient_state` | `(none)` |
-| 250 | `InputController:destroy` | `(none)` |
-| 274 | `InputController:set_repeat_delays` | `first_repeat_delay, repeat_delay` |
-| 289 | `InputController:restore_repeat_delays` | `(none)` |
-| 299 | `InputController:get_repeat_delays` | `(none)` |
-| 307 | `InputController:on` | `event, callback` |
-| 314 | `InputController:off` | `event, callback` |
-| 321 | `InputController:remove_listener` | `event, callback` |
-| 328 | `InputController:claim_input` | `owner, force` |
-| 364 | `InputController:release_input` | `owner` |
-| 388 | `InputController:has_input_control` | `owner` |
-| 392 | `InputController:get_input_owner` | `(none)` |
-| 396 | `InputController:_swallowing` | `(none)` |
-| 400 | `InputController:_emit_edge` | `kind, action, state` |
-| 424 | `InputController:handle_raw_input` | `events` |
-| 445 | `InputController:_set_action_down` | `action, down` |
-| 458 | `InputController:_update_logical_states` | `(none)` |
-| 477 | `InputController:_update_direction` | `(none)` |
-| 506 | `InputController:_synthesize_non_direction_releases` | `(none)` |
-| 520 | `InputController:_process_holds` | `dt` |
-| 540 | `InputController:tick` | `delta_time` |
-| 558 | `can_access_input` | `self, owner` |
-| 565 | `InputController:is_action_down` | `action, owner` |
-| 573 | `InputController:peek_action_pressed` | `action, owner` |
-| 580 | `InputController:peek_action_released` | `action, owner` |
-| 587 | `InputController:peek_action_repeated` | `action, owner` |
-| 594 | `InputController:is_action_pressed` | `action, owner` |
-| 603 | `InputController:is_action_released` | `action, owner` |
-| 612 | `InputController:is_action_repeated` | `action, owner` |
-| 621 | `InputController:get_active_direction` | `owner` |
-| 632 | `InputController:require_release` | `actions, owner` |
-| 644 | `InputController:swallow` | `seconds, owner` |
-| 652 | `InputController:consume` | `owner` |
+| 1 | `value` | Exact source parameter; type not asserted. |
 
-### Function notes
+#### 2. `normalize_events(events)`
 
-- **`normalize_state(value)`** *(source line 46)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`normalize_events(events)`** *(source line 58)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`rebuild_action_tables(self)`** — Rebuild self.actions and self.raw_to_actions from self.button_mappings. *(source line 91)*
-- **`sanitize_delay(value, fallback)`** *(source line 112)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController.new(player_id, button_mappings, direction_raw_names, config)`** — --------------------------------------------------------------------------- Construction --------------------------------------------------------------------------- *(source line 122)*
-- **`InputController:_init(player_id, button_mappings, direction_raw_names, config)`** *(source line 128)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController.extend(overrides)`** — Create a subclass. *(source line 169)*
-- **`subclass.new(player_id, button_mappings, direction_raw_names, config)`** *(source line 177)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:clone(player_id)`** — Clone produces a new controller that inherits the source controller's current repeat cadence (not the class defaults). *(source line 188)*
-- **`InputController:is_active()`** — --------------------------------------------------------------------------- Lifecycle --------------------------------------------------------------------------- *(source line 206)*
-- **`InputController:activate()`** *(source line 210)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:deactivate()`** *(source line 215)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:reset()`** *(source line 220)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:reload(button_mappings, direction_raw_names)`** *(source line 225)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:_clear_transient_state()`** *(source line 238)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:destroy()`** *(source line 250)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:set_repeat_delays(first_repeat_delay, repeat_delay)`** — Change the repeat cadence at runtime. Passing nil for either argument keeps the current value for that field. *(source line 274)*
-- **`InputController:restore_repeat_delays()`** — Revert to the cadence configured at construction time. *(source line 289)*
-- **`InputController:get_repeat_delays()`** *(source line 299)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:on(event, callback)`** — --------------------------------------------------------------------------- Events --------------------------------------------------------------------------- *(source line 307)*
-- **`InputController:off(event, callback)`** — Match the underlying EventEmitter API and let consumers reliably detach subscriptions during teardown. CameraController previously tried to unsubscribe, but InputController did not expose the emitter's method. *(source line 314)*
-- **`InputController:remove_listener(event, callback)`** *(source line 321)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:claim_input(owner, force)`** — Claim exclusive interactive control. A forced claim is intended for an explicit context transition (for example, entering a minigame) and not for competing systems to repeatedly steal control from each other. *(source line 328)*
-- **`InputController:release_input(owner)`** *(source line 364)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:has_input_control(owner)`** *(source line 388)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:get_input_owner()`** *(source line 392)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:_swallowing()`** *(source line 396)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:_emit_edge(kind, action, state)`** *(source line 400)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:handle_raw_input(events)`** — --------------------------------------------------------------------------- Input handling --------------------------------------------------------------------------- *(source line 424)*
-- **`InputController:_set_action_down(action, down)`** *(source line 445)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:_update_logical_states()`** *(source line 458)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:_update_direction()`** *(source line 477)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:_synthesize_non_direction_releases()`** *(source line 506)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:_process_holds(dt)`** *(source line 520)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:tick(delta_time)`** *(source line 540)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`can_access_input(self, owner)`** — Backward compatibility is retained while the controller is unclaimed. Once an owner exists, callers must identify themselves; legacy pollers can no longer consume the active owner's edge flags by calling without an owner. *(source line 558)*
-- **`InputController:is_action_down(action, owner)`** *(source line 565)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:peek_action_pressed(action, owner)`** *(source line 573)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:peek_action_released(action, owner)`** *(source line 580)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:peek_action_repeated(action, owner)`** *(source line 587)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:is_action_pressed(action, owner)`** *(source line 594)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:is_action_released(action, owner)`** *(source line 603)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:is_action_repeated(action, owner)`** *(source line 612)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:get_active_direction(owner)`** *(source line 621)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:require_release(actions, owner)`** — --------------------------------------------------------------------------- Control --------------------------------------------------------------------------- *(source line 632)*
-- **`InputController:swallow(seconds, owner)`** *(source line 644)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`InputController:consume(owner)`** *(source line 652)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Declared at:** source line 58.
+- **Scope syntax:** local.
+- **Source comment:** No adjacent explanation; refer to the implementation.
 
-## Tables and data structures
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `events` | Exact source parameter; type not asserted. |
 
-### `InputController` *(line 30)*
+#### 3. `rebuild_action_tables(self)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Declared at:** source line 91.
+- **Scope syntax:** local.
+- **Nearby source comment:** Rebuild self.actions and self.raw_to_actions from self.button_mappings.
 
-### `out` *(line 59)*
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `self` | Exact source parameter; type not asserted. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `sanitize_delay(value, fallback)`
 
-### `self.actions` *(line 92)*
+- **Declared at:** source line 112.
+- **Scope syntax:** local.
+- **Source comment:** No adjacent explanation; refer to the implementation.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `value` | Exact source parameter; type not asserted. |
+| 2 | `fallback` | Exact source parameter; type not asserted. |
 
-### `self.raw_to_actions` *(line 93)*
+#### 5. `InputController.new(player_id, button_mappings, direction_raw_names, config)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Declared at:** source line 122.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
 
-### `self.raw_states` *(line 136)*
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `player_id` | Exact source parameter; type not asserted. |
+| 2 | `button_mappings` | Exact source parameter; type not asserted. |
+| 3 | `direction_raw_names` | Exact source parameter; type not asserted. |
+| 4 | `config` | Exact source parameter; type not asserted. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 6. `InputController:_init(player_id, button_mappings, direction_raw_names, config)`
 
-### `self.raw_last_seen` *(line 138)*
+- **Declared at:** source line 128.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `player_id` | Exact source parameter; type not asserted. |
+| 2 | `button_mappings` | Exact source parameter; type not asserted. |
+| 3 | `direction_raw_names` | Exact source parameter; type not asserted. |
+| 4 | `config` | Exact source parameter; type not asserted. |
 
-### `self.logical` *(line 139)*
+#### 7. `InputController.extend(overrides)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Declared at:** source line 169.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Create a subclass.
 
-### `self.pressed_actions` *(line 141)*
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `overrides` | Exact source parameter; type not asserted. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 8. `subclass.new(player_id, button_mappings, direction_raw_names, config)`
 
-### `self.released_actions` *(line 142)*
+- **Declared at:** source line 177.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `player_id` | Exact source parameter; type not asserted. |
+| 2 | `button_mappings` | Exact source parameter; type not asserted. |
+| 3 | `direction_raw_names` | Exact source parameter; type not asserted. |
+| 4 | `config` | Exact source parameter; type not asserted. |
 
-### `self.repeat_actions` *(line 143)*
+#### 9. `InputController:clone(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Declared at:** source line 188.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Clone produces a new controller that inherits the source controller's current repeat cadence (not the class defaults).
 
-### `self.release_required` *(line 144)*
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `player_id` | Exact source parameter; type not asserted. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 10. `InputController:is_active()`
 
-### `self.raw_states` *(line 239)*
+- **Declared at:** source line 206.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 11. `InputController:activate()`
 
-### `self.raw_last_seen` *(line 240)*
+- **Declared at:** source line 210.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 12. `InputController:deactivate()`
 
-### `self.logical` *(line 241)*
+- **Declared at:** source line 215.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 13. `InputController:reset()`
 
-### `self.pressed_actions` *(line 243)*
+- **Declared at:** source line 220.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 14. `InputController:reload(button_mappings, direction_raw_names)`
 
-### `self.released_actions` *(line 244)*
+- **Declared at:** source line 225.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `button_mappings` | Exact source parameter; type not asserted. |
+| 2 | `direction_raw_names` | Exact source parameter; type not asserted. |
 
-### `self.repeat_actions` *(line 245)*
+#### 15. `InputController:_clear_transient_state()`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Declared at:** source line 238.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
 
-### `self.release_required` *(line 246)*
+#### 16. `InputController:destroy()`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Declared at:** source line 250.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
 
-### `pressed` *(line 478)*
+#### 17. `InputController:set_repeat_delays(first_repeat_delay, repeat_delay)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Declared at:** source line 274.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Change the repeat cadence at runtime. Passing nil for either argument keeps the current value for that field.
 
-### `self.pressed_actions` *(line 655)*
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `first_repeat_delay` | Exact source parameter; type not asserted. |
+| 2 | `repeat_delay` | Exact source parameter; type not asserted. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 18. `InputController:restore_repeat_delays()`
 
-### `self.released_actions` *(line 656)*
+- **Declared at:** source line 289.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Revert to the cadence configured at construction time.
+- **Parameters:** none explicitly declared.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 19. `InputController:get_repeat_delays()`
 
-### `self.repeat_actions` *(line 657)*
+- **Declared at:** source line 299.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 20. `InputController:on(event, callback)`
 
-## Implementation notes
+- **Declared at:** source line 307.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
 
-- This reference is generated from the exact archived source `scripts/input-controller/input-controller.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `event` | Exact source parameter; type not asserted. |
+| 2 | `callback` | Exact source parameter; type not asserted. |
+
+#### 21. `InputController:off(event, callback)`
+
+- **Declared at:** source line 314.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Match the underlying EventEmitter API and let consumers reliably detach subscriptions during teardown. CameraController previously tried to unsubscribe, but InputController did not expose the emitter's method.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `event` | Exact source parameter; type not asserted. |
+| 2 | `callback` | Exact source parameter; type not asserted. |
+
+#### 22. `InputController:remove_listener(event, callback)`
+
+- **Declared at:** source line 321.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `event` | Exact source parameter; type not asserted. |
+| 2 | `callback` | Exact source parameter; type not asserted. |
+
+#### 23. `InputController:claim_input(owner, force)`
+
+- **Declared at:** source line 328.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Claim exclusive interactive control. A forced claim is intended for an explicit context transition (for example, entering a minigame) and not for competing systems to repeatedly steal control from each other.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `owner` | Exact source parameter; type not asserted. |
+| 2 | `force` | Exact source parameter; type not asserted. |
+
+#### 24. `InputController:release_input(owner)`
+
+- **Declared at:** source line 363.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `owner` | Exact source parameter; type not asserted. |
+
+#### 25. `InputController:has_input_control(owner)`
+
+- **Declared at:** source line 389.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `owner` | Exact source parameter; type not asserted. |
+
+#### 26. `InputController:get_input_owner()`
+
+- **Declared at:** source line 393.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 27. `InputController:_swallowing()`
+
+- **Declared at:** source line 397.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 28. `InputController:_emit_edge(kind, action, state)`
+
+- **Declared at:** source line 401.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `kind` | Exact source parameter; type not asserted. |
+| 2 | `action` | Exact source parameter; type not asserted. |
+| 3 | `state` | Exact source parameter; type not asserted. |
+
+#### 29. `InputController:handle_raw_input(events)`
+
+- **Declared at:** source line 425.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `events` | Exact source parameter; type not asserted. |
+
+#### 30. `InputController:_set_action_down(action, down)`
+
+- **Declared at:** source line 446.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `action` | Exact source parameter; type not asserted. |
+| 2 | `down` | Exact source parameter; type not asserted. |
+
+#### 31. `InputController:_update_logical_states()`
+
+- **Declared at:** source line 459.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 32. `InputController:_update_direction()`
+
+- **Declared at:** source line 478.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 33. `InputController:_synthesize_non_direction_releases()`
+
+- **Declared at:** source line 507.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 34. `InputController:_process_holds(dt)`
+
+- **Declared at:** source line 521.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `dt` | Exact source parameter; type not asserted. |
+
+#### 35. `InputController:tick(delta_time)`
+
+- **Declared at:** source line 541.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `delta_time` | Exact source parameter; type not asserted. |
+
+#### 36. `can_access_input(self, owner)`
+
+- **Declared at:** source line 559.
+- **Scope syntax:** local.
+- **Nearby source comment:** Backward compatibility is retained while the controller is unclaimed. Once an owner exists, callers must identify themselves; legacy pollers can no longer consume the active owner's edge flags by calling without an owner.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `self` | Exact source parameter; type not asserted. |
+| 2 | `owner` | Exact source parameter; type not asserted. |
+
+#### 37. `InputController:is_action_down(action, owner)`
+
+- **Declared at:** source line 566.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `action` | Exact source parameter; type not asserted. |
+| 2 | `owner` | Exact source parameter; type not asserted. |
+
+#### 38. `InputController:peek_action_pressed(action, owner)`
+
+- **Declared at:** source line 574.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `action` | Exact source parameter; type not asserted. |
+| 2 | `owner` | Exact source parameter; type not asserted. |
+
+#### 39. `InputController:peek_action_released(action, owner)`
+
+- **Declared at:** source line 581.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `action` | Exact source parameter; type not asserted. |
+| 2 | `owner` | Exact source parameter; type not asserted. |
+
+#### 40. `InputController:peek_action_repeated(action, owner)`
+
+- **Declared at:** source line 588.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `action` | Exact source parameter; type not asserted. |
+| 2 | `owner` | Exact source parameter; type not asserted. |
+
+#### 41. `InputController:is_action_pressed(action, owner)`
+
+- **Declared at:** source line 595.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `action` | Exact source parameter; type not asserted. |
+| 2 | `owner` | Exact source parameter; type not asserted. |
+
+#### 42. `InputController:is_action_released(action, owner)`
+
+- **Declared at:** source line 604.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `action` | Exact source parameter; type not asserted. |
+| 2 | `owner` | Exact source parameter; type not asserted. |
+
+#### 43. `InputController:is_action_repeated(action, owner)`
+
+- **Declared at:** source line 613.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `action` | Exact source parameter; type not asserted. |
+| 2 | `owner` | Exact source parameter; type not asserted. |
+
+#### 44. `InputController:get_active_direction(owner)`
+
+- **Declared at:** source line 622.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `owner` | Exact source parameter; type not asserted. |
+
+#### 45. `InputController:require_release(actions, owner)`
+
+- **Declared at:** source line 633.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `actions` | Exact source parameter; type not asserted. |
+| 2 | `owner` | Exact source parameter; type not asserted. |
+
+#### 46. `InputController:swallow(seconds, owner)`
+
+- **Declared at:** source line 645.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `seconds` | Exact source parameter; type not asserted. |
+| 2 | `owner` | Exact source parameter; type not asserted. |
+
+#### 47. `InputController:consume(owner)`
+
+- **Declared at:** source line 653.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `owner` | Exact source parameter; type not asserted. |
+
+
+## Tables
+
+| Line | Table variable |
+|---:|---|
+| 31 | `InputController` |
+| 59 | `out` |
+| 92 | `self.actions` |
+| 93 | `self.raw_to_actions` |
+| 137 | `self.raw_states` |
+| 138 | `self.raw_last_seen` |
+| 139 | `self.logical` |
+| 141 | `self.pressed_actions` |
+| 142 | `self.released_actions` |
+| 143 | `self.repeat_actions` |
+| 144 | `self.release_required` |
+| 239 | `self.raw_states` |
+| 240 | `self.raw_last_seen` |
+| 241 | `self.logical` |
+| 243 | `self.pressed_actions` |
+| 244 | `self.released_actions` |
+| 245 | `self.repeat_actions` |
+| 246 | `self.release_required` |
+| 479 | `pressed` |
+| 656 | `self.pressed_actions` |
+| 657 | `self.released_actions` |
+| 658 | `self.repeat_actions` |
+
+## Net APIs
+
+No direct call expressions matching `Net.<name>(` detected.

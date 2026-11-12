@@ -1,289 +1,251 @@
-# `loot.lua`
+# 📄 `loot.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-custom/nebulous-liberations/liberations/loot.lua`  
-> **Source lines:** 361  
-> **Functions detected:** 16  
-> **Table declarations detected:** 20
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/liberations/loot.lua`](../../../../../ezlibs-custom/nebulous-liberations/liberations/loot.lua)  
+> **Source lines:** 363  
+> **SHA-256 (UTF-8):** `817b445bf2a2440b52955dc943b6e9413798685d54dadb5a53b291195935d1ad`  
+> **Named functions detected:** 16  
+> **Table initializers detected:** 20
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-Loot reward messages are part of the reward sequence. Awaiting the message promise keeps the revealed item visible until the player dismisses its textbox before the loot sequence continues.
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy` — line 1
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
+| 2 | `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No static literal subscriptions detected.
 
-## Functions
+## Functions and parameters
 
-| Line | Function / method | Parameters as declared |
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 7 | `show_reward_message` | `player, message, on_acknowledged` | local |
+| 24 | `activate` | `instance, player_session` | assigned/declared |
+| 33 | `activate` | `instance, player_session` | assigned/declared |
+| 40 | `activate` | `instance, player_session` | assigned/declared |
+| 49 | `activate` | `instance, player_session` | assigned/declared |
+| 56 | `activate` | `instance, player_session` | assigned/declared |
+| 68 | `activate` | `instance, player_session` | assigned/declared |
+| 79 | `activate` | `instance, player_session` | assigned/declared |
+| 95 | `activate` | `instance, player_session` | assigned/declared |
+| 109 | `unlock_gates` | `(none)` | local |
+| 186 | `spawn_item_bot` | `bot_data, property_animation` | local |
+| 209 | `cleanup` | `(none)` | local |
+| 217 | `Loot.spawn_item_bot` | `item, area_id, x, y, z` | assigned/declared |
+| 246 | `Loot.spawn_randomized_item_bot` | `loot_pool, item_index, area_id, x, y, z` | assigned/declared |
+| 296 | `Loot.loot_item_panel` | `instance, player_session, panel, destroy_items` | assigned/declared |
+| 335 | `Loot.loot_bonus_panel` | `instance, player_session, panel` | assigned/declared |
+
+### Parameter inventory
+
+#### 1. `show_reward_message(player, message, on_acknowledged)`
+
+- **Line:** 7
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 6 | `show_reward_message` | `player, message, on_acknowledged` |
-| 23 | `activate` | `instance, player_session` |
-| 32 | `activate` | `instance, player_session` |
-| 39 | `activate` | `instance, player_session` |
-| 48 | `activate` | `instance, player_session` |
-| 55 | `activate` | `instance, player_session` |
-| 67 | `activate` | `instance, player_session` |
-| 78 | `activate` | `instance, player_session` |
-| 94 | `activate` | `instance, player_session` |
-| 104 | `unlock_gates` | `(none)` |
-| 181 | `spawn_item_bot` | `bot_data, property_animation` |
-| 204 | `cleanup` | `(none)` |
-| 212 | `Loot.spawn_item_bot` | `item, area_id, x, y, z` |
-| 241 | `Loot.spawn_randomized_item_bot` | `loot_pool, item_index, area_id, x, y, z` |
-| 291 | `Loot.loot_item_panel` | `instance, player_session, panel, destroy_items` |
-| 333 | `Loot.loot_bonus_panel` | `instance, player_session, panel` |
+| 1 | `player` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `message` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `on_acknowledged` | Declared directly in the current Lua. Type not inferred. |
 
-### Function notes
+#### 2. `activate(instance, player_session)`
 
-- **`show_reward_message(player, message, on_acknowledged)`** — Loot reward messages are part of the reward sequence. Awaiting the message promise keeps the revealed item visible until the player dismisses its textbox before the loot sequence continues. *(source line 6)*
-- **`activate(instance, player_session)`** *(source line 23)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`activate(instance, player_session)`** *(source line 32)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`activate(instance, player_session)`** *(source line 39)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`activate(instance, player_session)`** *(source line 48)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`activate(instance, player_session)`** *(source line 55)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`activate(instance, player_session)`** *(source line 67)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`activate(instance, player_session)`** *(source line 78)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`activate(instance, player_session)`** *(source line 94)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`unlock_gates()`** *(source line 104)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`spawn_item_bot(bot_data, property_animation)`** *(source line 181)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`cleanup()`** *(source line 204)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Loot.spawn_item_bot(item, area_id, x, y, z)`** *(source line 212)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Loot.spawn_randomized_item_bot(loot_pool, item_index, area_id, x, y, z)`** *(source line 241)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Loot.loot_item_panel(instance, player_session, panel, destroy_items)`** *(source line 291)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Loot.loot_bonus_panel(instance, player_session, panel)`** *(source line 333)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 24
+- **Declaration:** assigned/declared
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_session` | Declared directly in the current Lua. Type not inferred. |
 
-### `Loot` *(line 18)*
+#### 3. `activate(instance, player_session)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `HEART` | table | `{ animation = "HEART", breakable = true, activate = function(instance, player_session) return show_reward_message(player_session.player, "I …` |
-| `CHIP` | table | `{ animation = "CHIP", breakable = true, activate = function(instance, player_session) return show_reward_message(player_session.player, "I f…` |
-| `MONEY` | table | `{ animation = "MONEY", breakable = true, activate = function(instance, player_session) return show_reward_message(player_session.player, "I …` |
-| `BUGFRAG` | table | `{ animation = "BUGFRAG", breakable = true, activate = function(instance, player_session) return show_reward_message(player_session.player, "…` |
-| `ORDER_POINT` | table | `{ animation = "ORDER_POINT", breakable = false, activate = function(instance, player_session) return show_reward_message(player_session.play…` |
-| `INVINCIBILITY` | table | `{ animation = "INVINCIBILITY", breakable = false, activate = function(instance, player_session) return show_reward_message(player_session.pl…` |
-| `MAJOR_HIT` | table | `{ animation = "MAJOR_HIT", breakable = false, activate = function(instance, player_session) local co = coroutine.create(function() Async.awa…` |
-| `KEY` | table | `{ animation = "KEY", breakable = false, activate = function(instance, player_session) local co = coroutine.create(function() Async.await(pla…` |
+- **Line:** 33
+- **Declaration:** assigned/declared
 
-### `HEART` *(line 20)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_session` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `animation` | string literal | `"HEART"` |
-| `breakable` | boolean literal | `true` |
-| `activate` | function | `function(instance` |
-| `[4]` | call/expression | `player_session) return show_reward_message(player_session.player` |
-| `[5]` | string literal | `"I found\na heart!"` |
-| `[6]` | function | `function() return player_session:heal(player_session.max_health / 2) end) end` |
+#### 4. `activate(instance, player_session)`
 
-### `CHIP` *(line 29)*
+- **Line:** 40
+- **Declaration:** assigned/declared
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `animation` | string literal | `"CHIP"` |
-| `breakable` | boolean literal | `true` |
-| `activate` | function | `function(instance` |
-| `[4]` | call/expression | `player_session) return show_reward_message(player_session.player` |
-| `[5]` | string literal | `"I found a\nBattleChip!") end` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_session` | Declared directly in the current Lua. Type not inferred. |
 
-### `MONEY` *(line 36)*
+#### 5. `activate(instance, player_session)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `animation` | string literal | `"MONEY"` |
-| `breakable` | boolean literal | `true` |
-| `activate` | function | `function(instance` |
-| `[4]` | call/expression | `player_session) return show_reward_message(player_session.player` |
-| `[5]` | string literal | `"I found some\nMonies!"` |
-| `[6]` | function | `function() player_session.get_monies = true end) end` |
+- **Line:** 49
+- **Declaration:** assigned/declared
 
-### `BUGFRAG` *(line 45)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_session` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `animation` | string literal | `"BUGFRAG"` |
-| `breakable` | boolean literal | `true` |
-| `activate` | function | `function(instance` |
-| `[4]` | call/expression | `player_session) return show_reward_message(player_session.player` |
-| `[5]` | string literal | `"I found a\nBugFrag!") end` |
+#### 6. `activate(instance, player_session)`
 
-### `ORDER_POINT` *(line 52)*
+- **Line:** 56
+- **Declaration:** assigned/declared
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `animation` | string literal | `"ORDER_POINT"` |
-| `breakable` | boolean literal | `false` |
-| `activate` | function | `function(instance` |
-| `[4]` | call/expression | `player_session) return show_reward_message(player_session.player` |
-| `[5]` | string literal | `"I found\nOrder Points!"` |
-| `[6]` | function | `function() local previous_points = instance.order_points instance:set_order_points(instance.order_points + 3) local recovered_points = insta…` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_session` | Declared directly in the current Lua. Type not inferred. |
 
-### `INVINCIBILITY` *(line 64)*
+#### 7. `activate(instance, player_session)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `animation` | string literal | `"INVINCIBILITY"` |
-| `breakable` | boolean literal | `false` |
-| `activate` | function | `function(instance` |
-| `[4]` | call/expression | `player_session) return show_reward_message(player_session.player` |
-| `[5]` | string literal | `"Team becomes invincible for\n 1 phase!!"` |
-| `[6]` | function | `function() for _` |
-| `[7]` | call/expression | `other_session in pairs(instance.player_sessions) do other_session.invincible = true end end) end` |
+- **Line:** 68
+- **Declaration:** assigned/declared
 
-### `MAJOR_HIT` *(line 75)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_session` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `animation` | string literal | `"MAJOR_HIT"` |
-| `breakable` | boolean literal | `false` |
-| `activate` | function | `function(instance` |
-| `[4]` | call/expression | `player_session) local co = coroutine.create(function() Async.await(player_session.player:message_with_mug("Damages the closest Guardian the …` |
-| `[5]` | call/expression | `enemy)) end) return Async.promisify(co) end` |
+#### 8. `activate(instance, player_session)`
 
-### `KEY` *(line 91)*
+- **Line:** 79
+- **Declaration:** assigned/declared
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `animation` | string literal | `"KEY"` |
-| `breakable` | boolean literal | `false` |
-| `activate` | function | `function(instance` |
-| `[4]` | call/expression | `player_session) local co = coroutine.create(function() Async.await(player_session.player:message_with_mug("I found a Key!")) local gates = p…` |
-| `[5]` | expression/reference | `#gates` |
-| `[6]` | number literal | `1 do instance:remove_panel(gates[i]) end end if #points &gt; 0 then local player_id = player_session.player.id local was_input_locked = Net.is_…` |
-| `[7]` | expression/reference | `#points` |
-| `[8]` | number literal | `1 do local point = points[j] Net.slide_player_camera(player_session.player.id` |
-| `[9]` | expression/reference | `point.x` |
-| `[10]` | expression/reference | `point.y` |
-| `[11]` | expression/reference | `point.z` |
-| `[12]` | call/expression | `slide_time) Net.move_player_camera(player_session.player.id` |
-| `[13]` | expression/reference | `point.x` |
-| `[14]` | expression/reference | `point.y` |
-| `[15]` | expression/reference | `point.z` |
-| `[16]` | call/expression | `hold_time) total_camera_time = total_camera_time + slide_time + hold_time if point == points[1] then Net.move_player_camera(player_session.p…` |
-| `[17]` | expression/reference | `point.x` |
-| `[18]` | expression/reference | `point.y` |
-| `[19]` | expression/reference | `point.z` |
-| `[20]` | call/expression | `hold_time) total_camera_time = total_camera_time + hold_time unlock_gates() end end total_camera_time = total_camera_time + slide_time Net.s…` |
-| `[21]` | expression/reference | `player_session.player.x` |
-| `[22]` | expression/reference | `player_session.player.y` |
-| `[23]` | expression/reference | `player_session.player.z` |
-| `[24]` | call/expression | `slide_time) Async.await(Async.sleep(total_camera_time)) if not was_input_locked then Net.unlock_player_input(player_id) end else unlock_gate…` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_session` | Declared directly in the current Lua. Type not inferred. |
 
-### `Loot.DEFAULT_POOL` *(line 145)*
+#### 9. `activate(instance, player_session)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | expression/reference | `Loot.HEART` |
-| `[2]` | expression/reference | `Loot.MONEY` |
-| `[3]` | expression/reference | `Loot.ORDER_POINT` |
+- **Line:** 95
+- **Declaration:** assigned/declared
 
-### `Loot.BONUS_POOL` *(line 151)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_session` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | expression/reference | `Loot.HEART` |
-| `[2]` | expression/reference | `Loot.ORDER_POINT` |
-| `[3]` | expression/reference | `Loot.INVINCIBILITY` |
-| `[4]` | expression/reference | `Loot.MAJOR_HIT` |
-| `[5]` | expression/reference | `Loot.MONEY` |
+#### 10. `unlock_gates()`
 
-### `Loot.TEST_POOL` *(line 159)*
+- **Line:** 109
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | expression/reference | `Loot.HEART` |
-| `[2]` | expression/reference | `Loot.CHIP` |
-| `[3]` | expression/reference | `Loot.MONEY` |
-| `[4]` | expression/reference | `Loot.BUGFRAG` |
-| `[5]` | expression/reference | `Loot.ORDER_POINT` |
+#### 11. `spawn_item_bot(bot_data, property_animation)`
 
-### `Loot.FULL_POOL` *(line 167)*
+- **Line:** 186
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | expression/reference | `Loot.HEART` |
-| `[2]` | expression/reference | `Loot.CHIP` |
-| `[3]` | expression/reference | `Loot.MONEY` |
-| `[4]` | expression/reference | `Loot.BUGFRAG` |
-| `[5]` | expression/reference | `Loot.ORDER_POINT` |
-| `[6]` | expression/reference | `Loot.INVINCIBILITY` |
-| `[7]` | expression/reference | `Loot.KEY` |
-| `[8]` | expression/reference | `Loot.MAJOR_HIT` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_data` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `property_animation` | Declared directly in the current Lua. Type not inferred. |
 
-### `bot_data` *(line 213)*
+#### 12. `cleanup()`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `area_id` | expression/reference | `area_id` |
-| `texture_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.png"` |
-| `animation_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.animation"` |
-| `animation` | expression/reference | `item.animation` |
-| `warp_in` | boolean literal | `false` |
-| `x` | expression/reference | `x` |
-| `y` | expression/reference | `y` |
-| `z` | expression/reference | `z` |
+- **Line:** 209
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
 
-### `property_animation` *(line 223)*
+#### 13. `Loot.spawn_item_bot(item, area_id, x, y, z)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ properties = { { property = "Z", ease = "Linear", value = z + 1 } }, duration = RISE_DURATION }` |
+- **Line:** 217
+- **Declaration:** assigned/declared
 
-### `properties` *(line 226)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `item` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `z` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property = "Z", ease = "Linear", value = z + 1 }` |
+#### 14. `Loot.spawn_randomized_item_bot(loot_pool, item_index, area_id, x, y, z)`
 
-### `bot_data` *(line 247)*
+- **Line:** 246
+- **Declaration:** assigned/declared
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `area_id` | expression/reference | `area_id` |
-| `texture_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.png"` |
-| `animation_path` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.animation"` |
-| `animation` | expression/reference | `loot_pool[start_index].animation` |
-| `warp_in` | boolean literal | `false` |
-| `x` | expression/reference | `x` |
-| `y` | expression/reference | `y` |
-| `z` | expression/reference | `z` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `loot_pool` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `item_index` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 6 | `z` | Declared directly in the current Lua. Type not inferred. |
 
-### `property_animation` *(line 258)*
+#### 15. `Loot.loot_item_panel(instance, player_session, panel, destroy_items)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 296
+- **Declaration:** assigned/declared
 
-### `key_frame` *(line 265)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_session` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `panel` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `destroy_items` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `properties` | table | `{ { property = "Animation", value = loot_pool[current_item_index].animation } }` |
-| `duration` | expression/reference | `frame_duration` |
+#### 16. `Loot.loot_bonus_panel(instance, player_session, panel)`
 
-### `properties` *(line 267)*
+- **Line:** 335
+- **Declaration:** assigned/declared
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property = "Animation", value = loot_pool[current_item_index].animation }` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_session` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `panel` | Declared directly in the current Lua. Type not inferred. |
 
-## Implementation notes
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/nebulous-liberations/liberations/loot.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 20 | `Loot` |
+| 21 | `HEART` |
+| 30 | `CHIP` |
+| 37 | `MONEY` |
+| 46 | `BUGFRAG` |
+| 53 | `ORDER_POINT` |
+| 65 | `INVINCIBILITY` |
+| 76 | `MAJOR_HIT` |
+| 92 | `KEY` |
+| 151 | `Loot.DEFAULT_POOL` |
+| 157 | `Loot.BONUS_POOL` |
+| 165 | `Loot.TEST_POOL` |
+| 173 | `Loot.FULL_POOL` |
+| 218 | `bot_data` |
+| 229 | `property_animation` |
+| 231 | `properties` |
+| 253 | `bot_data` |
+| 264 | `property_animation` |
+| 271 | `key_frame` |
+| 272 | `properties` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.animate_bot_properties` | 1 | 207 |
+| `Net.create_bot` | 2 | 187 |
+| `Net.move_player_camera` | 2 | 130 |
+| `Net.remove_bot` | 3 | 203 |
+| `Net.slide_player_camera` | 3 | 129 |

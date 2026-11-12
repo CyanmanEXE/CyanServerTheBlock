@@ -1,76 +1,93 @@
-# `state.lua`
+# 📄 `state.lua`
 
-> **Source:** `scripts/ezlibs-custom/footbomb/state.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-custom/footbomb/state.lua`](../../../../ezlibs-custom/footbomb/state.lua)  
 > **Source lines:** 27  
-> **Functions detected:** 0  
-> **Table declarations detected:** 7
+> **SHA-256 (UTF-8):** `c2fbdef6e96a61…`  
+> **Declared/assigned functions detected:** 0  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 7
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
 FootBomb state store. Mutable match/NPC/player registries live here instead of in the entry point. Keep this module data-only so main.lua remains responsible for game behavior.
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+*No named function declaration or `= function(...)` assignment detected. Anonymous callbacks may still be present.*
 
-## Tables and data structures
+## 🪄 Anonymous closures
 
-### `State` *(line 4)*
+*No anonymous `function(...)` expressions detected.*
 
-| Field / key | Value category | Initializer expression (source) |
+## 📦 Tables and data
+
+The following **7** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `State` — line 4
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `npc_refs` | table | `{}` |
-| `pending_interactions` | table | `{}` |
-| `waiting_matches` | table | `{}` |
-| `player_representations` | table | `{}` |
-| `instance_bots` | table | `{}` |
-| `instance_spawn_points` | table | `{}` |
-| `npc_direction_sequence_index` | number literal | `0` |
+| `[1]` | expression/reference | `-- area_id -> actor_id -> NPC reference npc_refs = {}` |
+| `[2]` | expression/reference | `-- player_id -> true while an NPC/match interaction is being handled pending_interactions = {}` |
+| `[3]` | expression/reference | `-- source area -> waiting VS Player match waiting_matches = {}` |
+| `[4]` | expression/reference | `-- player_id -> bot/cursor/camera/input representation player_representations = {}` |
+| `[5]` | expression/reference | `-- instance_id -> bot slot records instance_bots = {}` |
+| `[6]` | expression/reference | `-- instance_id -> named Player 1/2 spawn positions instance_spawn_points = {}` |
+| `[7]` | expression/reference | `-- Rotating deterministic NPC direction choice index npc_direction_sequence_index = 0` |
 
-### `npc_refs` *(line 6)*
+### 2. `npc_refs` — line 6
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `pending_interactions` *(line 9)*
+### 3. `pending_interactions` — line 9
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `waiting_matches` *(line 12)*
+### 4. `waiting_matches` — line 12
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `player_representations` *(line 15)*
+### 5. `player_representations` — line 15
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `instance_bots` *(line 18)*
+### 6. `instance_bots` — line 18
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `instance_spawn_points` *(line 21)*
+### 7. `instance_spawn_points` — line 21
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/footbomb/state.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

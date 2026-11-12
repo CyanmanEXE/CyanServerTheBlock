@@ -1,108 +1,144 @@
-# `main.lua`
+# 📄 `main.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/avatar_utils/main.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/avatar_utils/main.lua`](../../../avatar_utils/main.lua)  
 > **Source lines:** 158  
-> **Functions detected:** 7  
-> **Table declarations detected:** 8
+> **SHA-256 (UTF-8):** `68f89af462e5afc52d321499ed9911847778d567415b8a188874940f78a87cda`  
+> **Named/assigned functions detected:** 7  
+> **Table initializers detected (simple pattern):** 8
 
-## Contents
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-NaviSpot.lua Module to cache player and bot avatar/mugshot assets. For players: copies assets from engine to local files on avatar change. For bots: registers existing local asset paths (no copying).
+Current source inventory for `scripts/avatar_utils/main.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- `scripts/avatar_utils/avatar_utils` — line 6
+| Line | `require` module |
+|---:|---|
+| 6 | `scripts/avatar_utils/avatar_utils` |
 
-## Events
+## Event hooks
 
-- `Net:on("player_avatar_change", function(event) ...)` — line 72. The event name is taken directly from this source.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 72 | `Net` | `player_avatar_change` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 21 | `get_player_secret` | `player_id` | local |
+| 28 | `update_player_avatar` | `player_id` | local |
+| 83 | `get_player_avatar_paths` | `secret` | local |
+| 90 | `refresh_player_avatar` | `player_id` | local |
+| 104 | `register_bot_avatar` | `bot_id, sheet_texture_path, sheet_animation_path, mug_texture_path, mug_animation_path` | local |
+| 122 | `get_bot_avatar_paths` | `bot_id` | local |
+| 130 | `parse_bot_animation` | `bot_id, type` | local |
+
+### Detailed parameter inventory
+
+#### 1. `get_player_secret(player_id)`
+
+- **Line:** 21
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 21 | `get_player_secret` | `player_id` |
-| 28 | `update_player_avatar` | `player_id` |
-| 83 | `get_player_avatar_paths` | `secret` |
-| 90 | `refresh_player_avatar` | `player_id` |
-| 104 | `register_bot_avatar` | `bot_id, sheet_texture_path, sheet_animation_path, mug_texture_path, mug_animation_path` |
-| 122 | `get_bot_avatar_paths` | `bot_id` |
-| 130 | `parse_bot_animation` | `bot_id, type` |
+| 1 | `player_id` | Declared by this function; type not inferred. |
 
-### Function notes
+#### 2. `update_player_avatar(player_id)`
 
-- **`get_player_secret(player_id)`** *(source line 21)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`update_player_avatar(player_id)`** — - Copies the player's current avatar and mugshot to local files and registers them as assets. - @param player_id string - @return table|nil cached entry or nil on failure *(source line 28)*
-- **`get_player_avatar_paths(secret)`** — - Public API: retrieve cached player avatar paths for a given player secret. - @param secret string the player's secret (from Net.get_player_secret) - @return table|nil the cached sheet/mug paths or nil if not yet cached *(source line 83)*
-- **`refresh_player_avatar(player_id)`** — - Public API: force an immediate refresh for a player ID (useful if you need the data right away). - @param player_id string - @return table|nil the updated cached entry *(source line 90)*
-- **`register_bot_avatar(bot_id, sheet_texture_path, sheet_animation_path, mug_texture_path, mug_animation_path)`** — - Register or update a bot's avatar and mugshot asset paths. - These are assumed to be existing local files or server assets; no copying is performed. - @param bot_id string Unique identifier for the bot (e.g., bot name) - @param sheet_texture_path string Path to the bot's sheet texture - @param sheet_animation_path string Path to the bot's sheet animation file - @param mug_texture_path string Path to the bot's mugshot texture - @param mug_animation_path string Path to the bot's mugshot animation file - @return table the stored entry *(source line 104)*
-- **`get_bot_avatar_paths(bot_id)`** — - Retrieve cached bot avatar paths. - @param bot_id string - @return table|nil the cached sheet/mug paths or nil if not registered *(source line 122)*
-- **`parse_bot_animation(bot_id, type)`** — - Optionally parse a bot's animation file to get frame data. - @param bot_id string - @param type string "sheet" or "mug" to specify which animation to parse - @return table|nil parsed animation structure or nil if missing/error *(source line 130)*
+- **Line:** 28
+- **Declaration:** local
+- **Nearby code comment:** Copies the player's current avatar and mugshot to local files and registers them as assets. @param player_id string @return table\|nil cached entry or nil on failure
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared by this function; type not inferred. |
 
-### `player_cache` *(line 12)*
+#### 3. `get_player_avatar_paths(secret)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 83
+- **Declaration:** local
+- **Nearby code comment:** Public API: retrieve cached player avatar paths for a given player secret. @param secret string the player's secret (from Net.get_player_secret) @return table\|nil the cached sheet/mug paths or nil if not yet cached
 
-### `bot_cache` *(line 19)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `secret` | Declared by this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `refresh_player_avatar(player_id)`
 
-### `entry` *(line 56)*
+- **Line:** 90
+- **Declaration:** local
+- **Nearby code comment:** Public API: force an immediate refresh for a player ID (useful if you need the data right away). @param player_id string @return table\|nil the updated cached entry
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `sheet` | table | `{ texture = sheet_texture_path, animation = sheet_animation_path }` |
-| `mug` | table | `{ texture = mug_texture_path, animation = mug_animation_path }` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared by this function; type not inferred. |
 
-### `sheet` *(line 57)*
+#### 5. `register_bot_avatar(bot_id, sheet_texture_path, sheet_animation_path, mug_texture_path, mug_animation_path)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `texture` | expression/reference | `sheet_texture_path` |
-| `animation` | expression/reference | `sheet_animation_path` |
+- **Line:** 104
+- **Declaration:** local
+- **Nearby code comment:** @param sheet_animation_path string Path to the bot's sheet animation file @param mug_texture_path string Path to the bot's mugshot texture @param mug_animation_path string Path to the bot's mugshot animation file @return table the stored entry
 
-### `mug` *(line 61)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_id` | Declared by this function; type not inferred. |
+| 2 | `sheet_texture_path` | Declared by this function; type not inferred. |
+| 3 | `sheet_animation_path` | Declared by this function; type not inferred. |
+| 4 | `mug_texture_path` | Declared by this function; type not inferred. |
+| 5 | `mug_animation_path` | Declared by this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `texture` | expression/reference | `mug_texture_path` |
-| `animation` | expression/reference | `mug_animation_path` |
+#### 6. `get_bot_avatar_paths(bot_id)`
 
-### `entry` *(line 105)*
+- **Line:** 122
+- **Declaration:** local
+- **Nearby code comment:** Retrieve cached bot avatar paths. @param bot_id string @return table\|nil the cached sheet/mug paths or nil if not registered
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `sheet` | table | `{ texture = sheet_texture_path, animation = sheet_animation_path }` |
-| `mug` | table | `{ texture = mug_texture_path, animation = mug_animation_path }` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_id` | Declared by this function; type not inferred. |
 
-### `sheet` *(line 106)*
+#### 7. `parse_bot_animation(bot_id, type)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `texture` | expression/reference | `sheet_texture_path` |
-| `animation` | expression/reference | `sheet_animation_path` |
+- **Line:** 130
+- **Declaration:** local
+- **Nearby code comment:** Optionally parse a bot's animation file to get frame data. @param bot_id string @param type string "sheet" or "mug" to specify which animation to parse @return table\|nil parsed animation structure or nil if missing/error
 
-### `mug` *(line 110)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_id` | Declared by this function; type not inferred. |
+| 2 | `type` | Declared by this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `texture` | expression/reference | `mug_texture_path` |
-| `animation` | expression/reference | `mug_animation_path` |
 
-## Implementation notes
+## Tables
 
-- This reference is generated from the exact archived source `scripts/avatar_utils/main.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| Source line | Assignment |
+|---:|---|
+| 12 | `player_cache` |
+| 19 | `bot_cache` |
+| 56 | `entry` |
+| 57 | `sheet` |
+| 61 | `mug` |
+| 105 | `entry` |
+| 106 | `sheet` |
+| 110 | `mug` |
+
+## Net API calls
+
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.get_player_secret` | 1 | 22 |
+| `Net.on` | 1 | 72 |

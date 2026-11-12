@@ -1,56 +1,121 @@
-# `ezvalidate.lua`
+# 📄 `ezvalidate.lua`
 
-> **Source:** `scripts/ezlibs-scripts/utils/ezvalidate.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/utils/ezvalidate.lua`](../../../../ezlibs-scripts/utils/ezvalidate.lua)  
 > **Source lines:** 68  
-> **Functions detected:** 4  
-> **Table declarations detected:** 1
+> **SHA-256 (UTF-8):** `612295c86e0502…`  
+> **Declared/assigned functions detected:** 4  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 1
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-ezvalidate.lua Dependency-free validation helpers for Lua 5.2.
+Dependency-free validation helpers for Lua 5.2.
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 6 | `ezvalidate.is_type` | `value, expected_type` |
-| 11 | `ezvalidate.number_range` | `value, minimum, maximum` |
-| 33 | `ezvalidate.required_fields` | `value, fields` |
-| 49 | `ezvalidate.table_field_types` | `value, expected` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 6 | `ezvalidate.is_type` | `value, expected_type` | declared |
+| 11 | `ezvalidate.number_range` | `value, minimum, maximum` | declared |
+| 33 | `ezvalidate.required_fields` | `value, fields` | declared |
+| 49 | `ezvalidate.table_field_types` | `value, expected` | declared |
 
-### Function notes
+### Function details
 
-- **`ezvalidate.is_type(value, expected_type)`** *(source line 6)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezvalidate.number_range(value, minimum, maximum)`** *(source line 11)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezvalidate.required_fields(value, fields)`** *(source line 33)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezvalidate.table_field_types(value, expected)`** *(source line 49)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `ezvalidate.is_type(value, expected_type)`
 
-## Tables and data structures
+- **Location:** source line 6.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `ezvalidate` *(line 3)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `value` | Not explicitly documented in adjacent source annotations. |
+| 2 | `expected_type` | Not explicitly documented in adjacent source annotations. |
 
-## Implementation notes
+#### 2. `ezvalidate.number_range(value, minimum, maximum)`
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/utils/ezvalidate.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+- **Location:** source line 11.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `value` | Not explicitly documented in adjacent source annotations. |
+| 2 | `minimum` | Not explicitly documented in adjacent source annotations. |
+| 3 | `maximum` | Not explicitly documented in adjacent source annotations. |
+
+#### 3. `ezvalidate.required_fields(value, fields)`
+
+- **Location:** source line 33.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `value` | Not explicitly documented in adjacent source annotations. |
+| 2 | `fields` | Not explicitly documented in adjacent source annotations. |
+
+#### 4. `ezvalidate.table_field_types(value, expected)`
+
+- **Location:** source line 49.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `value` | Not explicitly documented in adjacent source annotations. |
+| 2 | `expected` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+*No anonymous `function(...)` expressions detected.*
+
+## 📦 Tables and data
+
+The following **1** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `ezvalidate` — line 4
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+## ⚙️ Runtime API calls
+
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

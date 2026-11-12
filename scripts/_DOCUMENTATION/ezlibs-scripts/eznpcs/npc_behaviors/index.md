@@ -1,87 +1,131 @@
-# `npc_behaviors.lua`
+# 📄 `npc_behaviors.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/eznpcs/npc_behaviors.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/eznpcs/npc_behaviors.lua`](../../../../ezlibs-scripts/eznpcs/npc_behaviors.lua)  
 > **Source lines:** 202  
-> **Functions detected:** 6  
-> **Table declarations detected:** 5
+> **SHA-256 (UTF-8):** `e39be4aa5da1a494e75e2a3b4b6d06382041d8b0765176ae9756520ae3b7373d`  
+> **Named/assigned functions detected:** 6  
+> **Table initializers detected:** 5
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-npc_behaviors.lua Composable behavior objects for eznpcs. Tiled object type: NPC Behavior Attached NPC: object reference to an NPC or NPC template Behavior: registered behavior key (currently Pushback) This module intentionally does not create bots. It attaches behavior to bots created and owned by eznpcs, or to each instance spawned from a template.
+Current source inventory for `scripts/ezlibs-scripts/eznpcs/npc_behaviors.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 11
-- `scripts/ezlibs-scripts/ezbus` — line 12
-- `scripts/ezlibs-scripts/ezcache` — line 13
-- `scripts/ezlibs-scripts/object_registry` — line 14
-- `scripts/ezlibs-scripts/eznpcs/eznpcs` — line 15
-- `scripts/ezlibs-scripts/eznpcs/ezpushback` — line 16
-- `scripts/ezlibs-scripts/utils/eztiledutils` — line 17
+| Line | `require` module |
+|---:|---|
+| 11 | `scripts/logger/logger` |
+| 12 | `scripts/ezlibs-scripts/ezbus` |
+| 13 | `scripts/ezlibs-scripts/ezcache` |
+| 14 | `scripts/ezlibs-scripts/object_registry` |
+| 15 | `scripts/ezlibs-scripts/eznpcs/eznpcs` |
+| 16 | `scripts/ezlibs-scripts/eznpcs/ezpushback` |
+| 17 | `scripts/ezlibs-scripts/utils/eztiledutils` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 165 | `ezbus` | `npc_created_from_object` |
+| 175 | `ezbus` | `npc_spawned_from_spawner` |
+| 192 | `ezbus` | `bot_removed` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 26 | `key` | `area_id, behavior_object_id, bot_id` | local |
+| 30 | `npc_behaviors.register` | `name, implementation` | assigned/declared |
+| 40 | `attach_one` | `area_id, behavior_object, bot_id, context` | local |
+| 76 | `attach_for_target` | `area_id, target_object_id, bot_id, context` | local |
+| 97 | `attach` | `args` | assigned/declared |
+| 125 | `npc_behaviors.attach_all` | `(none)` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `key(area_id, behavior_object_id, bot_id)`
+
+- **Line:** 26
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 26 | `key` | `area_id, behavior_object_id, bot_id` |
-| 30 | `npc_behaviors.register` | `name, implementation` |
-| 40 | `attach_one` | `area_id, behavior_object, bot_id, context` |
-| 76 | `attach_for_target` | `area_id, target_object_id, bot_id, context` |
-| 97 | `attach` | `args` |
-| 125 | `npc_behaviors.attach_all` | `(none)` |
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `behavior_object_id` | Declared in this function; type not inferred. |
+| 3 | `bot_id` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `npc_behaviors.register(name, implementation)`
 
-- **`key(area_id, behavior_object_id, bot_id)`** *(source line 26)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`npc_behaviors.register(name, implementation)`** *(source line 30)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`attach_one(area_id, behavior_object, bot_id, context)`** *(source line 40)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`attach_for_target(area_id, target_object_id, bot_id, context)`** *(source line 76)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`attach(args)`** *(source line 97)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`npc_behaviors.attach_all()`** — Static NPCs are created during object_registry.load_all(). Since the behavior object can appear earlier or later in Tiled's object order, attach_all() is called after eznpcs.load_npcs() has completed the map scan. *(source line 125)*
+- **Line:** 30
+- **Declaration:** table/global or assignment
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `name` | Declared in this function; type not inferred. |
+| 2 | `implementation` | Declared in this function; type not inferred. |
 
-### `npc_behaviors` *(line 18)*
+#### 3. `attach_one(area_id, behavior_object, bot_id, context)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `implementations` | table | `{}` |
-| `objects_by_area` | table | `{}` |
-| `attached` | table | `{}` |
-| `spawned_instances` | table | `{}` |
+- **Line:** 40
+- **Declaration:** local
 
-### `implementations` *(line 20)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `behavior_object` | Declared in this function; type not inferred. |
+| 3 | `bot_id` | Declared in this function; type not inferred. |
+| 4 | `context` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `attach_for_target(area_id, target_object_id, bot_id, context)`
 
-### `objects_by_area` *(line 21)*
+- **Line:** 76
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `target_object_id` | Declared in this function; type not inferred. |
+| 3 | `bot_id` | Declared in this function; type not inferred. |
+| 4 | `context` | Declared in this function; type not inferred. |
 
-### `attached` *(line 22)*
+#### 5. `attach(args)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 97
+- **Declaration:** table/global or assignment
 
-### `spawned_instances` *(line 23)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `args` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 6. `npc_behaviors.attach_all()`
 
-## Implementation notes
+- **Line:** 125
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/eznpcs/npc_behaviors.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 19 | `npc_behaviors` |
+| 20 | `implementations` |
+| 21 | `objects_by_area` |
+| 22 | `attached` |
+| 23 | `spawned_instances` |
+
+## Net API calls
+
+No direct `Net.method(...)` call expression matched.

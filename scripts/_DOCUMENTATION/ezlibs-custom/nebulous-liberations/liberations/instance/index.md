@@ -1,420 +1,602 @@
-# `instance.lua`
+# 📄 `instance.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-custom/nebulous-liberations/liberations/instance.lua`  
-> **Source lines:** 1715  
-> **Functions detected:** 34  
-> **Table declarations detected:** 47
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/liberations/instance.lua`](../../../../../ezlibs-custom/nebulous-liberations/liberations/instance.lua)  
+> **Source lines:** 2382  
+> **SHA-256 (UTF-8):** `c3752a92f804784a31c9cfbfdcb6afa4070bd71dd64ded276bb06e95b284a7da`  
+> **Named functions detected:** 42  
+> **Table initializers detected:** 56
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-instance.lua
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 2
-- `scripts/libs/direction` — line 5
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/player_session` — line 6
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy` — line 7
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_helpers` — line 8
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/panel_encounters` — line 9
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/loot` — line 10
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/preloader` — line 11
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/constants` — line 12
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/panel_registry` — line 13
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/camera_sequence` — line 14
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/points_gauge` — line 15
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators` — line 16
-- `scripts/libs/emotes` — line 17
-- `scripts/ezlibs-scripts/ezmemory` — line 18
-- `scripts/ezlibs-scripts/helpers` — line 19
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
+| 3 | `scripts/logger/logger` |
+| 6 | `scripts/libs/direction` |
+| 7 | `scripts/ezlibs-custom/nebulous-liberations/liberations/player_session` |
+| 8 | `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy` |
+| 9 | `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_helpers` |
+| 10 | `scripts/ezlibs-custom/nebulous-liberations/liberations/panel_encounters` |
+| 11 | `scripts/ezlibs-custom/nebulous-liberations/liberations/loot` |
+| 12 | `scripts/ezlibs-custom/nebulous-liberations/liberations/preloader` |
+| 13 | `scripts/ezlibs-custom/nebulous-liberations/liberations/constants` |
+| 14 | `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_config` |
+| 15 | `scripts/ezlibs-custom/nebulous-liberations/liberations/battle_scale` |
+| 16 | `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_templates` |
+| 17 | `scripts/ezlibs-custom/nebulous-liberations/liberations/logger` |
+| 20 | `scripts/ezlibs-custom/nebulous-liberations/liberations/panel_registry` |
+| 21 | `scripts/ezlibs-custom/nebulous-liberations/liberations/camera_sequence` |
+| 22 | `scripts/ezlibs-custom/nebulous-liberations/liberations/points_gauge` |
+| 23 | `scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators` |
+| 24 | `scripts/libs/emotes` |
+| 25 | `scripts/ezlibs-scripts/ezmemory` |
+| 26 | `scripts/ezlibs-scripts/helpers` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No static literal subscriptions detected.
 
-## Functions
+## Functions and parameters
 
-| Line | Function / method | Parameters as declared |
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 28 | `includes` | `table, value` | local |
+| 41 | `normalize_enemy_name` | `value` | local |
+| 52 | `apply_panel_enemy_config` | `panel, enemy` | local |
+| 62 | `apply_dark_hole_minion_health_to_bot` | `dark_hole, enemy` | local |
+| 90 | `assign_dark_hole_bot_encounter` | `dark_hole, enemy` | local |
+| 100 | `apply_dark_hole_minion_health_override` | `encounter_data, dark_hole, enemy` | local |
+| 144 | `copy_music_definition` | `music` | local |
+| 153 | `build_encounter_data` | `encounter_definition, overrides, persistent_enemy` | local |
+| 318 | `apply_battle_visuals` | `data, source, mission, panel, encounter_definition, encounter_source` | local |
+| 333 | `resolve_panel_type` | `object` | local |
+| 363 | `is_panel` | `self, object` | local |
+| 367 | `is_adjacent` | `position_a, position_b` | local |
+| 376 | `boot_player` | `player, isVictory, mapName` | local |
+| 382 | `liberate` | `self` | local |
+| 424 | `normalized_reference` | `value` | local |
+| 429 | `boss_group_ids_from_properties` | `properties` | local |
+| 448 | `object_is_associated_with_boss` | `properties, boss_group_id` | local |
+| 457 | `count_dark_holes_for_boss` | `self, boss_definition` | local |
+| 467 | `convert_indestructible_panels` | `self` | local |
+| 475 | `add_camera_focus` | `definition` | local |
+| 615 | `liberate_panel` | `self, player_session` | local |
+| 1023 | `take_enemy_turn` | `self` | local |
+| 1196 | `Mission:new` | `base_area_id, new_area_id, players, max_order_points` | assigned/declared |
+| 1687 | `Mission:spawn_boss` | `boss_id, force, triggered` | assigned/declared |
+| 1787 | `Mission:spawn_bosses_for_cleared_dark_holes` | `(none)` | assigned/declared |
+| 1797 | `Mission:handle_boss_defeated` | `enemy` | assigned/declared |
+| 1854 | `Mission:set_order_points` | `value` | assigned/declared |
+| 1862 | `Mission:clean_up` | `(none)` | assigned/declared |
+| 1889 | `Mission:cleaning_up` | `(none)` | assigned/declared |
+| 1893 | `Mission:begin` | `(none)` | assigned/declared |
+| 1980 | `Mission:on_tick` | `elapsed` | assigned/declared |
+| 2016 | `Mission:handle_tile_interaction` | `player_id, x, y, z, button` | assigned/declared |
+| 2038 | `Mission:handle_object_interaction` | `player_id, object_id, button` | assigned/declared |
+| 2146 | `Mission:handle_player_avatar_change` | `player_id` | assigned/declared |
+| 2156 | `Mission:handle_player_transfer` | `player_id` | assigned/declared |
+| 2194 | `Mission:handle_player_disconnect` | `player_id` | assigned/declared |
+| 2218 | `Mission:get_players` | `(none)` | assigned/declared |
+| 2222 | `Mission:get_spawn_position` | `(none)` | assigned/declared |
+| 2226 | `Mission:get_next_spawn_from_object` | `object_id` | assigned/declared |
+| 2238 | `Mission:get_panel_at` | `x, y, z` | assigned/declared |
+| 2253 | `Mission:remove_panel` | `panel` | assigned/declared |
+| 2279 | `Mission:get_enemy_at` | `x, y, z` | assigned/declared |
+
+### Parameter inventory
+
+#### 1. `includes(table, value)`
+
+- **Line:** 28
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 21 | `includes` | `table, value` |
-| 34 | `normalize_enemy_name` | `value` |
-| 39 | `build_encounter_data` | `encounter_definition, overrides, persistent_enemy` |
-| 101 | `is_panel` | `self, object` |
-| 105 | `is_adjacent` | `position_a, position_b` |
-| 114 | `boot_player` | `player, isVictory, mapName` |
-| 120 | `liberate` | `self` |
-| 162 | `normalized_reference` | `value` |
-| 167 | `boss_group_ids_from_properties` | `properties` |
-| 186 | `object_is_associated_with_boss` | `properties, boss_group_id` |
-| 195 | `count_dark_holes_for_boss` | `self, boss_definition` |
-| 205 | `convert_indestructible_panels` | `self` |
-| 311 | `liberate_panel` | `self, player_session` |
-| 610 | `take_enemy_turn` | `self` |
-| 764 | `Mission:new` | `base_area_id, new_area_id, players, max_order_points` |
-| 1129 | `Mission:spawn_boss` | `boss_id, force, triggered` |
-| 1212 | `Mission:spawn_bosses_for_cleared_dark_holes` | `(none)` |
-| 1222 | `Mission:handle_boss_defeated` | `enemy` |
-| 1279 | `Mission:set_order_points` | `value` |
-| 1287 | `Mission:clean_up` | `(none)` |
-| 1314 | `Mission:cleaning_up` | `(none)` |
-| 1318 | `Mission:begin` | `(none)` |
-| 1405 | `Mission:on_tick` | `elapsed` |
-| 1441 | `Mission:handle_tile_interaction` | `player_id, x, y, z, button` |
-| 1463 | `Mission:handle_object_interaction` | `player_id, object_id, button` |
-| 1571 | `Mission:handle_player_avatar_change` | `player_id` |
-| 1581 | `Mission:handle_player_transfer` | `player_id` |
-| 1619 | `Mission:handle_player_disconnect` | `player_id` |
-| 1643 | `Mission:get_players` | `(none)` |
-| 1647 | `Mission:get_spawn_position` | `(none)` |
-| 1651 | `Mission:get_next_spawn_from_object` | `object_id` |
-| 1663 | `Mission:get_panel_at` | `x, y, z` |
-| 1678 | `Mission:remove_panel` | `panel` |
-| 1704 | `Mission:get_enemy_at` | `x, y, z` |
-
-### Function notes
-
-- **`includes(table, value)`** *(source line 21)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`normalize_enemy_name(value)`** — Build a per-battle copy of an encounter definition. Enemy entries are copied individually because persistent liberation enemies may override `health`; mutating the cached area encounter definition would leak that HP into later encounters that use the same definition. *(source line 34)*
-- **`build_encounter_data(encounter_definition, overrides, persistent_enemy)`** *(source line 39)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`is_panel(self, object)`** *(source line 101)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`is_adjacent(position_a, position_b)`** *(source line 105)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`boot_player(player, isVictory, mapName)`** *(source line 114)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`liberate(self)`** *(source line 120)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`normalized_reference(value)`** *(source line 162)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`boss_group_ids_from_properties(properties)`** *(source line 167)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`object_is_associated_with_boss(properties, boss_group_id)`** *(source line 186)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`count_dark_holes_for_boss(self, boss_definition)`** *(source line 195)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`convert_indestructible_panels(self)`** *(source line 205)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`liberate_panel(self, player_session)`** *(source line 311)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`take_enemy_turn(self)`** *(source line 610)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:new(base_area_id, new_area_id, players, max_order_points)`** *(source line 764)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:spawn_boss(boss_id, force, triggered)`** *(source line 1129)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:spawn_bosses_for_cleared_dark_holes()`** *(source line 1212)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:handle_boss_defeated(enemy)`** *(source line 1222)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:set_order_points(value)`** *(source line 1279)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:clean_up()`** *(source line 1287)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:cleaning_up()`** *(source line 1314)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:begin()`** *(source line 1318)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:on_tick(elapsed)`** *(source line 1405)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:handle_tile_interaction(player_id, x, y, z, button)`** *(source line 1441)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:handle_object_interaction(player_id, object_id, button)`** *(source line 1463)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:handle_player_avatar_change(player_id)`** *(source line 1571)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:handle_player_transfer(player_id)`** *(source line 1581)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:handle_player_disconnect(player_id)`** *(source line 1619)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:get_players()`** *(source line 1643)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:get_spawn_position()`** *(source line 1647)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:get_next_spawn_from_object(object_id)`** *(source line 1651)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:get_panel_at(x, y, z)`** *(source line 1663)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:remove_panel(panel)`** *(source line 1678)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Mission:get_enemy_at(x, y, z)`** *(source line 1704)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+| 1 | `table` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `value` | Declared directly in the current Lua. Type not inferred. |
 
-## Tables and data structures
+#### 2. `normalize_enemy_name(value)`
 
-### `data` *(line 40)*
+- **Line:** 41
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `value` | Declared directly in the current Lua. Type not inferred. |
 
-### `data.enemies` *(line 45)*
+#### 3. `apply_panel_enemy_config(panel, enemy)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `enemy_copy` *(line 47)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `data.freedom_mission` *(line 54)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `mission` *(line 66)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `self.panels` *(line 131)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `self.enemies` *(line 135)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 52
+- **Declaration:** local
 
-### `ids` *(line 168)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `panel` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `enemy` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `apply_dark_hole_minion_health_to_bot(dark_hole, enemy)`
 
-### `seen` *(line 169)*
+- **Line:** 62
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `dark_hole` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `enemy` | Declared directly in the current Lua. Type not inferred. |
 
-### `converting` *(line 208)*
+#### 5. `assign_dark_hole_bot_encounter(dark_hole, enemy)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `remaining` *(line 209)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `DARK_HOLE_SHAPE` *(line 304)*
+- **Line:** 90
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{1, 1, 1}` |
-| `[2]` | table | `{1, 1, 1}` |
-| `[3]` | table | `{1, 1, 1}` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `dark_hole` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `enemy` | Declared directly in the current Lua. Type not inferred. |
 
-### `data` *(line 349)*
+#### 6. `apply_dark_hole_minion_health_override(encounter_data, dark_hole, enemy)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `terrain` | call/expression | `PanelEncounters.resolve_terrain(self` |
-| `[2]` | expression/reference | `player)` |
+- **Line:** 100
+- **Declaration:** local
 
-### `data` *(line 429)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `encounter_data` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `dark_hole` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `enemy` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `terrain` | call/expression | `PanelEncounters.resolve_terrain(self` |
-| `[2]` | expression/reference | `player)` |
+#### 7. `copy_music_definition(music)`
 
-### `panels` *(line 556)*
+- **Line:** 144
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `music` | Declared directly in the current Lua. Type not inferred. |
 
-### `panels` *(line 567)*
+#### 8. `build_encounter_data(encounter_definition, overrides, persistent_enemy)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 153
+- **Declaration:** local
 
-### `panel_summary` *(line 569)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `encounter_definition` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `overrides` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `persistent_enemy` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 9. `apply_battle_visuals(data, source, mission, panel, encounter_definition, encounter_source)`
 
-### `neighbor_offsets` *(line 694)*
+- **Line:** 318
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{1, -1}` |
-| `[2]` | table | `{1, 0}` |
-| `[3]` | table | `{1, 1}` |
-| `[4]` | table | `{-1, -1}` |
-| `[5]` | table | `{-1, 0}` |
-| `[6]` | table | `{-1, 1}` |
-| `[7]` | table | `{0, 1}` |
-| `[8]` | table | `{0, -1}` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `data` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `source` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `mission` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `panel` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `encounter_definition` | Declared directly in the current Lua. Type not inferred. |
+| 6 | `encounter_source` | Declared directly in the current Lua. Type not inferred. |
 
-### `neighbors` *(line 697)*
+#### 10. `resolve_panel_type(object)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 333
+- **Declaration:** local
 
-### `Mission` *(line 760)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 11. `is_panel(self, object)`
 
-### `mission` *(line 843)*
+- **Line:** 363
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `area_id` | expression/reference | `new_area_id` |
-| `base_area_id` | expression/reference | `base_area_id` |
-| `area_name` | call/expression | `Net.get_area_name(base_area_id)` |
-| `emote_timer` | number literal | `0` |
-| `target_phase` | call/expression | `math.max(minimum_phases` |
-| `[6]` | call/expression | `math.ceil(solo_target / math.max(1` |
-| `[7]` | expression/reference | `player_difference)))` |
-| `phase` | number literal | `1` |
-| `ready_count` | number literal | `0` |
-| `order_points` | number literal | `3` |
-| `MAX_ORDER_POINTS` | expression/reference | `MAX_ORDER_POINTS` |
-| `points_gauges` | table | `{}` |
-| `points_of_interest` | table | `{}` |
-| `players` | expression/reference | `players` |
-| `player_sessions` | table | `{}` |
-| `pending_transfer_players` | table | `{}` |
-| `begin_started` | boolean literal | `false` |
-| `boss` | nil | `nil` |
-| `bosses` | table | `{}` |
-| `boss_definitions` | table | `{}` |
-| `enemies` | table | `{}` |
-| `panels` | table | `{}` |
-| `dark_holes` | table | `{}` |
-| `indestructible_panels` | table | `{}` |
-| `panel_gates` | table | `{}` |
-| `FIRST_PANEL_GID` | expression/reference | `FIRST_PANEL_GID` |
-| `BASIC_PANEL_GID_LIST` | table | `{}` |
-| `ITEM_PANEL_GID_LIST` | table | `{}` |
-| `DARK_HOLE_GID_LIST` | table | `{}` |
-| `INDESTRUCTIBLE_PANEL_GID_LIST` | table | `{}` |
-| `BONUS_PANEL_GID_LIST` | table | `{}` |
-| `TRAP_PANEL_GID_LIST` | table | `{}` |
-| `PANEL_GATE_GID_LIST` | table | `{}` |
-| `LAST_PANEL_GID` | expression/reference | `FIRST_PANEL_GID + TOTAL_PANEL_GIDS - 1` |
-| `updating` | boolean literal | `false` |
-| `needs_disposal` | boolean literal | `false` |
-| `disposal_promise` | nil | `nil` |
-| `honor_hp_mem` | call/expression | `Net.get_area_custom_property(base_area_id` |
-| `[39]` | expression/reference | `Constants.CustomProperties.HonorHPMem) == "true"` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `self` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object` | Declared directly in the current Lua. Type not inferred. |
 
-### `points_gauges` *(line 853)*
+#### 12. `is_adjacent(position_a, position_b)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 367
+- **Declaration:** local
 
-### `points_of_interest` *(line 854)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `position_a` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `position_b` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 13. `boot_player(player, isVictory, mapName)`
 
-### `player_sessions` *(line 856)*
+- **Line:** 376
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `isVictory` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `mapName` | Declared directly in the current Lua. Type not inferred. |
 
-### `pending_transfer_players` *(line 859)*
+#### 14. `liberate(self)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 382
+- **Declaration:** local
 
-### `bosses` *(line 862)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `self` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 15. `normalized_reference(value)`
 
-### `boss_definitions` *(line 863)*
+- **Line:** 424
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `value` | Declared directly in the current Lua. Type not inferred. |
 
-### `enemies` *(line 864)*
+#### 16. `boss_group_ids_from_properties(properties)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 429
+- **Declaration:** local
 
-### `panels` *(line 865)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `properties` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 17. `object_is_associated_with_boss(properties, boss_group_id)`
 
-### `dark_holes` *(line 866)*
+- **Line:** 448
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `properties` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `boss_group_id` | Declared directly in the current Lua. Type not inferred. |
 
-### `indestructible_panels` *(line 867)*
+#### 18. `count_dark_holes_for_boss(self, boss_definition)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 457
+- **Declaration:** local
 
-### `panel_gates` *(line 868)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `self` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `boss_definition` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 19. `convert_indestructible_panels(self)`
 
-### `BASIC_PANEL_GID_LIST` *(line 870)*
+- **Line:** 467
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `self` | Declared directly in the current Lua. Type not inferred. |
 
-### `ITEM_PANEL_GID_LIST` *(line 871)*
+#### 20. `add_camera_focus(definition)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 475
+- **Declaration:** local
 
-### `DARK_HOLE_GID_LIST` *(line 872)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `definition` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 21. `liberate_panel(self, player_session)`
 
-### `INDESTRUCTIBLE_PANEL_GID_LIST` *(line 873)*
+- **Line:** 615
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `self` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_session` | Declared directly in the current Lua. Type not inferred. |
 
-### `BONUS_PANEL_GID_LIST` *(line 874)*
+#### 22. `take_enemy_turn(self)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 1023
+- **Declaration:** local
 
-### `TRAP_PANEL_GID_LIST` *(line 875)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `self` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 23. `Mission:new(base_area_id, new_area_id, players, max_order_points)`
 
-### `PANEL_GATE_GID_LIST` *(line 876)*
+- **Line:** 1196
+- **Declaration:** assigned/declared
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `base_area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `new_area_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `players` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `max_order_points` | Declared directly in the current Lua. Type not inferred. |
 
-### `new_panel` *(line 963)*
+#### 24. `Mission:spawn_boss(boss_id, force, triggered)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `name` | string literal | `""` |
-| `type` | expression/reference | `panel_type` |
-| `visible` | boolean literal | `true` |
-| `x` | expression/reference | `object.x` |
-| `y` | expression/reference | `object.y` |
-| `z` | expression/reference | `object.z` |
-| `width` | expression/reference | `object.width` |
-| `height` | expression/reference | `object.height` |
-| `data` | table | `{ type = "tile", gid = Net.get_tileset(base_area_id, "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx").first_gid…` |
-| `custom_properties` | expression/reference | `object.custom_properties` |
-| `visual_object_id` | expression/reference | `object.id` |
-| `visual_gid` | expression/reference | `object.data.gid` |
+- **Line:** 1687
+- **Declaration:** assigned/declared
 
-### `data` *(line 966)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `boss_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `force` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `triggered` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `type` | string literal | `"tile"` |
-| `gid` | call/expression | `Net.get_tileset(base_area_id` |
-| `[3]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx").first_gid` |
+#### 25. `Mission:spawn_bosses_for_cleared_dark_holes()`
 
-### `definition` *(line 1035)*
+- **Line:** 1787
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `object_id` | expression/reference | `object.id` |
-| `boss_id` | expression/reference | `configured_boss_id or object_id_string` |
-| `group_id` | expression/reference | `configured_boss_id or object_id_string` |
-| `enemy_name` | call/expression | `tostring(configured_boss_name)` |
-| `direction` | expression/reference | `properties[Constants.CustomProperties.Direction] or "Down"` |
-| `spawn_mode` | expression/reference | `properties[Constants.CustomProperties.SpawnMode] or "Immediate"` |
-| `trigger_boss_object_id` | call/expression | `normalized_reference(properties[Constants.CustomProperties.TriggerBoss])` |
-| `x` | expression/reference | `object.x` |
-| `y` | expression/reference | `object.y` |
-| `z` | expression/reference | `object.z` |
-| `offset_x` | call/expression | `tonumber(properties[Constants.CustomProperties.SpawnOffsetX]) or 0` |
-| `offset_y` | call/expression | `tonumber(properties[Constants.CustomProperties.SpawnOffsetY]) or 0` |
-| `offset_z` | call/expression | `tonumber(properties[Constants.CustomProperties.SpawnOffsetZ]) or 0` |
-| `auto_face_player` | expression/reference | `properties[Constants.CustomProperties.AutoFacePlayer] == true or properties[Constants.CustomProperties.AutoFacePlayer] == "true"` |
-| `max_health_override` | call/expression | `tonumber(properties[Constants.CustomProperties.BossHealthOverride]) or 0` |
-| `spawn_enabled` | call/expression | `not (properties[Constants.CustomProperties.SpawnEnabled] == false or properties[Constants.CustomProperties.SpawnEnabled] == "false")` |
-| `display_name` | call/expression | `tostring(properties[Constants.CustomProperties.BossDisplayName] or "")` |
-| `panel` | expression/reference | `new_panel` |
-| `spawned` | boolean literal | `false` |
-| `defeated` | boolean literal | `false` |
+#### 26. `Mission:handle_boss_defeated(enemy)`
 
-### `position` *(line 1062)*
+- **Line:** 1797
+- **Declaration:** assigned/declared
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | expression/reference | `object.x` |
-| `y` | expression/reference | `object.y` |
-| `z` | expression/reference | `object.z` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `enemy` | Declared directly in the current Lua. Type not inferred. |
 
-### `position` *(line 1157)*
+#### 27. `Mission:set_order_points(value)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | expression/reference | `definition.x + definition.offset_x` |
-| `y` | expression/reference | `definition.y + definition.offset_y` |
-| `z` | expression/reference | `definition.z + definition.offset_z` |
+- **Line:** 1854
+- **Declaration:** assigned/declared
 
-### `self.points_gauges` *(line 1304)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `value` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 28. `Mission:clean_up()`
 
-### `player_ids` *(line 1333)*
+- **Line:** 1862
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 29. `Mission:cleaning_up()`
 
-### `player_session.shadowsteps` *(line 1434)*
+- **Line:** 1889
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 30. `Mission:begin()`
 
-## Implementation notes
+- **Line:** 1893
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/nebulous-liberations/liberations/instance.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 31. `Mission:on_tick(elapsed)`
+
+- **Line:** 1980
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `elapsed` | Declared directly in the current Lua. Type not inferred. |
+
+#### 32. `Mission:handle_tile_interaction(player_id, x, y, z, button)`
+
+- **Line:** 2016
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `z` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `button` | Declared directly in the current Lua. Type not inferred. |
+
+#### 33. `Mission:handle_object_interaction(player_id, object_id, button)`
+
+- **Line:** 2038
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `button` | Declared directly in the current Lua. Type not inferred. |
+
+#### 34. `Mission:handle_player_avatar_change(player_id)`
+
+- **Line:** 2146
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 35. `Mission:handle_player_transfer(player_id)`
+
+- **Line:** 2156
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 36. `Mission:handle_player_disconnect(player_id)`
+
+- **Line:** 2194
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 37. `Mission:get_players()`
+
+- **Line:** 2218
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
+
+#### 38. `Mission:get_spawn_position()`
+
+- **Line:** 2222
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
+
+#### 39. `Mission:get_next_spawn_from_object(object_id)`
+
+- **Line:** 2226
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 40. `Mission:get_panel_at(x, y, z)`
+
+- **Line:** 2238
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `z` | Declared directly in the current Lua. Type not inferred. |
+
+#### 41. `Mission:remove_panel(panel)`
+
+- **Line:** 2253
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `panel` | Declared directly in the current Lua. Type not inferred. |
+
+#### 42. `Mission:get_enemy_at(x, y, z)`
+
+- **Line:** 2279
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `z` | Declared directly in the current Lua. Type not inferred. |
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 154 | `data` |
+| 159 | `data.enemies` |
+| 161 | `enemy_copy` |
+| 168 | `data.freedom_mission` |
+| 184 | `mission` |
+| 268 | `entry_summary` |
+| 393 | `self.panels` |
+| 397 | `self.enemies` |
+| 430 | `ids` |
+| 431 | `seen` |
+| 470 | `converting` |
+| 471 | `remaining` |
+| 472 | `camera_bosses` |
+| 473 | `camera_boss_seen` |
+| 490 | `satisfied_bosses` |
+| 542 | `sessions` |
+| 609 | `DARK_HOLE_SHAPE` |
+| 654 | `data` |
+| 733 | `entries` |
+| 809 | `data` |
+| 860 | `encounter_enemy_entries` |
+| 969 | `panels` |
+| 980 | `panels` |
+| 982 | `panel_summary` |
+| 1107 | `neighbor_offsets` |
+| 1110 | `neighbors` |
+| 1194 | `Mission` |
+| 1220 | `configured_encounter_music` |
+| 1294 | `mission` |
+| 1305 | `points_gauges` |
+| 1306 | `points_of_interest` |
+| 1308 | `player_sessions` |
+| 1311 | `pending_transfer_players` |
+| 1314 | `bosses` |
+| 1315 | `boss_definitions` |
+| 1316 | `enemies` |
+| 1317 | `panels` |
+| 1318 | `dark_holes` |
+| 1319 | `indestructible_panels` |
+| 1320 | `panel_gates` |
+| 1322 | `BASIC_PANEL_GID_LIST` |
+| 1323 | `ITEM_PANEL_GID_LIST` |
+| 1324 | `DARK_HOLE_GID_LIST` |
+| 1325 | `INDESTRUCTIBLE_PANEL_GID_LIST` |
+| 1326 | `BONUS_PANEL_GID_LIST` |
+| 1327 | `TRAP_PANEL_GID_LIST` |
+| 1328 | `PANEL_GATE_GID_LIST` |
+| 1411 | `pending_enemy_spawns` |
+| 1437 | `new_panel` |
+| 1445 | `data` |
+| 1527 | `definition` |
+| 1570 | `position` |
+| 1716 | `position` |
+| 1879 | `self.points_gauges` |
+| 1908 | `player_ids` |
+| 2009 | `player_session.shadowsteps` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.clone_area` | 1 | 1353 |
+| `Net.create_object` | 1 | 1515 |
+| `Net.exclude_object_for_player` | 1 | 1999 |
+| `Net.get_area_custom_properties` | 7 | 409 |
+| `Net.get_area_custom_property` | 4 | 1281 |
+| `Net.get_area_name` | 4 | 1243 |
+| `Net.get_height` | 1 | 1337 |
+| `Net.get_layer_count` | 1 | 1335 |
+| `Net.get_object_by_id` | 7 | 572 |
+| `Net.get_object_by_name` | 1 | 2223 |
+| `Net.get_player_area` | 1 | 2161 |
+| `Net.get_player_max_health` | 1 | 1918 |
+| `Net.get_tileset` | 3 | 1254 |
+| `Net.include_object_for_player` | 1 | 2007 |
+| `Net.is_player` | 4 | 2031 |
+| `Net.is_player_in_widget` | 2 | 2021 |
+| `Net.list_bots` | 1 | 1881 |
+| `Net.list_objects` | 2 | 1203 |
+| `Net.move_player_camera` | 4 | 558 |
+| `Net.remove_area` | 1 | 1884 |
+| `Net.remove_bot` | 3 | 395 |
+| `Net.remove_object` | 3 | 1417 |
+| `Net.set_background` | 1 | 407 |
+| `Net.set_bot_name` | 1 | 1762 |
+| `Net.set_object_data` | 2 | 578 |
+| `Net.set_player_emote` | 1 | 377 |
+| `Net.set_player_health` | 1 | 1919 |
+| `Net.set_song` | 2 | 414 |
+| `Net.slide_player_camera` | 8 | 557 |
+| `Net.unlock_player_camera` | 4 | 601 |
+
+
+## V2.1 source update
+
+Before either regular/boss or Dark Hole battle is dispatched,
+`instance.lua` calls `PanelEncounters.validate_encounter_data(data, path)`.
+Malformed payloads log an error, then return control without sending an
+invalid encounter to the client. The per-battle payload enforces
+`no_battle_rewards=true`, with panel/mission loot processed separately.
+
+See [V2.1 encounter audit](../../V21_ENCOUNTER_AND_MAP_AUDIT.md).
+
+> **Static inventory note:** The original function line-number table predates the V2.1 patch. Follow the current source link above or the V2.1 addendum for added APIs.

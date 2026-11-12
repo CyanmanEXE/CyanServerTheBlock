@@ -1,50 +1,90 @@
-# `navi-emotes.lua`
+# 📄 `navi-emotes.lua`
 
-> **Source:** `scripts/net-games/navi-emotes/navi-emotes.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/navi-emotes/navi-emotes.lua`](../../../../net-games/navi-emotes/navi-emotes.lua)  
 > **Source lines:** 12  
-> **Functions detected:** 1  
-> **Table declarations detected:** 1
+> **SHA-256 (UTF-8):** `6d1e807314e5de…`  
+> **Declared/assigned functions detected:** 1  
+> **Anonymous closures detected:** 1  
+> **Table initializers detected:** 1
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Source-based reference for `scripts/net-games/navi-emotes/navi-emotes.lua`. No module-purpose prose was supplied in the leading source comments.
 
-## Dependencies
+## 🔗 Dependencies
 
-- `scripts/net-games/main` — line 2
+| Line | Module string supplied to `require` |
+|---|---|
+| 2 | `scripts/net-games/main` |
 
-## Events
+## 📡 Event subscriptions
 
-- `Net:on("player_join", function(event) ...)` — line 9. The event name is taken directly from this source.
+| Line | Subscription call | Literal event name |
+|---|---|---|
+| 9 | `Net:on` | `player_join` |
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 3 | `NaviEmotes.activate` | `player_id` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 4 | `NaviEmotes.activate` | `player_id` | assigned |
 
-### Function notes
+### Function details
 
-- **`NaviEmotes.activate(player_id)`** *(source line 3)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `NaviEmotes.activate(player_id)`
 
-## Tables and data structures
+- **Location:** source line 4.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `NaviEmotes` *(line 1)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
 
-## Implementation notes
+## 🪄 Anonymous closures
 
-- This reference is generated from the exact archived source `scripts/net-games/navi-emotes/navi-emotes.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+These are anonymous `function(...)` expressions, including inline callbacks. Their argument lists are taken verbatim from source; lexical context is descriptive text, not a claim about execution.
+
+| Line | Arguments | Preceding source context |
+|---|---|---|
+| 9 | `event` | `ui_element("Test", player_id, "assets/card.png", nil, nil, 0, 0, 0) end Net:on("play…` |
+
+## 📦 Tables and data
+
+The following **1** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `NaviEmotes` — line 1
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+## ⚙️ Runtime API calls
+
+These are **statically detected call sites**, not API definitions or guaranteed successful runtime calls.
+
+| Call identifier | Occurrences |
+|---|---|
+| `Net.lock_player_input` | 1 |
+| `Net.on` | 1 |
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

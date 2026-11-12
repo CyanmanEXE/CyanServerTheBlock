@@ -1,96 +1,173 @@
-# `save-game.lua`
+# 📄 `save-game.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/persistence/save-game.lua`  
-> **Source lines:** 250  
-> **Functions detected:** 14  
-> **Table declarations detected:** 4
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/persistence/save-game.lua`](../../../persistence/save-game.lua)  
+> **Source lines:** 187  
+> **SHA-256 (UTF-8):** `8a1da8d304d69d7ce395dd9fde310af8dd0ede9547115313ab1075b1a5182b33`  
+> **Named/assigned functions detected:** 13  
+> **Table initializers detected (simple pattern):** 4
 
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
+
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-game_save.lua Extension of persistence.lua that provides a staging area for changes. Allows you to make multiple edits, then either commit them (save) or discard them (revert) back to the last saved state. This version supports per‑player save files using the player's secret: scripts/save-files/<player_secret>/save<index>.json where <index> is from 1 to MAX_SAVE_INSTANCES (configurable below). The factory function accepts a player_id (string) and an index. The secret is sanitized to be filesystem‑safe across platforms.
+Current source inventory for `scripts/persistence/save-game.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- `scripts/persistence/persistence` — line 12
-- `scripts/utils/utility` — line 13
+| Line | `require` module |
+|---:|---|
+| 8 | `scripts/persistence/persistence` |
+| 9 | `scripts/utils/utility` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No named `.on`/`:on` events detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 23 | `ensure_directory_exists` | `filePath` | local |
+| 42 | `ensure_save_file_exists` | `filePath` | local |
+| 57 | `sanitize_filename_component` | `str` | local |
+| 64 | `deep_copy` | `orig` | local |
+| 76 | `new` | `filePath` | local |
+| 88 | `self:load` | `(none)` | assigned/declared |
+| 98 | `self:edit` | `func` | assigned/declared |
+| 106 | `self:save` | `(none)` | assigned/declared |
+| 124 | `self:revert` | `(none)` | assigned/declared |
+| 132 | `self:getData` | `(none)` | assigned/declared |
+| 143 | `self:isModified` | `(none)` | assigned/declared |
+| 147 | `self:getWorkingTable` | `(none)` | assigned/declared |
+| 158 | `get_game_save` | `player_id, index` | local |
+
+### Detailed parameter inventory
+
+#### 1. `ensure_directory_exists(filePath)`
+
+- **Line:** 23
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 26 | `sanitize_filename_component` | `str` |
-| 40 | `escape_path_for_shell` | `path` |
-| 53 | `ensure_directory_exists` | `filePath` |
-| 89 | `ensure_save_file_exists` | `filePath` |
-| 108 | `deep_copy` | `orig` |
-| 118 | `new` | `filePath` |
-| 131 | `self:load` | `(none)` |
-| 145 | `self:edit` | `func` |
-| 155 | `self:save` | `(none)` |
-| 178 | `self:revert` | `(none)` |
-| 187 | `self:getData` | `(none)` |
-| 199 | `self:isModified` | `(none)` |
-| 205 | `self:getWorkingTable` | `(none)` |
-| 219 | `get_game_save` | `player_id, index` |
+| 1 | `filePath` | Declared by this function; type not inferred. |
 
-### Function notes
+#### 2. `ensure_save_file_exists(filePath)`
 
-- **`sanitize_filename_component(str)`** — Characters that are invalid in filenames on common platforms: Windows: \ / : * ? " < > | Unix: / and null We'll replace any problematic characters with an underscore. *(source line 26)*
-- **`escape_path_for_shell(path)`** — Safe path quoting for os.execute (escape double quotes) *(source line 40)*
-- **`ensure_directory_exists(filePath)`** — Ensures that the directory portion of a file path exists. Uses Garry's Mod's file.CreateDir if available (recommended), otherwise falls back to os.execute with proper escaping. *(source line 53)*
-- **`ensure_save_file_exists(filePath)`** — Ensure that the file at the given path exists and contains an empty JSON object. If the file does not exist, it is created with the content "{}". *(source line 89)*
-- **`deep_copy(orig)`** — Deep copy a table (simple recursive copy, assumes no cycles) *(source line 108)*
-- **`new(filePath)`** — Creates a new game_save instance for the given file path *(source line 118)*
-- **`self:load()`** — Load data from disk and initialise both saved and working copies *(source line 131)*
-- **`self:edit(func)`** — Apply a modification to the working copy. func receives the working data table and should modify it in place. *(source line 145)*
-- **`self:save()`** — Commit the working copy to disk. Returns a promise that resolves when the write completes. *(source line 155)*
-- **`self:revert()`** — Discard all changes made since the last save. Resets working_data to a copy of the last saved state. *(source line 178)*
-- **`self:getData()`** — Return a shallow copy of the current working data (for reading only). *(source line 187)*
-- **`self:isModified()`** — Check whether there are unsaved modifications. *(source line 199)*
-- **`self:getWorkingTable()`** — (Optional) Direct access to the working table – use with caution. Modifying the returned table will mark it dirty automatically. *(source line 205)*
-- **`get_game_save(player_id, index)`** — Factory: returns the singleton game_save instance for a given player and save slot. player_id : string – the player's ID index     : number – save slot index (1 .. MAX_SAVE_INSTANCES) The corresponding file is automatically created if it does not exist. *(source line 219)*
+- **Line:** 42
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `filePath` | Declared by this function; type not inferred. |
 
-### `instances` *(line 19)*
+#### 3. `sanitize_filename_component(str)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 57
+- **Declaration:** local
+- **Nearby code comment:** ---------------------------------------------------------------------------- Sanitisation and deep copy ----------------------------------------------------------------------------
 
-### `copy` *(line 110)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `str` | Declared by this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `deep_copy(orig)`
 
-### `self` *(line 120)*
+- **Line:** 64
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `filePath` | expression/reference | `filePath` |
-| `persistence` | expression/reference | `p` |
-| `saved_data` | nil | `nil` |
-| `working_data` | nil | `nil` |
-| `loaded` | boolean literal | `false` |
-| `dirty` | boolean literal | `false` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `orig` | Declared by this function; type not inferred. |
 
-### `copy` *(line 191)*
+#### 5. `new(filePath)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 76
+- **Declaration:** local
+- **Nearby code comment:** ---------------------------------------------------------------------------- Game save instance constructor ----------------------------------------------------------------------------
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `filePath` | Declared by this function; type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/persistence/save-game.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 6. `self:load()`
+
+- **Line:** 88
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 7. `self:edit(func)`
+
+- **Line:** 98
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `func` | Declared by this function; type not inferred. |
+
+#### 8. `self:save()`
+
+- **Line:** 106
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 9. `self:revert()`
+
+- **Line:** 124
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 10. `self:getData()`
+
+- **Line:** 132
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 11. `self:isModified()`
+
+- **Line:** 143
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 12. `self:getWorkingTable()`
+
+- **Line:** 147
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 13. `get_game_save(player_id, index)`
+
+- **Line:** 158
+- **Declaration:** local
+- **Nearby code comment:** Factory: returns the singleton game_save instance for a given player and save slot
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared by this function; type not inferred. |
+| 2 | `index` | Declared by this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 16 | `instances` |
+| 66 | `copy` |
+| 79 | `self` |
+| 136 | `copy` |
+
+## Net API calls
+
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.get_player_secret` | 1 | 166 |

@@ -1,0 +1,33 @@
+[2026-11-11 19:21:55] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : 010cdcdf-a3ba-4d2f-9d0c-c10b403965cc
+    success   : true
+[2026-11-11 19:23:03] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : eznpcs
+    player_id : c4b5d9b2-158b-486d-8e72-9b0729721315
+[2026-11-11 19:23:03] [DEBUG] [player_control/INPUT] logical focus transition
+    controller_claimed : true
+    new_owner          : "liberation_option_menu:c4b5d9b2-158b-486d-8e72-9b0729721315"
+    player_id          : c4b5d9b2-158b-486d-8e72-9b0729721315
+[2026-11-11 19:23:03] [DEBUG] [player_control/INPUT] control session started
+    owner      : "liberation_option_menu:c4b5d9b2-158b-486d-8e72-9b0729721315"
+    player_id  : c4b5d9b2-158b-486d-8e72-9b0729721315
+    profile    : menu
+    session_id : 2
+[2026-11-11 19:23:03] [DEBUG] [player_control/HANDOFF] guarding resumed input
+    owner           : "liberation_option_menu:c4b5d9b2-158b-486d-8e72-9b0729721315"
+    player_id       : c4b5d9b2-158b-486d-8e72-9b0729721315
+    swallow_seconds : 0
+[2026-11-11 19:23:03] [DEBUG] [player_control/HANDOFF] guarding resumed input
+    owner           : "liberation_option_menu:c4b5d9b2-158b-486d-8e72-9b0729721315"
+    player_id       : c4b5d9b2-158b-486d-8e72-9b0729721315
+    swallow_seconds : 0
+[2026-11-11 19:23:04] [DEBUG] [player_control/INPUT] control session closed
+    owner           : "liberation_option_menu:c4b5d9b2-158b-486d-8e72-9b0729721315"
+    pending_release : false
+    player_id       : c4b5d9b2-158b-486d-8e72-9b0729721315
+    session_id      : 2
+[2026-11-11 19:23:04] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : c4b5d9b2-158b-486d-8e72-9b0729721315
+    success   : true

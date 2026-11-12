@@ -1,97 +1,88 @@
-# `log_in_animation.lua`
+# 📄 `log_in_animation.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezwarps/log_in_animation.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezwarps/log_in_animation.lua`](../../../../ezlibs-scripts/ezwarps/log_in_animation.lua)  
 > **Source lines:** 81  
-> **Functions detected:** 2  
-> **Table declarations detected:** 5
+> **SHA-256 (UTF-8):** `5ec9bf0cd188dfc0f20013b48ca4f3ee7eb049c77b48ea7c695d155cfd43ef1b`  
+> **Named/assigned functions detected:** 2  
+> **Table initializers detected:** 5
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-these offsets will modify the warp landing location so that the player can animate from their spawn location nicely
+Current source inventory for `scripts/ezlibs-scripts/ezwarps/log_in_animation.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/logger/logger` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No literal `:on` event registration detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 2 | `create_jack_in_out_animation` | `is_arriving` | assigned/declared |
+| 10 | `animate` | `player_id` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `create_jack_in_out_animation(is_arriving)`
+
+- **Line:** 2
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 2 | `create_jack_in_out_animation` | `is_arriving` |
-| 10 | `animate` | `player_id` |
+| 1 | `is_arriving` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `animate(player_id)`
 
-- **`create_jack_in_out_animation(is_arriving)`** *(source line 2)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`animate(player_id)`** *(source line 10)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 10
+- **Declaration:** table/global or assignment
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
 
-### `log_in_animation` *(line 3)*
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `pre_animation_offsets` | table | `{ x=0, y=0, z=0 }` |
-| `animate` | function | `function(player_id) return async(function() local player_pos = Net.get_player_position(player_id) local area_id = Net.get_player_area(player…` |
-| `[3]` | string literal | `"/server/assets/ezlibs-assets/ezwarps/logout.png") Net.provide_asset(area_id` |
-| `[4]` | string literal | `"/server/assets/ezlibs-assets/ezwarps/logout.animation") local warp_in_effect_id = "warp_in_effect_"..player_id logger:info('spawning log in…` |
-| `[5]` | table | `{ warp_in = false, texture_path = "/server/assets/ezlibs-assets/ezwarps/logout.png", animation_path = "/server/assets/ezlibs-assets/ezwarps/…` |
-| `[6]` | string literal | `"JACK_IN"` |
-| `[7]` | call/expression | `false) Net.play_sound(area_id` |
-| `[8]` | string literal | `'/server/assets/ezlibs-assets/ezwarps/log_in.ogg') else Net.animate_bot(warp_in_effect_id` |
-| `[9]` | string literal | `"JACK_OUT"` |
-| `[10]` | call/expression | `false) Net.play_sound(area_id` |
-| `[11]` | string literal | `'/server/assets/ezlibs-assets/ezwarps/log_out.ogg') end local duration = 1.0 local vanish_time = 0.4 local player_keyframes = {{ properties=…` |
-| `[12]` | call/expression | `player_keyframes) await(Async.sleep(vanish_time)) local players = Net.list_players(area_id) for i` |
-| `[13]` | expression/reference | `nearby_player_id in next` |
-| `[14]` | call/expression | `players do if is_arriving then Net.include_actor_for_player(nearby_player_id` |
-| `[15]` | call/expression | `player_id) else Net.exclude_actor_for_player(nearby_player_id` |
-| `[16]` | call/expression | `player_id) end end await(Async.sleep(duration)) Net.unlock_player_camera(player_id) Net.remove_bot(warp_in_effect_id) end) end` |
+## Tables
 
-### `pre_animation_offsets` *(line 5)*
+| Source line | Assignment |
+|---:|---|
+| 3 | `log_in_animation` |
+| 5 | `pre_animation_offsets` |
+| 37 | `player_keyframes` |
+| 38 | `properties` |
+| 48 | `properties` |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | number literal | `0` |
-| `y` | number literal | `0` |
-| `z` | number literal | `0` |
+## Net API calls
 
-### `player_keyframes` *(line 36)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ properties={{ property="Y", value=player_pos.y, },{ property="Z", value=player_pos.z }}, duration=0 }` |
-
-### `properties` *(line 38)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property="Y", value=player_pos.y, }` |
-| `[2]` | table | `{ property="Z", value=player_pos.z }` |
-
-### `properties` *(line 48)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property="Y", ease="Out", value=player_pos.y }` |
-| `[2]` | table | `{ property="Z", ease="Out", value=player_pos.z }` |
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezwarps/log_in_animation.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.animate_bot` | 2 | 28 |
+| `Net.animate_player_properties` | 1 | 60 |
+| `Net.create_bot` | 1 | 18 |
+| `Net.exclude_actor_for_player` | 1 | 68 |
+| `Net.get_player_area` | 1 | 13 |
+| `Net.get_player_position` | 1 | 12 |
+| `Net.include_actor_for_player` | 1 | 66 |
+| `Net.list_players` | 1 | 63 |
+| `Net.play_sound` | 2 | 29 |
+| `Net.provide_asset` | 2 | 14 |
+| `Net.remove_bot` | 1 | 73 |
+| `Net.unlock_player_camera` | 1 | 72 |

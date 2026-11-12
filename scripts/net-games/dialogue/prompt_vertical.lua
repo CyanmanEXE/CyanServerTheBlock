@@ -1,3 +1,4 @@
+local PlayerControl = require("scripts/player-control/main")
 -- scripts/net-games/dialogue/prompt_vertical.lua
 -- Vertical menu prompt helper for net-games Dialogue (adapted to new displayer)
 -- NOTE: This version preserves the original logic but marks areas where the new
@@ -169,9 +170,9 @@ end
 
 local function set_input_locked(player_id, locked)
     if locked then
-        if Net.lock_player_input then pcall(Net.lock_player_input, Net, player_id) end
+        if PlayerControl.acquire_capture then pcall(PlayerControl.acquire_capture, player_id, "net-games:dialogue") end
     else
-        if Net.unlock_player_input then pcall(Net.unlock_player_input, Net, player_id) end
+        if PlayerControl.release_capture then pcall(PlayerControl.release_capture, player_id, "net-games:dialogue") end
     end
 end
 

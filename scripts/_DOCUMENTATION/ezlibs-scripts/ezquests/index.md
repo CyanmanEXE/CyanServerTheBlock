@@ -1,95 +1,158 @@
-# `ezquests.lua`
+# 📄 `ezquests.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezquests.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezquests.lua`](../../../ezlibs-scripts/ezquests.lua)  
 > **Source lines:** 122  
-> **Functions detected:** 9  
-> **Table declarations detected:** 3
+> **SHA-256 (UTF-8):** `2c261333115cfaa94d780ad7d2e043b7d5942bc10e39b603ac9f162c79ca16d3`  
+> **Named/assigned functions detected:** 9  
+> **Table initializers detected:** 3
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Current source inventory for `scripts/ezlibs-scripts/ezquests.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
-- `scripts/ezlibs-scripts/ezmemory` — line 2
-- `scripts/ezlibs-scripts/helpers` — line 3
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/logger/logger` |
+| 2 | `scripts/ezlibs-scripts/ezmemory` |
+| 3 | `scripts/ezlibs-scripts/helpers` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No literal `:on` event registration detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 9 | `ezquests.add_quest` | `quest` | assigned/declared |
+| 28 | `ezquests.set_player_quest_flag` | `player_id,quest_name,flag_name,flag_state` | assigned/declared |
+| 42 | `ezquests.get_player_quest_flag` | `player_id,quest_name,flag_name,flag_state` | assigned/declared |
+| 54 | `ezquests.clear_player_quest_flags` | `player_id,quest_name` | assigned/declared |
+| 65 | `ezquests.get_quest` | `quest_name` | assigned/declared |
+| 74 | `ezquests.get_player_quest_state` | `player_id, quest_name` | assigned/declared |
+| 83 | `ezquests.quest_event` | `player_id,quest_name,event_value` | assigned/declared |
+| 98 | `handle_event_async` | `self,player_id,event_value` | assigned/declared |
+| 110 | `determine_state` | `self,player_id` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `ezquests.add_quest(quest)`
+
+- **Line:** 9
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 9 | `ezquests.add_quest` | `quest` |
-| 28 | `ezquests.set_player_quest_flag` | `player_id,quest_name,flag_name,flag_state` |
-| 42 | `ezquests.get_player_quest_flag` | `player_id,quest_name,flag_name,flag_state` |
-| 54 | `ezquests.clear_player_quest_flags` | `player_id,quest_name` |
-| 65 | `ezquests.get_quest` | `quest_name` |
-| 74 | `ezquests.get_player_quest_state` | `player_id, quest_name` |
-| 83 | `ezquests.quest_event` | `player_id,quest_name,event_value` |
-| 98 | `handle_event_async` | `self,player_id,event_value` |
-| 110 | `determine_state` | `self,player_id` |
+| 1 | `quest` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `ezquests.set_player_quest_flag(player_id,quest_name,flag_name,flag_state)`
 
-- **`ezquests.add_quest(quest)`** *(source line 9)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezquests.set_player_quest_flag(player_id,quest_name,flag_name,flag_state)`** *(source line 28)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezquests.get_player_quest_flag(player_id,quest_name,flag_name,flag_state)`** *(source line 42)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezquests.clear_player_quest_flags(player_id,quest_name)`** *(source line 54)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezquests.get_quest(quest_name)`** *(source line 65)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezquests.get_player_quest_state(player_id, quest_name)`** *(source line 74)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezquests.quest_event(player_id,quest_name,event_value)`** *(source line 83)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`handle_event_async(self,player_id,event_value)`** *(source line 98)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`determine_state(self,player_id)`** *(source line 110)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 28
+- **Declaration:** table/global or assignment
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `quest_name` | Declared in this function; type not inferred. |
+| 3 | `flag_name` | Declared in this function; type not inferred. |
+| 4 | `flag_state` | Declared in this function; type not inferred. |
 
-### `ezquests` *(line 4)*
+#### 3. `ezquests.get_player_quest_flag(player_id,quest_name,flag_name,flag_state)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `quests` | table | `{}` |
+- **Line:** 42
+- **Declaration:** table/global or assignment
 
-### `quests` *(line 6)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `quest_name` | Declared in this function; type not inferred. |
+| 3 | `flag_name` | Declared in this function; type not inferred. |
+| 4 | `flag_state` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `ezquests.clear_player_quest_flags(player_id,quest_name)`
 
-### `quest_get_punched` *(line 96)*
+- **Line:** 54
+- **Declaration:** table/global or assignment
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `name` | string literal | `"Get Punched"` |
-| `handle_event_async` | function | `function (self` |
-| `[3]` | expression/reference | `player_id` |
-| `[4]` | call/expression | `event_value) return async(function () local accpeted = ezquests.get_player_quest_flag(player_id` |
-| `[5]` | expression/reference | `self.name` |
-| `[6]` | string literal | `'accepted') if accpeted or event_value == "accepted" then ezquests.set_player_quest_flag(player_id` |
-| `[7]` | expression/reference | `self.name` |
-| `[8]` | expression/reference | `event_value` |
-| `[9]` | call/expression | `true) end if event_value == 'reset' then ezquests.clear_player_quest_flags(player_id` |
-| `[10]` | expression/reference | `self.name) end end) end` |
-| `determine_state` | function | `function (self` |
-| `[12]` | call/expression | `player_id) if ezquests.get_player_quest_flag(player_id` |
-| `[13]` | expression/reference | `self.name` |
-| `[14]` | string literal | `'punched') then return "punched" end if ezquests.get_player_quest_flag(player_id` |
-| `[15]` | expression/reference | `self.name` |
-| `[16]` | string literal | `'accepted') then return "accepted" end return "unaccepted" end` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `quest_name` | Declared in this function; type not inferred. |
 
-## Implementation notes
+#### 5. `ezquests.get_quest(quest_name)`
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezquests.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+- **Line:** 65
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `quest_name` | Declared in this function; type not inferred. |
+
+#### 6. `ezquests.get_player_quest_state(player_id, quest_name)`
+
+- **Line:** 74
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `quest_name` | Declared in this function; type not inferred. |
+
+#### 7. `ezquests.quest_event(player_id,quest_name,event_value)`
+
+- **Line:** 83
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `quest_name` | Declared in this function; type not inferred. |
+| 3 | `event_value` | Declared in this function; type not inferred. |
+
+#### 8. `handle_event_async(self,player_id,event_value)`
+
+- **Line:** 98
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `self` | Declared in this function; type not inferred. |
+| 2 | `player_id` | Declared in this function; type not inferred. |
+| 3 | `event_value` | Declared in this function; type not inferred. |
+
+#### 9. `determine_state(self,player_id)`
+
+- **Line:** 110
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `self` | Declared in this function; type not inferred. |
+| 2 | `player_id` | Declared in this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 5 | `ezquests` |
+| 6 | `quests` |
+| 96 | `quest_get_punched` |
+
+## Net API calls
+
+No direct `Net.method(...)` call expression matched.

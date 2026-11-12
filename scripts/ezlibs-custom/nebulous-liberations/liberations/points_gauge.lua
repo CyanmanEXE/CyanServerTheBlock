@@ -33,8 +33,8 @@
 -- via Net.provide_asset_for_player before :show() is called. See
 -- Preloader.provide_gauge_assets_to_player.
 
-local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
-local log = ezlogger.get("nebulous-liberations")
+local SharedLogger = require("scripts/logger/logger")
+local log = SharedLogger.register("nebulous-liberations"):register_subsystem("points-gauge")
 
 local Displayer = require("scripts/displayer/displayer")
 local TextLayout = require("scripts/displayer/text-layout")

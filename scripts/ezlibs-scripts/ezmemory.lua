@@ -1,4 +1,4 @@
-local logger = require('scripts/ezlibs-scripts/ezlogger').get('ezmemory')
+local logger = require('scripts/logger/logger').register('ezmemory')
 local json = require('scripts/ezlibs-scripts/json')
 local helpers = require('scripts/ezlibs-scripts/helpers')
 local table = require('table')

@@ -1,151 +1,178 @@
-# `guard_interception.lua`
+# 📄 `guard_interception.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-custom/nebulous-liberations/liberations/guard_interception.lua`  
-> **Source lines:** 246  
-> **Functions detected:** 10  
-> **Table declarations detected:** 12
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/liberations/guard_interception.lua`](../../../../../ezlibs-custom/nebulous-liberations/liberations/guard_interception.lua)  
+> **Source lines:** 249  
+> **SHA-256 (UTF-8):** `5ace265eee6502d776f1a5e923dd94eaa4cbc3765cd5737003550732ffa1e79e`  
+> **Named/assigned functions detected:** 10  
+> **Table initializers detected:** 12
 
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../../../logger/README.md) for logging semantics.
+
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Current source inventory for `scripts/ezlibs-custom/nebulous-liberations/liberations/guard_interception.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezbus` — line 1
-- `scripts/libs/direction` — line 2
-- `scripts/ezlibs-scripts/ezlogger` — line 3
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/ezlibs-scripts/ezbus` |
+| 2 | `scripts/libs/direction` |
+| 3 | `scripts/logger/logger` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 203 | `bus` | `prepare_attack` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 21 | `get_position` | `player` | local |
+| 31 | `is_guard_session` | `session` | local |
+| 39 | `is_eligible_attacker` | `attacker` | local |
+| 44 | `face_attacker` | `guard_player, guard_position, attacker` | local |
+| 60 | `animate_interception` | `instance, guard_session, protected_session, attacker, impact_delay` | local |
+| 144 | `build_attack_records` | `event` | local |
+| 198 | `get_instance_bus` | `instance` | local |
+| 210 | `GuardInterception.prepare_attack` | `instance, attacker, target_sessions, impact_delay` | assigned/declared |
+| 222 | `GuardInterception.apply_damage` | `records, amount, attacker` | assigned/declared |
+| 242 | `GuardInterception.finish_attack` | `instance, records` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `get_position(player)`
+
+- **Line:** 21
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 21 | `get_position` | `player` |
-| 31 | `is_guard_session` | `session` |
-| 39 | `is_eligible_attacker` | `attacker` |
-| 44 | `face_attacker` | `guard_player, guard_position, attacker` |
-| 60 | `animate_interception` | `instance, guard_session, protected_session, attacker, impact_delay` |
-| 144 | `build_attack_records` | `event` |
-| 198 | `get_instance_bus` | `instance` |
-| 210 | `GuardInterception.prepare_attack` | `instance, attacker, target_sessions, impact_delay` |
-| 222 | `GuardInterception.apply_damage` | `records, amount, attacker` |
-| 239 | `GuardInterception.finish_attack` | `instance, records` |
+| 1 | `player` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `is_guard_session(session)`
 
-- **`get_position(player)`** *(source line 21)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`is_guard_session(session)`** *(source line 31)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`is_eligible_attacker(attacker)`** *(source line 39)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`face_attacker(guard_player, guard_position, attacker)`** *(source line 44)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`animate_interception(instance, guard_session, protected_session, attacker, impact_delay)`** *(source line 60)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`build_attack_records(event)`** *(source line 144)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`get_instance_bus(instance)`** *(source line 198)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`GuardInterception.prepare_attack(instance, attacker, target_sessions, impact_delay)`** *(source line 210)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`GuardInterception.apply_damage(records, amount, attacker)`** *(source line 222)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`GuardInterception.finish_attack(instance, records)`** *(source line 239)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 31
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `session` | Declared in this function; type not inferred. |
 
-### `GuardInterception` *(line 5)*
+#### 3. `is_eligible_attacker(attacker)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 39
+- **Declaration:** local
 
-### `registered_buses` *(line 7)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `attacker` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `face_attacker(guard_player, guard_position, attacker)`
 
-### `animation_suffix` *(line 13)*
+- **Line:** 44
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | expression/reference | `[Direction.UP_LEFT] = "UL"` |
-| `[2]` | expression/reference | `[Direction.UP_RIGHT] = "UR"` |
-| `[3]` | expression/reference | `[Direction.DOWN_LEFT] = "DL"` |
-| `[4]` | expression/reference | `[Direction.DOWN_RIGHT] = "DR"` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `guard_player` | Declared in this function; type not inferred. |
+| 2 | `guard_position` | Declared in this function; type not inferred. |
+| 3 | `attacker` | Declared in this function; type not inferred. |
 
-### `keyframes` *(line 86)*
+#### 5. `animate_interception(instance, guard_session, protected_session, attacker, impact_delay)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ properties = { { property = "X", value = guard_start.x, ease = "Linear" }, { property = "Y", value = guard_start.y, ease = "Linear" }, { p…` |
-| `[2]` | table | `{ properties = { { property = "X", value = protected_position.x, ease = "Linear" }, { property = "Y", value = protected_position.y, ease = "…` |
-| `[3]` | table | `{ properties = { { property = "X", value = protected_position.x, ease = "Linear" }, { property = "Y", value = protected_position.y, ease = "…` |
-| `[4]` | table | `{ properties = { { property = "X", value = push_x, ease = "Linear" }, { property = "Y", value = push_y, ease = "Linear" }, { property = "Z",…` |
-| `[5]` | table | `{ properties = { { property = "X", value = guard_start.x, ease = "Linear" }, { property = "Y", value = guard_start.y, ease = "Linear" }, { p…` |
+- **Line:** 60
+- **Declaration:** local
 
-### `properties` *(line 88)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared in this function; type not inferred. |
+| 2 | `guard_session` | Declared in this function; type not inferred. |
+| 3 | `protected_session` | Declared in this function; type not inferred. |
+| 4 | `attacker` | Declared in this function; type not inferred. |
+| 5 | `impact_delay` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property = "X", value = guard_start.x, ease = "Linear" }` |
-| `[2]` | table | `{ property = "Y", value = guard_start.y, ease = "Linear" }` |
-| `[3]` | table | `{ property = "Z", value = guard_start.z, ease = "Linear" }` |
+#### 6. `build_attack_records(event)`
 
-### `properties` *(line 96)*
+- **Line:** 144
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property = "X", value = protected_position.x, ease = "Linear" }` |
-| `[2]` | table | `{ property = "Y", value = protected_position.y, ease = "Linear" }` |
-| `[3]` | table | `{ property = "Z", value = protected_position.z, ease = "Linear" }` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `event` | Declared in this function; type not inferred. |
 
-### `properties` *(line 104)*
+#### 7. `get_instance_bus(instance)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property = "X", value = protected_position.x, ease = "Linear" }` |
-| `[2]` | table | `{ property = "Y", value = protected_position.y, ease = "Linear" }` |
-| `[3]` | table | `{ property = "Z", value = protected_position.z, ease = "Linear" }` |
+- **Line:** 198
+- **Declaration:** local
 
-### `properties` *(line 112)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property = "X", value = push_x, ease = "Linear" }` |
-| `[2]` | table | `{ property = "Y", value = push_y, ease = "Linear" }` |
-| `[3]` | table | `{ property = "Z", value = protected_position.z, ease = "Linear" }` |
+#### 8. `GuardInterception.prepare_attack(instance, attacker, target_sessions, impact_delay)`
 
-### `properties` *(line 120)*
+- **Line:** 210
+- **Declaration:** table/global or assignment
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property = "X", value = guard_start.x, ease = "Linear" }` |
-| `[2]` | table | `{ property = "Y", value = guard_start.y, ease = "Linear" }` |
-| `[3]` | table | `{ property = "Z", value = guard_start.z, ease = "Linear" }` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared in this function; type not inferred. |
+| 2 | `attacker` | Declared in this function; type not inferred. |
+| 3 | `target_sessions` | Declared in this function; type not inferred. |
+| 4 | `impact_delay` | Declared in this function; type not inferred. |
 
-### `event` *(line 211)*
+#### 9. `GuardInterception.apply_damage(records, amount, attacker)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `instance` | expression/reference | `instance` |
-| `attacker` | expression/reference | `attacker` |
-| `target_sessions` | expression/reference | `target_sessions or {}` |
-| `impact_delay` | expression/reference | `impact_delay or 0.5` |
-| `records` | table | `{}` |
+- **Line:** 222
+- **Declaration:** table/global or assignment
 
-### `records` *(line 216)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `records` | Declared in this function; type not inferred. |
+| 2 | `amount` | Declared in this function; type not inferred. |
+| 3 | `attacker` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 10. `GuardInterception.finish_attack(instance, records)`
 
-### `damaged` *(line 223)*
+- **Line:** 242
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared in this function; type not inferred. |
+| 2 | `records` | Declared in this function; type not inferred. |
 
-## Implementation notes
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/nebulous-liberations/liberations/guard_interception.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 6 | `GuardInterception` |
+| 7 | `registered_buses` |
+| 14 | `animation_suffix` |
+| 86 | `keyframes` |
+| 88 | `properties` |
+| 96 | `properties` |
+| 104 | `properties` |
+| 112 | `properties` |
+| 120 | `properties` |
+| 211 | `event` |
+| 216 | `records` |
+| 223 | `damaged` |
+
+## Net API calls
+
+No direct `Net.method(...)` call expression matched.

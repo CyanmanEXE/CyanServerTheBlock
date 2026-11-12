@@ -1,3 +1,4 @@
+local PlayerControl = require("scripts/player-control/main")
 local lev_beast_in_animation = {
     --these offsets will modify the warp landing location so that the player can animate from their spawn location nicely
     pre_animation_offsets={
@@ -106,7 +107,7 @@ local lev_beast_in_animation = {
             await(Async.sleep(seconds_here))
             
             Net.play_sound(area_id, '/server/assets/ezlibs-assets/ezwarps/lev-bus-leave.ogg')
-            Net.unlock_player_input(player_id)
+            PlayerControl.release_capture(player_id, "ezwarps")
             await(Async.sleep(seconds_leaving))
             
             Net.remove_bot(lev_beast_id)

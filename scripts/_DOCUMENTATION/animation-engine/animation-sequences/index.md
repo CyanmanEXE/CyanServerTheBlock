@@ -1,345 +1,669 @@
-# `animation-sequences.lua`
+# 📄 `animation-sequences.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/animation-engine/animation-sequences.lua`  
-> **Source lines:** 1248  
-> **Functions detected:** 53  
-> **Table declarations detected:** 23
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/animation-engine/animation-sequences.lua`](../../../animation-engine/animation-sequences.lua)  
+> **Source lines:** 1250  
+> **SHA-256 (UTF-8):** `cf9a104363e47d5d00fb5824baa8b3cb5120896056b98eda8df7c683fa196efa`  
+> **Named/assigned functions detected:** 49  
+> **Table initializers detected (simple pattern):** 23
 
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
+
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-animation-sequences.lua General purpose animation sequences that mimic duels.lua behaviors Works with any sprite_id and object properties
+Current source inventory for `scripts/animation-engine/animation-sequences.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- No `require(...)` dependency was detected.
+No statically identified literal `require` module strings.
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No named `.on`/`:on` events detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 148 | `on_update` | `values, t, phase` | assigned/declared |
+| 212 | `on_update` | `values, t, phase` | assigned/declared |
+| 279 | `on_update` | `values, t, phase` | assigned/declared |
+| 311 | `AnimationSequences.attack` | `object, recoil_offset, lunge_offset, options` | assigned/declared |
+| 332 | `on_update` | `values, t, phase` | assigned/declared |
+| 377 | `AnimationSequences.slideIn` | `object, start_x, start_y, end_x, end_y, options` | assigned/declared |
+| 394 | `on_update` | `values` | assigned/declared |
+| 411 | `AnimationSequences.bob` | `object, options` | assigned/declared |
+| 437 | `on_update` | `values` | assigned/declared |
+| 449 | `AnimationSequences.pulse` | `object, options` | assigned/declared |
+| 482 | `on_update` | `values` | assigned/declared |
+| 495 | `AnimationSequences.color_pulse` | `object, start_color, target_color, options` | assigned/declared |
+| 529 | `on_update` | `values` | assigned/declared |
+| 557 | `AnimationSequences.color_pulse_from_current` | `object, target_color, options` | assigned/declared |
+| 572 | `AnimationSequences.shake` | `object, options` | assigned/declared |
+| 593 | `on_update` | `values, t, phase` | assigned/declared |
+| 628 | `AnimationSequences.fade` | `object, target_alpha, options` | assigned/declared |
+| 646 | `on_update` | `values` | assigned/declared |
+| 665 | `AnimationSequences.tint` | `object, target_r, target_g, target_b, options` | assigned/declared |
+| 682 | `on_update` | `values` | assigned/declared |
+| 715 | `on_update` | `values, t, phase` | assigned/declared |
+| 749 | `on_update` | `values, t, phase` | assigned/declared |
+| 765 | `on_update` | `values, t, phase` | assigned/declared |
+| 781 | `AnimationSequences.menuCursor` | `object, options` | assigned/declared |
+| 811 | `AnimationSequences.highlightCard` | `object, options` | assigned/declared |
+| 829 | `on_update` | `values` | assigned/declared |
+| 841 | `AnimationSequences.tween` | `object, target_props, duration, options` | assigned/declared |
+| 850 | `AnimationSequences.move_to` | `object, target_x, target_y, duration, options` | assigned/declared |
+| 858 | `AnimationSequences.scale_to` | `object, target_scale, duration, options` | assigned/declared |
+| 866 | `AnimationSequences.rotate_to` | `object, target_angle, duration, options` | assigned/declared |
+| 874 | `AnimationSequences.fade_to` | `object, target_alpha, duration, options` | assigned/declared |
+| 882 | `AnimationSequences.tint_to` | `object, target_r, target_g, target_b, duration, options` | assigned/declared |
+| 890 | `AnimationSequences.color_pulse_to` | `object, target_r, target_g, target_b, target_a, duration, easing, on_complete, loop, ping_pong, easing_back, discrete, tag` | assigned/declared |
+| 921 | `AnimationSequences.move_to_discrete_first` | `object, target_x, target_y, duration, options` | assigned/declared |
+| 934 | `on_update` | `values` | assigned/declared |
+| 957 | `AnimationSequences.series` | `objects, animator, options` | assigned/declared |
+| 1002 | `run` | `done` | assigned/declared |
+| 1004 | `safe_done` | `(none)` | local |
+| 1028 | `anim_opts.on_complete` | `...` | assigned/declared |
+| 1076 | `AnimationSequences.marquee` | `object, distance, duration, options` | assigned/declared |
+| 1105 | `on_update` | `values, t, phase` | assigned/declared |
+| 1111 | `on_complete` | `values, interrupted` | assigned/declared |
+| 1129 | `AnimationSequences.typewriter` | `sprites, options` | assigned/declared |
+| 1155 | `on_update` | `v` | assigned/declared |
+| 1169 | `run` | `done` | assigned/declared |
+| 1205 | `on_complete` | `(none)` | assigned/declared |
+| 1219 | `AnimationSequences.stopAll` | `tag` | assigned/declared |
+| 1229 | `AnimationSequences.isAnimating` | `tag` | assigned/declared |
+| 1235 | `AnimationSequences.reset` | `object, initial_values` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `on_update(values, t, phase)`
+
+- **Line:** 148
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 124 | `AnimationSequences.summon` | `object, start_x, start_y, start_scale, end_x, end_y, end_scale, options` |
-| 148 | `on_update` | `values, t, phase` |
-| 193 | `AnimationSequences.set` | `object, start_x, start_y, start_scale, start_rotation, end_x, end_y, end_scale, end_rotation, options` |
-| 212 | `on_update` | `values, t, phase` |
-| 257 | `AnimationSequences.positionChange` | `object, start_rotation, end_rotation, options` |
-| 279 | `on_update` | `values, t, phase` |
-| 311 | `AnimationSequences.attack` | `object, recoil_offset, lunge_offset, options` |
-| 332 | `on_update` | `values, t, phase` |
-| 377 | `AnimationSequences.slideIn` | `object, start_x, start_y, end_x, end_y, options` |
-| 394 | `on_update` | `values` |
-| 411 | `AnimationSequences.bob` | `object, options` |
-| 436 | `on_update` | `values` |
-| 448 | `AnimationSequences.pulse` | `object, options` |
-| 481 | `on_update` | `values` |
-| 494 | `AnimationSequences.color_pulse` | `object, start_color, target_color, options` |
-| 527 | `on_update` | `values` |
-| 555 | `AnimationSequences.color_pulse_from_current` | `object, target_color, options` |
-| 570 | `AnimationSequences.shake` | `object, options` |
-| 591 | `on_update` | `values, t, phase` |
-| 626 | `AnimationSequences.fade` | `object, target_alpha, options` |
-| 644 | `on_update` | `values` |
-| 663 | `AnimationSequences.tint` | `object, target_r, target_g, target_b, options` |
-| 680 | `on_update` | `values` |
-| 701 | `AnimationSequences.complexSummon` | `object, start_x, start_y, start_scale, end_x, end_y, end_scale, options` |
-| 713 | `on_update` | `values, t, phase` |
-| 747 | `on_update` | `values, t, phase` |
-| 763 | `on_update` | `values, t, phase` |
-| 779 | `AnimationSequences.menuCursor` | `object, options` |
-| 809 | `AnimationSequences.highlightCard` | `object, options` |
-| 827 | `on_update` | `values` |
-| 839 | `AnimationSequences.tween` | `object, target_props, duration, options` |
-| 848 | `AnimationSequences.move_to` | `object, target_x, target_y, duration, options` |
-| 856 | `AnimationSequences.scale_to` | `object, target_scale, duration, options` |
-| 864 | `AnimationSequences.rotate_to` | `object, target_angle, duration, options` |
-| 872 | `AnimationSequences.fade_to` | `object, target_alpha, duration, options` |
-| 880 | `AnimationSequences.tint_to` | `object, target_r, target_g, target_b, duration, options` |
-| 888 | `AnimationSequences.color_pulse_to` | `object, target_r, target_g, target_b, target_a, duration, easing, on_complete, loop, ping_pong, easing_back, discrete, tag` |
-| 919 | `AnimationSequences.move_to_discrete_first` | `object, target_x, target_y, duration, options` |
-| 932 | `on_update` | `values` |
-| 955 | `AnimationSequences.series` | `objects, animator, options` |
-| 1000 | `run` | `done` |
-| 1002 | `safe_done` | `(none)` |
-| 1026 | `anim_opts.on_complete` | `...` |
-| 1074 | `AnimationSequences.marquee` | `object, distance, duration, options` |
-| 1103 | `on_update` | `values, t, phase` |
-| 1109 | `on_complete` | `values, interrupted` |
-| 1127 | `AnimationSequences.typewriter` | `sprites, options` |
-| 1153 | `on_update` | `v` |
-| 1167 | `run` | `done` |
-| 1203 | `on_complete` | `(none)` |
-| 1217 | `AnimationSequences.stopAll` | `tag` |
-| 1227 | `AnimationSequences.isAnimating` | `tag` |
-| 1233 | `AnimationSequences.reset` | `object, initial_values` |
+| 1 | `values` | Declared by this function; type not inferred. |
+| 2 | `t` | Declared by this function; type not inferred. |
+| 3 | `phase` | Declared by this function; type not inferred. |
 
-### Function notes
+#### 2. `on_update(values, t, phase)`
 
-- **`AnimationSequences.summon(object, start_x, start_y, start_scale, end_x, end_y, end_scale, options)`** — Create a summon animation (card flies from start to end with arc) *(source line 124)*
-- **`on_update(values, t, phase)`** *(source line 148)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.set(object, start_x, start_y, start_scale, start_rotation, end_x, end_y, end_scale, end_rotation, options)`** — Create a set animation (similar to summon but with flip and rotation) *(source line 193)*
-- **`on_update(values, t, phase)`** *(source line 212)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.positionChange(object, start_rotation, end_rotation, options)`** — Create a position change animation (rotate and reveal) *(source line 257)*
-- **`on_update(values, t, phase)`** *(source line 279)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.attack(object, recoil_offset, lunge_offset, options)`** — Create an attack animation (recoil then lunge) *(source line 311)*
-- **`on_update(values, t, phase)`** *(source line 332)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.slideIn(object, start_x, start_y, end_x, end_y, options)`** — Create a slide animation (move from offscreen to position) *(source line 377)*
-- **`on_update(values)`** *(source line 394)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.bob(object, options)`** — Create a bob animation (up and down movement) *(source line 411)*
-- **`on_update(values)`** *(source line 436)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.pulse(object, options)`** — Create a pulse animation (scale and alpha pulsing) *(source line 448)*
-- **`on_update(values)`** *(source line 481)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.color_pulse(object, start_color, target_color, options)`** — Create a color pulse animation (transition between two color sets) *(source line 494)*
-- **`on_update(values)`** *(source line 527)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.color_pulse_from_current(object, target_color, options)`** — Alternative version that uses the object's current color as starting point *(source line 555)*
-- **`AnimationSequences.shake(object, options)`** — Create a shake animation (screen shake effect) *(source line 570)*
-- **`on_update(values, t, phase)`** *(source line 591)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.fade(object, target_alpha, options)`** — Create a fade animation (fade in/out) *(source line 626)*
-- **`on_update(values)`** *(source line 644)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.tint(object, target_r, target_g, target_b, options)`** — Create a color tint animation *(source line 663)*
-- **`on_update(values)`** *(source line 680)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.complexSummon(object, start_x, start_y, start_scale, end_x, end_y, end_scale, options)`** — Create a complex sequence that mimics duels.lua summon with all effects *(source line 701)*
-- **`on_update(values, t, phase)`** *(source line 713)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`on_update(values, t, phase)`** *(source line 747)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`on_update(values, t, phase)`** *(source line 763)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.menuCursor(object, options)`** — Create a menu cursor animation (bob + pulse) *(source line 779)*
-- **`AnimationSequences.highlightCard(object, options)`** — Create a card highlight animation (lift + glow) *(source line 809)*
-- **`on_update(values)`** *(source line 827)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.tween(object, target_props, duration, options)`** — --------------------------------------------------------------------------- Tween: Simple property animation for any object --------------------------------------------------------------------------- *(source line 839)*
-- **`AnimationSequences.move_to(object, target_x, target_y, duration, options)`** — Simple move animation with looping support *(source line 848)*
-- **`AnimationSequences.scale_to(object, target_scale, duration, options)`** — Scale animation with looping support *(source line 856)*
-- **`AnimationSequences.rotate_to(object, target_angle, duration, options)`** — Rotation animation with looping support *(source line 864)*
-- **`AnimationSequences.fade_to(object, target_alpha, duration, options)`** — Fade animation with looping support *(source line 872)*
-- **`AnimationSequences.tint_to(object, target_r, target_g, target_b, duration, options)`** — Color tint animation with looping support *(source line 880)*
-- **`AnimationSequences.color_pulse_to(object, target_r, target_g, target_b, target_a, duration, easing, on_complete, loop, ping_pong, easing_back, discrete, tag)`** — Color pulse animation with looping support (convenience wrapper) *(source line 888)*
-- **`AnimationSequences.move_to_discrete_first(object, target_x, target_y, duration, options)`** — Discrete-first move animation *(source line 919)*
-- **`on_update(values)`** *(source line 932)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.series(objects, animator, options)`** — Apply an animation to many objects in series (one after another). *(source line 955)*
-- **`run(done)`** *(source line 1000)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`safe_done()`** *(source line 1002)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`anim_opts.on_complete(...)`** *(source line 1026)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.marquee(object, distance, duration, options)`** — - Move an object horizontally, optionally looping (ping‑pong). *(source line 1074)*
-- **`on_update(values, t, phase)`** *(source line 1103)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`on_complete(values, interrupted)`** *(source line 1109)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.typewriter(sprites, options)`** — - Reveal a list of sprite objects in sequence (like a typewriter). *(source line 1127)*
-- **`on_update(v)`** *(source line 1153)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`run(done)`** *(source line 1167)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`on_complete()`** *(source line 1203)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`AnimationSequences.stopAll(tag)`** — Stop all animations for an object (by tag) *(source line 1217)*
-- **`AnimationSequences.isAnimating(tag)`** — Check if any animations are running for a tag *(source line 1227)*
-- **`AnimationSequences.reset(object, initial_values)`** — Reset object to its initial state *(source line 1233)*
+- **Line:** 212
+- **Declaration:** table/global or assignment
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+| 2 | `t` | Declared by this function; type not inferred. |
+| 3 | `phase` | Declared by this function; type not inferred. |
 
-### `AnimationSequences` *(line 4)*
+#### 3. `on_update(values, t, phase)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 279
+- **Declaration:** table/global or assignment
 
-### `AnimationSequences.config` *(line 21)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+| 2 | `t` | Declared by this function; type not inferred. |
+| 3 | `phase` | Declared by this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `default_duration` | number literal | `0.25` |
-| `default_easing` | string literal | `"ease_in_out"` |
-| `summon` | table | `{ arc_height = 24, peak_scale_mul = 1.35, wobble_ro_deg = 5, duration = 0.25, z_offset = 10 }` |
-| `position_change` | table | `{ duration = 0.18, peak_scale_mul = 1.15, flip_min = 0.06, swap_t = 0.5 }` |
-| `attack` | table | `{ duration = 0.22, recoil_distance = 5, lunge_distance = 15, t1 = 0.25, t2 = 0.60, z_offset = 12 }` |
-| `slide` | table | `{ duration = 0.15, easing = "ease_out" }` |
-| `bob` | table | `{ duration = 1.0, distance = 3, easing = "smoothstep", loop = true, ping_pong = true }` |
-| `pulse` | table | `{ duration = 0.8, scale_from = 1.0, scale_to = 1.1, alpha_from = 255, alpha_to = 200, easing = "elastic_out", loop = true, ping_pong = true …` |
-| `shake` | table | `{ duration = 0.15, intensity = 3, frequency = 15, easing = "elastic_out" }` |
-| `fade` | table | `{ duration = 0.3, easing = "ease_in_out" }` |
-| `color_pulse` | table | `{ duration = 0.8, easing = "ease_in_out", loop = true, ping_pong = true }` |
-| `marquee` | table | `{ duration = 2.0, distance = 100, easing = "linear", loop = true, ping_pong = true }` |
-| `typewriter` | table | `{ char_delay = 0.1, appear_duration = 0.15, easing = "ease_out" }` |
+#### 4. `AnimationSequences.attack(object, recoil_offset, lunge_offset, options)`
 
-### `summon` *(line 27)*
+- **Line:** 311
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Create an attack animation (recoil then lunge)
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `arc_height` | number literal | `24` |
-| `peak_scale_mul` | number literal | `1.35` |
-| `wobble_ro_deg` | number literal | `5` |
-| `duration` | number literal | `0.25` |
-| `z_offset` | number literal | `10` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `recoil_offset` | Declared by this function; type not inferred. |
+| 3 | `lunge_offset` | Declared by this function; type not inferred. |
+| 4 | `options` | Declared by this function; type not inferred. |
 
-### `position_change` *(line 36)*
+#### 5. `on_update(values, t, phase)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `duration` | number literal | `0.18` |
-| `peak_scale_mul` | number literal | `1.15` |
-| `flip_min` | number literal | `0.06` |
-| `swap_t` | number literal | `0.5` |
+- **Line:** 332
+- **Declaration:** table/global or assignment
 
-### `attack` *(line 44)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+| 2 | `t` | Declared by this function; type not inferred. |
+| 3 | `phase` | Declared by this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `duration` | number literal | `0.22` |
-| `recoil_distance` | number literal | `5` |
-| `lunge_distance` | number literal | `15` |
-| `t1` | number literal | `0.25` |
-| `t2` | number literal | `0.60` |
-| `z_offset` | number literal | `12` |
+#### 6. `AnimationSequences.slideIn(object, start_x, start_y, end_x, end_y, options)`
 
-### `slide` *(line 54)*
+- **Line:** 377
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Create a slide animation (move from offscreen to position)
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `duration` | number literal | `0.15` |
-| `easing` | string literal | `"ease_out"` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `start_x` | Declared by this function; type not inferred. |
+| 3 | `start_y` | Declared by this function; type not inferred. |
+| 4 | `end_x` | Declared by this function; type not inferred. |
+| 5 | `end_y` | Declared by this function; type not inferred. |
+| 6 | `options` | Declared by this function; type not inferred. |
 
-### `bob` *(line 60)*
+#### 7. `on_update(values)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `duration` | number literal | `1.0` |
-| `distance` | number literal | `3` |
-| `easing` | string literal | `"smoothstep"` |
-| `loop` | boolean literal | `true` |
-| `ping_pong` | boolean literal | `true` |
+- **Line:** 394
+- **Declaration:** table/global or assignment
 
-### `pulse` *(line 69)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `duration` | number literal | `0.8` |
-| `scale_from` | number literal | `1.0` |
-| `scale_to` | number literal | `1.1` |
-| `alpha_from` | number literal | `255` |
-| `alpha_to` | number literal | `200` |
-| `easing` | string literal | `"elastic_out"` |
-| `loop` | boolean literal | `true` |
-| `ping_pong` | boolean literal | `true` |
+#### 8. `AnimationSequences.bob(object, options)`
 
-### `shake` *(line 81)*
+- **Line:** 411
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Create a bob animation (up and down movement)
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `duration` | number literal | `0.15` |
-| `intensity` | number literal | `3` |
-| `frequency` | number literal | `15` |
-| `easing` | string literal | `"elastic_out"` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `options` | Declared by this function; type not inferred. |
 
-### `fade` *(line 89)*
+#### 9. `on_update(values)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `duration` | number literal | `0.3` |
-| `easing` | string literal | `"ease_in_out"` |
+- **Line:** 437
+- **Declaration:** table/global or assignment
 
-### `color_pulse` *(line 95)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `duration` | number literal | `0.8` |
-| `easing` | string literal | `"ease_in_out"` |
-| `loop` | boolean literal | `true` |
-| `ping_pong` | boolean literal | `true` |
+#### 10. `AnimationSequences.pulse(object, options)`
 
-### `marquee` *(line 103)*
+- **Line:** 449
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Create a pulse animation (scale and alpha pulsing)
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `duration` | number literal | `2.0` |
-| `distance` | number literal | `100` |
-| `easing` | string literal | `"linear"` |
-| `loop` | boolean literal | `true` |
-| `ping_pong` | boolean literal | `true` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `options` | Declared by this function; type not inferred. |
 
-### `typewriter` *(line 112)*
+#### 11. `on_update(values)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `char_delay` | number literal | `0.1` |
-| `appear_duration` | number literal | `0.15` |
-| `easing` | string literal | `"ease_out"` |
+- **Line:** 482
+- **Declaration:** table/global or assignment
 
-### `start` *(line 390)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | expression/reference | `start_x` |
-| `y` | expression/reference | `start_y` |
+#### 12. `AnimationSequences.color_pulse(object, start_color, target_color, options)`
 
-### `target` *(line 391)*
+- **Line:** 495
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Create a color pulse animation (transition between two color sets)
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | expression/reference | `end_x` |
-| `y` | expression/reference | `end_y` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `start_color` | Declared by this function; type not inferred. |
+| 3 | `target_color` | Declared by this function; type not inferred. |
+| 4 | `options` | Declared by this function; type not inferred. |
 
-### `current_color` *(line 559)*
+#### 13. `on_update(values)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | expression/reference | `object.r or 255` |
-| `g` | expression/reference | `object.g or 255` |
-| `b` | expression/reference | `object.b or 255` |
-| `a` | expression/reference | `object.alpha or 255` |
+- **Line:** 529
+- **Declaration:** table/global or assignment
 
-### `sequence_steps` *(line 704)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 14. `AnimationSequences.color_pulse_from_current(object, target_color, options)`
 
-### `options` *(line 889)*
+- **Line:** 557
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Alternative version that uses the object's current color as starting point
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `duration` | expression/reference | `duration or 0.8` |
-| `easing` | expression/reference | `easing or "ease_in_out"` |
-| `loop` | expression/reference | `loop ~= nil and loop or true` |
-| `ping_pong` | expression/reference | `ping_pong ~= nil and ping_pong or true` |
-| `easing_back` | expression/reference | `easing_back` |
-| `discrete` | expression/reference | `discrete` |
-| `tag` | expression/reference | `tag` |
-| `on_complete` | expression/reference | `on_complete` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `target_color` | Declared by this function; type not inferred. |
+| 3 | `options` | Declared by this function; type not inferred. |
 
-### `current_color` *(line 901)*
+#### 15. `AnimationSequences.shake(object, options)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | expression/reference | `object.r or 255` |
-| `g` | expression/reference | `object.g or 255` |
-| `b` | expression/reference | `object.b or 255` |
-| `a` | expression/reference | `object.alpha or 255` |
+- **Line:** 572
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Create a shake animation (screen shake effect)
 
-### `target_color` *(line 907)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `options` | Declared by this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | expression/reference | `target_r` |
-| `g` | expression/reference | `target_g` |
-| `b` | expression/reference | `target_b` |
-| `a` | expression/reference | `target_a or current_color.a` |
+#### 16. `on_update(values, t, phase)`
 
-### `list` *(line 979)*
+- **Line:** 593
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+| 2 | `t` | Declared by this function; type not inferred. |
+| 3 | `phase` | Declared by this function; type not inferred. |
 
-### `steps` *(line 992)*
+#### 17. `AnimationSequences.fade(object, target_alpha, options)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 628
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Create a fade animation (fade in/out)
 
-### `steps` *(line 1162)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `target_alpha` | Declared by this function; type not inferred. |
+| 3 | `options` | Declared by this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 18. `on_update(values)`
 
-## Implementation notes
+- **Line:** 646
+- **Declaration:** table/global or assignment
 
-- This reference is generated from the exact archived source `scripts/animation-engine/animation-sequences.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+
+#### 19. `AnimationSequences.tint(object, target_r, target_g, target_b, options)`
+
+- **Line:** 665
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Create a color tint animation
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `target_r` | Declared by this function; type not inferred. |
+| 3 | `target_g` | Declared by this function; type not inferred. |
+| 4 | `target_b` | Declared by this function; type not inferred. |
+| 5 | `options` | Declared by this function; type not inferred. |
+
+#### 20. `on_update(values)`
+
+- **Line:** 682
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+
+#### 21. `on_update(values, t, phase)`
+
+- **Line:** 715
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+| 2 | `t` | Declared by this function; type not inferred. |
+| 3 | `phase` | Declared by this function; type not inferred. |
+
+#### 22. `on_update(values, t, phase)`
+
+- **Line:** 749
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+| 2 | `t` | Declared by this function; type not inferred. |
+| 3 | `phase` | Declared by this function; type not inferred. |
+
+#### 23. `on_update(values, t, phase)`
+
+- **Line:** 765
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+| 2 | `t` | Declared by this function; type not inferred. |
+| 3 | `phase` | Declared by this function; type not inferred. |
+
+#### 24. `AnimationSequences.menuCursor(object, options)`
+
+- **Line:** 781
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Create a menu cursor animation (bob + pulse)
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `options` | Declared by this function; type not inferred. |
+
+#### 25. `AnimationSequences.highlightCard(object, options)`
+
+- **Line:** 811
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Create a card highlight animation (lift + glow)
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `options` | Declared by this function; type not inferred. |
+
+#### 26. `on_update(values)`
+
+- **Line:** 829
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+
+#### 27. `AnimationSequences.tween(object, target_props, duration, options)`
+
+- **Line:** 841
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** --------------------------------------------------------------------------- Tween: Simple property animation for any object ---------------------------------------------------------------------------
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `target_props` | Declared by this function; type not inferred. |
+| 3 | `duration` | Declared by this function; type not inferred. |
+| 4 | `options` | Declared by this function; type not inferred. |
+
+#### 28. `AnimationSequences.move_to(object, target_x, target_y, duration, options)`
+
+- **Line:** 850
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Simple move animation with looping support
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `target_x` | Declared by this function; type not inferred. |
+| 3 | `target_y` | Declared by this function; type not inferred. |
+| 4 | `duration` | Declared by this function; type not inferred. |
+| 5 | `options` | Declared by this function; type not inferred. |
+
+#### 29. `AnimationSequences.scale_to(object, target_scale, duration, options)`
+
+- **Line:** 858
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Scale animation with looping support
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `target_scale` | Declared by this function; type not inferred. |
+| 3 | `duration` | Declared by this function; type not inferred. |
+| 4 | `options` | Declared by this function; type not inferred. |
+
+#### 30. `AnimationSequences.rotate_to(object, target_angle, duration, options)`
+
+- **Line:** 866
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Rotation animation with looping support
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `target_angle` | Declared by this function; type not inferred. |
+| 3 | `duration` | Declared by this function; type not inferred. |
+| 4 | `options` | Declared by this function; type not inferred. |
+
+#### 31. `AnimationSequences.fade_to(object, target_alpha, duration, options)`
+
+- **Line:** 874
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Fade animation with looping support
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `target_alpha` | Declared by this function; type not inferred. |
+| 3 | `duration` | Declared by this function; type not inferred. |
+| 4 | `options` | Declared by this function; type not inferred. |
+
+#### 32. `AnimationSequences.tint_to(object, target_r, target_g, target_b, duration, options)`
+
+- **Line:** 882
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Color tint animation with looping support
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `target_r` | Declared by this function; type not inferred. |
+| 3 | `target_g` | Declared by this function; type not inferred. |
+| 4 | `target_b` | Declared by this function; type not inferred. |
+| 5 | `duration` | Declared by this function; type not inferred. |
+| 6 | `options` | Declared by this function; type not inferred. |
+
+#### 33. `AnimationSequences.color_pulse_to(object, target_r, target_g, target_b, target_a, duration, easing, on_complete, loop, ping_pong, easing_back, discrete, tag)`
+
+- **Line:** 890
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Color pulse animation with looping support (convenience wrapper)
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `target_r` | Declared by this function; type not inferred. |
+| 3 | `target_g` | Declared by this function; type not inferred. |
+| 4 | `target_b` | Declared by this function; type not inferred. |
+| 5 | `target_a` | Declared by this function; type not inferred. |
+| 6 | `duration` | Declared by this function; type not inferred. |
+| 7 | `easing` | Declared by this function; type not inferred. |
+| 8 | `on_complete` | Declared by this function; type not inferred. |
+| 9 | `loop` | Declared by this function; type not inferred. |
+| 10 | `ping_pong` | Declared by this function; type not inferred. |
+| 11 | `easing_back` | Declared by this function; type not inferred. |
+| 12 | `discrete` | Declared by this function; type not inferred. |
+| 13 | `tag` | Declared by this function; type not inferred. |
+
+#### 34. `AnimationSequences.move_to_discrete_first(object, target_x, target_y, duration, options)`
+
+- **Line:** 921
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Discrete-first move animation
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `target_x` | Declared by this function; type not inferred. |
+| 3 | `target_y` | Declared by this function; type not inferred. |
+| 4 | `duration` | Declared by this function; type not inferred. |
+| 5 | `options` | Declared by this function; type not inferred. |
+
+#### 35. `on_update(values)`
+
+- **Line:** 934
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+
+#### 36. `AnimationSequences.series(objects, animator, options)`
+
+- **Line:** 957
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Apply an animation to many objects in series (one after another).
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `objects` | Declared by this function; type not inferred. |
+| 2 | `animator` | Declared by this function; type not inferred. |
+| 3 | `options` | Declared by this function; type not inferred. |
+
+#### 37. `run(done)`
+
+- **Line:** 1002
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `done` | Declared by this function; type not inferred. |
+
+#### 38. `safe_done()`
+
+- **Line:** 1004
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+#### 39. `anim_opts.on_complete(...)`
+
+- **Line:** 1028
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `...` | Declared by this function; type not inferred. |
+
+#### 40. `AnimationSequences.marquee(object, distance, duration, options)`
+
+- **Line:** 1076
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Move an object horizontally, optionally looping (ping‑pong).
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `distance` | Declared by this function; type not inferred. |
+| 3 | `duration` | Declared by this function; type not inferred. |
+| 4 | `options` | Declared by this function; type not inferred. |
+
+#### 41. `on_update(values, t, phase)`
+
+- **Line:** 1105
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+| 2 | `t` | Declared by this function; type not inferred. |
+| 3 | `phase` | Declared by this function; type not inferred. |
+
+#### 42. `on_complete(values, interrupted)`
+
+- **Line:** 1111
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared by this function; type not inferred. |
+| 2 | `interrupted` | Declared by this function; type not inferred. |
+
+#### 43. `AnimationSequences.typewriter(sprites, options)`
+
+- **Line:** 1129
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Reveal a list of sprite objects in sequence (like a typewriter).
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `sprites` | Declared by this function; type not inferred. |
+| 2 | `options` | Declared by this function; type not inferred. |
+
+#### 44. `on_update(v)`
+
+- **Line:** 1155
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `v` | Declared by this function; type not inferred. |
+
+#### 45. `run(done)`
+
+- **Line:** 1169
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `done` | Declared by this function; type not inferred. |
+
+#### 46. `on_complete()`
+
+- **Line:** 1205
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 47. `AnimationSequences.stopAll(tag)`
+
+- **Line:** 1219
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Stop all animations for an object (by tag)
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `tag` | Declared by this function; type not inferred. |
+
+#### 48. `AnimationSequences.isAnimating(tag)`
+
+- **Line:** 1229
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Check if any animations are running for a tag
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `tag` | Declared by this function; type not inferred. |
+
+#### 49. `AnimationSequences.reset(object, initial_values)`
+
+- **Line:** 1235
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Reset object to its initial state
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared by this function; type not inferred. |
+| 2 | `initial_values` | Declared by this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 5 | `AnimationSequences` |
+| 21 | `AnimationSequences.config` |
+| 27 | `summon` |
+| 36 | `position_change` |
+| 44 | `attack` |
+| 54 | `slide` |
+| 60 | `bob` |
+| 69 | `pulse` |
+| 81 | `shake` |
+| 89 | `fade` |
+| 95 | `color_pulse` |
+| 103 | `marquee` |
+| 112 | `typewriter` |
+| 390 | `start` |
+| 391 | `target` |
+| 561 | `current_color` |
+| 707 | `sequence_steps` |
+| 891 | `options` |
+| 903 | `current_color` |
+| 910 | `target_color` |
+| 981 | `list` |
+| 994 | `steps` |
+| 1164 | `steps` |
+
+## Net API calls
+
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.play_sound_for_player` | 5 | 1092 |

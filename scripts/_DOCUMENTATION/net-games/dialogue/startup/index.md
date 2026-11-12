@@ -1,43 +1,57 @@
-# `startup.lua`
+# 📄 `startup.lua`
 
-> **Source:** `scripts/net-games/dialogue/startup.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/dialogue/startup.lua`](../../../../net-games/dialogue/startup.lua)  
 > **Source lines:** 13  
-> **Functions detected:** 0  
-> **Table declarations detected:** 0
+> **SHA-256 (UTF-8):** `d6ee31b1cabe6e…`  
+> **Declared/assigned functions detected:** 0  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 0
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-server/scripts/net-games/dialogue/startup.lua print("[net-games dialogue/startup] LOADING...") _G.NG_TEXTBOX_DEBUG = false _G.NG_TEXTBOX_DEBUG_TRACE = false local Displayer = require("scripts/displayer/displayer") local Input     = require("scripts/input/input") assert(Displayer:init(), "[net-games dialogue/startup] Displayer failed to init") Input.attach_virtual_input_listener() print("[net-games dialogue/startup] READY") return true
+print("[net-games dialogue/startup] LOADING...") _G.NG_TEXTBOX_DEBUG = false _G.NG_TEXTBOX_DEBUG_TRACE = false local Displayer = require("scripts/displayer/displayer") local Input = require("scripts/input/input")
 
-## Dependencies
+## 🔗 Dependencies
 
-- `scripts/displayer/displayer` — line 6
-- `scripts/input/input` — line 7
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+*No named function declaration or `= function(...)` assignment detected. Anonymous callbacks may still be present.*
 
-## Tables and data structures
+## 🪄 Anonymous closures
 
-No simple named table initializer was detected. Tables created dynamically or returned inline may not appear in this inventory.
+*No anonymous `function(...)` expressions detected.*
 
-## Implementation notes
+## 📦 Tables and data
 
-- This reference is generated from the exact archived source `scripts/net-games/dialogue/startup.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+*No `name = { ... }` or `return { ... }` constructors detected. Dynamically created tables and table mutations may still exist.*
+
+## ⚙️ Runtime API calls
+
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

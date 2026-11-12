@@ -1,126 +1,241 @@
-# `element.lua`
+# 📄 `element.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/avatar_utils/lua_yes_parser/src/element.lua`  
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/avatar_utils/lua_yes_parser/src/element.lua`](../../../../../avatar_utils/lua_yes_parser/src/element.lua)  
 > **Source lines:** 419  
-> **Functions detected:** 18  
-> **Table declarations detected:** 8
+> **SHA-256 (UTF-8):** `a716bb5a30e4874cb20dfa6c0d0bd17d826effcbd74fd0f04111ce142ee7e9f7`  
+> **Named/assigned functions detected:** 18  
+> **Table initializers detected (simple pattern):** 8
 
-## Contents
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-Perform a sanity check
+Current source inventory for `scripts/avatar_utils/lua_yes_parser/src/element.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- `scripts/avatar_utils/lua_yes_parser/src/enums` — line 1
-- `scripts/avatar_utils/lua_yes_parser/src/keyval` — line 2
-- `scripts/avatar_utils/lua_yes_parser/src/utils/trim` — line 3
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/avatar_utils/lua_yes_parser/src/enums` |
+| 2 | `scripts/avatar_utils/lua_yes_parser/src/keyval` |
+| 3 | `scripts/avatar_utils/lua_yes_parser/src/utils/trim` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No named `.on`/`:on` events detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 6 | `Element.new` | `(none)` | assigned/declared |
+| 14 | `__tostring` | `self` | local |
+| 23 | `this.setAttributes` | `attrs` | assigned/declared |
+| 36 | `findKey` | `key` | local |
+| 49 | `this.upsert` | `keyval` | assigned/declared |
+| 62 | `this.hasKey` | `key` | assigned/declared |
+| 66 | `this.hasKeys` | `keyList` | assigned/declared |
+| 76 | `this.getKeyValue` | `key, orValue` | assigned/declared |
+| 87 | `this.getKeyValueAsInt` | `key, orValue` | assigned/declared |
+| 95 | `this.getKeyValueAsBool` | `key, orValue` | assigned/declared |
+| 107 | `this.getKeyValueAsNumber` | `key, orValue` | assigned/declared |
+| 116 | `this.printArgs` | `(none)` | assigned/declared |
+| 137 | `ElementParser.new` | `(none)` | assigned/declared |
+| 145 | `setDelimiterType` | `type` | local |
+| 154 | `evaluateDelimiter` | `input, start` | local |
+| 268 | `evaluateToken` | `input, start, nd` | local |
+| 287 | `parseTokenStep` | `input, start` | local |
+| 313 | `self.parseTokens` | `input, start` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `Element.new()`
+
+- **Line:** 6
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 2. `__tostring(self)`
+
+- **Line:** 14
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 6 | `Element.new` | `(none)` |
-| 13 | `__tostring` | `self` |
-| 22 | `this.setAttributes` | `attrs` |
-| 36 | `findKey` | `key` |
-| 48 | `this.upsert` | `keyval` |
-| 61 | `this.hasKey` | `key` |
-| 65 | `this.hasKeys` | `keyList` |
-| 75 | `this.getKeyValue` | `key, orValue` |
-| 86 | `this.getKeyValueAsInt` | `key, orValue` |
-| 94 | `this.getKeyValueAsBool` | `key, orValue` |
-| 106 | `this.getKeyValueAsNumber` | `key, orValue` |
-| 115 | `this.printArgs` | `(none)` |
-| 137 | `ElementParser.new` | `(none)` |
-| 144 | `setDelimiterType` | `type` |
-| 153 | `evaluateDelimiter` | `input, start` |
-| 267 | `evaluateToken` | `input, start, nd` |
-| 286 | `parseTokenStep` | `input, start` |
-| 312 | `self.parseTokens` | `input, start` |
+| 1 | `self` | Declared by this function; type not inferred. |
 
-### Function notes
+#### 3. `this.setAttributes(attrs)`
 
-- **`Element.new()`** *(source line 6)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`__tostring(self)`** *(source line 13)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.setAttributes(attrs)`** *(source line 22)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`findKey(key)`** — helper func *(source line 36)*
-- **`this.upsert(keyval)`** — public funcs *(source line 48)*
-- **`this.hasKey(key)`** *(source line 61)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.hasKeys(keyList)`** *(source line 65)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.getKeyValue(key, orValue)`** *(source line 75)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.getKeyValueAsInt(key, orValue)`** *(source line 86)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.getKeyValueAsBool(key, orValue)`** *(source line 94)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.getKeyValueAsNumber(key, orValue)`** *(source line 106)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.printArgs()`** *(source line 115)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ElementParser.new()`** *(source line 137)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`setDelimiterType(type)`** *(source line 144)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`evaluateDelimiter(input, start)`** *(source line 153)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`evaluateToken(input, start, nd)`** *(source line 267)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`parseTokenStep(input, start)`** *(source line 286)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`self.parseTokens(input, start)`** — public *(source line 312)*
+- **Line:** 23
+- **Declaration:** table/global or assignment
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `attrs` | Declared by this function; type not inferred. |
 
-### `Element` *(line 4)*
+#### 4. `findKey(key)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 36
+- **Declaration:** local
+- **Nearby code comment:** helper func
 
-### `this` *(line 7)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `key` | Declared by this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `attributes` | table | `{}` |
-| `text` | string literal | `''` |
-| `args` | table | `{}` |
-| `type` | expression/reference | `enums.ElementTypes.STANDARD` |
+#### 5. `this.upsert(keyval)`
 
-### `attributes` *(line 8)*
+- **Line:** 49
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `keyval` | Declared by this function; type not inferred. |
 
-### `args` *(line 10)*
+#### 6. `this.hasKey(key)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 62
+- **Declaration:** table/global or assignment
 
-### `this.attributes` *(line 24)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `key` | Declared by this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 7. `this.hasKeys(keyList)`
 
-### `mt` *(line 128)*
+- **Line:** 66
+- **Declaration:** table/global or assignment
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `__tostring` | expression/reference | `__tostring` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `keyList` | Declared by this function; type not inferred. |
 
-### `ElementParser` *(line 135)*
+#### 8. `this.getKeyValue(key, orValue)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 76
+- **Declaration:** table/global or assignment
 
-### `self` *(line 138)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `key` | Declared by this function; type not inferred. |
+| 2 | `orValue` | Declared by this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `delimiter` | expression/reference | `enums.Delimiters.UNSET` |
-| `element` | nil | `nil` |
-| `error` | nil | `nil` |
-| `lineNumber` | number literal | `-1` |
+#### 9. `this.getKeyValueAsInt(key, orValue)`
 
-## Implementation notes
+- **Line:** 87
+- **Declaration:** table/global or assignment
 
-- This reference is generated from the exact archived source `scripts/avatar_utils/lua_yes_parser/src/element.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `key` | Declared by this function; type not inferred. |
+| 2 | `orValue` | Declared by this function; type not inferred. |
+
+#### 10. `this.getKeyValueAsBool(key, orValue)`
+
+- **Line:** 95
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `key` | Declared by this function; type not inferred. |
+| 2 | `orValue` | Declared by this function; type not inferred. |
+
+#### 11. `this.getKeyValueAsNumber(key, orValue)`
+
+- **Line:** 107
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `key` | Declared by this function; type not inferred. |
+| 2 | `orValue` | Declared by this function; type not inferred. |
+
+#### 12. `this.printArgs()`
+
+- **Line:** 116
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 13. `ElementParser.new()`
+
+- **Line:** 137
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 14. `setDelimiterType(type)`
+
+- **Line:** 145
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `type` | Declared by this function; type not inferred. |
+
+#### 15. `evaluateDelimiter(input, start)`
+
+- **Line:** 154
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `input` | Declared by this function; type not inferred. |
+| 2 | `start` | Declared by this function; type not inferred. |
+
+#### 16. `evaluateToken(input, start, nd)`
+
+- **Line:** 268
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `input` | Declared by this function; type not inferred. |
+| 2 | `start` | Declared by this function; type not inferred. |
+| 3 | `nd` | Declared by this function; type not inferred. |
+
+#### 17. `parseTokenStep(input, start)`
+
+- **Line:** 287
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `input` | Declared by this function; type not inferred. |
+| 2 | `start` | Declared by this function; type not inferred. |
+
+#### 18. `self.parseTokens(input, start)`
+
+- **Line:** 313
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `input` | Declared by this function; type not inferred. |
+| 2 | `start` | Declared by this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 5 | `Element` |
+| 7 | `this` |
+| 8 | `attributes` |
+| 10 | `args` |
+| 24 | `this.attributes` |
+| 129 | `mt` |
+| 136 | `ElementParser` |
+| 138 | `self` |
+
+## Net API calls
+
+No direct `Net.method(...)` call expression matched.

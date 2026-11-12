@@ -1,58 +1,106 @@
-# `paralyze_effect.lua`
+# 📄 `paralyze_effect.lua`
 
-> **Source:** `scripts/ezlibs-custom/nebulous-liberations/utils/paralyze_effect.lua`  
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/utils/paralyze_effect.lua`](../../../../../ezlibs-custom/nebulous-liberations/utils/paralyze_effect.lua)  
 > **Source lines:** 47  
-> **Functions detected:** 2  
-> **Table declarations detected:** 2
+> **SHA-256 (UTF-8):** `8c2be4ba73a3e4…`  
+> **Declared/assigned functions detected:** 2  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 2
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Source-based reference for `scripts/ezlibs-custom/nebulous-liberations/utils/paralyze_effect.lua`. No module-purpose prose was supplied in the leading source comments.
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 5 | `ParalyzeEffect:new` | `actor_id, area_wide_sfx` |
-| 43 | `ParalyzeEffect:remove` | `(none)` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 5 | `ParalyzeEffect:new` | `actor_id, area_wide_sfx` | declared |
+| 43 | `ParalyzeEffect:remove` | `(none)` | declared |
 
-### Function notes
+### Function details
 
-- **`ParalyzeEffect:new(actor_id, area_wide_sfx)`** *(source line 5)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ParalyzeEffect:remove()`** *(source line 43)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `ParalyzeEffect:new(actor_id, area_wide_sfx)`
 
-## Tables and data structures
+- **Location:** source line 5.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
 
-### `ParalyzeEffect` *(line 1)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `actor_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `area_wide_sfx` | Not explicitly documented in adjacent source annotations. |
 
-### `paralyze_effect` *(line 6)*
+#### 2. `ParalyzeEffect:remove()`
 
-| Field / key | Value category | Initializer expression (source) |
+- **Location:** source line 43.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+## 🪄 Anonymous closures
+
+*No anonymous `function(...)` expressions detected.*
+
+## 📦 Tables and data
+
+The following **2** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `ParalyzeEffect` — line 1
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `paralyze_effect` — line 6
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `bot_id` | nil | `nil` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/nebulous-liberations/utils/paralyze_effect.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+These are **statically detected call sites**, not API definitions or guaranteed successful runtime calls.
+
+| Call identifier | Occurrences |
+|---|---|
+| `Net.create_bot` | 1 |
+| `Net.get_bot_area` | 1 |
+| `Net.get_bot_position` | 1 |
+| `Net.get_player_area` | 1 |
+| `Net.get_player_position` | 1 |
+| `Net.is_bot` | 1 |
+| `Net.is_player` | 2 |
+| `Net.play_sound` | 1 |
+| `Net.play_sound_for_player` | 1 |
+| `Net.remove_bot` | 1 |
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

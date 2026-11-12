@@ -1,42 +1,45 @@
-# `main.lua`
+# 📄 `main.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/avatar_utils/lua_yes_parser/example/main.lua`  
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/avatar_utils/lua_yes_parser/example/main.lua`](../../../../../avatar_utils/lua_yes_parser/example/main.lua)  
 > **Source lines:** 26  
-> **Functions detected:** 0  
-> **Table declarations detected:** 0
+> **SHA-256 (UTF-8):** `4729465b86a5378db3242d6a46eb8950737e856347c7bff5af1abb099a6515e9`  
+> **Named/assigned functions detected:** 0  
+> **Table initializers detected (simple pattern):** 0
 
-## Contents
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-print all elements
+Current source inventory for `scripts/avatar_utils/lua_yes_parser/example/main.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- `lib` — line 2
+| Line | `require` module |
+|---:|---|
+| 2 | `lib` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No named `.on`/`:on` events detected by the simple source pattern.
 
 ## Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+No named function declaration matched. Anonymous callbacks may be present.
 
-## Tables and data structures
+## Tables
 
-No simple named table initializer was detected. Tables created dynamically or returned inline may not appear in this inventory.
+No plain `name = {` table initializer matched.
 
-## Implementation notes
+## Net API calls
 
-- This reference is generated from the exact archived source `scripts/avatar_utils/lua_yes_parser/example/main.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+No direct `Net.method(...)` call expression matched.

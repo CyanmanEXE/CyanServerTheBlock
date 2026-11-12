@@ -1,149 +1,225 @@
-# `ezusers.lua`
+# 📄 `ezusers.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezusers.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezusers.lua`](../../../ezlibs-scripts/ezusers.lua)  
 > **Source lines:** 346  
-> **Functions detected:** 15  
-> **Table declarations detected:** 10
+> **SHA-256 (UTF-8):** `a99532b17326369c5e5a090509d48b0853f773055eb39517c215ec3f8372b3b7`  
+> **Named/assigned functions detected:** 15  
+> **Table initializers detected:** 10
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-ezusers.lua A flexible user/role/permission system for your server. Stores each player's role and a full copy of their permissions in ezmemory. Permissions are defined per role in the global `permissions` table. Per‑user permissions can be overridden without changing the role. Integrates with ezlibs via standard plugin hooks: handle_player_join, handle_player_disconnect.
+Current source inventory for `scripts/ezlibs-scripts/ezusers.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 8
-- `scripts/ezlibs-scripts/helpers` — line 9
-- `scripts/ezlibs-scripts/ezmemory` — line 10
-- `scripts/ezlibs-scripts/sha256` — line 11
-- `scripts/ezlibs-scripts/ezconfig` — line 12
-- `scripts/ezlibs-scripts/object_registry` — line 302
-- `scripts/ezlibs-scripts/eztriggers/eztriggers` — line 303
+| Line | `require` module |
+|---:|---|
+| 8 | `scripts/logger/logger` |
+| 9 | `scripts/ezlibs-scripts/helpers` |
+| 10 | `scripts/ezlibs-scripts/ezmemory` |
+| 11 | `scripts/ezlibs-scripts/sha256` |
+| 12 | `scripts/ezlibs-scripts/ezconfig` |
+| 302 | `scripts/ezlibs-scripts/object_registry` |
+| 303 | `scripts/ezlibs-scripts/eztriggers/eztriggers` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 309 | `emitter` | `interaction` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 65 | `async` | `p` | local |
+| 70 | `await` | `v` | local |
+| 75 | `deep_copy` | `orig` | local |
+| 91 | `get_safe_secret` | `player_id` | local |
+| 100 | `get_role` | `player_id` | assigned/declared |
+| 115 | `assign_role` | `player_id, role` | assigned/declared |
+| 135 | `get_user_permissions` | `player_id` | assigned/declared |
+| 151 | `set_user_permission` | `player_id, permission_path, value` | assigned/declared |
+| 187 | `reset_user_permissions` | `player_id` | assigned/declared |
+| 201 | `has_permission` | `player_id, permission_path` | assigned/declared |
+| 232 | `check_password_and_grant_admin` | `player_id, password_attempt` | assigned/declared |
+| 245 | `add_role` | `role_name, permission_table` | assigned/declared |
+| 252 | `update_permissions` | `role_name, permission_updates` | assigned/declared |
+| 270 | `handle_player_join` | `player_id` | assigned/declared |
+| 295 | `handle_player_disconnect` | `player_id` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `async(p)`
+
+- **Line:** 65
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 65 | `async` | `p` |
-| 70 | `await` | `v` |
-| 75 | `deep_copy` | `orig` |
-| 91 | `get_safe_secret` | `player_id` |
-| 100 | `get_role` | `player_id` |
-| 115 | `assign_role` | `player_id, role` |
-| 135 | `get_user_permissions` | `player_id` |
-| 151 | `set_user_permission` | `player_id, permission_path, value` |
-| 187 | `reset_user_permissions` | `player_id` |
-| 201 | `has_permission` | `player_id, permission_path` |
-| 232 | `check_password_and_grant_admin` | `player_id, password_attempt` |
-| 245 | `add_role` | `role_name, permission_table` |
-| 252 | `update_permissions` | `role_name, permission_updates` |
-| 270 | `handle_player_join` | `player_id` |
-| 295 | `handle_player_disconnect` | `player_id` |
+| 1 | `p` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `await(v)`
 
-- **`async(p)`** — ============================================================================ Internal helpers ============================================================================ *(source line 65)*
-- **`await(v)`** *(source line 70)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`deep_copy(orig)`** — Deep copy a table (for copying permission structures) *(source line 75)*
-- **`get_safe_secret(player_id)`** — Get player safe secret (urlencoded) for ezmemory *(source line 91)*
-- **`get_role(player_id)`** — Returns the role string for a player (defaults to "user") *(source line 100)*
-- **`assign_role(player_id, role)`** — Assign a role to a player. This also resets their permissions to the new role's defaults. Returns true if successful, false if player_id invalid *(source line 115)*
-- **`get_user_permissions(player_id)`** — Get a player's full permission table (for inspection or direct use) *(source line 135)*
-- **`set_user_permission(player_id, permission_path, value)`** — Set a specific permission for a player. permission_path can be a dot‑separated string (e.g., "BBS.CanPost") or a table of keys. value is the new permission value (usually boolean). *(source line 151)*
-- **`reset_user_permissions(player_id)`** — Reset a player's permissions to their role's defaults (discarding any overrides) *(source line 187)*
-- **`has_permission(player_id, permission_path)`** — Check if a player has a specific permission. permission_path can be a dot‑separated string (e.g., "BBS.CanPost") or a table of keys (e.g., {"BBS", "CanPost"}). Returns the permission value (usually boolean) or nil if not found. *(source line 201)*
-- **`check_password_and_grant_admin(player_id, password_attempt)`** — Verify a password attempt; if correct, grant the player the "admin" role. Returns true if password correct and role assigned, false otherwise. *(source line 232)*
-- **`add_role(role_name, permission_table)`** — (Optional) Add a new role with its permission table. Use this to extend the system dynamically. *(source line 245)*
-- **`update_permissions(role_name, permission_updates)`** — (Optional) Update permissions for an existing role (merges with current). If a permission path exists, it is overwritten; otherwise added. *(source line 252)*
-- **`handle_player_join(player_id)`** — Called when a player joins: ensure they have a role and permissions. *(source line 270)*
-- **`handle_player_disconnect(player_id)`** — Called when a player disconnects: nothing needed *(source line 295)*
+- **Line:** 70
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `v` | Declared in this function; type not inferred. |
 
-### `permissions` *(line 29)*
+#### 3. `deep_copy(orig)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `user` | table | `{ BBS = { CanRead = true, CanPost = false, CanEdit = false, CanDelete = false, CanPin = false, }, Commands = { CanAccess = false, }, }` |
-| `admin` | table | `{ BBS = { CanRead = true, CanPost = true, CanEdit = true, CanDelete = true, CanPin = true, }, Commands = { CanAccess = true, CanWarp = true,…` |
+- **Line:** 75
+- **Declaration:** local
 
-### `user` *(line 30)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `orig` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `BBS` | table | `{ CanRead = true, CanPost = false, CanEdit = false, CanDelete = false, CanPin = false, }` |
-| `Commands` | table | `{ CanAccess = false, }` |
+#### 4. `get_safe_secret(player_id)`
 
-### `BBS` *(line 31)*
+- **Line:** 91
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `CanRead` | boolean literal | `true` |
-| `CanPost` | boolean literal | `false` |
-| `CanEdit` | boolean literal | `false` |
-| `CanDelete` | boolean literal | `false` |
-| `CanPin` | boolean literal | `false` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
 
-### `Commands` *(line 38)*
+#### 5. `get_role(player_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `CanAccess` | boolean literal | `false` |
+- **Line:** 100
+- **Declaration:** table/global or assignment
 
-### `admin` *(line 42)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `BBS` | table | `{ CanRead = true, CanPost = true, CanEdit = true, CanDelete = true, CanPin = true, }` |
-| `Commands` | table | `{ CanAccess = true, CanWarp = true, CanGiftItem = true, CanTakeItem = true, CanKickUser = true, }` |
+#### 6. `assign_role(player_id, role)`
 
-### `BBS` *(line 43)*
+- **Line:** 115
+- **Declaration:** table/global or assignment
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `CanRead` | boolean literal | `true` |
-| `CanPost` | boolean literal | `true` |
-| `CanEdit` | boolean literal | `true` |
-| `CanDelete` | boolean literal | `true` |
-| `CanPin` | boolean literal | `true` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `role` | Declared in this function; type not inferred. |
 
-### `Commands` *(line 50)*
+#### 7. `get_user_permissions(player_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `CanAccess` | boolean literal | `true` |
-| `CanWarp` | boolean literal | `true` |
-| `CanGiftItem` | boolean literal | `true` |
-| `CanTakeItem` | boolean literal | `true` |
-| `CanKickUser` | boolean literal | `true` |
+- **Line:** 135
+- **Declaration:** table/global or assignment
 
-### `copy` *(line 79)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 8. `set_user_permission(player_id, permission_path, value)`
 
-### `path` *(line 163)*
+- **Line:** 151
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `permission_path` | Declared in this function; type not inferred. |
+| 3 | `value` | Declared in this function; type not inferred. |
 
-### `path` *(line 208)*
+#### 9. `reset_user_permissions(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 187
+- **Declaration:** table/global or assignment
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezusers.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 10. `has_permission(player_id, permission_path)`
+
+- **Line:** 201
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `permission_path` | Declared in this function; type not inferred. |
+
+#### 11. `check_password_and_grant_admin(player_id, password_attempt)`
+
+- **Line:** 232
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `password_attempt` | Declared in this function; type not inferred. |
+
+#### 12. `add_role(role_name, permission_table)`
+
+- **Line:** 245
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `role_name` | Declared in this function; type not inferred. |
+| 2 | `permission_table` | Declared in this function; type not inferred. |
+
+#### 13. `update_permissions(role_name, permission_updates)`
+
+- **Line:** 252
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `role_name` | Declared in this function; type not inferred. |
+| 2 | `permission_updates` | Declared in this function; type not inferred. |
+
+#### 14. `handle_player_join(player_id)`
+
+- **Line:** 270
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+
+#### 15. `handle_player_disconnect(player_id)`
+
+- **Line:** 295
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 29 | `permissions` |
+| 30 | `user` |
+| 31 | `BBS` |
+| 38 | `Commands` |
+| 42 | `admin` |
+| 43 | `BBS` |
+| 50 | `Commands` |
+| 79 | `copy` |
+| 163 | `path` |
+| 208 | `path` |
+
+## Net API calls
+
+No direct `Net.method(...)` call expression matched.

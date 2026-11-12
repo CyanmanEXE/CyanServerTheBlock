@@ -1,48 +1,73 @@
-# `trim.lua`
+# 📄 `trim.lua`
 
-> **Source:** `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/utils/trim.lua`  
+[🏠 Documentation home](../../../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/utils/trim.lua`](../../../../../../../ezlibs-scripts/avatar_utils/lua_yes_parser/src/utils/trim.lua)  
 > **Source lines:** 24  
-> **Functions detected:** 1  
-> **Table declarations detected:** 0
+> **SHA-256 (UTF-8):** `ab7bd5aebcbf3e…`  
+> **Declared/assigned functions detected:** 1  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 0
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Source-based reference for `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/utils/trim.lua`. No module-purpose prose was supplied in the leading source comments.
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 1 | `trim` | `str` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 1 | `trim` | `str` | local |
 
-### Function notes
+### Function details
 
-- **`trim(str)`** *(source line 1)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `trim(str)`
 
-## Tables and data structures
+- **Location:** source line 1.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-No simple named table initializer was detected. Tables created dynamically or returned inline may not appear in this inventory.
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-## Implementation notes
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `str` | Not explicitly documented in adjacent source annotations. |
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/utils/trim.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+## 🪄 Anonymous closures
+
+*No anonymous `function(...)` expressions detected.*
+
+## 📦 Tables and data
+
+*No `name = { ... }` or `return { ... }` constructors detected. Dynamically created tables and table mutations may still exist.*
+
+## ⚙️ Runtime API calls
+
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

@@ -1,4 +1,5 @@
-local logger = require('scripts/ezlibs-scripts/ezlogger').get('eznpcs')
+local PlayerControl = require("scripts/player-control/main")
+local logger = require('scripts/logger/logger').register('eznpcs')
 local Direction = require("scripts/ezlibs-scripts/direction")
 local helpers = require('scripts/ezlibs-scripts/helpers')
 local ezmemory = require('scripts/ezlibs-scripts/ezmemory')
@@ -402,7 +403,7 @@ function add_behaviour(npc,behaviour)
 end
 
 function clear_player_conversation(player_id)
-    Net.unlock_player_input(player_id)
+    PlayerControl.release_capture(player_id, "eznpcs")
     local bot_id = current_player_conversation[player_id]
     if bot_id then
         local npc = npcs[bot_id]
@@ -466,7 +467,7 @@ function chat_behaviour()
                     current_player_conversation[player_id] = nil
                     return
                 end
-                Net.lock_player_input(player_id)
+                PlayerControl.acquire_capture(player_id, "eznpcs")
                 await(do_dialogue(npc,player_id,dialogue,relay_object))
                 clear_player_conversation(player_id)
             end)

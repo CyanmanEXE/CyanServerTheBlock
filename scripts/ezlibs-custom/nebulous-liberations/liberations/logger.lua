@@ -1,12 +1,14 @@
--- Dedicated Nebulous Liberations subsystem loggers.
--- Each category writes to scripts/ezlibs-scripts/_DEBUGGING/<module>/debugging.log
--- using the existing ezlogger API (no additional filesystem logic).
-local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
+-- Nebulous Liberations subsystem streams, all grouped under one module.
+-- Each subsystem is mirrored to _DEBUGGING/nebulous-liberations/_FULL-log.log.
+local SharedLogger = require("scripts/logger/logger")
+local root_logger = SharedLogger.register("nebulous-liberations")
+
 local Logger = {
-    mission = ezlogger.get("nebulous-liberations"),
-    config = ezlogger.get("nebulous-liberations-config"),
-    spawning = ezlogger.get("nebulous-liberations-spawning"),
-    encounters = ezlogger.get("nebulous-liberations-encounters"),
-    validation = ezlogger.get("nebulous-liberations-validation"),
+    mission = root_logger:register_subsystem("mission"),
+    config = root_logger:register_subsystem("config"),
+    spawning = root_logger:register_subsystem("spawning"),
+    encounters = root_logger:register_subsystem("encounters"),
+    validation = root_logger:register_subsystem("validation"),
 }
+
 return Logger

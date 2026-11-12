@@ -1,6 +1,7 @@
+local PlayerControl = require("scripts/player-control/main")
 -- enemy.lua
-local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
-local log = ezlogger.get("nebulous-liberations")
+local SharedLogger = require("scripts/logger/logger")
+local log = SharedLogger.register("nebulous-liberations"):register_subsystem("enemy")
 
 local EnemyTemplates = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_templates")
 local ExplodingEffect = require("scripts/ezlibs-custom/nebulous-liberations/utils/exploding_effect")
@@ -156,10 +157,8 @@ function Enemy.destroy(instance, enemy)
         local slide_time = .2
         local hold_time = 3
         local extra_explosion_time = .5
-        local lock_tracker = {}
         for _, player in ipairs(instance.players) do
-            lock_tracker[player.id] = Net.is_player_input_locked(player.id)
-            Net.lock_player_input(player.id)
+            PlayerControl.acquire_capture(player.id, "liberation:enemy")
             Net.slide_player_camera(player.id, enemy.x + .5, enemy.y + .5, enemy.z, slide_time)
             Net.move_player_camera(player.id, enemy.x + .5, enemy.y + .5, enemy.z, hold_time)
             Net.slide_player_camera(player.id, player.x, player.y, player.z, slide_time)
@@ -183,9 +182,7 @@ function Enemy.destroy(instance, enemy)
         local unlock_padding = .3
         Async.await(Async.sleep(slide_time + unlock_padding))
         for _, player in ipairs(instance.players) do
-            if not lock_tracker[player.id] then
-                Net.unlock_player_input(player.id)
-            end
+            PlayerControl.release_capture(player.id, "liberation:enemy")
         end
     end)
     return Async.promisify(co)

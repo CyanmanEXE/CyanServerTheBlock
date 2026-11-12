@@ -220,8 +220,8 @@ function EnemyTemplates.ai.simple_charge(self)
                 local position = record.visual_position
                 if position then
                 local bot_id = Net.create_bot({
-                    texture_path = self.attack_texture or "/server/assets/ezlibs-custom/nebulous-liberations/bots/beast breath.png",
-                    animation_path = self.attack_animation_path or "/server/assets/ezlibs-custom/nebulous-liberations/bots/beast breath.animation",
+                    texture_path = self.attack_texture or "/server/assets/ezlibs-custom/nebulous-liberations/bots/attacks/beast breath.png",
+                    animation_path = self.attack_animation_path or "/server/assets/ezlibs-custom/nebulous-liberations/bots/attacks/beast breath.animation",
                     animation = "ANIMATE",
                     area_id = self.instance.area_id,
                     warp_in = false,

@@ -10,11 +10,11 @@
   <property name="Name" value="DEBUGIN"/>
   <property name="Song" value="/server/assets/music/undernet4theme.ogg"/>
  </properties>
- <tileset firstgid="1" source="../assets/tiles/panel base.tsx"/>
- <tileset firstgid="4" source="../assets/tiles/panels.tsx"/>
- <tileset firstgid="74" source="../assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx"/>
- <tileset firstgid="75" source="../assets/ezlibs-custom/nebulous-liberations/selected tile.tsx"/>
- <tileset firstgid="81" source="../assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx"/>
+ <tileset firstgid="1" source="../assets/ezlibs-custom/nebulous-liberations/tiles/panel base.tsx"/>
+ <tileset firstgid="4" source="../assets/ezlibs-custom/nebulous-liberations/tiles/panels.tsx"/>
+ <tileset firstgid="74" source="../assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx"/>
+ <tileset firstgid="75" source="../assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.tsx"/>
+ <tileset firstgid="81" source="../assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.tsx"/>
  <layer id="1" name="Tile Layer 1" width="16" height="7">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -227,7 +227,7 @@
    <properties>
     <property name="Encounter Music" type="object" value="108"/>
     <property name="Honor HPMem" type="bool" value="true"/>
-    <property name="Liberation Tileset" value="/server/assets/tiles/panels.tsx"/>
+    <property name="Liberation Tileset" value="/server/assets/ezlibs-custom/nebulous-liberations/tiles/panels.tsx"/>
     <property name="Max Order Points" value="40"/>
     <property name="Minimum Target Phase Count" value="1"/>
     <property name="Respawn Area" value="default"/>

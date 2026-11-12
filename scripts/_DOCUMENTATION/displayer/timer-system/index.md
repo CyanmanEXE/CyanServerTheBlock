@@ -1,134 +1,519 @@
-# `timer-system.lua`
+# 📄 `timer-system.lua`
 
-> **Source:** `scripts/displayer/timer-system.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/displayer/timer-system.lua`](../../../displayer/timer-system.lua)  
 > **Source lines:** 486  
-> **Functions detected:** 30  
-> **Table declarations detected:** 7
+> **SHA-256 (UTF-8):** `4f27a428ded6b5…`  
+> **Declared/assigned functions detected:** 30  
+> **Anonymous closures detected:** 6  
+> **Table initializers detected:** 7
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
 Timer System with Global and Player-specific Timers
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- `Net:on("player_join", function(event) ...)` — line 14. The event name is taken directly from this source.
-- `Net:on("tick", function(event) ...)` — line 24. The event name is taken directly from this source.
-- `Net:on("player_disconnect", function(event) ...)` — line 35. The event name is taken directly from this source.
+| Line | Subscription call | Literal event name |
+|---|---|---|
+| 14 | `Net:on` | `player_join` |
+| 24 | `Net:on` | `tick` |
+| 35 | `Net:on` | `player_disconnect` |
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 6 | `Timer:init` | `(none)` |
-| 47 | `Timer:handlePlayerJoin` | `player_id` |
-| 62 | `Timer:handlePlayerLeave` | `player_id` |
-| 69 | `Timer:updateTimers` | `delta` |
-| 209 | `Timer:emitToAllPlayers` | `event_name, data` |
-| 223 | `Timer:pausePlayerTimer` | `player_id, timer_id` |
-| 229 | `Timer:resumePlayerTimer` | `player_id, timer_id` |
-| 235 | `Timer:pausePlayerCountdown` | `player_id, countdown_id` |
-| 241 | `Timer:resumePlayerCountdown` | `player_id, countdown_id` |
-| 247 | `Timer:removePlayerTimer` | `player_id, timer_id` |
-| 252 | `Timer:removePlayerCountdown` | `player_id, countdown_id` |
-| 258 | `Timer:createGlobalTimer` | `timer_id, duration, callback, loop` |
-| 281 | `Timer:createGlobalCountdown` | `countdown_id, duration, callback, loop` |
-| 304 | `Timer:pauseGlobalTimer` | `timer_id` |
-| 311 | `Timer:resumeGlobalTimer` | `timer_id` |
-| 318 | `Timer:pauseGlobalCountdown` | `countdown_id` |
-| 325 | `Timer:resumeGlobalCountdown` | `countdown_id` |
-| 332 | `Timer:removeGlobalTimer` | `timer_id` |
-| 341 | `Timer:removeGlobalCountdown` | `countdown_id` |
-| 350 | `Timer:getGlobalTimer` | `timer_id` |
-| 354 | `Timer:getGlobalCountdown` | `countdown_id` |
-| 359 | `Timer:syncGlobalTimers` | `player_id` |
-| 389 | `Timer:createPlayerTimer` | `player_id, timer_id, duration, callback, loop` |
-| 418 | `Timer:createPlayerCountdown` | `player_id, countdown_id, duration, callback, loop` |
-| 448 | `Timer:getAllGlobalTimers` | `(none)` |
-| 452 | `Timer:getAllGlobalCountdowns` | `(none)` |
-| 456 | `Timer:clearAllGlobalTimers` | `(none)` |
-| 462 | `Timer:clearAllGlobalCountdowns` | `(none)` |
-| 468 | `Timer:getPlayerTimer` | `player_id, timer_id` |
-| 475 | `Timer:getPlayerCountdown` | `player_id, countdown_id` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 6 | `Timer:init` | `(none)` | declared |
+| 47 | `Timer:handlePlayerJoin` | `player_id` | declared |
+| 62 | `Timer:handlePlayerLeave` | `player_id` | declared |
+| 69 | `Timer:updateTimers` | `delta` | declared |
+| 209 | `Timer:emitToAllPlayers` | `event_name, data` | declared |
+| 223 | `Timer:pausePlayerTimer` | `player_id, timer_id` | declared |
+| 229 | `Timer:resumePlayerTimer` | `player_id, timer_id` | declared |
+| 235 | `Timer:pausePlayerCountdown` | `player_id, countdown_id` | declared |
+| 241 | `Timer:resumePlayerCountdown` | `player_id, countdown_id` | declared |
+| 247 | `Timer:removePlayerTimer` | `player_id, timer_id` | declared |
+| 252 | `Timer:removePlayerCountdown` | `player_id, countdown_id` | declared |
+| 258 | `Timer:createGlobalTimer` | `timer_id, duration, callback, loop` | declared |
+| 281 | `Timer:createGlobalCountdown` | `countdown_id, duration, callback, loop` | declared |
+| 304 | `Timer:pauseGlobalTimer` | `timer_id` | declared |
+| 311 | `Timer:resumeGlobalTimer` | `timer_id` | declared |
+| 318 | `Timer:pauseGlobalCountdown` | `countdown_id` | declared |
+| 325 | `Timer:resumeGlobalCountdown` | `countdown_id` | declared |
+| 332 | `Timer:removeGlobalTimer` | `timer_id` | declared |
+| 341 | `Timer:removeGlobalCountdown` | `countdown_id` | declared |
+| 350 | `Timer:getGlobalTimer` | `timer_id` | declared |
+| 354 | `Timer:getGlobalCountdown` | `countdown_id` | declared |
+| 359 | `Timer:syncGlobalTimers` | `player_id` | declared |
+| 389 | `Timer:createPlayerTimer` | `player_id, timer_id, duration, callback, loop` | declared |
+| 418 | `Timer:createPlayerCountdown` | `player_id, countdown_id, duration, callback, loop` | declared |
+| 448 | `Timer:getAllGlobalTimers` | `(none)` | declared |
+| 452 | `Timer:getAllGlobalCountdowns` | `(none)` | declared |
+| 456 | `Timer:clearAllGlobalTimers` | `(none)` | declared |
+| 462 | `Timer:clearAllGlobalCountdowns` | `(none)` | declared |
+| 468 | `Timer:getPlayerTimer` | `player_id, timer_id` | declared |
+| 475 | `Timer:getPlayerCountdown` | `player_id, countdown_id` | declared |
 
-### Function notes
+### Function details
 
-- **`Timer:init()`** *(source line 6)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:handlePlayerJoin(player_id)`** *(source line 47)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:handlePlayerLeave(player_id)`** *(source line 62)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:updateTimers(delta)`** *(source line 69)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:emitToAllPlayers(event_name, data)`** — Helper function to emit to all connected players (with error protection) *(source line 209)*
-- **`Timer:pausePlayerTimer(player_id, timer_id)`** — PLAYER TIMER/COUNTDOWN MANAGEMENT *(source line 223)*
-- **`Timer:resumePlayerTimer(player_id, timer_id)`** *(source line 229)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:pausePlayerCountdown(player_id, countdown_id)`** *(source line 235)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:resumePlayerCountdown(player_id, countdown_id)`** *(source line 241)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:removePlayerTimer(player_id, timer_id)`** *(source line 247)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:removePlayerCountdown(player_id, countdown_id)`** *(source line 252)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:createGlobalTimer(timer_id, duration, callback, loop)`** — Global Timer Methods *(source line 258)*
-- **`Timer:createGlobalCountdown(countdown_id, duration, callback, loop)`** *(source line 281)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:pauseGlobalTimer(timer_id)`** *(source line 304)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:resumeGlobalTimer(timer_id)`** *(source line 311)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:pauseGlobalCountdown(countdown_id)`** *(source line 318)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:resumeGlobalCountdown(countdown_id)`** *(source line 325)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:removeGlobalTimer(timer_id)`** *(source line 332)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:removeGlobalCountdown(countdown_id)`** *(source line 341)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:getGlobalTimer(timer_id)`** *(source line 350)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:getGlobalCountdown(countdown_id)`** *(source line 354)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:syncGlobalTimers(player_id)`** — Sync methods for new players *(source line 359)*
-- **`Timer:createPlayerTimer(player_id, timer_id, duration, callback, loop)`** *(source line 389)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:createPlayerCountdown(player_id, countdown_id, duration, callback, loop)`** *(source line 418)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:getAllGlobalTimers()`** — Additional utility methods *(source line 448)*
-- **`Timer:getAllGlobalCountdowns()`** *(source line 452)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:clearAllGlobalTimers()`** *(source line 456)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:clearAllGlobalCountdowns()`** *(source line 462)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:getPlayerTimer(player_id, timer_id)`** *(source line 468)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Timer:getPlayerCountdown(player_id, countdown_id)`** *(source line 475)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `Timer:init()`
 
-## Tables and data structures
+- **Location:** source line 6.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
 
-### `Timer` *(line 2)*
+#### 2. `Timer:handlePlayerJoin(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 47.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
 
-### `self.timers` *(line 7)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
 
-### `self.countdowns` *(line 8)*
+#### 3. `Timer:handlePlayerLeave(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 62.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
 
-### `self.global_timers` *(line 9)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
 
-### `self.global_countdowns` *(line 10)*
+#### 4. `Timer:updateTimers(delta)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 69.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
 
-### `self.player_data` *(line 11)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `delta` | Not explicitly documented in adjacent source annotations. |
 
-### `event_data` *(line 211)*
+#### 5. `Timer:emitToAllPlayers(event_name, data)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 209.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Helper function to emit to all connected players (with error protection)
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
 
-## Implementation notes
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-- This reference is generated from the exact archived source `scripts/displayer/timer-system.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `event_name` | Not explicitly documented in adjacent source annotations. |
+| 2 | `data` | Not explicitly documented in adjacent source annotations. |
+
+#### 6. `Timer:pausePlayerTimer(player_id, timer_id)`
+
+- **Location:** source line 223.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `timer_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 7. `Timer:resumePlayerTimer(player_id, timer_id)`
+
+- **Location:** source line 229.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `timer_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 8. `Timer:pausePlayerCountdown(player_id, countdown_id)`
+
+- **Location:** source line 235.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `countdown_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 9. `Timer:resumePlayerCountdown(player_id, countdown_id)`
+
+- **Location:** source line 241.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `countdown_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 10. `Timer:removePlayerTimer(player_id, timer_id)`
+
+- **Location:** source line 247.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `timer_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 11. `Timer:removePlayerCountdown(player_id, countdown_id)`
+
+- **Location:** source line 252.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `countdown_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 12. `Timer:createGlobalTimer(timer_id, duration, callback, loop)`
+
+- **Location:** source line 258.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Global Timer Methods
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `timer_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `duration` | Not explicitly documented in adjacent source annotations. |
+| 3 | `callback` | Not explicitly documented in adjacent source annotations. |
+| 4 | `loop` | Not explicitly documented in adjacent source annotations. |
+
+#### 13. `Timer:createGlobalCountdown(countdown_id, duration, callback, loop)`
+
+- **Location:** source line 281.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `countdown_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `duration` | Not explicitly documented in adjacent source annotations. |
+| 3 | `callback` | Not explicitly documented in adjacent source annotations. |
+| 4 | `loop` | Not explicitly documented in adjacent source annotations. |
+
+#### 14. `Timer:pauseGlobalTimer(timer_id)`
+
+- **Location:** source line 304.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `timer_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 15. `Timer:resumeGlobalTimer(timer_id)`
+
+- **Location:** source line 311.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `timer_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 16. `Timer:pauseGlobalCountdown(countdown_id)`
+
+- **Location:** source line 318.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `countdown_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 17. `Timer:resumeGlobalCountdown(countdown_id)`
+
+- **Location:** source line 325.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `countdown_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 18. `Timer:removeGlobalTimer(timer_id)`
+
+- **Location:** source line 332.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `timer_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 19. `Timer:removeGlobalCountdown(countdown_id)`
+
+- **Location:** source line 341.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `countdown_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 20. `Timer:getGlobalTimer(timer_id)`
+
+- **Location:** source line 350.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `timer_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 21. `Timer:getGlobalCountdown(countdown_id)`
+
+- **Location:** source line 354.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `countdown_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 22. `Timer:syncGlobalTimers(player_id)`
+
+- **Location:** source line 359.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Sync methods for new players
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 23. `Timer:createPlayerTimer(player_id, timer_id, duration, callback, loop)`
+
+- **Location:** source line 389.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `timer_id` | Not explicitly documented in adjacent source annotations. |
+| 3 | `duration` | Not explicitly documented in adjacent source annotations. |
+| 4 | `callback` | Not explicitly documented in adjacent source annotations. |
+| 5 | `loop` | Not explicitly documented in adjacent source annotations. |
+
+#### 24. `Timer:createPlayerCountdown(player_id, countdown_id, duration, callback, loop)`
+
+- **Location:** source line 418.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `countdown_id` | Not explicitly documented in adjacent source annotations. |
+| 3 | `duration` | Not explicitly documented in adjacent source annotations. |
+| 4 | `callback` | Not explicitly documented in adjacent source annotations. |
+| 5 | `loop` | Not explicitly documented in adjacent source annotations. |
+
+#### 25. `Timer:getAllGlobalTimers()`
+
+- **Location:** source line 448.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Additional utility methods
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+#### 26. `Timer:getAllGlobalCountdowns()`
+
+- **Location:** source line 452.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+#### 27. `Timer:clearAllGlobalTimers()`
+
+- **Location:** source line 456.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+#### 28. `Timer:clearAllGlobalCountdowns()`
+
+- **Location:** source line 462.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+#### 29. `Timer:getPlayerTimer(player_id, timer_id)`
+
+- **Location:** source line 468.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `timer_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 30. `Timer:getPlayerCountdown(player_id, countdown_id)`
+
+- **Location:** source line 475.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+- **Method invocation:** Uses Lua colon-method syntax (`self` is implicit at call sites).
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `countdown_id` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+These are anonymous `function(...)` expressions, including inline callbacks. Their argument lists are taken verbatim from source; lexical context is descriptive text, not a claim about execution.
+
+| Line | Arguments | Preceding source context |
+|---|---|---|
+| 14 | `event` | `layer_data = {} -- Track player states -- Handle player joining Net:on("player_join",` |
+| 15 | `(none)` | `Handle player joining Net:on("player_join", function(event) local ok, err = pcall(` |
+| 24 | `event` | `r_join:", err) end end) -- Handle timer updates every tick Net:on("tick",` |
+| 25 | `(none)` | `ndle timer updates every tick Net:on("tick", function(event) local ok, err = pcall(` |
+| 35 | `event` | `ick:", err) end end) -- Handle player leaving Net:on("player_disconnect",` |
+| 36 | `(none)` | `e player leaving Net:on("player_disconnect", function(event) local ok, err = pcall(` |
+
+## 📦 Tables and data
+
+The following **7** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `Timer` — line 3
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `self.timers` — line 7
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 3. `self.countdowns` — line 8
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 4. `self.global_timers` — line 9
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 5. `self.global_countdowns` — line 10
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 6. `self.player_data` — line 11
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 7. `event_data` — line 211
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+## ⚙️ Runtime API calls
+
+These are **statically detected call sites**, not API definitions or guaranteed successful runtime calls.
+
+| Call identifier | Occurrences |
+|---|---|
+| `Net.emit` | 15 |
+| `Net.on` | 3 |
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

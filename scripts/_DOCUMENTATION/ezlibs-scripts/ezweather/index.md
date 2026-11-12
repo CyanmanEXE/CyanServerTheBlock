@@ -1,111 +1,146 @@
-# `ezweather.lua`
+# 📄 `ezweather.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezweather.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezweather.lua`](../../../ezlibs-scripts/ezweather.lua)  
 > **Source lines:** 149  
-> **Functions detected:** 8  
-> **Table declarations detected:** 7
+> **SHA-256 (UTF-8):** `b1c16dc4138f3dcc9f45ffae21ac34dc68cc2558a40044f574e09be574fd75db`  
+> **Named/assigned functions detected:** 8  
+> **Table initializers detected:** 7
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-On server start, record the default custom properties for each area that might be overwritten if the weather changes TODO, support areas being added during server runtime
+Current source inventory for `scripts/ezlibs-scripts/ezweather.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
-- `scripts/ezlibs-scripts/ezbus` — line 3
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/logger/logger` |
+| 3 | `scripts/ezlibs-scripts/ezbus` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No literal `:on` event registration detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 25 | `ezweather.start_rain_in_area` | `area_id` | assigned/declared |
+| 51 | `ezweather.start_snow_in_area` | `area_id` | assigned/declared |
+| 77 | `ezweather.start_fog_in_area` | `area_id` | assigned/declared |
+| 98 | `fade_camera_for_players_in_area` | `area_id` | assigned/declared |
+| 105 | `ezweather.get_area_weather` | `area_id` | assigned/declared |
+| 113 | `ezweather.clear_weather_in_area` | `area_id` | assigned/declared |
+| 135 | `ezweather.handle_player_transfer` | `player_id` | assigned/declared |
+| 142 | `ezweather.handle_player_join` | `player_id` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `ezweather.start_rain_in_area(area_id)`
+
+- **Line:** 25
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 25 | `ezweather.start_rain_in_area` | `area_id` |
-| 51 | `ezweather.start_snow_in_area` | `area_id` |
-| 77 | `ezweather.start_fog_in_area` | `area_id` |
-| 98 | `fade_camera_for_players_in_area` | `area_id` |
-| 105 | `ezweather.get_area_weather` | `area_id` |
-| 113 | `ezweather.clear_weather_in_area` | `area_id` |
-| 135 | `ezweather.handle_player_transfer` | `player_id` |
-| 142 | `ezweather.handle_player_join` | `player_id` |
+| 1 | `area_id` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `ezweather.start_snow_in_area(area_id)`
 
-- **`ezweather.start_rain_in_area(area_id)`** *(source line 25)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezweather.start_snow_in_area(area_id)`** *(source line 51)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezweather.start_fog_in_area(area_id)`** *(source line 77)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`fade_camera_for_players_in_area(area_id)`** *(source line 98)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezweather.get_area_weather(area_id)`** *(source line 105)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezweather.clear_weather_in_area(area_id)`** *(source line 113)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezweather.handle_player_transfer(player_id)`** *(source line 135)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezweather.handle_player_join(player_id)`** *(source line 142)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 51
+- **Declaration:** table/global or assignment
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
 
-### `ezweather` *(line 2)*
+#### 3. `ezweather.start_fog_in_area(area_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 77
+- **Declaration:** table/global or assignment
 
-### `volatile_memory` *(line 4)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `fade_camera_for_players_in_area(area_id)`
 
-### `fine_weather_properties` *(line 9)*
+- **Line:** 98
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
 
-### `weather_properties` *(line 11)*
+#### 5. `ezweather.get_area_weather(area_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"Song"` |
-| `[2]` | string literal | `"Foreground Animation"` |
-| `[3]` | string literal | `"Foreground Texture"` |
-| `[4]` | string literal | `"Foreground Parallax"` |
-| `[5]` | string literal | `"Foreground Vel X"` |
-| `[6]` | string literal | `"Foreground Vel Y"` |
+- **Line:** 105
+- **Declaration:** table/global or assignment
 
-### `camera_tint` *(line 30)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | number literal | `10` |
-| `g` | number literal | `10` |
-| `b` | number literal | `40` |
-| `a` | number literal | `120` |
+#### 6. `ezweather.clear_weather_in_area(area_id)`
 
-### `camera_tint` *(line 56)*
+- **Line:** 113
+- **Declaration:** table/global or assignment
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | number literal | `255` |
-| `g` | number literal | `255` |
-| `b` | number literal | `255` |
-| `a` | number literal | `40` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
 
-### `camera_tint` *(line 82)*
+#### 7. `ezweather.handle_player_transfer(player_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | number literal | `0` |
-| `g` | number literal | `0` |
-| `b` | number literal | `0` |
-| `a` | number literal | `0` |
+- **Line:** 135
+- **Declaration:** table/global or assignment
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezweather.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 8. `ezweather.handle_player_join(player_id)`
+
+- **Line:** 142
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 2 | `ezweather` |
+| 5 | `volatile_memory` |
+| 9 | `fine_weather_properties` |
+| 11 | `weather_properties` |
+| 30 | `camera_tint` |
+| 56 | `camera_tint` |
+| 82 | `camera_tint` |
+
+## Net API calls
+
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.fade_player_camera` | 3 | 101 |
+| `Net.get_area_custom_properties` | 3 | 13 |
+| `Net.get_player_area` | 2 | 137 |
+| `Net.list_areas` | 1 | 10 |
+| `Net.list_players` | 1 | 99 |
+| `Net.set_area_custom_property` | 16 | 38 |
+| `Net.set_song` | 2 | 35 |

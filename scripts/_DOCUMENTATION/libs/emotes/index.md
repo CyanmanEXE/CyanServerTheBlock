@@ -1,66 +1,83 @@
-# `emotes.lua`
+# 📄 `emotes.lua`
 
-> **Source:** `scripts/libs/emotes.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/libs/emotes.lua`](../../../libs/emotes.lua)  
 > **Source lines:** 25  
-> **Functions detected:** 0  
-> **Table declarations detected:** 1
+> **SHA-256 (UTF-8):** `d05c61d450f186…`  
+> **Declared/assigned functions detected:** 0  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 1
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Source-based reference for `scripts/libs/emotes.lua`. No module-purpose prose was supplied in the leading source comments.
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+*No named function declaration or `= function(...)` assignment detected. Anonymous callbacks may still be present.*
 
-## Tables and data structures
+## 🪄 Anonymous closures
 
-### `Emotes` *(line 1)*
+*No anonymous `function(...)` expressions detected.*
 
-| Field / key | Value category | Initializer expression (source) |
+## 📦 Tables and data
+
+The following **1** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `Emotes` — line 1
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `HAPPY` | number literal | `0` |
-| `BLANK` | number literal | `1` |
-| `MAD` | number literal | `2` |
-| `SAD` | number literal | `3` |
-| `SMUG` | number literal | `4` |
-| `SHOCKED` | number literal | `5` |
-| `COB` | number literal | `6` |
-| `PVP` | number literal | `7` |
-| `ZZZ` | number literal | `8` |
-| `KEY` | number literal | `9` |
-| `QUESTION` | number literal | `10` |
-| `ALERT` | number literal | `11` |
-| `HEART` | number literal | `12` |
-| `GG` | number literal | `13` |
-| `LOL` | number literal | `14` |
-| `YES` | number literal | `15` |
-| `NO` | number literal | `16` |
-| `VOMIT` | number literal | `17` |
-| `COOL` | number literal | `18` |
-| `UNCOOL` | number literal | `19` |
-| `SPIRIT` | number literal | `20` |
+| `HAPPY` | numeric literal | `0` |
+| `BLANK` | numeric literal | `1` |
+| `MAD` | numeric literal | `2` |
+| `SAD` | numeric literal | `3` |
+| `SMUG` | numeric literal | `4` |
+| `SHOCKED` | numeric literal | `5` |
+| `COB` | numeric literal | `6` |
+| `PVP` | numeric literal | `7` |
+| `ZZZ` | numeric literal | `8` |
+| `KEY` | numeric literal | `9` |
+| `QUESTION` | numeric literal | `10` |
+| `ALERT` | numeric literal | `11` |
+| `HEART` | numeric literal | `12` |
+| `GG` | numeric literal | `13` |
+| `LOL` | numeric literal | `14` |
+| `YES` | numeric literal | `15` |
+| `NO` | numeric literal | `16` |
+| `VOMIT` | numeric literal | `17` |
+| `COOL` | numeric literal | `18` |
+| `UNCOOL` | numeric literal | `19` |
+| `SPIRIT` | numeric literal | `20` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/libs/emotes.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

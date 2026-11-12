@@ -1,45 +1,50 @@
-# `ezchristmas.lua`
+# 📄 `ezchristmas.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezchristmas.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezchristmas.lua`](../../../ezlibs-scripts/ezchristmas.lua)  
 > **Source lines:** 11  
-> **Functions detected:** 0  
-> **Table declarations detected:** 1
+> **SHA-256 (UTF-8):** `2a29fb4550d3c50bb2156cceee18555059870dfb5ec386f6c1a0784ea87c3d58`  
+> **Named/assigned functions detected:** 0  
+> **Table initializers detected:** 1
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Current source inventory for `scripts/ezlibs-scripts/ezchristmas.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
-- `scripts/ezlibs-scripts/ezweather` — line 3
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/logger/logger` |
+| 3 | `scripts/ezlibs-scripts/ezweather` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No literal `:on` event registration detected by the simple source pattern.
 
 ## Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+No named function declarations matched. Anonymous callbacks may exist.
 
-## Tables and data structures
+## Tables
 
-### `ezchristmas` *(line 2)*
+| Source line | Assignment |
+|---:|---|
+| 2 | `ezchristmas` |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+## Net API calls
 
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezchristmas.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.list_areas` | 1 | 5 |

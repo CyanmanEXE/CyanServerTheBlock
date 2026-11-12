@@ -1,57 +1,88 @@
-# `event_emitter.lua`
+# 📄 `event_emitter.lua`
 
-> **Source:** `scripts/tests/event_emitter.lua`  
+> ⚠️ **Archive-only reference:** The source file `scripts/tests/event_emitter.lua` is absent from the current server archive; the extracted functions/tables below are retained solely as historical reference, not as current runtime API.
+
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Historical source:** `scripts/tests/event_emitter.lua` (not present in the current server ZIP).  
 > **Source lines:** 103  
-> **Functions detected:** 0  
-> **Table declarations detected:** 2
+> **SHA-256 (UTF-8):** `5a30030735182d…`  
+> **Declared/assigned functions detected:** 0  
+> **Anonymous closures detected:** 4  
+> **Table initializers detected:** 2
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-functions tested: Net.EventEmitter.new :on :once :on_any :on_any_once :remove_listener :remove_on_any_listener :destroy
+functions tested: Net.EventEmitter.new :on :once :on_any
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+*No named function declaration or `= function(...)` assignment detected. Anonymous callbacks may still be present.*
 
-## Tables and data structures
+## 🪄 Anonymous closures
 
-### `emitted_events` *(line 19)*
+These are anonymous `function(...)` expressions, including inline callbacks. Their argument lists are taken verbatim from source; lexical context is descriptive text, not a claim about execution.
 
-| Field / key | Value category | Initializer expression (source) |
+| Line | Arguments | Preceding source context |
 |---|---|---|
-| `[1]` | table | `{"b", 2, '?'}` |
-| `[2]` | table | `{"a", 1, '?'}` |
-| `[3]` | table | `{"a", 3, '?'}` |
-| `[4]` | table | `{"c", 5, '?'}` |
-| `[5]` | table | `{"a", 4, '?'}` |
-| `[6]` | table | `{"d", 6, '?'}` |
-| `[7]` | table | `{"a", 7, '?'}` |
-| `[8]` | table | `{"e", 8, '?'}` |
+| 40 | `num, word` | `1] = params end end -- the test -- once also tests :remove_listener emitter:once("a",` |
+| 50 | `name, num, word` | `match") end end) -- on_any_once also tests :remove_on_any_listener emitter:on_any_on…` |
+| 59 | `(none)` | `then error("event data does not match") end end) Async.promisify(coroutine.create(` |
+| 89 | `(none)` | `) end i = i + 1 end -- testing helpful error local success, err = pcall(` |
 
-### `a_events` *(line 29)*
+## 📦 Tables and data
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+The following **2** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
 
-## Implementation notes
+### 1. `emitted_events` — line 19
 
-- This reference is generated from the exact archived source `scripts/tests/event_emitter.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `[1]` | nested table | `{"b", 2, '?'}` |
+| `[2]` | nested table | `{"a", 1, '?'}` |
+| `[3]` | nested table | `{"a", 3, '?'}` |
+| `[4]` | nested table | `{"c", 5, '?'}` |
+| `[5]` | nested table | `{"a", 4, '?'}` |
+| `[6]` | nested table | `{"d", 6, '?'}` |
+| `[7]` | nested table | `{"a", 7, '?'}` |
+| `[8]` | nested table | `{"e", 8, '?'}` |
+
+### 2. `a_events` — line 30
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+## ⚙️ Runtime API calls
+
+These are **statically detected call sites**, not API definitions or guaranteed successful runtime calls.
+
+| Call identifier | Occurrences |
+|---|---|
+| `Async.await` | 2 |
+| `Async.promisify` | 1 |
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

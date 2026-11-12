@@ -40,8 +40,8 @@ end
 function ShadeMan:spawn(direction)
   self.direction = direction
   self.id = Net.create_bot({
-    texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/shademan.png",
-    animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/shademan.animation",
+    texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/npcs/shademan.png",
+    animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/npcs/shademan.animation",
     area_id = self.instance.area_id,
     direction = direction,
     warp_in = false,

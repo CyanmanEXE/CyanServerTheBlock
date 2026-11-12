@@ -1,0 +1,10 @@
+[2026-11-11 19:25:40] [DEBUG] [nebulous-liberations/PLAYER] textbox_response: resolver consumed
+    pending_after  : 0
+    pending_before : 1
+    player_id      : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    response       : 1
+[2026-11-11 19:25:42] [DEBUG] [nebulous-liberations/PLAYER] textbox_response: resolver consumed
+    pending_after  : 0
+    pending_before : 1
+    player_id      : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    response       : 1

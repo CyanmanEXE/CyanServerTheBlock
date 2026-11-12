@@ -1,50 +1,67 @@
-# `enums.lua`
+# 📄 `enums.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/avatar_utils/lua_yes_parser/src/enums.lua`  
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/avatar_utils/lua_yes_parser/src/enums.lua`](../../../../../avatar_utils/lua_yes_parser/src/enums.lua)  
 > **Source lines:** 68  
-> **Functions detected:** 2  
-> **Table declarations detected:** 0
+> **SHA-256 (UTF-8):** `3decc38959d5665c5a061f620138da72f938ad8f40a2be76df0c2ffd5199e241`  
+> **Named/assigned functions detected:** 2  
+> **Table initializers detected (simple pattern):** 0
 
-## Contents
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Current source inventory for `scripts/avatar_utils/lua_yes_parser/src/enums.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- No `require(...)` dependency was detected.
+No statically identified literal `require` module strings.
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No named `.on`/`:on` events detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 25 | `glyphForType` | `type` | local |
+| 40 | `glyphIsReserved` | `glyph` | local |
+
+### Detailed parameter inventory
+
+#### 1. `glyphForType(type)`
+
+- **Line:** 25
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 24 | `glyphForType` | `type` |
-| 39 | `glyphIsReserved` | `glyph` |
+| 1 | `type` | Declared by this function; type not inferred. |
 
-### Function notes
+#### 2. `glyphIsReserved(glyph)`
 
-- **`glyphForType(type)`** *(source line 24)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`glyphIsReserved(glyph)`** *(source line 39)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 40
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `glyph` | Declared by this function; type not inferred. |
 
-No simple named table initializer was detected. Tables created dynamically or returned inline may not appear in this inventory.
 
-## Implementation notes
+## Tables
 
-- This reference is generated from the exact archived source `scripts/avatar_utils/lua_yes_parser/src/enums.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+No plain `name = {` table initializer matched.
+
+## Net API calls
+
+No direct `Net.method(...)` call expression matched.

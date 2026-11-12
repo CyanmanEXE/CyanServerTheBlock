@@ -1,3 +1,4 @@
+local PlayerControl = require("scripts/player-control/main")
 local Enemy = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy")
 
 -- Loot reward messages are part of the reward sequence. Awaiting the
@@ -118,8 +119,7 @@ local Loot = {
 
         if #points > 0 then
           local player_id = player_session.player.id
-          local was_input_locked = Net.is_player_input_locked(player_id)
-          Net.lock_player_input(player_id)
+          PlayerControl.acquire_capture(player_id, "liberation:loot")
 
           local hold_time = .4
           local slide_time = .4
@@ -140,9 +140,7 @@ local Loot = {
 
           -- Preserve a lock owned by the turn/game state; otherwise restore
           -- input as soon as this camera sequence has fully completed.
-          if not was_input_locked then
-            Net.unlock_player_input(player_id)
-          end
+          PlayerControl.release_capture(player_id, "liberation:loot")
         end
       end)
       return Async.promisify(co)
@@ -303,8 +301,7 @@ function Loot.loot_item_panel(instance, player_session, panel, destroy_items)
   local spawn_z = panel.z
 
   local player_id = player_session.player.id
-  local was_input_locked = Net.is_player_input_locked(player_id)
-  Net.lock_player_input(player_id)
+    PlayerControl.acquire_capture(player_id, "liberation:loot")
 
   Net.slide_player_camera(
     player_id,
@@ -322,9 +319,7 @@ function Loot.loot_item_panel(instance, player_session, panel, destroy_items)
     Async.await(Async.sleep(slide_time))
     -- The camera has finished moving. Restore input only if this short
     -- camera pan acquired the lock; preserve any turn/interaction lock.
-    if not was_input_locked then
-      Net.unlock_player_input(player_id)
-    end
+    PlayerControl.release_capture(player_id, "liberation:loot")
     local remove_item_bot = Async.await(Loot.spawn_item_bot(loot, instance.area_id, spawn_x, spawn_y, spawn_z))
     if not breakable and destroy_items or not destroy_items then
       Async.await(loot.activate(instance, player_session))

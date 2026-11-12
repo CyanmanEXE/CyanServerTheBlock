@@ -1,3 +1,4 @@
+local PlayerControl = require("scripts/player-control/main")
 --[[
 * ---------------------------------------------------------- *
            Net Games (framework) - Version 0.08
@@ -1957,7 +1958,7 @@ end
 -- CURSOR FUNCTIONS
 -- ===========================================================
 function frame.spawn_cursor(sprite_id, player_id, options)
-        Net.lock_player_input(player_id)
+        PlayerControl.acquire_capture(player_id, "net-games/main")
         
         local initial_selection = options.selections[1]
         
@@ -1993,7 +1994,7 @@ end
 function frame.remove_cursor(cursor_id, player_id)
     if ui_cache[player_id] and ui_cache[player_id][cursor_id] and ui_cache[player_id][cursor_id]["sprite_id"] then
         frame.remove_ui_element(cursor_id, player_id)
-        Net.unlock_player_input(player_id)
+        PlayerControl.release_capture(player_id, "net-games/main")
     else
         print("[games] No cursor found with ID: " .. cursor_id)
     end

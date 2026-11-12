@@ -1,44 +1,56 @@
-# `animation-enums.lua`
+# 📄 `animation-enums.lua`
 
-> **Source:** `scripts/animation-engine/animation-enums.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/animation-engine/animation-enums.lua`](../../../animation-engine/animation-enums.lua)  
 > **Source lines:** 80  
-> **Functions detected:** 0  
-> **Table declarations detected:** 6
+> **SHA-256 (UTF-8):** `c44fc79c89f290…`  
+> **Declared/assigned functions detected:** 0  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 7
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
 animation-enums.lua (enhanced)
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+*No named function declaration or `= function(...)` assignment detected. Anonymous callbacks may still be present.*
 
-## Tables and data structures
+## 🪄 Anonymous closures
 
-### `AnimationEnums` *(line 2)*
+*No anonymous `function(...)` expressions detected.*
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+## 📦 Tables and data
 
-### `AnimationEnums.easing_function_names` *(line 5)*
+The following **7** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
 
-| Field / key | Value category | Initializer expression (source) |
+### 1. `AnimationEnums` — line 2
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `AnimationEnums.easing_function_names` — line 6
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `instant` | string literal | `"instant"` |
 | `linear` | string literal | `"linear"` |
@@ -55,9 +67,9 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `square` | string literal | `"square"` |
 | `cubic` | string literal | `"cubic"` |
 
-### `AnimationEnums.animation_types` *(line 24)*
+### 3. `AnimationEnums.animation_types` — line 24
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `SUMMON` | string literal | `"summon"` |
 | `SET` | string literal | `"set"` |
@@ -72,9 +84,9 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `COLOR_PULSE` | string literal | `"color_pulse"` |
 | `SERIES` | string literal | `"series"` |
 
-### `AnimationEnums.animation_properties` *(line 40)*
+### 4. `AnimationEnums.animation_properties` — line 40
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `POSITION_X` | string literal | `"x"` |
 | `POSITION_Y` | string literal | `"y"` |
@@ -88,9 +100,9 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `COLOR_B` | string literal | `"b"` |
 | `COLOR_A` | string literal | `"a"` |
 
-### `AnimationEnums.directions` *(line 55)*
+### 5. `AnimationEnums.directions` — line 55
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `UP` | string literal | `"up"` |
 | `DOWN` | string literal | `"down"` |
@@ -99,9 +111,9 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `IN` | string literal | `"in"` |
 | `OUT` | string literal | `"out"` |
 
-### `AnimationEnums.triggers` *(line 65)*
+### 6. `AnimationEnums.triggers` — line 65
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `ON_CLICK` | string literal | `"on_click"` |
 | `ON_HOVER` | string literal | `"on_hover"` |
@@ -110,9 +122,24 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `ON_COMPLETE` | string literal | `"on_complete"` |
 | `ON_START` | string literal | `"on_start"` |
 
-## Implementation notes
+### 7. `return` — line 74
 
-- This reference is generated from the exact archived source `scripts/animation-engine/animation-enums.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `EasingFns` | expression/reference | `AnimationEnums.easing_function_names` |
+| `AnimationTypes` | expression/reference | `AnimationEnums.animation_types` |
+| `Properties` | expression/reference | `AnimationEnums.animation_properties` |
+| `Directions` | expression/reference | `AnimationEnums.directions` |
+| `Triggers` | expression/reference | `AnimationEnums.triggers` |
+
+## ⚙️ Runtime API calls
+
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

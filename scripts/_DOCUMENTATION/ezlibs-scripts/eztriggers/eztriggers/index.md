@@ -1,131 +1,230 @@
-# `eztriggers.lua`
+# 📄 `eztriggers.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/eztriggers/eztriggers.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/eztriggers/eztriggers.lua`](../../../../ezlibs-scripts/eztriggers/eztriggers.lua)  
 > **Source lines:** 436  
-> **Functions detected:** 14  
-> **Table declarations detected:** 10
+> **SHA-256 (UTF-8):** `384ed7cef6c58ddd9f2b2a209dc7af4a5c8b7e94ed8af85c24a86dec60751e4b`  
+> **Named/assigned functions detected:** 14  
+> **Table initializers detected:** 10
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-Geometry diagnostics are disabled in normal operation.
+Current source inventory for `scripts/ezlibs-scripts/eztriggers/eztriggers.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
-- `scripts/ezlibs-scripts/helpers` — line 2
-- `scripts/ezlibs-scripts/object_registry` — line 3
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/logger/logger` |
+| 2 | `scripts/ezlibs-scripts/helpers` |
+| 3 | `scripts/ezlibs-scripts/object_registry` |
 
-## Events
+## Event hooks
 
-- `Net:on("tick", function(event) ...)` — line 421. The event name is taken directly from this source.
-- `Net:on("player_disconnect", function(event) ...)` — line 428. The event name is taken directly from this source.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 56 | `emitter` | `entered` |
+| 421 | `Net` | `tick` |
+| 428 | `Net` | `player_disconnect` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 10 | `is_button_trigger` | `trigger_info` | local |
+| 26 | `eztriggers.add_location_event_trigger` | `area_id,object` | assigned/declared |
+| 74 | `eztriggers.add_interact_trigger` | `area_id,trigger_object` | assigned/declared |
+| 90 | `eztriggers.add_radius_trigger` | `area_id, trigger_object, diameter_x, diameter_y, center_x, center_y, trigger_id` | assigned/declared |
+| 149 | `eztriggers.add_rectangle_trigger` | `area_id, trigger_object, width, height, trigger_id` | assigned/declared |
+| 200 | `eztriggers.handle_object_interaction` | `player_id,object_id,button` | assigned/declared |
+| 217 | `set_player_overlap` | `trigger_info, player_id, is_inside, reason` | local |
+| 246 | `eztriggers.handle_player_move` | `player_id, x, y, z` | assigned/declared |
+| 326 | `eztriggers.add_event` | `event_object` | assigned/declared |
+| 341 | `eztriggers.clear_radius_overlaps_for_player` | `player_id, reason` | assigned/declared |
+| 349 | `eztriggers.clear_rectangle_overlaps_for_player` | `player_id, reason` | assigned/declared |
+| 357 | `eztriggers.handle_player_transfer` | `player_id` | assigned/declared |
+| 370 | `eztriggers.handle_player_disconnect` | `player_id` | assigned/declared |
+| 395 | `tick_check_player_triggers` | `(none)` | local |
+
+### Detailed parameter inventory
+
+#### 1. `is_button_trigger(trigger_info)`
+
+- **Line:** 10
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 10 | `is_button_trigger` | `trigger_info` |
-| 26 | `eztriggers.add_location_event_trigger` | `area_id,object` |
-| 74 | `eztriggers.add_interact_trigger` | `area_id,trigger_object` |
-| 90 | `eztriggers.add_radius_trigger` | `area_id, trigger_object, diameter_x, diameter_y, center_x, center_y, trigger_id` |
-| 149 | `eztriggers.add_rectangle_trigger` | `area_id, trigger_object, width, height, trigger_id` |
-| 200 | `eztriggers.handle_object_interaction` | `player_id,object_id,button` |
-| 217 | `set_player_overlap` | `trigger_info, player_id, is_inside, reason` |
-| 245 | `eztriggers.handle_player_move` | `player_id, x, y, z` |
-| 326 | `eztriggers.add_event` | `event_object` |
-| 341 | `eztriggers.clear_radius_overlaps_for_player` | `player_id, reason` |
-| 349 | `eztriggers.clear_rectangle_overlaps_for_player` | `player_id, reason` |
-| 357 | `eztriggers.handle_player_transfer` | `player_id` |
-| 370 | `eztriggers.handle_player_disconnect` | `player_id` |
-| 395 | `tick_check_player_triggers` | `(none)` |
+| 1 | `trigger_info` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `eztriggers.add_location_event_trigger(area_id,object)`
 
-- **`is_button_trigger(trigger_info)`** *(source line 10)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`eztriggers.add_location_event_trigger(area_id,object)`** *(source line 26)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`eztriggers.add_interact_trigger(area_id,trigger_object)`** *(source line 74)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`eztriggers.add_radius_trigger(area_id, trigger_object, diameter_x, diameter_y, center_x, center_y, trigger_id)`** *(source line 90)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`eztriggers.add_rectangle_trigger(area_id, trigger_object, width, height, trigger_id)`** *(source line 149)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`eztriggers.handle_object_interaction(player_id,object_id,button)`** *(source line 200)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`set_player_overlap(trigger_info, player_id, is_inside, reason)`** — Emit a transition only when the player's recorded overlap state changes. Update the overlap table before emitting so re-entrant listeners cannot observe the old state or cause duplicate transitions. *(source line 217)*
-- **`eztriggers.handle_player_move(player_id, x, y, z)`** *(source line 245)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`eztriggers.add_event(event_object)`** *(source line 326)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`eztriggers.clear_radius_overlaps_for_player(player_id, reason)`** *(source line 341)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`eztriggers.clear_rectangle_overlaps_for_player(player_id, reason)`** *(source line 349)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`eztriggers.handle_player_transfer(player_id)`** *(source line 357)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`eztriggers.handle_player_disconnect(player_id)`** *(source line 370)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`tick_check_player_triggers()`** — ========================================================================= Player movement tick  Historically the only caller of `handle_player_move` was `ezpushback.on_tick`, and only when a Pushback NPC moved. That meant no player triggers ever fired on maps without pushback NPCs.  This tick owns the check. To avoid iterating every trigger against every player every frame, we cache each player's last-seen position/area and skip the containment pass when nothing changed. A stationary player costs one `Net.get_player_position` and three comparisons per frame. ========================================================================= *(source line 395)*
+- **Line:** 26
+- **Declaration:** table/global or assignment
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `object` | Declared in this function; type not inferred. |
 
-### `eztriggers` *(line 4)*
+#### 3. `eztriggers.add_interact_trigger(area_id,trigger_object)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 74
+- **Declaration:** table/global or assignment
 
-### `eztriggers.interact_triggers` *(line 14)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `trigger_object` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `eztriggers.add_radius_trigger(area_id, trigger_object, diameter_x, diameter_y, center_x, center_y, trigger_id)`
 
-### `eztriggers.radius_triggers` *(line 16)*
+- **Line:** 90
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `trigger_object` | Declared in this function; type not inferred. |
+| 3 | `diameter_x` | Declared in this function; type not inferred. |
+| 4 | `diameter_y` | Declared in this function; type not inferred. |
+| 5 | `center_x` | Declared in this function; type not inferred. |
+| 6 | `center_y` | Declared in this function; type not inferred. |
+| 7 | `trigger_id` | Declared in this function; type not inferred. |
 
-### `eztriggers.rectangle_triggers` *(line 17)*
+#### 5. `eztriggers.add_rectangle_trigger(area_id, trigger_object, width, height, trigger_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 149
+- **Declaration:** table/global or assignment
 
-### `eztriggers._event_table` *(line 18)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `trigger_object` | Declared in this function; type not inferred. |
+| 3 | `width` | Declared in this function; type not inferred. |
+| 4 | `height` | Declared in this function; type not inferred. |
+| 5 | `trigger_id` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 6. `eztriggers.handle_object_interaction(player_id,object_id,button)`
 
-### `last_player_positions` *(line 24)*
+- **Line:** 200
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `object_id` | Declared in this function; type not inferred. |
+| 3 | `button` | Declared in this function; type not inferred. |
 
-### `trigger_info` *(line 122)*
+#### 7. `set_player_overlap(trigger_info, player_id, is_inside, reason)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `id` | expression/reference | `trigger_key` |
-| `object` | expression/reference | `trigger_object` |
-| `emitter` | expression/reference | `emitter` |
-| `overlapping_players` | table | `{}` |
-| `radius_x` | expression/reference | `width / 2` |
-| `radius_y` | expression/reference | `height / 2` |
-| `center_x` | expression/reference | `object_x + center_x` |
-| `center_y` | expression/reference | `object_y + center_y` |
+- **Line:** 217
+- **Declaration:** local
 
-### `overlapping_players` *(line 126)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `trigger_info` | Declared in this function; type not inferred. |
+| 2 | `player_id` | Declared in this function; type not inferred. |
+| 3 | `is_inside` | Declared in this function; type not inferred. |
+| 4 | `reason` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 8. `eztriggers.handle_player_move(player_id, x, y, z)`
 
-### `trigger_info` *(line 178)*
+- **Line:** 246
+- **Declaration:** table/global or assignment
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `id` | expression/reference | `trigger_key` |
-| `object` | expression/reference | `trigger_object` |
-| `emitter` | expression/reference | `emitter` |
-| `overlapping_players` | table | `{}` |
-| `width` | expression/reference | `trigger_width` |
-| `height` | expression/reference | `trigger_height` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `x` | Declared in this function; type not inferred. |
+| 3 | `y` | Declared in this function; type not inferred. |
+| 4 | `z` | Declared in this function; type not inferred. |
 
-### `overlapping_players` *(line 182)*
+#### 9. `eztriggers.add_event(event_object)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 326
+- **Declaration:** table/global or assignment
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `event_object` | Declared in this function; type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/eztriggers/eztriggers.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 10. `eztriggers.clear_radius_overlaps_for_player(player_id, reason)`
+
+- **Line:** 341
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `reason` | Declared in this function; type not inferred. |
+
+#### 11. `eztriggers.clear_rectangle_overlaps_for_player(player_id, reason)`
+
+- **Line:** 349
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `reason` | Declared in this function; type not inferred. |
+
+#### 12. `eztriggers.handle_player_transfer(player_id)`
+
+- **Line:** 357
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+
+#### 13. `eztriggers.handle_player_disconnect(player_id)`
+
+- **Line:** 370
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+
+#### 14. `tick_check_player_triggers()`
+
+- **Line:** 395
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 5 | `eztriggers` |
+| 15 | `eztriggers.interact_triggers` |
+| 16 | `eztriggers.radius_triggers` |
+| 17 | `eztriggers.rectangle_triggers` |
+| 18 | `eztriggers._event_table` |
+| 24 | `last_player_positions` |
+| 122 | `trigger_info` |
+| 126 | `overlapping_players` |
+| 178 | `trigger_info` |
+| 182 | `overlapping_players` |
+
+## Net API calls
+
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.get_player_area` | 2 | 202 |
+| `Net.list_areas` | 1 | 396 |
+| `Net.list_players` | 1 | 397 |
+| `Net.on` | 2 | 421 |

@@ -4,30 +4,30 @@
 -- before TMX files are modified. The caller can await Embedder.run().
 
 local Embedder = {}
-local log = require("scripts/ezlibs-scripts/ezlogger").get("nebulous-liberations")
+local log = require("scripts/logger/logger").register("nebulous-liberations"):register_subsystem("tileset-embedder")
 
 local SHARED_TILESETS = {
     {
         filename = "Liberation Collision.tsx",
-        source = "../assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx",
-        file_path = "assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx",
-        asset_path = "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx",
+        source = "../assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx",
+        file_path = "assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx",
+        asset_path = "/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx",
         image_filename = "Liberation Collision.png",
         tilecount = 1,
     },
     {
         filename = "selected tile.tsx",
-        source = "../assets/ezlibs-custom/nebulous-liberations/selected tile.tsx",
-        file_path = "assets/ezlibs-custom/nebulous-liberations/selected tile.tsx",
-        asset_path = "/server/assets/ezlibs-custom/nebulous-liberations/selected tile.tsx",
+        source = "../assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.tsx",
+        file_path = "assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.tsx",
+        asset_path = "/server/assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.tsx",
         image_filename = "selected tile.png",
         tilecount = 6,
     },
     {
         filename = "attack indicator.tsx",
-        source = "../assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx",
-        file_path = "assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx",
-        asset_path = "/server/assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx",
+        source = "../assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.tsx",
+        file_path = "assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.tsx",
+        asset_path = "/server/assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.tsx",
         image_filename = "attack indicator.png",
         tilecount = 1,
     },
@@ -88,8 +88,8 @@ local function publish_shared_assets()
         local asset_files = {
             { file_path = tileset.file_path, asset_path = tileset.asset_path },
             {
-                file_path = "assets/ezlibs-custom/nebulous-liberations/" .. tileset.image_filename,
-                asset_path = "/server/assets/ezlibs-custom/nebulous-liberations/" .. tileset.image_filename,
+                file_path = "assets/ezlibs-custom/nebulous-liberations/tiles/" .. tileset.image_filename,
+                asset_path = "/server/assets/ezlibs-custom/nebulous-liberations/tiles/" .. tileset.image_filename,
             },
         }
         for _, asset in ipairs(asset_files) do

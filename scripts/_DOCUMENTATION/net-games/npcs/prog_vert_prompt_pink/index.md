@@ -1,56 +1,82 @@
-# `prog_vert_prompt_pink.lua`
+# 📄 `prog_vert_prompt_pink.lua`
 
-> **Source:** `scripts/net-games/npcs/prog_vert_prompt_pink.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/npcs/prog_vert_prompt_pink.lua`](../../../../net-games/npcs/prog_vert_prompt_pink.lua)  
 > **Source lines:** 51  
-> **Functions detected:** 1  
-> **Table declarations detected:** 2
+> **SHA-256 (UTF-8):** `8d62768df160c2…`  
+> **Declared/assigned functions detected:** 1  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 2
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-===================================================== prog_vert_prompt_pink.lua Pink PROG vertical menu demo using Talk.vert_menu =====================================================
+Pink PROG vertical menu demo using Talk.vert_menu
 
-## Dependencies
+## 🔗 Dependencies
 
-- `scripts/net-games/npcs/talk` — line 6
+| Line | Module string supplied to `require` |
+|---|---|
+| 6 | `scripts/net-games/npcs/talk` |
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 20 | `on_interact` | `player_id, _bot_id, bot_name` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 21 | `on_interact` | `player_id, _bot_id, bot_name` | assigned |
 
-### Function notes
+### Function details
 
-- **`on_interact(player_id, _bot_id, bot_name)`** *(source line 20)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `on_interact(player_id, _bot_id, bot_name)`
 
-## Tables and data structures
+- **Location:** source line 21.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `options` *(line 31)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-| Field / key | Value category | Initializer expression (source) |
+| Position | Parameter | Source-established type / meaning |
 |---|---|---|
-| `count` | number literal | `40` |
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `_bot_id` | Not explicitly documented in adjacent source annotations. |
+| 3 | `bot_name` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+*No anonymous `function(...)` expressions detected.*
+
+## 📦 Tables and data
+
+The following **2** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `options` — line 31
+
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `count` | numeric literal | `40` |
 | `prefix` | string literal | `"Pink Option "` |
-| `pad` | number literal | `2` |
+| `pad` | numeric literal | `2` |
 | `exit_text` | string literal | `"Exit"` |
 | `exit_id` | string literal | `"exit"` |
 
-### `texts` *(line 32)*
+### 2. `texts` — line 33
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `open_question` | string literal | `"Do you wanna check out the vertical menu?"` |
 | `intro_text` | string literal | `"Awesome. Let me know if there's anything that you like."` |
@@ -61,9 +87,14 @@
 | `after_no` | string literal | `"Is there anything else you'd like?"` |
 | `exit_goodbye` | string literal | `"Thanks for stopping by!"` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/net-games/npcs/prog_vert_prompt_pink.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

@@ -1,173 +1,361 @@
-# `camera-controller.lua`
+# 📄 `camera-controller.lua` — Current source reference
 
-> **Source:** `scripts/camera/camera-controller.lua`  
-> **Source lines:** 556  
-> **Functions detected:** 28  
-> **Table declarations detected:** 7
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/camera/camera-controller.lua`](../../../camera/camera-controller.lua)  
+> **Source lines:** 564  
+> **SHA-256:** `2a080555b8b3c030331a045e8cb7a6cf24ab9cfed9952a3a23006b9668907968`  
+> **Declared/assigned functions:** 28 · **table initializers (simple patterns):** 7 · **event subscriptions detected:** 0
+
+> **Method:** Static source inventory. Parameters are spelled as in the source; no types, return values, or public accessibility are inferred from signatures alone. See the authored guides for behavioral descriptions.
+
+## 🧭 Contents
 
 - [Overview](#overview)
 - [Dependencies](#dependencies)
 - [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net APIs](#net-apis)
 
 ## Overview
 
-camera-controller.lua Unified camera controller with mode-based input handling. Subscribes to the shared per-player InputController's emitter. The camera applies its own repeat cadence to the shared InputController while it is active, and restores the controller's configured defaults on deactivate. This lets camera movement feel snappier without affecting any other consumer of the same InputController.
+Current reference for `camera/camera-controller.lua` in the PlayerControl-patched November 11 snapshot.
 
 ## Dependencies
 
-- `scripts/input-controller/main` — line 10
-- `scripts/enum/predefined-enums` — line 11
+| Line | Required module |
+|---:|---|
+| 1 | `scripts/net-games/ui-suppression` |
+| 11 | `scripts/input-controller/main` |
+| 12 | `scripts/enum/predefined-enums` |
 
 ## Events
 
-- No direct `Net:on(...)` registration was detected.
+No literal named event registrations detected.
 
-## Functions
+## Functions and parameters
 
-| Line | Function / method | Parameters as declared |
+| Line | Declared/assigned function | Parameters (source) | Local |
+|---:|---|---|---|
+| 33 | `dbg` | `...` | yes |
+| 42 | `handle_player_controlled_movement` | `self` | yes |
+| 105 | `emitter_off` | `emitter, event, cb` | yes |
+| 120 | `CameraController:new` | `player_id, opts` | no |
+| 170 | `controller._handler_owner_changed` | `change` | no |
+| 191 | `CameraController:_bind_input` | `(none)` | no |
+| 200 | `make_handler` | `kind` | yes |
+| 218 | `CameraController:_unbind_input` | `(none)` | no |
+| 235 | `CameraController:_apply_repeat_delays` | `(none)` | no |
+| 245 | `CameraController:_restore_repeat_delays` | `(none)` | no |
+| 256 | `CameraController:set_camera_repeat_delays` | `first_repeat_delay, repeat_delay` | no |
+| 273 | `CameraController:_on_input_event` | `kind, ev` | no |
+| 335 | `CameraController:handle_input` | `(none)` | no |
+| 357 | `CameraController:activate` | `mode, lock_player_input` | no |
+| 436 | `CameraController:deactivate` | `keep_camera_position` | no |
+| 474 | `CameraController:destroy` | `(none)` | no |
+| 484 | `CameraController:returnToPlayer` | `(none)` | no |
+| 497 | `CameraController:setMode` | `new_mode, custom_handlers` | no |
+| 512 | `CameraController:setCustomHandlers` | `handlers` | no |
+| 519 | `CameraController:moveTo` | `x, y, z` | no |
+| 530 | `CameraController:relativeMoveTo` | `dx, dy, dz` | no |
+| 537 | `CameraController:pan` | `dx, dy, dz` | no |
+| 539 | `CameraController:setPosition` | `new_x, new_y, new_z` | no |
+| 546 | `CameraController:getPosition` | `(none)` | no |
+| 550 | `CameraController:getPendingPosition` | `(none)` | no |
+| 557 | `CameraController:hasPendingMove` | `(none)` | no |
+| 559 | `CameraController:fadePlayerCamera` | `color, durationInSeconds` | no |
+| 564 | `CameraController:shakePlayerCamera` | `strength, durationInSeconds` | no |
+
+### Parameter details
+
+#### 1. `dbg(...)`
+
+- **Declared at:** source line 33.
+- **Scope syntax:** local.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
 |---:|---|---|
-| 32 | `dbg` | `...` |
-| 41 | `handle_player_controlled_movement` | `self` |
-| 104 | `emitter_off` | `emitter, event, cb` |
-| 119 | `CameraController:new` | `player_id, opts` |
-| 169 | `controller._handler_owner_changed` | `change` |
-| 190 | `CameraController:_bind_input` | `(none)` |
-| 199 | `make_handler` | `kind` |
-| 217 | `CameraController:_unbind_input` | `(none)` |
-| 234 | `CameraController:_apply_repeat_delays` | `(none)` |
-| 244 | `CameraController:_restore_repeat_delays` | `(none)` |
-| 255 | `CameraController:set_camera_repeat_delays` | `first_repeat_delay, repeat_delay` |
-| 272 | `CameraController:_on_input_event` | `kind, ev` |
-| 334 | `CameraController:handle_input` | `(none)` |
-| 356 | `CameraController:activate` | `mode, lock_player_input` |
-| 426 | `CameraController:deactivate` | `keep_camera_position` |
-| 462 | `CameraController:destroy` | `(none)` |
-| 472 | `CameraController:returnToPlayer` | `(none)` |
-| 485 | `CameraController:setMode` | `new_mode, custom_handlers` |
-| 500 | `CameraController:setCustomHandlers` | `handlers` |
-| 507 | `CameraController:moveTo` | `x, y, z` |
-| 518 | `CameraController:relativeMoveTo` | `dx, dy, dz` |
-| 525 | `CameraController:pan` | `dx, dy, dz` |
-| 527 | `CameraController:setPosition` | `new_x, new_y, new_z` |
-| 534 | `CameraController:getPosition` | `(none)` |
-| 538 | `CameraController:getPendingPosition` | `(none)` |
-| 545 | `CameraController:hasPendingMove` | `(none)` |
-| 547 | `CameraController:fadePlayerCamera` | `color, durationInSeconds` |
-| 552 | `CameraController:shakePlayerCamera` | `strength, durationInSeconds` |
+| 1 | `...` | Exact source parameter; type not asserted. |
 
-### Function notes
+#### 2. `handle_player_controlled_movement(self)`
 
-- **`dbg(...)`** *(source line 32)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`handle_player_controlled_movement(self)`** — -------------------------------------------------------------------------- Default direction-driven movement. -------------------------------------------------------------------------- *(source line 41)*
-- **`emitter_off(emitter, event, cb)`** *(source line 104)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:new(player_id, opts)`** — -------------------------------------------------------------------------- Constructor -------------------------------------------------------------------------- *(source line 119)*
-- **`controller._handler_owner_changed(change)`** — Observe exclusive input ownership. A minigame can take control of the player's shared controller; the camera then stops processing input but leaves the camera position alone for the new owner to manage. *(source line 169)*
-- **`CameraController:_bind_input()`** — -------------------------------------------------------------------------- Input binding -------------------------------------------------------------------------- *(source line 190)*
-- **`make_handler(kind)`** *(source line 199)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:_unbind_input()`** *(source line 217)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:_apply_repeat_delays()`** — -------------------------------------------------------------------------- Repeat cadence override -------------------------------------------------------------------------- *(source line 234)*
-- **`CameraController:_restore_repeat_delays()`** *(source line 244)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:set_camera_repeat_delays(first_repeat_delay, repeat_delay)`** — Optional API: change the camera's cadence at runtime. If the camera is currently active, the change takes effect immediately. *(source line 255)*
-- **`CameraController:_on_input_event(kind, ev)`** — -------------------------------------------------------------------------- Input event handling -------------------------------------------------------------------------- *(source line 272)*
-- **`CameraController:handle_input()`** — Legacy entry point. *(source line 334)*
-- **`CameraController:activate(mode, lock_player_input)`** — -------------------------------------------------------------------------- Activation / Deactivation -------------------------------------------------------------------------- *(source line 356)*
-- **`CameraController:deactivate(keep_camera_position)`** *(source line 426)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:destroy()`** *(source line 462)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:returnToPlayer()`** *(source line 472)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:setMode(new_mode, custom_handlers)`** — -------------------------------------------------------------------------- Mode switching -------------------------------------------------------------------------- *(source line 485)*
-- **`CameraController:setCustomHandlers(handlers)`** *(source line 500)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:moveTo(x, y, z)`** — -------------------------------------------------------------------------- Camera movement API (unchanged) -------------------------------------------------------------------------- *(source line 507)*
-- **`CameraController:relativeMoveTo(dx, dy, dz)`** *(source line 518)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:pan(dx, dy, dz)`** *(source line 525)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:setPosition(new_x, new_y, new_z)`** *(source line 527)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:getPosition()`** *(source line 534)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:getPendingPosition()`** *(source line 538)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:hasPendingMove()`** *(source line 545)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:fadePlayerCamera(color, durationInSeconds)`** *(source line 547)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`CameraController:shakePlayerCamera(strength, durationInSeconds)`** *(source line 552)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Declared at:** source line 42.
+- **Scope syntax:** local.
+- **Nearby source comment:** Default direction-driven movement.
 
-## Tables and data structures
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `self` | Exact source parameter; type not asserted. |
 
-### `CameraController` *(line 13)*
+#### 3. `emitter_off(emitter, event, cb)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Declared at:** source line 105.
+- **Scope syntax:** local.
+- **Source comment:** No adjacent explanation; refer to the implementation.
 
-### `CAMERA_DIRECTIONS` *(line 27)*
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `emitter` | Exact source parameter; type not asserted. |
+| 2 | `event` | Exact source parameter; type not asserted. |
+| 3 | `cb` | Exact source parameter; type not asserted. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"Left"` |
-| `[2]` | string literal | `"Right"` |
-| `[3]` | string literal | `"Up"` |
-| `[4]` | string literal | `"Down"` |
-| `[5]` | string literal | `"UpLeft"` |
-| `[6]` | string literal | `"UpRight"` |
-| `[7]` | string literal | `"DownLeft"` |
-| `[8]` | string literal | `"DownRight"` |
+#### 4. `CameraController:new(player_id, opts)`
 
-### `controller` *(line 142)*
+- **Declared at:** source line 120.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Constructor
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `player_id` | expression/reference | `player_id` |
-| `input` | expression/reference | `input` |
-| `mode` | expression/reference | `mode` |
-| `custom_handlers` | expression/reference | `opts.custom_handlers or nil` |
-| `is_active` | boolean literal | `false` |
-| `input_locked` | boolean literal | `false` |
-| `keep_player_input_locked` | expression/reference | `opts.keep_player_input_locked or false` |
-| `current_position` | table | `{ x = 0, y = 0, z = 100 }` |
-| `pending_position` | nil | `nil` |
-| `camera_color` | table | `{ r = 255, g = 255, b = 255, a = 0 }` |
-| `camera_first_repeat_delay` | expression/reference | `cam_first` |
-| `camera_repeat_delay` | expression/reference | `cam_repeat` |
-| `_input_bound` | boolean literal | `false` |
-| `_activating` | boolean literal | `false` |
-| `_handler_pressed` | nil | `nil` |
-| `_handler_released` | nil | `nil` |
-| `_handler_repeat` | nil | `nil` |
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `player_id` | Exact source parameter; type not asserted. |
+| 2 | `opts` | Exact source parameter; type not asserted. |
 
-### `current_position` *(line 151)*
+#### 5. `controller._handler_owner_changed(change)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | number literal | `0` |
-| `y` | number literal | `0` |
-| `z` | number literal | `100` |
+- **Declared at:** source line 170.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Observe exclusive input ownership. A minigame can take control of the player's shared controller; the camera then stops processing input but leaves the camera position alone for the new owner to manage.
 
-### `camera_color` *(line 153)*
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `change` | Exact source parameter; type not asserted. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | number literal | `255` |
-| `g` | number literal | `255` |
-| `b` | number literal | `255` |
-| `a` | number literal | `0` |
+#### 6. `CameraController:_bind_input()`
 
-### `self.current_position` *(line 410)*
+- **Declared at:** source line 191.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Input binding
+- **Parameters:** none explicitly declared.
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | expression/reference | `player_pos.x` |
-| `y` | expression/reference | `player_pos.y` |
-| `z` | expression/reference | `player_pos.z` |
+#### 7. `make_handler(kind)`
 
-### `self.pending_position` *(line 508)*
+- **Declared at:** source line 200.
+- **Scope syntax:** local.
+- **Source comment:** No adjacent explanation; refer to the implementation.
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | expression/reference | `x` |
-| `y` | expression/reference | `y` |
-| `z` | expression/reference | `z or self.current_position.z or 100` |
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `kind` | Exact source parameter; type not asserted. |
 
-## Implementation notes
+#### 8. `CameraController:_unbind_input()`
 
-- This reference is generated from the exact archived source `scripts/camera/camera-controller.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+- **Declared at:** source line 218.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 9. `CameraController:_apply_repeat_delays()`
+
+- **Declared at:** source line 235.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Repeat cadence override
+- **Parameters:** none explicitly declared.
+
+#### 10. `CameraController:_restore_repeat_delays()`
+
+- **Declared at:** source line 245.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 11. `CameraController:set_camera_repeat_delays(first_repeat_delay, repeat_delay)`
+
+- **Declared at:** source line 256.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Optional API: change the camera's cadence at runtime. If the camera is currently active, the change takes effect immediately.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `first_repeat_delay` | Exact source parameter; type not asserted. |
+| 2 | `repeat_delay` | Exact source parameter; type not asserted. |
+
+#### 12. `CameraController:_on_input_event(kind, ev)`
+
+- **Declared at:** source line 273.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Input event handling
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `kind` | Exact source parameter; type not asserted. |
+| 2 | `ev` | Exact source parameter; type not asserted. |
+
+#### 13. `CameraController:handle_input()`
+
+- **Declared at:** source line 335.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Legacy entry point.
+- **Parameters:** none explicitly declared.
+
+#### 14. `CameraController:activate(mode, lock_player_input)`
+
+- **Declared at:** source line 357.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Activation / Deactivation
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `mode` | Exact source parameter; type not asserted. |
+| 2 | `lock_player_input` | Exact source parameter; type not asserted. |
+
+#### 15. `CameraController:deactivate(keep_camera_position)`
+
+- **Declared at:** source line 436.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `keep_camera_position` | Exact source parameter; type not asserted. |
+
+#### 16. `CameraController:destroy()`
+
+- **Declared at:** source line 474.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 17. `CameraController:returnToPlayer()`
+
+- **Declared at:** source line 484.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 18. `CameraController:setMode(new_mode, custom_handlers)`
+
+- **Declared at:** source line 497.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Mode switching
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `new_mode` | Exact source parameter; type not asserted. |
+| 2 | `custom_handlers` | Exact source parameter; type not asserted. |
+
+#### 19. `CameraController:setCustomHandlers(handlers)`
+
+- **Declared at:** source line 512.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `handlers` | Exact source parameter; type not asserted. |
+
+#### 20. `CameraController:moveTo(x, y, z)`
+
+- **Declared at:** source line 519.
+- **Scope syntax:** table/global declaration.
+- **Nearby source comment:** Camera movement API (unchanged)
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `x` | Exact source parameter; type not asserted. |
+| 2 | `y` | Exact source parameter; type not asserted. |
+| 3 | `z` | Exact source parameter; type not asserted. |
+
+#### 21. `CameraController:relativeMoveTo(dx, dy, dz)`
+
+- **Declared at:** source line 530.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `dx` | Exact source parameter; type not asserted. |
+| 2 | `dy` | Exact source parameter; type not asserted. |
+| 3 | `dz` | Exact source parameter; type not asserted. |
+
+#### 22. `CameraController:pan(dx, dy, dz)`
+
+- **Declared at:** source line 537.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `dx` | Exact source parameter; type not asserted. |
+| 2 | `dy` | Exact source parameter; type not asserted. |
+| 3 | `dz` | Exact source parameter; type not asserted. |
+
+#### 23. `CameraController:setPosition(new_x, new_y, new_z)`
+
+- **Declared at:** source line 539.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `new_x` | Exact source parameter; type not asserted. |
+| 2 | `new_y` | Exact source parameter; type not asserted. |
+| 3 | `new_z` | Exact source parameter; type not asserted. |
+
+#### 24. `CameraController:getPosition()`
+
+- **Declared at:** source line 546.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 25. `CameraController:getPendingPosition()`
+
+- **Declared at:** source line 550.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 26. `CameraController:hasPendingMove()`
+
+- **Declared at:** source line 557.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+- **Parameters:** none explicitly declared.
+
+#### 27. `CameraController:fadePlayerCamera(color, durationInSeconds)`
+
+- **Declared at:** source line 559.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `color` | Exact source parameter; type not asserted. |
+| 2 | `durationInSeconds` | Exact source parameter; type not asserted. |
+
+#### 28. `CameraController:shakePlayerCamera(strength, durationInSeconds)`
+
+- **Declared at:** source line 564.
+- **Scope syntax:** table/global declaration.
+- **Source comment:** No adjacent explanation; refer to the implementation.
+
+| # | Parameter | Notes |
+|---:|---|---|
+| 1 | `strength` | Exact source parameter; type not asserted. |
+| 2 | `durationInSeconds` | Exact source parameter; type not asserted. |
+
+
+## Tables
+
+| Line | Table variable |
+|---:|---|
+| 15 | `CameraController` |
+| 28 | `CAMERA_DIRECTIONS` |
+| 144 | `controller` |
+| 152 | `current_position` |
+| 154 | `camera_color` |
+| 420 | `self.current_position` |
+| 520 | `self.pending_position` |
+
+## Net APIs
+
+| Called API | Occurrences | First source line |
+|---|---:|---:|
+| `Net.fade_player_camera` | 1 | 561 |
+| `Net.get_player_position` | 2 | 419 |
+| `Net.move_player_camera` | 1 | 525 |
+| `Net.shake_player_camera` | 1 | 565 |
+| `Net.track_with_player_camera` | 2 | 453 |
+| `Net.unlock_player_camera` | 3 | 405 |

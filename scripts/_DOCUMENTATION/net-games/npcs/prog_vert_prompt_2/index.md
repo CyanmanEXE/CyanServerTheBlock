@@ -1,126 +1,118 @@
-# `prog_vert_prompt_2.lua`
+# 📄 `prog_vert_prompt_2.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/net-games/npcs/prog_vert_prompt_2.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/npcs/prog_vert_prompt_2.lua`](../../../../net-games/npcs/prog_vert_prompt_2.lua)  
 > **Source lines:** 246  
-> **Functions detected:** 5  
-> **Table declarations detected:** 5
+> **SHA-256 (UTF-8):** `8511a5cc309f4636bfa8d53a6f57627b69d37b451d02b9ada7068a6e85506e71`  
+> **Named/assigned functions detected:** 5  
+> **Table initializers detected (simple pattern):** 5
 
-## Contents
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-===================================================== prog_vert_prompt_2.lua Vertical prompt demo PROG (basic style, like prog_basic_nameplate) Adds: - Mugshot support in the vertical prompt UI - Mugshot support in the follow-up Dialogue (reuse_existing_box) - RED frame dye applied to: * vertical menu frame overlay * textbox frame overlay * nameplate frame overlay (using the same red preset from talk_presets.lua) =====================================================
+Current source inventory for `scripts/net-games/npcs/prog_vert_prompt_2.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- `scripts/libs/direction` — line 15
-- `scripts/net-games/dialogue/startup` — line 16
-- `scripts/net-games/dialogue/dialogue` — line 18
-- `scripts/net-games/dialogue/prompt_vertical` — line 19
-- `scripts/net-games/npcs/talk_presets` — line 20
+| Line | `require` module |
+|---:|---|
+| 15 | `scripts/libs/direction` |
+| 16 | `scripts/net-games/dialogue/startup` |
+| 18 | `scripts/net-games/dialogue/dialogue` |
+| 19 | `scripts/net-games/dialogue/prompt_vertical` |
+| 20 | `scripts/net-games/npcs/talk_presets` |
 
-## Events
+## Event hooks
 
-- `Net:on("actor_interaction", function(event) ...)` — line 204. The event name is taken directly from this source.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 204 | `Net` | `actor_interaction` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 51 | `copy_frame_preset` | `preset` | local |
+| 64 | `build_options` | `(none)` | local |
+| 77 | `build_ui_config` | `box_id` | local |
+| 166 | `build_layout_config` | `(none)` | local |
+| 235 | `on_select` | `choice, index` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `copy_frame_preset(preset)`
+
+- **Line:** 51
+- **Declaration:** local
+- **Nearby code comment:** Frame dye preset (from talk_presets.lua)
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 51 | `copy_frame_preset` | `preset` |
-| 64 | `build_options` | `(none)` |
-| 77 | `build_ui_config` | `box_id` |
-| 166 | `build_layout_config` | `(none)` |
-| 235 | `on_select` | `choice, index` |
+| 1 | `preset` | Declared by this function; type not inferred. |
 
-### Function notes
+#### 2. `build_options()`
 
-- **`copy_frame_preset(preset)`** — ===================================================== Frame dye preset (from talk_presets.lua) ===================================================== *(source line 51)*
-- **`build_options()`** — ===================================================== Options builder (menu entries) ===================================================== *(source line 64)*
-- **`build_ui_config(box_id)`** — ===================================================== Shared UI config (So the prompt + follow-up dialogue stay visually identical) ===================================================== *(source line 77)*
-- **`build_layout_config()`** — ===================================================== Shared menu layout config ===================================================== *(source line 166)*
-- **`on_select(choice, index)`** — ===================================================== When the player selects an option: Reuse the existing textbox AND keep the mugshot consistent. ===================================================== *(source line 235)*
+- **Line:** 64
+- **Declaration:** local
+- **Nearby code comment:** Options builder (menu entries)
+- **Parameters:** none explicitly declared.
 
-## Tables and data structures
+#### 3. `build_ui_config(box_id)`
 
-### `t` *(line 65)*
+- **Line:** 77
+- **Declaration:** local
+- **Nearby code comment:** Shared UI config (So the prompt + follow-up dialogue stay visually identical)
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `box_id` | Declared by this function; type not inferred. |
 
-### `mugshot` *(line 92)*
+#### 4. `build_layout_config()`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `enabled` | boolean literal | `true` |
-| `texture_path` | string literal | `"/server/assets/ow/prog/prog_mug.png"` |
-| `anim_path` | string literal | `"/server/assets/ow/prog/prog_mug.animation"` |
-| `talk_anim_state` | string literal | `"TALK"` |
-| `idle_anim_state` | string literal | `"IDLE"` |
-| `reserve_w` | number literal | `40` |
-| `reserve_h` | number literal | `40` |
-| `offset_x` | number literal | `6` |
-| `offset_y` | number literal | `-46` |
-| `gap_px` | number literal | `6` |
-| `sprite_id` | number literal | `5300` |
-| `z_bias` | number literal | `50` |
+- **Line:** 166
+- **Declaration:** local
+- **Nearby code comment:** Shared menu layout config
+- **Parameters:** none explicitly declared.
 
-### `backdrop` *(line 114)*
+#### 5. `on_select(choice, index)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `render_offset_x` | number literal | `3` |
-| `render_offset_y` | number literal | `46` |
-| `style` | string literal | `"textbox_panel_frame_tint"` |
-| `open_seconds` | number literal | `0.20` |
-| `r` | expression/reference | `RED_FRAME.r` |
-| `g` | expression/reference | `RED_FRAME.g` |
-| `b` | expression/reference | `RED_FRAME.b` |
-| `a` | expression/reference | `RED_FRAME.a` |
-| `color_mode` | expression/reference | `RED_FRAME.color_mode` |
-| `x` | number literal | `1` |
-| `y` | number literal | `209` |
-| `width` | number literal | `478` |
-| `height` | number literal | `104` |
-| `padding_x` | number literal | `16` |
-| `padding_y` | number literal | `4` |
-| `max_lines` | number literal | `3` |
-| `indicator` | table | `{ enabled = true, width = 2, height = 2, offset_x = 24, offset_y = 26 }` |
+- **Line:** 235
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** When the player selects an option: Reuse the existing textbox AND keep the mugshot consistent.
 
-### `indicator` *(line 140)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `choice` | Declared by this function; type not inferred. |
+| 2 | `index` | Declared by this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `enabled` | boolean literal | `true` |
-| `width` | number literal | `2` |
-| `height` | number literal | `2` |
-| `offset_x` | number literal | `24` |
-| `offset_y` | number literal | `26` |
 
-### `nameplate` *(line 146)*
+## Tables
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `frame` | expression/reference | `RED_FRAME` |
-| `text` | expression/reference | `BOT_NAME` |
-| `anchor` | string literal | `"above"` |
-| `align` | string literal | `"left"` |
-| `gap_x` | number literal | `6` |
-| `gap_y` | number literal | `59` |
-| `dur` | number literal | `0.20` |
-| `close_dur` | number literal | `0.20` |
-| `bob_amp` | number literal | `1.2` |
-| `bob_speed` | number literal | `2` |
+| Source line | Assignment |
+|---:|---|
+| 65 | `t` |
+| 92 | `mugshot` |
+| 114 | `backdrop` |
+| 140 | `indicator` |
+| 146 | `nameplate` |
 
-## Implementation notes
+## Net API calls
 
-- This reference is generated from the exact archived source `scripts/net-games/npcs/prog_vert_prompt_2.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.create_bot` | 1 | 34 |
+| `Net.get_bot_name` | 1 | 46 |
+| `Net.get_object_by_name` | 1 | 28 |
+| `Net.get_player_position` | 1 | 212 |
+| `Net.on` | 1 | 204 |
+| `Net.set_bot_direction` | 1 | 213 |

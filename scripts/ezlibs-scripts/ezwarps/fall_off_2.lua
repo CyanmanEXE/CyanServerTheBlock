@@ -1,3 +1,4 @@
+local PlayerControl = require("scripts/player-control/main")
 local fall_off_2 = {
     --these offsets will modify the warp landing location so that the player can animate from their spawn location nicely
     pre_animation_offsets={
@@ -35,7 +36,7 @@ local fall_off_2 = {
             local sound_path = '/server/assets/ezlibs-assets/ezwarps/earthquake.ogg'
             Net.play_sound(area_id, sound_path)
             Net.shake_player_camera(player_id, 1, 0.5)
-            Net.unlock_player_input(player_id)
+            PlayerControl.release_capture(player_id, "ezwarps")
         end)
     end
 }

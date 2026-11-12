@@ -27,8 +27,8 @@ function ParalyzeEffect:new(actor_id, area_wide_sfx)
   end
 
   paralyze_effect.bot_id = Net.create_bot({
-    texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/paralyze.png",
-    animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/paralyze.animation",
+    texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/paralyze.png",
+    animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/paralyze.animation",
     animation = "THIN",
     area_id = area_id,
     warp_in = false,

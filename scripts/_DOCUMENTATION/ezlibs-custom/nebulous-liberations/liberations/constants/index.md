@@ -1,50 +1,62 @@
-# `constants.lua`
+# 📄 `constants.lua`
 
-> **Source:** `scripts/ezlibs-custom/nebulous-liberations/liberations/constants.lua`  
-> **Source lines:** 155  
-> **Functions detected:** 0  
-> **Table declarations detected:** 10
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/liberations/constants.lua`](../../../../../ezlibs-custom/nebulous-liberations/liberations/constants.lua)  
+> **Source lines:** 174  
+> **SHA-256 (UTF-8):** `19ad37136d4502…`  
+> **Declared/assigned functions detected:** 0  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 10
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+## 🗂️ Contents
 
-## Overview
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-constants.lua Centralised definitions for custom properties and constants used in liberations.
+## 📌 Overview
 
-## Dependencies
+Centralised definitions for custom properties and constants used in liberations.
 
-- No `require(...)` dependency was detected.
+## 🔗 Dependencies
 
-## Events
+*No literal `require` module strings detected.*
 
-- No direct `Net:on(...)` registration was detected.
+## 📡 Event subscriptions
 
-## Functions
+*No literal `.on` or `:on` event subscriptions detected.*
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+## 🧩 Functions
 
-## Tables and data structures
+*No named function declaration or `= function(...)` assignment detected. Anonymous callbacks may still be present.*
 
-### `Constants` *(line 3)*
+## 🪄 Anonymous closures
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*No anonymous `function(...)` expressions detected.*
 
-### `Constants.Defaults` *(line 7)*
+## 📦 Tables and data
 
-| Field / key | Value category | Initializer expression (source) |
+The following **10** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `Constants` — line 4
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `Constants.Defaults` — line 7
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `MaxOrderPoints` | number literal | `9` |
+| `MaxOrderPoints` | numeric literal | `9` |
 
-### `Constants.CustomProperties` *(line 12)*
+### 3. `Constants.CustomProperties` — line 12
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `RespawnArea` | string literal | `"Respawn Area"` |
 | `WaitingArea` | string literal | `"Waiting Area"` |
@@ -61,6 +73,10 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `BackgroundVelY` | string literal | `"Background Vel Y"` |
 | `Song` | string literal | `"Song"` |
 | `VictoryLapSong` | string literal | `"Victory Lap Song"` |
+| `EncounterMusic` | string literal | `"Encounter Music"` |
+| `MusicPath` | string literal | `"Path"` |
+| `MusicLoopStart` | string literal | `"Loop Start"` |
+| `MusicLoopEnd` | string literal | `"Loop End"` |
 | `HonorHPMem` | string literal | `"Honor HPMem"` |
 | `Compress` | string literal | `"Compress"` |
 | `Decompress` | string literal | `"Decompress"` |
@@ -76,6 +92,19 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `SpawnOffsetZ` | string literal | `"Spawn Offset Z"` |
 | `AutoFacePlayer` | string literal | `"Auto Face Player"` |
 | `BossHealthOverride` | string literal | `"Boss Health Override"` |
+| `OWBotEncounter` | string literal | `"OW Bot Encounter"` |
+| `OWEncounterPool` | string literal | `"OW Encounter Pool"` |
+| `EncounterMode` | string literal | `"Encounter Mode"` |
+| `EncounterCategory` | string literal | `"Encounter Category"` |
+| `EnemyConfig` | string literal | `"Enemy Config"` |
+| `MaxHP` | string literal | `"Max HP"` |
+| `StartingHP` | string literal | `"Starting HP"` |
+| `OWScale` | string literal | `"OW Scale"` |
+| `BattleScale` | string literal | `"Battle Scale"` |
+| `LegacyBossEncounter` | string literal | `"Boss Encounter"` |
+| `DarkHoleLiberationEncounters` | string literal | `"Liberation Encounters"` |
+| `MinionHealthOverride` | string literal | `"Minion Health Override"` |
+| `Scale` | string literal | `"scale"` |
 | `SpawnEnabled` | string literal | `"Spawn Enabled"` |
 | `BossDisplayName` | string literal | `"Boss Display Name"` |
 | `Shared` | string literal | `"Shared"` |
@@ -93,24 +122,26 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `DamageDealt` | string literal | `"Damage Dealt"` |
 | `Money` | string literal | `"Money"` |
 | `NextSpawn` | string literal | `"Next Spawn"` |
+| `FacingDirection` | string literal | `"Facing Direction"` |
 | `GateToRemove` | string literal | `"Gate To Remove"` |
 | `LiberationMapName` | string literal | `"Liberation Map Name"` |
 
-### `Constants.PanelTypes` *(line 65)*
+### 4. `Constants.PanelTypes` — line 83
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `DarkPanel` | string literal | `"Dark Panel"` |
 | `DarkHole` | string literal | `"Dark Hole"` |
+| `DarkHoleBuffedVirus` | string literal | `"Dark Hole Buffed Virus"` |
 | `IndestructiblePanel` | string literal | `"Indestructible Panel"` |
 | `ItemPanel` | string literal | `"Item Panel"` |
 | `PanelGate` | string literal | `"Panel Gate"` |
 | `BonusPanel` | string literal | `"Bonus Panel"` |
 | `TrapPanel` | string literal | `"Trap Panel"` |
 
-### `Constants.LiberatablePanelTypes` *(line 76)*
+### 5. `Constants.LiberatablePanelTypes` — line 95
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | expression/reference | `Constants.PanelTypes.DarkPanel` |
 | `[2]` | expression/reference | `Constants.PanelTypes.ItemPanel` |
@@ -118,25 +149,25 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `[4]` | expression/reference | `Constants.PanelTypes.BonusPanel` |
 | `[5]` | expression/reference | `Constants.PanelTypes.TrapPanel` |
 
-### `Constants.WalkablePanelTypes` *(line 85)*
+### 6. `Constants.WalkablePanelTypes` — line 104
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | expression/reference | `Constants.PanelTypes.DarkPanel` |
 | `[2]` | expression/reference | `Constants.PanelTypes.ItemPanel` |
 | `[3]` | expression/reference | `Constants.PanelTypes.TrapPanel` |
 
-### `Constants.ShadowstepPanelTypes` *(line 92)*
+### 7. `Constants.ShadowstepPanelTypes` — line 111
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | expression/reference | `Constants.PanelTypes.DarkPanel` |
 | `[2]` | expression/reference | `Constants.PanelTypes.ItemPanel` |
 | `[3]` | expression/reference | `Constants.PanelTypes.TrapPanel` |
 
-### `Constants.LootAnimations` *(line 99)*
+### 8. `Constants.LootAnimations` — line 118
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `Heart` | string literal | `"HEART"` |
 | `Chip` | string literal | `"CHIP"` |
@@ -147,9 +178,9 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `MajorHit` | string literal | `"MAJOR_HIT"` |
 | `Key` | string literal | `"KEY"` |
 
-### `Constants.AbilityIDs` *(line 111)*
+### 9. `Constants.AbilityIDs` — line 130
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `LongSwrd` | string literal | `"LongSwrd"` |
 | `WideSwrd` | string literal | `"WideSwrd"` |
@@ -160,26 +191,26 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `GutsHamr` | string literal | `"GutsHamr"` |
 | `ShdwShoe` | string literal | `"ShdwShoe"` |
 
-### `Constants.PreloadAssets` *(line 123)*
+### 10. `Constants.PreloadAssets` — line 142
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `[1]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/options-ui.png"` |
-| `[2]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/options-ui.animation"` |
-| `[3]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/attack indicator.png"` |
-| `[4]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/attack indicator.tsx"` |
-| `[5]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.png"` |
-| `[6]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx"` |
-| `[7]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/selected tile.png"` |
-| `[8]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/selected tile.tsx"` |
-| `[9]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/blur.png"` |
-| `[10]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/blur.animation"` |
-| `[11]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/explosion.png"` |
-| `[12]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/explosion.animation"` |
-| `[13]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/paralyze.png"` |
-| `[14]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/paralyze.animation"` |
-| `[15]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/recover.png"` |
-| `[16]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/recover.animation"` |
+| `[1]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/ui/options-ui.png"` |
+| `[2]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/ui/options-ui.animation"` |
+| `[3]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.png"` |
+| `[4]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.tsx"` |
+| `[5]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.png"` |
+| `[6]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx"` |
+| `[7]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.png"` |
+| `[8]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.tsx"` |
+| `[9]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/blur.png"` |
+| `[10]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/blur.animation"` |
+| `[11]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/explosion.png"` |
+| `[12]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/explosion.animation"` |
+| `[13]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/paralyze.png"` |
+| `[14]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/paralyze.animation"` |
+| `[15]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/recover.png"` |
+| `[16]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/recover.animation"` |
 | `[17]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.png"` |
 | `[18]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/bots/item.animation"` |
 | `[19]` | string literal | `"/server/assets/ezlibs-custom/nebulous-liberations/sound effects/hurt.ogg"` |
@@ -193,9 +224,14 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `[27]` | string literal | `"/server/assets/net-games/meters/liberation-order-points/point-total-3slice.png"` |
 | `[28]` | string literal | `"/server/assets/net-games/meters/liberation-order-points/point-total-3slice.animation"` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/nebulous-liberations/liberations/constants.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

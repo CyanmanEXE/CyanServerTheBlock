@@ -1,80 +1,168 @@
-# `ezbus.lua`
+# 📄 `ezbus.lua`
 
-> **Source:** `scripts/ezlibs-scripts/ezbus.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezbus.lua`](../../../ezlibs-scripts/ezbus.lua)  
 > **Source lines:** 107  
-> **Functions detected:** 7  
-> **Table declarations detected:** 5
+> **SHA-256 (UTF-8):** `85aa9acf06e046…`  
+> **Declared/assigned functions detected:** 7  
+> **Anonymous closures detected:** 1  
+> **Table initializers detected:** 5
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-ezbus.lua - Named event-bus registry. Three usage modes are supported: 1. Named emitters (recommended for cross-script communication) local EzBus = require("scripts/ezlibs-scripts/ezbus") local round_bus = EzBus.get("footbomb:round:" .. instance_id) round_bus:emit("round_complete", { ... }) Any other script can call EzBus.get(name) to reach the SAME emitter. Call EzBus.destroy(name) when the consumer is finished (e.g. instance removal) so the entry does not leak. 2. Fresh per-use emitters (per-round, per-response, etc.) local round_events = EzBus.new() 3. Backward-compatible default emitter local EzBus = require("scripts/ezlibs-scripts/ezbus") EzBus:on("some_event", cb) EzBus:emit("some_event", data) Every EzEmitter method (on/once/emit/... ) proxies to an unnamed default emitter, so code that treated ezbus as a single global bus keeps working. Use `:` method-call syntax as with any Lua object. Lifecycle helpers: EzBus.get(name)          -> emitter  (creates on first use) EzBus.destroy(name)      -> true if a bus existed and was destroyed EzBus.destroy_all()      -> destroys and forgets every named bus EzBus.exists(name)       -> boolean EzBus.list()             -> sorted array of registered names EzBus.new()              -> fresh, unregistered emitter (old factory)
+ezbus.lua - Named event-bus registry. Three usage modes are supported: 1. Named emitters (recommended for cross-script communication) local EzBus = require("scripts/ezlibs-scripts/ezbus") local round_bus = EzBus.get("footbomb:round:" .. instance_id)
 
-## Dependencies
+## 🔗 Dependencies
 
-- `scripts/ezlibs-scripts/ezbus` — line 6
-- `scripts/ezlibs-scripts/ezbus` — line 18
-- `scripts/ezlibs-scripts/ezemitter` — line 34
+| Line | Module string supplied to `require` |
+|---|---|
+| 34 | `scripts/ezlibs-scripts/ezemitter` |
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 46 | `ezbus.get` | `name` |
-| 58 | `ezbus.destroy` | `name` |
-| 68 | `ezbus.destroy_all` | `(none)` |
-| 75 | `ezbus.exists` | `name` |
-| 80 | `ezbus.list` | `(none)` |
-| 92 | `__index` | `_, key` |
-| 101 | `__newindex` | `_, key, value` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 46 | `ezbus.get` | `name` | declared |
+| 58 | `ezbus.destroy` | `name` | declared |
+| 68 | `ezbus.destroy_all` | `(none)` | declared |
+| 75 | `ezbus.exists` | `name` | declared |
+| 80 | `ezbus.list` | `(none)` | declared |
+| 92 | `__index` | `_, key` | assigned |
+| 101 | `__newindex` | `_, key, value` | assigned |
 
-### Function notes
+### Function details
 
-- **`ezbus.get(name)`** — Retrieve (or lazily create) a named emitter. `nil`/"" returns the default unnamed emitter so callers can pass an optional name. *(source line 46)*
-- **`ezbus.destroy(name)`** — Destroy a named bus and drop the registry entry. Does NOT touch the default emitter. Returns true if a bus was actually removed. *(source line 58)*
-- **`ezbus.destroy_all()`** — Destroy every named bus. The default emitter is preserved. *(source line 68)*
-- **`ezbus.exists(name)`** *(source line 75)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbus.list()`** *(source line 80)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`__index(_, key)`** *(source line 92)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`__newindex(_, key, value)`** *(source line 101)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `ezbus.get(name)`
 
-## Tables and data structures
+- **Location:** source line 46.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Retrieve (or lazily create) a named emitter. `nil`/"" returns the default unnamed emitter so callers can pass an optional name.
 
-### `named` *(line 35)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `name` | Not explicitly documented in adjacent source annotations. |
 
-### `ezbus` *(line 38)*
+#### 2. `ezbus.destroy(name)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 58.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Destroy a named bus and drop the registry entry. Does NOT touch the default emitter. Returns true if a bus was actually removed.
 
-### `snapshot` *(line 69)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `name` | Not explicitly documented in adjacent source annotations. |
 
-### `named` *(line 71)*
+#### 3. `ezbus.destroy_all()`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 68.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Destroy every named bus. The default emitter is preserved.
 
-### `names` *(line 81)*
+#### 4. `ezbus.exists(name)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 75.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-## Implementation notes
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezbus.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `name` | Not explicitly documented in adjacent source annotations. |
+
+#### 5. `ezbus.list()`
+
+- **Location:** source line 80.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+#### 6. `__index(_, key)`
+
+- **Location:** source line 92.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `_` | Not explicitly documented in adjacent source annotations. |
+| 2 | `key` | Not explicitly documented in adjacent source annotations. |
+
+#### 7. `__newindex(_, key, value)`
+
+- **Location:** source line 101.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `_` | Not explicitly documented in adjacent source annotations. |
+| 2 | `key` | Not explicitly documented in adjacent source annotations. |
+| 3 | `value` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+These are anonymous `function(...)` expressions, including inline callbacks. Their argument lists are taken verbatim from source; lexical context is descriptive text, not a claim about execution.
+
+| Line | Arguments | Preceding source context |
+|---|---|---|
+| 97 | `_, ...` | `d on the -- real default emitter so its internal state is used. return` |
+
+## 📦 Tables and data
+
+The following **5** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `named` — line 36
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `ezbus` — line 39
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 3. `snapshot` — line 69
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 4. `named` — line 71
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 5. `names` — line 81
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+## ⚙️ Runtime API calls
+
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

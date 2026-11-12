@@ -1,0 +1,11 @@
+[2026-11-11 19:21:37] [INFO ] [ezusers] [ezusers] Admin password hash computed from seed.
+[2026-11-11 19:21:47] [INFO ] [ezusers] [ezusers] Admin password hash computed from seed.
+[2026-11-11 19:22:55] [INFO ] [ezusers/PLAYER] [ezusers] handle_player_join called for player	c4b5d9b2-158b-486d-8e72-9b0729721315
+[2026-11-11 19:22:55] [INFO ] [ezusers/PLAYER] [ezusers] Player safe secret resolved
+[2026-11-11 19:22:55] [INFO ] [ezusers/PLAYER] [ezusers] handle_player_join called for player	c4b5d9b2-158b-486d-8e72-9b0729721315
+[2026-11-11 19:22:55] [INFO ] [ezusers/PLAYER] [ezusers] Player safe secret resolved
+[2026-11-11 19:25:15] [INFO ] [ezusers] [ezusers] Admin password hash computed from seed.
+[2026-11-11 19:25:28] [INFO ] [ezusers/PLAYER] [ezusers] handle_player_join called for player	ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+[2026-11-11 19:25:28] [INFO ] [ezusers/PLAYER] [ezusers] Player safe secret resolved
+[2026-11-11 19:25:28] [INFO ] [ezusers/PLAYER] [ezusers] handle_player_join called for player	ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+[2026-11-11 19:25:28] [INFO ] [ezusers/PLAYER] [ezusers] Player safe secret resolved

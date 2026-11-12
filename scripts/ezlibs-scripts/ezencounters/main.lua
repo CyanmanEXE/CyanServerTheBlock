@@ -1,4 +1,4 @@
-local logger = require('scripts/ezlibs-scripts/ezlogger').get('ezencounters')
+local logger = require('scripts/logger/logger').register('ezencounters'):register_subsystem("main")
 local ezwarps = require('scripts/ezlibs-scripts/ezwarps/main')
 local ezmemory = require('scripts/ezlibs-scripts/ezmemory')
 local helpers = require('scripts/ezlibs-scripts/helpers')
@@ -290,13 +290,26 @@ ezencounters.begin_encounter = function (player_id,encounter_info,trigger_object
 
         players_in_encounters[player_id].encounter_data = encounter_data
 
+        -- Preserve the full server-side encounter context above for events,
+        -- callbacks, results, and reward processing. Only the network-bound
+        -- battle payload is filtered here. Liberation missions initiate their
+        -- own battles directly and never pass through this filter.
+        -- Functions and bookkeeping fields are not client battle settings.
+        local battle_data = {}
+        for key, value in pairs(encounter_data) do
+            if key ~= "results_callback" and key ~= "_base_area_id"
+                and type(value) ~= "function" then
+                battle_data[key] = value
+            end
+        end
+
         ezbus:emit("encounter_started", {
             player_id = player_id,
             encounter_info = encounter_info,
             encounter_data = encounter_data,
             trigger_object = trigger_object
         })
-        local stats = await(Async.initiate_encounter(player_id,encounter_info.path,encounter_data))
+        local stats = await(Async.initiate_encounter(player_id,encounter_info.path,battle_data))
         return stats
     end)
 end

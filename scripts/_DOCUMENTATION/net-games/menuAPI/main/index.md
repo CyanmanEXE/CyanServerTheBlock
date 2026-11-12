@@ -1,489 +1,574 @@
-# `main.lua`
+# 📄 `main.lua` — Current Lua reference
 
-> **Source:** `scripts/net-games/menuAPI/main.lua`  
-> **Source lines:** 732  
-> **Functions detected:** 46  
-> **Table declarations detected:** 27
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/menuAPI/main.lua`](../../../../net-games/menuAPI/main.lua)  
+> **Source lines:** 699  
+> **SHA-256 (UTF-8):** `b3d7050855e7d6dfe4cc81c24baa7c0df215dba864de0799320bef3ac927d786`  
+> **Named functions detected:** 47  
+> **Table initializers detected:** 27
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-scripts/net-games/menuAPI/main.lua Reusable BN-style menu layer for net-games. This is a creator-side rewrite inspired by the production MenuAPI used by shadis_hp. It intentionally depends only on net-games/Displayer/Input and does not contain pet, inventory, LMenu, or server-specific business logic.
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/net-games/main` — line 8
-- `scripts/displayer/displayer` — line 10
-- `scripts/input-controller/main` — line 11
-- `scripts/net-games/ui-safe` — line 12
-- `scripts/net-games/ui-suppression` — line 13
+| Line | `require` path |
+|---:|---|
+| 8 | `scripts/net-games/main` |
+| 10 | `scripts/displayer/displayer` |
+| 11 | `scripts/input-controller/main` |
+| 12 | `scripts/net-games/ui-safe` |
+| 13 | `scripts/player-control/main` |
 
-## Events
+## Event hooks
 
-- `Net:on("tick", function(event) ...)` — line 673. The event name is taken directly from this source.
-- `Net:on("player_disconnect", function(event) ...)` — line 723. The event name is taken directly from this source.
-
-## Functions
-
-| Line | Function / method | Parameters as declared |
+| Line | Subscriber | Event |
 |---:|---|---|
-| 18 | `get_controller` | `player_id` |
-| 23 | `menu_input_owner` | `player_id` |
-| 27 | `guard_input` | `player_id, swallow_seconds` |
-| 60 | `tint_copy` | `src` |
-| 76 | `MenuAPI.get_palette` | `name` |
-| 153 | `copy_table` | `src` |
-| 161 | `merge` | `dst, src` |
-| 169 | `resolve_type` | `value` |
-| 178 | `stack_for` | `player_id, create` |
-| 183 | `active` | `player_id` |
-| 190 | `set_input_locked` | `player_id, locked` |
-| 217 | `play_sfx` | `player_id, path` |
-| 222 | `normalize_rows` | `rows` |
-| 236 | `row_selectable` | `row` |
-| 240 | `first_selectable` | `rows` |
-| 245 | `next_selectable` | `rows, start, direction` |
-| 256 | `ensure_visible` | `st` |
-| 267 | `sprite_key` | `st, key` |
-| 268 | `text_key` | `st, key` |
-| 270 | `draw_text` | `st, key, text, x, y, options` |
-| 277 | `erase_text` | `st, key` |
-| 281 | `tint_options` | `tint, extra` |
-| 293 | `draw_background` | `st` |
-| 306 | `draw_title` | `st` |
-| 312 | `clear_visible_rows` | `st` |
-| 321 | `draw_rows` | `st` |
-| 362 | `draw_cursor` | `st` |
-| 377 | `draw_scroll` | `st` |
-| 394 | `draw_profile` | `st` |
-| 432 | `draw_confirm` | `st` |
-| 451 | `full_draw` | `st` |
-| 457 | `cleanup` | `st` |
-| 467 | `move_selection` | `st, direction` |
-| 489 | `confirm` | `st` |
-| 505 | `handle_cancel` | `st` |
-| 514 | `MenuAPI.open` | `player_id, spec` |
-| 585 | `MenuAPI.close` | `player_id, opts` |
-| 613 | `MenuAPI.close_all` | `player_id, opts` |
-| 628 | `MenuAPI.is_open` | `player_id` |
-| 629 | `MenuAPI.get_state` | `player_id` |
-| 630 | `MenuAPI.get_stack` | `player_id` |
-| 632 | `MenuAPI.refresh` | `player_id` |
-| 639 | `MenuAPI.set_rows` | `player_id, rows, preserve_selection` |
-| 653 | `MenuAPI.set_profile` | `player_id, profile` |
-| 661 | `MenuAPI.set_title` | `player_id, title` |
-| 666 | `MenuAPI.handle_cancel` | `player_id` |
+| 658 | `Net` | `tick` |
+| 695 | `Net` | `player_disconnect` |
 
-### Function notes
+## Functions and parameters
 
-- **`get_controller(player_id)`** *(source line 18)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`menu_input_owner(player_id)`** *(source line 23)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`guard_input(player_id, swallow_seconds)`** *(source line 27)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`tint_copy(src)`** *(source line 60)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.get_palette(name)`** *(source line 76)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`copy_table(src)`** *(source line 153)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`merge(dst, src)`** *(source line 161)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`resolve_type(value)`** *(source line 169)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`stack_for(player_id, create)`** *(source line 178)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`active(player_id)`** *(source line 183)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`set_input_locked(player_id, locked)`** *(source line 190)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`play_sfx(player_id, path)`** *(source line 217)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`normalize_rows(rows)`** *(source line 222)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`row_selectable(row)`** *(source line 236)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`first_selectable(rows)`** *(source line 240)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`next_selectable(rows, start, direction)`** *(source line 245)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ensure_visible(st)`** *(source line 256)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`sprite_key(st, key)`** *(source line 267)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`text_key(st, key)`** *(source line 268)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`draw_text(st, key, text, x, y, options)`** *(source line 270)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`erase_text(st, key)`** *(source line 277)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`tint_options(tint, extra)`** *(source line 281)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`draw_background(st)`** *(source line 293)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`draw_title(st)`** *(source line 306)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`clear_visible_rows(st)`** *(source line 312)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`draw_rows(st)`** *(source line 321)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`draw_cursor(st)`** *(source line 362)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`draw_scroll(st)`** *(source line 377)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`draw_profile(st)`** *(source line 394)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`draw_confirm(st)`** *(source line 432)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`full_draw(st)`** *(source line 451)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`cleanup(st)`** *(source line 457)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`move_selection(st, direction)`** *(source line 467)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`confirm(st)`** *(source line 489)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`handle_cancel(st)`** *(source line 505)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.open(player_id, spec)`** *(source line 514)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.close(player_id, opts)`** *(source line 585)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.close_all(player_id, opts)`** *(source line 613)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.is_open(player_id)`** *(source line 628)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.get_state(player_id)`** *(source line 629)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.get_stack(player_id)`** *(source line 630)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.refresh(player_id)`** *(source line 632)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.set_rows(player_id, rows, preserve_selection)`** *(source line 639)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.set_profile(player_id, profile)`** *(source line 653)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.set_title(player_id, title)`** *(source line 661)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`MenuAPI.handle_cancel(player_id)`** *(source line 666)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 18 | `get_controller` | `player_id` | local |
+| 39 | `tint_copy` | `src` | local |
+| 55 | `MenuAPI.get_palette` | `name` | assigned/declared |
+| 132 | `copy_table` | `src` | local |
+| 140 | `merge` | `dst, src` | local |
+| 148 | `resolve_type` | `value` | local |
+| 157 | `stack_for` | `player_id, create` | local |
+| 162 | `active` | `player_id` | local |
+| 169 | `retained_owner` | `pid` | local |
+| 172 | `retain_input` | `pid` | local |
+| 177 | `release_retained_input` | `pid` | local |
+| 185 | `guard_input` | `player_id,swallow_seconds` | local |
+| 193 | `play_sfx` | `player_id, path` | local |
+| 198 | `normalize_rows` | `rows` | local |
+| 212 | `row_selectable` | `row` | local |
+| 216 | `first_selectable` | `rows` | local |
+| 221 | `next_selectable` | `rows, start, direction` | local |
+| 232 | `ensure_visible` | `st` | local |
+| 243 | `sprite_key` | `st, key` | local |
+| 244 | `text_key` | `st, key` | local |
+| 246 | `draw_text` | `st, key, text, x, y, options` | local |
+| 253 | `erase_text` | `st, key` | local |
+| 257 | `tint_options` | `tint, extra` | local |
+| 269 | `draw_background` | `st` | local |
+| 282 | `draw_title` | `st` | local |
+| 288 | `clear_visible_rows` | `st` | local |
+| 297 | `draw_rows` | `st` | local |
+| 338 | `draw_cursor` | `st` | local |
+| 353 | `draw_scroll` | `st` | local |
+| 370 | `draw_profile` | `st` | local |
+| 408 | `draw_confirm` | `st` | local |
+| 427 | `full_draw` | `st` | local |
+| 433 | `cleanup` | `st` | local |
+| 443 | `move_selection` | `st, direction` | local |
+| 465 | `confirm` | `st` | local |
+| 481 | `handle_cancel` | `st` | local |
+| 490 | `MenuAPI.open` | `player_id, spec` | assigned/declared |
+| 579 | `MenuAPI.close` | `player_id,opts` | assigned/declared |
+| 596 | `MenuAPI.close_all` | `player_id,opts` | assigned/declared |
+| 613 | `MenuAPI.is_open` | `player_id` | assigned/declared |
+| 614 | `MenuAPI.get_state` | `player_id` | assigned/declared |
+| 615 | `MenuAPI.get_stack` | `player_id` | assigned/declared |
+| 617 | `MenuAPI.refresh` | `player_id` | assigned/declared |
+| 624 | `MenuAPI.set_rows` | `player_id, rows, preserve_selection` | assigned/declared |
+| 638 | `MenuAPI.set_profile` | `player_id, profile` | assigned/declared |
+| 646 | `MenuAPI.set_title` | `player_id, title` | assigned/declared |
+| 651 | `MenuAPI.handle_cancel` | `player_id` | assigned/declared |
 
-## Tables and data structures
+### Parameter inventory
 
-### `MenuAPI` *(line 14)*
+#### 1. `get_controller(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 18
+- **Declaration:** local
 
-### `cfg` *(line 43)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `open_sfx` | string literal | `"/server/assets/net-games/sfx/screen_open.ogg"` |
-| `move_sfx` | string literal | `"/server/assets/net-games/sfx/cursor_move.ogg"` |
-| `choose_sfx` | string literal | `"/server/assets/net-games/sfx/choose.ogg"` |
-| `cancel_sfx` | string literal | `"/server/assets/net-games/sfx/cancel.ogg"` |
-| `title_tint` | table | `{ r = 18, g = 42, b = 100, color_mode = 2 }` |
-| `row_tint` | table | `{ r = 95, g = 100, b = 108, color_mode = 2 }` |
-| `right_tint` | table | `{ r = 95, g = 100, b = 108, color_mode = 2 }` |
-| `disabled_tint` | table | `{ r = 110, g = 110, b = 110, color_mode = 0, opacity = 150 }` |
-| `lock_input_by_default` | boolean literal | `true` |
-| `asset_root` | string literal | `"/server/assets/ui/menuAPI/"` |
+#### 2. `tint_copy(src)`
 
-### `title_tint` *(line 49)*
+- **Line:** 39
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | number literal | `18` |
-| `g` | number literal | `42` |
-| `b` | number literal | `100` |
-| `color_mode` | number literal | `2` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `src` | Declared directly in the current Lua. Type not inferred. |
 
-### `row_tint` *(line 51)*
+#### 3. `MenuAPI.get_palette(name)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | number literal | `95` |
-| `g` | number literal | `100` |
-| `b` | number literal | `108` |
-| `color_mode` | number literal | `2` |
+- **Line:** 55
+- **Declaration:** assigned/declared
 
-### `right_tint` *(line 52)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `name` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | number literal | `95` |
-| `g` | number literal | `100` |
-| `b` | number literal | `108` |
-| `color_mode` | number literal | `2` |
+#### 4. `copy_table(src)`
 
-### `disabled_tint` *(line 53)*
+- **Line:** 132
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | number literal | `110` |
-| `g` | number literal | `110` |
-| `b` | number literal | `110` |
-| `color_mode` | number literal | `0` |
-| `opacity` | number literal | `150` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `src` | Declared directly in the current Lua. Type not inferred. |
 
-### `out` *(line 61)*
+#### 5. `merge(dst, src)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 140
+- **Declaration:** local
 
-### `MenuAPI.tint_palettes` *(line 65)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `dst` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `src` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `default` | table | `{ title_tint = tint_copy(cfg.title_tint), row_tint = tint_copy(cfg.row_tint), right_tint = tint_copy(cfg.right_tint) }` |
-| `red` | table | `{ title_tint = {r=120,g=20,b=24,color_mode=2}, row_tint={r=128,g=27,b=27,color_mode=2}, right_tint={r=120,g=50,b=50,color_mode=2} }` |
-| `blue` | table | `{ title_tint = {r=18,g=42,b=100,color_mode=2}, row_tint={r=70,g=90,b=125,color_mode=2}, right_tint={r=65,g=85,b=120,color_mode=2} }` |
-| `green` | table | `{ title_tint = {r=20,g=95,b=55,color_mode=2}, row_tint={r=65,g=105,b=75,color_mode=2}, right_tint={r=55,g=115,b=70,color_mode=2} }` |
-| `gold` | table | `{ title_tint = {r=145,g=95,b=20,color_mode=2}, row_tint={r=115,g=95,b=55,color_mode=2}, right_tint={r=135,g=100,b=35,color_mode=2} }` |
-| `purple` | table | `{ title_tint = {r=95,g=40,b=125,color_mode=2}, row_tint={r=95,g=80,b=115,color_mode=2}, right_tint={r=105,g=75,b=125,color_mode=2} }` |
-| `gray` | table | `{ title_tint = {r=55,g=60,b=70,color_mode=2}, row_tint={r=95,g=100,b=108,color_mode=2}, right_tint={r=95,g=100,b=108,color_mode=2} }` |
+#### 6. `resolve_type(value)`
 
-### `default` *(line 67)*
+- **Line:** 148
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `title_tint` | call/expression | `tint_copy(cfg.title_tint)` |
-| `row_tint` | call/expression | `tint_copy(cfg.row_tint)` |
-| `right_tint` | call/expression | `tint_copy(cfg.right_tint)` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `value` | Declared directly in the current Lua. Type not inferred. |
 
-### `red` *(line 68)*
+#### 7. `stack_for(player_id, create)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `title_tint` | table | `{r=120,g=20,b=24,color_mode=2}` |
-| `row_tint` | table | `{r=128,g=27,b=27,color_mode=2}` |
-| `right_tint` | table | `{r=120,g=50,b=50,color_mode=2}` |
+- **Line:** 157
+- **Declaration:** local
 
-### `blue` *(line 69)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `create` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `title_tint` | table | `{r=18,g=42,b=100,color_mode=2}` |
-| `row_tint` | table | `{r=70,g=90,b=125,color_mode=2}` |
-| `right_tint` | table | `{r=65,g=85,b=120,color_mode=2}` |
+#### 8. `active(player_id)`
 
-### `green` *(line 70)*
+- **Line:** 162
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `title_tint` | table | `{r=20,g=95,b=55,color_mode=2}` |
-| `row_tint` | table | `{r=65,g=105,b=75,color_mode=2}` |
-| `right_tint` | table | `{r=55,g=115,b=70,color_mode=2}` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-### `gold` *(line 71)*
+#### 9. `retained_owner(pid)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `title_tint` | table | `{r=145,g=95,b=20,color_mode=2}` |
-| `row_tint` | table | `{r=115,g=95,b=55,color_mode=2}` |
-| `right_tint` | table | `{r=135,g=100,b=35,color_mode=2}` |
+- **Line:** 169
+- **Declaration:** local
 
-### `purple` *(line 72)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `pid` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `title_tint` | table | `{r=95,g=40,b=125,color_mode=2}` |
-| `row_tint` | table | `{r=95,g=80,b=115,color_mode=2}` |
-| `right_tint` | table | `{r=105,g=75,b=125,color_mode=2}` |
+#### 10. `retain_input(pid)`
 
-### `gray` *(line 73)*
+- **Line:** 172
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `title_tint` | table | `{r=55,g=60,b=70,color_mode=2}` |
-| `row_tint` | table | `{r=95,g=100,b=108,color_mode=2}` |
-| `right_tint` | table | `{r=95,g=100,b=108,color_mode=2}` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `pid` | Declared directly in the current Lua. Type not inferred. |
 
-### `MENU_TYPES` *(line 79)*
+#### 11. `release_retained_input(pid)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | expression/reference | `[1] = { name = "scroll_list", selectable = true, vertical = true, layout = { texture = cfg.asset_root .. "menu1.png", x = 49, y = 17, z = 22…` |
-| `[2]` | expression/reference | `[2] = { name = "info_window", selectable = false, vertical = false, layout = { texture = cfg.asset_root .. "menu2.png", x = 49, y = 17, z = …` |
-| `[3]` | expression/reference | `[3] = { name = "compact_menu", selectable = true, vertical = true, layout = { texture = cfg.asset_root .. "menu2.png", x = 49, y = 17, z = 2…` |
-| `[4]` | expression/reference | `[4] = { name = "confirm_prompt", selectable = true, horizontal = true, layout = { texture = cfg.asset_root .. "menu2.png", x = 49, y = 17, z…` |
-| `[5]` | expression/reference | `[5] = { name = "profile_list", selectable = true, vertical = true, layout = { profile_texture = cfg.asset_root .. "menu3.png", profile_x = 1…` |
+- **Line:** 177
+- **Declaration:** local
 
-### `layout` *(line 85)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `pid` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `texture` | expression/reference | `cfg.asset_root .. "menu1.png"` |
-| `x` | number literal | `49` |
-| `y` | number literal | `17` |
-| `z` | number literal | `220` |
-| `scale` | number literal | `2` |
-| `title_x` | number literal | `17` |
-| `title_y` | number literal | `1` |
-| `title_font` | string literal | `"THICK"` |
-| `title_scale` | number literal | `1.5` |
-| `row_x` | number literal | `13` |
-| `row_y` | number literal | `16` |
-| `row_font` | string literal | `"THICK"` |
-| `row_scale` | number literal | `1.5` |
-| `row_advance` | number literal | `13` |
-| `right_x` | number literal | `103` |
-| `right_font` | string literal | `"THICK"` |
-| `right_scale` | number literal | `1.5` |
-| `visible_rows` | number literal | `8` |
-| `cursor_texture` | expression/reference | `cfg.asset_root .. "cursor.png"` |
-| `cursor_x` | number literal | `1` |
-| `cursor_y_offset` | number literal | `-2` |
-| `cursor_scale` | number literal | `2` |
-| `scroll_texture` | expression/reference | `cfg.asset_root .. "scroll.png"` |
-| `scroll_x` | number literal | `131` |
-| `scroll_top_y` | number literal | `11` |
-| `scroll_bottom_y` | number literal | `106` |
-| `scroll_h` | number literal | `13` |
-| `scroll_scale` | number literal | `2` |
+#### 12. `guard_input(player_id,swallow_seconds)`
 
-### `layout` *(line 99)*
+- **Line:** 185
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `texture` | expression/reference | `cfg.asset_root .. "menu2.png"` |
-| `x` | number literal | `49` |
-| `y` | number literal | `17` |
-| `z` | number literal | `220` |
-| `scale` | number literal | `2` |
-| `title_x` | number literal | `17` |
-| `title_y` | number literal | `1` |
-| `title_font` | string literal | `"THICK"` |
-| `title_scale` | number literal | `1.5` |
-| `row_x` | number literal | `13` |
-| `row_y` | number literal | `16` |
-| `row_font` | string literal | `"THICK"` |
-| `row_scale` | number literal | `1.5` |
-| `row_advance` | number literal | `13` |
-| `visible_rows` | number literal | `4` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `swallow_seconds` | Declared directly in the current Lua. Type not inferred. |
 
-### `layout` *(line 110)*
+#### 13. `play_sfx(player_id, path)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `texture` | expression/reference | `cfg.asset_root .. "menu2.png"` |
-| `x` | number literal | `49` |
-| `y` | number literal | `17` |
-| `z` | number literal | `220` |
-| `scale` | number literal | `2` |
-| `title_x` | number literal | `17` |
-| `title_y` | number literal | `1` |
-| `title_font` | string literal | `"THICK"` |
-| `title_scale` | number literal | `1.5` |
-| `row_x` | number literal | `13` |
-| `row_y` | number literal | `16` |
-| `row_font` | string literal | `"THICK"` |
-| `row_scale` | number literal | `1.5` |
-| `row_advance` | number literal | `13` |
-| `visible_rows` | number literal | `4` |
-| `cursor_texture` | expression/reference | `cfg.asset_root .. "cursor.png"` |
-| `cursor_x` | number literal | `1` |
-| `cursor_y_offset` | number literal | `-2` |
-| `cursor_scale` | number literal | `2` |
+- **Line:** 193
+- **Declaration:** local
 
-### `layout` *(line 122)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `path` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `texture` | expression/reference | `cfg.asset_root .. "menu2.png"` |
-| `x` | number literal | `49` |
-| `y` | number literal | `17` |
-| `z` | number literal | `220` |
-| `scale` | number literal | `2` |
-| `title_x` | number literal | `17` |
-| `title_y` | number literal | `1` |
-| `title_font` | string literal | `"THICK"` |
-| `title_scale` | number literal | `1.5` |
-| `line_x` | number literal | `13` |
-| `line_y` | number literal | `16` |
-| `line_font` | string literal | `"THICK"` |
-| `line_scale` | number literal | `1.5` |
-| `line_advance` | number literal | `13` |
-| `choice_y` | number literal | `55` |
-| `yes_x` | number literal | `25` |
-| `no_x` | number literal | `82` |
-| `choice_scale` | number literal | `1.5` |
+#### 14. `normalize_rows(rows)`
 
-### `layout` *(line 133)*
+- **Line:** 198
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `profile_texture` | expression/reference | `cfg.asset_root .. "menu3.png"` |
-| `profile_x` | number literal | `144` |
-| `profile_y` | number literal | `20` |
-| `profile_z` | number literal | `220` |
-| `profile_scale` | number literal | `2` |
-| `mug_x` | number literal | `4` |
-| `mug_y` | number literal | `13` |
-| `mug_scale` | number literal | `1` |
-| `profile_title_x` | number literal | `17` |
-| `profile_title_y` | number literal | `2` |
-| `profile_title_font` | string literal | `"THICK_BLACK"` |
-| `profile_title_scale` | number literal | `1.8` |
-| `profile_text_x` | number literal | `40` |
-| `profile_text_y` | number literal | `24` |
-| `profile_text_advance` | number literal | `10` |
-| `profile_font` | string literal | `"THICK"` |
-| `profile_text_scale` | number literal | `1.5` |
-| `texture` | expression/reference | `cfg.asset_root .. "menu1.png"` |
-| `x` | number literal | `2` |
-| `y` | number literal | `20` |
-| `z` | number literal | `220` |
-| `scale` | number literal | `2` |
-| `title_x` | number literal | `17` |
-| `title_y` | number literal | `1` |
-| `title_font` | string literal | `"THICK"` |
-| `title_scale` | number literal | `1.5` |
-| `row_x` | number literal | `13` |
-| `row_y` | number literal | `16` |
-| `row_font` | string literal | `"THICK"` |
-| `row_scale` | number literal | `1.5` |
-| `row_advance` | number literal | `13` |
-| `right_x` | number literal | `96` |
-| `right_font` | string literal | `"THICK"` |
-| `right_scale` | number literal | `1.5` |
-| `visible_rows` | number literal | `8` |
-| `cursor_texture` | expression/reference | `cfg.asset_root .. "cursor.png"` |
-| `cursor_x` | number literal | `1` |
-| `cursor_y_offset` | number literal | `-2` |
-| `cursor_scale` | number literal | `2` |
-| `scroll_texture` | expression/reference | `cfg.asset_root .. "scroll.png"` |
-| `scroll_x` | number literal | `131` |
-| `scroll_top_y` | number literal | `11` |
-| `scroll_bottom_y` | number literal | `106` |
-| `scroll_h` | number literal | `13` |
-| `scroll_scale` | number literal | `2` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `rows` | Declared directly in the current Lua. Type not inferred. |
 
-### `stacks` *(line 149)*
+#### 15. `row_selectable(row)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 212
+- **Declaration:** local
 
-### `out` *(line 154)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `row` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 16. `first_selectable(rows)`
 
-### `input_lock_handles` *(line 187)*
+- **Line:** 216
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `rows` | Declared directly in the current Lua. Type not inferred. |
 
-### `out` *(line 223)*
+#### 17. `next_selectable(rows, start, direction)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 221
+- **Declaration:** local
 
-### `opts` *(line 283)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `rows` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `start` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `direction` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `font` | string literal | `"THICK"` |
-| `scale` | number literal | `1.5` |
-| `z` | number literal | `225` |
-| `r` | expression/reference | `tint.r or 255` |
-| `g` | expression/reference | `tint.g or 255` |
-| `b` | expression/reference | `tint.b or 255` |
-| `opacity` | expression/reference | `tint.opacity or 255` |
-| `a` | expression/reference | `tint.a or 255` |
-| `color_mode` | expression/reference | `tint.color_mode or 0` |
+#### 18. `ensure_visible(st)`
 
-### `st` *(line 526)*
+- **Line:** 232
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `player_id` | expression/reference | `player_id` |
-| `type` | expression/reference | `type_id` |
-| `type_name` | expression/reference | `def.name` |
-| `prefix` | string literal | `"menuapi_" .. tostring(player_id) .. "_" .. tostring(next_id)` |
-| `layout` | expression/reference | `layout` |
-| `title` | expression/reference | `spec.title or "Menu"` |
-| `rows` | call/expression | `normalize_rows(spec.rows)` |
-| `cursor` | number literal | `1` |
-| `top_index` | number literal | `1` |
-| `profile` | call/expression | `copy_table(spec.profile)` |
-| `lines` | call/expression | `copy_table(spec.lines)` |
-| `choice` | call/expression | `(tonumber(spec.default_selection) == 2 or tostring(spec.default_selection):lower() == "no") and 2 or 1` |
-| `yes_text` | expression/reference | `spec.yes_text` |
-| `no_text` | expression/reference | `spec.no_text` |
-| `title_tint` | call/expression | `copy_table(spec.title_tint or palette.title_tint)` |
-| `row_tint` | call/expression | `copy_table(spec.row_tint or palette.row_tint)` |
-| `right_tint` | call/expression | `copy_table(spec.right_tint or palette.right_tint)` |
-| `bg_tint` | call/expression | `copy_table(spec.bg_tint)` |
-| `on_select` | expression/reference | `spec.on_select` |
-| `on_move` | expression/reference | `spec.on_move` |
-| `on_cancel` | expression/reference | `spec.on_cancel` |
-| `on_result` | expression/reference | `spec.on_result` |
-| `on_close` | expression/reference | `spec.on_close` |
-| `close_on_select` | expression/reference | `spec.close_on_select` |
-| `lock_input` | expression/reference | `spec.lock_input ~= false and cfg.lock_input_by_default` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
 
-## Implementation notes
+#### 19. `sprite_key(st, key)`
 
-- This reference is generated from the exact archived source `scripts/net-games/menuAPI/main.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+- **Line:** 243
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `key` | Declared directly in the current Lua. Type not inferred. |
+
+#### 20. `text_key(st, key)`
+
+- **Line:** 244
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `key` | Declared directly in the current Lua. Type not inferred. |
+
+#### 21. `draw_text(st, key, text, x, y, options)`
+
+- **Line:** 246
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `key` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `text` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 6 | `options` | Declared directly in the current Lua. Type not inferred. |
+
+#### 22. `erase_text(st, key)`
+
+- **Line:** 253
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `key` | Declared directly in the current Lua. Type not inferred. |
+
+#### 23. `tint_options(tint, extra)`
+
+- **Line:** 257
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `tint` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `extra` | Declared directly in the current Lua. Type not inferred. |
+
+#### 24. `draw_background(st)`
+
+- **Line:** 269
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 25. `draw_title(st)`
+
+- **Line:** 282
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 26. `clear_visible_rows(st)`
+
+- **Line:** 288
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 27. `draw_rows(st)`
+
+- **Line:** 297
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 28. `draw_cursor(st)`
+
+- **Line:** 338
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 29. `draw_scroll(st)`
+
+- **Line:** 353
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 30. `draw_profile(st)`
+
+- **Line:** 370
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 31. `draw_confirm(st)`
+
+- **Line:** 408
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 32. `full_draw(st)`
+
+- **Line:** 427
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 33. `cleanup(st)`
+
+- **Line:** 433
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 34. `move_selection(st, direction)`
+
+- **Line:** 443
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `direction` | Declared directly in the current Lua. Type not inferred. |
+
+#### 35. `confirm(st)`
+
+- **Line:** 465
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 36. `handle_cancel(st)`
+
+- **Line:** 481
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `st` | Declared directly in the current Lua. Type not inferred. |
+
+#### 37. `MenuAPI.open(player_id, spec)`
+
+- **Line:** 490
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `spec` | Declared directly in the current Lua. Type not inferred. |
+
+#### 38. `MenuAPI.close(player_id,opts)`
+
+- **Line:** 579
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `opts` | Declared directly in the current Lua. Type not inferred. |
+
+#### 39. `MenuAPI.close_all(player_id,opts)`
+
+- **Line:** 596
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `opts` | Declared directly in the current Lua. Type not inferred. |
+
+#### 40. `MenuAPI.is_open(player_id)`
+
+- **Line:** 613
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 41. `MenuAPI.get_state(player_id)`
+
+- **Line:** 614
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 42. `MenuAPI.get_stack(player_id)`
+
+- **Line:** 615
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 43. `MenuAPI.refresh(player_id)`
+
+- **Line:** 617
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 44. `MenuAPI.set_rows(player_id, rows, preserve_selection)`
+
+- **Line:** 624
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `rows` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `preserve_selection` | Declared directly in the current Lua. Type not inferred. |
+
+#### 45. `MenuAPI.set_profile(player_id, profile)`
+
+- **Line:** 638
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `profile` | Declared directly in the current Lua. Type not inferred. |
+
+#### 46. `MenuAPI.set_title(player_id, title)`
+
+- **Line:** 646
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `title` | Declared directly in the current Lua. Type not inferred. |
+
+#### 47. `MenuAPI.handle_cancel(player_id)`
+
+- **Line:** 651
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 15 | `MenuAPI` |
+| 23 | `cfg` |
+| 29 | `title_tint` |
+| 30 | `row_tint` |
+| 31 | `right_tint` |
+| 32 | `disabled_tint` |
+| 40 | `out` |
+| 45 | `MenuAPI.tint_palettes` |
+| 46 | `default` |
+| 47 | `red` |
+| 48 | `blue` |
+| 49 | `green` |
+| 50 | `gold` |
+| 51 | `purple` |
+| 52 | `gray` |
+| 59 | `MENU_TYPES` |
+| 64 | `layout` |
+| 78 | `layout` |
+| 89 | `layout` |
+| 101 | `layout` |
+| 112 | `layout` |
+| 129 | `stacks` |
+| 133 | `out` |
+| 199 | `out` |
+| 259 | `opts` |
+| 502 | `st` |
+| 534 | `options` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.on` | 2 | 658 |

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="22" height="22" tilewidth="64" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="216">
+ <properties>
+  <property name="Background Animation" value="/server/assets/demo/clockman.animation"/>
+  <property name="Background Texture" value="/server/assets/demo/clockman.png"/>
+  <property name="Background Vel X" value="0.20"/>
+  <property name="Background Vel Y" value=".1"/>
+  <property name="Name" value="                  "/>
+  <property name="Size Mode" value="Normal"/>
+  <property name="Size Mode Scope" value="Area Wide"/>
+  <property name="Song" value="/server/assets/demo/space.ogg"/>
+  <property name="Stasis" value="26,21,0"/>
+ </properties>
+ <tileset firstgid="1" source="../assets/tiles/coffee.tsx"/>
+ <tileset firstgid="5" source="../assets/demo/warp.tsx"/>
+ <tileset firstgid="11" source="../assets/demo/Custom_Central_Tiles.tsx"/>
+ <tileset firstgid="19" source="../assets/ezlibs-assets/ezmystery/GreenMysteryData.tsx"/>
+ <tileset firstgid="27" source="../assets/ezlibs-assets/ezmystery/Dark Mystery Data.tsx"/>
+ <tileset firstgid="35" source="../assets/ezlibs-assets/ezmystery/BlueMysteryData.tsx"/>
+ <tileset firstgid="43" source="../assets/ezlibs-assets/ezmystery/PurpleMysteryData.tsx"/>
+ <tileset firstgid="51" source="../assets/ezlibs-assets/ezmystery/OrangeMysteryData.tsx"/>
+ <tileset firstgid="59" source="../assets/ezlibs-assets/ezmystery/SapphireMysteryData.tsx"/>
+ <tileset firstgid="67" source="../assets/tourney/ow-tourney-board.tsx"/>
+ <tileset firstgid="68" source="../assets/tiles/gate.tsx"/>
+ <tileset firstgid="73" source="../assets/hp_manager/Tilesets/machine.tsx"/>
+ <layer id="4" name="Tile Layer 0" width="22" height="22">
+  <data encoding="csv">
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,
+16,16,16,16,13,13,13,13,13,13,13,13,13,13,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,13,13,13,13,13,13,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,13,13,13,13,13,13,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,13,13,13,13,13,13,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,12,12,12,12,12,12,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,12,12,12,12,12,12,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,12,12,12,12,12,12,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,12,12,12,12,12,12,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,12,12,12,12,12,12,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,12,12,12,12,12,12,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,13,13,13,13,13,13,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,13,13,13,13,13,13,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,13,13,13,13,13,13,13,13,13,13,16,16,16,16,
+16,16,16,16,13,13,13,13,13,13,13,13,13,13,13,13,13,13,16,16,16,16,
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,
+16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16
+</data>
+ </layer>
+ <objectgroup id="7" name="Object Layer 0">
+  <object id="198" type="Endless Runner Trigger" x="208" y="48" width="32" height="32">
+   <properties>
+    <property name="Warp Bot Too" type="bool" value="true"/>
+    <property name="Warp To" value="$instance:202"/>
+   </properties>
+  </object>
+  <object id="202" type="Endless Runner Spawn" x="64" y="256">
+   <properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Next Waypoint 1" type="object" value="204"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="204" type="Waypoint" x="224" y="256">
+   <properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Move Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Next Waypoint 1" type="object" value="205"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="205" type="Waypoint" x="384" y="256">
+   <properties>
+    <property name="Move Direction" propertytype="Direction" value="Up Right"/>
+    <property name="Next Waypoint 1" type="object" value="210"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="206" type="Waypoint" x="384" y="32">
+   <properties>
+    <property name="Move Direction" propertytype="Direction" value="Up Left"/>
+    <property name="Next Waypoint 1" type="object" value="209"/>
+    <property name="Wait Time" type="int" value="0"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="209" type="Waypoint" x="224" y="32">
+   <properties>
+    <property name="Move Direction" propertytype="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="204"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="210" type="Waypoint" x="384" y="144">
+   <properties>
+    <property name="Default Option" type="int" value="1"/>
+    <property name="Direction" propertytype="Direction" value="Up Left"/>
+    <property name="Is Choice" type="bool" value="true"/>
+    <property name="Option 1" value="Straight"/>
+    <property name="Option 2" value="Left Detour"/>
+    <property name="Option 3" value="Right Detour"/>
+    <property name="Prompt" value="Which way?"/>
+    <property name="Target 1" type="object" value="206"/>
+    <property name="Target 2" type="object" value="211"/>
+    <property name="Target 3" type="object" value="214"/>
+    <property name="Timeout" type="int" value="20"/>
+    <property name="Wait Animation" value="IDLE_UL"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="211" type="Waypoint" x="304" y="144">
+   <properties>
+    <property name="Move Direction" propertytype="Direction" value="Down Left"/>
+    <property name="Next Waypoint 1" type="object" value="213"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="212" type="Runner Rectangle Encounter" x="208" y="16" width="32" height="32">
+   <properties>
+    <property name="Encounter 1" value="BossTest"/>
+    <property name="Encounter 2" value="BossTest"/>
+    <property name="Encounter 3" value="BossTest"/>
+    <property name="Pick Mode" value="random"/>
+    <property name="Return Point Type" value="Endless Runner Spawn"/>
+   </properties>
+  </object>
+  <object id="213" type="Waypoint" x="304" y="32">
+   <properties>
+    <property name="Move Direction" propertytype="Direction" value="Up Left"/>
+    <property name="Next Waypoint 1" type="object" value="209"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="214" type="Waypoint" x="464" y="144">
+   <properties>
+    <property name="Move Direction" propertytype="Direction" value="Up Right"/>
+    <property name="Next Waypoint 1" type="object" value="215"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="215" type="Waypoint" x="464" y="32">
+   <properties>
+    <property name="Move Direction" propertytype="Direction" value="Up Left"/>
+    <property name="Next Waypoint 1" type="object" value="209"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+</map>

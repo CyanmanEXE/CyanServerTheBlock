@@ -1,81 +1,82 @@
-# `custom.lua`
+# 📄 `custom.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/ezlibs-custom/custom.lua`  
-> **Source lines:** 54  
-> **Functions detected:** 1  
-> **Table declarations detected:** 3
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/ezlibs-custom/custom.lua`](../../../ezlibs-custom/custom.lua)  
+> **Source lines:** 188  
+> **SHA-256 (UTF-8):** `cab051cda0211f42d3bd2e8b4d1bc8a4a65486e18ccb9794cc58becdaf712789`  
+> **Named/assigned functions detected:** 1  
+> **Table initializers detected (simple pattern):** 7
 
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
+
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-Custom plugin aggregator. Keep custom gameplay modules here so ezlibs' main dispatcher can fan out event callbacks to each module without duplicate Net:on subscriptions.
+Current source inventory for `scripts/ezlibs-custom/custom.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- `scripts/ezlibs-custom/nebulous-liberations/main` — line 6
-- `scripts/ezlibs-custom/footbomb/main` — line 7
+| Line | `require` module |
+|---:|---|
+| 5 | `scripts/ezlibs-scripts/ezbus` |
+| 11 | `scripts/ezlibs-custom/endless-runner/endless-runner` |
+| 140 | `scripts/ezlibs-custom/nebulous-liberations/main` |
+| 141 | `scripts/ezlibs-custom/footbomb/main` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 67 | `ezbus` | `custom_warp` |
+| 79 | `ezbus` | `endless_runner_encounter_triggered` |
+| 86 | `ezbus` | `endless_runner_reward` |
+| 98 | `ezbus` | `endless_runner_encounter_started` |
+| 102 | `ezbus` | `endless_runner_encounter_finished` |
+| 107 | `ezbus` | `endless_runner_floor_started` |
+| 112 | `ezbus` | `endless_runner_floor_completed` |
+| 117 | `ezbus` | `endless_runner_run_completed` |
+| 123 | `ezbus` | `endless_runner_run_ended` |
+| 129 | `ezbus` | `endless_runner_hp_changed` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 147 | `dispatch` | `method_name, ...` | local |
+
+### Detailed parameter inventory
+
+#### 1. `dispatch(method_name, ...)`
+
+- **Line:** 147
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 12 | `dispatch` | `method_name, ...` |
+| 1 | `method_name` | Declared by this function; type not inferred. |
+| 2 | `...` | Declared by this function; type not inferred. |
 
-### Function notes
 
-- **`dispatch(method_name, ...)`** *(source line 12)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+## Tables
 
-## Tables and data structures
+| Source line | Assignment |
+|---:|---|
+| 25 | `ENDLESS_RUNNER_FLOOR_PLAN` |
+| 36 | `rewards` |
+| 47 | `ENDLESS_RUNNER_ENTER_OPTIONS` |
+| 69 | `base_area_ids` |
+| 139 | `plugins` |
+| 145 | `custom` |
+| 162 | `forwarded_methods` |
 
-### `plugins` *(line 4)*
+## Net API calls
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | call/expression | `require("scripts/ezlibs-custom/nebulous-liberations/main")` |
-| `[2]` | call/expression | `require("scripts/ezlibs-custom/footbomb/main")` |
-
-### `custom` *(line 9)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `forwarded_methods` *(line 25)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"on_tick"` |
-| `[2]` | string literal | `"handle_tile_interaction"` |
-| `[3]` | string literal | `"handle_object_interaction"` |
-| `[4]` | string literal | `"handle_actor_interaction"` |
-| `[5]` | string literal | `"handle_textbox_response"` |
-| `[6]` | string literal | `"handle_battle_results"` |
-| `[7]` | string literal | `"handle_battle_exit"` |
-| `[8]` | string literal | `"handle_player_avatar_change"` |
-| `[9]` | string literal | `"handle_player_transfer"` |
-| `[10]` | string literal | `"handle_player_request"` |
-| `[11]` | string literal | `"handle_player_disconnect"` |
-| `[12]` | string literal | `"handle_player_move"` |
-| `[13]` | string literal | `"handle_player_join"` |
-| `[14]` | string literal | `"handle_post_selection"` |
-| `[15]` | string literal | `"handle_board_close"` |
-| `[16]` | string literal | `"handle_shop_purchase"` |
-| `[17]` | string literal | `"handle_shop_close"` |
-| `[18]` | string literal | `"handle_custom_warp"` |
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/custom.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+No direct `Net.method(...)` call expression matched.

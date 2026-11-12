@@ -1,140 +1,269 @@
-# `persistence.lua`
+# 📄 `persistence.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/persistence/persistence.lua`  
-> **Source lines:** 373  
-> **Functions detected:** 21  
-> **Table declarations detected:** 11
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/persistence/persistence.lua`](../../../persistence/persistence.lua)  
+> **Source lines:** 338  
+> **SHA-256 (UTF-8):** `4be2c4230d0b27f03969a6f466c5ee039fda59e3acb5783a239e631a80dfe510`  
+> **Named/assigned functions detected:** 21  
+> **Table initializers detected (simple pattern):** 11
 
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
+
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-persistence.lua Persistent JSON file storage with automatic debounced saving and per‑file instance management. Supports chained updates and waiting for save completion via promise‑returning save(). Automatically creates missing directories when saving.
+Current source inventory for `scripts/persistence/persistence.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- `scripts/libs/json` — line 6
-- `scripts/utils/utility` — line 7
+| Line | `require` module |
+|---:|---|
+| 8 | `scripts/libs/json` |
+| 9 | `scripts/utils/utility` |
 
-## Events
+## Event hooks
 
-- `Net:on("tick", function(event) ...)` — line 85. The event name is taken directly from this source.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 54 | `Net` | `tick` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 22 | `ensure_directory_exists` | `filePath` | local |
+| 44 | `async_ensure_dir` | `filePath` | local |
+| 72 | `new` | `filePath` | local |
+| 84 | `self:_mark_dirty` | `(none)` | assigned/declared |
+| 93 | `self:load` | `(none)` | assigned/declared |
+| 117 | `self:getData` | `(none)` | assigned/declared |
+| 128 | `self:setData` | `newData` | assigned/declared |
+| 136 | `self:update` | `func` | assigned/declared |
+| 144 | `self:removeKey` | `key` | assigned/declared |
+| 148 | `self:setKey` | `key, value` | assigned/declared |
+| 152 | `self:clear` | `(none)` | assigned/declared |
+| 161 | `split` | `str, delim` | local |
+| 170 | `resolve_path` | `data, path, create` | local |
+| 190 | `self:removePath` | `path` | assigned/declared |
+| 197 | `self:setPath` | `path, value` | assigned/declared |
+| 205 | `self:_save_internal` | `(none)` | assigned/declared |
+| 269 | `self:save` | `(none)` | assigned/declared |
+| 288 | `self:saveData` | `data` | assigned/declared |
+| 314 | `self:ready` | `callback` | assigned/declared |
+| 318 | `self:updateAndSave` | `func` | assigned/declared |
+| 326 | `get_instance` | `filePath` | local |
+
+### Detailed parameter inventory
+
+#### 1. `ensure_directory_exists(filePath)`
+
+- **Line:** 22
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 22 | `split` | `str, delim` |
-| 32 | `get_os` | `(none)` |
-| 42 | `mkdir_p` | `dir` |
-| 76 | `async_ensure_dir` | `filePath` |
-| 102 | `new` | `filePath` |
-| 115 | `self:_mark_dirty` | `(none)` |
-| 125 | `self:load` | `(none)` |
-| 152 | `self:getData` | `(none)` |
-| 164 | `self:setData` | `newData` |
-| 173 | `self:update` | `func` |
-| 182 | `self:removeKey` | `key` |
-| 189 | `self:setKey` | `key, value` |
-| 196 | `self:clear` | `(none)` |
-| 205 | `resolve_path` | `data, path, create` |
-| 234 | `self:removePath` | `path` |
-| 244 | `self:setPath` | `path, value` |
-| 254 | `self:_save_internal` | `(none)` |
-| 326 | `self:save` | `(none)` |
-| 348 | `self:ready` | `callback` |
-| 353 | `self:updateAndSave` | `func` |
-| 361 | `get_instance` | `filePath` |
+| 1 | `filePath` | Declared by this function; type not inferred. |
 
-### Function notes
+#### 2. `async_ensure_dir(filePath)`
 
-- **`split(str, delim)`** — Simple split function (splits string on a delimiter) *(source line 22)*
-- **`get_os()`** — OS detection (copied from utils.lua for self‑containment) *(source line 32)*
-- **`mkdir_p(dir)`** — Synchronously create a directory (and all parents) if it does not exist. Returns true on success, false on failure (errors are printed). *(source line 42)*
-- **`async_ensure_dir(filePath)`** — Promise‑based directory creation: extracts directory part from file path, creates it synchronously, and returns an already‑resolved promise. *(source line 76)*
-- **`new(filePath)`** — Creates a new instance (internal) *(source line 102)*
-- **`self:_mark_dirty()`** — Mark data as dirty and schedule a save (debounced) *(source line 115)*
-- **`self:load()`** — Load data from file. Returns a promise that resolves when loaded. *(source line 125)*
-- **`self:getData()`** — Get current data (returns a shallow copy) *(source line 152)*
-- **`self:setData(newData)`** — Replace entire data *(source line 164)*
-- **`self:update(func)`** — Apply a function to modify data in place *(source line 173)*
-- **`self:removeKey(key)`** — Convenience: remove a top‑level key *(source line 182)*
-- **`self:setKey(key, value)`** — Convenience: set a top‑level key (replaces if exists) *(source line 189)*
-- **`self:clear()`** — Clear all data (reset to empty table) *(source line 196)*
-- **`resolve_path(data, path, create)`** — Robust helper to resolve a dot‑separated path (e.g., "user.profile.name") or table of keys *(source line 205)*
-- **`self:removePath(path)`** — Remove a nested key (path can be dot‑string or table of keys) *(source line 234)*
-- **`self:setPath(path, value)`** — Set a nested key (creates intermediate tables if needed) *(source line 244)*
-- **`self:_save_internal()`** — Internal save (called by timer or manually). Returns a promise. *(source line 254)*
-- **`self:save()`** — Public save: forces an immediate save (bypasses timer). Returns a promise. *(source line 326)*
-- **`self:ready(callback)`** — Convenience: load and then call a callback *(source line 348)*
-- **`self:updateAndSave(func)`** — Update and schedule save (same as update, but name indicates auto‑save) *(source line 353)*
-- **`get_instance(filePath)`** — Manager: returns the instance for a given file path (creates if not exist) *(source line 361)*
+- **Line:** 44
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `filePath` | Declared by this function; type not inferred. |
 
-### `instances` *(line 10)*
+#### 3. `new(filePath)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 72
+- **Declaration:** local
+- **Nearby code comment:** ---------------------------------------------------------------------------- Persistence instance constructor ----------------------------------------------------------------------------
 
-### `result` *(line 23)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `filePath` | Declared by this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `self:_mark_dirty()`
 
-### `self` *(line 103)*
+- **Line:** 84
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `filePath` | expression/reference | `filePath` |
-| `data` | nil | `nil` |
-| `loaded` | boolean literal | `false` |
-| `saving` | boolean literal | `false` |
-| `dirty` | boolean literal | `false` |
-| `save_delay` | nil | `nil` |
-| `pending` | boolean literal | `false` |
-| `after_save` | table | `{}` |
+#### 5. `self:load()`
 
-### `after_save` *(line 111)*
+- **Line:** 93
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 6. `self:getData()`
 
-### `self.data` *(line 143)*
+- **Line:** 117
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 7. `self:setData(newData)`
 
-### `copy` *(line 156)*
+- **Line:** 128
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `newData` | Declared by this function; type not inferred. |
 
-### `self.data` *(line 200)*
+#### 8. `self:update(func)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 136
+- **Declaration:** table/global or assignment
 
-### `self.after_save` *(line 275)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `func` | Declared by this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 9. `self:removeKey(key)`
 
-### `self.after_save` *(line 301)*
+- **Line:** 144
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `key` | Declared by this function; type not inferred. |
 
-### `self.after_save` *(line 306)*
+#### 10. `self:setKey(key, value)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 148
+- **Declaration:** table/global or assignment
 
-### `self.after_save` *(line 314)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `key` | Declared by this function; type not inferred. |
+| 2 | `value` | Declared by this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 11. `self:clear()`
 
-## Implementation notes
+- **Line:** 152
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
 
-- This reference is generated from the exact archived source `scripts/persistence/persistence.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 12. `split(str, delim)`
+
+- **Line:** 161
+- **Declaration:** local
+- **Nearby code comment:** Helper for nested path access
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `str` | Declared by this function; type not inferred. |
+| 2 | `delim` | Declared by this function; type not inferred. |
+
+#### 13. `resolve_path(data, path, create)`
+
+- **Line:** 170
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `data` | Declared by this function; type not inferred. |
+| 2 | `path` | Declared by this function; type not inferred. |
+| 3 | `create` | Declared by this function; type not inferred. |
+
+#### 14. `self:removePath(path)`
+
+- **Line:** 190
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `path` | Declared by this function; type not inferred. |
+
+#### 15. `self:setPath(path, value)`
+
+- **Line:** 197
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `path` | Declared by this function; type not inferred. |
+| 2 | `value` | Declared by this function; type not inferred. |
+
+#### 16. `self:_save_internal()`
+
+- **Line:** 205
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Internal save (called by timer or manual) – does NOT clear dirty here
+- **Parameters:** none explicitly declared.
+
+#### 17. `self:save()`
+
+- **Line:** 269
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** Public save: forces an immediate save (bypasses timer)
+- **Parameters:** none explicitly declared.
+
+#### 18. `self:saveData(data)`
+
+- **Line:** 288
+- **Declaration:** table/global or assignment
+- **Nearby code comment:** NEW: Save arbitrary data without modifying internal state. Used by save‑game to avoid inconsistency on failure.
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `data` | Declared by this function; type not inferred. |
+
+#### 19. `self:ready(callback)`
+
+- **Line:** 314
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `callback` | Declared by this function; type not inferred. |
+
+#### 20. `self:updateAndSave(func)`
+
+- **Line:** 318
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `func` | Declared by this function; type not inferred. |
+
+#### 21. `get_instance(filePath)`
+
+- **Line:** 326
+- **Declaration:** local
+- **Nearby code comment:** Manager: returns the instance for a given file path (creates if not exist)
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `filePath` | Declared by this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 12 | `instances` |
+| 73 | `self` |
+| 81 | `after_save` |
+| 109 | `self.data` |
+| 121 | `copy` |
+| 156 | `self.data` |
+| 162 | `result` |
+| 222 | `self.after_save` |
+| 244 | `self.after_save` |
+| 248 | `self.after_save` |
+| 257 | `self.after_save` |
+
+## Net API calls
+
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.on` | 1 | 54 |

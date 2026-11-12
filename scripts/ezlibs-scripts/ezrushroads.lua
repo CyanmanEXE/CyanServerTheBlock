@@ -1,7 +1,8 @@
+local PlayerControl = require("scripts/player-control/main")
 -- ezrushroads.lua
 -- Rush Roads minigame integrated with ezlibs
 -- Uses eztriggers for tile detection and ezmemory for persistence
-local logger = require('scripts/ezlibs-scripts/ezlogger').get('ezrushroads')
+local logger = require('scripts/logger/logger').register('ezrushroads')
 local ezrushroads = {}-- ezrushroads.lua
 -- ezrushroads.lua
 -- Rush Roads minigame integrated with ezlibs
@@ -567,12 +568,12 @@ function ezrushroads.handle_object_interaction(player_id, object_id)
         end
 
         -- Lock player input
-        Net.lock_player_input(player_id)
+        PlayerControl.acquire_capture(player_id, "ezlibs-scripts/ezrushroads")
 
         -- Consume food
         local remaining = ezrushroads.remove_food(player_id, group_size)
         if remaining < 0 then
-            Net.unlock_player_input(player_id)
+            PlayerControl.release_capture(player_id, "ezlibs-scripts/ezrushroads")
             return
         end
 
@@ -665,7 +666,7 @@ function ezrushroads.handle_object_interaction(player_id, object_id)
                     end
                 end
 
-                Net.unlock_player_input(player_id)
+                PlayerControl.release_capture(player_id, "ezlibs-scripts/ezrushroads")
             end
             player_active_animation[player_id] = nil
         end

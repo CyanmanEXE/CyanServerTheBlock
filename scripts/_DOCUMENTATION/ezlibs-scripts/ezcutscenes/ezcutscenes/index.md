@@ -1,114 +1,197 @@
-# `ezcutscenes.lua`
+# 📄 `ezcutscenes.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezcutscenes/ezcutscenes.lua`  
-> **Source lines:** 349  
-> **Functions detected:** 12  
-> **Table declarations detected:** 7
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezcutscenes/ezcutscenes.lua`](../../../../ezlibs-scripts/ezcutscenes/ezcutscenes.lua)  
+> **Source lines:** 350  
+> **SHA-256 (UTF-8):** `7c5821ec12d591479c01dc1001e3dc0d779e99a011897b1e009efaa3b8c04e48`  
+> **Named functions detected:** 12  
+> **Table initializers detected:** 7
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-ezcutscenes.lua Tiled-authored cutscene system. A Cutscene object names a chain of Cutscene Step objects. Each step performs one action (move an actor, show a message, ask a quiz, etc.). Steps chain via `Next Step` refs; branching steps use `Next 1/2/3` and `Fail Next`. Interactive vs non-interactive: Show Message / Ask Quiz / Prompt Player are interactive. They run through Async.message_player / quiz_player / prompt_player, which are modal dialogs. Net.lock_player_input only blocks world interaction and movement; those dialog APIs run their own input path, so the cutscene works while input is locked. Wait / Set Pose / Move Actor / Play Sound / Fade Camera / Move Camera / Emit Event are non-interactive. They animate actors, play audio, or emit bus events without touching player input. Player input is locked at cutscene start and unconditionally unlocked before the cutscene promise resolves. The chain runner is wrapped in pcall so an unexpected error mid-cutscene still reaches the unlock. Movement targets: Move Actor / Move Camera resolve their destination in this order: 1. `Target` (point object reference) 2. `Target X/Y/Z` (explicit numbers) 3. The Cutscene Step object's own (x, y, z) in Tiled The third option means map makers can place the step node at the destination and skip the separate target point.
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 32
-- `scripts/ezlibs-scripts/object_registry` — line 33
-- `scripts/ezlibs-scripts/ezcache` — line 34
-- `scripts/ezlibs-scripts/eznpcs/eznpcs` — line 35
-- `scripts/ezlibs-scripts/ezbus` — line 36
-- `scripts/ezlibs-scripts/eztriggers/eztriggers` — line 37
-- `scripts/ezlibs-scripts/utils/eztiledutils` — line 38
-- `scripts/ezlibs-scripts/ezcutscenes/step_types` — line 39
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
+| 33 | `scripts/logger/logger` |
+| 34 | `scripts/ezlibs-scripts/object_registry` |
+| 35 | `scripts/ezlibs-scripts/ezcache` |
+| 36 | `scripts/ezlibs-scripts/eznpcs/eznpcs` |
+| 37 | `scripts/ezlibs-scripts/ezbus` |
+| 38 | `scripts/ezlibs-scripts/eztriggers/eztriggers` |
+| 39 | `scripts/ezlibs-scripts/utils/eztiledutils` |
+| 40 | `scripts/ezlibs-scripts/ezcutscenes/step_types` |
 
-## Events
+## Event hooks
 
-- `Net:on("player_disconnect", function(event) ...)` — line 321. The event name is taken directly from this source.
-
-## Functions
-
-| Line | Function / method | Parameters as declared |
+| Line | Subscriber | Event |
 |---:|---|---|
-| 49 | `get_props` | `object` |
-| 53 | `resolve_object_cached` | `area_id, object_id` |
-| 65 | `choose_next_step_ref` | `step_props, step_type_name, result` |
-| 88 | `run_step_chain` | `context, first_step_ref` |
-| 132 | `run_cutscene` | `player_id, area_id, cutscene_object, trigger_context` |
-| 150 | `resolve_object` | `id` |
-| 205 | `ezcutscenes.start` | `player_id, area_id, cutscene_ref, trigger_context` |
-| 240 | `ezcutscenes.cancel` | `player_id` |
-| 245 | `ezcutscenes.is_active` | `player_id` |
-| 249 | `ezcutscenes.get_cutscene` | `area_id, name` |
-| 330 | `ezcutscenes.handle_player_disconnect` | `player_id` |
-| 338 | `ezcutscenes.handle_player_transfer` | `player_id` |
+| 308 | `emitter` | `entered` |
+| 322 | `Net` | `player_disconnect` |
 
-### Function notes
+## Functions and parameters
 
-- **`get_props(object)`** *(source line 49)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`resolve_object_cached(area_id, object_id)`** *(source line 53)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`choose_next_step_ref(step_props, step_type_name, result)`** *(source line 65)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`run_step_chain(context, first_step_ref)`** — Step handlers receive (context, props, step_object). The third argument lets movement / camera steps fall back to the step node's own Tiled placement when no explicit target is configured. *(source line 88)*
-- **`run_cutscene(player_id, area_id, cutscene_object, trigger_context)`** *(source line 132)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`resolve_object(id)`** *(source line 150)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezcutscenes.start(player_id, area_id, cutscene_ref, trigger_context)`** *(source line 205)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezcutscenes.cancel(player_id)`** *(source line 240)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezcutscenes.is_active(player_id)`** *(source line 245)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezcutscenes.get_cutscene(area_id, name)`** *(source line 249)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezcutscenes.handle_player_disconnect(player_id)`** *(source line 330)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezcutscenes.handle_player_transfer(player_id)`** *(source line 338)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 50 | `get_props` | `object` | local |
+| 54 | `resolve_object_cached` | `area_id, object_id` | local |
+| 66 | `choose_next_step_ref` | `step_props, step_type_name, result` | local |
+| 89 | `run_step_chain` | `context, first_step_ref` | local |
+| 133 | `run_cutscene` | `player_id, area_id, cutscene_object, trigger_context` | local |
+| 151 | `resolve_object` | `id` | assigned/declared |
+| 206 | `ezcutscenes.start` | `player_id, area_id, cutscene_ref, trigger_context` | assigned/declared |
+| 241 | `ezcutscenes.cancel` | `player_id` | assigned/declared |
+| 246 | `ezcutscenes.is_active` | `player_id` | assigned/declared |
+| 250 | `ezcutscenes.get_cutscene` | `area_id, name` | assigned/declared |
+| 331 | `ezcutscenes.handle_player_disconnect` | `player_id` | assigned/declared |
+| 339 | `ezcutscenes.handle_player_transfer` | `player_id` | assigned/declared |
 
-## Tables and data structures
+### Parameter inventory
 
-### `ezcutscenes` *(line 40)*
+#### 1. `get_props(object)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 50
+- **Declaration:** local
 
-### `registered_cutscenes` *(line 42)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 2. `resolve_object_cached(area_id, object_id)`
 
-### `active_cutscenes` *(line 44)*
+- **Line:** 54
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
 
-### `once_state` *(line 45)*
+#### 3. `choose_next_step_ref(step_props, step_type_name, result)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 66
+- **Declaration:** local
 
-### `context` *(line 142)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `step_props` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `step_type_name` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `result` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `player_id` | expression/reference | `player_id` |
-| `area_id` | expression/reference | `area_id` |
-| `cutscene_name` | expression/reference | `cutscene_name` |
-| `cutscene_object` | expression/reference | `cutscene_object` |
-| `trigger_object_id` | expression/reference | `trigger_context and trigger_context.trigger_object_id or nil` |
-| `trigger_bot_id` | expression/reference | `trigger_context and trigger_context.trigger_bot_id or nil` |
-| `resolve_object` | function | `function(id) return resolve_object_cached(area_id` |
-| `[8]` | expression/reference | `id) end` |
-| `variables` | table | `{}` |
-| `cancelled` | boolean literal | `false` |
+#### 4. `run_step_chain(context, first_step_ref)`
 
-### `variables` *(line 151)*
+- **Line:** 89
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `context` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `first_step_ref` | Declared directly in the current Lua. Type not inferred. |
 
-### `cleanup_bot_ids` *(line 155)*
+#### 5. `run_cutscene(player_id, area_id, cutscene_object, trigger_context)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 133
+- **Declaration:** local
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `cutscene_object` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `trigger_context` | Declared directly in the current Lua. Type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezcutscenes/ezcutscenes.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 6. `resolve_object(id)`
+
+- **Line:** 151
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 7. `ezcutscenes.start(player_id, area_id, cutscene_ref, trigger_context)`
+
+- **Line:** 206
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `cutscene_ref` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `trigger_context` | Declared directly in the current Lua. Type not inferred. |
+
+#### 8. `ezcutscenes.cancel(player_id)`
+
+- **Line:** 241
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 9. `ezcutscenes.is_active(player_id)`
+
+- **Line:** 246
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 10. `ezcutscenes.get_cutscene(area_id, name)`
+
+- **Line:** 250
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `name` | Declared directly in the current Lua. Type not inferred. |
+
+#### 11. `ezcutscenes.handle_player_disconnect(player_id)`
+
+- **Line:** 331
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 12. `ezcutscenes.handle_player_transfer(player_id)`
+
+- **Line:** 339
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 42 | `ezcutscenes` |
+| 44 | `registered_cutscenes` |
+| 45 | `active_cutscenes` |
+| 46 | `once_state` |
+| 144 | `context` |
+| 152 | `variables` |
+| 157 | `cleanup_bot_ids` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.is_player` | 2 | 207 |
+| `Net.on` | 1 | 322 |

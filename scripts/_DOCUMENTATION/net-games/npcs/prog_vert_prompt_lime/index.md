@@ -1,71 +1,130 @@
-# `prog_vert_prompt_lime.lua`
+# 📄 `prog_vert_prompt_lime.lua`
 
-> **Source:** `scripts/net-games/npcs/prog_vert_prompt_lime.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/npcs/prog_vert_prompt_lime.lua`](../../../../net-games/npcs/prog_vert_prompt_lime.lua)  
 > **Source lines:** 171  
-> **Functions detected:** 5  
-> **Table declarations detected:** 10
+> **SHA-256 (UTF-8):** `fe4e2a1387e65e…`  
+> **Declared/assigned functions detected:** 5  
+> **Anonymous closures detected:** 3  
+> **Table initializers detected:** 10
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-===================================================== prog_vert_prompt_lime.lua LIME variant of prog_vert_prompt_pink.lua. Key requirement: identical in-game flow, but implemented using Talk.lua + TalkVertMenu.lua (reusable wrapper). =====================================================
+LIME variant of prog_vert_prompt_pink.lua. Key requirement: identical in-game flow, but implemented using Talk.lua + TalkVertMenu.lua (reusable wrapper).
 
-## Dependencies
+## 🔗 Dependencies
 
-- `scripts/libs/direction` — line 10
-- `scripts/net-games/dialogue/startup` — line 11
-- `scripts/net-games/dialogue/dialogue` — line 13
-- `scripts/net-games/npcs/talk` — line 14
-- `scripts/net-games/npcs/talk_vert_menu` — line 15
-- `scripts/net-games/npcs/talk_presets` — line 16
+| Line | Module string supplied to `require` |
+|---|---|
+| 10 | `scripts/libs/direction` |
+| 11 | `scripts/net-games/dialogue/startup` |
+| 13 | `scripts/net-games/dialogue/dialogue` |
+| 14 | `scripts/net-games/npcs/talk` |
+| 15 | `scripts/net-games/npcs/talk_vert_menu` |
+| 16 | `scripts/net-games/npcs/talk_presets` |
 
-## Events
+## 📡 Event subscriptions
 
-- `Net:on("actor_interaction", function(event) ...)` — line 100. The event name is taken directly from this source.
+| Line | Subscription call | Literal event name |
+|---|---|---|
+| 100 | `Net:on` | `actor_interaction` |
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 27 | `play_sfx` | `player_id, path` |
-| 38 | `shallow_copy` | `t` |
-| 88 | `build_options` | `(none)` |
-| 115 | `on_yes` | `(none)` |
-| 160 | `on_no` | `(none)` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 27 | `play_sfx` | `player_id, path` | local |
+| 38 | `shallow_copy` | `t` | local |
+| 88 | `build_options` | `(none)` | local |
+| 115 | `on_yes` | `(none)` | assigned |
+| 161 | `on_no` | `(none)` | assigned |
 
-### Function notes
+### Function details
 
-- **`play_sfx(player_id, path)`** *(source line 27)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`shallow_copy(t)`** *(source line 38)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`build_options()`** — ===================================================== Menu options ===================================================== *(source line 88)*
-- **`on_yes()`** *(source line 115)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`on_no()`** *(source line 160)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `play_sfx(player_id, path)`
 
-## Tables and data structures
+- **Location:** source line 27.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `SFX` *(line 21)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-| Field / key | Value category | Initializer expression (source) |
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `path` | Not explicitly documented in adjacent source annotations. |
+
+#### 2. `shallow_copy(t)`
+
+- **Location:** source line 38.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `t` | Not explicitly documented in adjacent source annotations. |
+
+#### 3. `build_options()`
+
+- **Location:** source line 88.
+- **Declaration style:** `local`.
+- **Adjacent source comment:** Menu options
+
+#### 4. `on_yes()`
+
+- **Location:** source line 115.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+#### 5. `on_no()`
+
+- **Location:** source line 161.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+## 🪄 Anonymous closures
+
+These are anonymous `function(...)` expressions, including inline callbacks. Their argument lists are taken verbatim from source; lexical context is descriptive text, not a claim about execution.
+
+| Line | Arguments | Preceding source context |
+|---|---|---|
+| 32 | `(none)` | `Net.provide_asset_for_player(player_id, path) if Net.play_sound_for_player then pcal…` |
+| 34 | `(none)` | `ction() Net.play_sound_for_player(player_id, path) end) elseif Net.play_sound then p…` |
+| 100 | `event` | `nteraction --===================================================== Net:on("actor_int…` |
+
+## 📦 Tables and data
+
+The following **10** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `SFX` — line 21
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `DESC` | string literal | `"/server/assets/net-games/sfx/card_desc.ogg"` |
 | `CONFIRM` | string literal | `"/server/assets/net-games/sfx/card_confirm.ogg"` |
 | `DESC_CLOSE` | string literal | `"/server/assets/net-games/sfx/card_desc_close.ogg"` |
 
-### `o` *(line 39)*
+### 2. `o` — line 39
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `TALK_CFG` *(line 74)*
+### 3. `TALK_CFG` — line 74
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `area_id` | expression/reference | `area_id` |
 | `object` | expression/reference | `obj_name` |
@@ -75,63 +134,80 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `mug` | string literal | `"prog_lime"` |
 | `nameplate` | string literal | `"prog"` |
 
-### `t` *(line 89)*
+### 4. `t` — line 89
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `flow` *(line 130)*
+### 5. `flow` — line 130
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `keep_menu_open` | boolean literal | `true` |
-| `lock_dim_alpha` | number literal | `0.35` |
+| `lock_dim_alpha` | numeric literal | `0.35` |
 | `hide_cursor_when_locked` | boolean literal | `true` |
-| `confirm` | table | `{ enabled = true, text_format = 'Are you sure you want "%s"?', skip_ids = { exit = true }, }` |
-| `post_select` | table | `{ enabled = true, text_format = 'You got "%s".', skip_ids = { exit = true }, }` |
+| `confirm` | nested table | `{ enabled = true, text_format = 'Are you sure you want "%s"?', skip_ids = { exit = true }, }` |
+| `post_select` | nested table | `{ enabled = true, text_format = 'You got "%s".', skip_ids = { exit = true }, }` |
 | `after_yes_text` | string literal | `"Thank you!{p_1} Is there anything else you'd like?"` |
 | `after_no_text` | string literal | `"Is there anything else you'd like?"` |
 | `exit_goodbye_text` | string literal | `"Thanks for stopping by!"` |
-| `sfx` | table | `{ desc = SFX.DESC, confirm = SFX.CONFIRM, close = SFX.DESC_CLOSE, }` |
+| `sfx` | nested table | `{ desc = SFX.DESC, confirm = SFX.CONFIRM, close = SFX.DESC_CLOSE, }` |
 
-### `confirm` *(line 134)*
+### 6. `confirm` — line 135
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `enabled` | boolean literal | `true` |
 | `text_format` | string literal | `'Are you sure you want "%s"?'` |
-| `skip_ids` | table | `{ exit = true }` |
+| `skip_ids` | nested table | `{ exit = true }` |
 
-### `skip_ids` *(line 138)*
+### 7. `skip_ids` — line 138
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `exit` | boolean literal | `true` |
 
-### `post_select` *(line 140)*
+### 8. `post_select` — line 141
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `enabled` | boolean literal | `true` |
 | `text_format` | string literal | `'You got "%s".'` |
-| `skip_ids` | table | `{ exit = true }` |
+| `skip_ids` | nested table | `{ exit = true }` |
 
-### `skip_ids` *(line 144)*
+### 9. `skip_ids` — line 144
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `exit` | boolean literal | `true` |
 
-### `sfx` *(line 151)*
+### 10. `sfx` — line 152
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `desc` | expression/reference | `SFX.DESC` |
 | `confirm` | expression/reference | `SFX.CONFIRM` |
 | `close` | expression/reference | `SFX.DESC_CLOSE` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/net-games/npcs/prog_vert_prompt_lime.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+These are **statically detected call sites**, not API definitions or guaranteed successful runtime calls.
+
+| Call identifier | Occurrences |
+|---|---|
+| `Net.create_bot` | 1 |
+| `Net.get_bot_name` | 1 |
+| `Net.get_object_by_name` | 1 |
+| `Net.get_player_position` | 1 |
+| `Net.on` | 1 |
+| `Net.play_sound` | 1 |
+| `Net.play_sound_for_player` | 1 |
+| `Net.provide_asset_for_player` | 1 |
+| `Net.set_bot_direction` | 1 |
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

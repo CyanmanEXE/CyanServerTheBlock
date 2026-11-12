@@ -1,43 +1,46 @@
-# `ezconfig.lua`
+# 📄 `ezconfig.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezconfig.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezconfig.lua`](../../../ezlibs-scripts/ezconfig.lua)  
 > **Source lines:** 8  
-> **Functions detected:** 0  
-> **Table declarations detected:** 0
+> **SHA-256 (UTF-8):** `59732400640f1c426961c553e3bfacebfd65fd321b4af149d36fe0805cdae1c1`  
+> **Named/assigned functions detected:** 0  
+> **Table initializers detected:** 0
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Current source inventory for `scripts/ezlibs-scripts/ezconfig.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
-- `ezlibs-config` — line 4
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/logger/logger` |
+| 4 | `ezlibs-config` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No literal `:on` event registration detected by the simple source pattern.
 
 ## Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+No named function declarations matched. Anonymous callbacks may exist.
 
-## Tables and data structures
+## Tables
 
-No simple named table initializer was detected. Tables created dynamically or returned inline may not appear in this inventory.
+No simple `name = {` table initializer matched.
 
-## Implementation notes
+## Net API calls
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezconfig.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+No direct `Net.method(...)` call expression matched.

@@ -1,51 +1,61 @@
-# `example_pvp_script.disabled-lua`
+# 📄 `example_pvp_script.lua` — Current Lua reference
 
-> **Source:** `scripts/example_pvp_script.disabled-lua`  
-> **Source lines:** 89  
-> **Functions detected:** 0  
-> **Table declarations detected:** 2
+[🏠 Documentation home](../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/example_pvp_script.lua`](../../example_pvp_script.lua)  
+> **Source lines:** 105  
+> **SHA-256 (UTF-8):** `1a38f1e923fdace13d83e8388edda8d91f053d5f7076ac4f5c2895bed4adfda7`  
+> **Named/assigned functions detected:** 0  
+> **Table initializers detected:** 2
 
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../logger/README.md) for logging semantics.
+
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-other_id is not a player id, since they're not registered in the request list
+Current source inventory for `scripts/example_pvp_script.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- No `require(...)` dependency was detected.
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/logger/logger` |
 
-## Events
+## Event hooks
 
-- `Net:on("player_connect", function(event) ...)` — line 4. The event name is taken directly from this source.
-- `Net:on("player_disconnect", function(event) ...)` — line 8. The event name is taken directly from this source.
-- `Net:on("actor_interaction", function(event) ...)` — line 15. The event name is taken directly from this source.
-- `Net:on("textbox_response", function(event) ...)` — line 62. The event name is taken directly from this source.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 16 | `Net` | `player_connect` |
+| 20 | `Net` | `tile_interaction` |
+| 24 | `Net` | `player_disconnect` |
+| 31 | `Net` | `actor_interaction` |
+| 78 | `Net` | `textbox_response` |
 
 ## Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+No named function declarations matched. Anonymous callbacks may exist.
 
-## Tables and data structures
+## Tables
 
-### `requests` *(line 1)*
+| Source line | Assignment |
+|---:|---|
+| 13 | `requests` |
+| 14 | `questioned_requests` |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+## Net API calls
 
-### `questioned_requests` *(line 2)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/example_pvp_script.disabled-lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.animate_player` | 1 | 21 |
+| `Net.exclusive_player_emote` | 1 | 101 |
+| `Net.get_player_mugshot` | 1 | 66 |
+| `Net.initiate_pvp` | 1 | 97 |
+| `Net.on` | 5 | 16 |
+| `Net.question_player` | 1 | 68 |

@@ -1,155 +1,315 @@
-# `main.lua`
+# 📄 `main.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezwarps/main.lua`  
-> **Source lines:** 339  
-> **Functions detected:** 16  
-> **Table declarations detected:** 7
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezwarps/main.lua`](../../../../ezlibs-scripts/ezwarps/main.lua)  
+> **Source lines:** 420  
+> **SHA-256 (UTF-8):** `d22bce8f346824679a6e7d7f8dfc782d141d3aa48027490e753b97674d1d3a98`  
+> **Named functions detected:** 20  
+> **Table initializers detected:** 9
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-arrival / leaving animations
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
-- `scripts/ezlibs-scripts/json` — line 2
-- `scripts/ezlibs-scripts/ezwarps/arrow_animation_factory` — line 3
-- `scripts/ezlibs-scripts/ezwarps/log_in_animation` — line 4
-- `scripts/ezlibs-scripts/eztriggers/eztriggers` — line 5
-- `scripts/ezlibs-scripts/object_registry` — line 6
-- `scripts/ezlibs-scripts/ezbus` — line 7
-- `scripts/ezlibs-scripts/ezcache` — line 8
-- `scripts/ezlibs-scripts/ezwarps/fall_in_animation` — line 14
-- `scripts/ezlibs-scripts/ezwarps/lev_beast_in_animation` — line 15
-- `scripts/ezlibs-scripts/ezwarps/lev_beast_out_animation` — line 16
-- `scripts/ezlibs-scripts/ezwarps/fall_off_2` — line 25
-- `scripts/ezlibs-scripts/ezpress` — line 251
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
+| 2 | `scripts/logger/logger` |
+| 3 | `scripts/ezlibs-scripts/json` |
+| 4 | `scripts/ezlibs-scripts/ezwarps/arrow_animation_factory` |
+| 5 | `scripts/ezlibs-scripts/ezwarps/log_in_animation` |
+| 6 | `scripts/ezlibs-scripts/eztriggers/eztriggers` |
+| 7 | `scripts/ezlibs-scripts/object_registry` |
+| 8 | `scripts/ezlibs-scripts/ezbus` |
+| 9 | `scripts/ezlibs-scripts/ezcache` |
+| 10 | `scripts/ezlibs-scripts/ezwarps/default_spawn_guard` |
+| 16 | `scripts/ezlibs-scripts/ezwarps/fall_in_animation` |
+| 17 | `scripts/ezlibs-scripts/ezwarps/lev_beast_in_animation` |
+| 18 | `scripts/ezlibs-scripts/ezwarps/lev_beast_out_animation` |
+| 27 | `scripts/ezlibs-scripts/ezwarps/fall_off_2` |
+| 310 | `scripts/ezlibs-scripts/ezpress` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
-
-## Functions
-
-| Line | Function / method | Parameters as declared |
+| Line | Subscriber | Event |
 |---:|---|---|
-| 35 | `table_has_value` | `table, val` |
-| 45 | `log` | `message` |
-| 51 | `property_is_true` | `value` |
-| 55 | `add_landing` | `area_id, incoming_data, x, y, z, direction, warp_in, arrival_animation` |
-| 73 | `doAnimationForWarp` | `player_id,animation_name,is_leave_animation,warp_object` |
-| 92 | `add_interact_warp` | `object, object_id, area_id, area_name` |
-| 105 | `add_radius_warp` | `object, object_id, area_id, area_name` |
-| 122 | `add_custom_warp` | `object, object_id, area_id, area_name` |
-| 142 | `process_warp_object` | `area_id, object` |
-| 167 | `prepare_player_arrival` | `player_id,x,y,z,special_animation_name` |
-| 184 | `ezwarps.handle_player_request` | `player_id, data` |
-| 200 | `use_warp` | `player_id,warp_object,warp_meta` |
-| 300 | `ezwarps.handle_custom_warp` | `player_id, object_id` |
-| 317 | `ezwarps.handle_player_join` | `player_id` |
-| 324 | `ezwarps.player_is_in_animation` | `player_id` |
-| 331 | `ezwarps.handle_player_transfer` | `player_id` |
+| 139 | `interact_warp_emitter` | `interaction` |
+| 153 | `radius_warp_emitter` | `entered` |
 
-### Function notes
+## Functions and parameters
 
-- **`table_has_value(table, val)`** *(source line 35)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`log(message)`** — Logs the given message on screen -- *(source line 45)*
-- **`property_is_true(value)`** — Normalizes a custom property that may be a real boolean or a string such as "true"/"false" into a real Lua boolean. *(source line 51)*
-- **`add_landing(area_id, incoming_data, x, y, z, direction, warp_in, arrival_animation)`** *(source line 55)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`doAnimationForWarp(player_id,animation_name,is_leave_animation,warp_object)`** *(source line 73)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`add_interact_warp(object, object_id, area_id, area_name)`** *(source line 92)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`add_radius_warp(object, object_id, area_id, area_name)`** — Adds the given radius warp to the list of detected radius warps *(source line 105)*
-- **`add_custom_warp(object, object_id, area_id, area_name)`** — Adds the given custom warp to the list of detected custom warps *(source line 122)*
-- **`process_warp_object(area_id, object)`** — Shared function to process any warp object *(source line 142)*
-- **`prepare_player_arrival(player_id,x,y,z,special_animation_name)`** *(source line 167)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezwarps.handle_player_request(player_id, data)`** *(source line 184)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`use_warp(player_id,warp_object,warp_meta)`** *(source line 200)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezwarps.handle_custom_warp(player_id, object_id)`** *(source line 300)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezwarps.handle_player_join(player_id)`** *(source line 317)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezwarps.player_is_in_animation(player_id)`** *(source line 324)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezwarps.handle_player_transfer(player_id)`** *(source line 331)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 44 | `ezwarps.guard_return_warp` | `player_id, area_id, warp_object_id, position` | assigned/declared |
+| 59 | `update_return_warp_guard` | `player_id, area, x, y` | local |
+| 71 | `ezwarps.handle_player_move` | `player_id, x, y, z` | assigned/declared |
+| 75 | `ezwarps.handle_player_disconnect` | `player_id` | assigned/declared |
+| 79 | `table_has_value` | `table, val` | assigned/declared |
+| 89 | `log` | `message` | assigned/declared |
+| 95 | `property_is_true` | `value` | local |
+| 99 | `add_landing` | `area_id, incoming_data, x, y, z, direction, warp_in, arrival_animation` | assigned/declared |
+| 117 | `doAnimationForWarp` | `player_id,animation_name,is_leave_animation,warp_object` | assigned/declared |
+| 136 | `add_interact_warp` | `object, object_id, area_id, area_name` | assigned/declared |
+| 149 | `add_radius_warp` | `object, object_id, area_id, area_name` | assigned/declared |
+| 166 | `add_custom_warp` | `object, object_id, area_id, area_name` | assigned/declared |
+| 186 | `process_warp_object` | `area_id, object` | local |
+| 211 | `prepare_player_arrival` | `player_id,x,y,z,special_animation_name` | assigned/declared |
+| 228 | `ezwarps.handle_player_request` | `player_id, data` | assigned/declared |
+| 246 | `use_warp` | `player_id,warp_object,warp_meta` | assigned/declared |
+| 362 | `ezwarps.handle_custom_warp` | `player_id, object_id` | assigned/declared |
+| 393 | `ezwarps.handle_player_join` | `player_id` | assigned/declared |
+| 402 | `ezwarps.player_is_in_animation` | `player_id` | assigned/declared |
+| 409 | `ezwarps.handle_player_transfer` | `player_id` | assigned/declared |
 
-## Tables and data structures
+### Parameter inventory
 
-### `ezwarps` *(line 9)*
+#### 1. `ezwarps.guard_return_warp(player_id, area_id, warp_object_id, position)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 44
+- **Declaration:** assigned/declared
 
-### `special_animations` *(line 13)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `warp_object_id` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `position` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `fall_in` | call/expression | `require('scripts/ezlibs-scripts/ezwarps/fall_in_animation')` |
-| `lev_beast_in` | call/expression | `require('scripts/ezlibs-scripts/ezwarps/lev_beast_in_animation')` |
-| `lev_beast_out` | call/expression | `require('scripts/ezlibs-scripts/ezwarps/lev_beast_out_animation')` |
-| `arrow_up_left_out` | call/expression | `create_arrow_animation(false` |
-| `[5]` | string literal | `"Up Left")` |
-| `arrow_up_right_out` | call/expression | `create_arrow_animation(false` |
-| `[7]` | string literal | `"Up Right")` |
-| `arrow_down_left_out` | call/expression | `create_arrow_animation(false` |
-| `[9]` | string literal | `"Down Left")` |
-| `arrow_down_right_out` | call/expression | `create_arrow_animation(false` |
-| `[11]` | string literal | `"Down Right")` |
-| `arrow_up_left_in` | call/expression | `create_arrow_animation(true` |
-| `[13]` | string literal | `"Up Left")` |
-| `arrow_up_right_in` | call/expression | `create_arrow_animation(true` |
-| `[15]` | string literal | `"Up Right")` |
-| `arrow_down_left_in` | call/expression | `create_arrow_animation(true` |
-| `[17]` | string literal | `"Down Left")` |
-| `arrow_down_right_in` | call/expression | `create_arrow_animation(true` |
-| `[19]` | string literal | `"Down Right")` |
-| `fall_off_2` | call/expression | `require('scripts/ezlibs-scripts/ezwarps/fall_off_2')` |
-| `log_in` | call/expression | `create_jack_in_out_animation(true)` |
-| `log_out` | call/expression | `create_jack_in_out_animation(false)` |
+#### 2. `update_return_warp_guard(player_id, area, x, y)`
 
-### `landings` *(line 29)*
+- **Line:** 59
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `area` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `y` | Declared directly in the current Lua. Type not inferred. |
 
-### `player_animations` *(line 31)*
+#### 3. `ezwarps.handle_player_move(player_id, x, y, z)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 71
+- **Declaration:** assigned/declared
 
-### `players_in_animations` *(line 32)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `z` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `ezwarps.handle_player_disconnect(player_id)`
 
-### `warp_types_with_landings` *(line 33)*
+- **Line:** 75
+- **Declaration:** assigned/declared
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"Server Warp"` |
-| `[2]` | string literal | `"Custom Warp"` |
-| `[3]` | string literal | `"Interact Warp"` |
-| `[4]` | string literal | `"Radius Warp"` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-### `new_landing` *(line 56)*
+#### 5. `table_has_value(table, val)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `area_id` | expression/reference | `area_id` |
-| `warp_in` | expression/reference | `warp_in` |
-| `x` | expression/reference | `x` |
-| `y` | expression/reference | `y` |
-| `z` | expression/reference | `z` |
-| `pre_animation_x` | expression/reference | `x` |
-| `pre_animation_y` | expression/reference | `y` |
-| `pre_animation_z` | expression/reference | `z` |
-| `direction` | expression/reference | `direction` |
-| `arrival_animation` | expression/reference | `arrival_animation` |
+- **Line:** 79
+- **Declaration:** assigned/declared
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `table` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `val` | Declared directly in the current Lua. Type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezwarps/main.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 6. `log(message)`
+
+- **Line:** 89
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `message` | Declared directly in the current Lua. Type not inferred. |
+
+#### 7. `property_is_true(value)`
+
+- **Line:** 95
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `value` | Declared directly in the current Lua. Type not inferred. |
+
+#### 8. `add_landing(area_id, incoming_data, x, y, z, direction, warp_in, arrival_animation)`
+
+- **Line:** 99
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `incoming_data` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `z` | Declared directly in the current Lua. Type not inferred. |
+| 6 | `direction` | Declared directly in the current Lua. Type not inferred. |
+| 7 | `warp_in` | Declared directly in the current Lua. Type not inferred. |
+| 8 | `arrival_animation` | Declared directly in the current Lua. Type not inferred. |
+
+#### 9. `doAnimationForWarp(player_id,animation_name,is_leave_animation,warp_object)`
+
+- **Line:** 117
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `animation_name` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `is_leave_animation` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `warp_object` | Declared directly in the current Lua. Type not inferred. |
+
+#### 10. `add_interact_warp(object, object_id, area_id, area_name)`
+
+- **Line:** 136
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `area_name` | Declared directly in the current Lua. Type not inferred. |
+
+#### 11. `add_radius_warp(object, object_id, area_id, area_name)`
+
+- **Line:** 149
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `area_name` | Declared directly in the current Lua. Type not inferred. |
+
+#### 12. `add_custom_warp(object, object_id, area_id, area_name)`
+
+- **Line:** 166
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `area_name` | Declared directly in the current Lua. Type not inferred. |
+
+#### 13. `process_warp_object(area_id, object)`
+
+- **Line:** 186
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object` | Declared directly in the current Lua. Type not inferred. |
+
+#### 14. `prepare_player_arrival(player_id,x,y,z,special_animation_name)`
+
+- **Line:** 211
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `z` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `special_animation_name` | Declared directly in the current Lua. Type not inferred. |
+
+#### 15. `ezwarps.handle_player_request(player_id, data)`
+
+- **Line:** 228
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `data` | Declared directly in the current Lua. Type not inferred. |
+
+#### 16. `use_warp(player_id,warp_object,warp_meta)`
+
+- **Line:** 246
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `warp_object` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `warp_meta` | Declared directly in the current Lua. Type not inferred. |
+
+#### 17. `ezwarps.handle_custom_warp(player_id, object_id)`
+
+- **Line:** 362
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 18. `ezwarps.handle_player_join(player_id)`
+
+- **Line:** 393
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 19. `ezwarps.player_is_in_animation(player_id)`
+
+- **Line:** 402
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 20. `ezwarps.handle_player_transfer(player_id)`
+
+- **Line:** 409
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 12 | `ezwarps` |
+| 15 | `special_animations` |
+| 32 | `landings` |
+| 33 | `player_animations` |
+| 34 | `players_in_animations` |
+| 35 | `warp_types_with_landings` |
+| 42 | `return_warp_guards` |
+| 100 | `new_landing` |
+| 254 | `from_position` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.get_area_name` | 3 | 198 |
+| `Net.get_player_area` | 3 | 72 |
+| `Net.get_player_position` | 2 | 252 |
+| `Net.transfer_player` | 3 | 238 |
+| `Net.transfer_server` | 1 | 318 |

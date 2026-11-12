@@ -1,17 +1,26 @@
+local PlayerControl = require("scripts/player-control/main")
 --[[
 * ---------------------------------------------------------- *
              CyberSimon Says (minigame) by Indiana
-     (patched: lock/unlock input only, virtual_input gameplay)
+     (PlayerControl capture, facing/placement, and sprite-safe jitter)
 * ---------------------------------------------------------- *
 ]]--
 
+local createLogger = require("scripts/logger/logger").createLogger
+
+local Log = createLogger({  
+    filePath = "scripts/_DEBUGGING/Simon-Says/_FULL-log.log",
+    minLevel = "debug",
+    flushInterval = 5.0,
+    maxBufferSize = 50,
+    logIfChanged = true,  
+})
+
 local games = require("scripts/net-games/main")
-local InputAPI = require("scripts/input-controller/main")
 
 local simon_cache = {}
 local simon_players = {}
 local simon_optional_properties = { "NPC", "NPC Mug", "Time", "Limit" }
-local Logger = require("scripts/persistence/persistence")("scripts/_DEBUGGING/Simon-Says/_DEV_Simon-Says.json")
 
 local defaults = {
   time_limit = 60,
@@ -20,7 +29,6 @@ local defaults = {
   total_answers = 60
 }
 
--- Shorthand for async/await
 local function async(p)
   local co = coroutine.create(p)
   return Async.promisify(co)
@@ -41,6 +49,24 @@ end
 --=====================================================
 local INPUT_CHOICES = { "Interact", "Shoulder L","Shoulder R", "Move Down", "Move Left", "Move Right", "Move Up" }
 
+-- Overlay Z band.
+--
+-- Cosmetic bots ride at player.z + 3 (see net-games set_cosmetic). Overlays
+-- must clear that band so cosmetics don't occlude them, but the engine also
+-- couples Z with a visual (-Z/2, -Z/2) map-space shift (see
+-- net-games convertOffsets). So whenever we raise Z above the original
+-- (working) baseline, we must add +lift/2 to map X and Y to keep the sprite
+-- in the same visual screen position.
+--
+-- Both overlays are lifted by the same amount (4 units) to preserve their
+-- original 2-unit relative offset (chat was at +0, indicator was at +2).
+local OVERLAY_Z_LIFT       = 4
+local OVERLAY_XY_COMP        = OVERLAY_Z_LIFT / 2   -- = 2
+
+-- Original (pre-cosmetic) indicator Z relative to simon.z. Keep this so the
+-- indicator's vertical spacing relative to the chat is preserved.
+local INDICATOR_ORIGINAL_Z_OFFSET = 2
+
 local INDICATOR_STATE = {
   ["Interact"]   = "A",
   ["Confirm"]    = "A",
@@ -55,6 +81,81 @@ local INDICATOR_STATE = {
 local function is_simon_button(name)
   return name == "Interact" or name == "Confirm" or name == "Shoulder L" or name == "Shoulder R"
       or name == "Move Up" or name == "Move Down" or name == "Move Left" or name == "Move Right"
+end
+
+-- Simon's spawned bot always plays IDLE_DR (Down Right); in ONB's map-space
+-- coordinates this faces +X. Set the player on that side and have them look
+-- back Up Left. Only use player movement/animation APIs already used by the
+-- rest of this server; no same-area transfer is needed.
+local SIMON_FRONT_X = 1
+local SIMON_FRONT_Y = 0
+local SIMON_PLAYER_IDLE = "IDLE_UL"
+
+local IDLE_BY_DIRECTION = {
+  ["Up Left"] = "IDLE_UL", ["Up Right"] = "IDLE_UR",
+  ["Down Left"] = "IDLE_DL", ["Down Right"] = "IDLE_DR",
+}
+
+local function move_player_to(player_id, x, y, z)
+  for _, method in ipairs({"move_player", "set_player_position"}) do
+    local fn = Net[method]
+    if type(fn) == "function" then
+      local ok, result = pcall(fn, player_id, x, y, z)
+      if ok and result ~= false then return true end
+    end
+  end
+  return false
+end
+
+local function position_player_for_simon(player_id, simon, p)
+  local x = simon.x + SIMON_FRONT_X
+  local y = simon.y + SIMON_FRONT_Y
+  local z = simon.z
+  if not move_player_to(player_id, x, y, z) then
+    Log:warn("Unable to position player in front of Simon", {player_id=player_id, area=p.area})
+    return false
+  end
+  p.positioned = true
+  -- This sets the visible facing even while native movement is locked.
+  Net.animate_player(player_id, SIMON_PLAYER_IDLE, true)
+  Log:debug("Placed player in front of Simon", {player_id=player_id, x=x, y=y, z=z, facing=SIMON_PLAYER_IDLE})
+  return true
+end
+
+local function restore_player_placement(player_id, p)
+  if not p or not p.positioned or not p["return"] then return end
+  local pos = p["return"]
+  if move_player_to(player_id, pos.x, pos.y, pos.z) then
+    local idle = IDLE_BY_DIRECTION[p.return_direction]
+    if idle then Net.animate_player(player_id, idle, true) end
+  else
+    Log:warn("Could not restore Simon Says entry position", {player_id=player_id})
+  end
+end
+
+-- Net.move_bot changes a bot's walking state; this indicator's WALK states
+-- deliberately have no frames. Jitter its world X/Y *sprite properties*
+-- instead, explicitly pinning the chosen frame on every keyframe. This avoids
+-- revealing the full indicators.png sheet after a wrong answer.
+local function jiggle_indicator(player_id, simon, indicator_state)
+  local bot_id = player_id .. "-map-indicator"
+  local base_x = simon.x - 0.1 + OVERLAY_XY_COMP
+  local base_y = simon.y - 0.9 + OVERLAY_XY_COMP
+  local offsets = {
+    {-0.025, 0.025}, {0, 0}, {0.025, -0.05}, {0, 0},
+  }
+  local keyframes = {}
+  for _, off in ipairs(offsets) do
+    keyframes[#keyframes + 1] = {
+      properties = {
+        {property="Animation", value=indicator_state},
+        {property="X", value=base_x + off[1]},
+        {property="Y", value=base_y + off[2]},
+      },
+      duration = 0.1,
+    }
+  end
+  Net.animate_bot_properties(bot_id, keyframes)
 end
 
 --=====================================================
@@ -120,10 +221,8 @@ local function spawn_simon()
           solid=true,
           warp_in=false
         })
-        Logger:load():and_then(function ()
-          Logger:setKey(area_id .. "_simon", {Spawned = true, PlayersWhoPlayed = {}})
-          Logger:save()  
-        end)
+        Log:debug("Server booted")
+        Log:debug("Created Simon Bot")
       end
     end
   end
@@ -131,7 +230,6 @@ end
 
 spawn_simon()
 
--- Cleanup on disconnect (release occupancy + stop any half-running session)
 Net:on("player_disconnect", function(event)
   local pid = event.player_id
   local p = simon_players[pid]
@@ -178,19 +276,18 @@ local function simon_says_press(player_id)
       "/server/assets/simon-says/indicators.png",
       "/server/assets/simon-says/indicators.animation",
       indicator_state,
-      simon.x - 0.1,
-      simon.y - 0.9,
-      simon.z + 2
+      simon.x - 0.1 + OVERLAY_XY_COMP,
+      simon.y - 0.9 + OVERLAY_XY_COMP,
+      simon.z + INDICATOR_ORIGINAL_Z_OFFSET + OVERLAY_Z_LIFT
     )
-
-    -- IMPORTANT: do NOT unlock input here. Game is played via virtual_input while locked.
   end)
 end
 
 local function end_game_cleanup(player_id, reason, simon)
   return async(function()
-    -- stop prompt loop
     local p = simon_players[player_id]
+    Log:debug(tostring(player_id) .. " " .. reason, {score = p and p.score or 0})
+    
     if p then p.active = false end
 
     Net.fade_player_camera(player_id, {r=0,g=0,b=0,a=255}, 0.5)
@@ -202,7 +299,8 @@ local function end_game_cleanup(player_id, reason, simon)
     games.remove_countdown("simon_says", player_id)
     games.remove_text("simon_says_answers", player_id)
 
-    Net.toggle_player_hud(player_id)
+    restore_player_placement(player_id, p)
+    PlayerControl.restore_hud(player_id, "simon-says")
 
     Net.fade_player_camera(player_id, {r=0,g=0,b=0,a=0}, 0.5)
     await(Async.sleep(0.75))
@@ -210,7 +308,7 @@ local function end_game_cleanup(player_id, reason, simon)
     if simon then simon.occupied = false end
     simon_players[player_id] = nil
 
-    Net.unlock_player_input(player_id)
+    PlayerControl.release_capture(player_id, "simon-says")
   end)
 end
 
@@ -250,8 +348,8 @@ local function greet_simon(actor_id, player_id)
       return
     end
 
-    -- Setup phase: lock so nothing weird happens while we fade/toggle HUD/UI
-    Net.lock_player_input(player_id)
+    PlayerControl.acquire_capture(player_id, "simon-says")
+    Log:debug(player_id.." Played with simon")
 
     simon_players[player_id] = simon_players[player_id] or {}
     local p = simon_players[player_id]
@@ -260,12 +358,15 @@ local function greet_simon(actor_id, player_id)
     p.score = 0
     p.active = false
     p.current = nil
-    p["return"] = Net.get_player_position(player_id) -- kept, even though we don't move them
+    p["return"] = Net.get_player_position(player_id)
+    p.return_direction = Net.get_player_direction(player_id)
+    p.positioned = false
 
     Net.fade_player_camera(player_id, {r=0,g=0,b=0,a=255}, 0.5)
     await(Async.sleep(0.75))
 
-    Net.toggle_player_hud(player_id)
+    PlayerControl.suppress_hud(player_id, "simon-says")
+    position_player_for_simon(player_id, simon, p)
 
     games.add_ui_element(
       "board",
@@ -276,20 +377,18 @@ local function greet_simon(actor_id, player_id)
       2, 2, 100
     )
 
-    -- FIXED: Updated to match new framework API (removed +1 from duration)
     games.spawn_countdown("simon_says", player_id, 22, 15, tonumber(simon.custom_properties["Time"]), false)
     await(Async.sleep(0.1))
     games.pause_countdown("simon_says", player_id)
 
-    -- FIXED: Added scale parameter (2.0) to match new framework API
     games.draw_text("simon_says_answers", player_id, "00", 32, 39, 100, "THICK", 2.0)
 
     Net.fade_player_camera(player_id, {r=0,g=0,b=0,a=0}, 0.5)
     await(Async.sleep(0.75))
 
-    -- Allow dialogue to advance normally
-    Net.unlock_player_input(player_id)
-
+    -- Keep native movement locked while the board and instructions are
+    -- visible. Textboxes still receive native Confirm, just as the existing
+    -- winning/losing dialogs do while this capture is active.
     Net.message_player(player_id, "Now it's time for... \"CyberSimon Says\"! Yeahh! Whoo! Whoo!",
       simon.custom_properties["NPC Mug Texture"], simon.custom_properties["NPC Mug Animation"])
     Net.message_player(player_id, "All you have to do is push the button that I tell you to!",
@@ -312,15 +411,13 @@ local function greet_simon(actor_id, player_id)
       "/server/assets/simon-says/chat.png",
       "/server/assets/simon-says/chat.animation",
       "UI",
-      simon.x - 0.8,
-      simon.y - 1.1,
-      simon.z
+      simon.x - 0.8 + OVERLAY_XY_COMP,
+      simon.y - 1.1 + OVERLAY_XY_COMP,
+      simon.z + OVERLAY_Z_LIFT
     )
 
-    -- NOW start the minigame:
-    -- lock input so movement stops AND virtual_input events fire
-    Net.lock_player_input(player_id)
-
+    -- The capture acquired before showing the UI remains active throughout
+    -- the countdown, game, and end sequence; don't duplicate/release it here.
     games.resume_countdown("simon_says", player_id)
 
     await(Async.sleep(0.05))
@@ -328,32 +425,24 @@ local function greet_simon(actor_id, player_id)
   end)
 end
 
--- Talk to Simon bot
 Net:on("actor_interaction", function(event)
   if event.button == 0 and string.find(event.actor_id, "-simon-") then
     greet_simon(event.actor_id, event.player_id)
-  
   end
 end)
 
--- Main gameplay input: virtual_input ONLY (because we keep the player locked)
 Net:on("virtual_input", function(event)
   return async(function()
     local pid = event.player_id
-    local controller = InputAPI.get_controller(pid)
-    if controller and controller:get_input_owner() ~= nil then return end
     local p = simon_players[pid]
     if not p or p.active ~= true then return end
 
-    -- Only process one valid press per prompt.
-    -- We treat state==1 (pressed) and state==4 (held repeat) as "a press".
     for _, btn in next, event.events do
       local pressed = (btn.state == 1 or btn.state == 4)
       if pressed and is_simon_button(btn.name) then
         local name = btn.name
         if name == "Confirm" then name = "Interact" end
 
-        -- consume this prompt
         p.active = false
 
         if name == p.current then
@@ -375,29 +464,25 @@ Net:on("virtual_input", function(event)
             return
           end
 
-          -- WIN
           games.pause_countdown("simon_says", pid)
           Net.play_sound_for_player(pid, "/server/assets/simon-says/succeed.ogg")
 
           await(Async.message_player(pid, "Wonderful!! Congratulations!!",
             simon.custom_properties["NPC Mug Texture"], simon.custom_properties["NPC Mug Animation"]))
 
-          await(end_game_cleanup(pid, "win", simon))
+          await(end_game_cleanup(pid, "Won", simon))
           return
 
         else
-          -- WRONG
           Net.play_sound_for_player(pid, "/server/assets/simon-says/wrong_answer.ogg")
 
           local simon = simon_cache[p.area] and simon_cache[p.area][p.actor]
           if simon then
-            local function jiggle(dx, dy)
-              games.move_map_element("indicator", pid, simon.x + dx, simon.y + dy, simon.z + 2)
-            end
-            jiggle(-0.125, -0.875); await(Async.sleep(0.1))
-            jiggle(-0.10,  -0.90 ); await(Async.sleep(0.1))
-            jiggle(-0.075, -0.95 ); await(Async.sleep(0.1))
-            jiggle(-0.10,  -0.90 ); await(Async.sleep(0.1))
+            -- Explicit world-property keyframes preserve the button's chosen
+            -- animation; moving the bot via Net.move_bot can trigger its
+            -- empty WALK states and display the entire atlas.
+            jiggle_indicator(pid, simon, INDICATOR_STATE[p.current] or "A")
+            await(Async.sleep(0.4))
           end
 
           await(Async.sleep(0.08))
@@ -409,7 +494,6 @@ Net:on("virtual_input", function(event)
   end)
 end)
 
--- Time-out loss
 Net:on("countdown_ended", function(event)
   return async(function()
     local pid = event.player_id
@@ -428,6 +512,6 @@ Net:on("countdown_ended", function(event)
       ))
     end
 
-    await(end_game_cleanup(pid, "timeout", simon))
+    await(end_game_cleanup(pid, "Lost", simon))
   end)
 end)

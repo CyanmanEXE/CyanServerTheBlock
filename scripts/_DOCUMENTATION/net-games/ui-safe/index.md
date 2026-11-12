@@ -1,76 +1,238 @@
-# `ui-safe.lua`
+# 📄 `ui-safe.lua`
 
-> **Source:** `scripts/net-games/ui-safe.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/ui-safe.lua`](../../../net-games/ui-safe.lua)  
 > **Source lines:** 164  
-> **Functions detected:** 12  
-> **Table declarations detected:** 4
+> **SHA-256 (UTF-8):** `2271b874de226e…`  
+> **Declared/assigned functions detected:** 12  
+> **Anonymous closures detected:** 1  
+> **Table initializers detected:** 5
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-scripts/net-games/ui-safe.lua Small hardened sprite helper for reusable net-games UI. Public coordinates are virtual 240x160 coordinates. Production lessons captured here: * arbitrary assets are checked before provide_asset_for_player when possible; * changing a texture/animation allocates a fresh physical sprite id to avoid stale client-side texture caching; * positions are pixel-snapped by default; * unchanged draws are not retransmitted; * all owned sprites are cleaned on disconnect.
+Small hardened sprite helper for reusable net-games UI. Public coordinates are virtual 240x160 coordinates. Production lessons captured here: * arbitrary assets are checked before provide_asset_for_player when possible; * changing a texture/animation allocates a fresh physical sprite id to avoid
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- `Net:on("player_disconnect", function(event) ...)` — line 160. The event name is taken directly from this source.
+| Line | Subscription call | Literal event name |
+|---|---|---|
+| 160 | `Net:on` | `player_disconnect` |
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 18 | `player_state` | `player_id` |
-| 23 | `confirmed_missing` | `path` |
-| 30 | `UISafe.asset_exists` | `path` |
-| 34 | `UISafe.safe_provide` | `player_id, path` |
-| 39 | `same_draw` | `a, b` |
-| 51 | `erase_entry` | `player_id, entry` |
-| 57 | `allocate_entry` | `player_id, logical_id, texture_path, anim_path, anim_state` |
-| 80 | `virtual_to_screen` | `v, pixel_snap` |
-| 86 | `UISafe.draw` | `player_id, logical_id, texture_path, options` |
-| 136 | `UISafe.erase` | `player_id, logical_id` |
-| 147 | `UISafe.cleanup_player` | `player_id` |
-| 154 | `UISafe.invalidate` | `player_id, logical_id` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 18 | `player_state` | `player_id` | local |
+| 23 | `confirmed_missing` | `path` | local |
+| 30 | `UISafe.asset_exists` | `path` | declared |
+| 34 | `UISafe.safe_provide` | `player_id, path` | declared |
+| 39 | `same_draw` | `a, b` | local |
+| 51 | `erase_entry` | `player_id, entry` | local |
+| 57 | `allocate_entry` | `player_id, logical_id, texture_path, anim_path, anim_state` | local |
+| 80 | `virtual_to_screen` | `v, pixel_snap` | local |
+| 86 | `UISafe.draw` | `player_id, logical_id, texture_path, options` | declared |
+| 136 | `UISafe.erase` | `player_id, logical_id` | declared |
+| 147 | `UISafe.cleanup_player` | `player_id` | declared |
+| 154 | `UISafe.invalidate` | `player_id, logical_id` | declared |
 
-### Function notes
+### Function details
 
-- **`player_state(player_id)`** *(source line 18)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`confirmed_missing(path)`** *(source line 23)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`UISafe.asset_exists(path)`** *(source line 30)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`UISafe.safe_provide(player_id, path)`** *(source line 34)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`same_draw(a, b)`** *(source line 39)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`erase_entry(player_id, entry)`** *(source line 51)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`allocate_entry(player_id, logical_id, texture_path, anim_path, anim_state)`** *(source line 57)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`virtual_to_screen(v, pixel_snap)`** *(source line 80)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`UISafe.draw(player_id, logical_id, texture_path, options)`** *(source line 86)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`UISafe.erase(player_id, logical_id)`** *(source line 136)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`UISafe.cleanup_player(player_id)`** *(source line 147)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`UISafe.invalidate(player_id, logical_id)`** *(source line 154)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `player_state(player_id)`
 
-## Tables and data structures
+- **Location:** source line 18.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `UISafe` *(line 12)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
 
-### `players` *(line 14)*
+#### 2. `confirmed_missing(path)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 23.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `keys` *(line 41)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-| Field / key | Value category | Initializer expression (source) |
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `path` | Not explicitly documented in adjacent source annotations. |
+
+#### 3. `UISafe.asset_exists(path)`
+
+- **Location:** source line 30.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `path` | Not explicitly documented in adjacent source annotations. |
+
+#### 4. `UISafe.safe_provide(player_id, path)`
+
+- **Location:** source line 34.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `path` | Not explicitly documented in adjacent source annotations. |
+
+#### 5. `same_draw(a, b)`
+
+- **Location:** source line 39.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `a` | Not explicitly documented in adjacent source annotations. |
+| 2 | `b` | Not explicitly documented in adjacent source annotations. |
+
+#### 6. `erase_entry(player_id, entry)`
+
+- **Location:** source line 51.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `entry` | Not explicitly documented in adjacent source annotations. |
+
+#### 7. `allocate_entry(player_id, logical_id, texture_path, anim_path, anim_state)`
+
+- **Location:** source line 57.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `logical_id` | Not explicitly documented in adjacent source annotations. |
+| 3 | `texture_path` | Not explicitly documented in adjacent source annotations. |
+| 4 | `anim_path` | Not explicitly documented in adjacent source annotations. |
+| 5 | `anim_state` | Not explicitly documented in adjacent source annotations. |
+
+#### 8. `virtual_to_screen(v, pixel_snap)`
+
+- **Location:** source line 80.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `v` | Not explicitly documented in adjacent source annotations. |
+| 2 | `pixel_snap` | Not explicitly documented in adjacent source annotations. |
+
+#### 9. `UISafe.draw(player_id, logical_id, texture_path, options)`
+
+- **Location:** source line 86.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `logical_id` | Not explicitly documented in adjacent source annotations. |
+| 3 | `texture_path` | Not explicitly documented in adjacent source annotations. |
+| 4 | `options` | Not explicitly documented in adjacent source annotations. |
+
+#### 10. `UISafe.erase(player_id, logical_id)`
+
+- **Location:** source line 136.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `logical_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 11. `UISafe.cleanup_player(player_id)`
+
+- **Location:** source line 147.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+
+#### 12. `UISafe.invalidate(player_id, logical_id)`
+
+- **Location:** source line 154.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `logical_id` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+These are anonymous `function(...)` expressions, including inline callbacks. Their argument lists are taken verbatim from source; lexical context is descriptive text, not a claim about execution.
+
+| Line | Arguments | Preceding source context |
+|---|---|---|
+| 160 | `event` | `ring(logical_id)] if entry then entry.last_draw = nil end end Net:on("player_disconn…` |
+
+## 📦 Tables and data
+
+The following **5** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `UISafe` — line 13
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `players` — line 15
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 3. `keys` — line 41
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | string literal | `"x"` |
 | `[2]` | string literal | `"y"` |
@@ -88,15 +250,24 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `[14]` | string literal | `"color_mode"` |
 | `[15]` | string literal | `"anim_state"` |
 
-### `draw` *(line 106)*
+### 4. `return` — line 70
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `logical_id` | expression/reference | `logical_id` |
+| `draw_id` | string literal | `"ngui_draw_" .. tostring(logical_id)` |
+| `sprite_id` | expression/reference | `sprite_id` |
+| `texture_path` | expression/reference | `texture_path` |
+| `anim_path` | expression/reference | `anim_path or ""` |
+| `last_draw` | nil | `nil` |
+
+### 5. `draw` — line 107
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `id` | expression/reference | `entry.draw_id` |
-| `x` | call/expression | `virtual_to_screen(options.x` |
-| `[3]` | expression/reference | `options.pixel_snap)` |
-| `y` | call/expression | `virtual_to_screen(options.y` |
-| `[5]` | expression/reference | `options.pixel_snap)` |
+| `x` | expression/reference | `virtual_to_screen(options.x, options.pixel_snap)` |
+| `y` | expression/reference | `virtual_to_screen(options.y, options.pixel_snap)` |
 | `z` | expression/reference | `options.z or 100` |
 | `sx` | expression/reference | `options.sx or options.scale or 2.0` |
 | `sy` | expression/reference | `options.sy or options.scale or options.sx or 2.0` |
@@ -111,9 +282,18 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `color_mode` | expression/reference | `options.color_mode or 0` |
 | `anim_state` | expression/reference | `options.anim_state or ""` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/net-games/ui-safe.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+These are **statically detected call sites**, not API definitions or guaranteed successful runtime calls.
+
+| Call identifier | Occurrences |
+|---|---|
+| `Net.on` | 1 |
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

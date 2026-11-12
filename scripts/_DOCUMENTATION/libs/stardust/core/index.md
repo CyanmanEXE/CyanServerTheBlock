@@ -1,199 +1,885 @@
-# `core.lua`
+# 📄 `core.lua`
 
-> **Source:** `scripts/libs/stardust/core.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/libs/stardust/core.lua`](../../../../libs/stardust/core.lua)  
 > **Source lines:** 625  
-> **Functions detected:** 55  
-> **Table declarations detected:** 12
+> **SHA-256 (UTF-8):** `6c408136310398…`  
+> **Declared/assigned functions detected:** 55  
+> **Anonymous closures detected:** 1  
+> **Table initializers detected:** 15
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-[[
+Source-based reference for `scripts/libs/stardust/core.lua`. No module-purpose prose was supplied in the leading source comments.
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- `Net:on("tick", function(event) ...)` — line 618. The event name is taken directly from this source.
+| Line | Subscription call | Literal event name |
+|---|---|---|
+| 618 | `Net:on` | `tick` |
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 37 | `linear` | `x` |
-| 38 | `square` | `x` |
-| 39 | `cubic` | `x` |
-| 41 | `vec_one` | `(none)` |
-| 48 | `vec_zero` | `(none)` |
-| 55 | `ensure_val_or` | `c, val` |
-| 63 | `ensure_vector_or` | `v, val` |
-| 79 | `ensure_config` | `c` |
-| 101 | `resolve_mode` | `m` |
-| 109 | `system` | `opts` |
-| 132 | `lerp_scalar` | `w, s1, s2` |
-| 138 | `lerp_integer` | `w, s1, s2` |
-| 142 | `lerp_vec` | `w1, w2, v1, v2` |
-| 149 | `rand_scalar` | `s1, s2` |
-| 153 | `rand_vec` | `v1, v2` |
-| 157 | `respawn` | `sys, p` |
-| 252 | `tick_ani` | `sys, p` |
-| 316 | `t.config` | `self, opts` |
-| 335 | `t.spawn` | `self, a, b` |
-| 342 | `t.frames` | `self, a, b` |
-| 349 | `t.start_x` | `self, a, b` |
-| 356 | `t.start_y` | `self, a, b` |
-| 363 | `t.vel_x` | `self, a, b, mode` |
-| 372 | `t.vel_y` | `self, a, b, mode` |
-| 381 | `t.acc_x` | `self, a, b, mode` |
-| 390 | `t.acc_y` | `self, a, b, mode` |
-| 399 | `t.scl_x` | `self, a, b, mode` |
-| 408 | `t.scl_y` | `self, a, b, mode` |
-| 417 | `t.ach` | `self, a, b, mode` |
-| 426 | `t.rch` | `self, a, b, mode` |
-| 435 | `t.gch` | `self, a, b, mode` |
-| 444 | `t.bch` | `self, a, b, mode` |
-| 453 | `t.fco_x` | `self, a, b` |
-| 460 | `t.fco_y` | `self, a, b` |
-| 467 | `t.delay` | `self, a, b` |
-| 475 | `t.limit` | `self, limit` |
-| 480 | `t.rand_fco` | `self` |
-| 484 | `t.rand_acc` | `self` |
-| 488 | `t.rand_vel` | `self` |
-| 492 | `t.rand_pos` | `self` |
-| 496 | `t.rand_scl` | `self` |
-| 500 | `t.rand_cnt` | `self` |
-| 504 | `t.rand_rot` | `self` |
-| 509 | `t.rand_ach` | `self` |
-| 513 | `t.rand_rch` | `self` |
-| 517 | `t.rand_gch` | `self` |
-| 521 | `t.rand_bch` | `self` |
-| 525 | `t.rand_spn` | `self` |
-| 529 | `t.rand_del` | `self` |
-| 533 | `t.tick` | `self` |
-| 565 | `t.apply` | `self, force` |
-| 575 | `t.build` | `self` |
-| 583 | `t.destroy` | `self` |
-| 587 | `t.gen` | `self, count` |
-| 605 | `t.for_each` | `self, fn` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 37 | `linear` | `x` | assigned |
+| 38 | `square` | `x` | assigned |
+| 39 | `cubic` | `x` | assigned |
+| 42 | `vec_one` | `(none)` | assigned |
+| 49 | `vec_zero` | `(none)` | assigned |
+| 56 | `ensure_val_or` | `c, val` | assigned |
+| 64 | `ensure_vector_or` | `v, val` | assigned |
+| 80 | `ensure_config` | `c` | assigned |
+| 102 | `resolve_mode` | `m` | assigned |
+| 110 | `system` | `opts` | assigned |
+| 133 | `lerp_scalar` | `w, s1, s2` | assigned |
+| 139 | `lerp_integer` | `w, s1, s2` | assigned |
+| 143 | `lerp_vec` | `w1, w2, v1, v2` | assigned |
+| 150 | `rand_scalar` | `s1, s2` | assigned |
+| 154 | `rand_vec` | `v1, v2` | assigned |
+| 158 | `respawn` | `sys, p` | assigned |
+| 253 | `tick_ani` | `sys, p` | assigned |
+| 317 | `t.config` | `self, opts` | assigned |
+| 336 | `t.spawn` | `self, a, b` | assigned |
+| 343 | `t.frames` | `self, a, b` | assigned |
+| 350 | `t.start_x` | `self, a, b` | assigned |
+| 357 | `t.start_y` | `self, a, b` | assigned |
+| 364 | `t.vel_x` | `self, a, b, mode` | assigned |
+| 373 | `t.vel_y` | `self, a, b, mode` | assigned |
+| 382 | `t.acc_x` | `self, a, b, mode` | assigned |
+| 391 | `t.acc_y` | `self, a, b, mode` | assigned |
+| 400 | `t.scl_x` | `self, a, b, mode` | assigned |
+| 409 | `t.scl_y` | `self, a, b, mode` | assigned |
+| 418 | `t.ach` | `self, a, b, mode` | assigned |
+| 427 | `t.rch` | `self, a, b, mode` | assigned |
+| 436 | `t.gch` | `self, a, b, mode` | assigned |
+| 445 | `t.bch` | `self, a, b, mode` | assigned |
+| 454 | `t.fco_x` | `self, a, b` | assigned |
+| 461 | `t.fco_y` | `self, a, b` | assigned |
+| 468 | `t.delay` | `self, a, b` | assigned |
+| 476 | `t.limit` | `self, limit` | assigned |
+| 481 | `t.rand_fco` | `self` | assigned |
+| 485 | `t.rand_acc` | `self` | assigned |
+| 489 | `t.rand_vel` | `self` | assigned |
+| 493 | `t.rand_pos` | `self` | assigned |
+| 497 | `t.rand_scl` | `self` | assigned |
+| 501 | `t.rand_cnt` | `self` | assigned |
+| 505 | `t.rand_rot` | `self` | assigned |
+| 510 | `t.rand_ach` | `self` | assigned |
+| 514 | `t.rand_rch` | `self` | assigned |
+| 518 | `t.rand_gch` | `self` | assigned |
+| 522 | `t.rand_bch` | `self` | assigned |
+| 526 | `t.rand_spn` | `self` | assigned |
+| 530 | `t.rand_del` | `self` | assigned |
+| 534 | `t.tick` | `self` | assigned |
+| 566 | `t.apply` | `self, force` | assigned |
+| 576 | `t.build` | `self` | assigned |
+| 584 | `t.destroy` | `self` | assigned |
+| 588 | `t.gen` | `self, count` | assigned |
+| 606 | `t.for_each` | `self, fn` | assigned |
 
-### Function notes
+### Function details
 
-- **`linear(x)`** *(source line 37)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`square(x)`** *(source line 38)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`cubic(x)`** *(source line 39)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`vec_one()`** *(source line 41)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`vec_zero()`** *(source line 48)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ensure_val_or(c, val)`** *(source line 55)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ensure_vector_or(v, val)`** *(source line 63)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ensure_config(c)`** *(source line 79)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`resolve_mode(m)`** *(source line 101)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`system(opts)`** *(source line 109)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`lerp_scalar(w, s1, s2)`** *(source line 132)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`lerp_integer(w, s1, s2)`** *(source line 138)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`lerp_vec(w1, w2, v1, v2)`** *(source line 142)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`rand_scalar(s1, s2)`** *(source line 149)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`rand_vec(v1, v2)`** *(source line 153)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`respawn(sys, p)`** *(source line 157)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`tick_ani(sys, p)`** *(source line 252)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.config(self, opts)`** *(source line 316)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.spawn(self, a, b)`** *(source line 335)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.frames(self, a, b)`** *(source line 342)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.start_x(self, a, b)`** *(source line 349)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.start_y(self, a, b)`** *(source line 356)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.vel_x(self, a, b, mode)`** *(source line 363)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.vel_y(self, a, b, mode)`** *(source line 372)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.acc_x(self, a, b, mode)`** *(source line 381)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.acc_y(self, a, b, mode)`** *(source line 390)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.scl_x(self, a, b, mode)`** *(source line 399)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.scl_y(self, a, b, mode)`** *(source line 408)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.ach(self, a, b, mode)`** *(source line 417)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rch(self, a, b, mode)`** *(source line 426)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.gch(self, a, b, mode)`** *(source line 435)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.bch(self, a, b, mode)`** *(source line 444)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.fco_x(self, a, b)`** *(source line 453)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.fco_y(self, a, b)`** *(source line 460)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.delay(self, a, b)`** *(source line 467)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.limit(self, limit)`** *(source line 475)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_fco(self)`** *(source line 480)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_acc(self)`** *(source line 484)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_vel(self)`** *(source line 488)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_pos(self)`** *(source line 492)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_scl(self)`** *(source line 496)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_cnt(self)`** *(source line 500)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_rot(self)`** *(source line 504)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_ach(self)`** *(source line 509)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_rch(self)`** *(source line 513)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_gch(self)`** *(source line 517)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_bch(self)`** *(source line 521)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_spn(self)`** *(source line 525)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.rand_del(self)`** *(source line 529)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.tick(self)`** *(source line 533)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.apply(self, force)`** *(source line 565)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.build(self)`** *(source line 575)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.destroy(self)`** *(source line 583)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.gen(self, count)`** *(source line 587)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`t.for_each(self, fn)`** *(source line 605)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `linear(x)`
 
-## Tables and data structures
+- **Location:** source line 37.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `system_set` *(line 32)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `x` | Not explicitly documented in adjacent source annotations. |
 
-### `Presets` *(line 34)*
+#### 2. `square(x)`
 
-| Field / key | Value category | Initializer expression (source) |
+- **Location:** source line 38.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `x` | Not explicitly documented in adjacent source annotations. |
+
+#### 3. `cubic(x)`
+
+- **Location:** source line 39.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `x` | Not explicitly documented in adjacent source annotations. |
+
+#### 4. `vec_one()`
+
+- **Location:** source line 42.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+#### 5. `vec_zero()`
+
+- **Location:** source line 49.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+#### 6. `ensure_val_or(c, val)`
+
+- **Location:** source line 56.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `c` | Not explicitly documented in adjacent source annotations. |
+| 2 | `val` | Not explicitly documented in adjacent source annotations. |
+
+#### 7. `ensure_vector_or(v, val)`
+
+- **Location:** source line 64.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `v` | Not explicitly documented in adjacent source annotations. |
+| 2 | `val` | Not explicitly documented in adjacent source annotations. |
+
+#### 8. `ensure_config(c)`
+
+- **Location:** source line 80.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `c` | Not explicitly documented in adjacent source annotations. |
+
+#### 9. `resolve_mode(m)`
+
+- **Location:** source line 102.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `m` | Not explicitly documented in adjacent source annotations. |
+
+#### 10. `system(opts)`
+
+- **Location:** source line 110.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `opts` | Not explicitly documented in adjacent source annotations. |
+
+#### 11. `lerp_scalar(w, s1, s2)`
+
+- **Location:** source line 133.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `w` | Not explicitly documented in adjacent source annotations. |
+| 2 | `s1` | Not explicitly documented in adjacent source annotations. |
+| 3 | `s2` | Not explicitly documented in adjacent source annotations. |
+
+#### 12. `lerp_integer(w, s1, s2)`
+
+- **Location:** source line 139.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `w` | Not explicitly documented in adjacent source annotations. |
+| 2 | `s1` | Not explicitly documented in adjacent source annotations. |
+| 3 | `s2` | Not explicitly documented in adjacent source annotations. |
+
+#### 13. `lerp_vec(w1, w2, v1, v2)`
+
+- **Location:** source line 143.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `w1` | Not explicitly documented in adjacent source annotations. |
+| 2 | `w2` | Not explicitly documented in adjacent source annotations. |
+| 3 | `v1` | Not explicitly documented in adjacent source annotations. |
+| 4 | `v2` | Not explicitly documented in adjacent source annotations. |
+
+#### 14. `rand_scalar(s1, s2)`
+
+- **Location:** source line 150.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `s1` | Not explicitly documented in adjacent source annotations. |
+| 2 | `s2` | Not explicitly documented in adjacent source annotations. |
+
+#### 15. `rand_vec(v1, v2)`
+
+- **Location:** source line 154.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `v1` | Not explicitly documented in adjacent source annotations. |
+| 2 | `v2` | Not explicitly documented in adjacent source annotations. |
+
+#### 16. `respawn(sys, p)`
+
+- **Location:** source line 158.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `sys` | Not explicitly documented in adjacent source annotations. |
+| 2 | `p` | Not explicitly documented in adjacent source annotations. |
+
+#### 17. `tick_ani(sys, p)`
+
+- **Location:** source line 253.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `sys` | Not explicitly documented in adjacent source annotations. |
+| 2 | `p` | Not explicitly documented in adjacent source annotations. |
+
+#### 18. `t.config(self, opts)`
+
+- **Location:** source line 317.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `opts` | Not explicitly documented in adjacent source annotations. |
+
+#### 19. `t.spawn(self, a, b)`
+
+- **Location:** source line 336.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+
+#### 20. `t.frames(self, a, b)`
+
+- **Location:** source line 343.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+
+#### 21. `t.start_x(self, a, b)`
+
+- **Location:** source line 350.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+
+#### 22. `t.start_y(self, a, b)`
+
+- **Location:** source line 357.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+
+#### 23. `t.vel_x(self, a, b, mode)`
+
+- **Location:** source line 364.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+| 4 | `mode` | Not explicitly documented in adjacent source annotations. |
+
+#### 24. `t.vel_y(self, a, b, mode)`
+
+- **Location:** source line 373.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+| 4 | `mode` | Not explicitly documented in adjacent source annotations. |
+
+#### 25. `t.acc_x(self, a, b, mode)`
+
+- **Location:** source line 382.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+| 4 | `mode` | Not explicitly documented in adjacent source annotations. |
+
+#### 26. `t.acc_y(self, a, b, mode)`
+
+- **Location:** source line 391.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+| 4 | `mode` | Not explicitly documented in adjacent source annotations. |
+
+#### 27. `t.scl_x(self, a, b, mode)`
+
+- **Location:** source line 400.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+| 4 | `mode` | Not explicitly documented in adjacent source annotations. |
+
+#### 28. `t.scl_y(self, a, b, mode)`
+
+- **Location:** source line 409.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+| 4 | `mode` | Not explicitly documented in adjacent source annotations. |
+
+#### 29. `t.ach(self, a, b, mode)`
+
+- **Location:** source line 418.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+| 4 | `mode` | Not explicitly documented in adjacent source annotations. |
+
+#### 30. `t.rch(self, a, b, mode)`
+
+- **Location:** source line 427.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+| 4 | `mode` | Not explicitly documented in adjacent source annotations. |
+
+#### 31. `t.gch(self, a, b, mode)`
+
+- **Location:** source line 436.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+| 4 | `mode` | Not explicitly documented in adjacent source annotations. |
+
+#### 32. `t.bch(self, a, b, mode)`
+
+- **Location:** source line 445.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+| 4 | `mode` | Not explicitly documented in adjacent source annotations. |
+
+#### 33. `t.fco_x(self, a, b)`
+
+- **Location:** source line 454.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+
+#### 34. `t.fco_y(self, a, b)`
+
+- **Location:** source line 461.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+
+#### 35. `t.delay(self, a, b)`
+
+- **Location:** source line 468.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `a` | Not explicitly documented in adjacent source annotations. |
+| 3 | `b` | Not explicitly documented in adjacent source annotations. |
+
+#### 36. `t.limit(self, limit)`
+
+- **Location:** source line 476.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `limit` | Not explicitly documented in adjacent source annotations. |
+
+#### 37. `t.rand_fco(self)`
+
+- **Location:** source line 481.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 38. `t.rand_acc(self)`
+
+- **Location:** source line 485.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 39. `t.rand_vel(self)`
+
+- **Location:** source line 489.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 40. `t.rand_pos(self)`
+
+- **Location:** source line 493.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 41. `t.rand_scl(self)`
+
+- **Location:** source line 497.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 42. `t.rand_cnt(self)`
+
+- **Location:** source line 501.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 43. `t.rand_rot(self)`
+
+- **Location:** source line 505.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 44. `t.rand_ach(self)`
+
+- **Location:** source line 510.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 45. `t.rand_rch(self)`
+
+- **Location:** source line 514.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 46. `t.rand_gch(self)`
+
+- **Location:** source line 518.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 47. `t.rand_bch(self)`
+
+- **Location:** source line 522.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 48. `t.rand_spn(self)`
+
+- **Location:** source line 526.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 49. `t.rand_del(self)`
+
+- **Location:** source line 530.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 50. `t.tick(self)`
+
+- **Location:** source line 534.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 51. `t.apply(self, force)`
+
+- **Location:** source line 566.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `force` | Not explicitly documented in adjacent source annotations. |
+
+#### 52. `t.build(self)`
+
+- **Location:** source line 576.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 53. `t.destroy(self)`
+
+- **Location:** source line 584.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 54. `t.gen(self, count)`
+
+- **Location:** source line 588.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `count` | Not explicitly documented in adjacent source annotations. |
+
+#### 55. `t.for_each(self, fn)`
+
+- **Location:** source line 606.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `fn` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+These are anonymous `function(...)` expressions, including inline callbacks. Their argument lists are taken verbatim from source; lexical context is descriptive text, not a claim about execution.
+
+| Line | Arguments | Preceding source context |
+|---|---|---|
+| 618 | `event` | `_idx = table.insert(system_set, t) return t:config(opts) end local DT = 0 Net:on("ti…` |
+
+## 📦 Tables and data
+
+The following **15** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `system_set` — line 33
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `Presets` — line 35
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `random` | string literal | `'random'` |
 | `linear` | function | `function(x) return x end` |
 | `square` | function | `function(x) return x*x end` |
 | `cubic` | function | `function(x) return x*x*x end` |
 
-### `v` *(line 66)*
+### 3. `return` — line 43
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `c` *(line 82)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `t` *(line 111)*
-
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `upp` | table | `{}` |
-| `low` | table | `{}` |
-| `liv` | table | `{}` |
-| `len` | number literal | `0` |
-| `del` | number literal | `0` |
-| `lim` | number literal | `1` |
-| `ani` | table | `{ vel_x=Presets.random, acc_x=Presets.random, scl_x=Presets.random, vel_y=Presets.random, acc_y=Presets.random, scl_y=Presets.random, rot=Pr…` |
+| `x` | numeric literal | `1` |
+| `y` | numeric literal | `1` |
 
-### `upp` *(line 112)*
+### 4. `return` — line 50
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `x` | numeric literal | `0` |
+| `y` | numeric literal | `0` |
 
-### `low` *(line 113)*
+### 5. `v` — line 66
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `liv` *(line 114)*
+### 6. `c` — line 82
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `ani` *(line 118)*
+### 7. `t` — line 111
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `upp` | nested table | `{}` |
+| `low` | nested table | `{}` |
+| `liv` | nested table | `{}` |
+| `len` | numeric literal | `0` |
+| `del` | numeric literal | `0` |
+| `lim` | numeric literal | `1` |
+| `ani` | nested table | `{ vel_x=Presets.random, acc_x=Presets.random, scl_x=Presets.random, vel_y=Presets.random, acc_y=Presets.random, scl_y=Presets.random, rot=Presets.random, …` |
+
+### 8. `upp` — line 112
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 9. `low` — line 113
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 10. `liv` — line 114
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 11. `ani` — line 118
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `vel_x` | expression/reference | `Presets.random` |
 | `acc_x` | expression/reference | `Presets.random` |
@@ -207,24 +893,40 @@ Table initializer detected; no simple direct-level keys could be statically enum
 | `gch` | expression/reference | `Presets.random` |
 | `bch` | expression/reference | `Presets.random` |
 
-### `v` *(line 144)*
+### 12. `v` — line 144
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `x` | expression/reference | `v2.x - v1.x` |
 | `y` | expression/reference | `v2.y - v1.y` |
 
-### `opts` *(line 319)*
+### 13. `return` — line 147
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `x` | expression/reference | `rx + v1.x` |
+| `y` | expression/reference | `ry + v1.y` |
 
-### `next` *(line 541)*
+### 14. `opts` — line 319
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-## Implementation notes
+### 15. `next` — line 542
 
-- This reference is generated from the exact archived source `scripts/libs/stardust/core.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+## ⚙️ Runtime API calls
+
+These are **statically detected call sites**, not API definitions or guaranteed successful runtime calls.
+
+| Call identifier | Occurrences |
+|---|---|
+| `Net.on` | 1 |
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

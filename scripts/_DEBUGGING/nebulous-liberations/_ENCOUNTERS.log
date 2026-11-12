@@ -1,0 +1,2295 @@
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : DEBUGLIB
+    encounter_count : 1
+    key             : DEBUGLIB
+    module_path     : ./encounters/DEBUGLIB
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 1
+    key_used  : DEBUGLIB
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 1
+    key_used  : DEBUGLIB
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 1
+    key_used  : DEBUGLIB
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 2
+    key_used  : DEBUGLIB
+    name      : BigBruteVar1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 3
+    key_used  : DEBUGLIB
+    name      : BigBruteVar2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 4
+    key_used  : DEBUGLIB
+    name      : BigBruteVar3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 5
+    key_used  : DEBUGLIB
+    name      : Mettaur
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 6
+    key_used  : DEBUGLIB
+    name      : Roll
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : LiberationNormalMode
+    encounter_count : 8
+    key             : LiberationNormalMode
+    module_path     : ./encounters/LiberationNormalMode
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 1
+    key_used  : LiberationNormalMode
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 2
+    key_used  : LiberationNormalMode
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 3
+    key_used  : LiberationNormalMode
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 4
+    key_used  : LiberationNormalMode
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 5
+    key_used  : LiberationNormalMode
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 6
+    key_used  : LiberationNormalMode
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 7
+    key_used  : LiberationNormalMode
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 8
+    key_used  : LiberationNormalMode
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 1
+    key_used  : LiberationNormalMode
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 1
+    key_used  : LiberationNormalMode
+    name      : BigBrute1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 2
+    key_used  : LiberationNormalMode
+    name      : BigBrute2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 3
+    key_used  : LiberationNormalMode
+    name      : BigBrute3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 4
+    key_used  : LiberationNormalMode
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : LiberationHardMode
+    encounter_count : 8
+    key             : LiberationHardMode
+    module_path     : ./encounters/LiberationHardMode
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 1
+    key_used  : LiberationHardMode
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 2
+    key_used  : LiberationHardMode
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 3
+    key_used  : LiberationHardMode
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 4
+    key_used  : LiberationHardMode
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 5
+    key_used  : LiberationHardMode
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 6
+    key_used  : LiberationHardMode
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 7
+    key_used  : LiberationHardMode
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 8
+    key_used  : LiberationHardMode
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 1
+    key_used  : LiberationHardMode
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 1
+    key_used  : LiberationHardMode
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 2
+    key_used  : LiberationHardMode
+    name      : BigBrute1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 3
+    key_used  : LiberationHardMode
+    name      : BigBrute2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 4
+    key_used  : LiberationHardMode
+    name      : BigBrute3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 5
+    key_used  : LiberationHardMode
+    name      : BigBrute4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : liberation1
+    encounter_count : 4
+    key             : liberation1
+    module_path     : ./encounters/liberation1
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 1
+    key_used  : liberation1
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 2
+    key_used  : liberation1
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 3
+    key_used  : liberation1
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 4
+    key_used  : liberation1
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 1
+    key_used  : liberation1
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 1
+    key_used  : liberation1
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : LiberationEasyMode
+    encounter_count : 8
+    key             : LiberationEasyMode
+    module_path     : ./encounters/LiberationEasyMode
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 1
+    key_used  : LiberationEasyMode
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 2
+    key_used  : LiberationEasyMode
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 3
+    key_used  : LiberationEasyMode
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 4
+    key_used  : LiberationEasyMode
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 5
+    key_used  : LiberationEasyMode
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 6
+    key_used  : LiberationEasyMode
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 7
+    key_used  : LiberationEasyMode
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 8
+    key_used  : LiberationEasyMode
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 1
+    key_used  : LiberationEasyMode
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 1
+    key_used  : LiberationEasyMode
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : "example liberation friendly"
+    encounter_count : 4
+    key             : "example liberation friendly"
+    module_path     : "./encounters/example liberation friendly"
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 1
+    key_used  : "example liberation friendly"
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 2
+    key_used  : "example liberation friendly"
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 3
+    key_used  : "example liberation friendly"
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 4
+    key_used  : "example liberation friendly"
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 1
+    key_used  : "example liberation friendly"
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 1
+    key_used  : "example liberation friendly"
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : NewLiberation1
+    encounter_count : 9
+    key             : NewLiberation1
+    module_path     : ./encounters/NewLiberation1
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 1
+    key_used  : NewLiberation1
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 2
+    key_used  : NewLiberation1
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 3
+    key_used  : NewLiberation1
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 4
+    key_used  : NewLiberation1
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 5
+    key_used  : NewLiberation1
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 6
+    key_used  : NewLiberation1
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 7
+    key_used  : NewLiberation1
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 8
+    key_used  : NewLiberation1
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 9
+    key_used  : NewLiberation1
+    name      : Encounter9
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 1
+    key_used  : NewLiberation1
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 1
+    key_used  : NewLiberation1
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : testground
+    encounter_count : 4
+    key             : testground
+    module_path     : ./encounters/testground
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 1
+    key_used  : testground
+    name      : testground_Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 2
+    key_used  : testground
+    name      : testground_Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 3
+    key_used  : testground
+    name      : testground_Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 4
+    key_used  : testground
+    name      : testground_Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 1
+    key_used  : testground
+    name      : testground_Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 1
+    key_used  : testground
+    name      : testground_Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : testlib
+    encounter_count : 4
+    key             : testlib
+    module_path     : ./encounters/testlib
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 1
+    key_used  : testlib
+    name      : testlib_Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 2
+    key_used  : testlib
+    name      : testlib_Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 3
+    key_used  : testlib
+    name      : testlib_Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 4
+    key_used  : testlib
+    name      : testlib_Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 1
+    key_used  : testlib
+    name      : testlib_Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:37] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 1
+    key_used  : testlib
+    name      : testlib_Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : "example liberation friendly"
+    encounter_count : 4
+    key             : "example liberation friendly"
+    module_path     : "./encounters/example liberation friendly"
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 1
+    key_used  : "example liberation friendly"
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 2
+    key_used  : "example liberation friendly"
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 3
+    key_used  : "example liberation friendly"
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 4
+    key_used  : "example liberation friendly"
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 1
+    key_used  : "example liberation friendly"
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 1
+    key_used  : "example liberation friendly"
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : testlib
+    encounter_count : 4
+    key             : testlib
+    module_path     : ./encounters/testlib
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 1
+    key_used  : testlib
+    name      : testlib_Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 2
+    key_used  : testlib
+    name      : testlib_Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 3
+    key_used  : testlib
+    name      : testlib_Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 4
+    key_used  : testlib
+    name      : testlib_Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 1
+    key_used  : testlib
+    name      : testlib_Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 1
+    key_used  : testlib
+    name      : testlib_Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : DEBUGLIB
+    encounter_count : 1
+    key             : DEBUGLIB
+    module_path     : ./encounters/DEBUGLIB
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 1
+    key_used  : DEBUGLIB
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 1
+    key_used  : DEBUGLIB
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 1
+    key_used  : DEBUGLIB
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 2
+    key_used  : DEBUGLIB
+    name      : BigBruteVar1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 3
+    key_used  : DEBUGLIB
+    name      : BigBruteVar2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 4
+    key_used  : DEBUGLIB
+    name      : BigBruteVar3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 5
+    key_used  : DEBUGLIB
+    name      : Mettaur
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 6
+    key_used  : DEBUGLIB
+    name      : Roll
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : LiberationHardMode
+    encounter_count : 8
+    key             : LiberationHardMode
+    module_path     : ./encounters/LiberationHardMode
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 1
+    key_used  : LiberationHardMode
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 2
+    key_used  : LiberationHardMode
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 3
+    key_used  : LiberationHardMode
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 4
+    key_used  : LiberationHardMode
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 5
+    key_used  : LiberationHardMode
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 6
+    key_used  : LiberationHardMode
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 7
+    key_used  : LiberationHardMode
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 8
+    key_used  : LiberationHardMode
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 1
+    key_used  : LiberationHardMode
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 1
+    key_used  : LiberationHardMode
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 2
+    key_used  : LiberationHardMode
+    name      : BigBrute1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 3
+    key_used  : LiberationHardMode
+    name      : BigBrute2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 4
+    key_used  : LiberationHardMode
+    name      : BigBrute3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 5
+    key_used  : LiberationHardMode
+    name      : BigBrute4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : NewLiberation1
+    encounter_count : 9
+    key             : NewLiberation1
+    module_path     : ./encounters/NewLiberation1
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 1
+    key_used  : NewLiberation1
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 2
+    key_used  : NewLiberation1
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 3
+    key_used  : NewLiberation1
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 4
+    key_used  : NewLiberation1
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 5
+    key_used  : NewLiberation1
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 6
+    key_used  : NewLiberation1
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 7
+    key_used  : NewLiberation1
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 8
+    key_used  : NewLiberation1
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 9
+    key_used  : NewLiberation1
+    name      : Encounter9
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 1
+    key_used  : NewLiberation1
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 1
+    key_used  : NewLiberation1
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : testground
+    encounter_count : 4
+    key             : testground
+    module_path     : ./encounters/testground
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 1
+    key_used  : testground
+    name      : testground_Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 2
+    key_used  : testground
+    name      : testground_Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 3
+    key_used  : testground
+    name      : testground_Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 4
+    key_used  : testground
+    name      : testground_Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 1
+    key_used  : testground
+    name      : testground_Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 1
+    key_used  : testground
+    name      : testground_Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : LiberationNormalMode
+    encounter_count : 8
+    key             : LiberationNormalMode
+    module_path     : ./encounters/LiberationNormalMode
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 1
+    key_used  : LiberationNormalMode
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 2
+    key_used  : LiberationNormalMode
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 3
+    key_used  : LiberationNormalMode
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 4
+    key_used  : LiberationNormalMode
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 5
+    key_used  : LiberationNormalMode
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 6
+    key_used  : LiberationNormalMode
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 7
+    key_used  : LiberationNormalMode
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 8
+    key_used  : LiberationNormalMode
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 1
+    key_used  : LiberationNormalMode
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 1
+    key_used  : LiberationNormalMode
+    name      : BigBrute1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 2
+    key_used  : LiberationNormalMode
+    name      : BigBrute2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 3
+    key_used  : LiberationNormalMode
+    name      : BigBrute3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 4
+    key_used  : LiberationNormalMode
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : LiberationEasyMode
+    encounter_count : 8
+    key             : LiberationEasyMode
+    module_path     : ./encounters/LiberationEasyMode
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 1
+    key_used  : LiberationEasyMode
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 2
+    key_used  : LiberationEasyMode
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 3
+    key_used  : LiberationEasyMode
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 4
+    key_used  : LiberationEasyMode
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 5
+    key_used  : LiberationEasyMode
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 6
+    key_used  : LiberationEasyMode
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 7
+    key_used  : LiberationEasyMode
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 8
+    key_used  : LiberationEasyMode
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 1
+    key_used  : LiberationEasyMode
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 1
+    key_used  : LiberationEasyMode
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : liberation1
+    encounter_count : 4
+    key             : liberation1
+    module_path     : ./encounters/liberation1
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 1
+    key_used  : liberation1
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 2
+    key_used  : liberation1
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 3
+    key_used  : liberation1
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 4
+    key_used  : liberation1
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 1
+    key_used  : liberation1
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:21:47] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 1
+    key_used  : liberation1
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : "example liberation friendly"
+    encounter_count : 4
+    key             : "example liberation friendly"
+    module_path     : "./encounters/example liberation friendly"
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 1
+    key_used  : "example liberation friendly"
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 2
+    key_used  : "example liberation friendly"
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 3
+    key_used  : "example liberation friendly"
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 4
+    key_used  : "example liberation friendly"
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 1
+    key_used  : "example liberation friendly"
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : "example liberation friendly"
+    area_name : "Template Lib"
+    index     : 1
+    key_used  : "example liberation friendly"
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : testlib
+    encounter_count : 4
+    key             : testlib
+    module_path     : ./encounters/testlib
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 1
+    key_used  : testlib
+    name      : testlib_Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 2
+    key_used  : testlib
+    name      : testlib_Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 3
+    key_used  : testlib
+    name      : testlib_Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 4
+    key_used  : testlib
+    name      : testlib_Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 1
+    key_used  : testlib
+    name      : testlib_Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testlib
+    area_name : PracticeArea
+    index     : 1
+    key_used  : testlib
+    name      : testlib_Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : LiberationEasyMode
+    encounter_count : 8
+    key             : LiberationEasyMode
+    module_path     : ./encounters/LiberationEasyMode
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 1
+    key_used  : LiberationEasyMode
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 2
+    key_used  : LiberationEasyMode
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 3
+    key_used  : LiberationEasyMode
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 4
+    key_used  : LiberationEasyMode
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 5
+    key_used  : LiberationEasyMode
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 6
+    key_used  : LiberationEasyMode
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 7
+    key_used  : LiberationEasyMode
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 8
+    key_used  : LiberationEasyMode
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 1
+    key_used  : LiberationEasyMode
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationEasyMode
+    area_name : LibEasy
+    index     : 1
+    key_used  : LiberationEasyMode
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : liberation1
+    encounter_count : 4
+    key             : liberation1
+    module_path     : ./encounters/liberation1
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 1
+    key_used  : liberation1
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 2
+    key_used  : liberation1
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 3
+    key_used  : liberation1
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 4
+    key_used  : liberation1
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 1
+    key_used  : liberation1
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : liberation1
+    area_name : Undernet2
+    index     : 1
+    key_used  : liberation1
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : LiberationHardMode
+    encounter_count : 8
+    key             : LiberationHardMode
+    module_path     : ./encounters/LiberationHardMode
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 1
+    key_used  : LiberationHardMode
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 2
+    key_used  : LiberationHardMode
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 3
+    key_used  : LiberationHardMode
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 4
+    key_used  : LiberationHardMode
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 5
+    key_used  : LiberationHardMode
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 6
+    key_used  : LiberationHardMode
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 7
+    key_used  : LiberationHardMode
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 8
+    key_used  : LiberationHardMode
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 1
+    key_used  : LiberationHardMode
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 1
+    key_used  : LiberationHardMode
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 2
+    key_used  : LiberationHardMode
+    name      : BigBrute1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 3
+    key_used  : LiberationHardMode
+    name      : BigBrute2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 4
+    key_used  : LiberationHardMode
+    name      : BigBrute3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationHardMode
+    area_name : LibHard
+    index     : 5
+    key_used  : LiberationHardMode
+    name      : BigBrute4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : DEBUGLIB
+    encounter_count : 1
+    key             : DEBUGLIB
+    module_path     : ./encounters/DEBUGLIB
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 1
+    key_used  : DEBUGLIB
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 1
+    key_used  : DEBUGLIB
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 1
+    key_used  : DEBUGLIB
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 2
+    key_used  : DEBUGLIB
+    name      : BigBruteVar1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 3
+    key_used  : DEBUGLIB
+    name      : BigBruteVar2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 4
+    key_used  : DEBUGLIB
+    name      : BigBruteVar3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 5
+    key_used  : DEBUGLIB
+    name      : Mettaur
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : DEBUGLIB
+    area_name : DEBUGIN
+    index     : 6
+    key_used  : DEBUGLIB
+    name      : Roll
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : LiberationNormalMode
+    encounter_count : 8
+    key             : LiberationNormalMode
+    module_path     : ./encounters/LiberationNormalMode
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 1
+    key_used  : LiberationNormalMode
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 2
+    key_used  : LiberationNormalMode
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 3
+    key_used  : LiberationNormalMode
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 4
+    key_used  : LiberationNormalMode
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 5
+    key_used  : LiberationNormalMode
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 6
+    key_used  : LiberationNormalMode
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 7
+    key_used  : LiberationNormalMode
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 8
+    key_used  : LiberationNormalMode
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 1
+    key_used  : LiberationNormalMode
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 1
+    key_used  : LiberationNormalMode
+    name      : BigBrute1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 2
+    key_used  : LiberationNormalMode
+    name      : BigBrute2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 3
+    key_used  : LiberationNormalMode
+    name      : BigBrute3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : LiberationNormalMode
+    area_name : LibNorm
+    index     : 4
+    key_used  : LiberationNormalMode
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : NewLiberation1
+    encounter_count : 9
+    key             : NewLiberation1
+    module_path     : ./encounters/NewLiberation1
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 1
+    key_used  : NewLiberation1
+    name      : Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 2
+    key_used  : NewLiberation1
+    name      : Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 3
+    key_used  : NewLiberation1
+    name      : Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 4
+    key_used  : NewLiberation1
+    name      : Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 5
+    key_used  : NewLiberation1
+    name      : Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 6
+    key_used  : NewLiberation1
+    name      : Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 7
+    key_used  : NewLiberation1
+    name      : Encounter7
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 8
+    key_used  : NewLiberation1
+    name      : Encounter8
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 9
+    key_used  : NewLiberation1
+    name      : Encounter9
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 1
+    key_used  : NewLiberation1
+    name      : ShadeMan
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : NewLiberation1
+    area_name : BetaLiberation
+    index     : 1
+    key_used  : NewLiberation1
+    name      : BigBrute
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip
+    section   : special_encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Loaded area encounter table
+    base_area_id    : testground
+    encounter_count : 4
+    key             : testground
+    module_path     : ./encounters/testground
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 1
+    key_used  : testground
+    name      : testground_Encounter1
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 2
+    key_used  : testground
+    name      : testground_Encounter2
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 3
+    key_used  : testground
+    name      : testground_Encounter3
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 4
+    key_used  : testground
+    name      : testground_Encounter4
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : encounters
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 1
+    key_used  : testground
+    name      : testground_Encounter6
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : bosses
+    weight    : 10
+[2026-11-11 19:25:15] [INFO ] [nebulous-liberations/ENCOUNTERS] Liberation area encounter loaded
+    area_id   : testground
+    area_name : PracticeArea2
+    index     : 1
+    key_used  : testground
+    name      : testground_Encounter5
+    path      : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip
+    section   : special_encounters
+    weight    : 10

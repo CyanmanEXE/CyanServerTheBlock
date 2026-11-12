@@ -1,3 +1,4 @@
+local PlayerControl = require("scripts/player-control/main")
 --=====================================================
 -- talk_vert_menu.lua
 -- Talk-mode wrapper for PromptVertical
@@ -85,8 +86,8 @@ local function ensure_tick()
         for player_id, g in pairs(goodbye_closing) do
             local box_id = g.box_id
 
-            if Net.lock_player_input then
-                pcall(function() Net.lock_player_input(player_id) end)
+            if PlayerControl.acquire_capture then
+                pcall(function() PlayerControl.acquire_capture(player_id, "net-games/npcs/talk_vert_menu") end)
             end
             Input.consume(player_id)
             Input.swallow(player_id, 0.05)
@@ -94,8 +95,8 @@ local function ensure_tick()
             local st = Displayer.Text.getTextBoxState(player_id, box_id)
             if not st or st == "completed" then
                 goodbye_closing[player_id] = nil
-                if Net.unlock_player_input then
-                    pcall(function() Net.unlock_player_input(player_id) end)
+                if PlayerControl.release_capture then
+                    pcall(function() PlayerControl.release_capture(player_id, "net-games/npcs/talk_vert_menu") end)
                 end
                 Input.consume(player_id)
                 Input.clear_require_release(player_id, { "confirm", "cancel" })
@@ -179,8 +180,8 @@ local function ensure_tick()
                     on_no = function()
                         play_sfx(player_id, flow.sfx.close)
 
-                        if Net.lock_player_input then
-                            pcall(function() Net.lock_player_input(player_id) end)
+                        if PlayerControl.acquire_capture then
+                            pcall(function() PlayerControl.acquire_capture(player_id, "net-games/npcs/talk_vert_menu") end)
                         end
 
                         ui.backdrop.indicator.enabled = false
@@ -219,8 +220,8 @@ local function ensure_tick()
             if not st or st == "completed" then
                 pending_ack[player_id] = nil
             else
-                if Net.lock_player_input then
-                    pcall(function() Net.lock_player_input(player_id) end)
+                if PlayerControl.acquire_capture then
+                    pcall(function() PlayerControl.acquire_capture(player_id, "net-games/npcs/talk_vert_menu") end)
                 end
 
                 if st == "printing" then

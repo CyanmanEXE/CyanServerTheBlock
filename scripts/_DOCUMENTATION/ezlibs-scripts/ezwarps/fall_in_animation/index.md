@@ -1,83 +1,66 @@
-# `fall_in_animation.lua`
+# 📄 `fall_in_animation.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezwarps/fall_in_animation.lua`  
-> **Source lines:** 39  
-> **Functions detected:** 1  
-> **Table declarations detected:** 5
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezwarps/fall_in_animation.lua`](../../../../ezlibs-scripts/ezwarps/fall_in_animation.lua)  
+> **Source lines:** 40  
+> **SHA-256 (UTF-8):** `bf701bc598d779d44606cc5494f38b3778391fb12bcd9eab1e04a624696fbf67`  
+> **Named functions detected:** 1  
+> **Table initializers detected:** 5
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-these offsets will modify the warp landing location so that the player can animate from their spawn location nicely
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- No `require(...)` dependency was detected.
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No static literal subscriptions detected.
 
-## Functions
+## Functions and parameters
 
-| Line | Function / method | Parameters as declared |
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 9 | `animate` | `player_id` | assigned/declared |
+
+### Parameter inventory
+
+#### 1. `animate(player_id)`
+
+- **Line:** 9
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 8 | `animate` | `player_id` |
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-### Function notes
 
-- **`animate(player_id)`** *(source line 8)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+## Tables
 
-## Tables and data structures
+| Line | Identifier |
+|---:|---|
+| 2 | `fall_in_animation` |
+| 4 | `pre_animation_offsets` |
+| 15 | `keyframes` |
+| 16 | `properties` |
+| 23 | `properties` |
 
-### `fall_in_animation` *(line 1)*
+## Net API calls
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `pre_animation_offsets` | table | `{ x=0, y=0, z=40 }` |
-| `animate` | function | `function(player_id) return async(function() local player_pos = Net.get_player_position(player_id) local area_id = Net.get_player_area(player…` |
-| `[3]` | call/expression | `keyframes) await(Async.sleep(fall_duration)) local sound_path = '/server/assets/ezlibs-assets/ezwarps/earthquake.ogg' Net.play_sound(area_id` |
-| `[4]` | call/expression | `sound_path) Net.shake_player_camera(player_id` |
-| `[5]` | number literal | `3` |
-| `[6]` | number literal | `2) Net.unlock_player_input(player_id) end) end` |
-
-### `pre_animation_offsets` *(line 3)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | number literal | `0` |
-| `y` | number literal | `0` |
-| `z` | number literal | `40` |
-
-### `keyframes` *(line 14)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ properties={{ property="Z", value=player_pos.z }}, duration=0.0 }` |
-
-### `properties` *(line 15)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property="Z", value=player_pos.z }` |
-
-### `properties` *(line 22)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property="Z", ease="Linear", value=landing_z }` |
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezwarps/fall_in_animation.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| API | Count | First line |
+|---|---:|---:|
+| `Net.animate_player_properties` | 1 | 30 |
+| `Net.get_player_area` | 1 | 12 |
+| `Net.get_player_position` | 1 | 11 |
+| `Net.play_sound` | 1 | 33 |
+| `Net.shake_player_camera` | 1 | 34 |

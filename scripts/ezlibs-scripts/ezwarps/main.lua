@@ -1,4 +1,5 @@
-local logger = require('scripts/ezlibs-scripts/ezlogger').get('ezwarps')
+local PlayerControl = require("scripts/player-control/main")
+local logger = require('scripts/logger/logger').register('ezwarps')
 local json = require('scripts/ezlibs-scripts/json')
 local create_arrow_animation = require('scripts/ezlibs-scripts/ezwarps/arrow_animation_factory')
 local create_jack_in_out_animation = require('scripts/ezlibs-scripts/ezwarps/log_in_animation')
@@ -32,6 +33,48 @@ local landings = {}
 local player_animations = {}
 local players_in_animations = {}
 local warp_types_with_landings = {"Server Warp","Custom Warp","Interact Warp","Radius Warp"}
+
+-- When a scripted activity returns a player to the exact place they entered,
+-- the custom-warp tile can immediately send them back. Guard only that
+-- player's source warp until they physically walk away from the entry point.
+-- World coordinates are in tiles; allow a 1.5-tile departure before re-arming.
+local RETURN_WARP_REARM_DISTANCE_SQ = 1.5 * 1.5
+local return_warp_guards = {}
+
+function ezwarps.guard_return_warp(player_id, area_id, warp_object_id, position)
+    if not player_id or not area_id or not warp_object_id
+        or type(position) ~= "table" then return false end
+    local x, y = tonumber(position.x), tonumber(position.y)
+    if not x or not y then return false end
+    return_warp_guards[player_id] = {
+        area = tostring(area_id), object_id = tostring(warp_object_id),
+        x = x, y = y, z = tonumber(position.z) or 0,
+    }
+    log('[return-guard] armed player=' .. tostring(player_id)
+        .. ' area=' .. tostring(area_id)
+        .. ' warp=' .. tostring(warp_object_id))
+    return true
+end
+
+local function update_return_warp_guard(player_id, area, x, y)
+    local guard = return_warp_guards[player_id]
+    if not guard or area ~= guard.area then return end
+    if type(x) ~= "number" or type(y) ~= "number" then return end
+    local dx, dy = x - guard.x, y - guard.y
+    if dx * dx + dy * dy >= RETURN_WARP_REARM_DISTANCE_SQ then
+        return_warp_guards[player_id] = nil
+        log('[return-guard] rearmed player=' .. tostring(player_id)
+            .. ' warp=' .. guard.object_id .. ' after walking away')
+    end
+end
+
+function ezwarps.handle_player_move(player_id, x, y, z)
+    update_return_warp_guard(player_id, Net.get_player_area(player_id), x, y)
+end
+
+function ezwarps.handle_player_disconnect(player_id)
+    return_warp_guards[player_id] = nil
+end
 
 function table_has_value (table, val)
     for index, value in ipairs(table) do
@@ -78,7 +121,7 @@ function doAnimationForWarp(player_id,animation_name,is_leave_animation,warp_obj
         if warp_object and property_is_true(warp_object.custom_properties["Dont Teleport"]) then
             players_in_animations[player_id] = nil
         end
-        Net.lock_player_input(player_id)
+        PlayerControl.acquire_capture(player_id, "ezwarps")
         local animation_properties = special_animations[animation_name]
         local animation_duration = 0
         if animation_properties then
@@ -86,7 +129,7 @@ function doAnimationForWarp(player_id,animation_name,is_leave_animation,warp_obj
             log('animation complete '..animation_name)
             player_animations[player_id] = nil
         end
-        Net.unlock_player_input(player_id)
+        PlayerControl.release_capture(player_id, "ezwarps")
     end)
 end
 
@@ -203,6 +246,19 @@ end
 function use_warp(player_id,warp_object,warp_meta)
     return async(function()
         local from_area = Net.get_player_area(player_id)
+        -- Preserve the departure position before leave animations or transfer.
+        -- Additional `warp` event metadata is backward-compatible with all
+        -- existing consumers and enables the Endless Runner return trip.
+        local from_position = Net.get_player_position(player_id)
+        if type(from_position) == "table" then
+            from_position = {
+                x = from_position.x,
+                y = from_position.y,
+                z = from_position.z or 0,
+            }
+        else
+            from_position = nil
+        end
         local warp_properties = warp_object.custom_properties
         local is_valid_warp = false
         local is_remote_warp = false
@@ -263,6 +319,7 @@ function use_warp(player_id,warp_object,warp_meta)
             ezbus:emit("warp", {
                 player_id = player_id,
                 from_area = from_area,
+                from_position = from_position,
                 to_area = warp_properties.Address,
                 warp_type = "server"
             })
@@ -274,7 +331,7 @@ function use_warp(player_id,warp_object,warp_meta)
                 local target_object = ezcache.get_object_by_id_cached(target_area, target_id_str)
                 if not target_object then
                     log('ERROR: target object not found! ID: ' .. target_id_str .. ' in area: ' .. target_area)
-                    Net.unlock_player_input(player_id)
+                    PlayerControl.release_capture(player_id, "ezwarps")
                     return
                 end
                 if target_object.custom_properties["Direction"] then
@@ -293,6 +350,8 @@ function use_warp(player_id,warp_object,warp_meta)
             ezbus:emit("warp", {
                 player_id = player_id,
                 from_area = from_area,
+                from_position = from_position,
+                from_warp_object_id = tostring(warp_object.id),
                 to_area = target_area,
                 warp_type = "custom"
             })
@@ -305,6 +364,20 @@ function ezwarps.handle_custom_warp(player_id, object_id)
         return
     end
     local player_area = Net.get_player_area(player_id)
+    local guard = return_warp_guards[player_id]
+    if guard and guard.area == player_area
+        and guard.object_id == tostring(object_id) then
+        local pos = Net.get_player_position(player_id)
+        if type(pos) == "table" then
+            update_return_warp_guard(player_id, player_area, pos.x, pos.y)
+        end
+        if return_warp_guards[player_id] then
+            log('[return-guard] suppressed repeat entry player=' .. tostring(player_id)
+                .. ' area=' .. tostring(player_area)
+                .. ' warp=' .. tostring(object_id))
+            return
+        end
+    end
     local object = ezcache.get_object_by_id_cached(player_area, tostring(object_id))
     if not object then
         return

@@ -1,156 +1,211 @@
-# `ezcheckpoints.lua`
+# 📄 `ezcheckpoints.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezcheckpoints.lua`  
-> **Source lines:** 528  
-> **Functions detected:** 12  
-> **Table declarations detected:** 11
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezcheckpoints.lua`](../../../ezlibs-scripts/ezcheckpoints.lua)  
+> **Source lines:** 534  
+> **SHA-256 (UTF-8):** `9578485faf87fd57ee35daa910410bcf56692767d68f5e8df0c3c3bc6c4e447f`  
+> **Named functions detected:** 12  
+> **Table initializers detected:** 11
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-Optional schema-driven validation. If the generated schema file is not present yet (user hasn't run generate-ezlibs-tiled.lua), validation is skipped silently so the module continues to load.
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
-- `scripts/ezlibs-scripts/ezmemory` — line 2
-- `scripts/ezlibs-scripts/helpers` — line 3
-- `scripts/ezlibs-scripts/condition` — line 4
-- `scripts/ezlibs-scripts/ezbus` — line 5
-- `scripts/ezlibs-scripts/utils/eztiledutils` — line 6
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
+| 2 | `scripts/logger/logger` |
+| 3 | `scripts/ezlibs-scripts/ezmemory` |
+| 4 | `scripts/ezlibs-scripts/helpers` |
+| 5 | `scripts/ezlibs-scripts/condition` |
+| 6 | `scripts/ezlibs-scripts/ezbus` |
+| 7 | `scripts/ezlibs-scripts/utils/eztiledutils` |
 
-## Events
+## Event hooks
 
-- `Net:on("player_avatar_change", function(event) ...)` — line 56. The event name is taken directly from this source.
-- `Net:on("player_avatar_change", function(event) ...)` — line 62. The event name is taken directly from this source.
-- `Net:on("player_disconnect", function(event) ...)` — line 78. The event name is taken directly from this source.
-- `Net:on("player_avatar_change", function(event) ...)` — line 133. The event name is taken directly from this source.
-- `Net:on("object_interaction", function(event) ...)` — line 328. The event name is taken directly from this source.
-
-## Functions
-
-| Line | Function / method | Parameters as declared |
+| Line | Subscriber | Event |
 |---:|---|---|
-| 33 | `is_player_alive` | `player_id` |
-| 44 | `safe_net` | `fn, ...` |
-| 85 | `ezcheckpoints.handle_player_disconnect` | `player_id` |
-| 93 | `ezcheckpoints.get_player_navi_info` | `player_id` |
-| 101 | `names_equal` | `a, b` |
-| 106 | `ezcheckpoints.player_has_navi` | `player_id, name` |
-| 111 | `ezcheckpoints.player_has_navi_element` | `player_id, element` |
-| 116 | `ezcheckpoints.player_has_any_navi` | `player_id, names` |
-| 125 | `evaluate_navi_check` | `player_id, navi_check` |
-| 179 | `ezcheckpoints.unlock_checkpoint_for_player` | `player_id, area_id, object_id, unlocking_asset_name, unlocking_sound_path, unlocking_animation_time, once, opts` |
-| 263 | `ezcheckpoints.force_unlock_checkpoint` | `player_id, area_id, object_id, once, opts` |
-| 285 | `ezcheckpoints.relock_checkpoint` | `player_id, area_id, object_id` |
+| 63 | `Net` | `player_avatar_change` |
+| 79 | `Net` | `player_disconnect` |
+| 134 | `Net` | `player_avatar_change` |
+| 334 | `Net` | `object_interaction` |
 
-### Function notes
+## Functions and parameters
 
-- **`is_player_alive(player_id)`** — Returns true if the player is still connected. Conservative: if the check itself fails or Net.is_player is missing, we assume the player is alive rather than silently skipping the action. *(source line 33)*
-- **`safe_net(fn, ...)`** — Run a Net function under pcall; return true on success. Logs failures at info level so they're visible without crashing the server or being spammy as a warning. *(source line 44)*
-- **`ezcheckpoints.handle_player_disconnect(player_id)`** *(source line 85)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezcheckpoints.get_player_navi_info(player_id)`** — Public accessor. Override at startup if your game derives navi data from a different source than the avatar_change event. *(source line 93)*
-- **`names_equal(a, b)`** — ========================================================================== Navi check helpers ========================================================================== *(source line 101)*
-- **`ezcheckpoints.player_has_navi(player_id, name)`** *(source line 106)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezcheckpoints.player_has_navi_element(player_id, element)`** *(source line 111)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezcheckpoints.player_has_any_navi(player_id, names)`** *(source line 116)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`evaluate_navi_check(player_id, navi_check)`** *(source line 125)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezcheckpoints.unlock_checkpoint_for_player(player_id, area_id, object_id, unlocking_asset_name, unlocking_sound_path, unlocking_animation_time, once, opts)`** — Helper that unlocks the checkpoint for a player.  Persistent state (the hide) is ALWAYS applied, even when the player is no longer connected: that is what their reconnect state is driven from, and silently skipping it would leave a checkpoint unlocked across reconnects because a button fired just as they dropped.  Live effects (input lock, sound, animation bot, input unlock) run only when the player is confirmed connected, and every Net call is pcall-guarded so a mid-await disconnect cannot crash the coroutine.  `opts` (optional) may contain: * lock_input (boolean, default true) — when false, the player's input is neither locked nor unlocked around the unlocking animation. Use this when a bot / group effect / script is the initiator and the player is only a viewer: sound and the world animation bot still play so the player sees the checkpoint change, but their movement / battle is not interrupted for an action they did not take. *(source line 179)*
-- **`ezcheckpoints.force_unlock_checkpoint(player_id, area_id, object_id, once, opts)`** — Public shortcut to force-unlock a checkpoint using its own properties.  `opts` is forwarded verbatim to unlock_checkpoint_for_player. Bot-driven callers should pass { lock_input = false }. *(source line 263)*
-- **`ezcheckpoints.relock_checkpoint(player_id, area_id, object_id)`** — Re-lock a checkpoint for a player.  Persistent unhide always runs (that is how the player's reconnect state is cleared). The live object include runs only when the player is confirmed connected and still in the checkpoint's area. All memory/Net access is guarded so callers wrapping this in pcall isn't required for safety.  Note: relock does not lock player input in either path, so no opt-out flag is needed here. *(source line 285)*
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 34 | `is_player_alive` | `player_id` | local |
+| 45 | `safe_net` | `fn, ...` | local |
+| 86 | `ezcheckpoints.handle_player_disconnect` | `player_id` | assigned/declared |
+| 94 | `ezcheckpoints.get_player_navi_info` | `player_id` | assigned/declared |
+| 102 | `names_equal` | `a, b` | local |
+| 107 | `ezcheckpoints.player_has_navi` | `player_id, name` | assigned/declared |
+| 112 | `ezcheckpoints.player_has_navi_element` | `player_id, element` | assigned/declared |
+| 117 | `ezcheckpoints.player_has_any_navi` | `player_id, names` | assigned/declared |
+| 126 | `evaluate_navi_check` | `player_id, navi_check` | local |
+| 180 | `ezcheckpoints.unlock_checkpoint_for_player` | `player_id, area_id, object_id, unlocking_asset_name, unlocking_sound_path, unlocking_animation_time, once, opts` | assigned/declared |
+| 269 | `ezcheckpoints.force_unlock_checkpoint` | `player_id, area_id, object_id, once, opts` | assigned/declared |
+| 291 | `ezcheckpoints.relock_checkpoint` | `player_id, area_id, object_id` | assigned/declared |
 
-## Tables and data structures
+### Parameter inventory
 
-### `ezcheckpoints` *(line 18)*
+#### 1. `is_player_alive(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 34
+- **Declaration:** local
 
-### `navi_cache` *(line 60)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 2. `safe_net(fn, ...)`
 
-### `new_bot_props` *(line 219)*
+- **Line:** 45
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | expression/reference | `object.x` |
-| `y` | expression/reference | `object.y` |
-| `z` | expression/reference | `object.z` |
-| `texture_path` | string literal | `"/server/assets/ezlibs-assets/ezcheckpoints/bots/" .. unlocking_asset_name .. ".png"` |
-| `animation_path` | string literal | `"/server/assets/ezlibs-assets/ezcheckpoints/bots/" .. unlocking_asset_name .. ".animation"` |
-| `animation` | string literal | `"UNLOCKING"` |
-| `warp_in` | boolean literal | `false` |
-| `area_id` | expression/reference | `area_id` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `fn` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `...` | Declared directly in the current Lua. Type not inferred. |
 
-### `cond` *(line 401)*
+#### 3. `ezcheckpoints.handle_player_disconnect(player_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `type` | string literal | `"money"` |
-| `amount` | expression/reference | `required_keys` |
-| `consume` | expression/reference | `consume` |
+- **Line:** 86
+- **Declaration:** assigned/declared
 
-### `cond` *(line 405)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `type` | string literal | `"fragments"` |
-| `amount` | expression/reference | `required_keys` |
-| `consume` | expression/reference | `consume` |
+#### 4. `ezcheckpoints.get_player_navi_info(player_id)`
 
-### `cond` *(line 409)*
+- **Line:** 94
+- **Declaration:** assigned/declared
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `type` | string literal | `"tokens"` |
-| `amount` | expression/reference | `required_keys` |
-| `consume` | expression/reference | `consume` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-### `cond` *(line 419)*
+#### 5. `names_equal(a, b)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `type` | string literal | `"item"` |
-| `name` | expression/reference | `key_item_name` |
-| `amount` | expression/reference | `required_keys` |
-| `consume` | expression/reference | `consume` |
+- **Line:** 102
+- **Declaration:** local
 
-### `navi_check` *(line 436)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `a` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `b` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `kind` | string literal | `"navi_name"` |
-| `required` | expression/reference | `required_navi` |
+#### 6. `ezcheckpoints.player_has_navi(player_id, name)`
 
-### `navi_check` *(line 447)*
+- **Line:** 107
+- **Declaration:** assigned/declared
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `kind` | string literal | `"navi_element"` |
-| `required` | expression/reference | `required_elem` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `name` | Declared directly in the current Lua. Type not inferred. |
 
-### `navi_list` *(line 451)*
+#### 7. `ezcheckpoints.player_has_navi_element(player_id, element)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 112
+- **Declaration:** assigned/declared
 
-### `navi_check` *(line 464)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `element` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `kind` | string literal | `"navi_list"` |
-| `names` | expression/reference | `navi_list` |
+#### 8. `ezcheckpoints.player_has_any_navi(player_id, names)`
 
-## Implementation notes
+- **Line:** 117
+- **Declaration:** assigned/declared
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezcheckpoints.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `names` | Declared directly in the current Lua. Type not inferred. |
+
+#### 9. `evaluate_navi_check(player_id, navi_check)`
+
+- **Line:** 126
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `navi_check` | Declared directly in the current Lua. Type not inferred. |
+
+#### 10. `ezcheckpoints.unlock_checkpoint_for_player(player_id, area_id, object_id, unlocking_asset_name, unlocking_sound_path, unlocking_animation_time, once, opts)`
+
+- **Line:** 180
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `unlocking_asset_name` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `unlocking_sound_path` | Declared directly in the current Lua. Type not inferred. |
+| 6 | `unlocking_animation_time` | Declared directly in the current Lua. Type not inferred. |
+| 7 | `once` | Declared directly in the current Lua. Type not inferred. |
+| 8 | `opts` | Declared directly in the current Lua. Type not inferred. |
+
+#### 11. `ezcheckpoints.force_unlock_checkpoint(player_id, area_id, object_id, once, opts)`
+
+- **Line:** 269
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `once` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `opts` | Declared directly in the current Lua. Type not inferred. |
+
+#### 12. `ezcheckpoints.relock_checkpoint(player_id, area_id, object_id)`
+
+- **Line:** 291
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 20 | `ezcheckpoints` |
+| 61 | `navi_cache` |
+| 225 | `new_bot_props` |
+| 407 | `cond` |
+| 411 | `cond` |
+| 415 | `cond` |
+| 425 | `cond` |
+| 442 | `navi_check` |
+| 453 | `navi_check` |
+| 457 | `navi_list` |
+| 470 | `navi_check` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.create_bot` | 1 | 237 |
+| `Net.get_object_by_id` | 3 | 190 |
+| `Net.get_player_area` | 1 | 340 |
+| `Net.on` | 4 | 63 |

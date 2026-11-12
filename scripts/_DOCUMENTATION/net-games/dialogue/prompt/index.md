@@ -1,167 +1,299 @@
-# `prompt.lua`
+# 📄 `prompt.lua` — Current Lua reference
 
-> **Source:** `scripts/net-games/dialogue/prompt.lua`  
-> **Source lines:** 410  
-> **Functions detected:** 22  
-> **Table declarations detected:** 13
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/dialogue/prompt.lua`](../../../../net-games/dialogue/prompt.lua)  
+> **Source lines:** 411  
+> **SHA-256 (UTF-8):** `9f86a867144c6c1888691862fc944b66899831a951423b83d447402e008ffc4e`  
+> **Named functions detected:** 22  
+> **Table initializers detected:** 13
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-scripts/net-games/dialogue/prompt.lua Hardened YES/NO prompt using the public TextLayout service.
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/displayer/displayer` — line 4
-- `scripts/displayer/text-layout` — line 5
-- `scripts/displayer/text-display` — line 6
-- `scripts/input/input` — line 7
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
+| 5 | `scripts/displayer/displayer` |
+| 6 | `scripts/displayer/text-layout` |
+| 7 | `scripts/displayer/text-display` |
+| 8 | `scripts/input/input` |
 
-## Events
+## Event hooks
 
-- `Net:on("tick", function(event) ...)` — line 351. The event name is taken directly from this source.
-- `Net:on("player_disconnect", function(event) ...)` — line 397. The event name is taken directly from this source.
-
-## Functions
-
-| Line | Function / method | Parameters as declared |
+| Line | Subscriber | Event |
 |---:|---|---|
-| 21 | `has_asset` | `path` |
-| 27 | `safe_provide` | `player_id, path` |
-| 33 | `play_cursor_move_sfx` | `player_id` |
-| 39 | `ensure_backdrop_asset` | `player_id` |
-| 48 | `draw_backdrop` | `player_id, backdrop, z` |
-| 66 | `erase_backdrop` | `player_id` |
-| 70 | `ensure_cursor_asset` | `player_id` |
-| 83 | `selector_draw` | `player_id, draw_id, virtual_x, virtual_y, z, scale` |
-| 95 | `selector_erase` | `player_id, draw_id` |
-| 99 | `normalize_ui` | `ui` |
-| 128 | `build_prompt_text` | `question, ui` |
-| 167 | `options_visible` | `player_id, box_id` |
-| 176 | `find_option_virtual_positions` | `player_id, box_id, selection` |
-| 197 | `set_input_locked` | `player_id, locked` |
-| 202 | `mk_id` | `player_id` |
-| 207 | `PromptInstance:new` | `player_id, opts` |
-| 230 | `PromptInstance:render_initial` | `(none)` |
-| 264 | `PromptInstance:render_cursor` | `(none)` |
-| 270 | `PromptInstance:update` | `dt` |
-| 348 | `ensure_tick` | `(none)` |
-| 362 | `Prompt.yesno` | `player_id, opts` |
-| 375 | `Prompt.close` | `player_id, _reason, opts` |
+| 352 | `Net` | `tick` |
+| 398 | `Net` | `player_disconnect` |
 
-### Function notes
+## Functions and parameters
 
-- **`has_asset(path)`** *(source line 21)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`safe_provide(player_id, path)`** *(source line 27)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`play_cursor_move_sfx(player_id)`** *(source line 33)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ensure_backdrop_asset(player_id)`** *(source line 39)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`draw_backdrop(player_id, backdrop, z)`** *(source line 48)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`erase_backdrop(player_id)`** *(source line 66)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ensure_cursor_asset(player_id)`** *(source line 70)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`selector_draw(player_id, draw_id, virtual_x, virtual_y, z, scale)`** *(source line 83)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`selector_erase(player_id, draw_id)`** *(source line 95)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`normalize_ui(ui)`** *(source line 99)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`build_prompt_text(question, ui)`** *(source line 128)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`options_visible(player_id, box_id)`** *(source line 167)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`find_option_virtual_positions(player_id, box_id, selection)`** *(source line 176)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`set_input_locked(player_id, locked)`** *(source line 197)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`mk_id(player_id)`** *(source line 202)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PromptInstance:new(player_id, opts)`** *(source line 207)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PromptInstance:render_initial()`** *(source line 230)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PromptInstance:render_cursor()`** *(source line 264)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PromptInstance:update(dt)`** *(source line 270)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ensure_tick()`** *(source line 348)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Prompt.yesno(player_id, opts)`** *(source line 362)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Prompt.close(player_id, _reason, opts)`** *(source line 375)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 22 | `has_asset` | `path` | local |
+| 28 | `safe_provide` | `player_id, path` | local |
+| 34 | `play_cursor_move_sfx` | `player_id` | local |
+| 40 | `ensure_backdrop_asset` | `player_id` | local |
+| 49 | `draw_backdrop` | `player_id, backdrop, z` | local |
+| 67 | `erase_backdrop` | `player_id` | local |
+| 71 | `ensure_cursor_asset` | `player_id` | local |
+| 84 | `selector_draw` | `player_id, draw_id, virtual_x, virtual_y, z, scale` | local |
+| 96 | `selector_erase` | `player_id, draw_id` | local |
+| 100 | `normalize_ui` | `ui` | local |
+| 129 | `build_prompt_text` | `question, ui` | local |
+| 168 | `options_visible` | `player_id, box_id` | local |
+| 177 | `find_option_virtual_positions` | `player_id, box_id, selection` | local |
+| 198 | `set_input_locked` | `player_id, locked` | local |
+| 203 | `mk_id` | `player_id` | local |
+| 208 | `PromptInstance:new` | `player_id, opts` | assigned/declared |
+| 231 | `PromptInstance:render_initial` | `(none)` | assigned/declared |
+| 265 | `PromptInstance:render_cursor` | `(none)` | assigned/declared |
+| 271 | `PromptInstance:update` | `dt` | assigned/declared |
+| 349 | `ensure_tick` | `(none)` | local |
+| 363 | `Prompt.yesno` | `player_id, opts` | assigned/declared |
+| 376 | `Prompt.close` | `player_id, _reason, opts` | assigned/declared |
 
-## Tables and data structures
+### Parameter inventory
 
-### `Prompt` *(line 8)*
+#### 1. `has_asset(path)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 22
+- **Declaration:** local
 
-### `Prompt.instances` *(line 10)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `path` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 2. `safe_provide(player_id, path)`
 
-### `player_cursor_asset` *(line 17)*
+- **Line:** 28
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `path` | Declared directly in the current Lua. Type not inferred. |
 
-### `player_backdrop_asset` *(line 19)*
+#### 3. `play_cursor_move_sfx(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 34
+- **Declaration:** local
 
-### `o` *(line 101)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `box_id` | expression/reference | `ui.box_id` |
-| `font` | expression/reference | `ui.font or "THIN_BLACK"` |
-| `scale` | expression/reference | `ui.scale or 2.0` |
-| `z` | expression/reference | `ui.z or 100` |
-| `x` | expression/reference | `ui.x or 8` |
-| `y` | expression/reference | `ui.y or 110` |
-| `w` | expression/reference | `ui.w or 224` |
-| `h` | expression/reference | `ui.h or 42` |
-| `backdrop` | expression/reference | `ui.backdrop or ui.backdrop_config` |
-| `mugshot` | expression/reference | `ui.mugshot` |
-| `nameplate` | expression/reference | `ui.nameplate` |
-| `typing_speed` | expression/reference | `ui.typing_speed or 99999` |
-| `type_sfx_path` | expression/reference | `ui.type_sfx_path` |
-| `type_sfx_min_dt` | expression/reference | `ui.type_sfx_min_dt` |
+#### 4. `ensure_backdrop_asset(player_id)`
 
-### `qlines` *(line 136)*
+- **Line:** 40
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-### `pages` *(line 141)*
+#### 5. `draw_backdrop(player_id, backdrop, z)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 49
+- **Declaration:** local
 
-### `page` *(line 149)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `backdrop` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `z` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 6. `erase_backdrop(player_id)`
 
-### `final` *(line 154)*
+- **Line:** 67
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-### `page_strings` *(line 161)*
+#### 7. `ensure_cursor_asset(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 71
+- **Declaration:** local
 
-### `PromptInstance` *(line 203)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 8. `selector_draw(player_id, draw_id, virtual_x, virtual_y, z, scale)`
 
-### `text_options` *(line 236)*
+- **Line:** 84
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `font` | expression/reference | `ui.font` |
-| `scale` | expression/reference | `ui.scale` |
-| `z` | expression/reference | `ui.z` |
-| `speed` | expression/reference | `ui.typing_speed` |
-| `type_sound` | expression/reference | `ui.type_sfx_path` |
-| `type_sound_min_dt` | expression/reference | `ui.type_sfx_min_dt` |
-| `max_lines` | expression/reference | `ui.backdrop and ui.backdrop.max_lines or nil` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `draw_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `virtual_x` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `virtual_y` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `z` | Declared directly in the current Lua. Type not inferred. |
+| 6 | `scale` | Declared directly in the current Lua. Type not inferred. |
 
-### `held` *(line 288)*
+#### 9. `selector_erase(player_id, draw_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 96
+- **Declaration:** local
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `draw_id` | Declared directly in the current Lua. Type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/net-games/dialogue/prompt.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 10. `normalize_ui(ui)`
+
+- **Line:** 100
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `ui` | Declared directly in the current Lua. Type not inferred. |
+
+#### 11. `build_prompt_text(question, ui)`
+
+- **Line:** 129
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `question` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `ui` | Declared directly in the current Lua. Type not inferred. |
+
+#### 12. `options_visible(player_id, box_id)`
+
+- **Line:** 168
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `box_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 13. `find_option_virtual_positions(player_id, box_id, selection)`
+
+- **Line:** 177
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `box_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `selection` | Declared directly in the current Lua. Type not inferred. |
+
+#### 14. `set_input_locked(player_id, locked)`
+
+- **Line:** 198
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `locked` | Declared directly in the current Lua. Type not inferred. |
+
+#### 15. `mk_id(player_id)`
+
+- **Line:** 203
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 16. `PromptInstance:new(player_id, opts)`
+
+- **Line:** 208
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `opts` | Declared directly in the current Lua. Type not inferred. |
+
+#### 17. `PromptInstance:render_initial()`
+
+- **Line:** 231
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
+
+#### 18. `PromptInstance:render_cursor()`
+
+- **Line:** 265
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
+
+#### 19. `PromptInstance:update(dt)`
+
+- **Line:** 271
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `dt` | Declared directly in the current Lua. Type not inferred. |
+
+#### 20. `ensure_tick()`
+
+- **Line:** 349
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+#### 21. `Prompt.yesno(player_id, opts)`
+
+- **Line:** 363
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `opts` | Declared directly in the current Lua. Type not inferred. |
+
+#### 22. `Prompt.close(player_id, _reason, opts)`
+
+- **Line:** 376
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `_reason` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `opts` | Declared directly in the current Lua. Type not inferred. |
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 10 | `Prompt` |
+| 11 | `Prompt.instances` |
+| 19 | `player_cursor_asset` |
+| 20 | `player_backdrop_asset` |
+| 102 | `o` |
+| 137 | `qlines` |
+| 143 | `pages` |
+| 150 | `page` |
+| 156 | `final` |
+| 163 | `page_strings` |
+| 205 | `PromptInstance` |
+| 237 | `text_options` |
+| 289 | `held` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.on` | 2 | 352 |
+| `Net.player_alloc_sprite` | 2 | 44 |
+| `Net.player_draw_sprite` | 2 | 52 |
+| `Net.player_erase_sprite` | 2 | 68 |

@@ -1,112 +1,155 @@
-# `arrow_animation_factory.lua`
+# 📄 `arrow_animation_factory.lua`
 
-> **Source:** `scripts/ezlibs-scripts/ezwarps/arrow_animation_factory.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezwarps/arrow_animation_factory.lua`](../../../../ezlibs-scripts/ezwarps/arrow_animation_factory.lua)  
 > **Source lines:** 93  
-> **Functions detected:** 2  
-> **Table declarations detected:** 7
+> **SHA-256 (UTF-8):** `979f83bbdd6154…`  
+> **Declared/assigned functions detected:** 2  
+> **Anonymous closures detected:** 1  
+> **Table initializers detected:** 7
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Source-based reference for `scripts/ezlibs-scripts/ezwarps/arrow_animation_factory.lua`. No module-purpose prose was supplied in the leading source comments.
 
-## Dependencies
+## 🔗 Dependencies
 
-- `scripts/ezlibs-scripts/ezweather` — line 1
+| Line | Module string supplied to `require` |
+|---|---|
+| 1 | `scripts/ezlibs-scripts/ezweather` |
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 17 | `create_arrow_animation` | `is_arriving,direction_str` |
-| 44 | `animate` | `player_id` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 17 | `create_arrow_animation` | `is_arriving,direction_str` | declared |
+| 44 | `animate` | `player_id` | assigned |
 
-### Function notes
+### Function details
 
-- **`create_arrow_animation(is_arriving,direction_str)`** *(source line 17)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`animate(player_id)`** *(source line 44)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `create_arrow_animation(is_arriving,direction_str)`
 
-## Tables and data structures
+- **Location:** source line 17.
+- **Declaration style:** `declared`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `Direction` *(line 2)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-| Field / key | Value category | Initializer expression (source) |
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `is_arriving` | Not explicitly documented in adjacent source annotations. |
+| 2 | `direction_str` | Not explicitly documented in adjacent source annotations. |
+
+#### 2. `animate(player_id)`
+
+- **Location:** source line 44.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+These are anonymous `function(...)` expressions, including inline callbacks. Their argument lists are taken verbatim from source; lexical context is descriptive text, not a claim about execution.
+
+| Line | Arguments | Preceding source context |
+|---|---|---|
+| 45 | `(none)` | `ffset, z=0 }, animate=function(player_id) return async(` |
+
+## 📦 Tables and data
+
+The following **7** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `Direction` — line 3
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `UP_LEFT` | string literal | `"Up Left"` |
 | `UP_RIGHT` | string literal | `"Up Right"` |
 | `DOWN_LEFT` | string literal | `"Down Left"` |
 | `DOWN_RIGHT` | string literal | `"Down Right"` |
 
-### `reverse_table` *(line 9)*
+### 2. `reverse_table` — line 10
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `[Up Left]` | string literal | `"Down Right"` |
-| `[Up Right]` | string literal | `"Down Left"` |
-| `[Down Left]` | string literal | `"Up Right"` |
-| `[Down Right]` | string literal | `"Up Left"` |
+| `[1]` | expression/reference | `["Up Left"] = "Down Right"` |
+| `[2]` | expression/reference | `["Up Right"] = "Down Left"` |
+| `[3]` | expression/reference | `["Down Left"] = "Up Right"` |
+| `[4]` | expression/reference | `["Down Right"] = "Up Left"` |
 
-### `new_animation` *(line 37)*
+### 3. `new_animation` — line 38
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `pre_animation_offsets` | table | `{ x=x_start_offset, y=y_start_offset, z=0 }` |
-| `animate` | function | `function(player_id) return async(function() local player_pos = Net.get_player_position(player_id) local area_id = Net.get_player_area(player…` |
-| `[3]` | expression/reference | `weather.camera_tint` |
-| `[4]` | number literal | `0.5) Net.move_player_camera(player_id` |
-| `[5]` | expression/reference | `player_pos.x+x_distance` |
-| `[6]` | expression/reference | `player_pos.y+y_distance` |
-| `[7]` | expression/reference | `player_pos.z` |
-| `[8]` | number literal | `1) Net.unlock_player_camera(player_id) else Net.fade_player_camera(player_id` |
-| `[9]` | table | `{r=0, g=0, b=0, a=255}` |
-| `[10]` | number literal | `0.5) Net.slide_player_camera(player_id` |
-| `[11]` | expression/reference | `player_pos.x+x_distance` |
-| `[12]` | expression/reference | `player_pos.y+y_distance` |
-| `[13]` | expression/reference | `player_pos.z` |
-| `[14]` | number literal | `1) Net.unlock_player_camera(player_id) end player_keyframes[#player_keyframes+1] = { properties={{ property="X", ease="Linear", value=player…` |
-| `[15]` | call/expression | `player_keyframes) await(Async.sleep(1)) end) end` |
+| `pre_animation_offsets` | nested table | `{ x=x_start_offset, y=y_start_offset, z=0 }` |
+| `animate` | function | `function(player_id) return async(function() local player_pos = Net.get_player_position(player_id) local area_id = Net.get_player_area(player_id) local wea…` |
 
-### `pre_animation_offsets` *(line 39)*
+### 4. `pre_animation_offsets` — line 39
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `x` | expression/reference | `x_start_offset` |
 | `y` | expression/reference | `y_start_offset` |
-| `z` | number literal | `0` |
+| `z` | numeric literal | `0` |
 
-### `player_keyframes` *(line 49)*
+### 5. `player_keyframes` — line 49
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `properties` *(line 52)*
+### 6. `properties` — line 52
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `[1]` | table | `{ property="X", ease="Linear", value=player_pos.x, }` |
-| `[2]` | table | `{ property="Y", ease="Linear", value=player_pos.y }` |
+| `[1]` | nested table | `{ property="X", ease="Linear", value=player_pos.x, }` |
+| `[2]` | nested table | `{ property="Y", ease="Linear", value=player_pos.y }` |
 
-### `properties` *(line 73)*
+### 7. `properties` — line 73
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `[1]` | table | `{ property="X", ease="Linear", value=player_pos.x+x_distance }` |
-| `[2]` | table | `{ property="Y", ease="Linear", value=player_pos.y+y_distance }` |
+| `[1]` | nested table | `{ property="X", ease="Linear", value=player_pos.x+x_distance }` |
+| `[2]` | nested table | `{ property="Y", ease="Linear", value=player_pos.y+y_distance }` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezwarps/arrow_animation_factory.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+These are **statically detected call sites**, not API definitions or guaranteed successful runtime calls.
+
+| Call identifier | Occurrences |
+|---|---|
+| `Async.sleep` | 1 |
+| `Net.animate_player_properties` | 1 |
+| `Net.fade_player_camera` | 2 |
+| `Net.get_player_area` | 1 |
+| `Net.get_player_position` | 1 |
+| `Net.move_player_camera` | 1 |
+| `Net.slide_player_camera` | 1 |
+| `Net.unlock_player_camera` | 2 |
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

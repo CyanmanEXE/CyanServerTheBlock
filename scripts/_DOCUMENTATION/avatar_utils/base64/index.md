@@ -1,72 +1,124 @@
-# `base64.lua`
+# 📄 `base64.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/avatar_utils/base64.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/avatar_utils/base64.lua`](../../../avatar_utils/base64.lua)  
 > **Source lines:** 201  
-> **Functions detected:** 6  
-> **Table declarations detected:** 4
+> **SHA-256 (UTF-8):** `bce7480e262be409eb0e5c37fbda479999638526c6b1d08be0b0431cf5cd800b`  
+> **Named/assigned functions detected:** 6  
+> **Table initializers detected (simple pattern):** 4
 
-## Contents
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-[[
+Current source inventory for `scripts/avatar_utils/base64.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- No `require(...)` dependency was detected.
+No statically identified literal `require` module strings.
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No named `.on`/`:on` events detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 31 | `extract` | ` v, from, width ` | assigned/declared |
+| 35 | `extract` | ` v, from, width ` | assigned/declared |
+| 55 | `base64.makeencoder` | ` s62, s63, spad ` | assigned/declared |
+| 67 | `base64.makedecoder` | ` s62, s63, spad ` | assigned/declared |
+| 80 | `base64.encode` | ` str, encoder, usecaching ` | assigned/declared |
+| 112 | `base64.decode` | ` b64, decoder, usecaching ` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `extract( v, from, width )`
+
+- **Line:** 31
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 31 | `extract` | `v, from, width` |
-| 35 | `extract` | `v, from, width` |
-| 55 | `base64.makeencoder` | `s62, s63, spad` |
-| 67 | `base64.makedecoder` | `s62, s63, spad` |
-| 80 | `base64.encode` | `str, encoder, usecaching` |
-| 112 | `base64.decode` | `b64, decoder, usecaching` |
+| 1 | `v` | Declared by this function; type not inferred. |
+| 2 | `from` | Declared by this function; type not inferred. |
+| 3 | `width` | Declared by this function; type not inferred. |
 
-### Function notes
+#### 2. `extract( v, from, width )`
 
-- **`extract(v, from, width)`** *(source line 31)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`extract(v, from, width)`** *(source line 35)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`base64.makeencoder(s62, s63, spad)`** *(source line 55)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`base64.makedecoder(s62, s63, spad)`** *(source line 67)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`base64.encode(str, encoder, usecaching)`** *(source line 80)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`base64.decode(b64, decoder, usecaching)`** *(source line 112)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 35
+- **Declaration:** table/global or assignment
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `v` | Declared by this function; type not inferred. |
+| 2 | `from` | Declared by this function; type not inferred. |
+| 3 | `width` | Declared by this function; type not inferred. |
 
-### `base64` *(line 23)*
+#### 3. `base64.makeencoder( s62, s63, spad )`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 55
+- **Declaration:** table/global or assignment
 
-### `encoder` *(line 56)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `s62` | Declared by this function; type not inferred. |
+| 2 | `s63` | Declared by this function; type not inferred. |
+| 3 | `spad` | Declared by this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `base64.makedecoder( s62, s63, spad )`
 
-### `decoder` *(line 68)*
+- **Line:** 67
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `s62` | Declared by this function; type not inferred. |
+| 2 | `s63` | Declared by this function; type not inferred. |
+| 3 | `spad` | Declared by this function; type not inferred. |
 
-### `cache` *(line 84)*
+#### 5. `base64.encode( str, encoder, usecaching )`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 80
+- **Declaration:** table/global or assignment
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `str` | Declared by this function; type not inferred. |
+| 2 | `encoder` | Declared by this function; type not inferred. |
+| 3 | `usecaching` | Declared by this function; type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/avatar_utils/base64.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 6. `base64.decode( b64, decoder, usecaching )`
+
+- **Line:** 112
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `b64` | Declared by this function; type not inferred. |
+| 2 | `decoder` | Declared by this function; type not inferred. |
+| 3 | `usecaching` | Declared by this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 25 | `base64` |
+| 56 | `encoder` |
+| 68 | `decoder` |
+| 84 | `cache` |
+
+## Net API calls
+
+No direct `Net.method(...)` call expression matched.

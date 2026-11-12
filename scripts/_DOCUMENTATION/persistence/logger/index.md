@@ -1,101 +1,45 @@
-# `logger.lua`
+# 📄 `logger.lua` — Current Lua reference
 
-> **Source:** `scripts/persistence/logger.lua`  
-> **Source lines:** 189  
-> **Functions detected:** 10  
-> **Table declarations detected:** 7
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/persistence/logger.lua`](../../../persistence/logger.lua)  
+> **Source lines:** 3  
+> **SHA-256 (UTF-8):** `6aaf1748b522250e833db857c2a0749f6400467b537e59c3dc306c6c94a3b501`  
+> **Named/assigned functions detected:** 0  
+> **Table initializers detected:** 0
 
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../logger/README.md) for logging semantics.
+
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-[[
+Current source inventory for `scripts/persistence/logger.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/persistence/persistence` — line 7
+| Line | `require` module |
+|---:|---|
+| 3 | `scripts/logger/logger` |
 
-## Events
+## Event hooks
 
-- `Net:on("tick", function(event) ...)` — line 173. The event name is taken directly from this source.
+No literal `:on` event registration detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 14 | `timestamp` | `(none)` |
-| 30 | `createLogger` | `config` |
-| 73 | `LoggerMT:shouldLog` | `level` |
-| 80 | `LoggerMT:addEntry` | `level, msg, data` |
-| 110 | `LoggerMT:flush` | `(none)` |
-| 144 | `LoggerMT:debug` | `msg, data` |
-| 148 | `LoggerMT:info` | `msg, data` |
-| 152 | `LoggerMT:warn` | `msg, data` |
-| 156 | `LoggerMT:error` | `msg, data` |
-| 161 | `LoggerMT:forceFlush` | `(none)` |
+No named function declarations matched. Anonymous callbacks may exist.
 
-### Function notes
+## Tables
 
-- **`timestamp()`** — Helper to get current timestamp as string *(source line 14)*
-- **`createLogger(config)`** — Create a new logger instance -@param config table -@field filePath string           # required: path to log file -@field minLevel? string          # "debug", "info", "warn", "error" (default "info") -@field flushInterval? number     # seconds between writes (default 2.0) -@field maxBufferSize? number     # max messages before forcing flush (default 100) -@field logIfChanged? boolean     # only log if message differs from last (default false) -@field pretty? boolean           # pretty‑print JSON (default true) *(source line 30)*
-- **`LoggerMT:shouldLog(level)`** — Internal method to check if a message should be logged based on level *(source line 73)*
-- **`LoggerMT:addEntry(level, msg, data)`** — Internal method to add an entry to buffer *(source line 80)*
-- **`LoggerMT:flush()`** — Flush buffered entries to persistence *(source line 110)*
-- **`LoggerMT:debug(msg, data)`** — Public logging methods *(source line 144)*
-- **`LoggerMT:info(msg, data)`** *(source line 148)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`LoggerMT:warn(msg, data)`** *(source line 152)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`LoggerMT:error(msg, data)`** *(source line 156)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`LoggerMT:forceFlush()`** — Force flush now (useful before shutdown) *(source line 161)*
+No simple `name = {` table initializer matched.
 
-## Tables and data structures
+## Net API calls
 
-### `loggers` *(line 8)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `LoggerMT` *(line 19)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `self.levelPriority` *(line 45)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `debug` | number literal | `1` |
-| `info` | number literal | `2` |
-| `warn` | number literal | `3` |
-| `error` | number literal | `4` |
-
-### `self.buffer` *(line 53)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `self.lastMessages` *(line 57)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `entry` *(line 91)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `timestamp` | call/expression | `timestamp()` |
-| `level` | expression/reference | `level` |
-| `msg` | expression/reference | `msg` |
-
-### `self.buffer` *(line 129)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/persistence/logger.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+No direct `Net.method(...)` call expression matched.

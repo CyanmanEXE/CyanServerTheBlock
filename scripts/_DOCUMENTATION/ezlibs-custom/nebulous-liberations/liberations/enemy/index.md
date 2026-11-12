@@ -1,61 +1,104 @@
-# `enemy.lua`
+# 📄 `enemy.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy.lua`  
-> **Source lines:** 101  
-> **Functions detected:** 3  
-> **Table declarations detected:** 2
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/liberations/enemy.lua`](../../../../../ezlibs-custom/nebulous-liberations/liberations/enemy.lua)  
+> **Source lines:** 191  
+> **SHA-256 (UTF-8):** `37c04849b235f196873822df4d149534b782c544537895f5aa227d3e3ca1206b`  
+> **Named functions detected:** 4  
+> **Table initializers detected:** 3
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-enemy.lua
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 2
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_templates` — line 5
-- `scripts/ezlibs-custom/nebulous-liberations/utils/exploding_effect` — line 6
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators` — line 7
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
+| 3 | `scripts/logger/logger` |
+| 6 | `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_templates` |
+| 7 | `scripts/ezlibs-custom/nebulous-liberations/utils/exploding_effect` |
+| 8 | `scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No static literal subscriptions detected.
 
-## Functions
+## Functions and parameters
 
-| Line | Function / method | Parameters as declared |
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 12 | `apply_bot_scale_after_spawn` | `enemy, requested_scale` | local |
+| 97 | `Enemy.from` | `instance, position, direction, name, spawn_options` | assigned/declared |
+| 113 | `Enemy.is_alive` | `enemy` | assigned/declared |
+| 127 | `Enemy.destroy` | `instance, enemy` | assigned/declared |
+
+### Parameter inventory
+
+#### 1. `apply_bot_scale_after_spawn(enemy, requested_scale)`
+
+- **Line:** 12
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 11 | `Enemy.from` | `instance, position, direction, name, spawn_options` |
-| 21 | `Enemy.is_alive` | `enemy` |
-| 35 | `Enemy.destroy` | `instance, enemy` |
+| 1 | `enemy` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `requested_scale` | Declared directly in the current Lua. Type not inferred. |
 
-### Function notes
+#### 2. `Enemy.from(instance, position, direction, name, spawn_options)`
 
-- **`Enemy.from(instance, position, direction, name, spawn_options)`** *(source line 11)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Enemy.is_alive(enemy)`** *(source line 21)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Enemy.destroy(instance, enemy)`** *(source line 35)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 97
+- **Declaration:** assigned/declared
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `position` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `direction` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `name` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `spawn_options` | Declared directly in the current Lua. Type not inferred. |
 
-### `Enemy` *(line 8)*
+#### 3. `Enemy.is_alive(enemy)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 113
+- **Declaration:** assigned/declared
 
-### `lock_tracker` *(line 66)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `enemy` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `Enemy.destroy(instance, enemy)`
 
-## Implementation notes
+- **Line:** 127
+- **Declaration:** assigned/declared
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `enemy` | Declared directly in the current Lua. Type not inferred. |
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 10 | `Enemy` |
+| 40 | `keyframes` |
+| 41 | `properties` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.move_player_camera` | 1 | 163 |
+| `Net.remove_bot` | 1 | 177 |
+| `Net.set_bot_name` | 1 | 102 |
+| `Net.slide_player_camera` | 2 | 162 |
+| `Net.unlock_player_camera` | 1 | 165 |

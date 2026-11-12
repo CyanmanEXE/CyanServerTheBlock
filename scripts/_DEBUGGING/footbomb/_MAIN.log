@@ -1,0 +1,5 @@
+[2026-11-11 19:21:37] [INFO ] [footbomb/MAIN] [footbomb] Created FootBomb Controller footbomb-ref-footbomb-150 in footbomb
+[2026-11-11 19:21:47] [INFO ] [footbomb/MAIN] [footbomb] Created FootBomb Controller footbomb-ref-footbomb-150 in footbomb
+[2026-11-11 19:22:55] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_join observed player=c4b5d9b2-158b-486d-8e72-9b0729721315 area=default expected_source_area=footbomb
+[2026-11-11 19:25:16] [INFO ] [footbomb/MAIN] [footbomb] Created FootBomb Controller footbomb-ref-footbomb-150 in footbomb
+[2026-11-11 19:25:28] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_join observed player=ecf4a5c0-cac4-4e77-9462-91acea3d64aa area=default expected_source_area=footbomb

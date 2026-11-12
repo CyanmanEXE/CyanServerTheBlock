@@ -1,0 +1,9 @@
+[2026-11-11 19:21:37] [DEBUG] [hp_manager/BACKGROUND] [Background Manager] no background persistence file at scripts/hp_manager/data/background_data.dat
+[2026-11-11 19:21:37] [DEBUG] [hp_manager/REAL-TIME] [Real Time Manager] no persistence file at scripts/hp_manager/data/realtime_data.dat
+[2026-11-11 19:21:38] [INFO ] [hp_manager/DESKTOP] [HP_Manager] registered HP_Manager object_interaction listener
+[2026-11-11 19:21:48] [DEBUG] [hp_manager/BACKGROUND] [Background Manager] no background persistence file at scripts/hp_manager/data/background_data.dat
+[2026-11-11 19:21:48] [DEBUG] [hp_manager/REAL-TIME] [Real Time Manager] no persistence file at scripts/hp_manager/data/realtime_data.dat
+[2026-11-11 19:21:48] [INFO ] [hp_manager/DESKTOP] [HP_Manager] registered HP_Manager object_interaction listener
+[2026-11-11 19:25:16] [DEBUG] [hp_manager/BACKGROUND] [Background Manager] no background persistence file at scripts/hp_manager/data/background_data.dat
+[2026-11-11 19:25:16] [DEBUG] [hp_manager/REAL-TIME] [Real Time Manager] no persistence file at scripts/hp_manager/data/realtime_data.dat
+[2026-11-11 19:25:16] [INFO ] [hp_manager/DESKTOP] [HP_Manager] registered HP_Manager object_interaction listener

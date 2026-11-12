@@ -1,126 +1,344 @@
-# `element.lua`
+# 📄 `element.lua`
 
-> **Source:** `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/element.lua`  
+[🏠 Documentation home](../../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/element.lua`](../../../../../../ezlibs-scripts/avatar_utils/lua_yes_parser/src/element.lua)  
 > **Source lines:** 419  
-> **Functions detected:** 18  
-> **Table declarations detected:** 8
+> **SHA-256 (UTF-8):** `4f05a8dba6fea7…`  
+> **Declared/assigned functions detected:** 18  
+> **Anonymous closures detected:** 1  
+> **Table initializers detected:** 9
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-Perform a sanity check
+Source-based reference for `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/element.lua`. No module-purpose prose was supplied in the leading source comments.
 
-## Dependencies
+## 🔗 Dependencies
 
-- `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/enums` — line 1
-- `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/keyval` — line 2
-- `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/utils/trim` — line 3
+| Line | Module string supplied to `require` |
+|---|---|
+| 1 | `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/enums` |
+| 2 | `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/keyval` |
+| 3 | `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/utils/trim` |
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 6 | `Element.new` | `(none)` |
-| 13 | `__tostring` | `self` |
-| 22 | `this.setAttributes` | `attrs` |
-| 36 | `findKey` | `key` |
-| 48 | `this.upsert` | `keyval` |
-| 61 | `this.hasKey` | `key` |
-| 65 | `this.hasKeys` | `keyList` |
-| 75 | `this.getKeyValue` | `key, orValue` |
-| 86 | `this.getKeyValueAsInt` | `key, orValue` |
-| 94 | `this.getKeyValueAsBool` | `key, orValue` |
-| 106 | `this.getKeyValueAsNumber` | `key, orValue` |
-| 115 | `this.printArgs` | `(none)` |
-| 137 | `ElementParser.new` | `(none)` |
-| 144 | `setDelimiterType` | `type` |
-| 153 | `evaluateDelimiter` | `input, start` |
-| 267 | `evaluateToken` | `input, start, nd` |
-| 286 | `parseTokenStep` | `input, start` |
-| 312 | `self.parseTokens` | `input, start` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 6 | `Element.new` | `(none)` | assigned |
+| 14 | `__tostring` | `self` | assigned |
+| 23 | `this.setAttributes` | `attrs` | assigned |
+| 36 | `findKey` | `key` | assigned |
+| 49 | `this.upsert` | `keyval` | assigned |
+| 62 | `this.hasKey` | `key` | assigned |
+| 66 | `this.hasKeys` | `keyList` | assigned |
+| 76 | `this.getKeyValue` | `key, orValue` | assigned |
+| 87 | `this.getKeyValueAsInt` | `key, orValue` | assigned |
+| 95 | `this.getKeyValueAsBool` | `key, orValue` | assigned |
+| 107 | `this.getKeyValueAsNumber` | `key, orValue` | assigned |
+| 116 | `this.printArgs` | `(none)` | assigned |
+| 137 | `ElementParser.new` | `(none)` | assigned |
+| 145 | `setDelimiterType` | `type` | assigned |
+| 154 | `evaluateDelimiter` | `input, start` | assigned |
+| 268 | `evaluateToken` | `input, start, nd` | assigned |
+| 287 | `parseTokenStep` | `input, start` | assigned |
+| 313 | `self.parseTokens` | `input, start` | assigned |
 
-### Function notes
+### Function details
 
-- **`Element.new()`** *(source line 6)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`__tostring(self)`** *(source line 13)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.setAttributes(attrs)`** *(source line 22)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`findKey(key)`** — helper func *(source line 36)*
-- **`this.upsert(keyval)`** — public funcs *(source line 48)*
-- **`this.hasKey(key)`** *(source line 61)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.hasKeys(keyList)`** *(source line 65)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.getKeyValue(key, orValue)`** *(source line 75)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.getKeyValueAsInt(key, orValue)`** *(source line 86)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.getKeyValueAsBool(key, orValue)`** *(source line 94)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.getKeyValueAsNumber(key, orValue)`** *(source line 106)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`this.printArgs()`** *(source line 115)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ElementParser.new()`** *(source line 137)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`setDelimiterType(type)`** *(source line 144)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`evaluateDelimiter(input, start)`** *(source line 153)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`evaluateToken(input, start, nd)`** *(source line 267)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`parseTokenStep(input, start)`** *(source line 286)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`self.parseTokens(input, start)`** — public *(source line 312)*
+#### 1. `Element.new()`
 
-## Tables and data structures
+- **Location:** source line 6.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `Element` *(line 4)*
+#### 2. `__tostring(self)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 14.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `this` *(line 7)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-| Field / key | Value category | Initializer expression (source) |
+| Position | Parameter | Source-established type / meaning |
 |---|---|---|
-| `attributes` | table | `{}` |
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 3. `this.setAttributes(attrs)`
+
+- **Location:** source line 23.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `attrs` | Not explicitly documented in adjacent source annotations. |
+
+#### 4. `findKey(key)`
+
+- **Location:** source line 36.
+- **Declaration style:** `assigned`.
+- **Adjacent source comment:** helper func
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `key` | Not explicitly documented in adjacent source annotations. |
+
+#### 5. `this.upsert(keyval)`
+
+- **Location:** source line 49.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `keyval` | Not explicitly documented in adjacent source annotations. |
+
+#### 6. `this.hasKey(key)`
+
+- **Location:** source line 62.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `key` | Not explicitly documented in adjacent source annotations. |
+
+#### 7. `this.hasKeys(keyList)`
+
+- **Location:** source line 66.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `keyList` | Not explicitly documented in adjacent source annotations. |
+
+#### 8. `this.getKeyValue(key, orValue)`
+
+- **Location:** source line 76.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `key` | Not explicitly documented in adjacent source annotations. |
+| 2 | `orValue` | Not explicitly documented in adjacent source annotations. |
+
+#### 9. `this.getKeyValueAsInt(key, orValue)`
+
+- **Location:** source line 87.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `key` | Not explicitly documented in adjacent source annotations. |
+| 2 | `orValue` | Not explicitly documented in adjacent source annotations. |
+
+#### 10. `this.getKeyValueAsBool(key, orValue)`
+
+- **Location:** source line 95.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `key` | Not explicitly documented in adjacent source annotations. |
+| 2 | `orValue` | Not explicitly documented in adjacent source annotations. |
+
+#### 11. `this.getKeyValueAsNumber(key, orValue)`
+
+- **Location:** source line 107.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `key` | Not explicitly documented in adjacent source annotations. |
+| 2 | `orValue` | Not explicitly documented in adjacent source annotations. |
+
+#### 12. `this.printArgs()`
+
+- **Location:** source line 116.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+#### 13. `ElementParser.new()`
+
+- **Location:** source line 137.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+#### 14. `setDelimiterType(type)`
+
+- **Location:** source line 145.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `type` | Not explicitly documented in adjacent source annotations. |
+
+#### 15. `evaluateDelimiter(input, start)`
+
+- **Location:** source line 154.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `input` | Not explicitly documented in adjacent source annotations. |
+| 2 | `start` | Not explicitly documented in adjacent source annotations. |
+
+#### 16. `evaluateToken(input, start, nd)`
+
+- **Location:** source line 268.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `input` | Not explicitly documented in adjacent source annotations. |
+| 2 | `start` | Not explicitly documented in adjacent source annotations. |
+| 3 | `nd` | Not explicitly documented in adjacent source annotations. |
+
+#### 17. `parseTokenStep(input, start)`
+
+- **Location:** source line 287.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `input` | Not explicitly documented in adjacent source annotations. |
+| 2 | `start` | Not explicitly documented in adjacent source annotations. |
+
+#### 18. `self.parseTokens(input, start)`
+
+- **Location:** source line 313.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `input` | Not explicitly documented in adjacent source annotations. |
+| 2 | `start` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+These are anonymous `function(...)` expressions, including inline callbacks. Their argument lists are taken verbatim from source; lexical context is descriptive text, not a claim about execution.
+
+| Line | Arguments | Preceding source context |
+|---|---|---|
+| 324 | `line` | `elf.error ~= nil then break end end end return self end local read <const> =` |
+
+## 📦 Tables and data
+
+The following **9** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `Element` — line 5
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `this` — line 7
+
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `attributes` | nested table | `{}` |
 | `text` | string literal | `''` |
-| `args` | table | `{}` |
+| `args` | nested table | `{}` |
 | `type` | expression/reference | `enums.ElementTypes.STANDARD` |
 
-### `attributes` *(line 8)*
+### 3. `attributes` — line 8
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `args` *(line 10)*
+### 4. `args` — line 10
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `this.attributes` *(line 24)*
+### 5. `this.attributes` — line 24
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `mt` *(line 128)*
+### 6. `mt` — line 129
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `__tostring` | expression/reference | `__tostring` |
 
-### `ElementParser` *(line 135)*
+### 7. `ElementParser` — line 136
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `self` *(line 138)*
+### 8. `self` — line 138
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `delimiter` | expression/reference | `enums.Delimiters.UNSET` |
 | `element` | nil | `nil` |
 | `error` | nil | `nil` |
-| `lineNumber` | number literal | `-1` |
+| `lineNumber` | numeric literal | `-1` |
 
-## Implementation notes
+### 9. `return` — line 419
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/avatar_utils/lua_yes_parser/src/element.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `read` | expression/reference | `read` |
+| `Element` | expression/reference | `Element` |
+
+## ⚙️ Runtime API calls
+
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

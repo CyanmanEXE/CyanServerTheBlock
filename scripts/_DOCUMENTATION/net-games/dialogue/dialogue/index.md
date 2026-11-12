@@ -1,124 +1,240 @@
-# `dialogue.lua`
+# 📄 `dialogue.lua` — Current Lua reference
 
-> **Source:** `scripts/net-games/dialogue/dialogue.lua`  
-> **Source lines:** 330  
-> **Functions detected:** 17  
-> **Table declarations detected:** 7
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/dialogue/dialogue.lua`](../../../../net-games/dialogue/dialogue.lua)  
+> **Source lines:** 331  
+> **SHA-256 (UTF-8):** `40349ec0839a188a19bf55a4f9c28e8d1f9c4d26578900b05a834758b2421933`  
+> **Named functions detected:** 17  
+> **Table initializers detected:** 7
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-scripts/net-games/dialogue/dialogue.lua Hardened net-games dialogue lifecycle. Keeps the creator-side Displayer architecture while preserving production behavior learned from shadis_hp: held-input handoff protection, real visual teardown before unlock/on_complete, BN-style A/B behavior, and textbox reuse.
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/net-games/main` — line 7
-- `scripts/displayer/displayer` — line 9
-- `scripts/displayer/text-display` — line 10
-- `scripts/input/input` — line 11
-- `scripts/net-games/dialogue/constants` — line 12
-- `scripts/net-games/dialogue/prompt` — line 13
-- `scripts/net-games/dialogue/prompt_vertical` — line 14
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
+| 8 | `scripts/net-games/main` |
+| 10 | `scripts/displayer/displayer` |
+| 11 | `scripts/displayer/text-display` |
+| 12 | `scripts/input/input` |
+| 13 | `scripts/net-games/dialogue/constants` |
+| 14 | `scripts/net-games/dialogue/prompt` |
+| 15 | `scripts/net-games/dialogue/prompt_vertical` |
 
-## Events
+## Event hooks
 
-- `Net:on("tick", function(event) ...)` — line 161. The event name is taken directly from this source.
-
-## Functions
-
-| Line | Function / method | Parameters as declared |
+| Line | Subscriber | Event |
 |---:|---|---|
-| 24 | `ensure_backdrop_sprite` | `player_id` |
-| 37 | `draw_backdrop` | `player_id, backdrop, z` |
-| 58 | `erase_backdrop` | `player_id` |
-| 62 | `set_input_locked` | `player_id, locked` |
-| 72 | `ensure_listener` | `(none)` |
-| 80 | `default_opts` | `(none)` |
-| 96 | `merge` | `a, b` |
-| 101 | `mk_box_id` | `player_id, ui` |
-| 105 | `gate_handoff_input` | `player_id, seconds` |
-| 111 | `close_instance` | `player_id, reason` |
-| 136 | `finish_instance` | `player_id, inst` |
-| 157 | `attach_tick` | `(none)` |
-| 205 | `Dialogue.is_active` | `player_id` |
-| 209 | `Dialogue.prompt_yesno` | `player_id, opts` |
-| 213 | `Dialogue.prompt_menu` | `player_id, opts` |
-| 217 | `Dialogue.start` | `player_id, script, opts` |
-| 326 | `Dialogue.close` | `player_id` |
+| 162 | `Net` | `tick` |
 
-### Function notes
+## Functions and parameters
 
-- **`ensure_backdrop_sprite(player_id)`** *(source line 24)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`draw_backdrop(player_id, backdrop, z)`** *(source line 37)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`erase_backdrop(player_id)`** *(source line 58)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`set_input_locked(player_id, locked)`** *(source line 62)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ensure_listener()`** *(source line 72)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`default_opts()`** *(source line 80)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`merge(a, b)`** *(source line 96)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`mk_box_id(player_id, ui)`** *(source line 101)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`gate_handoff_input(player_id, seconds)`** *(source line 105)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`close_instance(player_id, reason)`** *(source line 111)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`finish_instance(player_id, inst)`** *(source line 136)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`attach_tick()`** *(source line 157)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Dialogue.is_active(player_id)`** *(source line 205)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Dialogue.prompt_yesno(player_id, opts)`** *(source line 209)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Dialogue.prompt_menu(player_id, opts)`** *(source line 213)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Dialogue.start(player_id, script, opts)`** *(source line 217)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`Dialogue.close(player_id)`** *(source line 326)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 25 | `ensure_backdrop_sprite` | `player_id` | local |
+| 38 | `draw_backdrop` | `player_id, backdrop, z` | local |
+| 59 | `erase_backdrop` | `player_id` | local |
+| 63 | `set_input_locked` | `player_id, locked` | local |
+| 73 | `ensure_listener` | `(none)` | local |
+| 81 | `default_opts` | `(none)` | local |
+| 97 | `merge` | `a, b` | local |
+| 102 | `mk_box_id` | `player_id, ui` | local |
+| 106 | `gate_handoff_input` | `player_id, seconds` | local |
+| 112 | `close_instance` | `player_id, reason` | local |
+| 137 | `finish_instance` | `player_id, inst` | local |
+| 158 | `attach_tick` | `(none)` | local |
+| 206 | `Dialogue.is_active` | `player_id` | assigned/declared |
+| 210 | `Dialogue.prompt_yesno` | `player_id, opts` | assigned/declared |
+| 214 | `Dialogue.prompt_menu` | `player_id, opts` | assigned/declared |
+| 218 | `Dialogue.start` | `player_id, script, opts` | assigned/declared |
+| 327 | `Dialogue.close` | `player_id` | assigned/declared |
 
-## Tables and data structures
+### Parameter inventory
 
-### `Dialogue` *(line 15)*
+#### 1. `ensure_backdrop_sprite(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 25
+- **Declaration:** local
 
-### `Dialogue.instances` *(line 17)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 2. `draw_backdrop(player_id, backdrop, z)`
 
-### `player_backdrop_sprite` *(line 22)*
+- **Line:** 38
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `backdrop` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `z` | Declared directly in the current Lua. Type not inferred. |
 
-### `pages` *(line 255)*
+#### 3. `erase_backdrop(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 59
+- **Declaration:** local
 
-### `pages` *(line 258)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | expression/reference | `script` |
+#### 4. `set_input_locked(player_id, locked)`
 
-### `pages` *(line 264)*
+- **Line:** 63
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `""` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `locked` | Declared directly in the current Lua. Type not inferred. |
 
-### `text_options` *(line 274)*
+#### 5. `ensure_listener()`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `font` | expression/reference | `o.font` |
-| `scale` | expression/reference | `o.scale` |
-| `z` | expression/reference | `o.z` |
-| `speed` | expression/reference | `o.typing_speed` |
-| `type_sound` | expression/reference | `o.type_sfx_path` |
-| `type_sound_min_dt` | expression/reference | `o.type_sfx_min_dt` |
-| `max_lines` | expression/reference | `backdrop and backdrop.max_lines or nil` |
+- **Line:** 73
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
 
-## Implementation notes
+#### 6. `default_opts()`
 
-- This reference is generated from the exact archived source `scripts/net-games/dialogue/dialogue.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+- **Line:** 81
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+#### 7. `merge(a, b)`
+
+- **Line:** 97
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `a` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `b` | Declared directly in the current Lua. Type not inferred. |
+
+#### 8. `mk_box_id(player_id, ui)`
+
+- **Line:** 102
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `ui` | Declared directly in the current Lua. Type not inferred. |
+
+#### 9. `gate_handoff_input(player_id, seconds)`
+
+- **Line:** 106
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `seconds` | Declared directly in the current Lua. Type not inferred. |
+
+#### 10. `close_instance(player_id, reason)`
+
+- **Line:** 112
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `reason` | Declared directly in the current Lua. Type not inferred. |
+
+#### 11. `finish_instance(player_id, inst)`
+
+- **Line:** 137
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `inst` | Declared directly in the current Lua. Type not inferred. |
+
+#### 12. `attach_tick()`
+
+- **Line:** 158
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+#### 13. `Dialogue.is_active(player_id)`
+
+- **Line:** 206
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 14. `Dialogue.prompt_yesno(player_id, opts)`
+
+- **Line:** 210
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `opts` | Declared directly in the current Lua. Type not inferred. |
+
+#### 15. `Dialogue.prompt_menu(player_id, opts)`
+
+- **Line:** 214
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `opts` | Declared directly in the current Lua. Type not inferred. |
+
+#### 16. `Dialogue.start(player_id, script, opts)`
+
+- **Line:** 218
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `script` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `opts` | Declared directly in the current Lua. Type not inferred. |
+
+#### 17. `Dialogue.close(player_id)`
+
+- **Line:** 327
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 17 | `Dialogue` |
+| 18 | `Dialogue.instances` |
+| 23 | `player_backdrop_sprite` |
+| 257 | `pages` |
+| 259 | `pages` |
+| 265 | `pages` |
+| 276 | `text_options` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.on` | 1 | 162 |
+| `Net.player_alloc_sprite` | 1 | 33 |
+| `Net.player_draw_sprite` | 1 | 42 |
+| `Net.player_erase_sprite` | 1 | 60 |
+| `Net.provide_asset_for_player` | 1 | 31 |

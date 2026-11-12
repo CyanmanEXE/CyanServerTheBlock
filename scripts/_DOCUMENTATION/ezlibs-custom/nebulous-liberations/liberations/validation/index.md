@@ -1,81 +1,159 @@
-# `validation.lua`
+# 📄 `validation.lua`
 
-> **Source:** `scripts/ezlibs-custom/nebulous-liberations/liberations/validation.lua`  
-> **Source lines:** 201  
-> **Functions detected:** 4  
-> **Table declarations detected:** 6
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/liberations/validation.lua`](../../../../../ezlibs-custom/nebulous-liberations/liberations/validation.lua)  
+> **Source lines:** 254  
+> **SHA-256 (UTF-8):** `7e1f5a0aa4ed46…`  
+> **Declared/assigned functions detected:** 4  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 7
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+## 🗂️ Contents
 
-## Overview
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-validation.lua
+## 📌 Overview
 
-## Dependencies
+Source-based reference for `scripts/ezlibs-custom/nebulous-liberations/liberations/validation.lua`. No module-purpose prose was supplied in the leading source comments.
 
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/constants` — line 2
+## 🔗 Dependencies
 
-## Events
+| Line | Module string supplied to `require` |
+|---|---|
+| 2 | `scripts/ezlibs-custom/nebulous-liberations/liberations/constants` |
+| 3 | `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_config` |
+| 4 | `scripts/ezlibs-custom/nebulous-liberations/liberations/logger` |
 
-- No direct `Net:on(...)` registration was detected.
+## 📡 Event subscriptions
 
-## Functions
+*No literal `.on` or `:on` event subscriptions detected.*
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 7 | `log` | `level, message` |
-| 12 | `validate_object` | `area_id, object` |
-| 84 | `Validation.validate_area` | `area_id` |
-| 190 | `Validation.report` | `area_id` |
+## 🧩 Functions
 
-### Function notes
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 9 | `log` | `level, message` | local |
+| 19 | `validate_object` | `area_id, object` | local |
+| 136 | `Validation.validate_area` | `area_id` | declared |
+| 243 | `Validation.report` | `area_id` | declared |
 
-- **`log(level, message)`** — Log a warning or error (replace with proper logging) *(source line 7)*
-- **`validate_object(area_id, object)`** — Validate a single object *(source line 12)*
-- **`Validation.validate_area(area_id)`** — Validate a whole area *(source line 84)*
-- **`Validation.report(area_id)`** — Print validation results to console *(source line 190)*
+### Function details
 
-## Tables and data structures
+#### 1. `log(level, message)`
 
-### `Validation` *(line 3)*
+- **Location:** source line 9.
+- **Declaration style:** `local`.
+- **Adjacent source comment:** Separate mission validation output from generic server console logging.
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-### `valid_modes` *(line 43)*
-
-| Field / key | Value category | Initializer expression (source) |
+| Position | Parameter | Source-established type / meaning |
 |---|---|---|
-| `[Immediate]` | boolean literal | `true` |
-| `[On Dark Hole Cleared]` | boolean literal | `true` |
-| `[Manual]` | boolean literal | `true` |
-| `[After Boss Defeated]` | boolean literal | `true` |
+| 1 | `level` | Not explicitly documented in adjacent source annotations. |
+| 2 | `message` | Not explicitly documented in adjacent source annotations. |
 
-### `boss_object_ids` *(line 88)*
+#### 2. `validate_object(area_id, object)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 19.
+- **Declaration style:** `local`.
+- **Adjacent source comment:** Validate a single object
 
-### `boss_ids` *(line 89)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `area_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `object` | Not explicitly documented in adjacent source annotations. |
 
-### `boss_trigger_refs` *(line 90)*
+#### 3. `Validation.validate_area(area_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 136.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Validate a whole area
 
-### `panel_boss_refs` *(line 91)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `area_id` | Not explicitly documented in adjacent source annotations. |
 
-## Implementation notes
+#### 4. `Validation.report(area_id)`
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/nebulous-liberations/liberations/validation.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+- **Location:** source line 243.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Print validation results to console
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `area_id` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+*No anonymous `function(...)` expressions detected.*
+
+## 📦 Tables and data
+
+The following **7** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `Validation` — line 6
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `details` — line 10
+
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `message` | expression/reference | `message` |
+
+### 3. `valid_modes` — line 95
+
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `["Immediate"]` | boolean literal | `true` |
+| `[2]` | expression/reference | `["On Dark Hole Cleared"] = true` |
+| `["Manual"]` | boolean literal | `true` |
+| `[4]` | expression/reference | `["After Boss Defeated"] = true` |
+
+### 4. `boss_object_ids` — line 140
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 5. `boss_ids` — line 141
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 6. `boss_trigger_refs` — line 142
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 7. `panel_boss_refs` — line 143
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+## ⚙️ Runtime API calls
+
+These are **statically detected call sites**, not API definitions or guaranteed successful runtime calls.
+
+| Call identifier | Occurrences |
+|---|---|
+| `Net.get_area_name` | 2 |
+| `Net.get_object_by_id` | 2 |
+| `Net.list_objects` | 1 |
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

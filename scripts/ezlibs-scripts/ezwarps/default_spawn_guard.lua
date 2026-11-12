@@ -8,7 +8,7 @@
 -- This guard only uses that point if the engine default spawn is missing or
 -- near the known-empty origin. It does not persist user positions.
 
-local log = require("scripts/ezlibs-scripts/ezlogger").get("ezwarps-spawn-guard")
+local log = require("scripts/logger/logger").register("ezwarps"):register_subsystem("spawn-guard")
 local Guard = {}
 
 local DEFAULT_AREA = "default"

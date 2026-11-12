@@ -1,48 +1,57 @@
-# `trim.lua`
+# 📄 `trim.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/avatar_utils/lua_yes_parser/src/utils/trim.lua`  
+[🏠 Documentation home](../../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/avatar_utils/lua_yes_parser/src/utils/trim.lua`](../../../../../../avatar_utils/lua_yes_parser/src/utils/trim.lua)  
 > **Source lines:** 24  
-> **Functions detected:** 1  
-> **Table declarations detected:** 0
+> **SHA-256 (UTF-8):** `ab7bd5aebcbf3e899da17ac0757662e5444e033a0902f3ad9b6bd776a976dfa9`  
+> **Named/assigned functions detected:** 1  
+> **Table initializers detected (simple pattern):** 0
 
-## Contents
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Current source inventory for `scripts/avatar_utils/lua_yes_parser/src/utils/trim.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- No `require(...)` dependency was detected.
+No statically identified literal `require` module strings.
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No named `.on`/`:on` events detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 1 | `trim` | `str` | local |
+
+### Detailed parameter inventory
+
+#### 1. `trim(str)`
+
+- **Line:** 1
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 1 | `trim` | `str` |
+| 1 | `str` | Declared by this function; type not inferred. |
 
-### Function notes
 
-- **`trim(str)`** *(source line 1)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+## Tables
 
-## Tables and data structures
+No plain `name = {` table initializer matched.
 
-No simple named table initializer was detected. Tables created dynamically or returned inline may not appear in this inventory.
+## Net API calls
 
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/avatar_utils/lua_yes_parser/src/utils/trim.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+No direct `Net.method(...)` call expression matched.

@@ -1,140 +1,212 @@
-# `ezmystery.lua`
+# 📄 `ezmystery.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezmystery.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezmystery.lua`](../../../ezlibs-scripts/ezmystery.lua)  
 > **Source lines:** 398  
-> **Functions detected:** 12  
-> **Table declarations detected:** 11
+> **SHA-256 (UTF-8):** `0cfb11326e25b5abf45332acba3c8f200751d8237cb24c5aa41583b6c264d384`  
+> **Named/assigned functions detected:** 12  
+> **Table initializers detected:** 11
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-Robust boolean checker (case‑insensitive, accepts 1 as true)
+Current source inventory for `scripts/ezlibs-scripts/ezmystery.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
-- `scripts/ezlibs-scripts/ezmemory` — line 3
-- `scripts/ezlibs-scripts/ezcache` — line 4
-- `scripts/ezlibs-scripts/helpers` — line 5
-- `scripts/ezlibs-scripts/ezlocks` — line 6
-- `scripts/ezlibs-scripts/condition` — line 7
-- `scripts/ezlibs-scripts/ezencounters/main` — line 8
-- `math` — line 9
-- `scripts/ezlibs-scripts/ezbus` — line 10
-- `scripts/ezlibs-scripts/avatar_utils/main` — line 12
-- `scripts/ezlibs-scripts/avatar_utils/avatar_utils` — line 13
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/logger/logger` |
+| 3 | `scripts/ezlibs-scripts/ezmemory` |
+| 4 | `scripts/ezlibs-scripts/ezcache` |
+| 5 | `scripts/ezlibs-scripts/helpers` |
+| 6 | `scripts/ezlibs-scripts/ezlocks` |
+| 7 | `scripts/ezlibs-scripts/condition` |
+| 8 | `scripts/ezlibs-scripts/ezencounters/main` |
+| 9 | `math` |
+| 10 | `scripts/ezlibs-scripts/ezbus` |
+| 12 | `scripts/ezlibs-scripts/avatar_utils/main` |
+| 13 | `scripts/ezlibs-scripts/avatar_utils/avatar_utils` |
 
-## Events
+## Event hooks
 
-- `Net:on("player_join", function(event) ...)` — line 74. The event name is taken directly from this source.
-- `Net:on("avatar_change", function(event) ...)` — line 79. The event name is taken directly from this source.
-- `Net:on("object_interaction", function(event) ...)` — line 84. The event name is taken directly from this source.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 74 | `Net` | `player_join` |
+| 79 | `Net` | `avatar_change` |
+| 84 | `Net` | `object_interaction` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 26 | `is_property_true` | `val` | local |
+| 40 | `resource_name` | `cost_type` | local |
+| 47 | `object_is_mystery_data` | `object` | local |
+| 53 | `fetch_player_avatar_and_details` | `player_id` | local |
+| 92 | `ezmystery.handle_player_disconnect` | `player_id` | assigned/declared |
+| 96 | `ezmystery.hide_random_data` | `player_id` | assigned/declared |
+| 133 | `ezmystery.handle_player_transfer` | `player_id` | assigned/declared |
+| 137 | `ezmystery.handle_player_join` | `player_id` | assigned/declared |
+| 141 | `run_quiz_from_list` | `player_id, area_id, quiz_list_id, failure_message` | local |
+| 201 | `try_collect_datum` | `player_id, area_id, object` | assigned/declared |
+| 308 | `read_datum_information` | `area_id, object` | assigned/declared |
+| 323 | `collect_datum` | `player_id, object, datum_id_override, is_quiz` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `is_property_true(val)`
+
+- **Line:** 26
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 26 | `is_property_true` | `val` |
-| 40 | `resource_name` | `cost_type` |
-| 47 | `object_is_mystery_data` | `object` |
-| 53 | `fetch_player_avatar_and_details` | `player_id` |
-| 92 | `ezmystery.handle_player_disconnect` | `player_id` |
-| 96 | `ezmystery.hide_random_data` | `player_id` |
-| 133 | `ezmystery.handle_player_transfer` | `player_id` |
-| 137 | `ezmystery.handle_player_join` | `player_id` |
-| 141 | `run_quiz_from_list` | `player_id, area_id, quiz_list_id, failure_message` |
-| 201 | `try_collect_datum` | `player_id, area_id, object` |
-| 308 | `read_datum_information` | `area_id, object` |
-| 323 | `collect_datum` | `player_id, object, datum_id_override, is_quiz` |
+| 1 | `val` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `resource_name(cost_type)`
 
-- **`is_property_true(val)`** — Robust boolean checker (case‑insensitive, accepts 1 as true) *(source line 26)*
-- **`resource_name(cost_type)`** — Helper to get a readable resource name *(source line 40)*
-- **`object_is_mystery_data(object)`** *(source line 47)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`fetch_player_avatar_and_details(player_id)`** *(source line 53)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmystery.handle_player_disconnect(player_id)`** *(source line 92)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmystery.hide_random_data(player_id)`** *(source line 96)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmystery.handle_player_transfer(player_id)`** *(source line 133)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezmystery.handle_player_join(player_id)`** *(source line 137)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`run_quiz_from_list(player_id, area_id, quiz_list_id, failure_message)`** *(source line 141)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`try_collect_datum(player_id, area_id, object)`** *(source line 201)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`read_datum_information(area_id, object)`** *(source line 308)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`collect_datum(player_id, object, datum_id_override, is_quiz)`** *(source line 323)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 40
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `cost_type` | Declared in this function; type not inferred. |
 
-### `ezmystery` *(line 2)*
+#### 3. `object_is_mystery_data(object)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 47
+- **Declaration:** local
 
-### `object_cache` *(line 14)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `fetch_player_avatar_and_details(player_id)`
 
-### `revealed_mysteries_for_players` *(line 16)*
+- **Line:** 53
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
 
-### `sfx` *(line 17)*
+#### 5. `ezmystery.handle_player_disconnect(player_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `item_get` | string literal | `'/server/assets/ezlibs-assets/sfx/item_get.ogg'` |
+- **Line:** 92
+- **Declaration:** table/global or assignment
 
-### `player_avatars` *(line 21)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 6. `ezmystery.hide_random_data(player_id)`
 
-### `player_animations` *(line 23)*
+- **Line:** 96
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
 
-### `datum_list` *(line 109)*
+#### 7. `ezmystery.handle_player_transfer(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 133
+- **Declaration:** table/global or assignment
 
-### `options` *(line 166)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 8. `ezmystery.handle_player_join(player_id)`
 
-### `check_cond` *(line 228)*
+- **Line:** 137
+- **Declaration:** table/global or assignment
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `type` | expression/reference | `cost_type` |
-| `amount` | expression/reference | `cost_amount` |
-| `consume` | boolean literal | `false` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
 
-### `spend_cond` *(line 250)*
+#### 9. `run_quiz_from_list(player_id, area_id, quiz_list_id, failure_message)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `type` | expression/reference | `cost_type` |
-| `amount` | expression/reference | `cost_amount` |
-| `consume` | boolean literal | `true` |
+- **Line:** 141
+- **Declaration:** local
 
-### `item_info` *(line 329)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `area_id` | Declared in this function; type not inferred. |
+| 3 | `quiz_list_id` | Declared in this function; type not inferred. |
+| 4 | `failure_message` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `type` | expression/reference | `object.custom_properties["Reward Type"] or "item"` |
-| `name` | expression/reference | `object.custom_properties["Reward Name"]` |
-| `amount` | call/expression | `tonumber(object.custom_properties["Reward Amount"] or 1)` |
-| `description` | expression/reference | `object.custom_properties["Reward Description"] or "???"` |
-| `price` | number literal | `0` |
+#### 10. `try_collect_datum(player_id, area_id, object)`
 
-## Implementation notes
+- **Line:** 201
+- **Declaration:** table/global or assignment
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezmystery.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `area_id` | Declared in this function; type not inferred. |
+| 3 | `object` | Declared in this function; type not inferred. |
+
+#### 11. `read_datum_information(area_id, object)`
+
+- **Line:** 308
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `object` | Declared in this function; type not inferred. |
+
+#### 12. `collect_datum(player_id, object, datum_id_override, is_quiz)`
+
+- **Line:** 323
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `object` | Declared in this function; type not inferred. |
+| 3 | `datum_id_override` | Declared in this function; type not inferred. |
+| 4 | `is_quiz` | Declared in this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 2 | `ezmystery` |
+| 15 | `object_cache` |
+| 16 | `revealed_mysteries_for_players` |
+| 18 | `sfx` |
+| 22 | `player_avatars` |
+| 23 | `player_animations` |
+| 109 | `datum_list` |
+| 167 | `options` |
+| 228 | `check_cond` |
+| 250 | `spend_cond` |
+| 329 | `item_info` |
+
+## Net API calls
+
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.get_area_custom_property` | 2 | 99 |
+| `Net.get_object_by_id` | 2 | 86 |
+| `Net.get_player_area` | 3 | 85 |
+| `Net.get_player_direction` | 1 | 373 |
+| `Net.get_player_secret` | 1 | 54 |
+| `Net.list_objects` | 1 | 98 |
+| `Net.on` | 3 | 74 |

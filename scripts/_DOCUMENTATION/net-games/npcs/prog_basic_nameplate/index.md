@@ -1,125 +1,174 @@
-# `prog_basic_nameplate.lua`
+# 📄 `prog_basic_nameplate.lua`
 
-> **Source:** `scripts/net-games/npcs/prog_basic_nameplate.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/npcs/prog_basic_nameplate.lua`](../../../../net-games/npcs/prog_basic_nameplate.lua)  
 > **Source lines:** 135  
-> **Functions detected:** 2  
-> **Table declarations detected:** 5
+> **SHA-256 (UTF-8):** `ed24a7d7452c5c…`  
+> **Declared/assigned functions detected:** 2  
+> **Anonymous closures detected:** 1  
+> **Table initializers detected:** 5
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-===================================================== prog_basic_nameplate_dialogue.lua Like prog_basic_dialogue.lua, but with a BN-style nameplate. =====================================================
+Like prog_basic_dialogue.lua, but with a BN-style nameplate.
 
-## Dependencies
+## 🔗 Dependencies
 
-- `scripts/libs/direction` — line 6
-- `scripts/net-games/dialogue/dialogue` — line 7
+| Line | Module string supplied to `require` |
+|---|---|
+| 6 | `scripts/libs/direction` |
+| 7 | `scripts/net-games/dialogue/dialogue` |
 
-## Events
+## 📡 Event subscriptions
 
-- `Net:on("actor_interaction", function(event) ...)` — line 42. The event name is taken directly from this source.
+| Line | Subscription call | Literal event name |
+|---|---|---|
+| 42 | `Net:on` | `actor_interaction` |
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 10 | `dbg` | `msg` |
-| 130 | `on_finish` | `(none)` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 10 | `dbg` | `msg` | local |
+| 131 | `on_finish` | `(none)` | assigned |
 
-### Function notes
+### Function details
 
-- **`dbg(msg)`** *(source line 10)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`on_finish()`** *(source line 130)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `dbg(msg)`
 
-## Tables and data structures
+- **Location:** source line 10.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `ui` *(line 65)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-| Field / key | Value category | Initializer expression (source) |
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `msg` | Not explicitly documented in adjacent source annotations. |
+
+#### 2. `on_finish()`
+
+- **Location:** source line 131.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+## 🪄 Anonymous closures
+
+These are anonymous `function(...)` expressions, including inline callbacks. Their argument lists are taken verbatim from source; lexical context is descriptive text, not a claim about execution.
+
+| Line | Arguments | Preceding source context |
+|---|---|---|
+| 42 | `event` | `on handler --===================================================== Net:on("actor_int…` |
+
+## 📦 Tables and data
+
+The following **5** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `ui` — line 66
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `box_id` | string literal | `"prog_dialogue_nameplate_box"` |
 | `font` | string literal | `"THIN_BLACK"` |
-| `scale` | number literal | `2.0` |
-| `z` | number literal | `100` |
-| `typing_speed` | number literal | `12` |
+| `scale` | numeric literal | `2.0` |
+| `z` | numeric literal | `100` |
+| `typing_speed` | numeric literal | `12` |
 | `type_sfx_path` | string literal | `"/server/assets/net-games/sfx/text.ogg"` |
-| `type_sfx_min_dt` | number literal | `0.05` |
-| `nameplate` | table | `{ text = BOT_NAME, anchor = "above", align = "left", gap_x = 6, gap_y = 59, dur = 0.20, close_dur = 0.20, bob_amp = 1.2, bob_speed = 2, }` |
-| `backdrop` | table | `{ render_offset_x = 3, render_offset_y = 46, style = "textbox_panel", open_seconds = 0.20, x = 1, y = 209, width = 478, height = 104, paddin…` |
-| `mugshot` | table | `{ enabled = true, texture_path = "/server/assets/ow/prog/prog_mug.png", anim_path = "/server/assets/ow/prog/prog_mug.animation", talk_anim_s…` |
+| `type_sfx_min_dt` | numeric literal | `0.05` |
+| `[8]` | expression/reference | `-- ? Nameplate (same pattern you used in prog_prompt_dialogue.lua) nameplate = { text = BOT_NAME, anchor = "above", align = "left", gap_x = 6, gap_y = 59,…` |
+| `backdrop` | nested table | `{ render_offset_x = 3, render_offset_y = 46, style = "textbox_panel", open_seconds = 0.20, x = 1, y = 209, width = 478, height = 104, padding_x = 16, padd…` |
+| `mugshot` | nested table | `{ enabled = true, texture_path = "/server/assets/ow/prog/prog_mug.png", anim_path = "/server/assets/ow/prog/prog_mug.animation", talk_anim_state = "TALK",…` |
 
-### `nameplate` *(line 76)*
+### 2. `nameplate` — line 76
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `text` | expression/reference | `BOT_NAME` |
 | `anchor` | string literal | `"above"` |
 | `align` | string literal | `"left"` |
-| `gap_x` | number literal | `6` |
-| `gap_y` | number literal | `59` |
-| `dur` | number literal | `0.20` |
-| `close_dur` | number literal | `0.20` |
-| `bob_amp` | number literal | `1.2` |
-| `bob_speed` | number literal | `2` |
+| `gap_x` | numeric literal | `6` |
+| `gap_y` | numeric literal | `59` |
+| `dur` | numeric literal | `0.20` |
+| `close_dur` | numeric literal | `0.20` |
+| `bob_amp` | numeric literal | `1.2` |
+| `bob_speed` | numeric literal | `2` |
 
-### `backdrop` *(line 87)*
+### 3. `backdrop` — line 88
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `render_offset_x` | number literal | `3` |
-| `render_offset_y` | number literal | `46` |
+| `render_offset_x` | numeric literal | `3` |
+| `render_offset_y` | numeric literal | `46` |
 | `style` | string literal | `"textbox_panel"` |
-| `open_seconds` | number literal | `0.20` |
-| `x` | number literal | `1` |
-| `y` | number literal | `209` |
-| `width` | number literal | `478` |
-| `height` | number literal | `104` |
-| `padding_x` | number literal | `16` |
-| `padding_y` | number literal | `4` |
-| `max_lines` | number literal | `3` |
-| `indicator` | table | `{ enabled = true, width = 2, height = 2, offset_x = 24, offset_y = 26, indicator_timer = 0, indicator_base_x = nil, indicator_base_y = nil, …` |
+| `open_seconds` | numeric literal | `0.20` |
+| `x` | numeric literal | `1` |
+| `y` | numeric literal | `209` |
+| `width` | numeric literal | `478` |
+| `height` | numeric literal | `104` |
+| `padding_x` | numeric literal | `16` |
+| `padding_y` | numeric literal | `4` |
+| `max_lines` | numeric literal | `3` |
+| `indicator` | nested table | `{ enabled = true, width = 2, height = 2, offset_x = 24, offset_y = 26, indicator_timer = 0, indicator_base_x = nil, indicator_base_y = nil, }` |
 
-### `indicator` *(line 100)*
+### 4. `indicator` — line 101
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `enabled` | boolean literal | `true` |
-| `width` | number literal | `2` |
-| `height` | number literal | `2` |
-| `offset_x` | number literal | `24` |
-| `offset_y` | number literal | `26` |
-| `indicator_timer` | number literal | `0` |
+| `width` | numeric literal | `2` |
+| `height` | numeric literal | `2` |
+| `offset_x` | numeric literal | `24` |
+| `offset_y` | numeric literal | `26` |
+| `indicator_timer` | numeric literal | `0` |
 | `indicator_base_x` | nil | `nil` |
 | `indicator_base_y` | nil | `nil` |
 
-### `mugshot` *(line 112)*
+### 5. `mugshot` — line 113
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `enabled` | boolean literal | `true` |
 | `texture_path` | string literal | `"/server/assets/ow/prog/prog_mug.png"` |
 | `anim_path` | string literal | `"/server/assets/ow/prog/prog_mug.animation"` |
 | `talk_anim_state` | string literal | `"TALK"` |
 | `idle_anim_state` | string literal | `"IDLE"` |
-| `reserve_w` | number literal | `40` |
-| `reserve_h` | number literal | `40` |
-| `offset_x` | number literal | `6` |
-| `offset_y` | number literal | `-46` |
-| `gap_px` | number literal | `6` |
-| `sprite_id` | number literal | `5300` |
-| `z_bias` | number literal | `50` |
+| `reserve_w` | numeric literal | `40` |
+| `reserve_h` | numeric literal | `40` |
+| `offset_x` | numeric literal | `6` |
+| `offset_y` | numeric literal | `-46` |
+| `gap_px` | numeric literal | `6` |
+| `sprite_id` | numeric literal | `5300` |
+| `z_bias` | numeric literal | `50` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/net-games/npcs/prog_basic_nameplate.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+These are **statically detected call sites**, not API definitions or guaranteed successful runtime calls.
+
+| Call identifier | Occurrences |
+|---|---|
+| `Net.create_bot` | 1 |
+| `Net.get_bot_name` | 1 |
+| `Net.get_object_by_name` | 1 |
+| `Net.get_player_position` | 1 |
+| `Net.on` | 1 |
+| `Net.set_bot_direction` | 1 |
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

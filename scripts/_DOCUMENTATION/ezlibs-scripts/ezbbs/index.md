@@ -1,188 +1,313 @@
-# `ezbbs.lua`
+# 📄 `ezbbs.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezbbs.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezbbs.lua`](../../../ezlibs-scripts/ezbbs.lua)  
 > **Source lines:** 475  
-> **Functions detected:** 21  
-> **Table declarations detected:** 16
+> **SHA-256 (UTF-8):** `a01c13b5375e3b717299446193c6c8c914e57d3fcd6357dee92ecdf75a6fe025`  
+> **Named/assigned functions detected:** 21  
+> **Table initializers detected:** 16
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-ezbbs.lua - Bulletin Board System for ezlibs Handles board interaction, posting, pinning, deleting. Uses ezusers for permission checks. Board data stored in memory/board/<board_name>.json (path from ezconfig).
+Current source inventory for `scripts/ezlibs-scripts/ezbbs.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 6
-- `scripts/libs/json` — line 7
-- `scripts/ezlibs-scripts/ezusers` — line 8
-- `scripts/ezlibs-scripts/helpers` — line 9
-- `scripts/ezlibs-scripts/ezconfig` — line 10
+| Line | `require` module |
+|---:|---|
+| 6 | `scripts/logger/logger` |
+| 7 | `scripts/libs/json` |
+| 8 | `scripts/ezlibs-scripts/ezusers` |
+| 9 | `scripts/ezlibs-scripts/helpers` |
+| 10 | `scripts/ezlibs-scripts/ezconfig` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No literal `:on` event registration detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 31 | `shallow_copy` | `original` | local |
+| 37 | `contains_only_whitespace` | `text` | local |
+| 41 | `sanitize_title` | `text, limit` | local |
+| 45 | `bbs_compare_pinned` | `a, b` | local |
+| 55 | `bbs_compare_unpinned` | `a, b` | local |
+| 62 | `bbs_display_order_ids` | `board_data` | local |
+| 85 | `save_board` | `board_name` | local |
+| 108 | `push_post` | `board_name, area_id, post` | local |
+| 127 | `show_post` | `player_id, post_id` | local |
+| 140 | `create_post` | `player_id, state` | local |
+| 187 | `load_board` | `name, callback` | local |
+| 222 | `open_board_with_data` | `board_data, player_id, board_name, color, postable, area_id, board_id` | local |
+| 229 | `add_display_post` | `src` | local |
+| 257 | `load_board_and_open` | `name, player_id, area_id, object, color, postable` | local |
+| 266 | `preload_boards` | `(none)` | local |
+| 292 | `ezbbs.handle_player_join` | `player_id` | assigned/declared |
+| 296 | `ezbbs.handle_player_disconnect` | `player_id` | assigned/declared |
+| 301 | `ezbbs.handle_object_interaction` | `player_id, object_id, button` | assigned/declared |
+| 334 | `ezbbs.handle_post_selection` | `player_id, post_id` | assigned/declared |
+| 439 | `ezbbs.handle_textbox_response` | `player_id, response` | assigned/declared |
+| 468 | `ezbbs.handle_board_close` | `player_id` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `shallow_copy(original)`
+
+- **Line:** 31
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 31 | `shallow_copy` | `original` |
-| 37 | `contains_only_whitespace` | `text` |
-| 41 | `sanitize_title` | `text, limit` |
-| 45 | `bbs_compare_pinned` | `a, b` |
-| 55 | `bbs_compare_unpinned` | `a, b` |
-| 62 | `bbs_display_order_ids` | `board_data` |
-| 85 | `save_board` | `board_name` |
-| 108 | `push_post` | `board_name, area_id, post` |
-| 127 | `show_post` | `player_id, post_id` |
-| 140 | `create_post` | `player_id, state` |
-| 187 | `load_board` | `name, callback` |
-| 222 | `open_board_with_data` | `board_data, player_id, board_name, color, postable, area_id, board_id` |
-| 229 | `add_display_post` | `src` |
-| 257 | `load_board_and_open` | `name, player_id, area_id, object, color, postable` |
-| 266 | `preload_boards` | `(none)` |
-| 292 | `ezbbs.handle_player_join` | `player_id` |
-| 296 | `ezbbs.handle_player_disconnect` | `player_id` |
-| 301 | `ezbbs.handle_object_interaction` | `player_id, object_id, button` |
-| 334 | `ezbbs.handle_post_selection` | `player_id, post_id` |
-| 439 | `ezbbs.handle_textbox_response` | `player_id, response` |
-| 468 | `ezbbs.handle_board_close` | `player_id` |
+| 1 | `original` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `contains_only_whitespace(text)`
 
-- **`shallow_copy(original)`** — ---------------------------------------------------------------------- Helper functions ---------------------------------------------------------------------- *(source line 31)*
-- **`contains_only_whitespace(text)`** *(source line 37)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`sanitize_title(text, limit)`** *(source line 41)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`bbs_compare_pinned(a, b)`** *(source line 45)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`bbs_compare_unpinned(a, b)`** *(source line 55)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`bbs_display_order_ids(board_data)`** *(source line 62)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`save_board(board_name)`** *(source line 85)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`push_post(board_name, area_id, post)`** — ---------------------------------------------------------------------- Post creation and display functions ---------------------------------------------------------------------- *(source line 108)*
-- **`show_post(player_id, post_id)`** *(source line 127)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`create_post(player_id, state)`** *(source line 140)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`load_board(name, callback)`** — ---------------------------------------------------------------------- Board loading with callback (and auto‑creation) ---------------------------------------------------------------------- *(source line 187)*
-- **`open_board_with_data(board_data, player_id, board_name, color, postable, area_id, board_id)`** — ---------------------------------------------------------------------- Board opening (shared) ---------------------------------------------------------------------- *(source line 222)*
-- **`add_display_post(src)`** *(source line 229)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`load_board_and_open(name, player_id, area_id, object, color, postable)`** *(source line 257)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`preload_boards()`** — ---------------------------------------------------------------------- Preload all boards at startup (create missing files) ---------------------------------------------------------------------- *(source line 266)*
-- **`ezbbs.handle_player_join(player_id)`** *(source line 292)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbbs.handle_player_disconnect(player_id)`** *(source line 296)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbbs.handle_object_interaction(player_id, object_id, button)`** *(source line 301)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbbs.handle_post_selection(player_id, post_id)`** *(source line 334)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbbs.handle_textbox_response(player_id, response)`** *(source line 439)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbbs.handle_board_close(player_id)`** *(source line 468)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 37
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `text` | Declared in this function; type not inferred. |
 
-### `last_read_time` *(line 21)*
+#### 3. `sanitize_title(text, limit)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 41
+- **Declaration:** local
 
-### `player_states` *(line 22)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `text` | Declared in this function; type not inferred. |
+| 2 | `limit` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `bbs_compare_pinned(a, b)`
 
-### `board_cache` *(line 23)*
+- **Line:** 45
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `a` | Declared in this function; type not inferred. |
+| 2 | `b` | Declared in this function; type not inferred. |
 
-### `copy` *(line 32)*
+#### 5. `bbs_compare_unpinned(a, b)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 55
+- **Declaration:** local
 
-### `ids` *(line 74)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `a` | Declared in this function; type not inferred. |
+| 2 | `b` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 6. `bbs_display_order_ids(board_data)`
 
-### `saving` *(line 83)*
+- **Line:** 62
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `board_data` | Declared in this function; type not inferred. |
 
-### `pending_save` *(line 84)*
+#### 7. `save_board(board_name)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 85
+- **Declaration:** local
 
-### `new_posts` *(line 121)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `board_name` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | expression/reference | `post` |
+#### 8. `push_post(board_name, area_id, post)`
 
-### `board_data` *(line 144)*
+- **Line:** 108
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `posts` | table | `{}` |
-| `next_id` | number literal | `1` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `board_name` | Declared in this function; type not inferred. |
+| 2 | `area_id` | Declared in this function; type not inferred. |
+| 3 | `post` | Declared in this function; type not inferred. |
 
-### `post` *(line 156)*
+#### 9. `show_post(player_id, post_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `time` | call/expression | `os.time()` |
-| `author` | call/expression | `sanitize_title(player_name` |
-| `[3]` | expression/reference | `AUTHOR_LIMIT)` |
-| `title` | call/expression | `sanitize_title(title` |
-| `[5]` | expression/reference | `TITLE_LIMIT)` |
-| `id` | call/expression | `tostring(board_data.next_id)` |
-| `body` | call/expression | `string.sub(state.submission_text` |
-| `[8]` | number literal | `1` |
-| `[9]` | expression/reference | `char_limit)` |
-| `pin` | boolean literal | `false` |
+- **Line:** 127
+- **Declaration:** local
 
-### `data` *(line 205)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `post_id` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `posts` | table | `{}` |
-| `next_id` | number literal | `1` |
+#### 10. `create_post(player_id, state)`
 
-### `posts` *(line 224)*
+- **Line:** 140
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ id = "POST", read = true, title = "POST" }` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `state` | Declared in this function; type not inferred. |
 
-### `board_names` *(line 269)*
+#### 11. `load_board(name, callback)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 187
+- **Declaration:** local
 
-### `ezbbs` *(line 290)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `name` | Declared in this function; type not inferred. |
+| 2 | `callback` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 12. `open_board_with_data(board_data, player_id, board_name, color, postable, area_id, board_id)`
 
-### `color` *(line 324)*
+- **Line:** 222
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `r` | call/expression | `tonumber(string.sub(color_string` |
-| `[2]` | number literal | `4` |
-| `[3]` | number literal | `5)` |
-| `[4]` | number literal | `16) or 0` |
-| `g` | call/expression | `tonumber(string.sub(color_string` |
-| `[6]` | number literal | `6` |
-| `[7]` | number literal | `7)` |
-| `[8]` | number literal | `16) or 0` |
-| `b` | call/expression | `tonumber(string.sub(color_string` |
-| `[10]` | number literal | `8` |
-| `[11]` | number literal | `9)` |
-| `[12]` | number literal | `16) or 0` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `board_data` | Declared in this function; type not inferred. |
+| 2 | `player_id` | Declared in this function; type not inferred. |
+| 3 | `board_name` | Declared in this function; type not inferred. |
+| 4 | `color` | Declared in this function; type not inferred. |
+| 5 | `postable` | Declared in this function; type not inferred. |
+| 6 | `area_id` | Declared in this function; type not inferred. |
+| 7 | `board_id` | Declared in this function; type not inferred. |
 
-### `viewers` *(line 387)*
+#### 13. `add_display_post(src)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 229
+- **Declaration:** local
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `src` | Declared in this function; type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezbbs.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 14. `load_board_and_open(name, player_id, area_id, object, color, postable)`
+
+- **Line:** 257
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `name` | Declared in this function; type not inferred. |
+| 2 | `player_id` | Declared in this function; type not inferred. |
+| 3 | `area_id` | Declared in this function; type not inferred. |
+| 4 | `object` | Declared in this function; type not inferred. |
+| 5 | `color` | Declared in this function; type not inferred. |
+| 6 | `postable` | Declared in this function; type not inferred. |
+
+#### 15. `preload_boards()`
+
+- **Line:** 266
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+#### 16. `ezbbs.handle_player_join(player_id)`
+
+- **Line:** 292
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+
+#### 17. `ezbbs.handle_player_disconnect(player_id)`
+
+- **Line:** 296
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+
+#### 18. `ezbbs.handle_object_interaction(player_id, object_id, button)`
+
+- **Line:** 301
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `object_id` | Declared in this function; type not inferred. |
+| 3 | `button` | Declared in this function; type not inferred. |
+
+#### 19. `ezbbs.handle_post_selection(player_id, post_id)`
+
+- **Line:** 334
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `post_id` | Declared in this function; type not inferred. |
+
+#### 20. `ezbbs.handle_textbox_response(player_id, response)`
+
+- **Line:** 439
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `response` | Declared in this function; type not inferred. |
+
+#### 21. `ezbbs.handle_board_close(player_id)`
+
+- **Line:** 468
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 21 | `last_read_time` |
+| 22 | `player_states` |
+| 23 | `board_cache` |
+| 32 | `copy` |
+| 74 | `ids` |
+| 83 | `saving` |
+| 84 | `pending_save` |
+| 121 | `new_posts` |
+| 144 | `board_data` |
+| 157 | `post` |
+| 205 | `data` |
+| 224 | `posts` |
+| 269 | `board_names` |
+| 290 | `ezbbs` |
+| 324 | `color` |
+| 387 | `viewers` |
+
+## Net API calls
+
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.append_posts` | 1 | 411 |
+| `Net.get_object_by_id` | 4 | 141 |
+| `Net.get_player_area` | 1 | 303 |
+| `Net.get_player_name` | 1 | 149 |
+| `Net.list_areas` | 1 | 268 |
+| `Net.list_objects` | 1 | 271 |
+| `Net.list_players` | 1 | 122 |
+| `Net.message_player` | 5 | 134 |
+| `Net.open_board` | 1 | 246 |
+| `Net.prompt_player` | 2 | 352 |
+| `Net.question_player` | 1 | 447 |
+| `Net.remove_post` | 2 | 410 |

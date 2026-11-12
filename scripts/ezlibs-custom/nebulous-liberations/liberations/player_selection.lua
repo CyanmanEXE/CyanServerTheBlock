@@ -36,7 +36,7 @@ end
 local PlayerSelection = {}
 
 function PlayerSelection:new(instance, player_id)
-  local LIBERATING_PANEL_GID = Net.get_tileset(instance.area_id, "/server/assets/ezlibs-custom/nebulous-liberations/selected tile.tsx").first_gid
+  local LIBERATING_PANEL_GID = Net.get_tileset(instance.area_id, "/server/assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.tsx").first_gid
 
   local player_selection = {
     player_id = player_id,

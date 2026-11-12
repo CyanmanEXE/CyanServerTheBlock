@@ -1,160 +1,325 @@
-# `enum.lua`
+# 📄 `enum.lua`
 
-> **Source:** `scripts/enum/enum.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/enum/enum.lua`](../../../enum/enum.lua)  
 > **Source lines:** 184  
-> **Functions detected:** 14  
-> **Table declarations detected:** 14
+> **SHA-256 (UTF-8):** `e3b1e7c9fb5596…`  
+> **Declared/assigned functions detected:** 14  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 14
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-enum.lua A reusable Lua 5.2 module for creating enum-like tables. Supports custom key-value definitions, active value validation, and copying for independent instances. No external dependencies.
+A reusable Lua 5.2 module for creating enum-like tables. Supports custom key-value definitions, active value validation, and copying for independent instances. No external dependencies.
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 18 | `Enum.new` | `...` |
-| 74 | `getName` | `self, value` |
-| 79 | `getValue` | `self, key` |
-| 84 | `isValid` | `self, value` |
-| 89 | `names` | `self` |
-| 99 | `values` | `self` |
-| 108 | `getActive` | `self` |
-| 113 | `setActive` | `self, value` |
-| 120 | `random` | `self` |
-| 126 | `new` | `self` |
-| 131 | `copy` | `self` |
-| 144 | `__index` | `tbl, key` |
-| 158 | `__newindex` | `tbl, key, value` |
-| 169 | `__tostring` | `tbl` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 18 | `Enum.new` | `...` | declared |
+| 74 | `getName` | `self, value` | assigned |
+| 79 | `getValue` | `self, key` | assigned |
+| 84 | `isValid` | `self, value` | assigned |
+| 89 | `names` | `self` | assigned |
+| 99 | `values` | `self` | assigned |
+| 108 | `getActive` | `self` | assigned |
+| 113 | `setActive` | `self, value` | assigned |
+| 120 | `random` | `self` | assigned |
+| 126 | `new` | `self` | assigned |
+| 131 | `copy` | `self` | assigned |
+| 144 | `__index` | `tbl, key` | assigned |
+| 159 | `__newindex` | `tbl, key, value` | assigned |
+| 170 | `__tostring` | `tbl` | assigned |
 
-### Function notes
+### Function details
 
-- **`Enum.new(...)`** — Create a new enum. Accepts: 1. A list of names (strings) -> values become 1,2,3,... e.g., Enum.new("RED", "GREEN", "BLUE") 2. A table of key-value pairs (old format) e.g., Enum.new({ RED = "red", GREEN = "green", BLUE = 0x0000FF }) 3. A table with 'options' and optional 'active' (new format) e.g., Enum.new({ options = { RED = "red", GREEN = "green" }, active = "green" }) If 'active' is not provided, the first option becomes active. *(source line 18)*
-- **`getName(self, value)`** — Return the key for a given value (requires unique values) *(source line 74)*
-- **`getValue(self, key)`** — Return the value for a given key *(source line 79)*
-- **`isValid(self, value)`** — Check if a value is valid (exists in enum) *(source line 84)*
-- **`names(self)`** — Return a sorted list of all keys (names) *(source line 89)*
-- **`values(self)`** — Return a list of all values in insertion order *(source line 99)*
-- **`getActive(self)`** — Get the current active value *(source line 108)*
-- **`setActive(self, value)`** — Set the active value (validated) *(source line 113)*
-- **`random(self)`** — Return a random valid value *(source line 120)*
-- **`new(self)`** — Alias for random *(source line 126)*
-- **`copy(self)`** — Returns a new independent enum with the same options *(source line 131)*
-- **`__index(tbl, key)`** *(source line 144)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`__newindex(tbl, key, value)`** *(source line 158)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`__tostring(tbl)`** *(source line 169)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `Enum.new(...)`
 
-## Tables and data structures
+- **Location:** source line 18.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Create a new enum. Accepts: 1. A list of names (strings) -> values become 1,2,3,... e.g., Enum.new("RED", "GREEN", "BLUE") 2. A table of key-value pairs (old format) e.g., Enum.new({ RED = "red", GREEN = "green", BLUE = 0x0000FF }) 3. A table with 'options' and optional 'active' (new format) e.g., Enum.new({ options = { RED = "red", GREEN = "green" }, active = "green" }) If 'active' is not provided, the first option becomes active.
 
-### `Enum` *(line 6)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `...` | Not explicitly documented in adjacent source annotations. |
 
-### `args` *(line 19)*
+#### 2. `getName(self, value)`
 
-| Field / key | Value category | Initializer expression (source) |
+- **Location:** source line 74.
+- **Declaration style:** `assigned`.
+- **Adjacent source comment:** Return the key for a given value (requires unique values)
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `value` | Not explicitly documented in adjacent source annotations. |
+
+#### 3. `getValue(self, key)`
+
+- **Location:** source line 79.
+- **Declaration style:** `assigned`.
+- **Adjacent source comment:** Return the value for a given key
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `key` | Not explicitly documented in adjacent source annotations. |
+
+#### 4. `isValid(self, value)`
+
+- **Location:** source line 84.
+- **Declaration style:** `assigned`.
+- **Adjacent source comment:** Check if a value is valid (exists in enum)
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `value` | Not explicitly documented in adjacent source annotations. |
+
+#### 5. `names(self)`
+
+- **Location:** source line 89.
+- **Declaration style:** `assigned`.
+- **Adjacent source comment:** Return a sorted list of all keys (names)
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 6. `values(self)`
+
+- **Location:** source line 99.
+- **Declaration style:** `assigned`.
+- **Adjacent source comment:** Return a list of all values in insertion order
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 7. `getActive(self)`
+
+- **Location:** source line 108.
+- **Declaration style:** `assigned`.
+- **Adjacent source comment:** Get the current active value
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 8. `setActive(self, value)`
+
+- **Location:** source line 113.
+- **Declaration style:** `assigned`.
+- **Adjacent source comment:** Set the active value (validated)
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+| 2 | `value` | Not explicitly documented in adjacent source annotations. |
+
+#### 9. `random(self)`
+
+- **Location:** source line 120.
+- **Declaration style:** `assigned`.
+- **Adjacent source comment:** Return a random valid value
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 10. `new(self)`
+
+- **Location:** source line 126.
+- **Declaration style:** `assigned`.
+- **Adjacent source comment:** Alias for random
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 11. `copy(self)`
+
+- **Location:** source line 131.
+- **Declaration style:** `assigned`.
+- **Adjacent source comment:** Returns a new independent enum with the same options
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `self` | Not explicitly documented in adjacent source annotations. |
+
+#### 12. `__index(tbl, key)`
+
+- **Location:** source line 144.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `tbl` | Not explicitly documented in adjacent source annotations. |
+| 2 | `key` | Not explicitly documented in adjacent source annotations. |
+
+#### 13. `__newindex(tbl, key, value)`
+
+- **Location:** source line 159.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `tbl` | Not explicitly documented in adjacent source annotations. |
+| 2 | `key` | Not explicitly documented in adjacent source annotations. |
+| 3 | `value` | Not explicitly documented in adjacent source annotations. |
+
+#### 14. `__tostring(tbl)`
+
+- **Location:** source line 170.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `tbl` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+*No anonymous `function(...)` expressions detected.*
+
+## 📦 Tables and data
+
+The following **14** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `Enum` — line 7
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `args` — line 19
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `[1]` | expression/reference | `...` |
 
-### `optionsTable` *(line 37)*
+### 3. `optionsTable` — line 37
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `keyToValue` *(line 43)*
+### 4. `keyToValue` — line 44
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `valueToKey` *(line 45)*
+### 5. `valueToKey` — line 45
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `orderedKeys` *(line 46)*
+### 6. `orderedKeys` — line 46
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `orderedValues` *(line 47)*
+### 7. `orderedValues` — line 47
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `methods` *(line 72)*
+### 8. `methods` — line 72
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `getName` | function | `function(self` |
-| `[2]` | expression/reference | `value) return valueToKey[value] end` |
-| `getValue` | function | `function(self` |
-| `[4]` | expression/reference | `key) return keyToValue[key] end` |
-| `isValid` | function | `function(self` |
-| `[6]` | expression/reference | `value) return valueToKey[value] ~= nil end` |
-| `names` | function | `function(self) local result = {} for key in pairs(keyToValue) do result[#result + 1] = key end table.sort(result) return result end` |
-| `values` | function | `function(self) local result = {} for i` |
-| `[9]` | call/expression | `v in ipairs(orderedValues) do result[i] = v end return result end` |
-| `getActive` | function | `function(self) return activeValue end` |
-| `setActive` | function | `function(self` |
-| `[12]` | call/expression | `value) assert(valueToKey[value] ~= nil` |
-| `[13]` | string literal | `"Invalid active value for enum") activeValue = value return value end` |
-| `random` | function | `function(self) if #orderedValues == 0 then return nil end return orderedValues[math.random(#orderedValues)] end` |
-| `new` | function | `function(self) return self:random() end` |
-| `copy` | function | `function(self) return Enum.new({ options = keyToValue, active = activeValue }) end` |
+| `[1]` | expression/reference | `-- Return the key for a given value (requires unique values) getName = function(self, value) return valueToKey[value] end` |
+| `[2]` | expression/reference | `-- Return the value for a given key getValue = function(self, key) return keyToValue[key] end` |
+| `[3]` | expression/reference | `-- Check if a value is valid (exists in enum) isValid = function(self, value) return valueToKey[value] ~= nil end` |
+| `[4]` | expression/reference | `-- Return a sorted list of all keys (names) names = function(self) local result = {} for key in pairs(keyToValue) do result[#result + 1] = key end table.s…` |
+| `[5]` | expression/reference | `-- Return a list of all values in insertion order values = function(self) local result = {} for i` |
+| `[6]` | expression/reference | `v in ipairs(orderedValues) do result[i] = v end return result end` |
+| `[7]` | expression/reference | `-- Get the current active value getActive = function(self) return activeValue end` |
+| `[8]` | expression/reference | `-- Set the active value (validated) setActive = function(self, value) assert(valueToKey[value] ~= nil, "Invalid active value for enum") activeValue = valu…` |
+| `[9]` | expression/reference | `-- Return a random valid value random = function(self) if #orderedValues == 0 then return nil end return orderedValues[math.random(#orderedValues)] end` |
+| `[10]` | expression/reference | `-- Alias for random new = function(self) return self:random() end` |
+| `[11]` | expression/reference | `-- Returns a new independent enum with the same options copy = function(self) return Enum.new({ options = keyToValue, active = activeValue }) end` |
 
-### `result` *(line 90)*
+### 9. `result` — line 90
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `result` *(line 100)*
+### 10. `result` — line 100
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `enum` *(line 137)*
+### 11. `enum` — line 137
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `mt` *(line 143)*
+### 12. `mt` — line 143
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `__index` | function | `function(tbl` |
-| `[2]` | expression/reference | `key) if key == "active" then return activeValue elseif key == "options" then local copy = {} for k` |
-| `[3]` | call/expression | `v in pairs(keyToValue) do copy[k] = v end return copy else return methods[key] end end` |
-| `__newindex` | function | `function(tbl` |
-| `[5]` | expression/reference | `key` |
-| `[6]` | call/expression | `value) if key == "active" then assert(valueToKey[value] ~= nil` |
-| `[7]` | string literal | `"Invalid active value for enum") activeValue = value elseif key == "options" then error("Cannot modify enum options") else error("Cannot mod…` |
+| `__index` | function | `function(tbl, key) if key == "active" then return activeValue elseif key == "options" then -- Return a copy to prevent accidental modification local copy …` |
+| `[2]` | expression/reference | `v in pairs(keyToValue) do copy[k] = v end return copy else return methods[key] end end` |
+| `__newindex` | function | `function(tbl, key, value) if key == "active" then assert(valueToKey[value] ~= nil, "Invalid active value for enum") activeValue = value elseif key == "opt…` |
 | `__tostring` | function | `function(tbl) local parts = {} for i` |
-| `[9]` | call/expression | `key in ipairs(orderedKeys) do parts[#parts + 1] = string.format("%s=%s"` |
-| `[10]` | expression/reference | `key` |
-| `[11]` | call/expression | `tostring(keyToValue[key])) end return "Enum(" .. table.concat(parts` |
-| `[12]` | string literal | `", ") .. ")" end` |
+| `[5]` | expression/reference | `key in ipairs(orderedKeys) do parts[#parts + 1] = string.format("%s=%s", key, tostring(keyToValue[key])) end return "Enum(" .. table.concat(parts, ", ") .…` |
 
-### `copy` *(line 149)*
+### 13. `copy` — line 149
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-### `parts` *(line 171)*
+### 14. `parts` — line 171
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/enum/enum.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

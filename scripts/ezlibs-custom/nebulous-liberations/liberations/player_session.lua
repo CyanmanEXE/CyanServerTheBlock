@@ -1,6 +1,7 @@
+local PlayerControl = require("scripts/player-control/main")
 -- player_session.lua
-local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
-local log = ezlogger.get("nebulous-liberations")
+local SharedLogger = require("scripts/logger/logger")
+local log = SharedLogger.register("nebulous-liberations"):register_subsystem("player-session")
 
 local Ability = require("scripts/ezlibs-custom/nebulous-liberations/liberations/ability")
 local PlayerSelection = require("scripts/ezlibs-custom/nebulous-liberations/liberations/player_selection")
@@ -88,7 +89,7 @@ function PlayerSession:get_ability_permission()
     question_promise.and_then(function(response)
         if response == 0 then
             self.selection:clear()
-            Net.unlock_player_input(self.player.id)
+            PlayerControl.release_capture(self.player.id, "liberation:turn")
             return
         end
         if self.instance.order_points < self.ability.cost then
@@ -125,7 +126,7 @@ function PlayerSession:get_pass_turn_permission()
     local question_promise = self.player:question_with_mug(question)
     question_promise.and_then(function(response)
         if response == 0 then
-            Net.unlock_player_input(self.player.id)
+            PlayerControl.release_capture(self.player.id, "liberation:turn")
         elseif response == 1 then
             self:pass_turn()
         end
@@ -325,7 +326,7 @@ function PlayerSession:complete_turn()
     if self.disconnected then return end
     self.completed_turn = true
     self.selection:clear()
-    Net.lock_player_input(self.player.id)
+    PlayerControl.acquire_capture(self.player.id, "liberation:turn")
     self:emote_state()
     self.instance.ready_count = self.instance.ready_count + 1
     log:info_data("Player turn complete", {
@@ -373,7 +374,7 @@ function PlayerSession:give_turn()
         health = self.health,
         order_points = self.instance.order_points,
     })
-    Net.unlock_player_input(self.player.id)
+    PlayerControl.release_capture(self.player.id, "liberation:turn")
 end
 
 function PlayerSession:find_matching_gates()
@@ -503,13 +504,10 @@ function PlayerSession:loot_panels(panels, remove_traps, destroy_items)
                 local spawn_x = math.floor(panel.x) + .5
                 local spawn_y = math.floor(panel.y) + .5
                 local spawn_z = panel.z
-                local was_input_locked = Net.is_player_input_locked(self.player.id)
-                Net.lock_player_input(self.player.id)
+                PlayerControl.acquire_capture(self.player.id, "liberation:player-camera")
                 Net.slide_player_camera(self.player.id, spawn_x, spawn_y, spawn_z, slide_time)
                 Async.await(Async.sleep(slide_time))
-                if not was_input_locked then
-                    Net.unlock_player_input(self.player.id)
-                end
+                PlayerControl.release_capture(self.player.id, "liberation:player-camera")
                 if remove_traps then
                     log:info_data("Player removed trap", {
                         base_area_id = self.instance.base_area_id,

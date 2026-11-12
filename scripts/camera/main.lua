@@ -3,6 +3,7 @@ local CameraManager = require("scripts/camera/camera-manager")
 local CameraController = require("scripts/camera/camera-controller")
 local PredefinedEnums = require("scripts/enum/predefined-enums")
 local InputAPI = require("scripts/input-controller/main")
+local PlayerControl = require("scripts/player-control/main")
 local CameraMode = PredefinedEnums.CameraMode
 
 local DBG = false
@@ -84,8 +85,13 @@ local setupTileInteraction = function()
 
         -- In other areas, do not let the camera steal input from a different
         -- active owner.
-        if input_owner ~= nil and input_owner ~= player_camera then
-            dbg("tile_interaction: skipping camera activation; input owned by another system")
+        local current_session=PlayerControl.get_active(player_id)
+        local camera_owner=player_camera and player_camera.input_session
+            and player_camera.input_session.state.owner or nil
+        if (current_session and
+            (not player_camera or current_session~=player_camera.input_session))
+            or (input_owner~=nil and input_owner~=camera_owner) then
+            dbg("tile_interaction: camera blocked by managed input owner")
             return
         end
 
@@ -101,5 +107,29 @@ local setupTileInteraction = function()
 end
 
 CameraManager:init(setupPlayerJoin, setupTileInteraction)
+
+Net:on("player_area_transfer", function(event)
+    local controller = CameraManager.PlayerControllers[event.player_id]
+    if controller and controller.is_active then
+        controller:deactivate(true)
+    end
+end)
+
+-- Track only the duration we requested; do not assume that Net confirms
+-- the rendered camera completed at precisely this time.
+Net:on("tick",function(event)
+    for _, controller in pairs(CameraManager.PlayerControllers) do
+        if controller and controller.tick then controller:tick(event.delta_time) end
+    end
+end)
+
+Net:on("player_disconnect", function(event)
+    local controller = CameraManager.PlayerControllers[event.player_id]
+    if controller then
+        if controller.is_active then controller:deactivate(true) end
+        if type(controller.destroy) == "function" then controller:destroy() end
+        CameraManager.PlayerControllers[event.player_id] = nil
+    end
+end)
 
 return CameraManager

@@ -1,80 +1,84 @@
-# `lib.lua`
+# 📄 `lib.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/avatar_utils/lua_yes_parser/lib.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/avatar_utils/lua_yes_parser/lib.lua`](../../../../avatar_utils/lua_yes_parser/lib.lua)  
 > **Source lines:** 53  
-> **Functions detected:** 3  
-> **Table declarations detected:** 6
+> **SHA-256 (UTF-8):** `a707d6885f02cec857ad71a56175b9e560ec1a3ae1efc2fa4c82479d1247fc55`  
+> **Named/assigned functions detected:** 3  
+> **Table initializers detected (simple pattern):** 6
 
-## Contents
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Current source inventory for `scripts/avatar_utils/lua_yes_parser/lib.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- `scripts/avatar_utils/lua_yes_parser/src/enums` — line 1
-- `scripts/avatar_utils/lua_yes_parser/src/element` — line 2
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/avatar_utils/lua_yes_parser/src/enums` |
+| 2 | `scripts/avatar_utils/lua_yes_parser/src/element` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No named `.on`/`:on` events detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 6 | `Collector.new` | `(none)` | assigned/declared |
+| 14 | `self.handleLine` | `line` | assigned/declared |
+| 40 | `parse` | `path` | local |
+
+### Detailed parameter inventory
+
+#### 1. `Collector.new()`
+
+- **Line:** 6
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 2. `self.handleLine(line)`
+
+- **Line:** 14
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 5 | `Collector.new` | `(none)` |
-| 13 | `self.handleLine` | `line` |
-| 40 | `parse` | `path` |
+| 1 | `line` | Declared by this function; type not inferred. |
 
-### Function notes
+#### 3. `parse(path)`
 
-- **`Collector.new()`** *(source line 5)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`self.handleLine(line)`** *(source line 13)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`parse(path)`** *(source line 40)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 40
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `path` | Declared by this function; type not inferred. |
 
-### `Collector` *(line 3)*
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+## Tables
 
-### `self` *(line 7)*
+| Source line | Assignment |
+|---:|---|
+| 4 | `Collector` |
+| 7 | `self` |
+| 9 | `pendingAttrs` |
+| 10 | `elements` |
+| 11 | `errors` |
+| 31 | `self.pendingAttrs` |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `lineCount` | number literal | `0` |
-| `pendingAttrs` | table | `{}` |
-| `elements` | table | `{}` |
-| `errors` | table | `{}` |
+## Net API calls
 
-### `pendingAttrs` *(line 9)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `elements` *(line 10)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `errors` *(line 11)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-### `self.pendingAttrs` *(line 31)*
-
-Table initializer detected; no simple direct-level keys could be statically enumerated.
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/avatar_utils/lua_yes_parser/lib.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+No direct `Net.method(...)` call expression matched.

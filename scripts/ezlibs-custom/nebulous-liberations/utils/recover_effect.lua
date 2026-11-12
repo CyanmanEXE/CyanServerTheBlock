@@ -27,8 +27,8 @@ function RecoverEffect:new(actor_id, area_wide_sfx)
   end
 
   local recover_bot_id = Net.create_bot({
-    texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/recover.png",
-    animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/recover.animation",
+    texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/recover.png",
+    animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/recover.animation",
     area_id = area_id,
     warp_in = false,
     x = position.x + 1 / 32,

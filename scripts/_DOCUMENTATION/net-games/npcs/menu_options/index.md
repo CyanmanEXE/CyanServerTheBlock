@@ -1,62 +1,113 @@
-# `menu_options.lua`
+# 📄 `menu_options.lua`
 
-> **Source:** `scripts/net-games/npcs/menu_options.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/npcs/menu_options.lua`](../../../../net-games/npcs/menu_options.lua)  
 > **Source lines:** 52  
-> **Functions detected:** 3  
-> **Table declarations detected:** 3
+> **SHA-256 (UTF-8):** `2def12bf1934fe…`  
+> **Declared/assigned functions detected:** 3  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 3
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-scripts/net-games/npcs/menu_options.lua Purpose: Build PromptVertical option tables without loops/math in each NPC file.
+Purpose: Build PromptVertical option tables without loops/math in each NPC file.
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 6 | `pad2` | `n` |
-| 14 | `M.count` | `count, cfg` |
-| 38 | `M.list` | `items, cfg` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 6 | `pad2` | `n` | local |
+| 14 | `M.count` | `count, cfg` | declared |
+| 38 | `M.list` | `items, cfg` | declared |
 
-### Function notes
+### Function details
 
-- **`pad2(n)`** *(source line 6)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`M.count(count, cfg)`** — Build numbered options from a count. Example: MenuOptions.count(40, { prefix="Lime Option ", pad=2, start=1, exit_text="Exit" }) *(source line 14)*
-- **`M.list(items, cfg)`** — Build from a list of strings. IDs become 1..N by default. Example: MenuOptions.list({ "Potion", "Antidote" }, { exit_text="Exit" }) *(source line 38)*
+#### 1. `pad2(n)`
 
-## Tables and data structures
+- **Location:** source line 6.
+- **Declaration style:** `local`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `M` *(line 3)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `n` | Not explicitly documented in adjacent source annotations. |
 
-### `t` *(line 22)*
+#### 2. `M.count(count, cfg)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Location:** source line 14.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Build numbered options from a count. Example: MenuOptions.count(40, { prefix="Lime Option ", pad=2, start=1, exit_text="Exit" })
 
-### `t` *(line 42)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `count` | Not explicitly documented in adjacent source annotations. |
+| 2 | `cfg` | Not explicitly documented in adjacent source annotations. |
 
-## Implementation notes
+#### 3. `M.list(items, cfg)`
 
-- This reference is generated from the exact archived source `scripts/net-games/npcs/menu_options.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+- **Location:** source line 38.
+- **Declaration style:** `declared`.
+- **Adjacent source comment:** Build from a list of strings. IDs become 1..N by default. Example: MenuOptions.list({ "Potion", "Antidote" }, { exit_text="Exit" })
+
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
+
+| Position | Parameter | Source-established type / meaning |
+|---|---|---|
+| 1 | `items` | Not explicitly documented in adjacent source annotations. |
+| 2 | `cfg` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+*No anonymous `function(...)` expressions detected.*
+
+## 📦 Tables and data
+
+The following **3** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `M` — line 4
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 2. `t` — line 23
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+### 3. `t` — line 43
+
+*Table constructor detected; no simple direct-level fields were extracted (or constructor is empty).*
+
+## ⚙️ Runtime API calls
+
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

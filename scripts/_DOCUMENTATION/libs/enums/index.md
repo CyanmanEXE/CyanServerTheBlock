@@ -1,113 +1,142 @@
-# `enums.lua`
+# 📄 `enums.lua`
 
-> **Source:** `scripts/libs/enums.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/libs/enums.lua`](../../../libs/enums.lua)  
 > **Source lines:** 85  
-> **Functions detected:** 0  
-> **Table declarations detected:** 6
+> **SHA-256 (UTF-8):** `201cde86c4cc96…`  
+> **Declared/assigned functions detected:** 0  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 7
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-Virtual input events and states
+Source-based reference for `scripts/libs/enums.lua`. No module-purpose prose was supplied in the leading source comments.
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+*No named function declaration or `= function(...)` assignment detected. Anonymous callbacks may still be present.*
 
-## Tables and data structures
+## 🪄 Anonymous closures
 
-### `ColorMode` *(line 1)*
+*No anonymous `function(...)` expressions detected.*
 
-| Field / key | Value category | Initializer expression (source) |
+## 📦 Tables and data
+
+The following **7** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `ColorMode` — line 1
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `MULT` | number literal | `0` |
-| `ADD` | number literal | `1` |
-| `COLOR` | number literal | `2` |
+| `MULT` | numeric literal | `0` |
+| `[2]` | expression/reference | `-- Multiply (default) ADD = 1` |
+| `[3]` | expression/reference | `-- Addititve COLOR = 2` |
+| `[4]` | expression/reference | `-- Colorize` |
 
-### `BattleItem` *(line 6)*
+### 2. `BattleItem` — line 7
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `MONEY` | number literal | `0` |
-| `CARD` | number literal | `1` |
-| `HEALTH` | number literal | `2` |
-| `FRAGMENT` | number literal | `3` |
+| `MONEY` | numeric literal | `0` |
+| `CARD` | numeric literal | `1` |
+| `HEALTH` | numeric literal | `2` |
+| `FRAGMENT` | numeric literal | `3` |
 
-### `InputState` *(line 15)*
+### 3. `InputState` — line 15
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `NONE` | number literal | `0` |
-| `PRESSED` | number literal | `1` |
-| `HELD` | number literal | `2` |
-| `RELEASED` | number literal | `3` |
+| `NONE` | numeric literal | `0` |
+| `PRESSED` | numeric literal | `1` |
+| `HELD` | numeric literal | `2` |
+| `RELEASED` | numeric literal | `3` |
 
-### `InputEvent` *(line 21)*
+### 4. `InputEvent` — line 22
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `RUN` | string literal | `"Run"` |
+| `[1]` | expression/reference | `--- --- OW Events --- RUN = "Run"` |
 | `INTERACT` | string literal | `"Interact"` |
 | `MINIMAP` | string literal | `"Minimap"` |
-| `SHOOT` | string literal | `"Shoot"` |
+| `[4]` | expression/reference | `--- --- Battle Events --- SHOOT = "Shoot"` |
 | `USE_CARD` | string literal | `"Use Card"` |
 | `SPECIAL` | string literal | `"Special"` |
 | `CUST_MENU` | string literal | `"Cust Menu"` |
 | `PAUSE` | string literal | `"Pause"` |
-| `MOVE_UP` | string literal | `"Move Up"` |
+| `[9]` | expression/reference | `--- --- Shared Battle & OW Events --- MOVE_UP = "Move Up"` |
 | `MOVE_DOWN` | string literal | `"Move Down"` |
 | `MOVE_LEFT` | string literal | `"Move Left"` |
 | `MOVE_RIGHT` | string literal | `"Move Right"` |
 | `SHOULDER_L` | string literal | `"Shoulder L"` |
 | `SHOULDER_R` | string literal | `"Shoulder R"` |
-| `UI_UP` | string literal | `"UI Up"` |
+| `[15]` | expression/reference | `--- --- UI Events --- UI_UP = "UI Up"` |
 | `UI_DOWN` | string literal | `"UI Down"` |
 | `UI_LEFT` | string literal | `"UI Left"` |
 | `UI_RIGHT` | string literal | `"UI Right"` |
 | `CONFIRM` | string literal | `"Confirm"` |
 | `CANCEL` | string literal | `"Cancel"` |
 | `OPTION` | string literal | `"Option"` |
-| `LEN` | number literal | `21` |
+| `[22]` | expression/reference | `--- --- META --- LEN = 21` |
 
-### `AssetType` *(line 61)*
+### 5. `AssetType` — line 62
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `TEXT` | number literal | `0` |
-| `TEXTURE` | number literal | `1` |
-| `AUDIO` | number literal | `2` |
-| `DATA` | number literal | `3` |
+| `TEXT` | numeric literal | `0` |
+| `TEXTURE` | numeric literal | `1` |
+| `AUDIO` | numeric literal | `2` |
+| `DATA` | numeric literal | `3` |
 
-### `PackageType` *(line 68)*
+### 6. `PackageType` — line 69
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `BLOCKS` | number literal | `0` |
-| `CARD` | number literal | `1` |
-| `ENCOUNTER` | number literal | `2` |
-| `CHARACTER` | number literal | `3` |
-| `LIBRARY` | number literal | `4` |
-| `PLAYER` | number literal | `5` |
+| `BLOCKS` | numeric literal | `0` |
+| `CARD` | numeric literal | `1` |
+| `ENCOUNTER` | numeric literal | `2` |
+| `CHARACTER` | numeric literal | `3` |
+| `LIBRARY` | numeric literal | `4` |
+| `PLAYER` | numeric literal | `5` |
 
-## Implementation notes
+### 7. `return` — line 78
 
-- This reference is generated from the exact archived source `scripts/libs/enums.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `ColorMode` | expression/reference | `ColorMode` |
+| `BattleItem` | expression/reference | `BattleItem` |
+| `InputState` | expression/reference | `InputState` |
+| `InputEvent` | expression/reference | `InputEvent` |
+| `AssetType` | expression/reference | `AssetType` |
+| `PackageType` | expression/reference | `PackageType` |
+
+## ⚙️ Runtime API calls
+
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

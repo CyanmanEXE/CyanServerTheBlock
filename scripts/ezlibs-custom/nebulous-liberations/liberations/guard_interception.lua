@@ -1,7 +1,7 @@
 local ezbus = require("scripts/ezlibs-scripts/ezbus")
 local Direction = require("scripts/libs/direction")
-local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
-local log = ezlogger.get("nebulous-liberations")
+local SharedLogger = require("scripts/logger/logger")
+local log = SharedLogger.register("nebulous-liberations"):register_subsystem("guard-interception")
 
 local GuardInterception = {}
 local registered_buses = {}

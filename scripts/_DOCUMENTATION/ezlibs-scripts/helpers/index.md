@@ -1,126 +1,263 @@
-# `helpers.lua`
+# 📄 `helpers.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/helpers.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/helpers.lua`](../../../ezlibs-scripts/helpers.lua)  
 > **Source lines:** 228  
-> **Functions detected:** 19  
-> **Table declarations detected:** 8
+> **SHA-256 (UTF-8):** `5743cdb0e9e9205ad4a3dbddc46d58cdce43dae7eaf6b5a60aaaf01961cafed9`  
+> **Named/assigned functions detected:** 19  
+> **Table initializers detected:** 8
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Current source inventory for `scripts/ezlibs-scripts/helpers.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
-- `scripts/ezlibs-scripts/utils/ezutil` — line 3
-- `scripts/ezlibs-scripts/urlencode` — line 4
-- `scripts/ezlibs-scripts/ezcache` — line 5
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/logger/logger` |
+| 3 | `scripts/ezlibs-scripts/utils/ezutil` |
+| 4 | `scripts/ezlibs-scripts/urlencode` |
+| 5 | `scripts/ezlibs-scripts/ezcache` |
 
-## Events
+## Event hooks
 
-- `Net:on("player_disconnect", function(event) ...)` — line 220. The event name is taken directly from this source.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 220 | `Net` | `player_disconnect` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 9 | `async` | `p` | assigned/declared |
+| 14 | `await` | `v` | assigned/declared |
+| 16 | `first_value_from_table` | `tbl` | assigned/declared |
+| 23 | `get_table_length` | `tbl` | assigned/declared |
+| 27 | `helpers.indexOf` | `array, value` | assigned/declared |
+| 36 | `helpers.extract_numbered_properties` | `object,property_prefix` | assigned/declared |
+| 47 | `helpers.clear_table` | `tbl` | assigned/declared |
+| 54 | `helpers.create_bbs_option` | `text,id` | assigned/declared |
+| 61 | `helpers.deep_copy` | `orig` | assigned/declared |
+| 65 | `helpers.split` | `string, delimiter` | assigned/declared |
+| 73 | `helpers.get_safe_player_secret` | `player_id` | assigned/declared |
+| 79 | `helpers.safe_require` | `script_path` | assigned/declared |
+| 93 | `helpers.date_string_to_timestamp` | `date_string` | assigned/declared |
+| 109 | `helpers.is_now_before_date` | `date_string` | assigned/declared |
+| 118 | `helpers.position_overlaps_something` | `position,area_id` | assigned/declared |
+| 135 | `helpers.get_lock` | `player_id,lock_id,timeout` | assigned/declared |
+| 141 | `release` | `(none)` | assigned/declared |
+| 160 | `helpers.read_item_information` | `area_id, item_object_id` | assigned/declared |
+| 183 | `helpers.ensure_directory` | `path` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `async(p)`
+
+- **Line:** 9
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 9 | `async` | `p` |
-| 14 | `await` | `v` |
-| 16 | `first_value_from_table` | `tbl` |
-| 23 | `get_table_length` | `tbl` |
-| 27 | `helpers.indexOf` | `array, value` |
-| 36 | `helpers.extract_numbered_properties` | `object,property_prefix` |
-| 47 | `helpers.clear_table` | `tbl` |
-| 54 | `helpers.create_bbs_option` | `text,id` |
-| 61 | `helpers.deep_copy` | `orig` |
-| 65 | `helpers.split` | `string, delimiter` |
-| 73 | `helpers.get_safe_player_secret` | `player_id` |
-| 79 | `helpers.safe_require` | `script_path` |
-| 93 | `helpers.date_string_to_timestamp` | `date_string` |
-| 109 | `helpers.is_now_before_date` | `date_string` |
-| 118 | `helpers.position_overlaps_something` | `position,area_id` |
-| 135 | `helpers.get_lock` | `player_id,lock_id,timeout` |
-| 141 | `release` | `(none)` |
-| 160 | `helpers.read_item_information` | `area_id, item_object_id` |
-| 183 | `helpers.ensure_directory` | `path` |
+| 1 | `p` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `await(v)`
 
-- **`async(p)`** *(source line 9)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`await(v)`** *(source line 14)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`first_value_from_table(tbl)`** *(source line 16)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`get_table_length(tbl)`** *(source line 23)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.indexOf(array, value)`** *(source line 27)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.extract_numbered_properties(object,property_prefix)`** *(source line 36)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.clear_table(tbl)`** *(source line 47)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.create_bbs_option(text,id)`** *(source line 54)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.deep_copy(orig)`** *(source line 61)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.split(string, delimiter)`** *(source line 65)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.get_safe_player_secret(player_id)`** *(source line 73)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.safe_require(script_path)`** *(source line 79)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.date_string_to_timestamp(date_string)`** *(source line 93)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.is_now_before_date(date_string)`** *(source line 109)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.position_overlaps_something(position,area_id)`** *(source line 118)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.get_lock(player_id,lock_id,timeout)`** *(source line 135)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`release()`** *(source line 141)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.read_item_information(area_id, item_object_id)`** *(source line 160)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`helpers.ensure_directory(path)`** — ============================================================================ Cross‑platform directory creation ============================================================================ *(source line 183)*
+- **Line:** 14
+- **Declaration:** table/global or assignment
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `v` | Declared in this function; type not inferred. |
 
-### `helpers` *(line 2)*
+#### 3. `first_value_from_table(tbl)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 16
+- **Declaration:** table/global or assignment
 
-### `locks` *(line 6)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `tbl` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `get_table_length(tbl)`
 
-### `locks_by_player` *(line 7)*
+- **Line:** 23
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `tbl` | Declared in this function; type not inferred. |
 
-### `out_table` *(line 37)*
+#### 5. `helpers.indexOf(array, value)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 27
+- **Declaration:** table/global or assignment
 
-### `table` *(line 66)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `array` | Declared in this function; type not inferred. |
+| 2 | `value` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 6. `helpers.extract_numbered_properties(object,property_prefix)`
 
-### `date_part_keys` *(line 99)*
+- **Line:** 36
+- **Declaration:** table/global or assignment
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"sec"` |
-| `[2]` | string literal | `"min"` |
-| `[3]` | string literal | `"hour"` |
-| `[4]` | string literal | `"day"` |
-| `[5]` | string literal | `"month"` |
-| `[6]` | string literal | `"year"` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared in this function; type not inferred. |
+| 2 | `property_prefix` | Declared in this function; type not inferred. |
 
-### `lock` *(line 140)*
+#### 7. `helpers.clear_table(tbl)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `release` | function | `function() if locks_by_player[player_id] then locks_by_player[player_id][lock_id] = nil end locks[lock_id] = nil end` |
+- **Line:** 47
+- **Declaration:** table/global or assignment
 
-### `item` *(line 163)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `tbl` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 8. `helpers.create_bbs_option(text,id)`
 
-## Implementation notes
+- **Line:** 54
+- **Declaration:** table/global or assignment
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/helpers.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `text` | Declared in this function; type not inferred. |
+| 2 | `id` | Declared in this function; type not inferred. |
+
+#### 9. `helpers.deep_copy(orig)`
+
+- **Line:** 61
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `orig` | Declared in this function; type not inferred. |
+
+#### 10. `helpers.split(string, delimiter)`
+
+- **Line:** 65
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `string` | Declared in this function; type not inferred. |
+| 2 | `delimiter` | Declared in this function; type not inferred. |
+
+#### 11. `helpers.get_safe_player_secret(player_id)`
+
+- **Line:** 73
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+
+#### 12. `helpers.safe_require(script_path)`
+
+- **Line:** 79
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `script_path` | Declared in this function; type not inferred. |
+
+#### 13. `helpers.date_string_to_timestamp(date_string)`
+
+- **Line:** 93
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `date_string` | Declared in this function; type not inferred. |
+
+#### 14. `helpers.is_now_before_date(date_string)`
+
+- **Line:** 109
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `date_string` | Declared in this function; type not inferred. |
+
+#### 15. `helpers.position_overlaps_something(position,area_id)`
+
+- **Line:** 118
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `position` | Declared in this function; type not inferred. |
+| 2 | `area_id` | Declared in this function; type not inferred. |
+
+#### 16. `helpers.get_lock(player_id,lock_id,timeout)`
+
+- **Line:** 135
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared in this function; type not inferred. |
+| 2 | `lock_id` | Declared in this function; type not inferred. |
+| 3 | `timeout` | Declared in this function; type not inferred. |
+
+#### 17. `release()`
+
+- **Line:** 141
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
+
+#### 18. `helpers.read_item_information(area_id, item_object_id)`
+
+- **Line:** 160
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `item_object_id` | Declared in this function; type not inferred. |
+
+#### 19. `helpers.ensure_directory(path)`
+
+- **Line:** 183
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `path` | Declared in this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 2 | `helpers` |
+| 6 | `locks` |
+| 7 | `locks_by_player` |
+| 37 | `out_table` |
+| 66 | `table` |
+| 99 | `date_part_keys` |
+| 140 | `lock` |
+| 163 | `item` |
+
+## Net API calls
+
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.get_player_position` | 1 | 122 |
+| `Net.get_player_secret` | 1 | 74 |
+| `Net.list_players` | 1 | 119 |
+| `Net.on` | 1 | 220 |

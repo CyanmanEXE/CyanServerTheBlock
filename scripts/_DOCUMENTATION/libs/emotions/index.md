@@ -1,55 +1,72 @@
-# `emotions.lua`
+# 📄 `emotions.lua`
 
-> **Source:** `scripts/libs/emotions.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/libs/emotions.lua`](../../../libs/emotions.lua)  
 > **Source lines:** 14  
-> **Functions detected:** 0  
-> **Table declarations detected:** 1
+> **SHA-256 (UTF-8):** `8a965ebbafc3fe…`  
+> **Declared/assigned functions detected:** 0  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 1
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Source-based reference for `scripts/libs/emotions.lua`. No module-purpose prose was supplied in the leading source comments.
 
-## Dependencies
+## 🔗 Dependencies
 
-- No `require(...)` dependency was detected.
+*No literal `require` module strings detected.*
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+*No named function declaration or `= function(...)` assignment detected. Anonymous callbacks may still be present.*
 
-## Tables and data structures
+## 🪄 Anonymous closures
 
-### `Emotions` *(line 1)*
+*No anonymous `function(...)` expressions detected.*
 
-| Field / key | Value category | Initializer expression (source) |
+## 📦 Tables and data
+
+The following **1** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `Emotions` — line 1
+
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
-| `NORMAL` | number literal | `0` |
-| `FULL_SYNCHRO` | number literal | `1` |
-| `ANGRY` | number literal | `2` |
-| `EVIL` | number literal | `3` |
-| `ANXIOUS` | number literal | `4` |
-| `TIRED` | number literal | `5` |
-| `EXHAUSTED` | number literal | `6` |
-| `PINCH` | number literal | `7` |
-| `FOCUS` | number literal | `8` |
-| `HAPPY` | number literal | `9` |
+| `NORMAL` | numeric literal | `0` |
+| `FULL_SYNCHRO` | numeric literal | `1` |
+| `ANGRY` | numeric literal | `2` |
+| `EVIL` | numeric literal | `3` |
+| `ANXIOUS` | numeric literal | `4` |
+| `TIRED` | numeric literal | `5` |
+| `EXHAUSTED` | numeric literal | `6` |
+| `PINCH` | numeric literal | `7` |
+| `FOCUS` | numeric literal | `8` |
+| `HAPPY` | numeric literal | `9` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/libs/emotions.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

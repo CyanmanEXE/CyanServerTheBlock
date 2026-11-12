@@ -1,135 +1,265 @@
-# `panel_encounters.lua`
+# 📄 `panel_encounters.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-custom/nebulous-liberations/liberations/panel_encounters.lua`  
-> **Source lines:** 290  
-> **Functions detected:** 9  
-> **Table declarations detected:** 12
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
 
-## Contents
+> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/liberations/panel_encounters.lua`](../../../../../ezlibs-custom/nebulous-liberations/liberations/panel_encounters.lua)  
+> **Source lines:** 702  
+> **SHA-256 (UTF-8):** `e3e57a7a8cf68e20ab9e4d3de6a75c1538b71b6c1af156be1b5ea6458cad6403`  
+> **Named/assigned functions detected:** 16  
+> **Table initializers detected:** 17
 
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../../../logger/README.md) for logging semantics.
+
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-[[
+Current source inventory for `scripts/ezlibs-custom/nebulous-liberations/liberations/panel_encounters.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 1
-- `scripts/ezlibs-scripts/ezconfig` — line 3
-- `scripts/ezlibs-scripts/ezencounters/main` — line 190
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/logger/logger` |
+| 2 | `scripts/ezlibs-custom/nebulous-liberations/liberations/logger` |
+| 3 | `scripts/ezlibs-scripts/ezconfig` |
+| 215 | `scripts/ezlibs-scripts/ezencounters/main` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No literal `:on` event registration detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 65 | `has_dark_panel` | `instance, x, y, z` | local |
+| 69 | `includes` | `values, value` | local |
+| 80 | `PanelEncounters.resolve_terrain` | `instance, player` | assigned/declared |
+| 109 | `candidate_area_keys` | `base_area_id` | local |
+| 124 | `load_area_encounter_table` | `base_area_id` | local |
+| 152 | `pick_encounter` | `encounter_table, category` | local |
+| 186 | `PanelEncounters.pick_weighted` | `candidates` | assigned/declared |
+| 213 | `PanelEncounters.resolve_encounter_value` | `reference, base_area_id` | assigned/declared |
+| 226 | `PanelEncounters.resolve_named_encounter` | `base_area_id, category, reference` | assigned/declared |
+| 263 | `PanelEncounters.resolve_dark_hole_liberation_encounters` | `base_area_id, object_reference` | assigned/declared |
+| 302 | `nonempty` | `value` | local |
+| 309 | `normalize_category` | `value, fallback` | local |
+| 316 | `weighted_pool` | `base_area_id, reference, inherited_category` | local |
+| 366 | `PanelEncounters.resolve_enemy_encounter` | `base_area_id, default_category, enemy, properties, config` | assigned/declared |
+| 418 | `PanelEncounters.resolve_encounter` | `base_area_id, category` | assigned/declared |
+| 469 | `startup_diagnostic` | `(none)` | local |
+
+### Detailed parameter inventory
+
+#### 1. `has_dark_panel(instance, x, y, z)`
+
+- **Line:** 65
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 65 | `has_dark_panel` | `instance, x, y, z` |
-| 69 | `includes` | `values, value` |
-| 80 | `PanelEncounters.resolve_terrain` | `instance, player` |
-| 109 | `candidate_area_keys` | `base_area_id` |
-| 124 | `load_area_encounter_table` | `base_area_id` |
-| 152 | `pick_encounter` | `encounter_table, category` |
-| 188 | `PanelEncounters.resolve_encounter_value` | `reference` |
-| 197 | `PanelEncounters.resolve_encounter` | `base_area_id, category` |
-| 248 | `startup_diagnostic` | `(none)` |
+| 1 | `instance` | Declared in this function; type not inferred. |
+| 2 | `x` | Declared in this function; type not inferred. |
+| 3 | `y` | Declared in this function; type not inferred. |
+| 4 | `z` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `includes(values, value)`
 
-- **`has_dark_panel(instance, x, y, z)`** *(source line 65)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`includes(values, value)`** *(source line 69)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PanelEncounters.resolve_terrain(instance, player)`** *(source line 80)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`candidate_area_keys(base_area_id)`** *(source line 109)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`load_area_encounter_table(base_area_id)`** *(source line 124)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`pick_encounter(encounter_table, category)`** *(source line 152)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PanelEncounters.resolve_encounter_value(reference)`** — Used by instance.lua for the per-panel "Encounter Path" custom property override. Routes through ezencounters.resolve_encounter so named encounters registered via encounters/*.lua resolve to their full definition (with battle data), while raw paths fall back to {path = ref}. *(source line 188)*
-- **`PanelEncounters.resolve_encounter(base_area_id, category)`** *(source line 197)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`startup_diagnostic()`** — Startup diagnostic: for every area that looks like a liberation base (has a Liberation Tileset custom property), report whether ezencounters can see an encounter file for it and how many encounters it declares. *(source line 248)*
+- **Line:** 69
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `values` | Declared in this function; type not inferred. |
+| 2 | `value` | Declared in this function; type not inferred. |
 
-### `PanelEncounters` *(line 4)*
+#### 3. `PanelEncounters.resolve_terrain(instance, player)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 80
+- **Declaration:** table/global or assignment
 
-### `encounters` *(line 15)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared in this function; type not inferred. |
+| 2 | `player` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ name = "ACDC4Liberation", path = "scripts/ezlibs-assets/ezencounters/ezencounters.zip", weight = 1, enemies = { { name = "NormalNavi", ran…` |
+#### 4. `candidate_area_keys(base_area_id)`
 
-### `enemies` *(line 20)*
+- **Line:** 109
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ name = "NormalNavi", rank = 1 }` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `base_area_id` | Declared in this function; type not inferred. |
 
-### `bosses` *(line 26)*
+#### 5. `load_area_encounter_table(base_area_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ name = "ShadeManBattle", path = "scripts/ezlibs-assets/ezencounters/ezencounters.zip", weight = 1, enemies = { { name = "ShadeMan", rank =…` |
+- **Line:** 124
+- **Declaration:** local
 
-### `enemies` *(line 31)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `base_area_id` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ name = "ShadeMan", rank = 1 }` |
+#### 6. `pick_encounter(encounter_table, category)`
 
-### `special_encounters` *(line 37)*
+- **Line:** 152
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ name = "BigBruteBattle", path = "scripts/ezlibs-assets/ezencounters/ezencounters.zip", weight = 1, enemies = { { name = "BigBrute", rank =…` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `encounter_table` | Declared in this function; type not inferred. |
+| 2 | `category` | Declared in this function; type not inferred. |
 
-### `enemies` *(line 42)*
+#### 7. `PanelEncounters.pick_weighted(candidates)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ name = "BigBrute", rank = 1 }` |
+- **Line:** 186
+- **Declaration:** table/global or assignment
 
-### `corner_offsets` *(line 57)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `candidates` | Declared in this function; type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ 1, -1 }` |
-| `[2]` | table | `{ 1, 1 }` |
-| `[3]` | table | `{ -1, -1 }` |
-| `[4]` | table | `{ -1, 1 }` |
+#### 8. `PanelEncounters.resolve_encounter_value(reference, base_area_id)`
 
-### `panel_type_table` *(line 68)*
+- **Line:** 213
+- **Declaration:** table/global or assignment
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | string literal | `"Dark Panel"` |
-| `[2]` | string literal | `"Dark Hole"` |
-| `[3]` | string literal | `"Indestructible Panel"` |
-| `[4]` | string literal | `"Item Panel"` |
-| `[5]` | string literal | `"Trap Panel"` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `reference` | Declared in this function; type not inferred. |
+| 2 | `base_area_id` | Declared in this function; type not inferred. |
 
-### `area_table_cache` *(line 107)*
+#### 9. `PanelEncounters.resolve_named_encounter(base_area_id, category, reference)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 226
+- **Declaration:** table/global or assignment
 
-### `keys` *(line 110)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `base_area_id` | Declared in this function; type not inferred. |
+| 2 | `category` | Declared in this function; type not inferred. |
+| 3 | `reference` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 10. `PanelEncounters.resolve_dark_hole_liberation_encounters(base_area_id, object_reference)`
 
-### `out` *(line 240)*
+- **Line:** 263
+- **Declaration:** table/global or assignment
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `base_area_id` | Declared in this function; type not inferred. |
+| 2 | `object_reference` | Declared in this function; type not inferred. |
 
-## Implementation notes
+#### 11. `nonempty(value)`
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/nebulous-liberations/liberations/panel_encounters.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+- **Line:** 302
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `value` | Declared in this function; type not inferred. |
+
+#### 12. `normalize_category(value, fallback)`
+
+- **Line:** 309
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `value` | Declared in this function; type not inferred. |
+| 2 | `fallback` | Declared in this function; type not inferred. |
+
+#### 13. `weighted_pool(base_area_id, reference, inherited_category)`
+
+- **Line:** 316
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `base_area_id` | Declared in this function; type not inferred. |
+| 2 | `reference` | Declared in this function; type not inferred. |
+| 3 | `inherited_category` | Declared in this function; type not inferred. |
+
+#### 14. `PanelEncounters.resolve_enemy_encounter(base_area_id, default_category, enemy, properties, config)`
+
+- **Line:** 366
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `base_area_id` | Declared in this function; type not inferred. |
+| 2 | `default_category` | Declared in this function; type not inferred. |
+| 3 | `enemy` | Declared in this function; type not inferred. |
+| 4 | `properties` | Declared in this function; type not inferred. |
+| 5 | `config` | Declared in this function; type not inferred. |
+
+#### 15. `PanelEncounters.resolve_encounter(base_area_id, category)`
+
+- **Line:** 418
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `base_area_id` | Declared in this function; type not inferred. |
+| 2 | `category` | Declared in this function; type not inferred. |
+
+#### 16. `startup_diagnostic()`
+
+- **Line:** 469
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 5 | `PanelEncounters` |
+| 15 | `encounters` |
+| 20 | `enemies` |
+| 26 | `bosses` |
+| 31 | `enemies` |
+| 37 | `special_encounters` |
+| 42 | `enemies` |
+| 58 | `corner_offsets` |
+| 68 | `panel_type_table` |
+| 107 | `area_table_cache` |
+| 110 | `keys` |
+| 189 | `valid` |
+| 243 | `copy` |
+| 278 | `numbered` |
+| 288 | `candidates` |
+| 334 | `entries` |
+| 461 | `out` |
+
+## Net API calls
+
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.get_area_custom_property` | 1 | 472 |
+| `Net.get_area_name` | 4 | 420 |
+| `Net.get_object_by_id` | 1 | 268 |
+| `Net.list_areas` | 1 | 470 |
+
+
+## V2.1 source update
+
+`PanelEncounters.validate_encounter_data(definition, package_path)` validates
+the 6×3 battle matrices and enemy indexes before client dispatch.
+`package_path` supplies the selected ZIP when checking a built battle payload
+whose `path` was stripped by the encounter builder.
+`provide_mission_encounter_assets` also checks definitions before provisioning.
+The startup area scan now checks `Liberation Config` objects instead of the
+obsolete map-level `Liberation Tileset` property.
+
+See [V2.1 encounter audit](../../V21_ENCOUNTER_AND_MAP_AUDIT.md).
+
+> **Static inventory note:** The original function line-number table predates the V2.1 patch. Follow the current source link above or the V2.1 addendum for added APIs.

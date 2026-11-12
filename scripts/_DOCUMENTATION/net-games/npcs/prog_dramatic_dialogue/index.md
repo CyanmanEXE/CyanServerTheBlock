@@ -1,89 +1,79 @@
-# `prog_dramatic_dialogue.lua`
+# 📄 `prog_dramatic_dialogue.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/net-games/npcs/prog_dramatic_dialogue.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/npcs/prog_dramatic_dialogue.lua`](../../../../net-games/npcs/prog_dramatic_dialogue.lua)  
 > **Source lines:** 110  
-> **Functions detected:** 2  
-> **Table declarations detected:** 3
+> **SHA-256 (UTF-8):** `9f3067dd088f69cf88a8ca36e53df93185cdc5e554cdc677515b2f0e7dce58c1`  
+> **Named/assigned functions detected:** 2  
+> **Table initializers detected (simple pattern):** 3
 
-## Contents
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-===================================================== prog_dramatic_dialogue.lua Tiled-spawned NPC that triggers net-games Dialogue (BLACK BOX style + normal THICK font) =====================================================
+Current source inventory for `scripts/net-games/npcs/prog_dramatic_dialogue.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- `scripts/libs/direction` — line 7
-- `scripts/net-games/dialogue/dialogue` — line 8
+| Line | `require` module |
+|---:|---|
+| 7 | `scripts/libs/direction` |
+| 8 | `scripts/net-games/dialogue/dialogue` |
 
-## Events
+## Event hooks
 
-- `Net:on("actor_interaction", function(event) ...)` — line 41. The event name is taken directly from this source.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 41 | `Net` | `actor_interaction` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 11 | `dbg` | `msg` | local |
+| 106 | `on_finish` | `(none)` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `dbg(msg)`
+
+- **Line:** 11
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 11 | `dbg` | `msg` |
-| 105 | `on_finish` | `(none)` |
+| 1 | `msg` | Declared by this function; type not inferred. |
 
-### Function notes
+#### 2. `on_finish()`
 
-- **`dbg(msg)`** *(source line 11)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`on_finish()`** *(source line 105)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 106
+- **Declaration:** table/global or assignment
+- **Parameters:** none explicitly declared.
 
-## Tables and data structures
 
-### `ui` *(line 69)*
+## Tables
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `box_id` | string literal | `"prog_dialogue_box"` |
-| `font` | string literal | `"THICK"` |
-| `scale` | number literal | `2.0` |
-| `z` | number literal | `100` |
-| `typing_speed` | number literal | `30` |
-| `type_sfx_path` | string literal | `"/server/assets/net-games/sfx/text.ogg"` |
-| `type_sfx_min_dt` | number literal | `0.05` |
-| `backdrop` | table | `{ style = "black_box", x = 1, y = 209, width = 478, height = 104, padding_x = 16, padding_y = 16, max_lines = 3, indicator = { enabled = tru…` |
+| Source line | Assignment |
+|---:|---|
+| 70 | `ui` |
+| 81 | `backdrop` |
+| 92 | `indicator` |
 
-### `backdrop` *(line 81)*
+## Net API calls
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `style` | string literal | `"black_box"` |
-| `x` | number literal | `1` |
-| `y` | number literal | `209` |
-| `width` | number literal | `478` |
-| `height` | number literal | `104` |
-| `padding_x` | number literal | `16` |
-| `padding_y` | number literal | `16` |
-| `max_lines` | number literal | `3` |
-| `indicator` | table | `{ enabled = true, width = 2, height = 2, offset_x = 24, offset_y = 24, indicator_timer = 0, indicator_base_x = nil, indicator_base_y = nil, …` |
-
-### `indicator` *(line 91)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `enabled` | boolean literal | `true` |
-| `width` | number literal | `2` |
-| `height` | number literal | `2` |
-| `offset_x` | number literal | `24` |
-| `offset_y` | number literal | `24` |
-| `indicator_timer` | number literal | `0` |
-| `indicator_base_x` | nil | `nil` |
-| `indicator_base_y` | nil | `nil` |
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/net-games/npcs/prog_dramatic_dialogue.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| API | Occurrences | First line |
+|---|---:|---:|
+| `Net.create_bot` | 1 | 24 |
+| `Net.get_object_by_name` | 1 | 21 |
+| `Net.get_player_position` | 1 | 53 |
+| `Net.on` | 1 | 41 |
+| `Net.set_bot_direction` | 1 | 54 |

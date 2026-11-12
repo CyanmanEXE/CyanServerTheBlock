@@ -1,7 +1,7 @@
 local ezmemory = require("scripts/ezlibs-scripts/ezmemory")
 local helpers = require('scripts/ezlibs-scripts/helpers')
-local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
-local log = ezlogger.get("nebulous-liberations")
+local SharedLogger = require("scripts/logger/logger")
+local log = SharedLogger.register("nebulous-liberations"):register_subsystem("player")
 local OptionMenu = require("scripts/ezlibs-custom/nebulous-liberations/liberations/option_menu")
 
 -- private functions

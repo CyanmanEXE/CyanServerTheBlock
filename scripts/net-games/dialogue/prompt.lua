@@ -1,3 +1,4 @@
+local PlayerControl = require("scripts/player-control/main")
 -- scripts/net-games/dialogue/prompt.lua
 -- Hardened YES/NO prompt using the public TextLayout service.
 
@@ -195,8 +196,8 @@ local function find_option_virtual_positions(player_id, box_id, selection)
 end
 
 local function set_input_locked(player_id, locked)
-    if locked and Net.lock_player_input then pcall(Net.lock_player_input, Net, player_id)
-    elseif (not locked) and Net.unlock_player_input then pcall(Net.unlock_player_input, Net, player_id) end
+    if locked and PlayerControl.acquire_capture then pcall(PlayerControl.acquire_capture, player_id, "net-games:dialogue")
+    elseif (not locked) and PlayerControl.release_capture then pcall(PlayerControl.release_capture, player_id, "net-games:dialogue") end
 end
 
 local function mk_id(player_id) return "ng_prompt_" .. tostring(player_id) end

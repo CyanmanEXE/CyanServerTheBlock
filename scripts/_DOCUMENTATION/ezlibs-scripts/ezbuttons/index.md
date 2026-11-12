@@ -1,370 +1,804 @@
-# `ezbuttons.lua`
+# 📄 `ezbuttons.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezbuttons.lua`  
-> **Source lines:** 1979  
-> **Functions detected:** 67  
-> **Table declarations detected:** 28
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezbuttons.lua`](../../../ezlibs-scripts/ezbuttons.lua)  
+> **Source lines:** 1980  
+> **SHA-256 (UTF-8):** `ef606ebacc70e1039b9a8647b36c11ac1287ab9fad6e213c54044e0d6f7c4756`  
+> **Named functions detected:** 62  
+> **Table initializers detected:** 28
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-ezbuttons.lua Creates trigger-based buttons (non-solid NPCs). Logical relationships are defined with groups and button/group effects. Supports five interaction behaviors: Pressure Plate, One-Time, Toggle, Custom, Timed. Supports area-wide unlock/relock via "Area Wide" flag on Unlock/Relock Behavior objects. Optional per-button flag "Bots Can Trigger" (bool, default false) causes the button to register a parallel ezbottriggers rectangle/ellipse in addition to its eztriggers one, so NPCs entering or leaving can drive the same Pressure Plate / One-Time / Toggle / Timed state machine. Custom behavior is excluded because custom scripts receive a player_id. Bot-triggered activations pass nil as the activator, so per-player checkpoint unlocks and relocks have no target. When that happens, the deactivation path falls back to area-wide so the button's state change is fully reversed - matching player behavior as closely as possible. Optional "Cinematic Unlock" (bool, default false) on OW Buttons, Button Groups, and Combo Button Groups: player-triggered unlocks lock input, pan the player's camera smoothly to the first checkpoint, hold, then snap the camera back to the player and unlock input. Companion "Cinematic Duration" (number, default 1.0) sets the hold time after the checkpoint animation. Optional "Cinematic on Bot Trigger" (bool, default false): when true, bot (NPC) activations also play the cinematic - the camera pans for every live player in the area. When false, bot triggers perform the unlock normally but suppress the cinematic. Player-triggered cinematics are unaffected. Camera API: uses Net.unlock_player_camera / Net.move_player_camera / Net.track_with_player_camera (the same primitives camera-controller.lua uses). Override ezbuttons.camera_release / camera_move / camera_reattach if a project's engine revision exposes different names.
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 34
-- `scripts/ezlibs-scripts/object_registry` — line 35
-- `scripts/ezlibs-scripts/eznpcs/eznpcs` — line 36
-- `scripts/ezlibs-scripts/eztriggers/eztriggers` — line 37
-- `scripts/ezlibs-scripts/ezmemory` — line 38
-- `scripts/ezlibs-scripts/ezbus` — line 39
-- `scripts/ezlibs-scripts/helpers` — line 40
-- `scripts/ezlibs-scripts/ezcheckpoints` — line 41
-- `scripts/ezlibs-scripts/utils/eztiledutils` — line 42
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
+| 35 | `scripts/logger/logger` |
+| 36 | `scripts/ezlibs-scripts/object_registry` |
+| 37 | `scripts/ezlibs-scripts/eznpcs/eznpcs` |
+| 38 | `scripts/ezlibs-scripts/eztriggers/eztriggers` |
+| 39 | `scripts/ezlibs-scripts/ezmemory` |
+| 40 | `scripts/ezlibs-scripts/ezbus` |
+| 41 | `scripts/ezlibs-scripts/helpers` |
+| 42 | `scripts/ezlibs-scripts/ezcheckpoints` |
+| 43 | `scripts/ezlibs-scripts/utils/eztiledutils` |
 
-## Events
+## Event hooks
 
-- `Net:on("player_join", function(event) ...)` — line 411. The event name is taken directly from this source.
-- `Net:on("player_area_transfer", function(event) ...)` — line 427. The event name is taken directly from this source.
-- `Net:on("player_disconnect", function(event) ...)` — line 483. The event name is taken directly from this source.
-
-## Functions
-
-| Line | Function / method | Parameters as declared |
+| Line | Subscriber | Event |
 |---:|---|---|
-| 59 | `async` | `p` |
-| 64 | `await` | `v` |
-| 80 | `player_is_alive` | `player_id` |
-| 88 | `validate_button_object` | `area_id, object` |
-| 105 | `object_to_tile_pos` | `object` |
-| 142 | `normalize_ids` | `ids` |
-| 157 | `find_live_contributor` | `area_id, group` |
-| 158 | `first_live_from` | `ids` |
-| 180 | `resolve_transition_player` | `area_id, group, event_player_id` |
-| 200 | `combo_is_satisfied` | `area_id, combo` |
-| 222 | `group_is_satisfied` | `area_id, group` |
-| 252 | `apply_logic_action` | `area_id, target_id, action, player_id, was_bot` |
-| 288 | `process_logic_event` | `event` |
-| 332 | `enqueue_logic_event` | `area_id, object_id, active, player_id, was_bot` |
-| 357 | `hide_button_placeholder_for_player` | `player_id, area_id, object_id` |
-| 364 | `hide_button_placeholders_for_player` | `player_id` |
-| 375 | `set_button_animation` | `bot_id, anim_state, loop` |
-| 384 | `sync_button_animations_for_player` | `player_id` |
-| 401 | `apply_area_wide_unlocks` | `player_id, area_id` |
-| 446 | `cleanup_player_state` | `player_id` |
-| 492 | `ezbuttons.handle_player_disconnect` | `player_id` |
-| 500 | `create_button_bot` | `area_id, asset_name, x, y, z, direction, bot_name, animation_name, mug_animation_name, initial_anim` |
-| 546 | `is_button_active` | `area_id, object_id` |
-| 552 | `set_button_active_state` | `area_id, object_id, bot_id, active_anim, inactive_anim, active` |
-| 563 | `create_button_trigger` | `area_id, object, width_px, height_px, trigger_id` |
-| 587 | `ezbuttons.camera_release` | `player_id` |
-| 590 | `ezbuttons.camera_move` | `player_id, x, y, z` |
-| 594 | `ezbuttons.camera_reattach` | `player_id` |
-| 600 | `smooth_camera_pan` | `player_id, from_pos, to_pos, duration` |
-| 621 | `run_cinematic_unlock` | `player_id, button_area_id, button_object_id, checkpoint_ids, permanent, hold_duration` |
-| 708 | `run_cinematic_for_all_players` | `button_area_id, button_object_id, checkpoint_ids, permanent, hold_duration` |
-| 720 | `perform_activation` | `area_id, object_id, player_id, info` |
-| 810 | `perform_deactivation` | `area_id, object_id, info` |
-| 874 | `reconcile_pending_button_state` | `area_id, object_id, info` |
-| 894 | `deactivate_button_internal` | `area_id, object_id, info` |
-| 922 | `finish_deactivation` | `(none)` |
-| 942 | `start_timed_deactivation` | `area_id, object_id, info` |
-| 965 | `activate_button` | `area_id, object_id, player_id, was_bot` |
-| 1004 | `deactivate_button` | `area_id, object_id` |
-| 1016 | `load_custom_script` | `script_path` |
-| 1038 | `register_button_object` | `area_id, object, group_member` |
-| 1274 | `resolve_actor_id` | `event, actor_type` |
-| 1279 | `mark_actor_present` | `actor_id, actor_type` |
-| 1287 | `clear_actor_present` | `actor_id, actor_type` |
-| 1295 | `on_button_entered` | `event, actor_type` |
-| 1349 | `on_button_departed` | `event, actor_type` |
-| 1417 | `ezbuttons.is_button_active` | `area_id, object_id` |
-| 1421 | `ezbuttons.activate_button` | `area_id, object_id, player_id, was_bot` |
-| 1425 | `ezbuttons.deactivate_button` | `area_id, object_id` |
-| 1429 | `ezbuttons.reset_button` | `area_id, object_id` |
-| 1441 | `ezbuttons.define_group` | `area_id, group_id, button_ids, mode, options` |
-| 1468 | `ezbuttons.on_group_change` | `area_id, group_id, callback` |
-| 1476 | `ezbuttons.add_button_effect` | `area_id, source_id, event_name, target_id, action` |
-| 1488 | `ezbuttons.add_group_effect` | `area_id, group_id, event_name, target_id, action` |
-| 1500 | `ezbuttons.refresh_groups` | `area_id, player_id` |
-| 1510 | `ezbuttons.get_group_state` | `area_id, group_id` |
-| 1518 | `property_ids` | `props, prefix` |
-| 1539 | `apply_group_checkpoint_action` | `area_id, player_id, checkpoint_ids, area_wide, unlock, permanent, group_id, cinematic, cinematic_duration` |
-| 1650 | `route_group_callback` | `area_id, group_ref, event_player_id, checkpoint_ids, area_wide, unlock, permanent, group_id, log_tag, cinematic, cinematic_duration, cinematic_on_bot, was_bot` |
-| 1679 | `configure_group_object` | `area_id, object` |
-| 1714 | `on_change` | `changed_area_id, changed_group_id, satisfied, player_id, was_bot` |
-| 1756 | `try_configure_pending_groups` | `area_id` |
-| 1774 | `configure_button_combo_object` | `area_id, object` |
-| 1816 | `try_configure_pending_combos` | `area_id` |
-| 1834 | `configure_combo_button_group_object` | `area_id, object` |
-| 1876 | `callback` | `changed_area_id, changed_group_id, satisfied, player_id, was_bot` |
-| 1926 | `try_configure_pending_combo_groups` | `area_id` |
+| 412 | `Net` | `player_join` |
+| 428 | `Net` | `player_area_transfer` |
+| 484 | `Net` | `player_disconnect` |
+| 1383 | `emitter` | `entered` |
+| 1384 | `emitter` | `departed` |
+| 1387 | `bot_emitter` | `entered` |
+| 1388 | `bot_emitter` | `departed` |
 
-### Function notes
+## Functions and parameters
 
-- **`async(p)`** *(source line 59)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`await(v)`** *(source line 64)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`player_is_alive(player_id)`** — ========================================================================== Player liveness ========================================================================== *(source line 80)*
-- **`validate_button_object(area_id, object)`** *(source line 88)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`object_to_tile_pos(object)`** *(source line 105)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`normalize_ids(ids)`** *(source line 142)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`find_live_contributor(area_id, group)`** — ========================================================================== Live-contributor resolution for group state transitions ========================================================================== *(source line 157)*
-- **`first_live_from(ids)`** *(source line 158)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`resolve_transition_player(area_id, group, event_player_id)`** *(source line 180)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`combo_is_satisfied(area_id, combo)`** *(source line 200)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`group_is_satisfied(area_id, group)`** *(source line 222)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`apply_logic_action(area_id, target_id, action, player_id, was_bot)`** *(source line 252)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`process_logic_event(event)`** *(source line 288)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`enqueue_logic_event(area_id, object_id, active, player_id, was_bot)`** *(source line 332)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`hide_button_placeholder_for_player(player_id, area_id, object_id)`** *(source line 357)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`hide_button_placeholders_for_player(player_id)`** *(source line 364)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`set_button_animation(bot_id, anim_state, loop)`** *(source line 375)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`sync_button_animations_for_player(player_id)`** *(source line 384)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`apply_area_wide_unlocks(player_id, area_id)`** *(source line 401)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`cleanup_player_state(player_id)`** — ========================================================================== Disconnect cleanup - deterministic three-phase ========================================================================== *(source line 446)*
-- **`ezbuttons.handle_player_disconnect(player_id)`** *(source line 492)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`create_button_bot(area_id, asset_name, x, y, z, direction, bot_name, animation_name, mug_animation_name, initial_anim)`** — Helper: create a non‑solid bot for the button *(source line 500)*
-- **`is_button_active(area_id, object_id)`** *(source line 546)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`set_button_active_state(area_id, object_id, bot_id, active_anim, inactive_anim, active)`** *(source line 552)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`create_button_trigger(area_id, object, width_px, height_px, trigger_id)`** *(source line 563)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbuttons.camera_release(player_id)`** — ========================================================================== Cinematic unlock (uses Net camera primitives from camera-controller.lua) ========================================================================== *(source line 587)*
-- **`ezbuttons.camera_move(player_id, x, y, z)`** *(source line 590)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbuttons.camera_reattach(player_id)`** *(source line 594)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`smooth_camera_pan(player_id, from_pos, to_pos, duration)`** *(source line 600)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`run_cinematic_unlock(player_id, button_area_id, button_object_id, checkpoint_ids, permanent, hold_duration)`** *(source line 621)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`run_cinematic_for_all_players(button_area_id, button_object_id, checkpoint_ids, permanent, hold_duration)`** — Fan a cinematic out to every live player in an area (used for bot triggers when "Cinematic on Bot Trigger" is enabled). *(source line 708)*
-- **`perform_activation(area_id, object_id, player_id, info)`** — ============================================================ PERFORM ACTIVATION ============================================================ *(source line 720)*
-- **`perform_deactivation(area_id, object_id, info)`** — ============================================================ PERFORM DEACTIVATION ============================================================ *(source line 810)*
-- **`reconcile_pending_button_state(area_id, object_id, info)`** *(source line 874)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`deactivate_button_internal(area_id, object_id, info)`** *(source line 894)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`finish_deactivation()`** *(source line 922)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`start_timed_deactivation(area_id, object_id, info)`** *(source line 942)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`activate_button(area_id, object_id, player_id, was_bot)`** *(source line 965)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`deactivate_button(area_id, object_id)`** *(source line 1004)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`load_custom_script(script_path)`** *(source line 1016)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`register_button_object(area_id, object, group_member)`** — ============================================================ OBJECT REGISTRY HANDLER FOR "OW BUTTON" ============================================================ *(source line 1038)*
-- **`resolve_actor_id(event, actor_type)`** *(source line 1274)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`mark_actor_present(actor_id, actor_type)`** *(source line 1279)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`clear_actor_present(actor_id, actor_type)`** *(source line 1287)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`on_button_entered(event, actor_type)`** *(source line 1295)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`on_button_departed(event, actor_type)`** *(source line 1349)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbuttons.is_button_active(area_id, object_id)`** — Public API *(source line 1417)*
-- **`ezbuttons.activate_button(area_id, object_id, player_id, was_bot)`** *(source line 1421)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbuttons.deactivate_button(area_id, object_id)`** *(source line 1425)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbuttons.reset_button(area_id, object_id)`** *(source line 1429)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbuttons.define_group(area_id, group_id, button_ids, mode, options)`** *(source line 1441)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbuttons.on_group_change(area_id, group_id, callback)`** *(source line 1468)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbuttons.add_button_effect(area_id, source_id, event_name, target_id, action)`** *(source line 1476)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbuttons.add_group_effect(area_id, group_id, event_name, target_id, action)`** *(source line 1488)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbuttons.refresh_groups(area_id, player_id)`** *(source line 1500)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbuttons.get_group_state(area_id, group_id)`** *(source line 1510)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`property_ids(props, prefix)`** *(source line 1518)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`apply_group_checkpoint_action(area_id, player_id, checkpoint_ids, area_wide, unlock, permanent, group_id, cinematic, cinematic_duration)`** — Group checkpoint action. Area-wide: applies to every live player. Per-player: applies to the resolved target if still alive; otherwise skips with a log.  `cinematic` (optional) enables the camera presentation on the unlock path. Relock is never cinematic (the "Cinematic Unlock" property is unlock-only). *(source line 1539)*
-- **`route_group_callback(area_id, group_ref, event_player_id, checkpoint_ids, area_wide, unlock, permanent, group_id, log_tag, cinematic, cinematic_duration, cinematic_on_bot, was_bot)`** — Resolve-and-route wrapper used by every group/combo callback.  Bot-trigger handling: * If `was_bot` is true and the event is a sat isfied transition (unlock): - `cinematic_on_bot` false (default): suppress the cinematic, but still perform the unlock through the normal resolution path. - `cinematic_on_bot` true: force area-wide so the cinematic fans out to every live player in the area. * Player-triggered transitions are unchanged. *(source line 1650)*
-- **`configure_group_object(area_id, object)`** *(source line 1679)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`on_change(changed_area_id, changed_group_id, satisfied, player_id, was_bot)`** *(source line 1714)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`try_configure_pending_groups(area_id)`** *(source line 1756)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`configure_button_combo_object(area_id, object)`** *(source line 1774)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`try_configure_pending_combos(area_id)`** *(source line 1816)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`configure_combo_button_group_object(area_id, object)`** *(source line 1834)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`callback(changed_area_id, changed_group_id, satisfied, player_id, was_bot)`** *(source line 1876)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`try_configure_pending_combo_groups(area_id)`** *(source line 1926)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 60 | `async` | `p` | assigned/declared |
+| 65 | `await` | `v` | assigned/declared |
+| 81 | `player_is_alive` | `player_id` | local |
+| 89 | `validate_button_object` | `area_id, object` | local |
+| 106 | `object_to_tile_pos` | `object` | local |
+| 143 | `normalize_ids` | `ids` | local |
+| 158 | `find_live_contributor` | `area_id, group` | local |
+| 159 | `first_live_from` | `ids` | local |
+| 181 | `resolve_transition_player` | `area_id, group, event_player_id` | local |
+| 201 | `combo_is_satisfied` | `area_id, combo` | local |
+| 223 | `group_is_satisfied` | `area_id, group` | local |
+| 253 | `apply_logic_action` | `area_id, target_id, action, player_id, was_bot` | local |
+| 289 | `process_logic_event` | `event` | local |
+| 333 | `enqueue_logic_event` | `area_id, object_id, active, player_id, was_bot` | local |
+| 358 | `hide_button_placeholder_for_player` | `player_id, area_id, object_id` | local |
+| 365 | `hide_button_placeholders_for_player` | `player_id` | local |
+| 376 | `set_button_animation` | `bot_id, anim_state, loop` | local |
+| 385 | `sync_button_animations_for_player` | `player_id` | local |
+| 402 | `apply_area_wide_unlocks` | `player_id, area_id` | local |
+| 447 | `cleanup_player_state` | `player_id` | local |
+| 493 | `ezbuttons.handle_player_disconnect` | `player_id` | assigned/declared |
+| 548 | `is_button_active` | `area_id, object_id` | assigned/declared |
+| 554 | `set_button_active_state` | `area_id, object_id, bot_id, active_anim, inactive_anim, active` | assigned/declared |
+| 564 | `create_button_trigger` | `area_id, object, width_px, height_px, trigger_id` | local |
+| 588 | `ezbuttons.camera_release` | `player_id` | assigned/declared |
+| 592 | `ezbuttons.camera_move` | `player_id, x, y, z` | assigned/declared |
+| 596 | `ezbuttons.camera_reattach` | `player_id` | assigned/declared |
+| 601 | `smooth_camera_pan` | `player_id, from_pos, to_pos, duration` | local |
+| 721 | `perform_activation` | `area_id, object_id, player_id, info` | assigned/declared |
+| 811 | `perform_deactivation` | `area_id, object_id, info` | assigned/declared |
+| 875 | `reconcile_pending_button_state` | `area_id, object_id, info` | local |
+| 896 | `deactivate_button_internal` | `area_id, object_id, info` | assigned/declared |
+| 923 | `finish_deactivation` | `(none)` | local |
+| 943 | `start_timed_deactivation` | `area_id, object_id, info` | local |
+| 967 | `activate_button` | `area_id, object_id, player_id, was_bot` | assigned/declared |
+| 1006 | `deactivate_button` | `area_id, object_id` | assigned/declared |
+| 1017 | `load_custom_script` | `script_path` | local |
+| 1039 | `register_button_object` | `area_id, object, group_member` | local |
+| 1275 | `resolve_actor_id` | `event, actor_type` | local |
+| 1280 | `mark_actor_present` | `actor_id, actor_type` | local |
+| 1288 | `clear_actor_present` | `actor_id, actor_type` | local |
+| 1296 | `on_button_entered` | `event, actor_type` | local |
+| 1350 | `on_button_departed` | `event, actor_type` | local |
+| 1418 | `ezbuttons.is_button_active` | `area_id, object_id` | assigned/declared |
+| 1422 | `ezbuttons.activate_button` | `area_id, object_id, player_id, was_bot` | assigned/declared |
+| 1426 | `ezbuttons.deactivate_button` | `area_id, object_id` | assigned/declared |
+| 1430 | `ezbuttons.reset_button` | `area_id, object_id` | assigned/declared |
+| 1442 | `ezbuttons.define_group` | `area_id, group_id, button_ids, mode, options` | assigned/declared |
+| 1469 | `ezbuttons.on_group_change` | `area_id, group_id, callback` | assigned/declared |
+| 1477 | `ezbuttons.add_button_effect` | `area_id, source_id, event_name, target_id, action` | assigned/declared |
+| 1489 | `ezbuttons.add_group_effect` | `area_id, group_id, event_name, target_id, action` | assigned/declared |
+| 1501 | `ezbuttons.refresh_groups` | `area_id, player_id` | assigned/declared |
+| 1511 | `ezbuttons.get_group_state` | `area_id, group_id` | assigned/declared |
+| 1519 | `property_ids` | `props, prefix` | local |
+| 1680 | `configure_group_object` | `area_id, object` | local |
+| 1715 | `on_change` | `changed_area_id, changed_group_id, satisfied, player_id, was_bot` | assigned/declared |
+| 1758 | `try_configure_pending_groups` | `area_id` | assigned/declared |
+| 1775 | `configure_button_combo_object` | `area_id, object` | local |
+| 1818 | `try_configure_pending_combos` | `area_id` | assigned/declared |
+| 1835 | `configure_combo_button_group_object` | `area_id, object` | local |
+| 1877 | `callback` | `changed_area_id, changed_group_id, satisfied, player_id, was_bot` | assigned/declared |
+| 1928 | `try_configure_pending_combo_groups` | `area_id` | assigned/declared |
 
-## Tables and data structures
+### Parameter inventory
 
-### `ezbuttons` *(line 65)*
+#### 1. `async(p)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 60
+- **Declaration:** assigned/declared
 
-### `custom_script_cache` *(line 71)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `p` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 2. `await(v)`
 
-### `button_triggers` *(line 73)*
+- **Line:** 65
+- **Declaration:** assigned/declared
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `v` | Declared directly in the current Lua. Type not inferred. |
 
-### `button_placeholders` *(line 113)*
+#### 3. `player_is_alive(player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 81
+- **Declaration:** local
 
-### `button_bots` *(line 114)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `validate_button_object(area_id, object)`
 
-### `button_groups` *(line 125)*
+- **Line:** 89
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object` | Declared directly in the current Lua. Type not inferred. |
 
-### `button_effects` *(line 127)*
+#### 5. `object_to_tile_pos(object)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 106
+- **Declaration:** local
 
-### `group_effects` *(line 128)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `object` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 6. `normalize_ids(ids)`
 
-### `pending_group_objects` *(line 129)*
+- **Line:** 143
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `ids` | Declared directly in the current Lua. Type not inferred. |
 
-### `group_object_ids` *(line 130)*
+#### 7. `find_live_contributor(area_id, group)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 158
+- **Declaration:** local
 
-### `pending_group_effect_objects` *(line 131)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `group` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 8. `first_live_from(ids)`
 
-### `combo_object_definitions` *(line 132)*
+- **Line:** 159
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `ids` | Declared directly in the current Lua. Type not inferred. |
 
-### `pending_combo_objects` *(line 133)*
+#### 9. `resolve_transition_player(area_id, group, event_player_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 181
+- **Declaration:** local
 
-### `pending_combo_group_objects` *(line 134)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `group` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `event_player_id` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 10. `combo_is_satisfied(area_id, combo)`
 
-### `logic_queue` *(line 138)*
+- **Line:** 201
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `combo` | Declared directly in the current Lua. Type not inferred. |
 
-### `required` *(line 201)*
+#### 11. `group_is_satisfied(area_id, group)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 223
+- **Declaration:** local
 
-### `logic_queue` *(line 352)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `group` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 12. `apply_logic_action(area_id, target_id, action, player_id, was_bot)`
 
-### `plates_to_deactivate` *(line 448)*
+- **Line:** 253
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `target_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `action` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `was_bot` | Declared directly in the current Lua. Type not inferred. |
 
-### `npc_data` *(line 509)*
+#### 13. `process_logic_event(event)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `asset_name` | expression/reference | `asset_name` |
-| `bot_id` | nil | `nil` |
-| `name` | expression/reference | `bot_name` |
-| `area_id` | expression/reference | `area_id` |
-| `texture_path` | expression/reference | `texture_path` |
-| `animation_path` | expression/reference | `animation_path` |
-| `animation` | expression/reference | `initial_anim or "IDLE_D"` |
-| `direction` | expression/reference | `direction` |
-| `x` | expression/reference | `x` |
-| `y` | expression/reference | `y` |
-| `z` | expression/reference | `z` |
-| `solid` | boolean literal | `false` |
-| `size` | number literal | `0.2` |
-| `speed` | number literal | `1` |
-| `dont_face_player` | boolean literal | `true` |
-| `warp_in` | boolean literal | `true` |
+- **Line:** 289
+- **Declaration:** local
 
-### `from_pos` *(line 657)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `event` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | expression/reference | `player_pos.x` |
-| `y` | expression/reference | `player_pos.y` |
-| `z` | expression/reference | `cam_z` |
+#### 14. `enqueue_logic_event(area_id, object_id, active, player_id, was_bot)`
 
-### `to_pos` *(line 658)*
+- **Line:** 333
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | call/expression | `tonumber(cp_obj.x) or 0` |
-| `y` | call/expression | `tonumber(cp_obj.y) or 0` |
-| `z` | expression/reference | `cam_z` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `active` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `was_bot` | Declared directly in the current Lua. Type not inferred. |
 
-### `info` *(line 1165)*
+#### 15. `hide_button_placeholder_for_player(player_id, area_id, object_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `area_id` | expression/reference | `area_id` |
-| `object_id` | expression/reference | `object.id` |
-| `bot_id` | expression/reference | `bot_id` |
-| `active_anim` | expression/reference | `active_anim` |
-| `inactive_anim` | expression/reference | `inactive_anim` |
-| `behavior` | expression/reference | `behavior` |
-| `script_path` | expression/reference | `script_path` |
-| `bot_x` | expression/reference | `bot_x` |
-| `bot_y` | expression/reference | `bot_y` |
-| `bot_z` | expression/reference | `bot_z` |
-| `activation_anim` | expression/reference | `activation_anim` |
-| `activation_duration` | expression/reference | `activation_duration` |
-| `deactivation_anim` | expression/reference | `deactivation_anim` |
-| `deactivation_duration` | expression/reference | `deactivation_duration` |
-| `is_animating` | boolean literal | `false` |
-| `pending_state` | nil | `nil` |
-| `pending_player_id` | nil | `nil` |
-| `pending_was_bot` | boolean literal | `false` |
-| `trigger_players` | table | `{}` |
-| `trigger_bots` | table | `{}` |
-| `trigger_x` | expression/reference | `trigger_source_obj.x` |
-| `trigger_y` | expression/reference | `trigger_source_obj.y` |
-| `trigger_z` | expression/reference | `trigger_source_obj.z or 0` |
-| `trigger_half_w` | call/expression | `(TILE_SIZE / trigger_width_px) * 0.5` |
-| `trigger_half_h` | call/expression | `(TILE_SIZE / trigger_height_px) * 0.5` |
-| `activated_time` | expression/reference | `activated_time` |
-| `timed_cancel` | boolean literal | `false` |
-| `timer_generation` | number literal | `0` |
-| `relock_target` | expression/reference | `relock_target` |
-| `relock_area_wide` | expression/reference | `relock_area_wide` |
-| `last_activator` | nil | `nil` |
-| `last_activator_was_bot` | boolean literal | `false` |
-| `group_member` | expression/reference | `group_member` |
-| `unlock_checkpoint_obj` | expression/reference | `unlock_checkpoint_obj` |
-| `unlock_permanently` | expression/reference | `unlock_permanently` |
-| `unlock_area_wide` | expression/reference | `unlock_area_wide` |
-| `cinematic_unlock` | expression/reference | `cinematic_unlock` |
-| `cinematic_duration` | expression/reference | `cinematic_duration` |
-| `cinematic_on_bot` | expression/reference | `cinematic_on_bot` |
+- **Line:** 358
+- **Declaration:** local
 
-### `trigger_players` *(line 1185)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `object_id` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 16. `hide_button_placeholders_for_player(player_id)`
 
-### `trigger_bots` *(line 1186)*
+- **Line:** 365
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-### `numbered` *(line 1519)*
+#### 17. `set_button_animation(bot_id, anim_state, loop)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 376
+- **Declaration:** local
 
-### `ids` *(line 1529)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `anim_state` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `loop` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 18. `sync_button_animations_for_player(player_id)`
 
-### `combos` *(line 1857)*
+- **Line:** 385
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
 
-### `combo` *(line 1863)*
+#### 19. `apply_area_wide_unlocks(player_id, area_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `object_id` | expression/reference | `definition.object_id` |
-| `button_ids` | call/expression | `normalize_ids(definition.button_ids)` |
-| `forbidden_ids` | call/expression | `normalize_ids(definition.forbidden_ids)` |
-| `mode` | expression/reference | `combo_mode` |
+- **Line:** 402
+- **Declaration:** local
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `area_id` | Declared directly in the current Lua. Type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezbuttons.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 20. `cleanup_player_state(player_id)`
+
+- **Line:** 447
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 21. `ezbuttons.handle_player_disconnect(player_id)`
+
+- **Line:** 493
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 22. `is_button_active(area_id, object_id)`
+
+- **Line:** 548
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 23. `set_button_active_state(area_id, object_id, bot_id, active_anim, inactive_anim, active)`
+
+- **Line:** 554
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `bot_id` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `active_anim` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `inactive_anim` | Declared directly in the current Lua. Type not inferred. |
+| 6 | `active` | Declared directly in the current Lua. Type not inferred. |
+
+#### 24. `create_button_trigger(area_id, object, width_px, height_px, trigger_id)`
+
+- **Line:** 564
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `width_px` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `height_px` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `trigger_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 25. `ezbuttons.camera_release(player_id)`
+
+- **Line:** 588
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 26. `ezbuttons.camera_move(player_id, x, y, z)`
+
+- **Line:** 592
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `z` | Declared directly in the current Lua. Type not inferred. |
+
+#### 27. `ezbuttons.camera_reattach(player_id)`
+
+- **Line:** 596
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 28. `smooth_camera_pan(player_id, from_pos, to_pos, duration)`
+
+- **Line:** 601
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `from_pos` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `to_pos` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `duration` | Declared directly in the current Lua. Type not inferred. |
+
+#### 29. `perform_activation(area_id, object_id, player_id, info)`
+
+- **Line:** 721
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `info` | Declared directly in the current Lua. Type not inferred. |
+
+#### 30. `perform_deactivation(area_id, object_id, info)`
+
+- **Line:** 811
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `info` | Declared directly in the current Lua. Type not inferred. |
+
+#### 31. `reconcile_pending_button_state(area_id, object_id, info)`
+
+- **Line:** 875
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `info` | Declared directly in the current Lua. Type not inferred. |
+
+#### 32. `deactivate_button_internal(area_id, object_id, info)`
+
+- **Line:** 896
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `info` | Declared directly in the current Lua. Type not inferred. |
+
+#### 33. `finish_deactivation()`
+
+- **Line:** 923
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+#### 34. `start_timed_deactivation(area_id, object_id, info)`
+
+- **Line:** 943
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `info` | Declared directly in the current Lua. Type not inferred. |
+
+#### 35. `activate_button(area_id, object_id, player_id, was_bot)`
+
+- **Line:** 967
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `was_bot` | Declared directly in the current Lua. Type not inferred. |
+
+#### 36. `deactivate_button(area_id, object_id)`
+
+- **Line:** 1006
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 37. `load_custom_script(script_path)`
+
+- **Line:** 1017
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `script_path` | Declared directly in the current Lua. Type not inferred. |
+
+#### 38. `register_button_object(area_id, object, group_member)`
+
+- **Line:** 1039
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `group_member` | Declared directly in the current Lua. Type not inferred. |
+
+#### 39. `resolve_actor_id(event, actor_type)`
+
+- **Line:** 1275
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `event` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `actor_type` | Declared directly in the current Lua. Type not inferred. |
+
+#### 40. `mark_actor_present(actor_id, actor_type)`
+
+- **Line:** 1280
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `actor_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `actor_type` | Declared directly in the current Lua. Type not inferred. |
+
+#### 41. `clear_actor_present(actor_id, actor_type)`
+
+- **Line:** 1288
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `actor_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `actor_type` | Declared directly in the current Lua. Type not inferred. |
+
+#### 42. `on_button_entered(event, actor_type)`
+
+- **Line:** 1296
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `event` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `actor_type` | Declared directly in the current Lua. Type not inferred. |
+
+#### 43. `on_button_departed(event, actor_type)`
+
+- **Line:** 1350
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `event` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `actor_type` | Declared directly in the current Lua. Type not inferred. |
+
+#### 44. `ezbuttons.is_button_active(area_id, object_id)`
+
+- **Line:** 1418
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 45. `ezbuttons.activate_button(area_id, object_id, player_id, was_bot)`
+
+- **Line:** 1422
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `was_bot` | Declared directly in the current Lua. Type not inferred. |
+
+#### 46. `ezbuttons.deactivate_button(area_id, object_id)`
+
+- **Line:** 1426
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 47. `ezbuttons.reset_button(area_id, object_id)`
+
+- **Line:** 1430
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 48. `ezbuttons.define_group(area_id, group_id, button_ids, mode, options)`
+
+- **Line:** 1442
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `group_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `button_ids` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `mode` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `options` | Declared directly in the current Lua. Type not inferred. |
+
+#### 49. `ezbuttons.on_group_change(area_id, group_id, callback)`
+
+- **Line:** 1469
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `group_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `callback` | Declared directly in the current Lua. Type not inferred. |
+
+#### 50. `ezbuttons.add_button_effect(area_id, source_id, event_name, target_id, action)`
+
+- **Line:** 1477
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `source_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `event_name` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `target_id` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `action` | Declared directly in the current Lua. Type not inferred. |
+
+#### 51. `ezbuttons.add_group_effect(area_id, group_id, event_name, target_id, action)`
+
+- **Line:** 1489
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `group_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `event_name` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `target_id` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `action` | Declared directly in the current Lua. Type not inferred. |
+
+#### 52. `ezbuttons.refresh_groups(area_id, player_id)`
+
+- **Line:** 1501
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 53. `ezbuttons.get_group_state(area_id, group_id)`
+
+- **Line:** 1511
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `group_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 54. `property_ids(props, prefix)`
+
+- **Line:** 1519
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `props` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `prefix` | Declared directly in the current Lua. Type not inferred. |
+
+#### 55. `configure_group_object(area_id, object)`
+
+- **Line:** 1680
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object` | Declared directly in the current Lua. Type not inferred. |
+
+#### 56. `on_change(changed_area_id, changed_group_id, satisfied, player_id, was_bot)`
+
+- **Line:** 1715
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `changed_area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `changed_group_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `satisfied` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `was_bot` | Declared directly in the current Lua. Type not inferred. |
+
+#### 57. `try_configure_pending_groups(area_id)`
+
+- **Line:** 1758
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 58. `configure_button_combo_object(area_id, object)`
+
+- **Line:** 1775
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object` | Declared directly in the current Lua. Type not inferred. |
+
+#### 59. `try_configure_pending_combos(area_id)`
+
+- **Line:** 1818
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 60. `configure_combo_button_group_object(area_id, object)`
+
+- **Line:** 1835
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object` | Declared directly in the current Lua. Type not inferred. |
+
+#### 61. `callback(changed_area_id, changed_group_id, satisfied, player_id, was_bot)`
+
+- **Line:** 1877
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `changed_area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `changed_group_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `satisfied` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 5 | `was_bot` | Declared directly in the current Lua. Type not inferred. |
+
+#### 62. `try_configure_pending_combo_groups(area_id)`
+
+- **Line:** 1928
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 68 | `ezbuttons` |
+| 73 | `custom_script_cache` |
+| 74 | `button_triggers` |
+| 114 | `button_placeholders` |
+| 115 | `button_bots` |
+| 127 | `button_groups` |
+| 128 | `button_effects` |
+| 129 | `group_effects` |
+| 130 | `pending_group_objects` |
+| 131 | `group_object_ids` |
+| 132 | `pending_group_effect_objects` |
+| 133 | `combo_object_definitions` |
+| 134 | `pending_combo_objects` |
+| 135 | `pending_combo_group_objects` |
+| 139 | `logic_queue` |
+| 202 | `required` |
+| 353 | `logic_queue` |
+| 450 | `plates_to_deactivate` |
+| 511 | `npc_data` |
+| 658 | `from_pos` |
+| 659 | `to_pos` |
+| 1167 | `info` |
+| 1186 | `trigger_players` |
+| 1187 | `trigger_bots` |
+| 1520 | `numbered` |
+| 1530 | `ids` |
+| 1859 | `combos` |
+| 1865 | `combo` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.create_bot` | 1 | 539 |
+| `Net.get_object_by_id` | 5 | 635 |
+| `Net.get_player_position` | 1 | 651 |
+| `Net.list_players` | 8 | 191 |
+| `Net.on` | 3 | 412 |

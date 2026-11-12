@@ -3,8 +3,8 @@ local EnemyHelpers = require("scripts/ezlibs-custom/nebulous-liberations/liberat
 local Preloader = require("scripts/ezlibs-custom/nebulous-liberations/liberations/preloader")
 local GuardInterception = require("scripts/ezlibs-custom/nebulous-liberations/liberations/guard_interception")
 
-Preloader.add_asset("/server/assets/ezlibs-custom/nebulous-liberations/bots/snowball.png")
-Preloader.add_asset("/server/assets/ezlibs-custom/nebulous-liberations/bots/snowball.animation")
+Preloader.add_asset("/server/assets/ezlibs-custom/nebulous-liberations/bots/attacks/snowball.png")
+Preloader.add_asset("/server/assets/ezlibs-custom/nebulous-liberations/bots/attacks/snowball.animation")
 
 local BlizzardMan = {}
 
@@ -44,8 +44,8 @@ end
 
 function BlizzardMan:spawn(direction)
   self.id = Net.create_bot({
-    texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/blizzardman.png",
-    animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/blizzardman.animation",
+    texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/npcs/blizzardman.png",
+    animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/npcs/blizzardman.animation",
     area_id = self.instance.area_id,
     direction = direction,
     warp_in = false,
@@ -106,8 +106,8 @@ function BlizzardMan:take_turn()
       local position = record.visual_position
       if position then
       local snowball_bot_id = Net.create_bot({
-        texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/snowball.png",
-        animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/snowball.animation",
+        texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/attacks/snowball.png",
+        animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/attacks/snowball.animation",
         area_id = self.instance.area_id,
         warp_in = false,
         x = position.x - 0.5,

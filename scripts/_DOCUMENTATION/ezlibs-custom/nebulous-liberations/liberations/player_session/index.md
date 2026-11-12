@@ -1,144 +1,292 @@
-# `player_session.lua`
+# 📄 `player_session.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-custom/nebulous-liberations/liberations/player_session.lua`  
-> **Source lines:** 561  
-> **Functions detected:** 22  
-> **Table declarations detected:** 6
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/liberations/player_session.lua`](../../../../../ezlibs-custom/nebulous-liberations/liberations/player_session.lua)  
+> **Source lines:** 590  
+> **SHA-256 (UTF-8):** `2e92f11bb261604933df7d4099990c7bede62413cc178df5219ddae8f406a429`  
+> **Named functions detected:** 24  
+> **Table initializers detected:** 7
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-player_session.lua
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 2
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/ability` — line 5
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/player_selection` — line 6
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/loot` — line 7
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_helpers` — line 8
-- `scripts/ezlibs-custom/nebulous-liberations/utils/paralyze_effect` — line 9
-- `scripts/ezlibs-custom/nebulous-liberations/utils/recover_effect` — line 10
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/constants` — line 11
-- `scripts/ezlibs-scripts/ezmemory` — line 12
-- `scripts/libs/emotes` — line 13
-- `scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators` — line 14
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
+| 3 | `scripts/logger/logger` |
+| 6 | `scripts/ezlibs-custom/nebulous-liberations/liberations/ability` |
+| 7 | `scripts/ezlibs-custom/nebulous-liberations/liberations/player_selection` |
+| 8 | `scripts/ezlibs-custom/nebulous-liberations/liberations/loot` |
+| 9 | `scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_helpers` |
+| 10 | `scripts/ezlibs-custom/nebulous-liberations/utils/paralyze_effect` |
+| 11 | `scripts/ezlibs-custom/nebulous-liberations/utils/recover_effect` |
+| 12 | `scripts/ezlibs-custom/nebulous-liberations/liberations/constants` |
+| 13 | `scripts/ezlibs-scripts/ezmemory` |
+| 14 | `scripts/libs/emotes` |
+| 15 | `scripts/ezlibs-custom/nebulous-liberations/liberations/hp_indicators` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No static literal subscriptions detected.
 
-## Functions
+## Functions and parameters
 
-| Line | Function / method | Parameters as declared |
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 32 | `is_enabled` | `value` | local |
+| 36 | `normalize_identifier` | `value` | local |
+| 45 | `stats_indicate_panic` | `results` | local |
+| 53 | `PlayerSession:new` | `instance, player` | assigned/declared |
+| 75 | `PlayerSession:emote_state` | `(none)` | assigned/declared |
+| 87 | `PlayerSession:get_ability_permission` | `(none)` | assigned/declared |
+| 121 | `PlayerSession:get_pass_turn_permission` | `(none)` | assigned/declared |
+| 136 | `PlayerSession:initiate_encounter` | `encounter_path, data` | assigned/declared |
+| 204 | `PlayerSession:heal` | `amount` | assigned/declared |
+| 225 | `is_guardable_attacker` | `attacker` | local |
+| 230 | `guard_is_covering_target` | `instance, target_session` | local |
+| 255 | `PlayerSession:hurt` | `amount, attacker` | assigned/declared |
+| 299 | `PlayerSession:paralyze` | `(none)` | assigned/declared |
+| 311 | `PlayerSession:pass_turn` | `(none)` | assigned/declared |
+| 325 | `PlayerSession:complete_turn` | `(none)` | assigned/declared |
+| 346 | `PlayerSession:give_turn` | `(none)` | assigned/declared |
+| 380 | `PlayerSession:find_matching_gates` | `(none)` | assigned/declared |
+| 401 | `PlayerSession:find_gate_points` | `id` | assigned/declared |
+| 415 | `PlayerSession:find_closest_guardian` | `(none)` | assigned/declared |
+| 430 | `PlayerSession:liberate_panels` | `panels, results` | assigned/declared |
+| 460 | `PlayerSession:get_cash` | `panel, destroy_items` | assigned/declared |
+| 487 | `PlayerSession:loot_panels` | `panels, remove_traps, destroy_items` | assigned/declared |
+| 564 | `PlayerSession:liberate_and_loot_panels` | `panels, results, remove_traps, destroy_items` | assigned/declared |
+| 572 | `PlayerSession:handle_disconnect` | `(none)` | assigned/declared |
+
+### Parameter inventory
+
+#### 1. `is_enabled(value)`
+
+- **Line:** 32
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 33 | `stats_indicate_panic` | `results` |
-| 41 | `PlayerSession:new` | `instance, player` |
-| 63 | `PlayerSession:emote_state` | `(none)` |
-| 75 | `PlayerSession:get_ability_permission` | `(none)` |
-| 109 | `PlayerSession:get_pass_turn_permission` | `(none)` |
-| 124 | `PlayerSession:initiate_encounter` | `encounter_path, data` |
-| 183 | `PlayerSession:heal` | `amount` |
-| 204 | `is_guardable_attacker` | `attacker` |
-| 209 | `guard_is_covering_target` | `instance, target_session` |
-| 234 | `PlayerSession:hurt` | `amount, attacker` |
-| 278 | `PlayerSession:paralyze` | `(none)` |
-| 290 | `PlayerSession:pass_turn` | `(none)` |
-| 304 | `PlayerSession:complete_turn` | `(none)` |
-| 325 | `PlayerSession:give_turn` | `(none)` |
-| 359 | `PlayerSession:find_matching_gates` | `(none)` |
-| 374 | `PlayerSession:find_gate_points` | `id` |
-| 385 | `PlayerSession:find_closest_guardian` | `(none)` |
-| 400 | `PlayerSession:liberate_panels` | `panels, results` |
-| 428 | `PlayerSession:get_cash` | `panel, destroy_items` |
-| 455 | `PlayerSession:loot_panels` | `panels, remove_traps, destroy_items` |
-| 535 | `PlayerSession:liberate_and_loot_panels` | `panels, results, remove_traps, destroy_items` |
-| 543 | `PlayerSession:handle_disconnect` | `(none)` |
+| 1 | `value` | Declared directly in the current Lua. Type not inferred. |
 
-### Function notes
+#### 2. `normalize_identifier(value)`
 
-- **`stats_indicate_panic(results)`** *(source line 33)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:new(instance, player)`** *(source line 41)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:emote_state()`** *(source line 63)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:get_ability_permission()`** *(source line 75)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:get_pass_turn_permission()`** *(source line 109)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:initiate_encounter(encounter_path, data)`** *(source line 124)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:heal(amount)`** *(source line 183)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`is_guardable_attacker(attacker)`** *(source line 204)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`guard_is_covering_target(instance, target_session)`** *(source line 209)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:hurt(amount, attacker)`** *(source line 234)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:paralyze()`** *(source line 278)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:pass_turn()`** *(source line 290)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:complete_turn()`** *(source line 304)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:give_turn()`** *(source line 325)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:find_matching_gates()`** *(source line 359)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:find_gate_points(id)`** *(source line 374)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:find_closest_guardian()`** *(source line 385)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:liberate_panels(panels, results)`** *(source line 400)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:get_cash(panel, destroy_items)`** *(source line 428)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:loot_panels(panels, remove_traps, destroy_items)`** *(source line 455)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:liberate_and_loot_panels(panels, results, remove_traps, destroy_items)`** *(source line 535)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`PlayerSession:handle_disconnect()`** *(source line 543)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 36
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `value` | Declared directly in the current Lua. Type not inferred. |
 
-### `BattleReason` *(line 17)*
+#### 3. `stats_indicate_panic(results)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `DRAW` | number literal | `0` |
-| `WIN` | number literal | `1` |
-| `LOSE` | number literal | `2` |
-| `RUN` | number literal | `3` |
-| `USER_PANIC` | number literal | `4` |
+- **Line:** 45
+- **Declaration:** local
 
-### `PlayerSession` *(line 38)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `results` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `PlayerSession:new(instance, player)`
 
-### `player_session` *(line 42)*
+- **Line:** 53
+- **Declaration:** assigned/declared
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `instance` | expression/reference | `instance` |
-| `player` | expression/reference | `player` |
-| `health` | number literal | `100` |
-| `max_health` | number literal | `100` |
-| `shadowsteps` | table | `{}` |
-| `paralyze_effect` | nil | `nil` |
-| `paralyze_counter` | number literal | `0` |
-| `invincible` | boolean literal | `false` |
-| `completed_turn` | boolean literal | `false` |
-| `selection` | call/expression | `PlayerSelection:new(instance` |
-| `[11]` | expression/reference | `player.id)` |
-| `ability` | call/expression | `Ability.resolve_for_player(player)` |
-| `disconnected` | boolean literal | `false` |
-| `is_trapped` | boolean literal | `false` |
-| `get_monies` | boolean literal | `false` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player` | Declared directly in the current Lua. Type not inferred. |
 
-### `shadowsteps` *(line 47)*
+#### 5. `PlayerSession:emote_state()`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 75
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
 
-### `gates` *(line 360)*
+#### 6. `PlayerSession:get_ability_permission()`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 87
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
 
-### `points` *(line 375)*
+#### 7. `PlayerSession:get_pass_turn_permission()`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 121
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
 
-## Implementation notes
+#### 8. `PlayerSession:initiate_encounter(encounter_path, data)`
 
-- This reference is generated from the exact archived source `scripts/ezlibs-custom/nebulous-liberations/liberations/player_session.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+- **Line:** 136
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `encounter_path` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `data` | Declared directly in the current Lua. Type not inferred. |
+
+#### 9. `PlayerSession:heal(amount)`
+
+- **Line:** 204
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `amount` | Declared directly in the current Lua. Type not inferred. |
+
+#### 10. `is_guardable_attacker(attacker)`
+
+- **Line:** 225
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `attacker` | Declared directly in the current Lua. Type not inferred. |
+
+#### 11. `guard_is_covering_target(instance, target_session)`
+
+- **Line:** 230
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `instance` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `target_session` | Declared directly in the current Lua. Type not inferred. |
+
+#### 12. `PlayerSession:hurt(amount, attacker)`
+
+- **Line:** 255
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `amount` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `attacker` | Declared directly in the current Lua. Type not inferred. |
+
+#### 13. `PlayerSession:paralyze()`
+
+- **Line:** 299
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
+
+#### 14. `PlayerSession:pass_turn()`
+
+- **Line:** 311
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
+
+#### 15. `PlayerSession:complete_turn()`
+
+- **Line:** 325
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
+
+#### 16. `PlayerSession:give_turn()`
+
+- **Line:** 346
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
+
+#### 17. `PlayerSession:find_matching_gates()`
+
+- **Line:** 380
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
+
+#### 18. `PlayerSession:find_gate_points(id)`
+
+- **Line:** 401
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 19. `PlayerSession:find_closest_guardian()`
+
+- **Line:** 415
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
+
+#### 20. `PlayerSession:liberate_panels(panels, results)`
+
+- **Line:** 430
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `panels` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `results` | Declared directly in the current Lua. Type not inferred. |
+
+#### 21. `PlayerSession:get_cash(panel, destroy_items)`
+
+- **Line:** 460
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `panel` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `destroy_items` | Declared directly in the current Lua. Type not inferred. |
+
+#### 22. `PlayerSession:loot_panels(panels, remove_traps, destroy_items)`
+
+- **Line:** 487
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `panels` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `remove_traps` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `destroy_items` | Declared directly in the current Lua. Type not inferred. |
+
+#### 23. `PlayerSession:liberate_and_loot_panels(panels, results, remove_traps, destroy_items)`
+
+- **Line:** 564
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `panels` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `results` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `remove_traps` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `destroy_items` | Declared directly in the current Lua. Type not inferred. |
+
+#### 24. `PlayerSession:handle_disconnect()`
+
+- **Line:** 572
+- **Declaration:** assigned/declared
+- **Parameters:** none explicitly declared.
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 18 | `BattleReason` |
+| 51 | `PlayerSession` |
+| 54 | `player_session` |
+| 59 | `shadowsteps` |
+| 142 | `results` |
+| 381 | `gates` |
+| 402 | `points` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.get_player_money` | 2 | 464 |
+| `Net.play_sound_for_player` | 1 | 279 |
+| `Net.set_player_emote` | 4 | 77 |
+| `Net.set_player_emotion` | 1 | 154 |
+| `Net.set_player_money` | 1 | 478 |
+| `Net.slide_player_camera` | 1 | 508 |
+| `Net.unlock_player_camera` | 1 | 342 |

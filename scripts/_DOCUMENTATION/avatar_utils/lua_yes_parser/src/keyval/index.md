@@ -1,65 +1,72 @@
-# `keyval.lua`
+# 📄 `keyval.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/avatar_utils/lua_yes_parser/src/keyval.lua`  
+[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/avatar_utils/lua_yes_parser/src/keyval.lua`](../../../../../avatar_utils/lua_yes_parser/src/keyval.lua)  
 > **Source lines:** 22  
-> **Functions detected:** 2  
-> **Table declarations detected:** 3
+> **SHA-256 (UTF-8):** `fba4b30476d2ab11479db59adec7c4860d96aef6e97607a2ef0daee8ec713791`  
+> **Named/assigned functions detected:** 2  
+> **Table initializers detected (simple pattern):** 3
 
-## Contents
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Current source inventory for `scripts/avatar_utils/lua_yes_parser/src/keyval.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- No `require(...)` dependency was detected.
+No statically identified literal `require` module strings.
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No named `.on`/`:on` events detected by the simple source pattern.
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 2 | `KeyVal.new` | `key, val` | assigned/declared |
+| 8 | `__tostring` | `self` | local |
+
+### Detailed parameter inventory
+
+#### 1. `KeyVal.new(key, val)`
+
+- **Line:** 2
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 2 | `KeyVal.new` | `key, val` |
-| 7 | `__tostring` | `self` |
+| 1 | `key` | Declared by this function; type not inferred. |
+| 2 | `val` | Declared by this function; type not inferred. |
 
-### Function notes
+#### 2. `__tostring(self)`
 
-- **`KeyVal.new(key, val)`** *(source line 2)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`__tostring(self)`** *(source line 7)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 8
+- **Declaration:** local
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `self` | Declared by this function; type not inferred. |
 
-### `KeyVal` *(line 1)*
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+## Tables
 
-### `this` *(line 3)*
+| Source line | Assignment |
+|---:|---|
+| 1 | `KeyVal` |
+| 3 | `this` |
+| 16 | `mt` |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `key` | expression/reference | `key` |
-| `val` | expression/reference | `val` |
+## Net API calls
 
-### `mt` *(line 15)*
-
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `__tostring` | expression/reference | `__tostring` |
-
-## Implementation notes
-
-- This reference is generated from the exact archived source `scripts/avatar_utils/lua_yes_parser/src/keyval.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+No direct `Net.method(...)` call expression matched.

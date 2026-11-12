@@ -1,237 +1,378 @@
-# `ezpushback.lua`
+# 📄 `ezpushback.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/ezpushback.lua`  
-> **Source lines:** 574  
-> **Functions detected:** 27  
-> **Table declarations detected:** 13
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/ezpushback.lua`](../../../ezlibs-scripts/ezpushback.lua)  
+> **Source lines:** 573  
+> **SHA-256 (UTF-8):** `ce7842018de667378fba488ec5b4d8b3f0325a6ab2b9bcbc2a48b0d61775d512`  
+> **Named functions detected:** 27  
+> **Table initializers detected:** 13
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-ezpushback.lua A Pushback NPC uses the regular eznpcs NPC pipeline, with a moving rectangle trigger that follows its bot. On collision, a temporary bot uses the player's own avatar, plays a movement animation, and carries the player to its endpoint.
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 6
-- `scripts/ezlibs-scripts/eztriggers` — line 7
-- `scripts/ezlibs-scripts/ezbus` — line 8
-- `scripts/ezlibs-scripts/ezemitter` — line 9
-- `scripts/ezlibs-scripts/object_registry` — line 10
-- `scripts/ezlibs-scripts/eznpcs/eznpcs` — line 11
+| Line | `require` path |
+|---:|---|
+| 1 | `scripts/player-control/main` |
+| 7 | `scripts/logger/logger` |
+| 8 | `scripts/ezlibs-scripts/eztriggers` |
+| 9 | `scripts/ezlibs-scripts/ezbus` |
+| 10 | `scripts/ezlibs-scripts/ezemitter` |
+| 11 | `scripts/ezlibs-scripts/object_registry` |
+| 12 | `scripts/ezlibs-scripts/eznpcs/eznpcs` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
-
-## Functions
-
-| Line | Function / method | Parameters as declared |
+| Line | Subscriber | Event |
 |---:|---|---|
-| 26 | `truthy` | `value, default` |
-| 36 | `number_property` | `props, name, default, min_value` |
-| 43 | `safe_call` | `fn, ...` |
-| 48 | `get_area_players` | `area_id` |
-| 54 | `provide_avatar_to_area` | `area_id, avatar` |
-| 62 | `set_player_actor_hidden` | `player_id, area_id, hidden` |
-| 72 | `remove_bot` | `bot_id` |
-| 76 | `event_for` | `entry, player_id, extra` |
-| 90 | `emit_entry` | `entry, name, event` |
-| 125 | `map_vector_to_screen` | `dx, dy` |
-| 130 | `screen_vector_to_map` | `sx, sy` |
-| 135 | `atan2` | `y, x` |
-| 159 | `snap_to_canonical_map` | `dx, dy` |
-| 170 | `direction_vector` | `direction` |
-| 192 | `get_push_vector` | `entry, player_pos, npc_pos, player_direction` |
-| 219 | `calculate_target` | `entry, player_pos, npc_pos, player_direction` |
-| 246 | `cleanup_push` | `player_id, state, reason, restore_player` |
-| 269 | `perform_pushback` | `entry, player_id` |
-| 420 | `update_entry_geometry` | `entry` |
-| 440 | `register_pushback_npc` | `area_id, object` |
-| 504 | `ezpushback.get_emitter` | `area_id, object_id` |
-| 509 | `ezpushback.set_collision_enabled` | `area_id, object_id, enabled` |
-| 517 | `ezpushback.handle_player_move` | `player_id, x, y, z` |
-| 522 | `ezpushback.on_tick` | `delta_time` |
-| 544 | `ezpushback.handle_player_join` | `player_id` |
-| 556 | `ezpushback.handle_player_transfer` | `player_id` |
-| 563 | `ezpushback.handle_player_disconnect` | `player_id` |
+| 486 | `trigger_emitter` | `entered` |
+| 492 | `trigger_emitter` | `departed` |
 
-### Function notes
+## Functions and parameters
 
-- **`truthy(value, default)`** *(source line 26)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`number_property(props, name, default, min_value)`** *(source line 36)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`safe_call(fn, ...)`** *(source line 43)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`get_area_players(area_id)`** *(source line 48)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`provide_avatar_to_area(area_id, avatar)`** *(source line 54)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`set_player_actor_hidden(player_id, area_id, hidden)`** *(source line 62)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`remove_bot(bot_id)`** *(source line 72)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`event_for(entry, player_id, extra)`** *(source line 76)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`emit_entry(entry, name, event)`** *(source line 90)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`map_vector_to_screen(dx, dy)`** *(source line 125)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`screen_vector_to_map(sx, sy)`** *(source line 130)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`atan2(y, x)`** *(source line 135)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`snap_to_canonical_map(dx, dy)`** — Snap an arbitrary map-space vector to the nearest canonical isometric direction. Returns the unit-length snapped vector plus its canonical name. *(source line 159)*
-- **`direction_vector(direction)`** *(source line 170)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`get_push_vector(entry, player_pos, npc_pos, player_direction)`** — Get the radial push direction (from NPC toward player) in map space, as a unit vector. This vector is the raw radial direction; it is snapped to the canonical isometric grid in calculate_target. *(source line 192)*
-- **`calculate_target(entry, player_pos, npc_pos, player_direction)`** *(source line 219)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`cleanup_push(player_id, state, reason, restore_player)`** *(source line 246)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`perform_pushback(entry, player_id)`** *(source line 269)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`update_entry_geometry(entry)`** *(source line 420)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`register_pushback_npc(area_id, object)`** *(source line 440)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezpushback.get_emitter(area_id, object_id)`** *(source line 504)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezpushback.set_collision_enabled(area_id, object_id, enabled)`** *(source line 509)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezpushback.handle_player_move(player_id, x, y, z)`** *(source line 517)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezpushback.on_tick(delta_time)`** *(source line 522)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezpushback.handle_player_join(player_id)`** *(source line 544)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezpushback.handle_player_transfer(player_id)`** *(source line 556)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezpushback.handle_player_disconnect(player_id)`** *(source line 563)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 27 | `truthy` | `value, default` | local |
+| 37 | `number_property` | `props, name, default, min_value` | local |
+| 44 | `safe_call` | `fn, ...` | local |
+| 49 | `get_area_players` | `area_id` | local |
+| 55 | `provide_avatar_to_area` | `area_id, avatar` | local |
+| 63 | `set_player_actor_hidden` | `player_id, area_id, hidden` | local |
+| 73 | `remove_bot` | `bot_id` | local |
+| 77 | `event_for` | `entry, player_id, extra` | local |
+| 91 | `emit_entry` | `entry, name, event` | local |
+| 126 | `map_vector_to_screen` | `dx, dy` | local |
+| 131 | `screen_vector_to_map` | `sx, sy` | local |
+| 136 | `atan2` | `y, x` | local |
+| 160 | `snap_to_canonical_map` | `dx, dy` | local |
+| 171 | `direction_vector` | `direction` | local |
+| 193 | `get_push_vector` | `entry, player_pos, npc_pos, player_direction` | local |
+| 220 | `calculate_target` | `entry, player_pos, npc_pos, player_direction` | local |
+| 247 | `cleanup_push` | `player_id, state, reason, restore_player` | local |
+| 268 | `perform_pushback` | `entry, player_id` | local |
+| 419 | `update_entry_geometry` | `entry` | local |
+| 439 | `register_pushback_npc` | `area_id, object` | local |
+| 503 | `ezpushback.get_emitter` | `area_id, object_id` | assigned/declared |
+| 508 | `ezpushback.set_collision_enabled` | `area_id, object_id, enabled` | assigned/declared |
+| 516 | `ezpushback.handle_player_move` | `player_id, x, y, z` | assigned/declared |
+| 521 | `ezpushback.on_tick` | `delta_time` | assigned/declared |
+| 543 | `ezpushback.handle_player_join` | `player_id` | assigned/declared |
+| 555 | `ezpushback.handle_player_transfer` | `player_id` | assigned/declared |
+| 562 | `ezpushback.handle_player_disconnect` | `player_id` | assigned/declared |
 
-## Tables and data structures
+### Parameter inventory
 
-### `ezpushback` *(line 12)*
+#### 1. `truthy(value, default)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 27
+- **Declaration:** local
 
-### `entries` *(line 14)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `value` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `default` | Declared directly in the current Lua. Type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 2. `number_property(props, name, default, min_value)`
 
-### `active_by_player` *(line 15)*
+- **Line:** 37
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `props` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `name` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `default` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `min_value` | Declared directly in the current Lua. Type not inferred. |
 
-### `cooldowns` *(line 16)*
+#### 3. `safe_call(fn, ...)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 44
+- **Declaration:** local
 
-### `event` *(line 77)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `fn` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `...` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `player_id` | expression/reference | `player_id` |
-| `area_id` | expression/reference | `entry.area_id` |
-| `object_id` | expression/reference | `entry.object_id` |
-| `npc_bot_id` | expression/reference | `entry.bot_id` |
-| `trigger_id` | expression/reference | `entry.trigger_id` |
+#### 4. `get_area_players(area_id)`
 
-### `CANONICAL_DIRECTIONS` *(line 141)*
+- **Line:** 49
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ name = 'DownRight', x = 1, y = 0 }` |
-| `[2]` | table | `{ name = 'Down', x = 0.70710678, y = 0.70710678 }` |
-| `[3]` | table | `{ name = 'DownLeft', x = 0, y = 1 }` |
-| `[4]` | table | `{ name = 'Left', x = -0.70710678, y = 0.70710678 }` |
-| `[5]` | table | `{ name = 'UpLeft', x = -1, y = 0 }` |
-| `[6]` | table | `{ name = 'Up', x = -0.70710678, y = -0.70710678 }` |
-| `[7]` | table | `{ name = 'UpRight', x = 0, y = -1 }` |
-| `[8]` | table | `{ name = 'Right', x = 0.70710678, y = -0.70710678 }` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
 
-### `OPPOSITE_DIRECTION` *(line 151)*
+#### 5. `provide_avatar_to_area(area_id, avatar)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `DownRight` | string literal | `'UpLeft'` |
-| `Down` | string literal | `'Up'` |
-| `DownLeft` | string literal | `'UpRight'` |
-| `Left` | string literal | `'Right'` |
-| `UpLeft` | string literal | `'DownRight'` |
-| `Up` | string literal | `'Down'` |
-| `UpRight` | string literal | `'DownLeft'` |
-| `Right` | string literal | `'Left'` |
+- **Line:** 55
+- **Declaration:** local
 
-### `state` *(line 300)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `avatar` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `player_id` | expression/reference | `player_id` |
-| `area_id` | expression/reference | `entry.area_id` |
-| `entry` | expression/reference | `entry` |
-| `bot_id` | expression/reference | `temp_bot_id` |
-| `start_position` | table | `{ x = player_pos.x, y = player_pos.y, z = player_pos.z or 0 }` |
-| `target_position` | expression/reference | `target` |
-| `original_direction` | expression/reference | `player_direction` |
-| `was_input_locked` | call/expression | `(type(Net.is_player_input_locked) == 'function' and Net.is_player_input_locked(player_id)) or false` |
-| `avatar` | expression/reference | `avatar` |
-| `cleaned` | boolean literal | `false` |
-| `transferring` | boolean literal | `false` |
+#### 6. `set_player_actor_hidden(player_id, area_id, hidden)`
 
-### `start_position` *(line 305)*
+- **Line:** 63
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | expression/reference | `player_pos.x` |
-| `y` | expression/reference | `player_pos.y` |
-| `z` | expression/reference | `player_pos.z or 0` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `hidden` | Declared directly in the current Lua. Type not inferred. |
 
-### `properties` *(line 352)*
+#### 7. `remove_bot(bot_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `[1]` | table | `{ property = 'X', value = target.x, ease = 'Out' }` |
-| `[2]` | table | `{ property = 'Y', value = target.y, ease = 'Out' }` |
-| `[3]` | table | `{ property = 'Z', value = target.z, ease = 'Linear' }` |
+- **Line:** 73
+- **Declaration:** local
 
-### `final_pos` *(line 383)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_id` | Declared directly in the current Lua. Type not inferred. |
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `x` | call/expression | `tonumber(bot_pos.x)` |
-| `y` | call/expression | `tonumber(bot_pos.y)` |
-| `z` | call/expression | `tonumber(bot_pos.z) or target.z` |
-| `direction` | expression/reference | `target.direction` |
+#### 8. `event_for(entry, player_id, extra)`
 
-### `trigger_object` *(line 451)*
+- **Line:** 77
+- **Declaration:** local
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `id` | expression/reference | `trigger_id` |
-| `name` | call/expression | `object.name or ('Pushback NPC ' .. tostring(object.id))` |
-| `x` | call/expression | `(tonumber(object.x) or 0) - width / 2` |
-| `y` | call/expression | `(tonumber(object.y) or 0) - height / 2` |
-| `z` | call/expression | `tonumber(object.z) or 0` |
-| `width` | expression/reference | `width` |
-| `height` | expression/reference | `height` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `entry` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `extra` | Declared directly in the current Lua. Type not inferred. |
 
-### `entry` *(line 462)*
+#### 9. `emit_entry(entry, name, event)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `key` | expression/reference | `trigger_id` |
-| `trigger_id` | expression/reference | `trigger_id` |
-| `area_id` | expression/reference | `area_id` |
-| `object_id` | expression/reference | `object.id` |
-| `bot_id` | expression/reference | `bot_id` |
-| `width` | expression/reference | `width` |
-| `height` | expression/reference | `height` |
-| `push_distance` | call/expression | `number_property(props` |
-| `[9]` | string literal | `'Push Distance'` |
-| `[10]` | expression/reference | `DEFAULT_PUSH_DISTANCE` |
-| `[11]` | number literal | `0.1)` |
-| `push_duration` | call/expression | `number_property(props` |
-| `[13]` | string literal | `'Push Duration'` |
-| `[14]` | expression/reference | `DEFAULT_PUSH_DURATION` |
-| `[15]` | number literal | `0.05)` |
-| `cooldown` | call/expression | `number_property(props` |
-| `[17]` | string literal | `'Push Cooldown'` |
-| `[18]` | expression/reference | `DEFAULT_COOLDOWN` |
-| `[19]` | number literal | `0)` |
-| `move_state` | expression/reference | `props['Move Animation State'] or DEFAULT_MOVE_STATE` |
-| `enabled` | call/expression | `truthy(props['Collision Enabled']` |
-| `[22]` | expression/reference | `true)` |
-| `trigger_object` | expression/reference | `trigger_object` |
-| `emitter` | expression/reference | `emitter` |
+- **Line:** 91
+- **Declaration:** local
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `entry` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `name` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `event` | Declared directly in the current Lua. Type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/ezpushback.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 10. `map_vector_to_screen(dx, dy)`
+
+- **Line:** 126
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `dx` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `dy` | Declared directly in the current Lua. Type not inferred. |
+
+#### 11. `screen_vector_to_map(sx, sy)`
+
+- **Line:** 131
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `sx` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `sy` | Declared directly in the current Lua. Type not inferred. |
+
+#### 12. `atan2(y, x)`
+
+- **Line:** 136
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `x` | Declared directly in the current Lua. Type not inferred. |
+
+#### 13. `snap_to_canonical_map(dx, dy)`
+
+- **Line:** 160
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `dx` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `dy` | Declared directly in the current Lua. Type not inferred. |
+
+#### 14. `direction_vector(direction)`
+
+- **Line:** 171
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `direction` | Declared directly in the current Lua. Type not inferred. |
+
+#### 15. `get_push_vector(entry, player_pos, npc_pos, player_direction)`
+
+- **Line:** 193
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `entry` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_pos` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `npc_pos` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `player_direction` | Declared directly in the current Lua. Type not inferred. |
+
+#### 16. `calculate_target(entry, player_pos, npc_pos, player_direction)`
+
+- **Line:** 220
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `entry` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_pos` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `npc_pos` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `player_direction` | Declared directly in the current Lua. Type not inferred. |
+
+#### 17. `cleanup_push(player_id, state, reason, restore_player)`
+
+- **Line:** 247
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `state` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `reason` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `restore_player` | Declared directly in the current Lua. Type not inferred. |
+
+#### 18. `perform_pushback(entry, player_id)`
+
+- **Line:** 268
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `entry` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 19. `update_entry_geometry(entry)`
+
+- **Line:** 419
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `entry` | Declared directly in the current Lua. Type not inferred. |
+
+#### 20. `register_pushback_npc(area_id, object)`
+
+- **Line:** 439
+- **Declaration:** local
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object` | Declared directly in the current Lua. Type not inferred. |
+
+#### 21. `ezpushback.get_emitter(area_id, object_id)`
+
+- **Line:** 503
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 22. `ezpushback.set_collision_enabled(area_id, object_id, enabled)`
+
+- **Line:** 508
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `object_id` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `enabled` | Declared directly in the current Lua. Type not inferred. |
+
+#### 23. `ezpushback.handle_player_move(player_id, x, y, z)`
+
+- **Line:** 516
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `x` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `y` | Declared directly in the current Lua. Type not inferred. |
+| 4 | `z` | Declared directly in the current Lua. Type not inferred. |
+
+#### 24. `ezpushback.on_tick(delta_time)`
+
+- **Line:** 521
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `delta_time` | Declared directly in the current Lua. Type not inferred. |
+
+#### 25. `ezpushback.handle_player_join(player_id)`
+
+- **Line:** 543
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 26. `ezpushback.handle_player_transfer(player_id)`
+
+- **Line:** 555
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+#### 27. `ezpushback.handle_player_disconnect(player_id)`
+
+- **Line:** 562
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `player_id` | Declared directly in the current Lua. Type not inferred. |
+
+
+## Tables
+
+| Line | Identifier |
+|---:|---|
+| 14 | `ezpushback` |
+| 15 | `entries` |
+| 16 | `active_by_player` |
+| 17 | `cooldowns` |
+| 78 | `event` |
+| 142 | `CANONICAL_DIRECTIONS` |
+| 153 | `OPPOSITE_DIRECTION` |
+| 299 | `state` |
+| 304 | `start_position` |
+| 351 | `properties` |
+| 382 | `final_pos` |
+| 450 | `trigger_object` |
+| 461 | `entry` |
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.get_bot_position` | 1 | 282 |
+| `Net.get_player_area` | 3 | 272 |
+| `Net.get_player_direction` | 1 | 296 |
+| `Net.get_player_position` | 2 | 281 |
+| `Net.is_player` | 4 | 254 |
+| `Net.is_player_input_locked` | 1 | 307 |
+| `Net.list_areas` | 1 | 530 |

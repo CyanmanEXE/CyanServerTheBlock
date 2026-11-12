@@ -1,50 +1,67 @@
-# `ui-suppression-examples.lua`
+# 📄 `ui-suppression-examples.lua` — Current Lua reference
 
-> **Source:** `scripts/net-games/ui-suppression-examples.lua`  
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/ui-suppression-examples.lua`](../../../net-games/ui-suppression-examples.lua)  
 > **Source lines:** 36  
-> **Functions detected:** 2  
-> **Table declarations detected:** 0
+> **SHA-256 (UTF-8):** `2ec9b410ab584ba8021a7fcb9d0ec341b3e2d4d9bf9aadfd3d1d1e74c5964dad`  
+> **Named functions detected:** 2  
+> **Table initializers detected:** 0
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-Usage examples for scripts/net-games/ui-suppression.lua. This file is documentation only; it is not required by the framework.
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/net-games/ui-suppression` — line 3
+| Line | `require` path |
+|---:|---|
+| 3 | `scripts/player-control/resources/ui-suppression` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No static literal subscriptions detected.
 
-## Functions
+## Functions and parameters
 
-| Line | Function / method | Parameters as declared |
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 25 | `acquire` | `pid, owner, options` | assigned/declared |
+| 30 | `release` | `pid, token` | assigned/declared |
+
+### Parameter inventory
+
+#### 1. `acquire(pid, owner, options)`
+
+- **Line:** 25
+- **Declaration:** assigned/declared
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 25 | `acquire` | `pid, owner, options` |
-| 30 | `release` | `pid, token` |
+| 1 | `pid` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `owner` | Declared directly in the current Lua. Type not inferred. |
+| 3 | `options` | Declared directly in the current Lua. Type not inferred. |
 
-### Function notes
+#### 2. `release(pid, token)`
 
-- **`acquire(pid, owner, options)`** *(source line 25)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`release(pid, token)`** *(source line 30)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 30
+- **Declaration:** assigned/declared
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `pid` | Declared directly in the current Lua. Type not inferred. |
+| 2 | `token` | Declared directly in the current Lua. Type not inferred. |
 
-No simple named table initializer was detected. Tables created dynamically or returned inline may not appear in this inventory.
 
-## Implementation notes
+## Tables
 
-- This reference is generated from the exact archived source `scripts/net-games/ui-suppression-examples.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+No simple table assignments matched.
+
+## Net API calls
+
+No direct Net API calls matched.

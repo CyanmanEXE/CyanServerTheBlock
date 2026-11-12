@@ -1,56 +1,80 @@
-# `main.lua`
+# 📄 `main.lua` — Current Lua reference
 
-> **Source:** `scripts/camera/main.lua`  
-> **Source lines:** 105  
-> **Functions detected:** 3  
-> **Table declarations detected:** 0
+[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/camera/main.lua`](../../../camera/main.lua)  
+> **Source lines:** 135  
+> **SHA-256 (UTF-8):** `54ab6e425d78c29c3bcc8ec2370bf446c5da1275b414a946ff1794d84ea98e43`  
+> **Named functions detected:** 3  
+> **Table initializers detected:** 0
+
+> **Static reference:** Function signatures, dependency paths, and event names are extracted from current Lua. The listing does not establish runtime reachability or public API exposure. See the authored guide for semantics.
 
 ## Contents
-
-- [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
-
-## Overview
-
-main.lua (Entry Point)
+- [Event hooks](#event-hooks)
+- [Functions and parameters](#functions-and-parameters)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Dependencies
 
-- `scripts/camera/camera-manager` — line 2
-- `scripts/camera/camera-controller` — line 3
-- `scripts/enum/predefined-enums` — line 4
-- `scripts/input-controller/main` — line 5
+| Line | `require` path |
+|---:|---|
+| 2 | `scripts/camera/camera-manager` |
+| 3 | `scripts/camera/camera-controller` |
+| 4 | `scripts/enum/predefined-enums` |
+| 5 | `scripts/input-controller/main` |
+| 6 | `scripts/player-control/main` |
 
-## Events
+## Event hooks
 
-- `Net:on("player_join", function(event) ...)` — line 20. The event name is taken directly from this source.
-- `Net:on("tile_interaction", function(event) ...)` — line 47. The event name is taken directly from this source.
-
-## Functions
-
-| Line | Function / method | Parameters as declared |
+| Line | Subscriber | Event |
 |---:|---|---|
-| 9 | `dbg` | `...` |
-| 18 | `setupPlayerJoin` | `(none)` |
-| 45 | `setupTileInteraction` | `(none)` |
+| 21 | `Net` | `player_join` |
+| 48 | `Net` | `tile_interaction` |
+| 111 | `Net` | `player_area_transfer` |
+| 120 | `Net` | `tick` |
+| 126 | `Net` | `player_disconnect` |
 
-### Function notes
+## Functions and parameters
 
-- **`dbg(...)`** *(source line 9)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`setupPlayerJoin()`** *(source line 18)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`setupTileInteraction()`** *(source line 45)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+| Line | Function | Arguments | Declaration |
+|---:|---|---|---|
+| 10 | `dbg` | `...` | local |
+| 20 | `setupPlayerJoin` | `(none)` | local |
+| 47 | `setupTileInteraction` | `(none)` | local |
 
-## Tables and data structures
+### Parameter inventory
 
-No simple named table initializer was detected. Tables created dynamically or returned inline may not appear in this inventory.
+#### 1. `dbg(...)`
 
-## Implementation notes
+- **Line:** 10
+- **Declaration:** local
 
-- This reference is generated from the exact archived source `scripts/camera/main.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `...` | Declared directly in the current Lua. Type not inferred. |
+
+#### 2. `setupPlayerJoin()`
+
+- **Line:** 20
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+#### 3. `setupTileInteraction()`
+
+- **Line:** 47
+- **Declaration:** local
+- **Parameters:** none explicitly declared.
+
+
+## Tables
+
+No simple table assignments matched.
+
+## Net API calls
+
+| API | Count | First line |
+|---|---:|---:|
+| `Net.on` | 5 | 21 |

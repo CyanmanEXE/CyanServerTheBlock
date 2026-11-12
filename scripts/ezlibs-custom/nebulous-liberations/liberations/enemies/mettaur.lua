@@ -12,10 +12,10 @@ return function(EnemyTemplates)
 -- three-tile line in the bot's current isometric direction.
 -- These overworld sprites use the native 48x56 animation frames and are
 -- intentionally NOT resized to BigBrute's previous bot appearance.
-local METTAUR_OW_TEXTURE = "/server/assets/ezlibs-custom/nebulous-liberations/mettaur_ow.png"
-local METTAUR_OW_ANIMATION = "/server/assets/ezlibs-custom/nebulous-liberations/mettaur_ow.animation"
-local SHOCKWAVE_TEXTURE = "/server/assets/ezlibs-custom/nebulous-liberations/shockwaves_all_directions.png"
-local SHOCKWAVE_ANIMATION = "/server/assets/ezlibs-custom/nebulous-liberations/shockwaves_all_directions.animation"
+local METTAUR_OW_TEXTURE = "/server/assets/ezlibs-custom/nebulous-liberations/bots/npcs/mettaur_ow.png"
+local METTAUR_OW_ANIMATION = "/server/assets/ezlibs-custom/nebulous-liberations/bots/npcs/mettaur_ow.animation"
+local SHOCKWAVE_TEXTURE = "/server/assets/ezlibs-custom/nebulous-liberations/bots/attacks/shockwave.png"
+local SHOCKWAVE_ANIMATION = "/server/assets/ezlibs-custom/nebulous-liberations/bots/attacks/shockwave.animation"
 local SHOCKWAVE_DIRECTION = {
     [Direction.UP_LEFT] = { suffix = "UL", dx = -1, dy = 0 },
     [Direction.UP_RIGHT] = { suffix = "UR", dx = 0, dy = -1 },

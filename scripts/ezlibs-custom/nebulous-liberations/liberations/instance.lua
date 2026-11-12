@@ -1,6 +1,7 @@
+local PlayerControl = require("scripts/player-control/main")
 -- instance.lua
-local ezlogger = require("scripts/ezlibs-scripts/ezlogger")
-local log = ezlogger.get("nebulous-liberations")
+local SharedLogger = require("scripts/logger/logger")
+local log = SharedLogger.register("nebulous-liberations"):register_subsystem("instance")
 
 local Direction = require("scripts/libs/direction")
 local PlayerSession = require("scripts/ezlibs-custom/nebulous-liberations/liberations/player_session")
@@ -193,6 +194,10 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
         end
     end
 
+    -- Liberation missions award loot through panels, never battle result drops.
+    -- Do not mutate the cached encounter definition or regular EZEncounters.
+    data.no_battle_rewards = true
+
     -- Liberation flipping belongs to the WORLD formation, never to an
     -- encounter's authored flip flag. The editor can carry these same
     -- encounter definitions to regular ezencounters / the Endless Runner,
@@ -374,7 +379,7 @@ end
 
 local function boot_player(player, isVictory, mapName)
     Net.set_player_emote(player.id, Emotes.BLANK)
-    Net.unlock_player_input(player.id)
+    PlayerControl.release_capture(player.id, "liberation:turn")
     player:boot_to_lobby(isVictory, mapName)
 end
 
@@ -544,7 +549,7 @@ local function convert_indestructible_panels(self)
         if Net.get_area_custom_properties(self.area_id)[Constants.CustomProperties.VictoryLapSong] then
             Net.set_song(self.area_id, Net.get_area_custom_properties(self.area_id)[Constants.CustomProperties.VictoryLapSong])
         end
-        Net.lock_player_input(session.player.id)
+        PlayerControl.acquire_capture(session.player.id, "liberation:turn")
     end
 
     -- Visit every distinct associated boss once. With multiple boss groups,
@@ -599,7 +604,7 @@ local function convert_indestructible_panels(self)
         local player = session.player
         Net.unlock_player_camera(player.id)
         if not session.completed_turn then
-            Net.unlock_player_input(player.id)
+            PlayerControl.release_capture(player.id, "liberation:turn")
         end
         player:say("Indestructible Panels have been unlocked!")
     end
@@ -639,7 +644,7 @@ local function liberate_panel(self, player_session)
             self:remove_panel(panel)
             selection:clear()
             Async.await(Loot.loot_bonus_panel(self, player_session, panel))
-            Net.unlock_player_input(player.id)
+            PlayerControl.release_capture(player.id, "liberation:turn")
         elseif panel.type == Constants.PanelTypes.DarkHole then
             if panel.custom_properties[Constants.CustomProperties.Message] then
                 Async.await(player:message_with_mug(panel.custom_properties[Constants.CustomProperties.Message]))
@@ -760,6 +765,42 @@ local function liberate_panel(self, player_session)
                     minion_health_override = minion_health_override,
                 })
             end
+            -- Always check the chosen package on the actual cloned area. This
+            -- also handles Encounter Path overrides not in the base table.
+            if not PanelEncounters.ensure_encounter_asset(self.area_id, encounter_definition.path) then
+                log:error_data("Liberation encounter aborted: battle package unavailable", {
+                    base_area_id = self.base_area_id,
+                    instance_area_id = self.area_id,
+                    encounter_name = encounter_definition.name,
+                    package_path = encounter_definition.path,
+                    player_id = player.id,
+                })
+                player_session:complete_turn()
+                return
+            end
+            local encounter_valid, encounter_problem =
+                PanelEncounters.validate_encounter_data(encounter_data, encounter_definition.path)
+            if not encounter_valid then
+                log:error_data("Blocked invalid Liberation battle payload", {
+                    base_area_id = self.base_area_id,
+                    instance_area_id = self.area_id,
+                    encounter_name = encounter_definition.name,
+                    problem = encounter_problem,
+                })
+                player_session:complete_turn()
+                return
+            end
+            log:info_data("Dispatching liberation encounter to client", {
+                base_area_id = self.base_area_id,
+                instance_area_id = self.area_id,
+                encounter_name = encounter_definition.name,
+                package_path = encounter_definition.path,
+                enemy_count = type(encounter_data.enemies) == "table" and #encounter_data.enemies or 0,
+                has_positions = type(encounter_data.positions) == "table",
+                has_player_positions = type(encounter_data.player_positions) == "table",
+                terrain = encounter_data.terrain,
+                player_id = player.id,
+            })
             local results = Async.await(player_session:initiate_encounter(encounter_definition.path, encounter_data))
             -- Deliberately do not synchronize Dark Hole battle results to the
             -- persistent bot. Only a battle started directly on an active bot
@@ -886,6 +927,42 @@ local function liberate_panel(self, player_session)
                 resolved_terrain = encounter_data.terrain,
                 player_can_flip = encounter_data.freedom_mission
                     and encounter_data.freedom_mission.player_can_flip or false,
+            })
+            -- Always check the chosen package on the actual cloned area. This
+            -- also handles Encounter Path overrides not in the base table.
+            if not PanelEncounters.ensure_encounter_asset(self.area_id, encounter_definition.path) then
+                log:error_data("Liberation encounter aborted: battle package unavailable", {
+                    base_area_id = self.base_area_id,
+                    instance_area_id = self.area_id,
+                    encounter_name = encounter_definition.name,
+                    package_path = encounter_definition.path,
+                    player_id = player.id,
+                })
+                player_session:complete_turn()
+                return
+            end
+            local encounter_valid, encounter_problem =
+                PanelEncounters.validate_encounter_data(encounter_data, encounter_definition.path)
+            if not encounter_valid then
+                log:error_data("Blocked invalid Liberation battle payload", {
+                    base_area_id = self.base_area_id,
+                    instance_area_id = self.area_id,
+                    encounter_name = encounter_definition.name,
+                    problem = encounter_problem,
+                })
+                player_session:complete_turn()
+                return
+            end
+            log:info_data("Dispatching liberation encounter to client", {
+                base_area_id = self.base_area_id,
+                instance_area_id = self.area_id,
+                encounter_name = encounter_definition.name,
+                package_path = encounter_definition.path,
+                enemy_count = type(encounter_data.enemies) == "table" and #encounter_data.enemies or 0,
+                has_positions = type(encounter_data.positions) == "table",
+                has_player_positions = type(encounter_data.player_positions) == "table",
+                terrain = encounter_data.terrain,
+                player_id = player.id,
             })
             local results = Async.await(player_session:initiate_encounter(encounter_definition.path, encounter_data))
             -- Synchronize before branching: survivors retain their health on
@@ -1066,7 +1143,7 @@ local function take_enemy_turn(self)
                             player:message_with_mug("Is this the power of Nebula...?").and_then(function()
                                 boot_player(player, false, self.area_name)
                                 Net.unlock_player_camera(player.id)
-                                Net.unlock_player_input(player.id)
+                                PlayerControl.release_capture(player.id, "liberation:turn")
                             end)
                         end)
                     end
@@ -1340,7 +1417,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
     setmetatable(mission, self)
     self.__index = self
 
-    -- Structured diagnostics: these should appear in the same ezlogger output
+    -- Structured diagnostics: these should appear in the same shared logger output
     -- as the rest of the liberation logs, unlike a bare print() call.
     log:info_data("Collision tileset diagnostic: before clone", {
         base_area_id = tostring(base_area_id),
@@ -1376,13 +1453,28 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
     end
     log:info_data("Collision tileset diagnostic: preload complete", {
         mission_area_id = tostring(new_area_id),
-        collision_tileset_path = "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx",
+        collision_tileset_path = "/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx",
     })
+
+    -- Cloned mission areas do not go through ezencounters' base-area package
+    -- provisioning. Supply registered battle ZIPs now, before transferring
+    -- players into this instance. The launch path still provisions any
+    -- per-panel override that was not in the base encounter table.
+    local package_ok, package_count, package_failures =
+        PanelEncounters.provide_mission_encounter_assets(base_area_id, new_area_id)
+    if not package_ok then
+        log:warn_data("Liberation mission encounter asset preflight reported failures", {
+            base_area_id = base_area_id,
+            mission_area_id = new_area_id,
+            distinct_packages = package_count,
+            failed_packages = package_failures,
+        })
+    end
 
     -- Diagnostic only: verify the new collision tileset can be retrieved from
     -- the cloned/provisioned mission area. Keep the old panel GID lookup below
     -- unchanged until this result is confirmed in a live server session.
-    local collision_tileset_path = "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx"
+    local collision_tileset_path = "/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx"
     local collision_tileset_ok, collision_tileset = pcall(function()
         return Net.get_tileset(mission.area_id, collision_tileset_path)
     end)
@@ -1441,7 +1533,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                     is_buffed_virus and "Buffed Virus" or "Dark Hole"),
                 visible = true,
                 x = object.x, y = object.y, z = object.z, width = object.width, height = object.height,
-                data = { type = "tile", gid = Net.get_tileset(base_area_id, "/server/assets/ezlibs-custom/nebulous-liberations/Liberation Collision.tsx").first_gid },
+                data = { type = "tile", gid = Net.get_tileset(base_area_id, "/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx").first_gid },
                 custom_properties = object.custom_properties,
                 visual_object_id = object.id,
                 visual_gid = object.data.gid
@@ -1880,6 +1972,7 @@ function Mission:clean_up()
     for _, id in ipairs(Net.list_bots(self.area_id)) do
         Net.remove_bot(id)
     end
+    PanelEncounters.clear_mission_encounter_assets(self.area_id)
     Net.remove_area(self.area_id)
     self.resolve_disposal()
     return self.disposal_promise
@@ -1921,7 +2014,7 @@ function Mission:begin()
         self.player_sessions[player.id].max_health = start_health
         self.player_sessions[player.id].health = start_health
         if not debug then
-            Net.lock_player_input(player.id)
+            PlayerControl.acquire_capture(player.id, "liberation:turn")
             if self.points_of_interest and #self.points_of_interest > 0 then
                 -- CameraSequence.play returns the full duration of its
                 -- movement/hold sequence. Include it so input is not
@@ -1970,7 +2063,7 @@ function Mission:begin()
     if not debug then
         Async.sleep(total_camera_time).and_then(function()
             for _, player in ipairs(self.players) do
-                Net.unlock_player_input(player.id)
+                PlayerControl.release_capture(player.id, "liberation:turn")
             end
         end)
     end
@@ -2018,17 +2111,17 @@ function Mission:handle_tile_interaction(player_id, x, y, z, button)
     if panel then return end
     if button == 1 then return end
     if player_session.completed_turn or Net.is_player_in_widget(player_id) then return end
-    Net.lock_player_input(player_id)
+    PlayerControl.acquire_capture(player_id, "liberation:turn")
     local quiz_promise = player_session.player:select_mission_option({ "Pass", "Cancel" }, "Panel interaction")
     quiz_promise.and_then(function(response)
         if response == 0 then
             player_session:get_pass_turn_permission()
         elseif response == 1 then
-            Net.unlock_player_input(player_id)
+            PlayerControl.release_capture(player_id, "liberation:turn")
         else
             -- A failed/interrupted menu must not leave the player movement-locked.
             if Net.is_player(player_id) then
-                Net.unlock_player_input(player_id)
+                PlayerControl.release_capture(player_id, "liberation:turn")
             end
         end
     end)
@@ -2067,7 +2160,7 @@ function Mission:handle_object_interaction(player_id, object_id, button)
         })
         return
     end
-    Net.lock_player_input(player_id)
+    PlayerControl.acquire_capture(player_id, "liberation:turn")
     local panel_already_selected = false
     for _, ps in pairs(self.player_sessions) do
         if ps.selection.root_panel == panel then
@@ -2082,10 +2175,10 @@ function Mission:handle_object_interaction(player_id, object_id, button)
             if response == 0 then
                 player_session:get_pass_turn_permission()
             elseif response == 1 then
-                Net.unlock_player_input(player_id)
+                PlayerControl.release_capture(player_id, "liberation:turn")
             else
                 if Net.is_player(player_id) then
-                    Net.unlock_player_input(player_id)
+                    PlayerControl.release_capture(player_id, "liberation:turn")
                 end
             end
         end)
@@ -2111,11 +2204,11 @@ function Mission:handle_object_interaction(player_id, object_id, button)
                 player_session:get_pass_turn_permission()
             elseif response == 2 then
                 player_session.selection:clear()
-                Net.unlock_player_input(player_id)
+                PlayerControl.release_capture(player_id, "liberation:turn")
             else
                 player_session.selection:clear()
                 if Net.is_player(player_id) then
-                    Net.unlock_player_input(player_id)
+                    PlayerControl.release_capture(player_id, "liberation:turn")
                 end
             end
         end)
@@ -2136,7 +2229,7 @@ function Mission:handle_object_interaction(player_id, object_id, button)
         else
             player_session.selection:clear()
             if Net.is_player(player_id) then
-                Net.unlock_player_input(player_id)
+                PlayerControl.release_capture(player_id, "liberation:turn")
             end
         end
     end)

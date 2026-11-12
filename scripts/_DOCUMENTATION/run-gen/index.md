@@ -1,42 +1,45 @@
-# `run-gen.lua`
+# 📄 `run-gen.lua` — Refreshed Lua reference
 
-> **Source:** `scripts/run-gen.lua`  
+[🏠 Documentation home](../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/run-gen.lua`](../../run-gen.lua)  
 > **Source lines:** 2  
-> **Functions detected:** 0  
-> **Table declarations detected:** 0
+> **SHA-256 (UTF-8):** `50654891474fbd26e5c6759ff600fe398b77b07a659bcf3a1aab49c0f33ddeb7`  
+> **Named/assigned functions detected:** 0  
+> **Table initializers detected (simple pattern):** 0
 
-## Contents
+> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-No module-level description was present in the source. The reference below documents the symbols and behavior visible in this file.
+Current source inventory for `scripts/run-gen.lua` from the latest overlaid server archive.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/generate-ezlibs-tiled` — line 1
+| Line | `require` module |
+|---:|---|
+| 1 | `scripts/ezlibs-scripts/generate-ezlibs-tiled` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+No named `.on`/`:on` events detected by the simple source pattern.
 
 ## Functions
 
-No named function declarations were detected. This file may contain data, inline callbacks, or executable setup code.
+No named function declaration matched. Anonymous callbacks may be present.
 
-## Tables and data structures
+## Tables
 
-No simple named table initializer was detected. Tables created dynamically or returned inline may not appear in this inventory.
+No plain `name = {` table initializer matched.
 
-## Implementation notes
+## Net API calls
 
-- This reference is generated from the exact archived source `scripts/run-gen.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+No direct `Net.method(...)` call expression matched.

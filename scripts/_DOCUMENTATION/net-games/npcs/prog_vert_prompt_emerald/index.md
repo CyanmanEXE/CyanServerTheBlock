@@ -1,56 +1,82 @@
-# `prog_vert_prompt_emerald.lua`
+# 📄 `prog_vert_prompt_emerald.lua`
 
-> **Source:** `scripts/net-games/npcs/prog_vert_prompt_emerald.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/net-games/npcs/prog_vert_prompt_emerald.lua`](../../../../net-games/npcs/prog_vert_prompt_emerald.lua)  
 > **Source lines:** 65  
-> **Functions detected:** 1  
-> **Table declarations detected:** 3
+> **SHA-256 (UTF-8):** `924257c9b81997…`  
+> **Declared/assigned functions detected:** 1  
+> **Anonymous closures detected:** 0  
+> **Table initializers detected:** 3
 
-## Contents
+## 🗂️ Contents
 
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Events](#events)
-- [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [📌 Overview](#overview)
+- [🔗 Dependencies](#dependencies)
+- [📡 Event subscriptions](#event-subscriptions)
+- [🧩 Functions](#functions)
+- [🪄 Anonymous closures](#anonymous-closures)
+- [📦 Tables and data](#tables-and-data)
+- [⚙️ Runtime API calls](#runtime-api-calls)
+- [🧪 Static-analysis notes](#static-analysis-notes)
 
-## Overview
+## 📌 Overview
 
-===================================================== prog_vert_prompt_emerald_shop.lua Shop-themed variant of ProgVertPromptRed: - identical flow + option generator - overrides PromptVertical assets ONLY for this NPC instance =====================================================
+Shop-themed variant of ProgVertPromptRed: - identical flow + option generator - overrides PromptVertical assets ONLY for this NPC instance
 
-## Dependencies
+## 🔗 Dependencies
 
-- `scripts/net-games/npcs/talk` — line 8
+| Line | Module string supplied to `require` |
+|---|---|
+| 8 | `scripts/net-games/npcs/talk` |
 
-## Events
+## 📡 Event subscriptions
 
-- No direct `Net:on(...)` registration was detected.
+*No literal `.on` or `:on` event subscriptions detected.*
 
-## Functions
+## 🧩 Functions
 
-| Line | Function / method | Parameters as declared |
-|---:|---|---|
-| 24 | `on_interact` | `player_id, _bot_id, bot_name` |
+| Line | Function or assignment | Parameters (verbatim) | Declaration |
+|---|---|---|---|
+| 25 | `on_interact` | `player_id, _bot_id, bot_name` | assigned |
 
-### Function notes
+### Function details
 
-- **`on_interact(player_id, _bot_id, bot_name)`** *(source line 24)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+#### 1. `on_interact(player_id, _bot_id, bot_name)`
 
-## Tables and data structures
+- **Location:** source line 25.
+- **Declaration style:** `assigned`.
+- **Description:** No adjacent explanatory source comment; behavior must be verified in the linked implementation.
 
-### `options` *(line 35)*
+  **Parameter reference** (parameter names are sourced directly; undocumented types are not inferred):
 
-| Field / key | Value category | Initializer expression (source) |
+| Position | Parameter | Source-established type / meaning |
 |---|---|---|
-| `count` | number literal | `99` |
+| 1 | `player_id` | Not explicitly documented in adjacent source annotations. |
+| 2 | `_bot_id` | Not explicitly documented in adjacent source annotations. |
+| 3 | `bot_name` | Not explicitly documented in adjacent source annotations. |
+
+## 🪄 Anonymous closures
+
+*No anonymous `function(...)` expressions detected.*
+
+## 📦 Tables and data
+
+The following **3** table initializer(s) were statically identified. Entries show **source expressions**, not evaluated values or guaranteed runtime table contents.
+
+### 1. `options` — line 35
+
+| Field / index | Initializer category | Expression from source |
+|---|---|---|
+| `count` | numeric literal | `99` |
 | `prefix` | string literal | `"Item "` |
-| `pad` | number literal | `2` |
+| `pad` | numeric literal | `2` |
 | `exit_text` | string literal | `"Exit"` |
 | `exit_id` | string literal | `"exit"` |
 
-### `texts` *(line 38)*
+### 2. `texts` — line 38
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `open_question` | string literal | `"Welcome! Wanna browse the shop menu?"` |
 | `intro_text` | string literal | `"Take your time. I won't judge your impulse buys."` |
@@ -61,18 +87,23 @@
 | `after_no` | string literal | `"Fair. Anything else?"` |
 | `exit_goodbye` | string literal | `"Thanks for stopping by!"` |
 
-### `assets` *(line 53)*
+### 3. `assets` — line 53
 
-| Field / key | Value category | Initializer expression (source) |
+| Field / index | Initializer category | Expression from source |
 |---|---|---|
 | `menu_bg` | string literal | `"/server/assets/net-games/ui/prompt_vert_menu_shop_an.png"` |
 | `menu_bg_anim` | string literal | `"/server/assets/net-games/ui/prompt_vert_menu_an.animation"` |
 | `menu_bg_frame` | string literal | `"/server/assets/net-games/ui/prompt_vert_menu_shop_an_frame.png"` |
 | `highlight` | string literal | `"/server/assets/net-games/ui/highlight_shop.png"` |
 
-## Implementation notes
+## ⚙️ Runtime API calls
 
-- This reference is generated from the exact archived source `scripts/net-games/npcs/prog_vert_prompt_emerald.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+*No calls matching the listed runtime API prefixes were detected.*
+
+## 🧪 Static-analysis notes
+
+- Generated directly from the uploaded server ZIP; source names, signatures, literal dependencies, and line counts were inspected from this copy.
+- Function parameter names preserve Lua declaration spelling and order; Lua varargs are shown as `...`.
+- Table rows are **initializer expressions**, not guarantees about contents after runtime mutation. Tables built dynamically may not appear.
+- Anonymous functions and local functions assigned through computed keys are not fully enumerable using static pattern analysis.
+- No Net/Async runtime behavior, battle compatibility, error contracts, or inferred type information is asserted without source support.

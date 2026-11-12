@@ -52,8 +52,8 @@ end
 local function spawn(self, area_id, position)
   for i = 1, TOTAL_EXPLOSIONS, 1 do
     local explosion_bot_id = Net.create_bot({
-      texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/explosion.png",
-      animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/explosion.animation",
+      texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/explosion.png",
+      animation_path = "/server/assets/ezlibs-custom/nebulous-liberations/bots/effects/explosion.animation",
       area_id = self.area_id,
       warp_in = false,
       x = self.position.x,

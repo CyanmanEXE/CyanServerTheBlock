@@ -1,19 +1,30 @@
-# 📁 scripts/net-games/navi-emotes
+# 📁 net-games/navi-emotes
 
-## Contents
+[🏠 Documentation home](../../index.md) · [⬆ Parent folder](../index.md)
 
-- [Collection contents](#collection-contents)
-- [Collection summary](#collection-summary)
+## 🗂️ Contents
 
-## Collection contents
+- [📚 Collection contents](#collection-contents)
+- [🔎 Module API overview](#module-api-overview)
+- [📊 Collection summary](#collection-summary)
+
+## 📚 Collection contents
 
 | Type | Entry | Lua files | Functions | Tables | Source lines | Documentation |
-|---|---|---:|---:|---:|---:|---|
-| 📄 Script | `constants.lua` | 1 | 0 | 11 | 44 | [Open script index](./constants/index.md) |
-| 📄 Script | `navi-emotes.lua` | 1 | 1 | 1 | 12 | [Open script index](./navi-emotes/index.md) |
+|---|---|---|---|---|---|---|
+| 📄 Script | `constants.lua` | 1 | 0 | 11 | 44 | [Open script reference](constants/index.md) |
+| 📄 Script | `navi-emotes.lua` | 1 | 1 | 1 | 12 | [Open script reference](navi-emotes/index.md) |
 
-## Collection summary
+## 🔎 Module API overview
 
-This collection contains **2 Lua files**, **1 detected named functions**, and **12 detected table initializers**.
+Named, qualified functions detected in direct files in this folder. Check each linked script reference for **all local and assigned functions**, parameters, initializer tables, and line numbers. A qualified name alone does not establish external accessibility.
 
-The individual script indexes document exact source paths, discovered `require` dependencies, direct `Net:on` event names, declared function signatures, and statically enumerable table keys.
+| Module | Qualified function / method | Source line | Reference |
+|---|---|---|---|
+| `navi-emotes.lua` | `NaviEmotes.activate(player_id)` | 4 | [Details](navi-emotes/index.md) |
+
+## 📊 Collection summary
+
+This folder subtree contains **2 Lua source files**, **1 named/assigned function detections**, and **12 table initializer detections**.
+
+Counts represent static matching of archived code and may omit anonymous closures or dynamic table construction.

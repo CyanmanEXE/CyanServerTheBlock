@@ -1,107 +1,179 @@
-# `ezbottriggers.lua`
+# 📄 `ezbottriggers.lua` — Current Lua reference
 
-> **Source:** `scripts/ezlibs-scripts/eztriggers/ezbottriggers.lua`  
+[🏠 Documentation home](../../../index.md) · [⬆ Folder index](../index.md)
+
+> **Source:** [`scripts/ezlibs-scripts/eztriggers/ezbottriggers.lua`](../../../../ezlibs-scripts/eztriggers/ezbottriggers.lua)  
 > **Source lines:** 292  
-> **Functions detected:** 9  
-> **Table declarations detected:** 7
+> **SHA-256 (UTF-8):** `a2ce8db5b5762ec195af47e78f88c48bc0989de4b45b8fcb1ace56a0f4bba8bc`  
+> **Named/assigned functions detected:** 9  
+> **Table initializers detected:** 7
 
-## Contents
+> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../../logger/README.md) for logging semantics.
 
+## 🧭 Contents
 - [Overview](#overview)
 - [Dependencies](#dependencies)
-- [Events](#events)
+- [Event hooks](#event-hooks)
 - [Functions](#functions)
-- [Tables and data structures](#tables-and-data-structures)
-- [Implementation notes](#implementation-notes)
+- [Tables](#tables)
+- [Net API calls](#net-api-calls)
 
 ## Overview
 
-ezbottriggers.lua Bot-only variant of eztriggers. Mirrors the rectangle/ellipse trigger API of eztriggers, but tracks bots instead of players. It does not touch eztriggers or its player-only state, so the two modules can be used side by side on the same source objects. Fed by eznpcs via ezbus events: bot_created { bot_id, area_id, x, y, z } bot_moved   { bot_id, area_id, x, y, z } bot_removed { bot_id } Each returned emitter fires: entered  { bot_id = ..., object = ..., reason = ..., x, y, z } departed { bot_id = ..., object = ..., reason = ..., x, y, z } The x/y/z values describe the position that caused the transition, so listeners can reconcile overlapping triggers without any Net lookup.
+Current source inventory for `scripts/ezlibs-scripts/eztriggers/ezbottriggers.lua` in the shared-logger migration.
 
 ## Dependencies
 
-- `scripts/ezlibs-scripts/ezlogger` — line 19
-- `scripts/ezlibs-scripts/ezbus` — line 20
+| Line | `require` module |
+|---:|---|
+| 19 | `scripts/logger/logger` |
+| 20 | `scripts/ezlibs-scripts/ezbus` |
 
-## Events
+## Event hooks
 
-- No direct `Net:on(...)` registration was detected.
+| Line | Subscriber | Event |
+|---:|---|---|
+| 276 | `ezbus` | `bot_created` |
+| 281 | `ezbus` | `bot_moved` |
+| 286 | `ezbus` | `bot_removed` |
 
 ## Functions
 
-| Line | Function / method | Parameters as declared |
+| Source line | Function | Parameters | Declaration |
+|---:|---|---|---|
+| 29 | `resolve_trigger_key` | `trigger_object, trigger_id` | local |
+| 35 | `ezbottriggers.add_radius_trigger` | `area_id, trigger_object, diameter_x, diameter_y, center_x, center_y, trigger_id` | assigned/declared |
+| 86 | `ezbottriggers.add_rectangle_trigger` | `area_id, trigger_object, width, height, trigger_id` | assigned/declared |
+| 135 | `set_bot_overlap` | `trigger_info, bot_id, is_inside, reason, x, y, z` | local |
+| 166 | `ezbottriggers.handle_bot_move` | `bot_id, x, y, z, area_id` | assigned/declared |
+| 238 | `ezbottriggers.clear_radius_overlaps_for_bot` | `bot_id, reason` | assigned/declared |
+| 246 | `ezbottriggers.clear_rectangle_overlaps_for_bot` | `bot_id, reason` | assigned/declared |
+| 254 | `ezbottriggers.handle_bot_created` | `bot_id, area_id, x, y, z` | assigned/declared |
+| 269 | `ezbottriggers.handle_bot_removed` | `bot_id` | assigned/declared |
+
+### Detailed parameter inventory
+
+#### 1. `resolve_trigger_key(trigger_object, trigger_id)`
+
+- **Line:** 29
+- **Declaration:** local
+
+| # | Parameter | Evidence |
 |---:|---|---|
-| 29 | `resolve_trigger_key` | `trigger_object, trigger_id` |
-| 35 | `ezbottriggers.add_radius_trigger` | `area_id, trigger_object, diameter_x, diameter_y, center_x, center_y, trigger_id` |
-| 86 | `ezbottriggers.add_rectangle_trigger` | `area_id, trigger_object, width, height, trigger_id` |
-| 135 | `set_bot_overlap` | `trigger_info, bot_id, is_inside, reason, x, y, z` |
-| 166 | `ezbottriggers.handle_bot_move` | `bot_id, x, y, z, area_id` |
-| 238 | `ezbottriggers.clear_radius_overlaps_for_bot` | `bot_id, reason` |
-| 246 | `ezbottriggers.clear_rectangle_overlaps_for_bot` | `bot_id, reason` |
-| 254 | `ezbottriggers.handle_bot_created` | `bot_id, area_id, x, y, z` |
-| 269 | `ezbottriggers.handle_bot_removed` | `bot_id` |
+| 1 | `trigger_object` | Declared in this function; type not inferred. |
+| 2 | `trigger_id` | Declared in this function; type not inferred. |
 
-### Function notes
+#### 2. `ezbottriggers.add_radius_trigger(area_id, trigger_object, diameter_x, diameter_y, center_x, center_y, trigger_id)`
 
-- **`resolve_trigger_key(trigger_object, trigger_id)`** *(source line 29)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbottriggers.add_radius_trigger(area_id, trigger_object, diameter_x, diameter_y, center_x, center_y, trigger_id)`** *(source line 35)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbottriggers.add_rectangle_trigger(area_id, trigger_object, width, height, trigger_id)`** *(source line 86)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`set_bot_overlap(trigger_info, bot_id, is_inside, reason, x, y, z)`** — x/y/z describe the position that caused the transition, so listeners can resolve overlapping triggers from the same authoritative state. *(source line 135)*
-- **`ezbottriggers.handle_bot_move(bot_id, x, y, z, area_id)`** — Reconcile a single bot's occupancy against the triggers in its current area. *(source line 166)*
-- **`ezbottriggers.clear_radius_overlaps_for_bot(bot_id, reason)`** *(source line 238)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbottriggers.clear_rectangle_overlaps_for_bot(bot_id, reason)`** *(source line 246)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbottriggers.handle_bot_created(bot_id, area_id, x, y, z)`** *(source line 254)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
-- **`ezbottriggers.handle_bot_removed(bot_id)`** *(source line 269)*: No adjacent explanatory comment was present. Parameter names are documented verbatim; consult the implementation for validation, mutation, and return details.
+- **Line:** 35
+- **Declaration:** table/global or assignment
 
-## Tables and data structures
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `trigger_object` | Declared in this function; type not inferred. |
+| 3 | `diameter_x` | Declared in this function; type not inferred. |
+| 4 | `diameter_y` | Declared in this function; type not inferred. |
+| 5 | `center_x` | Declared in this function; type not inferred. |
+| 6 | `center_y` | Declared in this function; type not inferred. |
+| 7 | `trigger_id` | Declared in this function; type not inferred. |
 
-### `ezbottriggers` *(line 21)*
+#### 3. `ezbottriggers.add_rectangle_trigger(area_id, trigger_object, width, height, trigger_id)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 86
+- **Declaration:** table/global or assignment
 
-### `ezbottriggers.radius_triggers` *(line 25)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `area_id` | Declared in this function; type not inferred. |
+| 2 | `trigger_object` | Declared in this function; type not inferred. |
+| 3 | `width` | Declared in this function; type not inferred. |
+| 4 | `height` | Declared in this function; type not inferred. |
+| 5 | `trigger_id` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 4. `set_bot_overlap(trigger_info, bot_id, is_inside, reason, x, y, z)`
 
-### `ezbottriggers.rectangle_triggers` *(line 27)*
+- **Line:** 135
+- **Declaration:** local
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `trigger_info` | Declared in this function; type not inferred. |
+| 2 | `bot_id` | Declared in this function; type not inferred. |
+| 3 | `is_inside` | Declared in this function; type not inferred. |
+| 4 | `reason` | Declared in this function; type not inferred. |
+| 5 | `x` | Declared in this function; type not inferred. |
+| 6 | `y` | Declared in this function; type not inferred. |
+| 7 | `z` | Declared in this function; type not inferred. |
 
-### `trigger_info` *(line 64)*
+#### 5. `ezbottriggers.handle_bot_move(bot_id, x, y, z, area_id)`
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `id` | expression/reference | `trigger_key` |
-| `object` | expression/reference | `trigger_object` |
-| `emitter` | expression/reference | `emitter` |
-| `overlapping_bots` | table | `{}` |
-| `radius_x` | expression/reference | `width / 2` |
-| `radius_y` | expression/reference | `height / 2` |
-| `center_x` | expression/reference | `object_x + center_x` |
-| `center_y` | expression/reference | `object_y + center_y` |
+- **Line:** 166
+- **Declaration:** table/global or assignment
 
-### `overlapping_bots` *(line 68)*
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_id` | Declared in this function; type not inferred. |
+| 2 | `x` | Declared in this function; type not inferred. |
+| 3 | `y` | Declared in this function; type not inferred. |
+| 4 | `z` | Declared in this function; type not inferred. |
+| 5 | `area_id` | Declared in this function; type not inferred. |
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+#### 6. `ezbottriggers.clear_radius_overlaps_for_bot(bot_id, reason)`
 
-### `trigger_info` *(line 113)*
+- **Line:** 238
+- **Declaration:** table/global or assignment
 
-| Field / key | Value category | Initializer expression (source) |
-|---|---|---|
-| `id` | expression/reference | `trigger_key` |
-| `object` | expression/reference | `trigger_object` |
-| `emitter` | expression/reference | `emitter` |
-| `overlapping_bots` | table | `{}` |
-| `width` | expression/reference | `trigger_width` |
-| `height` | expression/reference | `trigger_height` |
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_id` | Declared in this function; type not inferred. |
+| 2 | `reason` | Declared in this function; type not inferred. |
 
-### `overlapping_bots` *(line 117)*
+#### 7. `ezbottriggers.clear_rectangle_overlaps_for_bot(bot_id, reason)`
 
-Table initializer detected; no simple direct-level keys could be statically enumerated.
+- **Line:** 246
+- **Declaration:** table/global or assignment
 
-## Implementation notes
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_id` | Declared in this function; type not inferred. |
+| 2 | `reason` | Declared in this function; type not inferred. |
 
-- This reference is generated from the exact archived source `scripts/ezlibs-scripts/eztriggers/ezbottriggers.lua`.
-- Function signatures preserve the parameter names and ordering found in the source. Lua varargs appear as `...`.
-- Return values, table mutation, network side effects, and error behavior should be interpreted from the implementation; no behavior is inferred where the source does not establish it.
-- Line numbers refer to the archived source file, not this Markdown file.
+#### 8. `ezbottriggers.handle_bot_created(bot_id, area_id, x, y, z)`
+
+- **Line:** 254
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_id` | Declared in this function; type not inferred. |
+| 2 | `area_id` | Declared in this function; type not inferred. |
+| 3 | `x` | Declared in this function; type not inferred. |
+| 4 | `y` | Declared in this function; type not inferred. |
+| 5 | `z` | Declared in this function; type not inferred. |
+
+#### 9. `ezbottriggers.handle_bot_removed(bot_id)`
+
+- **Line:** 269
+- **Declaration:** table/global or assignment
+
+| # | Parameter | Evidence |
+|---:|---|---|
+| 1 | `bot_id` | Declared in this function; type not inferred. |
+
+
+## Tables
+
+| Source line | Assignment |
+|---:|---|
+| 22 | `ezbottriggers` |
+| 26 | `ezbottriggers.radius_triggers` |
+| 27 | `ezbottriggers.rectangle_triggers` |
+| 64 | `trigger_info` |
+| 68 | `overlapping_bots` |
+| 113 | `trigger_info` |
+| 117 | `overlapping_bots` |
+
+## Net API calls
+
+No direct `Net.method(...)` call expression matched.
