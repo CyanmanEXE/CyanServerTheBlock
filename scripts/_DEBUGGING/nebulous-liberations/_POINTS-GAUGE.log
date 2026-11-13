@@ -1,0 +1,150 @@
+[2026-11-11 19:28:01] [INFO ] [nebulous-liberations/POINTS-GAUGE] Gauge animation validated
+    anim_path      : /server/assets/net-games/meters/liberation-order-points/base-guage-3slice.animation
+    center_h       : 16
+    center_w       : 2
+    heights_match  : true
+    left_h         : 16
+    left_w         : 8
+    natural_height : 16
+    natural_width  : 18
+    right_h        : 16
+    right_w        : 8
+    style          : base
+[2026-11-11 19:28:01] [INFO ] [nebulous-liberations/POINTS-GAUGE] Gauge animation validated
+    anim_path      : /server/assets/net-games/meters/liberation-order-points/points-3slice.animation
+    center_h       : 8
+    center_w       : 2
+    heights_match  : true
+    left_h         : 8
+    left_w         : 1
+    natural_height : 8
+    natural_width  : 4
+    right_h        : 8
+    right_w        : 1
+    style          : points
+[2026-11-11 19:28:01] [INFO ] [nebulous-liberations/POINTS-GAUGE] Gauge animation validated
+    anim_path      : /server/assets/net-games/meters/liberation-order-points/point-total-3slice.animation
+    center_h       : 13
+    center_w       : 2
+    heights_match  : true
+    left_h         : 13
+    left_w         : 8
+    natural_height : 13
+    natural_width  : 18
+    right_h        : 13
+    right_w        : 8
+    style          : badge
+[2026-11-11 19:28:01] [INFO ] [nebulous-liberations/POINTS-GAUGE] PointsGauge: shown
+    badge_usable  : true
+    base_usable   : true
+    max_points    : 9
+    player_id     : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    points_usable : true
+    value         : 3
+[2026-11-11 19:34:02] [INFO ] [nebulous-liberations/POINTS-GAUGE] PointsGauge: shown
+    badge_usable  : true
+    base_usable   : true
+    max_points    : 40
+    player_id     : 717c49dc-3658-4eb1-bd98-2e9561fab46c
+    points_usable : true
+    value         : 3
+[2026-11-11 19:37:58] [INFO ] [nebulous-liberations/POINTS-GAUGE] PointsGauge: shown
+    badge_usable  : true
+    base_usable   : true
+    max_points    : 40
+    player_id     : c8bad993-c256-4816-a803-4dd376c77208
+    points_usable : true
+    value         : 3
+[2026-11-11 19:38:14] [INFO ] [nebulous-liberations/POINTS-GAUGE] PointsGauge: shown
+    badge_usable  : true
+    base_usable   : true
+    max_points    : 40
+    player_id     : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    points_usable : true
+    value         : 3
+[2026-11-12 05:21:44] [INFO ] [nebulous-liberations/POINTS-GAUGE] Gauge animation validated
+    anim_path      : /server/assets/net-games/meters/liberation-order-points/base-guage-3slice.animation
+    center_h       : 16
+    center_w       : 2
+    heights_match  : true
+    left_h         : 16
+    left_w         : 8
+    natural_height : 16
+    natural_width  : 18
+    right_h        : 16
+    right_w        : 8
+    style          : base
+[2026-11-12 05:21:44] [INFO ] [nebulous-liberations/POINTS-GAUGE] Gauge animation validated
+    anim_path      : /server/assets/net-games/meters/liberation-order-points/points-3slice.animation
+    center_h       : 8
+    center_w       : 2
+    heights_match  : true
+    left_h         : 8
+    left_w         : 1
+    natural_height : 8
+    natural_width  : 4
+    right_h        : 8
+    right_w        : 1
+    style          : points
+[2026-11-12 05:21:44] [INFO ] [nebulous-liberations/POINTS-GAUGE] Gauge animation validated
+    anim_path      : /server/assets/net-games/meters/liberation-order-points/point-total-3slice.animation
+    center_h       : 13
+    center_w       : 2
+    heights_match  : true
+    left_h         : 13
+    left_w         : 8
+    natural_height : 13
+    natural_width  : 18
+    right_h        : 13
+    right_w        : 8
+    style          : badge
+[2026-11-12 05:21:44] [INFO ] [nebulous-liberations/POINTS-GAUGE] PointsGauge: shown
+    badge_usable  : true
+    base_usable   : true
+    max_points    : 40
+    player_id     : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    points_usable : true
+    value         : 3
+[2026-11-13 14:56:09] [INFO ] [nebulous-liberations/POINTS-GAUGE] Gauge animation validated
+    anim_path      : /server/assets/net-games/meters/liberation-order-points/base-guage-3slice.animation
+    center_h       : 16
+    center_w       : 2
+    heights_match  : true
+    left_h         : 16
+    left_w         : 8
+    natural_height : 16
+    natural_width  : 18
+    right_h        : 16
+    right_w        : 8
+    style          : base
+[2026-11-13 14:56:09] [INFO ] [nebulous-liberations/POINTS-GAUGE] Gauge animation validated
+    anim_path      : /server/assets/net-games/meters/liberation-order-points/points-3slice.animation
+    center_h       : 8
+    center_w       : 2
+    heights_match  : true
+    left_h         : 8
+    left_w         : 1
+    natural_height : 8
+    natural_width  : 4
+    right_h        : 8
+    right_w        : 1
+    style          : points
+[2026-11-13 14:56:09] [INFO ] [nebulous-liberations/POINTS-GAUGE] Gauge animation validated
+    anim_path      : /server/assets/net-games/meters/liberation-order-points/point-total-3slice.animation
+    center_h       : 13
+    center_w       : 2
+    heights_match  : true
+    left_h         : 13
+    left_w         : 8
+    natural_height : 13
+    natural_width  : 18
+    right_h        : 13
+    right_w        : 8
+    style          : badge
+[2026-11-13 14:56:09] [INFO ] [nebulous-liberations/POINTS-GAUGE] PointsGauge: shown
+    badge_usable  : true
+    base_usable   : true
+    max_points    : 40
+    player_id     : aec3ec72-35f4-4645-8555-008a17080b90
+    points_usable : true
+    value         : 3

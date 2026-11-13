@@ -6,6 +6,7 @@
 
 local Direction = require("scripts/libs/direction")
 local Dialogue  = require("scripts/net-games/dialogue/dialogue")
+local DebugLog = require("scripts/net-games/logging").get("DEMO-PROGS")
 
 local DEBUG = true
 local function dbg(msg)
@@ -34,6 +35,11 @@ local bot_id = Net.create_bot({
 })
 
 dbg("LOADED bot_id=" .. tostring(bot_id))
+DebugLog:info_data("Direct prompt PROG created", {npc = obj_name, area_id = area_id, bot_id = bot_id})
+
+-- Keep the same Displayer textbox across the Yes/No -> dialogue handoff.
+-- Prompt.close(keep_textbox=true) deliberately leaves the original box alive.
+local SHARED_BOX_ID = "prog_prompt_yesno_box"
 
 --=====================================================
 -- Shared UI base (clone of prog_basic_dialogue.lua settings)
@@ -118,6 +124,7 @@ Net:on("actor_interaction", function(event)
   if event.actor_id ~= bot_id then return end
 
   local player_id = event.player_id
+  DebugLog:info_data("Direct prompt PROG interacted", {npc = obj_name, player_id = player_id, bot_id = bot_id})
   if Dialogue.is_active(player_id) then
     -- already in dialogue/prompt; ignore retriggers
     return
@@ -127,13 +134,14 @@ Net:on("actor_interaction", function(event)
   local player_pos = Net.get_player_position(player_id)
   Net.set_bot_direction(bot_id, Direction.from_points(bot_pos, player_pos))
 
-  Dialogue.prompt_yesno(player_id, {
+  local prompt_box_id, prompt_err = Dialogue.prompt_yesno(player_id, {
     question = "Want to hear a story? I promise it won't take too long...",
 
-    ui = prog_ui_prompt("prog_prompt_yesno_box"),
+    ui = prog_ui_prompt(SHARED_BOX_ID),
 
     on_yes = function()
-      Dialogue.start(player_id, {
+      DebugLog:info_data("Direct prompt PROG Yes selected", {npc = obj_name, player_id = player_id})
+      local followup_box_id, followup_err = Dialogue.start(player_id, {
         "AWESOME!",
         "There once was a young boy named timmy.",
         "He was an average kid, that noone understood.",
@@ -141,27 +149,58 @@ Net:on("actor_interaction", function(event)
         "always gave him commands.",
         "He's still there to this very day.",
       }, {
-        from_prompt = true, -- prevents the double-confirm after prompt
+        from_prompt = true, -- guards against a held Confirm during handoff
+        reuse_existing_box = true, -- reset the preserved prompt textbox, do not orphan it
         page_advance = "wait_for_confirm",
         confirm_during_typing = true,
-        ui = prog_ui_dialogue("prog_prompt_followup_box"),
+        ui = prog_ui_dialogue(SHARED_BOX_ID),
       })
+      if followup_box_id then
+        DebugLog:info_data("Direct prompt PROG Yes follow-up opened", {
+          npc = obj_name, player_id = player_id, box_id = followup_box_id,
+        })
+      else
+        DebugLog:error_data("Direct prompt PROG Yes follow-up failed", {
+          npc = obj_name, player_id = player_id, error = tostring(followup_err),
+        })
+      end
     end,
 
     on_no = function()
-      Dialogue.start(player_id, {
+      DebugLog:info_data("Direct prompt PROG No selected", {npc = obj_name, player_id = player_id})
+      local followup_box_id, followup_err = Dialogue.start(player_id, {
         "All good.",
         "Come back when you want to hear a banger.",
       }, {
-        from_prompt = true, -- prevents the double-confirm after prompt
+        from_prompt = true, -- guards against a held Confirm during handoff
+        reuse_existing_box = true, -- reset the preserved prompt textbox, do not orphan it
         page_advance = "wait_for_confirm",
         confirm_during_typing = true,
-        ui = prog_ui_dialogue("prog_prompt_no_box"),
+        ui = prog_ui_dialogue(SHARED_BOX_ID),
       })
+      if followup_box_id then
+        DebugLog:info_data("Direct prompt PROG No follow-up opened", {
+          npc = obj_name, player_id = player_id, box_id = followup_box_id,
+        })
+      else
+        DebugLog:error_data("Direct prompt PROG No follow-up failed", {
+          npc = obj_name, player_id = player_id, error = tostring(followup_err),
+        })
+      end
     end,
 
     on_cancel = function()
+      DebugLog:info_data("Direct prompt PROG cancelled", {npc = obj_name, player_id = player_id})
       -- Silent cancel
     end,
   })
+  if prompt_box_id then
+    DebugLog:info_data("Direct prompt PROG Yes/No opened", {
+      npc = obj_name, player_id = player_id, box_id = prompt_box_id,
+    })
+  else
+    DebugLog:error_data("Direct prompt PROG Yes/No failed", {
+      npc = obj_name, player_id = player_id, error = tostring(prompt_err),
+    })
+  end
 end)

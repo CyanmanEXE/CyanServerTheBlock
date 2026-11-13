@@ -1,0 +1,42 @@
+[2026-11-11 19:39:07] [INFO ] [nebulous-liberations/ABILITY] Initiating ability encounter
+    ability          : LongSwrd
+    area_name        : LibEasy
+    base_area_id     : LiberationEasyMode
+    encounter_path   : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    instance_area_id : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    phase            : 2
+    player_id        : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    terrain          : even
+[2026-11-11 19:39:34] [INFO ] [nebulous-liberations/ABILITY] Ability encounter results
+    ability          : LongSwrd
+    base_area_id     : LiberationEasyMode
+    escape           : "nil"
+    fled             : "nil"
+    health           : 880
+    instance_area_id : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    player_id        : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    ran              : "nil"
+    reason           : "4"
+    success          : false
+    turns            : 2
+[2026-11-12 05:21:56] [INFO ] [nebulous-liberations/ABILITY] Initiating ability encounter
+    ability          : LongSwrd
+    area_name        : LibEasy
+    base_area_id     : LiberationEasyMode
+    encounter_path   : /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip
+    instance_area_id : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    phase            : 1
+    player_id        : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    terrain          : even
+[2026-11-12 05:22:36] [INFO ] [nebulous-liberations/ABILITY] Ability encounter results
+    ability          : LongSwrd
+    base_area_id     : LiberationEasyMode
+    escape           : "nil"
+    fled             : "nil"
+    health           : 940
+    instance_area_id : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    player_id        : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    ran              : "nil"
+    reason           : "2"
+    success          : false
+    turns            : 3

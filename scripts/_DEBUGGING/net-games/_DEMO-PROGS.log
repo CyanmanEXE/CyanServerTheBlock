@@ -1,0 +1,110 @@
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgBannerDialogue
+    script  : prog_banner_dialogue
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgBasicDialogue
+    script  : prog_basic_dialogue
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgBasicFreeDraw
+    script  : prog_basic_freedraw
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgDramaticDialogue
+    script  : prog_dramatic_dialogue
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgDyedDialogue
+    script  : prog_dyed_dialogue
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgPromptDialogue
+    script  : prog_prompt_dialogue
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgPromptDialogue2
+    script  : prog_prompt_dialogue_2
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgBasicNameplateDialogue
+    script  : prog_basic_nameplate
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : prog_talk_prompt_npc
+    script  : prog_talk_dialogue
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1]  : prog_default
+        [2]  : prog_lime
+        [3]  : prog_red
+        [4]  : prog_purple
+        [5]  : prog_turquoise
+        [6]  : prog_pink
+        [7]  : prog_emerald
+        [8]  : prog_sapphire
+        [9]  : prog_yellow
+        [10] : prog_orange
+        [11] : prog_charcoal_grey
+        [12] : prog_white
+    script  : prog_talk_colors
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgVertPrompt
+    script  : prog_vert_prompt
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgVertPrompt2
+    script  : prog_vert_prompt_2
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgVertPromptSapphire
+    script  : prog_vert_prompt_sapphire
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgVertPromptPink
+    script  : prog_vert_prompt_pink
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgVertPromptLime
+    script  : prog_vert_prompt_lime
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgVertPromptCharcoalGrey
+    script  : prog_vert_prompt_charcoal_grey
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgVertPromptRed
+    script  : prog_vert_prompt_red
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgVertPromptEmeraldShop
+    script  : prog_vert_prompt_emerald
+[2026-11-13 14:54:05] [WARN ] [net-games/DEMO-PROGS] Demo PROG script skipped; Tiled objects missing
+    area_id : default
+    missing :
+        [1] : ProgShop
+    script  : prog_shop
+[2026-11-13 14:54:05] [INFO ] [net-games/DEMO-PROGS] Demo PROG activation summary
+    failed  : 0
+    loaded  : 0
+    skipped : 19

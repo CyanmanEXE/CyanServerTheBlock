@@ -9,3 +9,458 @@
     owner     : eznpcs
     player_id : c4b5d9b2-158b-486d-8e72-9b0729721315
     success   : true
+[2026-11-11 19:27:56] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : eznpcs
+    player_id : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+[2026-11-11 19:27:59] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    success   : true
+[2026-11-11 19:28:01] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    success   : true
+[2026-11-11 19:28:01] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+[2026-11-11 19:28:05] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    success   : true
+[2026-11-11 19:28:08] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+[2026-11-11 19:28:27] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+[2026-11-11 19:28:32] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    success   : true
+[2026-11-11 19:33:53] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    success   : true
+[2026-11-11 19:34:00] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : eznpcs
+    player_id : 717c49dc-3658-4eb1-bd98-2e9561fab46c
+[2026-11-11 19:34:00] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : 717c49dc-3658-4eb1-bd98-2e9561fab46c
+    success   : true
+[2026-11-11 19:34:02] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : 717c49dc-3658-4eb1-bd98-2e9561fab46c
+    success   : true
+[2026-11-11 19:34:02] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : 717c49dc-3658-4eb1-bd98-2e9561fab46c
+[2026-11-11 19:34:10] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : 717c49dc-3658-4eb1-bd98-2e9561fab46c
+    success   : true
+[2026-11-11 19:37:46] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : 717c49dc-3658-4eb1-bd98-2e9561fab46c
+    success   : true
+[2026-11-11 19:37:57] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : eznpcs
+    player_id : c8bad993-c256-4816-a803-4dd376c77208
+[2026-11-11 19:37:57] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : c8bad993-c256-4816-a803-4dd376c77208
+    success   : true
+[2026-11-11 19:37:58] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : c8bad993-c256-4816-a803-4dd376c77208
+    success   : true
+[2026-11-11 19:37:58] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : c8bad993-c256-4816-a803-4dd376c77208
+[2026-11-11 19:37:59] [DEBUG] [player_control/CAPTURE] engine HUD restored
+    owner     : "liberation:turn"
+    player_id : c8bad993-c256-4816-a803-4dd376c77208
+    success   : true
+[2026-11-11 19:37:59] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : c8bad993-c256-4816-a803-4dd376c77208
+    success   : true
+[2026-11-11 19:37:59] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : c8bad993-c256-4816-a803-4dd376c77208
+    success   : true
+[2026-11-11 19:38:06] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : eznpcs
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+[2026-11-11 19:38:13] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    success   : true
+[2026-11-11 19:38:14] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    success   : true
+[2026-11-11 19:38:14] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+[2026-11-11 19:38:22] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    success   : true
+[2026-11-11 19:38:26] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+[2026-11-11 19:38:27] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    success   : true
+[2026-11-11 19:38:27] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+[2026-11-11 19:38:34] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+[2026-11-11 19:38:45] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    success   : true
+[2026-11-11 19:39:05] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+[2026-11-11 19:39:34] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+[2026-11-11 19:39:36] [DEBUG] [player_control/CAPTURE] engine HUD restored
+    owner     : "liberation:turn"
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    success   : true
+[2026-11-11 19:39:36] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    success   : true
+[2026-11-11 19:39:36] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : 1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    success   : true
+[2026-11-11 19:39:47] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:39:47] [DEBUG] [player_control/CAPTURE] engine HUD suppressed
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:39:50] [DEBUG] [player_control/CAPTURE] engine HUD restored
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:39:50] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:39:50] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:40:05] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:40:06] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:40:13] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:40:13] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:40:13] [DEBUG] [player_control/CAPTURE] engine HUD suppressed
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:40:26] [DEBUG] [player_control/CAPTURE] engine HUD restored
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:40:26] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:40:27] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:40:27] [DEBUG] [player_control/CAPTURE] engine HUD suppressed
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:40:35] [DEBUG] [player_control/CAPTURE] engine HUD restored
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:40:35] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:40:35] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:40:35] [DEBUG] [player_control/CAPTURE] engine HUD suppressed
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:40:44] [DEBUG] [player_control/CAPTURE] engine HUD restored
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:40:44] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:51:30] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:51:30] [DEBUG] [player_control/CAPTURE] engine HUD suppressed
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:51:33] [DEBUG] [player_control/CAPTURE] engine HUD restored
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:51:33] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:51:33] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:51:36] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:51:37] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:51:39] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:51:40] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:51:40] [DEBUG] [player_control/CAPTURE] engine HUD suppressed
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:51:52] [DEBUG] [player_control/CAPTURE] engine HUD restored
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:51:52] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:51:53] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:51:53] [DEBUG] [player_control/CAPTURE] engine HUD suppressed
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:52:01] [DEBUG] [player_control/CAPTURE] engine HUD restored
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:52:01] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:52:02] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:52:02] [DEBUG] [player_control/CAPTURE] engine HUD suppressed
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:52:10] [DEBUG] [player_control/CAPTURE] engine HUD restored
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:52:10] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:52:19] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:52:19] [DEBUG] [player_control/CAPTURE] engine HUD suppressed
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:52:22] [DEBUG] [player_control/CAPTURE] engine HUD restored
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:52:22] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:52:22] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:52:23] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:52:25] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:54:08] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+    success   : true
+[2026-11-11 19:54:09] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-11 19:54:09] [DEBUG] [player_control/CAPTURE] engine HUD suppressed
+    owner     : net-game-tourney/tournament-flow
+    player_id : 4e130c85-1e60-4e84-8c9c-9e530ac9d520
+[2026-11-12 05:21:18] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : 4833b8b3-1512-43b6-9093-53824e29800b
+    success   : true
+[2026-11-12 05:21:27] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : a8a30190-aed7-4f77-b184-e789eeebae02
+    success   : true
+[2026-11-12 05:21:43] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : eznpcs
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:21:44] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:21:44] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:21:44] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:21:52] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:21:54] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:22:36] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:22:47] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:22:48] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:23:28] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:23:33] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:23:36] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:23:37] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:23:38] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:23:42] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:23:42] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:23:44] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:23:45] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:23:47] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:23:49] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:23:50] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:23:51] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:23:56] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:23:59] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:24:38] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:24:43] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:24:45] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    success   : true
+[2026-11-12 05:25:06] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : affe97b7-0b6f-4e25-ac77-1b881211a3ff
+    success   : true
+[2026-11-13 14:56:01] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : eznpcs
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:56:04] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+    success   : true
+[2026-11-13 14:56:04] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : eznpcs
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:56:08] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+    success   : true
+[2026-11-13 14:56:09] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : eznpcs
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+    success   : true
+[2026-11-13 14:56:09] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:56:19] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+    success   : true
+[2026-11-13 14:56:21] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:56:22] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+    success   : true
+[2026-11-13 14:56:23] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:56:30] [DEBUG] [player_control/CAPTURE] engine input acquired
+    owner     : "liberation:turn"
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:56:34] [DEBUG] [player_control/CAPTURE] engine input release
+    owner     : "liberation:turn"
+    player_id : aec3ec72-35f4-4645-8555-008a17080b90
+    success   : true

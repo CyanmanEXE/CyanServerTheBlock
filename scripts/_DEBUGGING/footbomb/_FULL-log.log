@@ -3,3 +3,40 @@
 [2026-11-11 19:22:55] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_join observed player=c4b5d9b2-158b-486d-8e72-9b0729721315 area=default expected_source_area=footbomb
 [2026-11-11 19:25:16] [INFO ] [footbomb/MAIN] [footbomb] Created FootBomb Controller footbomb-ref-footbomb-150 in footbomb
 [2026-11-11 19:25:28] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_join observed player=ecf4a5c0-cac4-4e77-9462-91acea3d64aa area=default expected_source_area=footbomb
+[2026-11-11 19:27:59] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: created id=liberation_ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+[2026-11-11 19:27:59] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: player joined instance=liberation_ecf4a5c0-cac4-4e77-9462-91acea3d64aa player=ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+[2026-11-11 19:28:01] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_transfer observed player=ecf4a5c0-cac4-4e77-9462-91acea3d64aa area=liberation_ecf4a5c0-cac4-4e77-9462-91acea3d64aa expected_source_area=footbomb
+[2026-11-11 19:33:53] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: player left instance=liberation_ecf4a5c0-cac4-4e77-9462-91acea3d64aa player=ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+[2026-11-11 19:33:53] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: host changed instance=liberation_ecf4a5c0-cac4-4e77-9462-91acea3d64aa new=nil old=ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+[2026-11-11 19:33:57] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_join observed player=717c49dc-3658-4eb1-bd98-2e9561fab46c area=default expected_source_area=footbomb
+[2026-11-11 19:34:00] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: created id=liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c
+[2026-11-11 19:34:00] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: player joined instance=liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c player=717c49dc-3658-4eb1-bd98-2e9561fab46c
+[2026-11-11 19:34:02] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_transfer observed player=717c49dc-3658-4eb1-bd98-2e9561fab46c area=liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c expected_source_area=footbomb
+[2026-11-11 19:37:46] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: player left instance=liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c player=717c49dc-3658-4eb1-bd98-2e9561fab46c
+[2026-11-11 19:37:46] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: host changed instance=liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c new=nil old=717c49dc-3658-4eb1-bd98-2e9561fab46c
+[2026-11-11 19:37:49] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_join observed player=c8bad993-c256-4816-a803-4dd376c77208 area=default expected_source_area=footbomb
+[2026-11-11 19:37:57] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: created id=liberation_c8bad993-c256-4816-a803-4dd376c77208
+[2026-11-11 19:37:57] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: player joined instance=liberation_c8bad993-c256-4816-a803-4dd376c77208 player=c8bad993-c256-4816-a803-4dd376c77208
+[2026-11-11 19:37:58] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_transfer observed player=c8bad993-c256-4816-a803-4dd376c77208 area=liberation_c8bad993-c256-4816-a803-4dd376c77208 expected_source_area=footbomb
+[2026-11-11 19:37:59] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: player left instance=liberation_c8bad993-c256-4816-a803-4dd376c77208 player=c8bad993-c256-4816-a803-4dd376c77208
+[2026-11-11 19:37:59] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: host changed instance=liberation_c8bad993-c256-4816-a803-4dd376c77208 new=nil old=c8bad993-c256-4816-a803-4dd376c77208
+[2026-11-11 19:38:03] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_join observed player=1aec9d1f-9632-47cb-bb30-3e511e1f9195 area=default expected_source_area=footbomb
+[2026-11-11 19:38:13] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: created id=liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+[2026-11-11 19:38:13] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: player joined instance=liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195 player=1aec9d1f-9632-47cb-bb30-3e511e1f9195
+[2026-11-11 19:38:14] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_transfer observed player=1aec9d1f-9632-47cb-bb30-3e511e1f9195 area=liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195 expected_source_area=footbomb
+[2026-11-11 19:39:36] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: player left instance=liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195 player=1aec9d1f-9632-47cb-bb30-3e511e1f9195
+[2026-11-11 19:39:36] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: host changed instance=liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195 new=nil old=1aec9d1f-9632-47cb-bb30-3e511e1f9195
+[2026-11-11 19:39:40] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_join observed player=4e130c85-1e60-4e84-8c9c-9e530ac9d520 area=default expected_source_area=footbomb
+[2026-11-12 05:21:16] [INFO ] [footbomb/MAIN] [footbomb] Created FootBomb Controller footbomb-ref-footbomb-150 in footbomb
+[2026-11-12 05:21:36] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_join observed player=fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3 area=default expected_source_area=footbomb
+[2026-11-12 05:21:43] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: created id=liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:21:43] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: player joined instance=liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3 player=fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:21:44] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_transfer observed player=fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3 area=liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3 expected_source_area=footbomb
+[2026-11-12 05:24:45] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: player left instance=liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3 player=fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:24:45] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: host changed instance=liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3 new=nil old=fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+[2026-11-12 05:24:49] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_join observed player=affe97b7-0b6f-4e25-ac77-1b881211a3ff area=default expected_source_area=footbomb
+[2026-11-13 14:54:05] [INFO ] [footbomb/MAIN] [footbomb] Created FootBomb Controller footbomb-ref-footbomb-150 in footbomb
+[2026-11-13 14:55:21] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_join observed player=aec3ec72-35f4-4645-8555-008a17080b90 area=default expected_source_area=footbomb
+[2026-11-13 14:56:07] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: created id=liberation_aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:56:07] [INFO ] [footbomb/MAIN] [footbomb] INSTANCE_FLOW: player joined instance=liberation_aec3ec72-35f4-4645-8555-008a17080b90 player=aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:56:09] [INFO ] [footbomb/MAIN] [footbomb] ASSET_FLOW: player_transfer observed player=aec3ec72-35f4-4645-8555-008a17080b90 area=liberation_aec3ec72-35f4-4645-8555-008a17080b90 expected_source_area=footbomb

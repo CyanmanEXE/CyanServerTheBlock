@@ -1,0 +1,431 @@
+[2026-11-11 19:27:59] [INFO ] [nebulous-liberations/SPAWNING] Panel overworld spawn queue constructed
+    area_id          : liberation_ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    configured_count : 2
+    dark_hole_count  : 2
+[2026-11-11 19:27:59] [WARN ] [nebulous-liberations/SPAWNING] Skipping enemy spawn on a non-enemy or occupied panel after panel indexing
+    base_area_id        : liberation1
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 83
+    source_panel_type   : "Dark Hole"
+    x                   : 17
+    y                   : 27
+    z                   : 0
+[2026-11-11 19:27:59] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : liberation1
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 139
+    source_panel_type   : "Dark Hole"
+    x                   : 27
+    y                   : 6
+    z                   : 0
+[2026-11-11 19:27:59] [INFO ] [nebulous-liberations/SPAWNING] Completed configured panel enemy spawns
+    base_area_id           : liberation1
+    configured_spawn_count : 2
+    instance_area_id       : liberation_ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    spawned_count          : 1
+[2026-11-11 19:28:29] [INFO ] [nebulous-liberations/SPAWNING] Dark Hole respawn requested
+    area_id          : liberation_ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    destination_x    : 15
+    destination_y    : 28
+    source_object_id : 83
+    template_name    : BigBrute
+[2026-11-11 19:28:31] [INFO ] [nebulous-liberations/SPAWNING] Dark Hole respawn completed
+    area_id          : liberation_ecf4a5c0-cac4-4e77-9462-91acea3d64aa
+    enemy_id         : db7e3b12-1e51-4e3d-990b-80252ff1dd3c
+    source_object_id : 83
+    template_name    : BigBrute
+[2026-11-11 19:34:00] [INFO ] [nebulous-liberations/SPAWNING] Panel overworld spawn queue constructed
+    area_id          : liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c
+    configured_count : 6
+    dark_hole_count  : 6
+[2026-11-11 19:34:00] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 50
+    source_panel_type   : "Dark Hole"
+    x                   : 34
+    y                   : 14
+    z                   : 0
+[2026-11-11 19:34:00] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 55
+    source_panel_type   : "Dark Hole"
+    x                   : 34
+    y                   : 6
+    z                   : 0
+[2026-11-11 19:34:00] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Left"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 79
+    source_panel_type   : "Dark Hole"
+    x                   : 26
+    y                   : 7
+    z                   : 0
+[2026-11-11 19:34:00] [WARN ] [nebulous-liberations/SPAWNING] Skipping enemy spawn on a non-enemy or occupied panel after panel indexing
+    base_area_id        : LiberationEasyMode
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 80
+    source_panel_type   : "Dark Hole"
+    x                   : 14
+    y                   : 11
+    z                   : 0
+[2026-11-11 19:34:00] [WARN ] [nebulous-liberations/SPAWNING] Skipping enemy spawn on a non-enemy or occupied panel after panel indexing
+    base_area_id        : LiberationEasyMode
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 81
+    source_panel_type   : "Dark Hole"
+    x                   : 14
+    y                   : 2
+    z                   : 0
+[2026-11-11 19:34:00] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 82
+    source_panel_type   : "Dark Hole"
+    x                   : 12
+    y                   : 0
+    z                   : 0
+[2026-11-11 19:34:00] [INFO ] [nebulous-liberations/SPAWNING] Completed configured panel enemy spawns
+    base_area_id           : LiberationEasyMode
+    configured_spawn_count : 6
+    instance_area_id       : liberation_717c49dc-3658-4eb1-bd98-2e9561fab46c
+    spawned_count          : 4
+[2026-11-11 19:37:57] [INFO ] [nebulous-liberations/SPAWNING] Panel overworld spawn queue constructed
+    area_id          : liberation_c8bad993-c256-4816-a803-4dd376c77208
+    configured_count : 6
+    dark_hole_count  : 6
+[2026-11-11 19:37:57] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_c8bad993-c256-4816-a803-4dd376c77208
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 50
+    source_panel_type   : "Dark Hole"
+    x                   : 34
+    y                   : 14
+    z                   : 0
+[2026-11-11 19:37:57] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_c8bad993-c256-4816-a803-4dd376c77208
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 55
+    source_panel_type   : "Dark Hole"
+    x                   : 34
+    y                   : 6
+    z                   : 0
+[2026-11-11 19:37:57] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Left"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_c8bad993-c256-4816-a803-4dd376c77208
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 79
+    source_panel_type   : "Dark Hole"
+    x                   : 26
+    y                   : 7
+    z                   : 0
+[2026-11-11 19:37:57] [WARN ] [nebulous-liberations/SPAWNING] Skipping enemy spawn on a non-enemy or occupied panel after panel indexing
+    base_area_id        : LiberationEasyMode
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_c8bad993-c256-4816-a803-4dd376c77208
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 80
+    source_panel_type   : "Dark Hole"
+    x                   : 14
+    y                   : 11
+    z                   : 0
+[2026-11-11 19:37:57] [WARN ] [nebulous-liberations/SPAWNING] Skipping enemy spawn on a non-enemy or occupied panel after panel indexing
+    base_area_id        : LiberationEasyMode
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_c8bad993-c256-4816-a803-4dd376c77208
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 81
+    source_panel_type   : "Dark Hole"
+    x                   : 14
+    y                   : 2
+    z                   : 0
+[2026-11-11 19:37:57] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_c8bad993-c256-4816-a803-4dd376c77208
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 82
+    source_panel_type   : "Dark Hole"
+    x                   : 12
+    y                   : 0
+    z                   : 0
+[2026-11-11 19:37:57] [INFO ] [nebulous-liberations/SPAWNING] Completed configured panel enemy spawns
+    base_area_id           : LiberationEasyMode
+    configured_spawn_count : 6
+    instance_area_id       : liberation_c8bad993-c256-4816-a803-4dd376c77208
+    spawned_count          : 4
+[2026-11-11 19:38:13] [INFO ] [nebulous-liberations/SPAWNING] Panel overworld spawn queue constructed
+    area_id          : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    configured_count : 6
+    dark_hole_count  : 6
+[2026-11-11 19:38:13] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 50
+    source_panel_type   : "Dark Hole"
+    x                   : 34
+    y                   : 14
+    z                   : 0
+[2026-11-11 19:38:13] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 55
+    source_panel_type   : "Dark Hole"
+    x                   : 34
+    y                   : 6
+    z                   : 0
+[2026-11-11 19:38:13] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Left"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 79
+    source_panel_type   : "Dark Hole"
+    x                   : 26
+    y                   : 7
+    z                   : 0
+[2026-11-11 19:38:13] [WARN ] [nebulous-liberations/SPAWNING] Skipping enemy spawn on a non-enemy or occupied panel after panel indexing
+    base_area_id        : LiberationEasyMode
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 80
+    source_panel_type   : "Dark Hole"
+    x                   : 14
+    y                   : 11
+    z                   : 0
+[2026-11-11 19:38:13] [WARN ] [nebulous-liberations/SPAWNING] Skipping enemy spawn on a non-enemy or occupied panel after panel indexing
+    base_area_id        : LiberationEasyMode
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 81
+    source_panel_type   : "Dark Hole"
+    x                   : 14
+    y                   : 2
+    z                   : 0
+[2026-11-11 19:38:13] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 82
+    source_panel_type   : "Dark Hole"
+    x                   : 12
+    y                   : 0
+    z                   : 0
+[2026-11-11 19:38:13] [INFO ] [nebulous-liberations/SPAWNING] Completed configured panel enemy spawns
+    base_area_id           : LiberationEasyMode
+    configured_spawn_count : 6
+    instance_area_id       : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    spawned_count          : 4
+[2026-11-11 19:38:40] [INFO ] [nebulous-liberations/SPAWNING] Dark Hole respawn requested
+    area_id          : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    destination_x    : 12
+    destination_y    : 12
+    source_object_id : 80
+    template_name    : BigBrute
+[2026-11-11 19:38:42] [INFO ] [nebulous-liberations/SPAWNING] Dark Hole respawn completed
+    area_id          : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    enemy_id         : b925314e-3b90-47a8-b766-db27d9aae366
+    source_object_id : 80
+    template_name    : BigBrute
+[2026-11-11 19:38:42] [INFO ] [nebulous-liberations/SPAWNING] Dark Hole respawn requested
+    area_id          : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    destination_x    : 12
+    destination_y    : 3
+    source_object_id : 81
+    template_name    : BigBrute
+[2026-11-11 19:38:45] [INFO ] [nebulous-liberations/SPAWNING] Dark Hole respawn completed
+    area_id          : liberation_1aec9d1f-9632-47cb-bb30-3e511e1f9195
+    enemy_id         : 08cd8592-fd07-4419-a5bb-b55a87c3d0ae
+    source_object_id : 81
+    template_name    : BigBrute
+[2026-11-12 05:21:44] [INFO ] [nebulous-liberations/SPAWNING] Panel overworld spawn queue constructed
+    area_id          : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    configured_count : 6
+    dark_hole_count  : 6
+[2026-11-12 05:21:44] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 50
+    source_panel_type   : "Dark Hole"
+    x                   : 34
+    y                   : 14
+    z                   : 0
+[2026-11-12 05:21:44] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 55
+    source_panel_type   : "Dark Hole"
+    x                   : 34
+    y                   : 6
+    z                   : 0
+[2026-11-12 05:21:44] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Left"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 79
+    source_panel_type   : "Dark Hole"
+    x                   : 26
+    y                   : 7
+    z                   : 0
+[2026-11-12 05:21:44] [WARN ] [nebulous-liberations/SPAWNING] Skipping enemy spawn on a non-enemy or occupied panel after panel indexing
+    base_area_id        : LiberationEasyMode
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 80
+    source_panel_type   : "Dark Hole"
+    x                   : 14
+    y                   : 11
+    z                   : 0
+[2026-11-12 05:21:44] [WARN ] [nebulous-liberations/SPAWNING] Skipping enemy spawn on a non-enemy or occupied panel after panel indexing
+    base_area_id        : LiberationEasyMode
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 81
+    source_panel_type   : "Dark Hole"
+    x                   : 14
+    y                   : 2
+    z                   : 0
+[2026-11-12 05:21:44] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationEasyMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 82
+    source_panel_type   : "Dark Hole"
+    x                   : 12
+    y                   : 0
+    z                   : 0
+[2026-11-12 05:21:44] [INFO ] [nebulous-liberations/SPAWNING] Completed configured panel enemy spawns
+    base_area_id           : LiberationEasyMode
+    configured_spawn_count : 6
+    instance_area_id       : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    spawned_count          : 4
+[2026-11-12 05:22:41] [INFO ] [nebulous-liberations/SPAWNING] Dark Hole respawn requested
+    area_id          : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    destination_x    : 14
+    destination_y    : 12
+    source_object_id : 80
+    template_name    : BigBrute
+[2026-11-12 05:22:44] [INFO ] [nebulous-liberations/SPAWNING] Dark Hole respawn completed
+    area_id          : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    enemy_id         : f21e92db-9ec6-4738-9b09-9b18943becb1
+    source_object_id : 80
+    template_name    : BigBrute
+[2026-11-12 05:22:44] [INFO ] [nebulous-liberations/SPAWNING] Dark Hole respawn requested
+    area_id          : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    destination_x    : 12
+    destination_y    : 1
+    source_object_id : 81
+    template_name    : BigBrute
+[2026-11-12 05:22:47] [INFO ] [nebulous-liberations/SPAWNING] Dark Hole respawn completed
+    area_id          : liberation_fdf4f8f2-035f-48cd-a0cb-3b6bf25234a3
+    enemy_id         : 7b75a49b-58c8-424c-ba2c-f767eaa4af81
+    source_object_id : 81
+    template_name    : BigBrute
+[2026-11-13 14:56:08] [INFO ] [nebulous-liberations/SPAWNING] Panel overworld spawn queue constructed
+    area_id          : liberation_aec3ec72-35f4-4645-8555-008a17080b90
+    configured_count : 4
+    dark_hole_count  : 4
+[2026-11-13 14:56:08] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationNormalMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_aec3ec72-35f4-4645-8555-008a17080b90
+    panel_behavior_type : "Dark Hole"
+    requested_bot_scale : 1.5
+    source_object_id    : 70
+    source_panel_type   : "Dark Hole Buffed Virus"
+    x                   : 22
+    y                   : 17
+    z                   : 0
+[2026-11-13 14:56:08] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationNormalMode
+    direction           : "Down Left"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_aec3ec72-35f4-4645-8555-008a17080b90
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 71
+    source_panel_type   : "Dark Hole"
+    x                   : 17
+    y                   : 18
+    z                   : 0
+[2026-11-13 14:56:08] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationNormalMode
+    direction           : "Down Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_aec3ec72-35f4-4645-8555-008a17080b90
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 72
+    source_panel_type   : "Dark Hole"
+    x                   : 19
+    y                   : 15
+    z                   : 0
+[2026-11-13 14:56:08] [INFO ] [nebulous-liberations/SPAWNING] Configured panel enemy spawned
+    base_area_id        : LiberationNormalMode
+    direction           : "Up Right"
+    enemy_name          : BigBrute
+    instance_area_id    : liberation_aec3ec72-35f4-4645-8555-008a17080b90
+    panel_behavior_type : "Dark Hole"
+    source_object_id    : 73
+    source_panel_type   : "Dark Hole"
+    x                   : 14
+    y                   : 16
+    z                   : 0
+[2026-11-13 14:56:08] [INFO ] [nebulous-liberations/SPAWNING] Completed configured panel enemy spawns
+    base_area_id           : LiberationNormalMode
+    configured_spawn_count : 4
+    instance_area_id       : liberation_aec3ec72-35f4-4645-8555-008a17080b90
+    spawned_count          : 4

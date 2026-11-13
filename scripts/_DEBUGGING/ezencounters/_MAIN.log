@@ -605,3 +605,421 @@
 [2026-11-11 19:25:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter school_Encounter3 (encounters)
 [2026-11-11 19:25:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter school_Encounter4 (encounters)
 [2026-11-11 19:25:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for school
+[2026-11-11 19:28:01] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-11 19:33:53] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-11 19:34:02] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-11 19:37:46] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-11 19:37:58] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-11 19:37:59] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-11 19:38:14] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-11 19:39:36] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to school
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter school_Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter school_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter school_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter school_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for school
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to Chichi
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi_Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for Chichi
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to Chichi4
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for Chichi4
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip to example liberation friendly
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (bosses)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for example liberation friendly
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to endless-runner
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BossTest (bosses)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter SpecialTest (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for endless-runner
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip to testground
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter6 (bosses)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter5 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for testground
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip to LiberationEasyMode
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter7 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter8 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ShadeMan (bosses)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for LiberationEasyMode
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip to LiberationNormalMode
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter7 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter8 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ShadeMan (bosses)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute1 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute2 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute3 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for LiberationNormalMode
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to Ponddrive1
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for Ponddrive1
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip to liberation1
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (bosses)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for liberation1
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip to LiberationHardMode
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter7 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter8 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ShadeMan (bosses)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute1 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute2 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute3 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute4 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for LiberationHardMode
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip to DEBUGLIB
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ShadeMan (bosses)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBruteVar1 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBruteVar2 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBruteVar3 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Mettaur (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Roll (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for DEBUGLIB
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to porttown1
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown1_Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown1_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown1_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown1_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for porttown1
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to SnowPark3
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter SnowPark3_Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter SnowPark3_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter SnowPark3_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter SnowPark3_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for SnowPark3
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip to testlib
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter6 (bosses)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter5 (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for testlib
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip to NewLiberation1
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter7 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter8 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter9 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ShadeMan (bosses)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute (special_encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for NewLiberation1
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to porttown3
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown3_Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown3_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown3_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown3_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for porttown3
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to ponddrive2
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ponddrive2_Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ponddrive2_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ponddrive2_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ponddrive2_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for ponddrive2
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to Chichi3
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi3_Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi3_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi3_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi3_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for Chichi3
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to undernet1
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Robber (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter5 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter6 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter7 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter8 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter9 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter10 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter11 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter12 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter13 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter14 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter15 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter16 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter17 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter18 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter19 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter20 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter21 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter22 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter23 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter24 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter25 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter26 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter27 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter28 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter29 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter30 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for undernet1
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to porttown2
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown2_Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown2_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown2_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown2_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for porttown2
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to Chichi2
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi2_Encounter1 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi2_Encounter2 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi2_Encounter3 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi2_Encounter4 (encounters)
+[2026-11-12 05:21:15] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for Chichi2
+[2026-11-12 05:21:18] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-12 05:21:27] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-12 05:21:44] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-12 05:24:45] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-12 05:25:06] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to Chichi4
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for Chichi4
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to endless-runner
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BossTest (bosses)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter SpecialTest (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for endless-runner
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-example-liberation-friendly.zip to example liberation friendly
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (bosses)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for example liberation friendly
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to SnowPark3
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter SnowPark3_Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter SnowPark3_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter SnowPark3_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter SnowPark3_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for SnowPark3
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to Chichi2
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi2_Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi2_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi2_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi2_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for Chichi2
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationeasymode.zip to LiberationEasyMode
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter7 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter8 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ShadeMan (bosses)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for LiberationEasyMode
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-newliberation1.zip to NewLiberation1
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter7 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter8 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter9 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ShadeMan (bosses)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for NewLiberation1
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to school
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter school_Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter school_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter school_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter school_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for school
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationnormalmode.zip to LiberationNormalMode
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter7 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter8 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ShadeMan (bosses)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute1 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute2 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute3 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for LiberationNormalMode
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip to DEBUGLIB
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ShadeMan (bosses)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBruteVar1 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBruteVar2 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBruteVar3 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Mettaur (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Roll (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for DEBUGLIB
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to Chichi
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi_Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for Chichi
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to porttown3
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown3_Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown3_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown3_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown3_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for porttown3
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to undernet1
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Robber (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter5 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter6 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter7 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter8 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter9 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter10 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter11 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter12 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter13 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter14 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter15 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter16 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter17 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter18 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter19 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter20 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter21 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter22 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter23 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter24 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter25 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter26 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter27 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter28 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter29 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter undernet1_Encounter30 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for undernet1
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to ponddrive2
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ponddrive2_Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ponddrive2_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ponddrive2_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ponddrive2_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for ponddrive2
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to porttown2
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown2_Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown2_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown2_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown2_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for porttown2
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to porttown1
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown1_Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown1_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown1_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter porttown1_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for porttown1
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to Ponddrive1
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for Ponddrive1
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testlib.zip to testlib
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter6 (bosses)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testlib_Encounter5 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for testlib
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberation1.zip to liberation1
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (bosses)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for liberation1
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters.zip to Chichi3
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi3_Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi3_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi3_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Chichi3_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for Chichi3
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-testground.zip to testground
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter6 (bosses)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter testground_Encounter5 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for testground
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] providing mob package /server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-liberationhardmode.zip to LiberationHardMode
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter1 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter2 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter3 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter4 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter5 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter6 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter7 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter Encounter8 (encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter ShadeMan (bosses)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute1 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute2 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute3 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded named encounter BigBrute4 (special_encounters)
+[2026-11-13 14:54:04] [INFO ] [ezencounters/MAIN] [ezencounters] loaded encounter table for LiberationHardMode
+[2026-11-13 14:56:09] [INFO ] [ezencounters/MAIN] [ezencounters] clearing last position

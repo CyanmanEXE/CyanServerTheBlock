@@ -142,3 +142,99 @@
 [2026-11-11 19:25:18] [INFO ] [nebulous-liberations/TILESET-EMBEDDER] Liberation tileset embedding pass complete
     areas_checked  : 69
     maps_processed : 69
+[2026-11-12 05:21:17] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx"
+[2026-11-12 05:21:17] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.png"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.png"
+[2026-11-12 05:21:17] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.tsx"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.tsx"
+[2026-11-12 05:21:17] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.png"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.png"
+[2026-11-12 05:21:17] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.tsx"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.tsx"
+[2026-11-12 05:21:18] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.png"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.png"
+[2026-11-12 05:21:18] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : "example liberation friendly"
+    map_path : "areas/example liberation friendly.tmx"
+[2026-11-12 05:21:18] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : testground
+    map_path : areas/testground.tmx
+[2026-11-12 05:21:18] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : LiberationEasyMode
+    map_path : areas/LiberationEasyMode.tmx
+[2026-11-12 05:21:18] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : LiberationNormalMode
+    map_path : areas/LiberationNormalMode.tmx
+[2026-11-12 05:21:18] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : liberation1
+    map_path : areas/liberation1.tmx
+[2026-11-12 05:21:18] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : LiberationHardMode
+    map_path : areas/LiberationHardMode.tmx
+[2026-11-12 05:21:18] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : DEBUGLIB
+    map_path : areas/DEBUGLIB.tmx
+[2026-11-12 05:21:18] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : testlib
+    map_path : areas/testlib.tmx
+[2026-11-12 05:21:18] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : NewLiberation1
+    map_path : areas/NewLiberation1.tmx
+[2026-11-12 05:21:18] [INFO ] [nebulous-liberations/TILESET-EMBEDDER] Liberation tileset embedding pass complete
+    areas_checked  : 69
+    maps_processed : 69
+[2026-11-13 14:54:06] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx"
+[2026-11-13 14:54:06] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.png"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.png"
+[2026-11-13 14:54:06] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.tsx"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.tsx"
+[2026-11-13 14:54:06] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.png"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/selected tile.png"
+[2026-11-13 14:54:06] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.tsx"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.tsx"
+[2026-11-13 14:54:06] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Published shared liberation tileset asset
+    asset_path : "/server/assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.png"
+    file_path  : "assets/ezlibs-custom/nebulous-liberations/tiles/attack indicator.png"
+[2026-11-13 14:54:07] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : "example liberation friendly"
+    map_path : "areas/example liberation friendly.tmx"
+[2026-11-13 14:54:07] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : LiberationEasyMode
+    map_path : areas/LiberationEasyMode.tmx
+[2026-11-13 14:54:07] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : NewLiberation1
+    map_path : areas/NewLiberation1.tmx
+[2026-11-13 14:54:07] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : LiberationNormalMode
+    map_path : areas/LiberationNormalMode.tmx
+[2026-11-13 14:54:07] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : DEBUGLIB
+    map_path : areas/DEBUGLIB.tmx
+[2026-11-13 14:54:07] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : testlib
+    map_path : areas/testlib.tmx
+[2026-11-13 14:54:07] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : liberation1
+    map_path : areas/liberation1.tmx
+[2026-11-13 14:54:07] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : testground
+    map_path : areas/testground.tmx
+[2026-11-13 14:54:07] [DEBUG] [nebulous-liberations/TILESET-EMBEDDER] Liberation map tilesets already correct
+    area_id  : LiberationHardMode
+    map_path : areas/LiberationHardMode.tmx
+[2026-11-13 14:54:07] [INFO ] [nebulous-liberations/TILESET-EMBEDDER] Liberation tileset embedding pass complete
+    areas_checked  : 69
+    maps_processed : 69

@@ -1,0 +1,126 @@
+[2026-11-13 14:54:27] [INFO ] [displayer/FONT] Priority NPC fonts allocated
+    font_count : 6
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [INFO ] [displayer/FONT] Priority NPC fonts allocated
+    font_count : 6
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [INFO ] [displayer/FONT] Priority NPC fonts allocated
+    font_count : 6
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [INFO ] [displayer/FONT] Priority NPC fonts allocated
+    font_count : 6
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [INFO ] [displayer/FONT] Priority NPC fonts allocated
+    font_count : 6
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [INFO ] [displayer/FONT] Priority NPC fonts allocated
+    font_count : 6
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [INFO ] [displayer/FONT] Priority NPC fonts allocated
+    font_count : 6
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:54:27] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [DEBUG] [displayer/FONT] Font asset allocation requested
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
+[2026-11-13 14:55:21] [ERROR] [displayer/FONT] Font allocation failed
+    error      : "...ode\\CyanServerTheBlock\\scripts/displayer/font-system.lua:720: Async.await expected a Promise or async iterator function; got table"
+    generation : 1
+    player_id  : aec3ec72-35f4-4645-8555-008a17080b90
