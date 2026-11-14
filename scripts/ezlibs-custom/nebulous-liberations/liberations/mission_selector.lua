@@ -18,6 +18,7 @@ local MUG_ROOT = "/server/assets/ezlibs-assets/eznpcs/mug/"
 local MENU_CONFIG = {
     max_visible = 5,
     centered = true,
+    stable_text = true,
     mugshot = {
         texture_path = MUG_ROOT .. "prog-gold.png",
         animation_path = MUG_ROOT .. "prog-gold.animation",
