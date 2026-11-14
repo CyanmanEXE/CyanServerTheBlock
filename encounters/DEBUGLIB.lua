@@ -7,7 +7,7 @@ return {
     bosses = {
         {
             name = "ShadeMan",
-            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib-shademan.zip",
             weight = 10,
             enemies = {
                 {
@@ -232,7 +232,7 @@ return {
     special_encounters = {
         {
             name = "BigBrute",
-            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib-bigbrute.zip",
             weight = 10,
             enemies = {
                 {
@@ -302,7 +302,7 @@ return {
         },
         {
             name = "BigBruteVar1",
-            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib-bigbrutevar1.zip",
             weight = 10,
             enemies = {
                 {
@@ -376,7 +376,7 @@ return {
         },
         {
             name = "BigBruteVar2",
-            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib-bigbrutevar2.zip",
             weight = 10,
             enemies = {
                 {
@@ -454,7 +454,7 @@ return {
         },
         {
             name = "BigBruteVar3",
-            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib-bigbrutevar3.zip",
             weight = 10,
             enemies = {
                 {
@@ -601,8 +601,78 @@ return {
             no_battle_rewards = true,
         },
         {
+            name = "Bladia",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib-mettaur.zip",
+            weight = 10,
+            enemies = {
+                {
+                    name = "Mettaur", -- temporary safe battle stand-in; OW bot remains Bladia
+                    rank = 1,
+                },
+            },
+            obstacles = {},
+            positions = {
+                {
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                },
+                {
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                },
+                {
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                },
+            },
+            player_positions = {
+                {
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                },
+                {
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                },
+                {
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                },
+            },
+            freedom_mission = {
+                enabled = true,
+                player_can_flip = false,
+                turn_count = 3,
+            },
+            no_battle_rewards = true,
+        },
+        {
             name = "Roll",
-            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib-roll.zip",
             weight = 10,
             enemies = {
                 {
