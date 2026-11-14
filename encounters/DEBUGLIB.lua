@@ -158,7 +158,7 @@ return {
     encounters = {
         {
             name = "Encounter1",
-            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib-mettaur.zip",
             weight = 10,
             enemies = {
                 {
@@ -532,7 +532,7 @@ return {
         },
         {
             name = "Mettaur",
-            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib-mettaur.zip",
             weight = 10,
             enemies = {
                 {

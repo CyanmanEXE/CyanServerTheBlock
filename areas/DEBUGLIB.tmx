@@ -314,7 +314,7 @@
     <property name="Max HP" type="int" value="240"/>
     <property name="Minion Health Override" value="240"/>
     <property name="OW Attack Damage" type="int" value="20"/>
-    <property name="OW Bot Encounter" value="Roll"/>
+    <property name="OW Bot Encounter" value="Mettaur"/>
     <property name="OW Scale" type="float" value="1.5"/>
     <property name="Spawns" value="Mettaur"/>
     <property name="Starting HP" type="int" value="240"/>
