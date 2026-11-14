@@ -143,6 +143,8 @@ EnemyTemplates.metatable = {
             return EnemyTemplates.ai.simple_charge(self)
         elseif self.ai_type == "ranged" then
             return EnemyTemplates.ai.ranged(self)
+        elseif self.ai_type == "bladia_strike" and EnemyTemplates.ai.bladia_strike then
+            return EnemyTemplates.ai.bladia_strike(self)
         elseif self.ai_type == "shademan_ambush" then
             return EnemyTemplates.ai.shademan_ambush(self)
         elseif self.ai_type == "shockwave_line" then

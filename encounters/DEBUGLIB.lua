@@ -602,11 +602,11 @@ return {
         },
         {
             name = "Bladia",
-            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib-mettaur.zip",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib-bladia-native-test.zip",
             weight = 10,
             enemies = {
                 {
-                    name = "Mettaur", -- temporary safe battle stand-in; OW bot remains Bladia
+                    name = "Bladia", -- OPTIONAL native client test: may crash, capture client log
                     rank = 1,
                 },
             },
