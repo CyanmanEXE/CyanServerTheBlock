@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="40" height="40" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="208">
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="40" height="40" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="217">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/ezlibs-custom/nebulous-liberations/backgrounds/block/GrayBG.animation"/>
@@ -101,34 +101,26 @@
   <object id="27" type="Dark Hole" gid="6" x="832" y="736" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Minion Health Override" value="120"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="208"/></properties>
   </object>
   <object id="28" type="Dark Hole" gid="6" x="832" y="864" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Minion Health Override" value="120"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="208"/></properties>
   </object>
   <object id="29" type="Dark Hole" gid="6" x="352" y="640" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Minion Health Override" value="190"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="210"/></properties>
   </object>
   <object id="30" type="Dark Hole" gid="6" x="512" y="640" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Minion Health Override" value="190"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="210"/></properties>
   </object>
   <object id="31" type="Dark Panel" gid="4" x="384" y="672" width="50" height="30"/>
   <object id="32" type="Dark Panel" gid="4" x="352" y="672" width="50" height="30"/>
@@ -188,10 +180,8 @@
   <object id="86" type="Dark Hole" gid="6" x="832" y="384" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Minion Health Override" value="190"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="210"/></properties>
   </object>
   <object id="87" type="Dark Panel" gid="4" x="544" y="256" width="50" height="30"/>
   <object id="88" type="Dark Panel" gid="4" x="544" y="224" width="50" height="30"/>
@@ -253,11 +243,8 @@
   <object id="144" type="Dark Hole" gid="6" x="512" y="1088" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_02"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Minion Health Override" value="300"/>
-    <property name="Spawns" value="BigBrute"/>
-    <property name="scale" value="1.5"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="213"/></properties>
   </object>
   <object id="145" name="Spawn" type="Spawn Point" x="944" y="1136">
    <properties>
@@ -388,11 +375,9 @@
   <object id="168" type="Boss Dark Panel" gid="4" x="1024" y="128" width="50" height="30">
    <properties>
     <property name="Auto Face Player" type="bool" value="true"/>
-    <property name="Boss" value="ShadeMan"/>
-    <property name="Boss Health Override" value="1200"/>
     <property name="Boss ID" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Left"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Left"/>
+   <property name="Bot Config" type="object" value="214"/></properties>
   </object>
   <object id="169" type="Indestructible Panel" gid="7" x="1056" y="160" width="50" height="30">
    <properties>
@@ -437,11 +422,9 @@
   <object id="177" type="Boss Dark Panel" gid="4" x="128" y="992" width="50" height="30">
    <properties>
     <property name="Auto Face Player" type="bool" value="true"/>
-    <property name="Boss" value="ShadeMan"/>
-    <property name="Boss Health Override" value="2000"/>
     <property name="Boss ID" value="ShadeMan_02"/>
-    <property name="Direction" value="Down Right"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+   <property name="Bot Config" type="object" value="215"/></properties>
   </object>
   <object id="178" type="Indestructible Panel" gid="7" x="96" y="992" width="50" height="30">
    <properties>
@@ -498,11 +481,8 @@
   <object id="199" type="Dark Hole" gid="6" x="480" y="1056" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_02"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Minion Health Override" value="300"/>
-    <property name="Spawns" value="BigBrute"/>
-    <property name="scale" value="1.5"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="213"/></properties>
   </object>
   <object id="200" name="Point of Interest" type="Point of Interest" x="864" y="824">
    <properties>
@@ -546,5 +526,5 @@
    </properties>
    <point/>
   </object>
- </objectgroup>
+ <object id="208" name="Bot for Dark Hole #27" type="Bot Config" x="832" y="736" width="0" height="0"><properties><property name="Spawns" value="BigBrute"/><property name="Max HP" type="int" value="120"/></properties></object><object id="210" name="Bot for Dark Hole #29" type="Bot Config" x="352" y="640" width="0" height="0"><properties><property name="Spawns" value="BigBrute"/><property name="Max HP" type="int" value="190"/></properties></object><object id="213" name="Bot for Dark Hole #144" type="Bot Config" x="512" y="1088" width="0" height="0"><properties><property name="Spawns" value="BigBrute"/><property name="Max HP" type="int" value="300"/><property name="OW Scale" type="float" value="1.5"/></properties></object><object id="214" name="Bot for Boss Dark Panel #168" type="Bot Config" x="1024" y="128" width="0" height="0"><properties><property name="Max HP" type="int" value="1200"/><property name="Spawns" value="ShadeMan"/></properties></object><object id="215" name="Bot for Boss Dark Panel #177" type="Bot Config" x="128" y="992" width="0" height="0"><properties><property name="Max HP" type="int" value="2000"/><property name="Spawns" value="ShadeMan"/></properties></object></objectgroup>
 </map>

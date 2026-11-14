@@ -3,6 +3,8 @@ local log = require("scripts/ezlibs-custom/nebulous-liberations/liberations/logg
 local ezconfig = require("scripts/ezlibs-scripts/ezconfig")
 
 local PanelEncounters = {}
+local Numbered = require("scripts/ezlibs-custom/nebulous-liberations/liberations/numbered_properties")
+local problems = require("scripts/ezlibs-custom/nebulous-liberations/liberations/logger").map_problems
 
 --[[
 Encounters are defined per base area by ezencounters itself. The file
@@ -438,7 +440,7 @@ function PanelEncounters.resolve_named_encounter(base_area_id, category, referen
   return nil
 end
 
--- The object reference is to a Tiled "Dark Hole Encounter List" object in
+-- The object reference is to a Tiled Encounter Config (or legacy Dark Hole Encounter List) in
 -- the BASE area. Each nonblank numbered Name field is the name of a
 -- special_encounters entry in that area's encounter table. Missing and
 -- invalid names are ignored with diagnostics; a fully empty/invalid list
@@ -449,8 +451,9 @@ function PanelEncounters.resolve_dark_hole_liberation_encounters(base_area_id, o
   end
   local id = tonumber(object_reference) or object_reference
   local list_object = Net.get_object_by_id(base_area_id, id)
-  if not list_object or list_object.type ~= "Dark Hole Encounter List" then
-    log:warn_data("Dark Hole Liberation Encounters is not a Dark Hole Encounter List", {
+  if not list_object or (list_object.type ~= "Dark Hole Encounter List"
+      and list_object.type ~= "Encounter Config") then
+    log:warn_data("Liberation Encounter Config reference has incorrect object class", {
       base_area_id = base_area_id,
       reference = tostring(object_reference),
       object_type = list_object and list_object.type,
@@ -458,22 +461,26 @@ function PanelEncounters.resolve_dark_hole_liberation_encounters(base_area_id, o
     return {}
   end
 
-  local numbered = {}
-  for field, value in pairs(list_object.custom_properties or {}) do
-    local index = type(field) == "string" and tonumber(field:match("^Name (%d+)$"))
-    local name = value ~= nil and tostring(value):match("^%s*(.-)%s*$") or ""
-    if index and index > 0 and name ~= "" then
-      numbered[#numbered + 1] = { index = index, name = name }
-    end
+  local legacy = list_object.type == "Dark Hole Encounter List"
+  local numbered, excess = Numbered.names(list_object.custom_properties or {}, legacy)
+  if #excess > 0 then
+    problems:warn_data("Encounter Config exceeds nine numbered entries", {
+      area_id = base_area_id, object_id = list_object.id,
+      property = "Name #", maximum = 9, ignored = #excess})
   end
-  table.sort(numbered, function(a, b) return a.index < b.index end)
 
   local candidates = {}
   for _, entry in ipairs(numbered) do
     local definition = PanelEncounters.resolve_named_encounter(
       base_area_id, "special_encounters", entry.name)
-    if definition then
+    if definition and entry.weight and entry.weight > 0 and entry.weight < math.huge then
+      definition.weight = entry.weight
       candidates[#candidates + 1] = definition
+    elseif definition then
+      problems:warn_data("Invalid liberation encounter weight; entry ignored", {
+        area_id = base_area_id, object_id = list_object.id,
+        property = "Weight " .. entry.index, value = tostring(entry.weight),
+      })
     end
   end
   return candidates
@@ -505,8 +512,9 @@ local function weighted_pool(base_area_id, reference, inherited_category)
     return nil
   end
   local ok, pool = pcall(Net.get_object_by_id, base_area_id, pool_id)
-  if not ok or type(pool) ~= "table" or pool.type ~= "Liberation Encounter Pool" then
-    log:warn_data("Encounter Pool reference is not a Liberation Encounter Pool", {
+  if not ok or type(pool) ~= "table" or (pool.type ~= "Liberation Encounter Pool"
+      and pool.type ~= "Encounter Config") then
+    log:warn_data("Encounter Pool reference is not an Encounter Config", {
       base_area_id = base_area_id, pool_reference = tostring(reference),
       actual_type = pool and pool.type,
     })
@@ -515,23 +523,24 @@ local function weighted_pool(base_area_id, reference, inherited_category)
   local properties = pool.custom_properties or {}
   local category = normalize_category(properties["Encounter Category"], inherited_category)
   local entries = {}
-  for index = 1, 20 do
-    local name = nonempty(properties["Name " .. index])
-    local weight = tonumber(properties["Weight " .. index])
-    if name then
-      if weight == nil then weight = 1 end
-      if weight > 0 and weight < math.huge then
-        local found = PanelEncounters.resolve_named_encounter(base_area_id, category, name)
-        if found then
-          found.weight = weight
-          entries[#entries + 1] = found
-        end
-      elseif weight < 0 then
-        log:warn_data("Encounter Pool has negative weight; entry ignored", {
-          base_area_id = base_area_id, pool_id = pool_id,
-          encounter_name = name, weight = weight,
-        })
+  local numbered, excess = Numbered.names(properties, pool.type == "Liberation Encounter Pool")
+  if #excess > 0 then
+    problems:warn_data("Encounter Config exceeds nine numbered entries", {
+      area_id = base_area_id, object_id = pool_id,
+      property = "Name #", maximum = 9, ignored = #excess})
+  end
+  for _, entry in ipairs(numbered) do
+    if entry.weight and entry.weight > 0 and entry.weight < math.huge then
+      local found = PanelEncounters.resolve_named_encounter(base_area_id, category, entry.name)
+      if found then
+        found.weight = entry.weight
+        entries[#entries + 1] = found
       end
+    else
+      problems:warn_data("Invalid encounter weight", {
+        area_id = base_area_id, object_id = pool_id,
+        property = "Weight " .. entry.index, value = tostring(entry.weight),
+        action = "entry ignored"})
     end
   end
   local selected = PanelEncounters.pick_weighted(entries)

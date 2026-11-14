@@ -152,20 +152,23 @@ local function prop(name, typ, default, enumName)
 end
 
 -- ----------------------------------------------------------------------
--- Common field definition: Dark Hole and Buffed Virus use exactly the
--- same property schema. Override values of 0 mean "inherit".
+-- Placed panel classes expose only their own behavior and object references.
+-- Reusable combat modifiers and encounter selection live on standalone objects.
+-- Numbered Boss ID 2..9 / Name 1..9 / Weight 1..9 are OPTIONAL custom
+-- properties created manually in Tiled; they are intentionally not declared.
 local function dark_hole_members()
     return {
-        prop("Spawns", "string", ""),
         prop("Direction", "string", "Down", "Direction"),
         prop("Boss ID 1", "string", ""),
-        prop("Boss ID 2", "string", ""),
-        prop("OW Bot Encounter", "string", ""),
-        prop("Liberation Encounters", "object", 0),
-        prop("Enemy Config", "object", 0),
-        prop("Encounter Mode", "string", "Auto", "LiberationEncounterMode"),
-        prop("Encounter Category", "string", "Auto", "LiberationEncounterCategory"),
-        prop("OW Encounter Pool", "object", 0),
+        prop("Bot Config", "object", 0),
+        prop("OW Encounter Config", "object", 0),
+        prop("Liberation Encounter Config", "object", 0),
+    }
+end
+
+local function bot_config_members()
+    return {
+        prop("Spawns", "string", ""),
         prop("Max HP", "int", 0),
         prop("Starting HP", "int", 0),
         prop("OW Scale", "float", 0),
@@ -173,9 +176,22 @@ local function dark_hole_members()
         prop("Battle Scale Scope", "string", "Auto", "LiberationBattleScaleScope"),
         prop("OW Attack Damage", "int", 0),
         prop("OW Damage Multiplier", "float", 0),
+        prop("OW Defense Multiplier", "float", 0),
         prop("Battle Attack Multiplier", "float", 0),
         prop("Battle Defense Multiplier", "float", 0),
         prop("AI Type", "string", "Auto", "LiberationAIType"),
+        prop("Heal Percent Per Turn", "float", -1),
+        prop("Heal Flat Per Turn", "float", -1),
+    }
+end
+
+local function encounter_config_members()
+    return {
+        prop("Encounter Mode", "string", "Auto", "LiberationEncounterMode"),
+        prop("Encounter Category", "string", "Auto", "LiberationEncounterCategory"),
+        prop("Encounter Name", "string", ""),
+        prop("Encounter Pool", "object", 0),
+        -- Add optional Name # / Weight # properties directly in Tiled.
     }
 end
 
@@ -807,178 +823,69 @@ local object_types = {
             prop("Facing Direction", "string", "Down", "Direction"),
         }
     },
-    -- Boss Dark Panel is a placed tile object. The boss settings live here,
-    -- rather than being repeated across map-specific scripts.
+    -- Placed boss panel: presentation and dependency only.
     {
         name = "Boss Dark Panel",
         color = "#cc3366",
         useAs = { "object" },
         members = {
-            prop("Boss", "string", ""),
             prop("Boss ID", "string", ""),
             prop("Direction", "string", "Down", "Direction"),
             prop("Spawn Mode", "string", "Immediate", "BossSpawnMode"),
-            prop("Trigger Boss", "object", ""),
+            prop("Trigger Boss", "object", 0),
             prop("Spawn Offset X", "number", 0),
             prop("Spawn Offset Y", "number", 0),
             prop("Spawn Offset Z", "number", 0),
             prop("Auto Face Player", "bool", false),
-            prop("Boss Health Override", "number", 0),
-            prop("scale", "number", 1),
             prop("Spawn Enabled", "bool", true),
             prop("Boss Display Name", "string", ""),
-            prop("Enemy Config", "object", 0),
-            prop("Encounter Mode", "string", "Auto", "LiberationEncounterMode"),
-            prop("Encounter Category", "string", "Auto", "LiberationEncounterCategory"),
-            prop("OW Encounter Pool", "object", 0),
-            prop("Max HP", "int", 0),
-            prop("Starting HP", "int", 0),
-            prop("OW Scale", "float", 0),
-            prop("Battle Scale", "float", 0),
-            prop("Battle Scale Scope", "string", "Auto", "LiberationBattleScaleScope"),
-            prop("OW Attack Damage", "int", 0),
-            prop("OW Damage Multiplier", "float", 0),
-            prop("Battle Attack Multiplier", "float", 0),
-            prop("Battle Defense Multiplier", "float", 0),
-            prop("AI Type", "string", "Auto", "LiberationAIType"),
-            prop("OW Bot Encounter", "string", ""),
-        }
+            prop("Bot Config", "object", 0),
+            prop("OW Encounter Config", "object", 0),
+        },
     },
-    -- Reusable, object-referenced list of named special encounters for a
-    -- Dark Hole liberation battle. Empty Name fields are ignored.
     {
-        name = "Dark Hole Encounter List",
-        color = "#9955aa",
-        useAs = { "object" },
-        members = (function()
-            local fields = {}
-            for index = 1, 20 do
-                fields[#fields + 1] = prop("Name " .. index, "string", "")
-            end
-            return fields
-        end)(),
+        name = "Dark Hole Encounter List", -- legacy only, preserved for old maps
+        color = "#9955aa", useAs = { "object" }, members = {},
     },
-    -- These classes are applied to placed tile objects on the map's object
-    -- layer. Boss ID 1/2 associate the object with one or two boss groups.
-    -- The two Dark Hole variants intentionally share one complete set of
-    -- map-author-facing properties. Older "scale" / "Minion Health Override"
-    -- values are still accepted by Lua but should not appear on new objects.
     {
-        name = "Dark Hole",
-        color = "#663366",
-        useAs = { "object" },
+        name = "Dark Hole", color = "#663366", useAs = { "object" },
         members = dark_hole_members(),
     },
     {
-        name = "Dark Hole Buffed Virus",
-        color = "#8844aa",
-        useAs = { "object" },
+        name = "Dark Hole Buffed Virus", color = "#8844aa", useAs = { "object" },
         members = dark_hole_members(),
     },
     {
-        name = "Indestructible Panel",
-        color = "#9966cc",
-        useAs = { "object" },
+        name = "Indestructible Panel", color = "#9966cc", useAs = { "object" },
         members = {
             prop("Boss ID 1", "string", ""),
-            prop("Boss ID 2", "string", ""),
             prop("Type", "string", "All", "BossRequirementType"),
             prop("Shared", "bool", false),
-        }
-    },
-
-    -- Reusable Liberation configuration and weighted encounter pool objects.
-    {
-        name = "Liberation Enemy Config",
-        color = "#37a7b5",
-        useAs = { "object" },
-        members = {
-            prop("Spawns", "string", ""),
-            prop("Max HP", "int", 0),
-            prop("Starting HP", "int", 0),
-            prop("OW Scale", "float", 0),
-            prop("Battle Scale", "float", 0),
-            prop("Battle Scale Scope", "string", "Auto", "LiberationBattleScaleScope"),
-            prop("OW Attack Damage", "int", 0),
-            prop("OW Damage Multiplier", "float", 0),
-            prop("Battle Attack Multiplier", "float", 0),
-            prop("Battle Defense Multiplier", "float", 0),
-            prop("AI Type", "string", "Auto", "LiberationAIType"),
-            prop("Encounter Mode", "string", "Auto", "LiberationEncounterMode"),
-            prop("Encounter Category", "string", "Auto", "LiberationEncounterCategory"),
-            prop("OW Bot Encounter", "string", ""),
-            prop("OW Encounter Pool", "object", 0),
         },
     },
     {
-        name = "Liberation Enemy Defaults",
-        color = "#4c9e72",
-        useAs = { "object" },
+        name = "Bot Config", color = "#37a7b5", useAs = { "object" },
+        members = bot_config_members(),
+    },
+    {
+        name = "Encounter Config", color = "#bd8844", useAs = { "object" },
+        members = encounter_config_members(),
+    },
+    {
+        name = "Liberation Enemy Config", -- legacy schema compatibility
+        color = "#37a7b5", useAs = { "object" },
+        members = bot_config_members(),
+    },
+    {
+        name = "Liberation Enemy Defaults", color = "#4c9e72", useAs = { "object" },
         members = {
             prop("Category", "string", "All", "LiberationEnemyCategory"),
-            prop("Max HP", "int", 0),
-            prop("Starting HP", "int", 0),
-            prop("OW Scale", "float", 0),
-            prop("Battle Scale", "float", 0),
-            prop("Battle Scale Scope", "string", "Auto", "LiberationBattleScaleScope"),
-            prop("OW Attack Damage", "int", 0),
-            prop("OW Damage Multiplier", "float", 0),
-            prop("Battle Attack Multiplier", "float", 0),
-            prop("Battle Defense Multiplier", "float", 0),
-            prop("AI Type", "string", "Auto", "LiberationAIType"),
-            prop("Encounter Mode", "string", "Auto", "LiberationEncounterMode"),
-            prop("Encounter Category", "string", "Auto", "LiberationEncounterCategory"),
-            prop("OW Bot Encounter", "string", ""),
-            prop("OW Encounter Pool", "object", 0),
+            prop("Bot Config", "object", 0),
         },
     },
     {
-        name = "Liberation Encounter Pool",
-        color = "#bd8844",
-        useAs = { "object" },
-        members = {
-            prop("Encounter Category", "string", "Auto", "LiberationEncounterCategory"),
-            prop("Name 1", "string", ""),
-            prop("Weight 1", "float", 1),
-            prop("Name 2", "string", ""),
-            prop("Weight 2", "float", 1),
-            prop("Name 3", "string", ""),
-            prop("Weight 3", "float", 1),
-            prop("Name 4", "string", ""),
-            prop("Weight 4", "float", 1),
-            prop("Name 5", "string", ""),
-            prop("Weight 5", "float", 1),
-            prop("Name 6", "string", ""),
-            prop("Weight 6", "float", 1),
-            prop("Name 7", "string", ""),
-            prop("Weight 7", "float", 1),
-            prop("Name 8", "string", ""),
-            prop("Weight 8", "float", 1),
-            prop("Name 9", "string", ""),
-            prop("Weight 9", "float", 1),
-            prop("Name 10", "string", ""),
-            prop("Weight 10", "float", 1),
-            prop("Name 11", "string", ""),
-            prop("Weight 11", "float", 1),
-            prop("Name 12", "string", ""),
-            prop("Weight 12", "float", 1),
-            prop("Name 13", "string", ""),
-            prop("Weight 13", "float", 1),
-            prop("Name 14", "string", ""),
-            prop("Weight 14", "float", 1),
-            prop("Name 15", "string", ""),
-            prop("Weight 15", "float", 1),
-            prop("Name 16", "string", ""),
-            prop("Weight 16", "float", 1),
-            prop("Name 17", "string", ""),
-            prop("Weight 17", "float", 1),
-            prop("Name 18", "string", ""),
-            prop("Weight 18", "float", 1),
-            prop("Name 19", "string", ""),
-            prop("Weight 19", "float", 1),
-            prop("Name 20", "string", ""),
-            prop("Weight 20", "float", 1),
-        },
+        name = "Liberation Encounter Pool", -- legacy schema compatibility
+        color = "#bd8844", useAs = { "object" }, members = {},
     },
 }
 
@@ -1017,16 +924,21 @@ local META = {
         ["Spawn Point"] = { category = "gameplay",
             description = "Player arrival point for Liberation missions. The assigned player faces this direction after transfer; Next Spawn links to the next player's Spawn Point." },
         ["Boss Dark Panel"] = { category = "gameplay",
-            description = "A Liberation boss spawn point. Select an enemy template, spawn mode, optional boss dependency, position offsets, facing, health override, and display name." },
+            description = "Placed Liberation boss. Uses Bot Config for template/stats/healing and OW Encounter Config for battle selection." },
         ["Dark Hole Encounter List"] = { category = "gameplay",
             description = "Reusable list of named encounters from this area's special_encounters section, used only when liberating a linked Dark Hole. Leave entries blank to ignore them.",
             numberedTemplates = { "Name " } },
+        ["Bot Config"] = { category = "gameplay",
+            description = "Reusable OW bot template, native/persistent HP and scale, AI, damage and per-turn healing. Boss defaults to 10% healing; regular enemies default to zero." },
+        ["Encounter Config"] = { category = "gameplay",
+            description = "Reusable battle selection. Fixed name, category, or optional numbered Name 1..9 / Weight 1..9; numbered fields are not prepopulated in the class.",
+            numberedTemplates = { "Name ", "Weight " } },
         ["Dark Hole"] = { category = "gameplay",
-            description = "Placed Liberation panel. Spawns/Direction define its overworld bot. OW Bot Encounter or OW Encounter Pool select that bot's battle, while Liberation Encounters selects the separate panel-liberation battle." },
+            description = "Placed Liberation panel. Bot Config defines the overworld enemy, OW Encounter Config selects its battle, and Liberation Encounter Config selects panel liberation battles. Add optional Boss ID 2..9 manually." },
         ["Dark Hole Buffed Virus"] = { category = "gameplay",
-            description = "Dark Hole variant sharing the same OW template, encounter selection, HP and scaling fields. Use OW Scale/Battle Scale instead of the legacy scale property." },
+            description = "Buffed panel with external Bot Config and Encounter Config references. Only Direction and optional Boss ID 1..9 remain local." },
         ["Indestructible Panel"] = { category = "gameplay",
-            description = "Placed Liberation panel object. Boss ID 1/2 define boss-group unlock requirements; Type selects All or Any when both are set. Shared=true waits for all Dark Holes in the mission." },
+            description = "Panel boss links use Boss ID 1 through optional Boss ID 9. Type selects All or Any, Shared waits for every Dark Hole." },
         ["Waypoint"] = { category = "gameplay",
             description = "Navigation node for NPCs. Move Animation handles travel; Wait Animation handles the arrival hold. Set Move Duration > 0 for scripted (jump-style) movement where the animation has intrinsic timing.",
             numberedTemplates = { "Next Waypoint " } },
@@ -1117,58 +1029,51 @@ local META = {
             },
         },
         ["Boss Dark Panel"] = {
-            ["Boss"] = { category = "gameplay", description = "Required enemy template key registered in Liberation enemy_templates.lua." },
-            ["Boss ID"] = { category = "gameplay", description = "Unique group identifier. Dark Holes and Indestructible Panels use the same value to associate with this boss. If empty, the Tiled object ID is used internally." },
-            ["Direction"] = { category = "gameplay", description = "Initial facing direction. Auto Face Player overrides this when enabled." },
-            ["Spawn Mode"] = { category = "gameplay", description = "Immediate: mission startup. On Dark Hole Cleared: after all Dark Holes with this Boss ID are liberated. Manual: only when Mission:spawn_boss(Boss ID) is called. After Boss Defeated: after the boss selected by Trigger Boss is defeated." },
-            ["Trigger Boss"] = { category = "gameplay", description = "Required Tiled Object reference when Spawn Mode is After Boss Defeated. Select the other Boss Dark Panel object that must be defeated first." },
-            ["Spawn Offset X"] = { category = "gameplay", description = "Horizontal tile offset from this object's position." },
-            ["Spawn Offset Y"] = { category = "gameplay", description = "Vertical tile offset from this object's position." },
-            ["Spawn Offset Z"] = { category = "gameplay", description = "Layer offset from this object's position." },
-            ["Auto Face Player"] = { category = "gameplay", description = "When true, the boss faces the nearest player on spawn. When false, Direction is respected." },
-            ["Boss Health Override"] = { category = "gameplay", description = "Optional positive maximum HP for this boss overworld bot and its matching battle enemy when the character package supports deferred HP. Zero keeps the template's default maximum; the current HP tracks persistent mission health." },
-            ["scale"] = { category = "gameplay", description = "Optional visual scale for this boss overworld bot and matching battle enemy. 1 is normal size; custom max HP requires a deferred-HP-compatible enemy package." },
-            ["Spawn Enabled"] = { category = "gameplay", description = "When false, this boss definition is registered but will not spawn automatically. It can still be spawned manually." },
-            ["Boss Display Name"] = { category = "gameplay", description = "Optional name shown above the spawned bot. Empty uses the enemy template's display name." },
+            ["Boss ID"] = { category = "gameplay", description = "Unique boss group ID. Defaults to this object's Tiled ID." },
+            ["Bot Config"] = { category = "gameplay", description = "Required reference to Bot Config containing Spawns, HP, scale, attack, and healing." },
+            ["OW Encounter Config"] = { category = "gameplay", description = "Optional reference to an Encounter Config for the boss battle." },
+            ["Direction"] = { category = "gameplay", description = "Tiled Direction enum; Auto Face Player may override it." },
+            ["Spawn Mode"] = { category = "gameplay", description = "BossSpawnMode enum." },
+            ["Trigger Boss"] = { category = "gameplay", description = "Another Boss Dark Panel, used when Spawn Mode == After Boss Defeated." },
         },
         ["Dark Hole Encounter List"] = {
-            -- All numbered Name fields refer to special_encounters by name.
+            -- Legacy: reads arbitrary Name # entries; >9 preserved with warning.
         },
         ["Dark Hole"] = {
-            ["Spawns"] = { category = "gameplay", description = "Registered overworld enemy template key (e.g. Mettaur). Required unless provided by the referenced Enemy Config. Encounter names select battles, not bot templates." },
-            ["Direction"] = { category = "gameplay", description = "Overworld bot spawn direction and adjacent tile. Defaults to Down." },
-            ["OW Bot Encounter"] = { category = "gameplay", description = "Fixed encounter name in the selected Encounter Category. Auto mode prefers this name before the pool or category selection." },
-            ["Liberation Encounters"] = { category = "gameplay", description = "Optional object reference to a Dark Hole Encounter List for liberation battles. Uses special_encounters and preserves that encounter's authored HP; takes priority over OW bot encounter selection when nonempty." },
-            ["Boss ID 1"] = { category = "gameplay", description = "First linked boss group." },
-            ["Boss ID 2"] = { category = "gameplay", description = "Optional second linked boss group." },
-            ["Encounter Mode"] = { category = "gameplay", description = "Auto: named encounter, then pool, then category. Fixed: named encounter. Pool: weighted encounter pool. Category: random encounter in the category. Failed Fixed/Pool lookups fall back to category." },
-            ["Encounter Category"] = { category = "gameplay", description = "Area encounter table section; Auto follows the overworld template's Boss/Special/Normal classification." },
-            ["OW Encounter Pool"] = { category = "gameplay", description = "Object reference to a Liberation Encounter Pool. Each Name/Weight pair is resolved inside that area's selected encounter category." },
-            ["Max HP"] = { category = "gameplay", description = "Maximum persistent overworld bot HP. Zero inherits from shared/category/template settings. Battle mods may restrict native maxima." },
-            ["Starting HP"] = { category = "gameplay", description = "Initial overworld bot HP; zero inherits. Capped at effective Max HP." },
-            ["OW Scale"] = { category = "appearance", description = "Persistent overworld bot scale. Zero inherits template/shared/default settings." },
-            ["Battle Scale"] = { category = "appearance", description = "Battle visual scale. Zero inherits effective OW Scale." },
-            ["Battle Scale Scope"] = { category = "appearance", description = "Matching affects matching enemy aliases or one-entry battles. All affects every enemy in the battle." },
+            ["Bot Config"] = { category = "gameplay", description = "Reference to Bot Config. Required for a spawned enemy unless legacy Spawns is present." },
+            ["OW Encounter Config"] = { category = "gameplay", description = "Optional battle selector for the spawned bot." },
+            ["Liberation Encounter Config"] = { category = "gameplay", description = "Optional panel-liberation encounter list (separate from the bot encounter)." },
+            ["Direction"] = { category = "gameplay", description = "Initial Direction enum, defaults Down." },
+            ["Boss ID 1"] = { category = "gameplay", description = "Optional boss dependency. Add Boss ID 2 through Boss ID 9 manually when needed." },
         },
         ["Dark Hole Buffed Virus"] = {
-            ["Spawns"] = { category = "gameplay", description = "Registered overworld enemy template key. Required unless the referenced Enemy Config supplies Spawns. Encounter names do not create a bot." },
-            ["Direction"] = { category = "gameplay", description = "Overworld bot spawn direction and adjacent tile. Defaults to Down." },
-            ["OW Bot Encounter"] = { category = "gameplay", description = "Optional named OW bot encounter for the base area." },
-            ["Liberation Encounters"] = { category = "gameplay", description = "Optional Dark Hole Encounter List reference. Liberation-list HP remains independent of the persistent overworld bot." },
-            ["Encounter Mode"] = { category = "gameplay", description = "Auto, Fixed, Pool, or Category; selects the overworld bot battle only." },
-            ["Encounter Category"] = { category = "gameplay", description = "Base-area encounter section; Auto follows the overworld template classification." },
-            ["OW Encounter Pool"] = { category = "gameplay", description = "Object reference to a weighted Liberation Encounter Pool." },
-            ["Max HP"] = { category = "gameplay", description = "Persistent overworld max HP; zero inherits." },
-            ["Starting HP"] = { category = "gameplay", description = "Initial overworld HP; zero inherits." },
-            ["OW Scale"] = { category = "appearance", description = "Overworld visual scale; zero inherits." },
-            ["Battle Scale"] = { category = "appearance", description = "Battle scale; zero follows effective OW Scale." },
-            ["Battle Scale Scope"] = { category = "appearance", description = "Matching (safe default) or All enemies." },
+            ["Bot Config"] = { category = "gameplay", description = "Reference to Bot Config, including buffs and scaling." },
+            ["OW Encounter Config"] = { category = "gameplay", description = "Optional spawned-bot battle selector." },
+            ["Liberation Encounter Config"] = { category = "gameplay", description = "Optional panel-liberation battle list." },
+            ["Direction"] = { category = "gameplay", description = "Initial Direction enum, defaults Down." },
+            ["Boss ID 1"] = { category = "gameplay", description = "Optional boss dependency. Add Boss ID 2 through Boss ID 9 manually." },
+        },
+        ["Bot Config"] = {
+            ["Spawns"] = { category = "gameplay", description = "Enemy template registered in Liberation enemy_templates.lua." },
+            ["Max HP"] = { category = "gameplay", description = "Zero/unset inherits template HP; explicit positive overrides persistent OW maximum and matching battle HP where character supports it." },
+            ["Starting HP"] = { category = "gameplay", description = "Positive value starts the OW bot partially damaged." },
+            ["OW Scale"] = { category = "appearance", description = "OW scale; unset/zero uses default." },
+            ["Battle Scale"] = { category = "appearance", description = "Battle scale, inherits OW Scale unless explicitly set." },
+            ["Battle Scale Scope"] = { category = "appearance", description = "Matching or All; Matching is safer for multi-enemy battles." },
+            ["AI Type"] = { category = "gameplay", description = "Existing LiberationAIType enum." },
+            ["Heal Percent Per Turn"] = { category = "gameplay", description = "Percentage of max HP to heal on each enemy turn; -1/unset inherits Boss=10% or other=0%, and explicit 0 disables." },
+            ["Heal Flat Per Turn"] = { category = "gameplay", description = "Flat HP restored per enemy turn in addition to percentage; -1/unset inherits 0." },
+        },
+        ["Encounter Config"] = {
+            ["Encounter Mode"] = { category = "gameplay", description = "Auto / Fixed / Pool / Category enum." },
+            ["Encounter Category"] = { category = "gameplay", description = "Area encounter section enum." },
+            ["Encounter Name"] = { category = "gameplay", description = "Fixed encounter name in the chosen category." },
+            ["Encounter Pool"] = { category = "gameplay", description = "Optional reference to another Encounter Config with Name # / Weight # entries." },
         },
         ["Indestructible Panel"] = {
-            ["Boss ID 1"] = { category = "gameplay", description = "First boss-group identifier required to unlock this panel." },
-            ["Boss ID 2"] = { category = "gameplay", description = "Optional second boss-group identifier required according to Type." },
-            ["Type"] = { category = "gameplay", description = "All requires every assigned boss group to have no remaining Dark Holes. Any requires at least one assigned boss group to have no remaining Dark Holes. Only meaningful when both Boss IDs are set." },
-            ["Shared"] = { category = "gameplay", description = "When true, this panel waits until every Dark Hole in the mission has been liberated, regardless of Boss IDs or Type." },
+            ["Boss ID 1"] = { category = "gameplay", description = "Optional boss association; add Boss ID 2..9 manually." },
+            ["Type"] = { category = "gameplay", description = "BossRequirementType enum: All or Any." },
+            ["Shared"] = { category = "gameplay", description = "Wait for all mission Dark Holes." },
         },
         -- Checkpoint ----------------------------------------------------
         ["Checkpoint"] = {

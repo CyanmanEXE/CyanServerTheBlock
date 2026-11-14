@@ -9,6 +9,8 @@ local Logger = {
     spawning = root_logger:register_subsystem("spawning"),
     encounters = root_logger:register_subsystem("encounters"),
     validation = root_logger:register_subsystem("validation"),
+    -- Dedicated output: scripts/_DEBUGGING/_MAP_PROBLEMS/_NEBULOUS-LIBERATIONS.log
+    map_problems = SharedLogger.register("_MAP_PROBLEMS"):register_subsystem("nebulous-liberations"),
 }
 
 return Logger

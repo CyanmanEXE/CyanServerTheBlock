@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="40" height="20" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="158">
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="40" height="20" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="172">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/ezlibs-custom/nebulous-liberations/backgrounds/block/GrayBG.animation"/>
@@ -135,27 +135,15 @@
   <object id="49" type="Boss Dark Panel" gid="4" x="192" y="192" width="50" height="30">
    <properties>
     <property name="Auto Face Player" type="bool" value="true"/>
-    <property name="Boss" value="ShadeMan"/>
-    <property name="Boss Health Override" value="1000"/>
     <property name="Boss ID" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Left"/>
-    <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="bosses"/>
-    <property name="Encounter Mode" propertytype="LiberationEncounterMode" value="Auto"/>
-    <property name="Max HP" type="int" value="1000"/>
-    <property name="Starting HP" type="int" value="1000"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Left"/>
+    <property name="Bot Config" type="object" value="158"/><property name="OW Encounter Config" type="object" value="159"/></properties>
   </object>
   <object id="50" type="Dark Hole" gid="6" x="1056" y="448" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Liberation Encounters" type="object" value="0"/>
-    <property name="Max HP" type="int" value="240"/>
-    <property name="Minion Health Override" value="240"/>
-    <property name="OW Attack Damage" type="int" value="180"/>
-    <property name="OW Bot Encounter" value="BigBrute"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="160"/><property name="OW Encounter Config" type="object" value="161"/></properties>
   </object>
   <object id="51" type="Item Panel" gid="5" x="1088" y="224" width="50" height="30">
    <properties>
@@ -180,16 +168,8 @@
   <object id="55" type="Dark Hole" gid="6" x="1056" y="192" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="Auto"/>
-    <property name="Encounter Mode" propertytype="LiberationEncounterMode" value="Auto"/>
-    <property name="Liberation Encounters" type="object" value="0"/>
-    <property name="Max HP" type="int" value="240"/>
-    <property name="Minion Health Override" value="240"/>
-    <property name="OW Attack Damage" type="int" value="180"/>
-    <property name="OW Bot Encounter" value="BigBrute"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="160"/><property name="OW Encounter Config" type="object" value="161"/></properties>
   </object>
   <object id="56" type="Dark Panel" gid="4" x="1088" y="192" width="50" height="30"/>
   <object id="57" type="Dark Panel" gid="4" x="1024" y="192" width="50" height="30"/>
@@ -247,50 +227,26 @@
   <object id="79" type="Dark Hole" gid="6" x="832" y="192" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Left"/>
-    <property name="Liberation Encounters" type="object" value="0"/>
-    <property name="Max HP" type="int" value="240"/>
-    <property name="Minion Health Override" value="240"/>
-    <property name="OW Attack Damage" type="int" value="180"/>
-    <property name="OW Bot Encounter" value="BigBrute"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Left"/>
+    <property name="Bot Config" type="object" value="160"/><property name="OW Encounter Config" type="object" value="161"/></properties>
   </object>
   <object id="80" type="Dark Hole" gid="6" x="416" y="352" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Liberation Encounters" type="object" value="0"/>
-    <property name="Max HP" type="int" value="240"/>
-    <property name="Minion Health Override" value="240"/>
-    <property name="OW Attack Damage" type="int" value="180"/>
-    <property name="OW Bot Encounter" value="BigBrute"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="160"/><property name="OW Encounter Config" type="object" value="161"/></properties>
   </object>
   <object id="81" type="Dark Hole" gid="6" x="416" y="64" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Liberation Encounters" type="object" value="0"/>
-    <property name="Max HP" type="int" value="240"/>
-    <property name="Minion Health Override" value="240"/>
-    <property name="OW Attack Damage" type="int" value="180"/>
-    <property name="OW Bot Encounter" value="BigBrute"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="160"/><property name="OW Encounter Config" type="object" value="161"/></properties>
   </object>
   <object id="82" type="Dark Hole" gid="6" x="352" y="0" width="50" height="30">
    <properties>
     <property name="Boss ID 1" value="ShadeMan_01"/>
-    <property name="Direction" value="Down Right"/>
-    <property name="Liberation Encounters" type="object" value="0"/>
-    <property name="Max HP" type="int" value="240"/>
-    <property name="Minion Health Override" value="240"/>
-    <property name="OW Attack Damage" type="int" value="180"/>
-    <property name="OW Bot Encounter" value="BigBrute"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="160"/><property name="OW Encounter Config" type="object" value="161"/></properties>
   </object>
   <object id="83" type="Bonus Panel" gid="8" x="512" y="224" width="50" height="30">
    <properties>
@@ -452,12 +408,12 @@
    </properties>
    <point/>
   </object>
-  <object id="157" type="Dark Hole Encounter List" x="664" y="-40">
+  <object id="157" type="Encounter Config" x="664" y="-40">
    <properties>
     <property name="Name 1" value="BigBrute"/>
     <property name="Weight 1" type="float" value="1"/>
-   </properties>
+   <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="special_encounters"/></properties>
    <point/>
   </object>
- </objectgroup>
+ <object id="158" name="Bot for Boss Dark Panel #49" type="Bot Config" x="192" y="192" width="0" height="0"><properties><property name="Max HP" type="int" value="1000"/><property name="Starting HP" type="int" value="1000"/><property name="Spawns" value="ShadeMan"/></properties></object><object id="159" name="OW encounter for Boss Dark Panel #49" type="Encounter Config" x="192" y="192" width="0" height="0"><properties><property name="Encounter Category" propertytype="LiberationEncounterCategory" value="bosses"/></properties></object><object id="160" name="Bot for Dark Hole #50" type="Bot Config" x="1056" y="448" width="0" height="0"><properties><property name="Max HP" type="int" value="240"/><property name="Spawns" value="BigBrute"/><property name="OW Attack Damage" type="int" value="180"/></properties></object><object id="161" name="OW encounter for Dark Hole #50" type="Encounter Config" x="1056" y="448" width="0" height="0"><properties><property name="Encounter Name" value="BigBrute"/></properties></object></objectgroup>
 </map>

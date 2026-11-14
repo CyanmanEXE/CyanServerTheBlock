@@ -717,7 +717,6 @@ local function initialize_areas()
                         PanelRegistry.register(Constants.PanelTypes.DarkPanel, { gids = { gid } })
                     end
                 end
-                Validation.report(area_id)
             else
                 log:warn_data("Could not register Liberation Tileset panels from Liberation Config", {
                     area_id = area_id,
@@ -727,6 +726,8 @@ local function initialize_areas()
                 })
             end
         end
+        -- Validate even when the optional tileset lookup fails.
+        Validation.report(area_id)
 
         gate_to_area_map[area_id] = gate_to_area_map[area_id] or {}
         for _, obj_id in ipairs(objects) do

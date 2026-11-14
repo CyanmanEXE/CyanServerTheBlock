@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="50" height="65" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="561">
+<map version="1.8" tiledversion="1.8.6" orientation="isometric" renderorder="right-down" width="50" height="65" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="569">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/ezlibs-custom/nebulous-liberations/backgrounds/block/GrayBG.animation"/>
@@ -90,7 +90,7 @@
   <object id="1" name="Spawn" type="Spawn Point" x="144" y="1648">
    <properties>
     <property name="Next Spawn" type="int" value="7"/>
-   <property name="Facing Direction" value="Down"/></properties>
+   <property name="Facing Direction" value="Down" propertytype="Direction"/></properties>
    <point/>
   </object>
   <object id="2" type="Dark Panel" gid="4" x="128" y="1248" width="50" height="30"/>
@@ -102,15 +102,14 @@
   </object>
   <object id="4" type="Dark Hole" gid="6" x="128" y="1280" width="50" height="30">
    <properties>
-    <property name="Direction" value="Down Right"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="561"/></properties>
   </object>
   <object id="5" type="Indestructible Panel" gid="7" x="1152" y="256" width="50" height="30"/>
   <object id="7" name="Spawn2" type="Spawn Point" x="112" y="1648">
    <properties>
     <property name="Next Spawn" type="int" value="522"/>
-   <property name="Facing Direction" value="Down"/></properties>
+   <property name="Facing Direction" value="Down" propertytype="Direction"/></properties>
    <point/>
   </object>
   <object id="8" name="Point of Interest" type="Point of Interest" x="128" y="1424">
@@ -307,15 +306,13 @@
   <object id="281" type="Dark Panel" gid="4" x="352" y="352" width="50" height="30"/>
   <object id="282" type="Dark Hole" gid="6" x="448" y="1120" width="50" height="30">
    <properties>
-    <property name="Direction" value="Down Right"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="561"/></properties>
   </object>
   <object id="283" type="Dark Hole" gid="6" x="448" y="1056" width="50" height="30">
    <properties>
-    <property name="Direction" value="Down Right"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="561"/></properties>
   </object>
   <object id="284" type="Dark Panel" gid="4" x="1056" y="1152" width="50" height="30"/>
   <object id="285" type="Dark Panel" gid="4" x="1056" y="1120" width="50" height="30"/>
@@ -323,27 +320,23 @@
   <object id="287" type="Dark Panel" gid="4" x="1088" y="1120" width="50" height="30"/>
   <object id="288" type="Dark Hole" gid="6" x="1024" y="1056" width="50" height="30">
    <properties>
-    <property name="Direction" value="Down Right"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="561"/></properties>
   </object>
   <object id="290" type="Dark Hole" gid="6" x="1152" y="1024" width="50" height="30">
    <properties>
-    <property name="Direction" value="Down Right"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="561"/></properties>
   </object>
   <object id="291" type="Dark Hole" gid="6" x="448" y="448" width="50" height="30">
    <properties>
-    <property name="Direction" value="Down Right"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="561"/></properties>
   </object>
   <object id="293" type="Dark Hole" gid="6" x="384" y="512" width="50" height="30">
    <properties>
-    <property name="Direction" value="Down Right"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="561"/></properties>
   </object>
   <object id="300" type="Dark Panel" gid="4" x="1184" y="1184" width="50" height="30"/>
   <object id="301" type="Dark Panel" gid="4" x="1216" y="1184" width="50" height="30"/>
@@ -521,9 +514,8 @@
   <object id="438" type="Dark Panel" gid="4" x="384" y="416" width="50" height="30"/>
   <object id="439" type="Dark Hole" gid="6" x="992" y="1184" width="50" height="30">
    <properties>
-    <property name="Direction" value="Down Right"/>
-    <property name="Spawns" value="BigBrute"/>
-   </properties>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="Bot Config" type="object" value="561"/></properties>
   </object>
   <object id="440" type="Item Panel" gid="5" x="1088" y="1088" width="50" height="30">
    <properties>
@@ -682,25 +674,25 @@
   <object id="522" name="Spawn3" type="Spawn Point" x="80" y="1648">
    <properties>
     <property name="Next Spawn" type="int" value="523"/>
-   <property name="Facing Direction" value="Down"/></properties>
+   <property name="Facing Direction" value="Down" propertytype="Direction"/></properties>
    <point/>
   </object>
   <object id="523" name="Spawn4" type="Spawn Point" x="176" y="1648">
    <properties>
     <property name="Next Spawn" type="int" value="524"/>
-   <property name="Facing Direction" value="Down"/></properties>
+   <property name="Facing Direction" value="Down" propertytype="Direction"/></properties>
    <point/>
   </object>
   <object id="524" name="Spawn5" type="Spawn Point" x="112" y="1680">
    <properties>
     <property name="Next Spawn" type="int" value="525"/>
-   <property name="Facing Direction" value="Down"/></properties>
+   <property name="Facing Direction" value="Down" propertytype="Direction"/></properties>
    <point/>
   </object>
   <object id="525" name="Spawn6" type="Spawn Point" x="144" y="1680">
    <properties>
     <property name="Next Spawn" type="int" value="1"/>
-   <property name="Facing Direction" value="Down"/></properties>
+   <property name="Facing Direction" value="Down" propertytype="Direction"/></properties>
    <point/>
   </object>
   <object id="527" type="Item Panel" gid="5" x="32" y="1696" width="50" height="30">
@@ -869,5 +861,5 @@
     <property name="Specific Loot" value="ORDER_POINT"/>
    </properties>
   </object>
- <object id="560" type="Liberation Config" x="144" y="1648"><properties><property name="Liberation Tileset" value="/server/assets/ezlibs-custom/nebulous-liberations/tiles/panels.tsx"/><property name="Max Order Points" value="9"/><property name="Respawn Area" value="christmas"/><property name="Waiting Area" value="christmas"/><property name="Target Phase Count" value="7"/><property name="Target Player Count" value="5"/></properties></object></objectgroup>
+ <object id="560" type="Liberation Config" x="144" y="1648"><properties><property name="Liberation Tileset" value="/server/assets/ezlibs-custom/nebulous-liberations/tiles/panels.tsx"/><property name="Max Order Points" value="9"/><property name="Respawn Area" value="christmas"/><property name="Waiting Area" value="christmas"/><property name="Target Phase Count" value="7"/><property name="Target Player Count" value="5"/></properties></object><object id="561" name="Bot for Dark Hole #4" type="Bot Config" x="128" y="1280" width="0" height="0"><properties><property name="Spawns" value="BigBrute"/></properties></object></objectgroup>
 </map>

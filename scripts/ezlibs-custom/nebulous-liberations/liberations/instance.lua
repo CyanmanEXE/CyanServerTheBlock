@@ -13,6 +13,7 @@ local Preloader = require("scripts/ezlibs-custom/nebulous-liberations/liberation
 local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberations/constants")
 local EnemyConfig = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_config")
 local BattleScale = require("scripts/ezlibs-custom/nebulous-liberations/liberations/battle_scale")
+local Numbered = require("scripts/ezlibs-custom/nebulous-liberations/liberations/numbered_properties")
 local EnemyTemplates = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_templates")
 local SubsystemLogger = require("scripts/ezlibs-custom/nebulous-liberations/liberations/logger")
 local spawn_log = SubsystemLogger.spawning
@@ -466,12 +467,8 @@ local function boss_group_ids_from_properties(properties)
     local seen = {}
     properties = properties or {}
 
-    for _, property_name in ipairs({
-        Constants.CustomProperties.BossID1,
-        Constants.CustomProperties.BossID2,
-    }) do
-        local boss_id = normalized_reference(properties[property_name])
-        if boss_id and not seen[boss_id] then
+    for _, boss_id in ipairs(Numbered.boss_ids(properties)) do
+        if not seen[boss_id] then
             seen[boss_id] = true
             ids[#ids + 1] = boss_id
         end
@@ -694,7 +691,8 @@ local function liberate_panel(self, player_session)
                 or "encounters"
             local properties = panel.custom_properties or {}
             local liberation_candidates = PanelEncounters.resolve_dark_hole_liberation_encounters(
-                self.base_area_id, properties[Constants.CustomProperties.DarkHoleLiberationEncounters])
+                self.base_area_id, properties[Constants.CustomProperties.LiberationEncounterConfig]
+                    or properties[Constants.CustomProperties.DarkHoleLiberationEncounters])
             -- An empty/disabled/invalid weighted list falls back to the OW
             -- encounter instead of leaving the liberation action unplayable.
             local encounter_definition = PanelEncounters.pick_weighted(liberation_candidates)
@@ -1192,8 +1190,14 @@ local function take_enemy_turn(self)
                 Net.slide_player_camera(player.id, enemy.x + .5, enemy.y + .5, enemy.z, slide_time)
             end
             Async.await(Async.sleep(slide_time))
-            if enemy.is_boss then
-                Async.await(EnemyHelpers.heal(enemy, enemy.max_health * .10))
+            -- The old hardcoded 10% boss heal is now a Bot Config default.
+            -- A configured 0% disables healing; flat healing is additive.
+            local heal_percent = tonumber(enemy.heal_percent_per_turn)
+            if heal_percent == nil then heal_percent = enemy.is_boss and 10 or 0 end
+            local heal_flat = tonumber(enemy.heal_flat_per_turn) or 0
+            local amount = math.max(0, enemy.max_health * heal_percent / 100 + heal_flat)
+            if amount > 0 and enemy.health < enemy.max_health then
+                Async.await(EnemyHelpers.heal(enemy, amount))
             end
             log:debug_data("Enemy taking turn", {
                 base_area_id = self.base_area_id,
@@ -1570,6 +1574,10 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                 visual_gid = object.data.gid
             }
 
+            if object_type == "Boss Dark Panel" then
+                new_panel.enemy_config = EnemyConfig.resolve(mission.area_id, object,
+                    Constants.CustomProperties.BossHealthOverride, "Boss")
+            end
             if new_panel.enemy_config.ow_scale then new_panel.scale = new_panel.enemy_config.ow_scale end
 
             if panel_type == Constants.PanelTypes.ItemPanel then
@@ -1642,6 +1650,11 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
 
             local configured_boss_name = object.custom_properties
                 and object.custom_properties[Constants.CustomProperties.Boss]
+            -- New Boss Dark Panels declare their enemy on the referenced Bot Config.
+            -- Keep the old inline Boss field readable for legacy maps.
+            if object_type == "Boss Dark Panel" and not configured_boss_name then
+                configured_boss_name = new_panel.enemy_config and new_panel.enemy_config.template_name
+            end
             if configured_boss_name and configured_boss_name ~= "" then
                 local properties = object.custom_properties or {}
                 local object_id_string = tostring(object.id)
@@ -1660,7 +1673,8 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                     offset_z = tonumber(properties[Constants.CustomProperties.SpawnOffsetZ]) or 0,
                     auto_face_player = properties[Constants.CustomProperties.AutoFacePlayer] == true
                         or properties[Constants.CustomProperties.AutoFacePlayer] == "true",
-                    max_health_override = tonumber(properties[Constants.CustomProperties.BossHealthOverride]) or 0,
+                    max_health_override = (new_panel.enemy_config and new_panel.enemy_config.max_hp)
+                        or tonumber(properties[Constants.CustomProperties.BossHealthOverride]) or 0,
                     scale = new_panel.scale,
                     enemy_config = EnemyConfig.resolve(mission.area_id, object,
                         Constants.CustomProperties.BossHealthOverride, "Boss"),
