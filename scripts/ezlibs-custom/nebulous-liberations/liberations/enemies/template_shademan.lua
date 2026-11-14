@@ -10,7 +10,7 @@ EnemyTemplates.register("ShadeMan", {
     shape_offset_x = 0,
     shape_offset_y = -1,
     attack_damage = 60,
-    ai_type = "ranged",  -- custom AI will be implemented separately
+    ai_type = "shademan_ambush", -- Uses the existing ShadeMan teleport/strike behavior
     is_boss = true,
     mug = {
         texture_path = "/server/assets/ezlibs-custom/nebulous-liberations/mugs/shademan.png",

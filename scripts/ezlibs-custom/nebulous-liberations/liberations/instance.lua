@@ -1477,7 +1477,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
     })
 
     local preload_ok, preload_error = pcall(function()
-        Preloader.update(new_area_id)
+        Preloader.update(new_area_id, EnemyTemplates)
     end)
     if not preload_ok then
         log:error_data("Collision tileset diagnostic: preload failed", {
@@ -2018,6 +2018,7 @@ function Mission:clean_up()
         Net.remove_bot(id)
     end
     PanelEncounters.clear_mission_encounter_assets(self.area_id)
+    Preloader.clear(self.area_id)
     Net.remove_area(self.area_id)
     self.resolve_disposal()
     return self.disposal_promise

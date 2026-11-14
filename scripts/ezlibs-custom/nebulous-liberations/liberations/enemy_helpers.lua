@@ -41,13 +41,34 @@ local direction_suffix_map = {
   [Direction.UP_RIGHT] = "UR",
 }
 
+-- Net.animate_bot does not await the sprite animation. Every actively
+-- attacking template defines ATTACK_*, HOLD_* and IDLE_* states in its OW
+-- animation. The caller waits for its actual ATTACK duration, holds the last
+-- frame while the attack effect completes, then explicitly returns to IDLE.
+local function animation_suffix_for(enemy)
+  if not enemy or not enemy.id then return nil end
+  return direction_suffix_map[Net.get_bot_direction(enemy.id)]
+end
+
 function EnemyHelpers.play_attack_animation(enemy)
-  local direction = Net.get_bot_direction(enemy.id)
-  local suffix = direction_suffix_map[direction]
-  print(suffix)
-  local animation = "ATTACK_" .. suffix
-  print(animation)
-  Net.animate_bot(enemy.id, animation)
+  local suffix = animation_suffix_for(enemy)
+  if not suffix or enemy.has_attack_animation == false then return false end
+  Net.animate_bot(enemy.id, "ATTACK_" .. suffix)
+  return true
+end
+
+function EnemyHelpers.hold_attack_animation(enemy)
+  local suffix = animation_suffix_for(enemy)
+  if not suffix or enemy.has_attack_hold ~= true then return false end
+  Net.animate_bot(enemy.id, "HOLD_" .. suffix)
+  return true
+end
+
+function EnemyHelpers.finish_attack_animation(enemy)
+  local suffix = animation_suffix_for(enemy)
+  if not suffix or enemy.has_attack_animation == false then return false end
+  Net.animate_bot(enemy.id, "IDLE_" .. suffix)
+  return true
 end
 
 function EnemyHelpers.update_name(enemy)

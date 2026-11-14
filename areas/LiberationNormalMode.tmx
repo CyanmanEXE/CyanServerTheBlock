@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="35" height="20" tilewidth="64" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="229">
+<map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="35" height="20" tilewidth="64" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="229">
  <properties>
   <property name="Background" value="custom"/>
   <property name="Background Animation" value="/server/assets/ezlibs-custom/nebulous-liberations/backgrounds/block/GrayBG.animation"/>
@@ -40,24 +40,6 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" type="Liberation Config" x="232" y="72">
-   <properties>
-    <property name="Encounter Music" type="object" value="2"/>
-    <property name="Honor HPMem" type="bool" value="true"/>
-    <property name="Liberation Tileset" value="/server/assets/ezlibs-custom/nebulous-liberations/tiles/panels.tsx"/>
-    <property name="Max Order Points" value="40"/>
-    <property name="Minimum Target Phase Count" value="10"/>
-    <property name="Respawn Area" value="default"/>
-    <property name="Target Phase Count" type="int" value="13"/>
-    <property name="Target Player Count" type="int" value="5"/>
-    <property name="Victory Lap Song" value="/server/assets/exe4-hero.ogg"/>
-    <property name="Waiting Area" value="default"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="2" type="Music Definition" x="264" y="72">
-   <point/>
-  </object>
   <object id="3" name="Spawn" type="Spawn Point" x="528" y="368">
    <properties>
     <property name="Facing Direction" propertytype="Direction" value="Down Left"/>
@@ -284,14 +266,6 @@
     <property name="Damage Dealt" type="int" value="100"/>
     <property name="Damage Trap" type="bool" value="true"/>
    </properties>
-  </object>
-  <object id="111" name="PlzWork" type="Encounter Config" x="800" y="760">
-   <properties>
-    <property name="Name 1" value="BigBrute1"/>
-    <property name="Name 2" value="BigBrute2"/>
-    <property name="Name 3" value="BigBrute3"/>
-   <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="special_encounters"/></properties>
-   <point/>
   </object>
   <object id="112" type="Indestructible Panel" gid="7" x="480" y="128" width="50" height="30">
    <properties>
@@ -589,7 +563,34 @@
   <object id="214" type="Dark Panel" gid="4" x="96" y="128" width="50" height="30"/>
   <object id="215" type="Dark Panel" gid="4" x="128" y="128" width="50" height="30"/>
   <object id="216" type="Dark Panel" gid="4" x="160" y="160" width="50" height="30"/>
-  <object id="218" name="LibNorm - BigBrute OW Pool" type="Encounter Config" x="568" y="776">
+  </objectgroup>
+<objectgroup id="3" name="CONFIG - Existing Point Objects" color="#52bcff"><object id="1" type="Liberation Config" x="16" y="16" name="Liberation Config #1">
+   <properties>
+    <property name="Encounter Music" type="object" value="2"/>
+    <property name="Honor HPMem" type="bool" value="true"/>
+    <property name="Liberation Tileset" value="/server/assets/ezlibs-custom/nebulous-liberations/tiles/panels.tsx"/>
+    <property name="Max Order Points" value="40"/>
+    <property name="Minimum Target Phase Count" value="10"/>
+    <property name="Respawn Area" value="default"/>
+    <property name="Target Phase Count" type="int" value="13"/>
+    <property name="Target Player Count" type="int" value="5"/>
+    <property name="Victory Lap Song" value="/server/assets/exe4-hero.ogg"/>
+    <property name="Waiting Area" value="default"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="2" type="Music Definition" x="48" y="16" name="Music Definition #2">
+   <point/>
+  </object>
+  <object id="111" name="PlzWork" type="Encounter Config" x="80" y="16">
+   <properties>
+    <property name="Name 1" value="BigBrute1"/>
+    <property name="Name 2" value="BigBrute2"/>
+    <property name="Name 3" value="BigBrute3"/>
+   <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="special_encounters"/></properties>
+   <point/>
+  </object>
+  <object id="218" name="LibNorm - BigBrute OW Pool" type="Encounter Config" x="112" y="16">
    <properties>
     <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="special_encounters"/>
     <property name="Name 1" value="BigBrute"/>
@@ -597,5 +598,4 @@
    <property name="Encounter Mode" propertytype="LiberationEncounterMode" value="Pool"/></properties>
    <point/>
   </object>
- <object id="219" name="Bot for Dark Hole Buffed Virus #70" type="Bot Config" x="672" y="544" width="0" height="0"><properties><property name="Max HP" type="int" value="240"/><property name="Spawns" value="BigBrute"/><property name="OW Attack Damage" type="int" value="200"/><property name="OW Scale" type="float" value="1.5"/></properties></object><object id="220" name="OW encounter for Dark Hole Buffed Virus #70" type="Encounter Config" x="672" y="544" width="0" height="0"><properties><property name="Encounter Name" value="BigBrute"/><property name="Encounter Pool" type="object" value="218"/></properties></object><object id="221" name="Bot for Dark Hole #71" type="Bot Config" x="544" y="544" width="0" height="0"><properties><property name="Max HP" type="int" value="240"/><property name="Spawns" value="BigBrute"/><property name="OW Attack Damage" type="int" value="200"/></properties></object><object id="226" name="OW encounter for Dark Hole #73" type="Encounter Config" x="448" y="544" width="0" height="0"><properties><property name="Encounter Mode" propertytype="LiberationEncounterMode" value="Pool"/><property name="Encounter Category" propertytype="LiberationEncounterCategory" value="special_encounters"/><property name="Encounter Name" value="BigBrute"/><property name="Encounter Pool" type="object" value="218"/></properties></object><object id="227" name="Bot for Boss Dark Panel #136" type="Bot Config" x="512" y="96" width="0" height="0"><properties><property name="Max HP" type="int" value="1500"/><property name="Starting HP" type="int" value="1500"/><property name="Spawns" value="ShadeMan"/></properties></object><object id="228" name="OW encounter for Boss Dark Panel #136" type="Encounter Config" x="512" y="96" width="0" height="0"><properties><property name="Encounter Category" propertytype="LiberationEncounterCategory" value="bosses"/></properties></object></objectgroup>
-</map>
+ <object id="219" name="Bot for Dark Hole Buffed Virus #70" type="Bot Config" x="144" y="16"><properties><property name="Max HP" type="int" value="240"/><property name="Spawns" value="BigBrute"/><property name="OW Attack Damage" type="int" value="200"/><property name="OW Scale" type="float" value="1.5"/></properties><point/></object><object id="220" name="OW encounter for Dark Hole Buffed Virus #70" type="Encounter Config" x="176" y="16"><properties><property name="Encounter Name" value="BigBrute"/><property name="Encounter Pool" type="object" value="218"/></properties><point/></object><object id="221" name="Bot for Dark Hole #71" type="Bot Config" x="208" y="16"><properties><property name="Max HP" type="int" value="240"/><property name="Spawns" value="BigBrute"/><property name="OW Attack Damage" type="int" value="200"/></properties><point/></object><object id="226" name="OW encounter for Dark Hole #73" type="Encounter Config" x="240" y="16"><properties><property name="Encounter Mode" propertytype="LiberationEncounterMode" value="Pool"/><property name="Encounter Category" propertytype="LiberationEncounterCategory" value="special_encounters"/><property name="Encounter Name" value="BigBrute"/><property name="Encounter Pool" type="object" value="218"/></properties><point/></object><object id="227" name="Bot for Boss Dark Panel #136" type="Bot Config" x="272" y="16"><properties><property name="Max HP" type="int" value="1500"/><property name="Starting HP" type="int" value="1500"/><property name="Spawns" value="ShadeMan"/></properties><point/></object><object id="228" name="OW encounter for Boss Dark Panel #136" type="Encounter Config" x="304" y="16"><properties><property name="Encounter Category" propertytype="LiberationEncounterCategory" value="bosses"/></properties><point/></object></objectgroup></map>

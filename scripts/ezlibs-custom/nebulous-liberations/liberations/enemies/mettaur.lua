@@ -3,7 +3,6 @@
 -- No separate enemy constructor: EnemyTemplates.create handles instance lifecycle.
 local EnemyHelpers = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_helpers")
 local GuardInterception = require("scripts/ezlibs-custom/nebulous-liberations/liberations/guard_interception")
-local Preloader = require("scripts/ezlibs-custom/nebulous-liberations/liberations/preloader")
 local Direction = require("scripts/libs/direction")
 
 return function(EnemyTemplates)
@@ -23,13 +22,11 @@ local SHOCKWAVE_DIRECTION = {
     [Direction.DOWN_LEFT] = { suffix = "DL", dx = 0, dy = 1 },
 }
 local SHOCKWAVE_RANGE = 3
-local SHOCKWAVE_STEP_SECONDS = 0.12
-local SHOCKWAVE_FRAME_SECONDS = {0.09, 0.10, 0.11, 0.125, 0.125, 0.13}
--- All four ATTACK_* states in mettaur_ow.animation have eight frames:
--- 0.10 + 0.10 + 0.10 + 0.09 + 0.09 + 0.13 + 0.10 + 0.12 = 0.83s.
--- Allow one small network/frame margin before starting the first shockwave.
--- Keep this value synchronized if those animation frame durations change.
-local METTAUR_ATTACK_ANIMATION_SECONDS = 0.83 + 0.05
+local SHOCKWAVE_STEP_SECONDS = 0.24
+-- All four ATTACK_* states in mettaur_ow.animation total 0.83s.
+-- Switch to the authored HOLD_* frame just BEFORE that state expires so
+-- there is no one-frame return to IDLE between swing and shockwave.
+local METTAUR_ATTACK_ANIMATION_SECONDS = 0.82
 
 local function has_terrain_tile(instance, x, y, z)
     -- Net.get_tile can fail outside the map, so guard against the end of a
@@ -40,8 +37,8 @@ end
 
 -- A shockwave is one straight three-tile ray in the direction the Mettaur
 -- faces. The normal enemy turn loop calls this once; no client battle AI is
--- involved. First try to align with the target by moving to a nearby valid
--- enemy-owned panel, then always play the attack (a miss still has visuals).
+-- involved. Try to align with ANY active player by using a nearby valid
+-- enemy-owned panel; skip the attack if no target can actually be hit.
 local function aligned_shockwave_direction(x, y, target_x, target_y)
     local dx, dy = target_x - x, target_y - y
     if dx == 0 and dy < 0 and -dy <= SHOCKWAVE_RANGE then
@@ -56,37 +53,40 @@ local function aligned_shockwave_direction(x, y, target_x, target_y)
     return nil, nil
 end
 
-local function find_shockwave_firing_position(self, target)
-    local tx = math.floor(target.x)
-    local ty = math.floor(target.y)
+-- Evaluate ALL active players, not only the nearest: an adjacent player
+-- can be off-axis while a different player is reachable with a shockwave.
+local function find_shockwave_firing_position(self)
     local best, best_score
-
-    -- Reposition by at most two tiles per turn. EnemyHelpers.move already
-    -- handles teleport animation and enemy bot facing/scale restoration.
-    for offset_y = -2, 2 do
-        for offset_x = -2, 2 do
-            local x = self.x + offset_x
-            local y = self.y + offset_y
-            local direction, distance = aligned_shockwave_direction(x, y, tx, ty)
-            if direction then
-                local movable = (offset_x == 0 and offset_y == 0)
-                    or EnemyHelpers.can_move_to(self.instance, x, y, self.z, self)
-                if movable then
-                    local travel = SHOCKWAVE_DIRECTION[direction]
-                    local clear = true
-                    for step = 1, distance do
-                        if not has_terrain_tile(self.instance,
-                            x + travel.dx * step, y + travel.dy * step, self.z) then
-                            clear = false
-                            break
-                        end
-                    end
-                    if clear then
-                        local travel_distance = math.abs(offset_x) + math.abs(offset_y)
-                        local score = travel_distance * 10 + distance
-                        if best_score == nil or score < best_score then
-                            best = { x = x, y = y, direction = direction }
-                            best_score = score
+    for _, session in pairs(self.instance.player_sessions or {}) do
+        local target = session and session.player
+        if session and (session.health or 0) > 0 and target
+            and math.floor(target.z) == math.floor(self.z) then
+            local tx, ty = math.floor(target.x), math.floor(target.y)
+            for offset_y = -2, 2 do
+                for offset_x = -2, 2 do
+                    local x, y = self.x + offset_x, self.y + offset_y
+                    local direction, distance = aligned_shockwave_direction(x, y, tx, ty)
+                    if direction then
+                        local movable = (offset_x == 0 and offset_y == 0)
+                            or EnemyHelpers.can_move_to(self.instance, x, y, self.z, self)
+                        if movable then
+                            local travel = SHOCKWAVE_DIRECTION[direction]
+                            local clear = true
+                            for step = 1, distance do
+                                if not has_terrain_tile(self.instance,
+                                    x + travel.dx * step,
+                                    y + travel.dy * step, self.z) then
+                                    clear = false
+                                    break
+                                end
+                            end
+                            if clear then
+                                local score = (math.abs(offset_x) + math.abs(offset_y)) * 10 + distance
+                                if best_score == nil or score < best_score then
+                                    best = { x = x, y = y, direction = direction }
+                                    best_score = score
+                                end
+                            end
                         end
                     end
                 end
@@ -96,106 +96,109 @@ local function find_shockwave_firing_position(self, target)
     return best
 end
 
+local function sessions_at_shockwave_step(self, direction, sessions)
+    local groups = {}
+    local travel = SHOCKWAVE_DIRECTION[direction]
+    if not travel then return groups end
+    for _, session in ipairs(sessions) do
+        local player = session.player
+        if player and math.floor(player.z) == self.z then
+            local dx = math.floor(player.x) - self.x
+            local dy = math.floor(player.y) - self.y
+            local step
+            if travel.dx ~= 0 and dy == 0 then
+                step = dx / travel.dx
+            elseif travel.dy ~= 0 and dx == 0 then
+                step = dy / travel.dy
+            end
+            if step and step >= 1 and step <= SHOCKWAVE_RANGE
+                and step == math.floor(step) then
+                groups[step] = groups[step] or {}
+                groups[step][#groups[step] + 1] = session
+            end
+        end
+    end
+    return groups
+end
+
 function EnemyTemplates.ai.shockwave_line(self)
     local co = coroutine.create(function()
-        local closest = EnemyHelpers.find_closest_player_session(self.instance, self)
-        if not closest or not closest.player then return end
-        local target = closest.player
-        local firing_position = find_shockwave_firing_position(self, target)
-
-        if firing_position and
-            (firing_position.x ~= self.x or firing_position.y ~= self.y) then
-            Async.await(EnemyHelpers.move(self.instance, self,
-                firing_position.x, firing_position.y, self.z,
-                firing_position.direction))
+        local firing_position = find_shockwave_firing_position(self)
+        if not firing_position then
+            -- No reachable player in a three-panel ray: DO NOT attack.
+            return
         end
-
-        -- If an aligned firing position exists, use that exact axis. When
-        -- no such position is reachable, launch toward the nearest player
-        -- anyway: don't silently skip the turn just because the player is
-        -- outside the three-tile hitbox.
-        local direction
-        if firing_position then
-            direction = firing_position.direction
-            Net.set_bot_direction(self.id, direction)
-        else
-            EnemyHelpers.face_position(self, target.x, target.y)
-            direction = Net.get_bot_direction(self.id)
-        end
+        local direction = firing_position.direction
         local travel = SHOCKWAVE_DIRECTION[direction]
-        if not travel then return end
+        if firing_position.x ~= self.x or firing_position.y ~= self.y then
+            Async.await(EnemyHelpers.move(self.instance, self,
+                firing_position.x, firing_position.y, self.z, direction))
+        end
+        Net.set_bot_direction(self.id, direction)
         self.direction = direction
         self.selection:move(self, direction)
+        if #self.selection:detect_player_sessions() == 0 then return end
 
         self.selection:indicate()
         Async.await(Async.sleep(0.5))
-
         local caught_sessions = self.selection:detect_player_sessions()
-        EnemyHelpers.play_attack_animation(self)
-        -- Net.animate_bot initiates the animation without awaiting its frames.
-        -- Complete Mettaur's entire directional pickaxe swing before spawning
-        -- shockwaves. The attack remains within the same enemy turn.
-        Async.await(Async.sleep(METTAUR_ATTACK_ANIMATION_SECONDS))
-
-        -- Start Guard interception when the shockwave begins, not at the start
-        -- of the wind-up; otherwise the Guard can return before impact.
-        local records = nil
-        if #caught_sessions > 0 then
-            records = GuardInterception.prepare_attack(
-                self.instance, self, caught_sessions,
-                SHOCKWAVE_RANGE * SHOCKWAVE_STEP_SECONDS)
+        if #caught_sessions == 0 then
+            self.selection:remove_indicators()
+            return
         end
 
-        local spawned_bots = {}
-        for distance = 1, SHOCKWAVE_RANGE do
-            local x = self.x + travel.dx * distance
-            local y = self.y + travel.dy * distance
-            if not has_terrain_tile(self.instance, x, y, self.z) then
-                break
+        EnemyHelpers.play_attack_animation(self)
+        Async.await(Async.sleep(METTAUR_ATTACK_ANIMATION_SECONDS))
+        EnemyHelpers.hold_attack_animation(self)
+
+        local groups = sessions_at_shockwave_step(self, direction, caught_sessions)
+        local records_by_step = {}
+        for step = 1, SHOCKWAVE_RANGE do
+            if groups[step] then
+                records_by_step[step] = GuardInterception.prepare_attack(
+                    self.instance, self, groups[step], step * SHOCKWAVE_STEP_SECONDS)
             end
-            local bot_id = Net.create_bot({
-                texture_path = SHOCKWAVE_TEXTURE,
-                animation_path = SHOCKWAVE_ANIMATION,
-                animation = "SHOCKWAVE_" .. travel.suffix,
-                direction = direction,
-                area_id = self.instance.area_id,
-                warp_in = false,
-                x = x + 0.5,
-                y = y + 0.5,
-                z = self.z,
-            })
-            if bot_id then
-                spawned_bots[#spawned_bots + 1] = bot_id
+        end
+
+        -- One projectile, transferred to each consecutive panel. The prior
+        -- version created three persistent sprites that overlapped visually.
+        local projectile_id
+        for step = 1, SHOCKWAVE_RANGE do
+            local x, y = self.x + travel.dx * step, self.y + travel.dy * step
+            if not has_terrain_tile(self.instance, x, y, self.z) then break end
+            if not projectile_id then
+                projectile_id = Net.create_bot({
+                    texture_path = SHOCKWAVE_TEXTURE,
+                    animation_path = SHOCKWAVE_ANIMATION,
+                    animation = "SHOCKWAVE_" .. travel.suffix,
+                    direction = direction,
+                    area_id = self.instance.area_id,
+                    warp_in = false,
+                    x = x + 0.5, y = y + 0.5, z = self.z,
+                })
+            else
+                Net.transfer_bot(projectile_id, self.instance.area_id, false,
+                    x + 0.5, y + 0.5, self.z)
+                Net.animate_bot(projectile_id, "SHOCKWAVE_" .. travel.suffix)
             end
             Async.await(Async.sleep(SHOCKWAVE_STEP_SECONDS))
+            local records = records_by_step[step]
+            if records then
+                GuardInterception.apply_damage(records, self.attack_damage or 20, self)
+                GuardInterception.finish_attack(self.instance, records)
+            end
         end
-
-        if records then
-            GuardInterception.apply_damage(records, self.attack_damage or 20, self)
-            GuardInterception.finish_attack(self.instance, records)
-        end
-
-        local remaining = 0
-        for _, duration in ipairs(SHOCKWAVE_FRAME_SECONDS) do
-            remaining = remaining + duration
-        end
-        Async.await(Async.sleep(remaining))
-        for _, bot_id in ipairs(spawned_bots) do
-            Net.remove_bot(bot_id, false)
-        end
+        if projectile_id then Net.remove_bot(projectile_id, false) end
+        EnemyHelpers.finish_attack_animation(self)
         self.selection:remove_indicators()
     end)
     return Async.promisify(co)
 end
 
--- Register the assets before an instance clones/preloads its area. This is
--- deliberately done at module load, rather than only when Mettaur spawns.
-Preloader.add_asset(SHOCKWAVE_TEXTURE)
-Preloader.add_asset(SHOCKWAVE_ANIMATION)
--- Registration occurs before instances clone their areas; supplying both
--- files here lets the OW bot use its new skin immediately on spawn.
-Preloader.add_asset(METTAUR_OW_TEXTURE)
-Preloader.add_asset(METTAUR_OW_ANIMATION)
+-- The v3 mission preloader supplies these paths from this template's
+-- texture_path/animation_path and attack_texture/attack_animation_path.
+-- Do not register them as shared assets: that would provision Mettaur to
+-- every Liberation mission, including maps with no Mettaurs.
 
 EnemyTemplates.register("Mettaur", {
     battle_name = "Mettaur",
@@ -210,6 +213,9 @@ EnemyTemplates.register("Mettaur", {
     animation_path = METTAUR_OW_ANIMATION,
     ai_type = "shockwave_line",
     attack_damage = 20,
+    attack_animation_seconds = 0.83,
+    has_attack_animation = true,
+    has_attack_hold = true,
     attack_texture = SHOCKWAVE_TEXTURE,
     attack_animation_path = SHOCKWAVE_ANIMATION,
     -- 1x3 unbroken line forward. The Selection module rotates it for each

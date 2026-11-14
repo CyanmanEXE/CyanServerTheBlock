@@ -100,7 +100,7 @@ function EnemyTemplates.create(instance, position, direction, template_name, spa
     -- Preload assets
     if template.preload_assets then
         for _, asset in ipairs(template.preload_assets) do
-            Preloader.add_asset(asset)
+            Preloader.add_asset(asset, instance.area_id)
         end
     end
 
@@ -143,6 +143,8 @@ EnemyTemplates.metatable = {
             return EnemyTemplates.ai.simple_charge(self)
         elseif self.ai_type == "ranged" then
             return EnemyTemplates.ai.ranged(self)
+        elseif self.ai_type == "shademan_ambush" then
+            return EnemyTemplates.ai.shademan_ambush(self)
         elseif self.ai_type == "shockwave_line" then
             return EnemyTemplates.ai.shockwave_line(self)
         else
@@ -250,7 +252,13 @@ function EnemyTemplates.ai.simple_charge(self)
 end
 
 function EnemyTemplates.ai.ranged(self)
-    -- placeholder
+    if self.template_name == "ShadeMan" and EnemyTemplates.ai.shademan_ambush then
+        return EnemyTemplates.ai.shademan_ambush(self)
+    end
+    if self.template_name == "Bladia" and EnemyTemplates.ai.bladia_strike then
+        return EnemyTemplates.ai.bladia_strike(self)
+    end
+    -- Only named templates with implemented AI may attack here.
     return Async.create_promise(function(resolve) resolve() end)
 end
 
@@ -258,6 +266,8 @@ end
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_bigbrute")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_blizzardman")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_shademan")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/shademan_ow")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/bladia_ow")(EnemyTemplates)
 
 
 
@@ -267,5 +277,10 @@ require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template
 -- Register the Mettaur template and its unique overworld shockwave AI.
 -- Keep enemy-specific behaviors in enemies/ rather than in this shared registry.
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/mettaur")(EnemyTemplates)
+
+-- Additional existing overworld sprite sheets used by DEBUGLIB scaling tests.
+-- These use currently supported AI placeholders; they do not change other templates.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_bladia")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_prog")(EnemyTemplates)
 
 return EnemyTemplates
