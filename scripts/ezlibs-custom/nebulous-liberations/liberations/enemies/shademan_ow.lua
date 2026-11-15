@@ -3,6 +3,7 @@
 -- The existing sprite has downward ATTACK_DL/ATTACK_DR states only.
 local EnemyHelpers = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_helpers")
 local GuardInterception = require("scripts/ezlibs-custom/nebulous-liberations/liberations/guard_interception")
+local Runtime = require("scripts/ezlibs-custom/nebulous-liberations/liberations/ai/attack_runtime")
 local Direction = require("scripts/libs/direction")
 
 local MAX_TARGET_RANGE = 10
@@ -70,8 +71,8 @@ return function(EnemyTemplates)
             self.selection:move(target.player, Direction.None)
             local caught = self.selection:detect_player_sessions()
             if #caught > 0 then
-                self.selection:indicate()
-                local records = GuardInterception.prepare_attack(self.instance, self, caught, 0.5)
+                Runtime.begin_telegraph(self.selection)
+                local records = Runtime.prepare(self, caught, 0.5)
                 -- The existing ATTACK_DL/DR animations each contain 3 frames.
                 -- Play all 3 frames; the final frame stays active until we
                 -- explicitly return to IDLE after impact and recovery.
@@ -84,10 +85,9 @@ return function(EnemyTemplates)
                 -- switch to the nonstandard ATTACK_*_HOLD state: a client
                 -- using its original animation file may show the whole sheet.
                 Async.await(Async.sleep(ATTACK_HOLD_SECONDS))
-                GuardInterception.apply_damage(records, self.attack_damage or 60, self)
-                GuardInterception.finish_attack(self.instance, records)
+                Runtime.impact(self, records, self.attack_damage or 60)
                 Async.await(Async.sleep(ATTACK_RECOVERY_SECONDS))
-                self.selection:remove_indicators()
+                Runtime.end_telegraph(self.selection)
                 Net.set_bot_direction(self.id, destination.direction)
                 print("[Liberation][ShadeMan][OW] IMPACT", self.id, "targets", #caught)
             else

@@ -12,6 +12,7 @@ EnemyTemplates.register("BlizzardMan", {
     attack_damage = 40,
     attack_animation_seconds = 1.95,
     attack_effect_animation = "FALL",
+    attack_effect_motion = "fall", -- reusable Z-fall effect, matches legacy snowball
     has_attack_animation = true,
     has_attack_hold = true,
     attack_texture = "/server/assets/ezlibs-custom/nebulous-liberations/bots/attacks/snowball.png",

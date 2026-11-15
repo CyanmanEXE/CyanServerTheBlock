@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="isometric" renderorder="right-down" width="53" height="11" tilewidth="64" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="256">
  <properties>
   <property name="Background" value="custom"/>
@@ -287,99 +287,273 @@
     <property name="OW Encounter Config" type="object" value="123"/>
    </properties>
   </object>
-  <object id="126" name="TEST - Mettaur - 0.75x - 40HP" type="Dark Hole Buffed Virus" gid="6" x="576" y="32" width="50" height="30"><properties><property name="Bot Config" type="object" value="124"/><property name="OW Encounter Config" type="object" value="125"/><property name="Direction" value="Down Right"/></properties></object><object id="127" name="TEST Spawn Pad - Mettaur - 0.75x - 40HP" type="Dark Panel" gid="4" x="608" y="32" width="50" height="30"/><object id="130" name="TEST - Mettaur - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="576" y="96" width="50" height="30"><properties><property name="Bot Config" type="object" value="128"/><property name="OW Encounter Config" type="object" value="129"/><property name="Direction" value="Down Right"/></properties></object><object id="131" name="TEST Spawn Pad - Mettaur - 1.5x - 240HP" type="Dark Panel" gid="4" x="608" y="96" width="50" height="30"/><object id="134" name="TEST - Mettaur - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="576" y="160" width="50" height="30"><properties><property name="Bot Config" type="object" value="132"/><property name="OW Encounter Config" type="object" value="133"/><property name="Direction" value="Down Right"/></properties></object><object id="135" name="TEST Spawn Pad - Mettaur - 2x - 1200HP" type="Dark Panel" gid="4" x="608" y="160" width="50" height="30"/><object id="138" name="TEST - BigBrute - 0.75x - 120HP" type="Dark Hole Buffed Virus" gid="6" x="672" y="32" width="50" height="30"><properties><property name="Bot Config" type="object" value="136"/><property name="OW Encounter Config" type="object" value="137"/><property name="Direction" value="Down Right"/></properties></object><object id="139" name="TEST Spawn Pad - BigBrute - 0.75x - 120HP" type="Dark Panel" gid="4" x="704" y="32" width="50" height="30"/><object id="142" name="TEST - BigBrute - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="672" y="96" width="50" height="30"><properties><property name="Bot Config" type="object" value="140"/><property name="OW Encounter Config" type="object" value="141"/><property name="Direction" value="Down Right"/></properties></object><object id="143" name="TEST Spawn Pad - BigBrute - 1.5x - 240HP" type="Dark Panel" gid="4" x="704" y="96" width="50" height="30"/><object id="146" name="TEST - BigBrute - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="672" y="160" width="50" height="30"><properties><property name="Bot Config" type="object" value="144"/><property name="OW Encounter Config" type="object" value="145"/><property name="Direction" value="Down Right"/></properties></object><object id="147" name="TEST Spawn Pad - BigBrute - 2x - 1200HP" type="Dark Panel" gid="4" x="704" y="160" width="50" height="30"/><object id="150" name="TEST - BlizzardMan - 0.75x - 400HP" type="Dark Hole Buffed Virus" gid="6" x="768" y="32" width="50" height="30"><properties><property name="Bot Config" type="object" value="148"/><property name="OW Encounter Config" type="object" value="149"/><property name="Direction" value="Down Right"/></properties></object><object id="151" name="TEST Spawn Pad - BlizzardMan - 0.75x - 400HP" type="Dark Panel" gid="4" x="800" y="32" width="50" height="30"/><object id="154" name="TEST - BlizzardMan - 1.5x - 600HP" type="Dark Hole Buffed Virus" gid="6" x="768" y="96" width="50" height="30"><properties><property name="Bot Config" type="object" value="152"/><property name="OW Encounter Config" type="object" value="153"/><property name="Direction" value="Down Right"/></properties></object><object id="155" name="TEST Spawn Pad - BlizzardMan - 1.5x - 600HP" type="Dark Panel" gid="4" x="800" y="96" width="50" height="30"/><object id="158" name="TEST - BlizzardMan - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="768" y="160" width="50" height="30"><properties><property name="Bot Config" type="object" value="156"/><property name="OW Encounter Config" type="object" value="157"/><property name="Direction" value="Down Right"/></properties></object><object id="159" name="TEST Spawn Pad - BlizzardMan - 2x - 1200HP" type="Dark Panel" gid="4" x="800" y="160" width="50" height="30"/><object id="162" name="TEST - ShadeMan - 0.75x - 600HP" type="Dark Hole Buffed Virus" gid="6" x="864" y="32" width="50" height="30"><properties><property name="Bot Config" type="object" value="160"/><property name="OW Encounter Config" type="object" value="161"/><property name="Direction" value="Down Right"/></properties></object><object id="163" name="TEST Spawn Pad - ShadeMan - 0.75x - 600HP" type="Dark Panel" gid="4" x="896" y="32" width="50" height="30"/><object id="166" name="TEST - ShadeMan - 1.5x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="864" y="96" width="50" height="30"><properties><property name="Bot Config" type="object" value="164"/><property name="OW Encounter Config" type="object" value="165"/><property name="Direction" value="Down Right"/></properties></object><object id="167" name="TEST Spawn Pad - ShadeMan - 1.5x - 1200HP" type="Dark Panel" gid="4" x="896" y="96" width="50" height="30"/><object id="170" name="TEST - ShadeMan - 2x - 2400HP" type="Dark Hole Buffed Virus" gid="6" x="864" y="160" width="50" height="30"><properties><property name="Bot Config" type="object" value="168"/><property name="OW Encounter Config" type="object" value="169"/><property name="Direction" value="Down Right"/></properties></object><object id="171" name="TEST Spawn Pad - ShadeMan - 2x - 2400HP" type="Dark Panel" gid="4" x="896" y="160" width="50" height="30"/><object id="174" name="TEST - Bladia - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="960" y="32" width="50" height="30"><properties><property name="Bot Config" type="object" value="172"/><property name="OW Encounter Config" type="object" value="173"/><property name="Direction" value="Down Right"/></properties></object><object id="175" name="TEST Spawn Pad - Bladia - 0.75x - 80HP" type="Dark Panel" gid="4" x="992" y="32" width="50" height="30"/><object id="178" name="TEST - Bladia - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="960" y="96" width="50" height="30"><properties><property name="Bot Config" type="object" value="176"/><property name="OW Encounter Config" type="object" value="177"/><property name="Direction" value="Down Right"/></properties></object><object id="179" name="TEST Spawn Pad - Bladia - 1.5x - 240HP" type="Dark Panel" gid="4" x="992" y="96" width="50" height="30"/><object id="182" name="TEST - Bladia - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="960" y="160" width="50" height="30"><properties><property name="Bot Config" type="object" value="180"/><property name="OW Encounter Config" type="object" value="181"/><property name="Direction" value="Down Right"/></properties></object><object id="183" name="TEST Spawn Pad - Bladia - 2x - 1200HP" type="Dark Panel" gid="4" x="992" y="160" width="50" height="30"/><object id="186" name="TEST - Prog - 0.75x - 40HP" type="Dark Hole Buffed Virus" gid="6" x="1056" y="32" width="50" height="30"><properties><property name="Bot Config" type="object" value="184"/><property name="OW Encounter Config" type="object" value="185"/><property name="Direction" value="Down Right"/></properties></object><object id="187" name="TEST Spawn Pad - Prog - 0.75x - 40HP" type="Dark Panel" gid="4" x="1088" y="32" width="50" height="30"/><object id="190" name="TEST - Prog - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1056" y="96" width="50" height="30"><properties><property name="Bot Config" type="object" value="188"/><property name="OW Encounter Config" type="object" value="189"/><property name="Direction" value="Down Right"/></properties></object><object id="191" name="TEST Spawn Pad - Prog - 1.5x - 240HP" type="Dark Panel" gid="4" x="1088" y="96" width="50" height="30"/><object id="194" name="TEST - Prog - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1056" y="160" width="50" height="30"><properties><property name="Bot Config" type="object" value="192"/><property name="OW Encounter Config" type="object" value="193"/><property name="Direction" value="Down Right"/></properties></object><object id="195" name="TEST Spawn Pad - Prog - 2x - 1200HP" type="Dark Panel" gid="4" x="1088" y="160" width="50" height="30"/>
-  <object id="198" name="TEST - AutoScale Quaker - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="1152" y="32" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="196"/>
-   <property name="OW Encounter Config" type="object" value="197"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="126" name="TEST - Mettaur - 0.75x - 40HP" type="Dark Hole Buffed Virus" gid="6" x="576" y="32" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="124"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="125"/>
+   </properties>
+  </object>
+  <object id="127" name="TEST Spawn Pad - Mettaur - 0.75x - 40HP" type="Dark Panel" gid="4" x="608" y="32" width="50" height="30"/>
+  <object id="130" name="TEST - Mettaur - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="576" y="96" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="128"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="129"/>
+   </properties>
+  </object>
+  <object id="131" name="TEST Spawn Pad - Mettaur - 1.5x - 240HP" type="Dark Panel" gid="4" x="608" y="96" width="50" height="30"/>
+  <object id="134" name="TEST - Mettaur - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="576" y="160" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="132"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="133"/>
+   </properties>
+  </object>
+  <object id="135" name="TEST Spawn Pad - Mettaur - 2x - 1200HP" type="Dark Panel" gid="4" x="608" y="160" width="50" height="30"/>
+  <object id="138" name="TEST - BigBrute - 0.75x - 120HP" type="Dark Hole Buffed Virus" gid="6" x="672" y="32" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="136"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="137"/>
+   </properties>
+  </object>
+  <object id="139" name="TEST Spawn Pad - BigBrute - 0.75x - 120HP" type="Dark Panel" gid="4" x="704" y="32" width="50" height="30"/>
+  <object id="142" name="TEST - BigBrute - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="672" y="96" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="140"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="141"/>
+   </properties>
+  </object>
+  <object id="143" name="TEST Spawn Pad - BigBrute - 1.5x - 240HP" type="Dark Panel" gid="4" x="704" y="96" width="50" height="30"/>
+  <object id="146" name="TEST - BigBrute - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="672" y="160" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="144"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="145"/>
+   </properties>
+  </object>
+  <object id="147" name="TEST Spawn Pad - BigBrute - 2x - 1200HP" type="Dark Panel" gid="4" x="704" y="160" width="50" height="30"/>
+  <object id="150" name="TEST - BlizzardMan - 0.75x - 400HP" type="Dark Hole Buffed Virus" gid="6" x="768" y="32" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="148"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="149"/>
+   </properties>
+  </object>
+  <object id="151" name="TEST Spawn Pad - BlizzardMan - 0.75x - 400HP" type="Dark Panel" gid="4" x="800" y="32" width="50" height="30"/>
+  <object id="154" name="TEST - BlizzardMan - 1.5x - 600HP" type="Dark Hole Buffed Virus" gid="6" x="768" y="96" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="152"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="153"/>
+   </properties>
+  </object>
+  <object id="155" name="TEST Spawn Pad - BlizzardMan - 1.5x - 600HP" type="Dark Panel" gid="4" x="800" y="96" width="50" height="30"/>
+  <object id="158" name="TEST - BlizzardMan - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="768" y="160" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="156"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="157"/>
+   </properties>
+  </object>
+  <object id="159" name="TEST Spawn Pad - BlizzardMan - 2x - 1200HP" type="Dark Panel" gid="4" x="800" y="160" width="50" height="30"/>
+  <object id="162" name="TEST - ShadeMan - 0.75x - 600HP" type="Dark Hole Buffed Virus" gid="6" x="864" y="32" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="160"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="161"/>
+   </properties>
+  </object>
+  <object id="163" name="TEST Spawn Pad - ShadeMan - 0.75x - 600HP" type="Dark Panel" gid="4" x="896" y="32" width="50" height="30"/>
+  <object id="166" name="TEST - ShadeMan - 1.5x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="864" y="96" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="164"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="165"/>
+   </properties>
+  </object>
+  <object id="167" name="TEST Spawn Pad - ShadeMan - 1.5x - 1200HP" type="Dark Panel" gid="4" x="896" y="96" width="50" height="30"/>
+  <object id="170" name="TEST - ShadeMan - 2x - 2400HP" type="Dark Hole Buffed Virus" gid="6" x="864" y="160" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="168"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="169"/>
+   </properties>
+  </object>
+  <object id="171" name="TEST Spawn Pad - ShadeMan - 2x - 2400HP" type="Dark Panel" gid="4" x="896" y="160" width="50" height="30"/>
+  <object id="174" name="TEST - Bladia - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="960" y="32" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="172"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="173"/>
+   </properties>
+  </object>
+  <object id="175" name="TEST Spawn Pad - Bladia - 0.75x - 80HP" type="Dark Panel" gid="4" x="992" y="32" width="50" height="30"/>
+  <object id="178" name="TEST - Bladia - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="960" y="96" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="176"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="177"/>
+   </properties>
+  </object>
+  <object id="179" name="TEST Spawn Pad - Bladia - 1.5x - 240HP" type="Dark Panel" gid="4" x="992" y="96" width="50" height="30"/>
+  <object id="182" name="TEST - Bladia - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="960" y="160" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="180"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="181"/>
+   </properties>
+  </object>
+  <object id="183" name="TEST Spawn Pad - Bladia - 2x - 1200HP" type="Dark Panel" gid="4" x="992" y="160" width="50" height="30"/>
+  <object id="186" name="TEST - Prog - 0.75x - 40HP" type="Dark Hole Buffed Virus" gid="6" x="1056" y="32" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="184"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="185"/>
+   </properties>
+  </object>
+  <object id="187" name="TEST Spawn Pad - Prog - 0.75x - 40HP" type="Dark Panel" gid="4" x="1088" y="32" width="50" height="30"/>
+  <object id="190" name="TEST - Prog - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1056" y="96" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="188"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="189"/>
+   </properties>
+  </object>
+  <object id="191" name="TEST Spawn Pad - Prog - 1.5x - 240HP" type="Dark Panel" gid="4" x="1088" y="96" width="50" height="30"/>
+  <object id="194" name="TEST - Prog - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1056" y="160" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="192"/>
+    <property name="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="193"/>
+   </properties>
+  </object>
+  <object id="195" name="TEST Spawn Pad - Prog - 2x - 1200HP" type="Dark Panel" gid="4" x="1088" y="160" width="50" height="30"/>
+  <object id="198" name="TEST - AutoScale Quaker - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="1152" y="32" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="196"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="197"/>
+   </properties>
+  </object>
   <object id="199" name="TEST Spawn Pad - AutoScale Quaker - 0.75x - 80HP" type="Dark Panel" gid="4" x="1184" y="32" width="50" height="30"/>
-  <object id="202" name="TEST - AutoScale Quaker - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1152" y="96" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="200"/>
-   <property name="OW Encounter Config" type="object" value="201"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="202" name="TEST - AutoScale Quaker - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1152" y="96" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="200"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="201"/>
+   </properties>
+  </object>
   <object id="203" name="TEST Spawn Pad - AutoScale Quaker - 1.5x - 240HP" type="Dark Panel" gid="4" x="1184" y="96" width="50" height="30"/>
-  <object id="206" name="TEST - AutoScale Quaker - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1152" y="160" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="204"/>
-   <property name="OW Encounter Config" type="object" value="205"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="206" name="TEST - AutoScale Quaker - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1152" y="160" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="204"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="205"/>
+   </properties>
+  </object>
   <object id="207" name="TEST Spawn Pad - AutoScale Quaker - 2x - 1200HP" type="Dark Panel" gid="4" x="1184" y="160" width="50" height="30"/>
-  <object id="210" name="TEST - AutoScale Swordy - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="1248" y="32" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="208"/>
-   <property name="OW Encounter Config" type="object" value="209"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="210" name="TEST - AutoScale Swordy - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="1248" y="32" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="208"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="209"/>
+   </properties>
+  </object>
   <object id="211" name="TEST Spawn Pad - AutoScale Swordy - 0.75x - 80HP" type="Dark Panel" gid="4" x="1280" y="32" width="50" height="30"/>
-  <object id="214" name="TEST - AutoScale Swordy - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1248" y="96" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="212"/>
-   <property name="OW Encounter Config" type="object" value="213"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="214" name="TEST - AutoScale Swordy - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1248" y="96" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="212"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="213"/>
+   </properties>
+  </object>
   <object id="215" name="TEST Spawn Pad - AutoScale Swordy - 1.5x - 240HP" type="Dark Panel" gid="4" x="1280" y="96" width="50" height="30"/>
-  <object id="218" name="TEST - AutoScale Swordy - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1248" y="160" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="216"/>
-   <property name="OW Encounter Config" type="object" value="217"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="218" name="TEST - AutoScale Swordy - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1248" y="160" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="216"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="217"/>
+   </properties>
+  </object>
   <object id="219" name="TEST Spawn Pad - AutoScale Swordy - 2x - 1200HP" type="Dark Panel" gid="4" x="1280" y="160" width="50" height="30"/>
-  <object id="222" name="TEST - AutoScale Piranha - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="1344" y="32" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="220"/>
-   <property name="OW Encounter Config" type="object" value="221"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="222" name="TEST - AutoScale Piranha - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="1344" y="32" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="220"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="221"/>
+   </properties>
+  </object>
   <object id="223" name="TEST Spawn Pad - AutoScale Piranha - 0.75x - 80HP" type="Dark Panel" gid="4" x="1376" y="32" width="50" height="30"/>
-  <object id="226" name="TEST - AutoScale Piranha - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1344" y="96" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="224"/>
-   <property name="OW Encounter Config" type="object" value="225"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="226" name="TEST - AutoScale Piranha - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1344" y="96" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="224"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="225"/>
+   </properties>
+  </object>
   <object id="227" name="TEST Spawn Pad - AutoScale Piranha - 1.5x - 240HP" type="Dark Panel" gid="4" x="1376" y="96" width="50" height="30"/>
-  <object id="230" name="TEST - AutoScale Piranha - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1344" y="160" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="228"/>
-   <property name="OW Encounter Config" type="object" value="229"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="230" name="TEST - AutoScale Piranha - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1344" y="160" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="228"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="229"/>
+   </properties>
+  </object>
   <object id="231" name="TEST Spawn Pad - AutoScale Piranha - 2x - 1200HP" type="Dark Panel" gid="4" x="1376" y="160" width="50" height="30"/>
-  <object id="234" name="TEST - AutoScale AirMan - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="1440" y="32" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="232"/>
-   <property name="OW Encounter Config" type="object" value="233"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="234" name="TEST - AutoScale AirMan - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="1440" y="32" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="232"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="233"/>
+   </properties>
+  </object>
   <object id="235" name="TEST Spawn Pad - AutoScale AirMan - 0.75x - 80HP" type="Dark Panel" gid="4" x="1472" y="32" width="50" height="30"/>
-  <object id="238" name="TEST - AutoScale AirMan - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1440" y="96" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="236"/>
-   <property name="OW Encounter Config" type="object" value="237"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="238" name="TEST - AutoScale AirMan - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1440" y="96" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="236"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="237"/>
+   </properties>
+  </object>
   <object id="239" name="TEST Spawn Pad - AutoScale AirMan - 1.5x - 240HP" type="Dark Panel" gid="4" x="1472" y="96" width="50" height="30"/>
-  <object id="242" name="TEST - AutoScale AirMan - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1440" y="160" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="240"/>
-   <property name="OW Encounter Config" type="object" value="241"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="242" name="TEST - AutoScale AirMan - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1440" y="160" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="240"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="241"/>
+   </properties>
+  </object>
   <object id="243" name="TEST Spawn Pad - AutoScale AirMan - 2x - 1200HP" type="Dark Panel" gid="4" x="1472" y="160" width="50" height="30"/>
-  <object id="246" name="TEST - AutoScale Cannodumb - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="1536" y="32" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="244"/>
-   <property name="OW Encounter Config" type="object" value="245"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="246" name="TEST - AutoScale Cannodumb - 0.75x - 80HP" type="Dark Hole Buffed Virus" gid="6" x="1536" y="32" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="244"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="245"/>
+   </properties>
+  </object>
   <object id="247" name="TEST Spawn Pad - AutoScale Cannodumb - 0.75x - 80HP" type="Dark Panel" gid="4" x="1568" y="32" width="50" height="30"/>
-  <object id="250" name="TEST - AutoScale Cannodumb - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1536" y="96" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="248"/>
-   <property name="OW Encounter Config" type="object" value="249"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="250" name="TEST - AutoScale Cannodumb - 1.5x - 240HP" type="Dark Hole Buffed Virus" gid="6" x="1536" y="96" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="248"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="249"/>
+   </properties>
+  </object>
   <object id="251" name="TEST Spawn Pad - AutoScale Cannodumb - 1.5x - 240HP" type="Dark Panel" gid="4" x="1568" y="96" width="50" height="30"/>
-  <object id="254" name="TEST - AutoScale Cannodumb - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1536" y="160" width="50" height="30"><properties>
-   <property name="Bot Config" type="object" value="252"/>
-   <property name="OW Encounter Config" type="object" value="253"/>
-   <property name="Direction" propertytype="Direction" value="Down Right"/>
-  </properties></object>
+  <object id="254" name="TEST - AutoScale Cannodumb - 2x - 1200HP" type="Dark Hole Buffed Virus" gid="6" x="1536" y="160" width="50" height="30">
+   <properties>
+    <property name="Bot Config" type="object" value="252"/>
+    <property name="Direction" propertytype="Direction" value="Down Right"/>
+    <property name="OW Encounter Config" type="object" value="253"/>
+   </properties>
+  </object>
   <object id="255" name="TEST Spawn Pad - AutoScale Cannodumb - 2x - 1200HP" type="Dark Panel" gid="4" x="1568" y="160" width="50" height="30"/>
  </objectgroup>
-<objectgroup id="3" name="CONFIG - Existing Point Objects" color="#52bcff"><object id="75" type="Liberation Config" x="16" y="240" name="Liberation Config #75">
+ <objectgroup color="#52bcff" id="3" name="CONFIG - Existing Point Objects">
+  <object id="75" name="Liberation Config #75" type="Liberation Config" x="16" y="240">
    <properties>
     <property name="Encounter Music" type="object" value="108"/>
     <property name="Honor HPMem" type="bool" value="true"/>
@@ -393,10 +567,10 @@
    </properties>
    <point/>
   </object>
-  <object id="108" type="Music Definition" x="48" y="240" name="Music Definition #108">
+  <object id="108" name="Music Definition #108" type="Music Definition" x="48" y="240">
    <point/>
   </object>
-  <object id="109" type="Encounter Config" x="80" y="240" name="Encounter Config #109">
+  <object id="109" name="Encounter Config #109" type="Encounter Config" x="80" y="240">
    <properties>
     <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="special_encounters"/>
     <property name="Name 1" value="BigBruteVar1"/>
@@ -405,7 +579,7 @@
    </properties>
    <point/>
   </object>
-  <object id="110" type="Dark Hole Encounter List" x="112" y="240" name="Dark Hole Encounter List #110">
+  <object id="110" name="Dark Hole Encounter List #110" type="Dark Hole Encounter List" x="112" y="240">
    <properties>
     <property name="Name 1" value="BigBrute"/>
     <property name="Name 10" value="Bladia"/>
@@ -590,7 +764,8 @@
    <properties>
     <property name="Spawns" value="BigBrute"/>
    </properties>
-  <point/></object>
+   <point/>
+  </object>
   <object id="116" name="OW encounter for Dark Hole #7" type="Encounter Config" x="272" y="240">
    <properties>
     <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="special_encounters"/>
@@ -598,306 +773,837 @@
     <property name="Encounter Name" value="BigBrute"/>
     <property name="Encounter Pool" type="object" value="113"/>
    </properties>
-  <point/></object>
+   <point/>
+  </object>
   <object id="117" name="Bot for Boss Dark Panel #61" type="Bot Config" x="304" y="240">
    <properties>
     <property name="Max HP" type="int" value="1200"/>
     <property name="Spawns" value="ShadeMan"/>
     <property name="Starting HP" type="int" value="1200"/>
    </properties>
-  <point/></object>
+   <point/>
+  </object>
   <object id="118" name="OW encounter for Boss Dark Panel #61" type="Encounter Config" x="336" y="240">
    <properties>
     <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="bosses"/>
    </properties>
-  <point/></object>
+   <point/>
+  </object>
   <object id="119" name="Bot for Boss Dark Panel #76" type="Bot Config" x="368" y="240">
    <properties>
     <property name="Spawns" value="ShadeMan"/>
    </properties>
-  <point/></object>
+   <point/>
+  </object>
   <object id="122" name="OW encounter for Dark Hole #101" type="Encounter Config" x="400" y="240">
    <properties>
     <property name="Encounter Name" value="BigBrute"/>
    </properties>
-  <point/></object>
+   <point/>
+  </object>
   <object id="123" name="OW encounter for Dark Hole Buffed Virus #107" type="Encounter Config" x="432" y="240">
    <properties>
     <property name="Encounter Category" propertytype="LiberationEncounterCategory" value="special_encounters"/>
     <property name="Encounter Mode" propertytype="LiberationEncounterMode" value="Fixed"/>
     <property name="Encounter Name" value="Mettaur"/>
    </properties>
-  <point/></object>
- </objectgroup><objectgroup id="4" name="CONFIG - Scaling Tests - Bot Stats (Points)" color="#ffb84d"><object id="124" name="TEST - Mettaur - 0.75x - 40HP - Bot Config" type="Bot Config" x="16" y="272"><properties><property name="Spawns" value="Mettaur"/><property name="Max HP" type="int" value="40"/><property name="Starting HP" type="int" value="40"/><property name="OW Scale" type="float" value="0.75"/><property name="Battle Scale" type="float" value="0.75"/><property name="Battle Scale Scope" value="Matching"/><property name="AI Type" value="shockwave_line"/><property name="OW Attack Damage" type="int" value="20"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="128" name="TEST - Mettaur - 1.5x - 240HP - Bot Config" type="Bot Config" x="48" y="272"><properties><property name="Spawns" value="Mettaur"/><property name="Max HP" type="int" value="240"/><property name="Starting HP" type="int" value="240"/><property name="OW Scale" type="float" value="1.5"/><property name="Battle Scale" type="float" value="1.5"/><property name="Battle Scale Scope" value="Matching"/><property name="AI Type" value="shockwave_line"/><property name="OW Attack Damage" type="int" value="20"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="132" name="TEST - Mettaur - 2x - 1200HP - Bot Config" type="Bot Config" x="80" y="272"><properties><property name="Spawns" value="Mettaur"/><property name="Max HP" type="int" value="1200"/><property name="Starting HP" type="int" value="1200"/><property name="OW Scale" type="float" value="2.0"/><property name="Battle Scale" type="float" value="2.0"/><property name="Battle Scale Scope" value="Matching"/><property name="AI Type" value="shockwave_line"/><property name="OW Attack Damage" type="int" value="20"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="136" name="TEST - BigBrute - 0.75x - 120HP - Bot Config" type="Bot Config" x="112" y="272"><properties><property name="Spawns" value="BigBrute"/><property name="Max HP" type="int" value="120"/><property name="Starting HP" type="int" value="120"/><property name="OW Scale" type="float" value="0.75"/><property name="Battle Scale" type="float" value="0.75"/><property name="Battle Scale Scope" value="Matching"/><property name="AI Type" value="simple_charge"/><property name="OW Attack Damage" type="int" value="20"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="140" name="TEST - BigBrute - 1.5x - 240HP - Bot Config" type="Bot Config" x="144" y="272"><properties><property name="Spawns" value="BigBrute"/><property name="Max HP" type="int" value="240"/><property name="Starting HP" type="int" value="240"/><property name="OW Scale" type="float" value="1.5"/><property name="Battle Scale" type="float" value="1.5"/><property name="Battle Scale Scope" value="Matching"/><property name="AI Type" value="simple_charge"/><property name="OW Attack Damage" type="int" value="20"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="144" name="TEST - BigBrute - 2x - 1200HP - Bot Config" type="Bot Config" x="176" y="272"><properties><property name="Spawns" value="BigBrute"/><property name="Max HP" type="int" value="1200"/><property name="Starting HP" type="int" value="1200"/><property name="OW Scale" type="float" value="2.0"/><property name="Battle Scale" type="float" value="2.0"/><property name="Battle Scale Scope" value="Matching"/><property name="AI Type" value="simple_charge"/><property name="OW Attack Damage" type="int" value="20"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="148" name="TEST - BlizzardMan - 0.75x - 400HP - Bot Config" type="Bot Config" x="208" y="272"><properties><property name="Spawns" value="BlizzardMan"/><property name="Max HP" type="int" value="400"/><property name="Starting HP" type="int" value="400"/><property name="OW Scale" type="float" value="0.75"/><property name="Battle Scale" type="float" value="0.75"/><property name="Battle Scale Scope" value="All"/><property name="AI Type" value="simple_charge"/><property name="OW Attack Damage" type="int" value="40"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="152" name="TEST - BlizzardMan - 1.5x - 600HP - Bot Config" type="Bot Config" x="240" y="272"><properties><property name="Spawns" value="BlizzardMan"/><property name="Max HP" type="int" value="600"/><property name="Starting HP" type="int" value="600"/><property name="OW Scale" type="float" value="1.5"/><property name="Battle Scale" type="float" value="1.5"/><property name="Battle Scale Scope" value="All"/><property name="AI Type" value="simple_charge"/><property name="OW Attack Damage" type="int" value="40"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="156" name="TEST - BlizzardMan - 2x - 1200HP - Bot Config" type="Bot Config" x="272" y="272"><properties><property name="Spawns" value="BlizzardMan"/><property name="Max HP" type="int" value="1200"/><property name="Starting HP" type="int" value="1200"/><property name="OW Scale" type="float" value="2.0"/><property name="Battle Scale" type="float" value="2.0"/><property name="Battle Scale Scope" value="All"/><property name="AI Type" value="simple_charge"/><property name="OW Attack Damage" type="int" value="40"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="160" name="TEST - ShadeMan - 0.75x - 600HP - Bot Config" type="Bot Config" x="304" y="272"><properties><property name="Spawns" value="ShadeMan"/><property name="Max HP" type="int" value="600"/><property name="Starting HP" type="int" value="600"/><property name="OW Scale" type="float" value="0.75"/><property name="Battle Scale" type="float" value="0.75"/><property name="Battle Scale Scope" value="Matching"/><property name="AI Type" value="ranged"/><property name="OW Attack Damage" type="int" value="60"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="164" name="TEST - ShadeMan - 1.5x - 1200HP - Bot Config" type="Bot Config" x="336" y="272"><properties><property name="Spawns" value="ShadeMan"/><property name="Max HP" type="int" value="1200"/><property name="Starting HP" type="int" value="1200"/><property name="OW Scale" type="float" value="1.5"/><property name="Battle Scale" type="float" value="1.5"/><property name="Battle Scale Scope" value="Matching"/><property name="AI Type" value="ranged"/><property name="OW Attack Damage" type="int" value="60"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="168" name="TEST - ShadeMan - 2x - 2400HP - Bot Config" type="Bot Config" x="368" y="272"><properties><property name="Spawns" value="ShadeMan"/><property name="Max HP" type="int" value="2400"/><property name="Starting HP" type="int" value="2400"/><property name="OW Scale" type="float" value="2.0"/><property name="Battle Scale" type="float" value="2.0"/><property name="Battle Scale Scope" value="Matching"/><property name="AI Type" value="ranged"/><property name="OW Attack Damage" type="int" value="60"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="172" name="TEST - Bladia - 0.75x - 80HP - Bot Config" type="Bot Config" x="400" y="272"><properties><property name="Spawns" value="Bladia"/><property name="Max HP" type="int" value="80"/><property name="Starting HP" type="int" value="80"/><property name="OW Scale" type="float" value="0.75"/><property name="Battle Scale" type="float" value="0.75"/><property name="Battle Scale Scope" value="All"/><property name="AI Type" value="ranged"/><property name="OW Attack Damage" type="int" value="25"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="176" name="TEST - Bladia - 1.5x - 240HP - Bot Config" type="Bot Config" x="432" y="272"><properties><property name="Spawns" value="Bladia"/><property name="Max HP" type="int" value="240"/><property name="Starting HP" type="int" value="240"/><property name="OW Scale" type="float" value="1.5"/><property name="Battle Scale" type="float" value="1.5"/><property name="Battle Scale Scope" value="All"/><property name="AI Type" value="ranged"/><property name="OW Attack Damage" type="int" value="25"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="180" name="TEST - Bladia - 2x - 1200HP - Bot Config" type="Bot Config" x="464" y="272"><properties><property name="Spawns" value="Bladia"/><property name="Max HP" type="int" value="1200"/><property name="Starting HP" type="int" value="1200"/><property name="OW Scale" type="float" value="2.0"/><property name="Battle Scale" type="float" value="2.0"/><property name="Battle Scale Scope" value="All"/><property name="AI Type" value="ranged"/><property name="OW Attack Damage" type="int" value="25"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="184" name="TEST - Prog - 0.75x - 40HP - Bot Config" type="Bot Config" x="496" y="272"><properties><property name="Spawns" value="Prog"/><property name="Max HP" type="int" value="40"/><property name="Starting HP" type="int" value="40"/><property name="OW Scale" type="float" value="0.75"/><property name="Battle Scale" type="float" value="0.75"/><property name="Battle Scale Scope" value="All"/><property name="AI Type" value="ranged"/><property name="OW Attack Damage" type="int" value="10"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="188" name="TEST - Prog - 1.5x - 240HP - Bot Config" type="Bot Config" x="528" y="272"><properties><property name="Spawns" value="Prog"/><property name="Max HP" type="int" value="240"/><property name="Starting HP" type="int" value="240"/><property name="OW Scale" type="float" value="1.5"/><property name="Battle Scale" type="float" value="1.5"/><property name="Battle Scale Scope" value="All"/><property name="AI Type" value="ranged"/><property name="OW Attack Damage" type="int" value="10"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object><object id="192" name="TEST - Prog - 2x - 1200HP - Bot Config" type="Bot Config" x="560" y="272"><properties><property name="Spawns" value="Prog"/><property name="Max HP" type="int" value="1200"/><property name="Starting HP" type="int" value="1200"/><property name="OW Scale" type="float" value="2.0"/><property name="Battle Scale" type="float" value="2.0"/><property name="Battle Scale Scope" value="All"/><property name="AI Type" value="ranged"/><property name="OW Attack Damage" type="int" value="10"/><property name="Battle Attack Multiplier" type="float" value="1.0"/><property name="Battle Defense Multiplier" type="float" value="1.0"/><property name="Heal Percent Per Turn" type="float" value="0.0"/></properties><point/></object>
-  <object id="196" name="TEST - AutoScale Quaker - 0.75x - 80HP - Bot Config" type="Bot Config" x="592" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="80"/>
-   <property name="Starting HP" type="int" value="80"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="0.75"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="200" name="TEST - AutoScale Quaker - 1.5x - 240HP - Bot Config" type="Bot Config" x="624" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="240"/>
-   <property name="Starting HP" type="int" value="240"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="1.5"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="204" name="TEST - AutoScale Quaker - 2x - 1200HP - Bot Config" type="Bot Config" x="656" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="1200"/>
-   <property name="Starting HP" type="int" value="1200"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="2.0"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="208" name="TEST - AutoScale Swordy - 0.75x - 80HP - Bot Config" type="Bot Config" x="688" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="80"/>
-   <property name="Starting HP" type="int" value="80"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="0.75"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="212" name="TEST - AutoScale Swordy - 1.5x - 240HP - Bot Config" type="Bot Config" x="720" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="240"/>
-   <property name="Starting HP" type="int" value="240"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="1.5"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="216" name="TEST - AutoScale Swordy - 2x - 1200HP - Bot Config" type="Bot Config" x="752" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="1200"/>
-   <property name="Starting HP" type="int" value="1200"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="2.0"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="220" name="TEST - AutoScale Piranha - 0.75x - 80HP - Bot Config" type="Bot Config" x="784" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="80"/>
-   <property name="Starting HP" type="int" value="80"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="0.75"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="224" name="TEST - AutoScale Piranha - 1.5x - 240HP - Bot Config" type="Bot Config" x="816" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="240"/>
-   <property name="Starting HP" type="int" value="240"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="1.5"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="228" name="TEST - AutoScale Piranha - 2x - 1200HP - Bot Config" type="Bot Config" x="848" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="1200"/>
-   <property name="Starting HP" type="int" value="1200"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="2.0"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="232" name="TEST - AutoScale AirMan - 0.75x - 80HP - Bot Config" type="Bot Config" x="880" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="80"/>
-   <property name="Starting HP" type="int" value="80"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="0.75"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="236" name="TEST - AutoScale AirMan - 1.5x - 240HP - Bot Config" type="Bot Config" x="912" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="240"/>
-   <property name="Starting HP" type="int" value="240"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="1.5"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="240" name="TEST - AutoScale AirMan - 2x - 1200HP - Bot Config" type="Bot Config" x="944" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="1200"/>
-   <property name="Starting HP" type="int" value="1200"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="2.0"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="244" name="TEST - AutoScale Cannodumb - 0.75x - 80HP - Bot Config" type="Bot Config" x="976" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="80"/>
-   <property name="Starting HP" type="int" value="80"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="0.75"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="248" name="TEST - AutoScale Cannodumb - 1.5x - 240HP - Bot Config" type="Bot Config" x="1008" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="240"/>
-   <property name="Starting HP" type="int" value="240"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="1.5"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
-  <object id="252" name="TEST - AutoScale Cannodumb - 2x - 1200HP - Bot Config" type="Bot Config" x="1040" y="272"><properties>
-   <property name="Spawns" value="Prog"/>
-   <property name="Max HP" type="int" value="1200"/>
-   <property name="Starting HP" type="int" value="1200"/>
-   <property name="OW Scale" type="float" value="1.0"/>
-   <property name="Battle Scale" type="float" value="2.0"/>
-   <property name="Battle Scale Scope" value="All"/>
-   <property name="AI Type" value="ranged"/>
-   <property name="OW Attack Damage" type="int" value="10"/>
-   <property name="Battle Attack Multiplier" type="float" value="1.0"/>
-   <property name="Battle Defense Multiplier" type="float" value="1.0"/>
-   <property name="Heal Percent Per Turn" type="float" value="0.0"/>
-  </properties><point/></object>
- </objectgroup><objectgroup id="5" name="CONFIG - Scaling Tests - OW Encounters (Points)" color="#88da88"><object id="125" name="TEST - Mettaur - 0.75x - 40HP - OW Encounter" type="Encounter Config" x="16" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="Mettaur"/></properties><point/></object><object id="129" name="TEST - Mettaur - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="48" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="Mettaur"/></properties><point/></object><object id="133" name="TEST - Mettaur - 2x - 1200HP - OW Encounter" type="Encounter Config" x="80" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="Mettaur"/></properties><point/></object><object id="137" name="TEST - BigBrute - 0.75x - 120HP - OW Encounter" type="Encounter Config" x="112" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="BigBrute"/></properties><point/></object><object id="141" name="TEST - BigBrute - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="144" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="BigBrute"/></properties><point/></object><object id="145" name="TEST - BigBrute - 2x - 1200HP - OW Encounter" type="Encounter Config" x="176" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="BigBrute"/></properties><point/></object><object id="149" name="TEST - BlizzardMan - 0.75x - 400HP - OW Encounter" type="Encounter Config" x="208" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="encounters"/><property name="Encounter Name" value="Encounter1"/></properties><point/></object><object id="153" name="TEST - BlizzardMan - 1.5x - 600HP - OW Encounter" type="Encounter Config" x="240" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="encounters"/><property name="Encounter Name" value="Encounter1"/></properties><point/></object><object id="157" name="TEST - BlizzardMan - 2x - 1200HP - OW Encounter" type="Encounter Config" x="272" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="encounters"/><property name="Encounter Name" value="Encounter1"/></properties><point/></object><object id="161" name="TEST - ShadeMan - 0.75x - 600HP - OW Encounter" type="Encounter Config" x="304" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="bosses"/><property name="Encounter Name" value="ShadeMan"/></properties><point/></object><object id="165" name="TEST - ShadeMan - 1.5x - 1200HP - OW Encounter" type="Encounter Config" x="336" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="bosses"/><property name="Encounter Name" value="ShadeMan"/></properties><point/></object><object id="169" name="TEST - ShadeMan - 2x - 2400HP - OW Encounter" type="Encounter Config" x="368" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="bosses"/><property name="Encounter Name" value="ShadeMan"/></properties><point/></object><object id="173" name="TEST - Bladia - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="400" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="Bladia"/></properties><point/></object><object id="177" name="TEST - Bladia - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="432" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="Bladia"/></properties><point/></object><object id="181" name="TEST - Bladia - 2x - 1200HP - OW Encounter" type="Encounter Config" x="464" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="Bladia"/></properties><point/></object><object id="185" name="TEST - Prog - 0.75x - 40HP - OW Encounter" type="Encounter Config" x="496" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="Mettaur"/></properties><point/></object><object id="189" name="TEST - Prog - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="528" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="Mettaur"/></properties><point/></object><object id="193" name="TEST - Prog - 2x - 1200HP - OW Encounter" type="Encounter Config" x="560" y="304"><properties><property name="Encounter Mode" value="Fixed"/><property name="Encounter Category" value="special_encounters"/><property name="Encounter Name" value="Mettaur"/></properties><point/></object>
-  <object id="197" name="TEST - AutoScale Quaker - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="592" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Quaker"/>
-  </properties><point/></object>
-  <object id="201" name="TEST - AutoScale Quaker - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="624" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Quaker"/>
-  </properties><point/></object>
-  <object id="205" name="TEST - AutoScale Quaker - 2x - 1200HP - OW Encounter" type="Encounter Config" x="656" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Quaker"/>
-  </properties><point/></object>
-  <object id="209" name="TEST - AutoScale Swordy - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="688" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Swordy"/>
-  </properties><point/></object>
-  <object id="213" name="TEST - AutoScale Swordy - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="720" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Swordy"/>
-  </properties><point/></object>
-  <object id="217" name="TEST - AutoScale Swordy - 2x - 1200HP - OW Encounter" type="Encounter Config" x="752" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Swordy"/>
-  </properties><point/></object>
-  <object id="221" name="TEST - AutoScale Piranha - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="784" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Piranha"/>
-  </properties><point/></object>
-  <object id="225" name="TEST - AutoScale Piranha - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="816" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Piranha"/>
-  </properties><point/></object>
-  <object id="229" name="TEST - AutoScale Piranha - 2x - 1200HP - OW Encounter" type="Encounter Config" x="848" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Piranha"/>
-  </properties><point/></object>
-  <object id="233" name="TEST - AutoScale AirMan - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="880" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_AirMan"/>
-  </properties><point/></object>
-  <object id="237" name="TEST - AutoScale AirMan - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="912" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_AirMan"/>
-  </properties><point/></object>
-  <object id="241" name="TEST - AutoScale AirMan - 2x - 1200HP - OW Encounter" type="Encounter Config" x="944" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_AirMan"/>
-  </properties><point/></object>
-  <object id="245" name="TEST - AutoScale Cannodumb - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="976" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Cannodumb"/>
-  </properties><point/></object>
-  <object id="249" name="TEST - AutoScale Cannodumb - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="1008" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Cannodumb"/>
-  </properties><point/></object>
-  <object id="253" name="TEST - AutoScale Cannodumb - 2x - 1200HP - OW Encounter" type="Encounter Config" x="1040" y="304"><properties>
-   <property name="Encounter Mode" value="Fixed"/>
-   <property name="Encounter Category" value="special_encounters"/>
-   <property name="Encounter Name" value="AutoScale_Cannodumb"/>
-  </properties><point/></object>
- </objectgroup></map>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ffb84d" id="4" name="CONFIG - Scaling Tests - Bot Stats (Points)">
+  <object id="124" name="TEST - Mettaur - 0.75x - 40HP - Bot Config" type="Bot Config" x="16" y="272">
+   <properties>
+    <property name="AI Type" value="shockwave_line"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="0.75"/>
+    <property name="Battle Scale Scope" value="Matching"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="40"/>
+    <property name="OW Attack Damage" type="int" value="20"/>
+    <property name="OW Scale" type="float" value="0.75"/>
+    <property name="Spawns" value="Mettaur"/>
+    <property name="Starting HP" type="int" value="40"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="128" name="TEST - Mettaur - 1.5x - 240HP - Bot Config" type="Bot Config" x="48" y="272">
+   <properties>
+    <property name="AI Type" value="shockwave_line"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="1.5"/>
+    <property name="Battle Scale Scope" value="Matching"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="240"/>
+    <property name="OW Attack Damage" type="int" value="20"/>
+    <property name="OW Scale" type="float" value="1.5"/>
+    <property name="Spawns" value="Mettaur"/>
+    <property name="Starting HP" type="int" value="240"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="132" name="TEST - Mettaur - 2x - 1200HP - Bot Config" type="Bot Config" x="80" y="272">
+   <properties>
+    <property name="AI Type" value="shockwave_line"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="2"/>
+    <property name="Battle Scale Scope" value="Matching"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="1200"/>
+    <property name="OW Attack Damage" type="int" value="20"/>
+    <property name="OW Scale" type="float" value="2"/>
+    <property name="Spawns" value="Mettaur"/>
+    <property name="Starting HP" type="int" value="1200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="136" name="TEST - BigBrute - 0.75x - 120HP - Bot Config" type="Bot Config" x="112" y="272">
+   <properties>
+    <property name="AI Type" value="simple_charge"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="0.75"/>
+    <property name="Battle Scale Scope" value="Matching"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="120"/>
+    <property name="OW Attack Damage" type="int" value="20"/>
+    <property name="OW Scale" type="float" value="0.75"/>
+    <property name="Spawns" value="BigBrute"/>
+    <property name="Starting HP" type="int" value="120"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="140" name="TEST - BigBrute - 1.5x - 240HP - Bot Config" type="Bot Config" x="144" y="272">
+   <properties>
+    <property name="AI Type" value="simple_charge"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="1.5"/>
+    <property name="Battle Scale Scope" value="Matching"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="240"/>
+    <property name="OW Attack Damage" type="int" value="20"/>
+    <property name="OW Scale" type="float" value="1.5"/>
+    <property name="Spawns" value="BigBrute"/>
+    <property name="Starting HP" type="int" value="240"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="144" name="TEST - BigBrute - 2x - 1200HP - Bot Config" type="Bot Config" x="176" y="272">
+   <properties>
+    <property name="AI Type" value="simple_charge"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="2"/>
+    <property name="Battle Scale Scope" value="Matching"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="1200"/>
+    <property name="OW Attack Damage" type="int" value="20"/>
+    <property name="OW Scale" type="float" value="2"/>
+    <property name="Spawns" value="BigBrute"/>
+    <property name="Starting HP" type="int" value="1200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="148" name="TEST - BlizzardMan - 0.75x - 400HP - Bot Config" type="Bot Config" x="208" y="272">
+   <properties>
+    <property name="AI Type" value="simple_charge"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="0.75"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="400"/>
+    <property name="OW Attack Damage" type="int" value="40"/>
+    <property name="OW Scale" type="float" value="0.75"/>
+    <property name="Spawns" value="BlizzardMan"/>
+    <property name="Starting HP" type="int" value="400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="152" name="TEST - BlizzardMan - 1.5x - 600HP - Bot Config" type="Bot Config" x="240" y="272">
+   <properties>
+    <property name="AI Type" value="simple_charge"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="1.5"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="600"/>
+    <property name="OW Attack Damage" type="int" value="40"/>
+    <property name="OW Scale" type="float" value="1.5"/>
+    <property name="Spawns" value="BlizzardMan"/>
+    <property name="Starting HP" type="int" value="600"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="156" name="TEST - BlizzardMan - 2x - 1200HP - Bot Config" type="Bot Config" x="272" y="272">
+   <properties>
+    <property name="AI Type" value="simple_charge"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="2"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="1200"/>
+    <property name="OW Attack Damage" type="int" value="40"/>
+    <property name="OW Scale" type="float" value="2"/>
+    <property name="Spawns" value="BlizzardMan"/>
+    <property name="Starting HP" type="int" value="1200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="160" name="TEST - ShadeMan - 0.75x - 600HP - Bot Config" type="Bot Config" x="304" y="272">
+   <properties>
+    <property name="AI Type" value="shademan_ambush"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="0.75"/>
+    <property name="Battle Scale Scope" value="Matching"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="600"/>
+    <property name="OW Attack Damage" type="int" value="60"/>
+    <property name="OW Scale" type="float" value="0.75"/>
+    <property name="Spawns" value="ShadeMan"/>
+    <property name="Starting HP" type="int" value="600"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="164" name="TEST - ShadeMan - 1.5x - 1200HP - Bot Config" type="Bot Config" x="336" y="272">
+   <properties>
+    <property name="AI Type" value="shademan_ambush"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="1.5"/>
+    <property name="Battle Scale Scope" value="Matching"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="1200"/>
+    <property name="OW Attack Damage" type="int" value="60"/>
+    <property name="OW Scale" type="float" value="1.5"/>
+    <property name="Spawns" value="ShadeMan"/>
+    <property name="Starting HP" type="int" value="1200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="168" name="TEST - ShadeMan - 2x - 2400HP - Bot Config" type="Bot Config" x="368" y="272">
+   <properties>
+    <property name="AI Type" value="shademan_ambush"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="2"/>
+    <property name="Battle Scale Scope" value="Matching"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="2400"/>
+    <property name="OW Attack Damage" type="int" value="60"/>
+    <property name="OW Scale" type="float" value="2"/>
+    <property name="Spawns" value="ShadeMan"/>
+    <property name="Starting HP" type="int" value="2400"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="172" name="TEST - Bladia - 0.75x - 80HP - Bot Config" type="Bot Config" x="400" y="272">
+   <properties>
+    <property name="AI Type" value="bladia_strike"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="0.75"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="80"/>
+    <property name="OW Attack Damage" type="int" value="25"/>
+    <property name="OW Scale" type="float" value="0.75"/>
+    <property name="Spawns" value="Bladia"/>
+    <property name="Starting HP" type="int" value="80"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="176" name="TEST - Bladia - 1.5x - 240HP - Bot Config" type="Bot Config" x="432" y="272">
+   <properties>
+    <property name="AI Type" value="bladia_strike"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="1.5"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="240"/>
+    <property name="OW Attack Damage" type="int" value="25"/>
+    <property name="OW Scale" type="float" value="1.5"/>
+    <property name="Spawns" value="Bladia"/>
+    <property name="Starting HP" type="int" value="240"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="180" name="TEST - Bladia - 2x - 1200HP - Bot Config" type="Bot Config" x="464" y="272">
+   <properties>
+    <property name="AI Type" value="bladia_strike"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="2"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="1200"/>
+    <property name="OW Attack Damage" type="int" value="25"/>
+    <property name="OW Scale" type="float" value="2"/>
+    <property name="Spawns" value="Bladia"/>
+    <property name="Starting HP" type="int" value="1200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="184" name="TEST - Prog - 0.75x - 40HP - Bot Config" type="Bot Config" x="496" y="272">
+   <properties>
+    <property name="AI Type" value="ranged"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="0.75"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="40"/>
+    <property name="OW Attack Damage" type="int" value="10"/>
+    <property name="OW Scale" type="float" value="0.75"/>
+    <property name="Spawns" value="Prog"/>
+    <property name="Starting HP" type="int" value="40"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="188" name="TEST - Prog - 1.5x - 240HP - Bot Config" type="Bot Config" x="528" y="272">
+   <properties>
+    <property name="AI Type" value="ranged"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="1.5"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="240"/>
+    <property name="OW Attack Damage" type="int" value="10"/>
+    <property name="OW Scale" type="float" value="1.5"/>
+    <property name="Spawns" value="Prog"/>
+    <property name="Starting HP" type="int" value="240"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="192" name="TEST - Prog - 2x - 1200HP - Bot Config" type="Bot Config" x="560" y="272">
+   <properties>
+    <property name="AI Type" value="ranged"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="2"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="1200"/>
+    <property name="OW Attack Damage" type="int" value="10"/>
+    <property name="OW Scale" type="float" value="2"/>
+    <property name="Spawns" value="Prog"/>
+    <property name="Starting HP" type="int" value="1200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="196" name="TEST - AutoScale Quaker - 0.75x - 80HP - Bot Config" type="Bot Config" x="592" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="0.75"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="80"/>
+    <property name="OW Attack Damage" type="int" value="16"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Quaker"/>
+    <property name="Starting HP" type="int" value="80"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="200" name="TEST - AutoScale Quaker - 1.5x - 240HP - Bot Config" type="Bot Config" x="624" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="1.5"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="240"/>
+    <property name="OW Attack Damage" type="int" value="16"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Quaker"/>
+    <property name="Starting HP" type="int" value="240"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="204" name="TEST - AutoScale Quaker - 2x - 1200HP - Bot Config" type="Bot Config" x="656" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="2"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="1200"/>
+    <property name="OW Attack Damage" type="int" value="16"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Quaker"/>
+    <property name="Starting HP" type="int" value="1200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="208" name="TEST - AutoScale Swordy - 0.75x - 80HP - Bot Config" type="Bot Config" x="688" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="0.75"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="80"/>
+    <property name="OW Attack Damage" type="int" value="22"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Swordy"/>
+    <property name="Starting HP" type="int" value="80"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="212" name="TEST - AutoScale Swordy - 1.5x - 240HP - Bot Config" type="Bot Config" x="720" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="1.5"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="240"/>
+    <property name="OW Attack Damage" type="int" value="22"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Swordy"/>
+    <property name="Starting HP" type="int" value="240"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="216" name="TEST - AutoScale Swordy - 2x - 1200HP - Bot Config" type="Bot Config" x="752" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="2"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="1200"/>
+    <property name="OW Attack Damage" type="int" value="22"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Swordy"/>
+    <property name="Starting HP" type="int" value="1200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="220" name="TEST - AutoScale Piranha - 0.75x - 80HP - Bot Config" type="Bot Config" x="784" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="0.75"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="80"/>
+    <property name="OW Attack Damage" type="int" value="14"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Piranha"/>
+    <property name="Starting HP" type="int" value="80"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="224" name="TEST - AutoScale Piranha - 1.5x - 240HP - Bot Config" type="Bot Config" x="816" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="1.5"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="240"/>
+    <property name="OW Attack Damage" type="int" value="14"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Piranha"/>
+    <property name="Starting HP" type="int" value="240"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="228" name="TEST - AutoScale Piranha - 2x - 1200HP - Bot Config" type="Bot Config" x="848" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="2"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="1200"/>
+    <property name="OW Attack Damage" type="int" value="14"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Piranha"/>
+    <property name="Starting HP" type="int" value="1200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="232" name="TEST - AutoScale AirMan - 0.75x - 80HP - Bot Config" type="Bot Config" x="880" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="0.75"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="80"/>
+    <property name="OW Attack Damage" type="int" value="15"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="AirMan"/>
+    <property name="Starting HP" type="int" value="80"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="236" name="TEST - AutoScale AirMan - 1.5x - 240HP - Bot Config" type="Bot Config" x="912" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="1.5"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="240"/>
+    <property name="OW Attack Damage" type="int" value="15"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="AirMan"/>
+    <property name="Starting HP" type="int" value="240"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="240" name="TEST - AutoScale AirMan - 2x - 1200HP - Bot Config" type="Bot Config" x="944" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="2"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="1200"/>
+    <property name="OW Attack Damage" type="int" value="15"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="AirMan"/>
+    <property name="Starting HP" type="int" value="1200"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="244" name="TEST - AutoScale Cannodumb - 0.75x - 80HP - Bot Config" type="Bot Config" x="976" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="0.75"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="80"/>
+    <property name="OW Attack Damage" type="int" value="24"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Cannodumb"/>
+    <property name="Starting HP" type="int" value="80"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="248" name="TEST - AutoScale Cannodumb - 1.5x - 240HP - Bot Config" type="Bot Config" x="1008" y="272">
+   <properties>
+    <property name="AI Type" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="1.5"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="240"/>
+    <property name="OW Attack Damage" type="int" value="24"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Cannodumb"/>
+    <property name="Starting HP" type="int" value="240"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="252" name="TEST - AutoScale Cannodumb - 2x - 1200HP - Bot Config" type="Bot Config" x="1040" y="272">
+   <properties>
+    <property name="AI Type" propertytype="LiberationAIType" value="patterned_attack"/>
+    <property name="Battle Attack Multiplier" type="float" value="1"/>
+    <property name="Battle Defense Multiplier" type="float" value="1"/>
+    <property name="Battle Scale" type="float" value="2"/>
+    <property name="Battle Scale Scope" value="All"/>
+    <property name="Heal Percent Per Turn" type="float" value="0"/>
+    <property name="Max HP" type="int" value="1200"/>
+    <property name="OW Attack Damage" type="int" value="24"/>
+    <property name="OW Scale" type="float" value="1"/>
+    <property name="Spawns" value="Cannodumb"/>
+    <property name="Starting HP" type="int" value="1200"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#88da88" id="5" name="CONFIG - Scaling Tests - OW Encounters (Points)">
+  <object id="125" name="TEST - Mettaur - 0.75x - 40HP - OW Encounter" type="Encounter Config" x="16" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Mettaur"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="129" name="TEST - Mettaur - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="48" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Mettaur"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="133" name="TEST - Mettaur - 2x - 1200HP - OW Encounter" type="Encounter Config" x="80" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Mettaur"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="137" name="TEST - BigBrute - 0.75x - 120HP - OW Encounter" type="Encounter Config" x="112" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="BigBrute"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="141" name="TEST - BigBrute - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="144" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="BigBrute"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="145" name="TEST - BigBrute - 2x - 1200HP - OW Encounter" type="Encounter Config" x="176" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="BigBrute"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="149" name="TEST - BlizzardMan - 0.75x - 400HP - OW Encounter" type="Encounter Config" x="208" y="304">
+   <properties>
+    <property name="Encounter Category" value="encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Encounter1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="153" name="TEST - BlizzardMan - 1.5x - 600HP - OW Encounter" type="Encounter Config" x="240" y="304">
+   <properties>
+    <property name="Encounter Category" value="encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Encounter1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="157" name="TEST - BlizzardMan - 2x - 1200HP - OW Encounter" type="Encounter Config" x="272" y="304">
+   <properties>
+    <property name="Encounter Category" value="encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Encounter1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="161" name="TEST - ShadeMan - 0.75x - 600HP - OW Encounter" type="Encounter Config" x="304" y="304">
+   <properties>
+    <property name="Encounter Category" value="bosses"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="ShadeMan"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="165" name="TEST - ShadeMan - 1.5x - 1200HP - OW Encounter" type="Encounter Config" x="336" y="304">
+   <properties>
+    <property name="Encounter Category" value="bosses"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="ShadeMan"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="169" name="TEST - ShadeMan - 2x - 2400HP - OW Encounter" type="Encounter Config" x="368" y="304">
+   <properties>
+    <property name="Encounter Category" value="bosses"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="ShadeMan"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="173" name="TEST - Bladia - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="400" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Bladia"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="177" name="TEST - Bladia - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="432" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Bladia"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="181" name="TEST - Bladia - 2x - 1200HP - OW Encounter" type="Encounter Config" x="464" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Bladia"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="185" name="TEST - Prog - 0.75x - 40HP - OW Encounter" type="Encounter Config" x="496" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Mettaur"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="189" name="TEST - Prog - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="528" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Mettaur"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="193" name="TEST - Prog - 2x - 1200HP - OW Encounter" type="Encounter Config" x="560" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="Mettaur"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="197" name="TEST - AutoScale Quaker - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="592" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Quaker"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="201" name="TEST - AutoScale Quaker - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="624" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Quaker"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="205" name="TEST - AutoScale Quaker - 2x - 1200HP - OW Encounter" type="Encounter Config" x="656" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Quaker"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="209" name="TEST - AutoScale Swordy - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="688" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Swordy"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="213" name="TEST - AutoScale Swordy - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="720" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Swordy"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="217" name="TEST - AutoScale Swordy - 2x - 1200HP - OW Encounter" type="Encounter Config" x="752" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Swordy"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="221" name="TEST - AutoScale Piranha - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="784" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Piranha"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="225" name="TEST - AutoScale Piranha - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="816" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Piranha"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="229" name="TEST - AutoScale Piranha - 2x - 1200HP - OW Encounter" type="Encounter Config" x="848" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Piranha"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="233" name="TEST - AutoScale AirMan - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="880" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_AirMan"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="237" name="TEST - AutoScale AirMan - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="912" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_AirMan"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="241" name="TEST - AutoScale AirMan - 2x - 1200HP - OW Encounter" type="Encounter Config" x="944" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_AirMan"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="245" name="TEST - AutoScale Cannodumb - 0.75x - 80HP - OW Encounter" type="Encounter Config" x="976" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Cannodumb"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="249" name="TEST - AutoScale Cannodumb - 1.5x - 240HP - OW Encounter" type="Encounter Config" x="1008" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Cannodumb"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="253" name="TEST - AutoScale Cannodumb - 2x - 1200HP - OW Encounter" type="Encounter Config" x="1040" y="304">
+   <properties>
+    <property name="Encounter Category" value="special_encounters"/>
+    <property name="Encounter Mode" value="Fixed"/>
+    <property name="Encounter Name" value="AutoScale_Cannodumb"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
+</map>

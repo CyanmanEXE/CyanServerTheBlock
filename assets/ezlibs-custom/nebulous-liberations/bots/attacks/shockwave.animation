@@ -1,4 +1,4 @@
-imagePath="shockwaves_all_directions.png"
+imagePath="shockwave.png"
 
 animation state="SHOCKWAVE_UL"
 frame duration="0.09" x="0" y="0" w="64" h="64" originx="32" originy="48"
@@ -43,3 +43,6 @@ frame duration="0.13" x="320" y="192" w="64" h="64" originx="32" originy="48"
 
 animation state="IDLE_DL"
 frame duration="0.1" x="0" y="192" w="64" h="64" originx="32" originy="48"
+
+animation state="IDLE"
+frame duration="0.1" x="0" y="128" w="64" h="64" originx="32" originy="48"

@@ -8,6 +8,7 @@
 local EnemySelection = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_selection")
 local EnemyHelpers = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_helpers")
 local GuardInterception = require("scripts/ezlibs-custom/nebulous-liberations/liberations/guard_interception")
+local AttackRuntime = require("scripts/ezlibs-custom/nebulous-liberations/liberations/ai/attack_runtime")
 local Preloader = require("scripts/ezlibs-custom/nebulous-liberations/liberations/preloader")
 local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberations/constants")
 local Direction = require("scripts/libs/direction")
@@ -67,6 +68,12 @@ function EnemyTemplates.create(instance, position, direction, template_name, spa
         is_special_encounter = template.is_special_encounter or false,
         ai_type = template.ai_type or "simple_charge",
         ai_params = template.ai_params or {},
+        attack_profile = template.attack_profile,
+        attack_effect_animation = template.attack_effect_animation,
+        attack_effect_motion = template.attack_effect_motion,
+        has_attack_animation = template.has_attack_animation,
+        has_attack_hold = template.has_attack_hold,
+        attack_animation_seconds = template.attack_animation_seconds,
         -- These fields are read from `self` at runtime (spawn, attack,
         -- death) and must be copied explicitly; the enemy instance table
         -- does not otherwise inherit from the template.
@@ -97,12 +104,10 @@ function EnemyTemplates.create(instance, position, direction, template_name, spa
     local offset_y = template.shape_offset_y or -1
     enemy.selection:set_shape(shape, offset_x, offset_y)
 
-    -- Preload assets
-    if template.preload_assets then
-        for _, asset in ipairs(template.preload_assets) do
-            Preloader.add_asset(asset, instance.area_id)
-        end
-    end
+    -- Map boot preflight covers placed panels. This second idempotent check
+    -- covers manually/dynamically spawned bots and ensures ALL stage attack
+    -- effects exist in this instance before any bot can create them.
+    Preloader.provide_template(instance.area_id, template, template_name)
 
     enemy:spawn(direction)
     return enemy
@@ -141,12 +146,14 @@ EnemyTemplates.metatable = {
         -- Use the AI type to determine behaviour
         if self.ai_type == "simple_charge" then
             return EnemyTemplates.ai.simple_charge(self)
-        elseif self.ai_type == "ranged" then
-            return EnemyTemplates.ai.ranged(self)
-        elseif self.ai_type == "bladia_strike" and EnemyTemplates.ai.bladia_strike then
-            return EnemyTemplates.ai.bladia_strike(self)
         elseif self.ai_type == "shademan_ambush" then
             return EnemyTemplates.ai.shademan_ambush(self)
+        elseif self.ai_type == "bladia_strike" then
+            return EnemyTemplates.ai.bladia_strike(self)
+        elseif self.ai_type == "ranged" then
+            return EnemyTemplates.ai.ranged(self)
+        elseif self.ai_type == "patterned_attack" then
+            return EnemyTemplates.ai.patterned_attack(self)
         elseif self.ai_type == "shockwave_line" then
             return EnemyTemplates.ai.shockwave_line(self)
         else
@@ -163,6 +170,7 @@ local function sign(a)
 end
 -- AI implementations
 EnemyTemplates.ai = {}
+EnemyTemplates.ai.patterned_attack = require("scripts/ezlibs-custom/nebulous-liberations/liberations/ai/patterned_attack").take_turn
 
 function EnemyTemplates.ai.simple_charge(self)
     local co = coroutine.create(function()
@@ -194,7 +202,7 @@ function EnemyTemplates.ai.simple_charge(self)
                 local targety = self.y + ystep * offset
                 EnemyHelpers.face_position(self, targetx + .5, targety + .5)
                 local target_direction = Direction.diagonal_from_offset(player.x - (targetx + .5), player.y - (targety + .5))
-                EnemyHelpers.move(self.instance, self, targetx, targety, self.z, target_direction).and_then(function()
+                EnemyHelpers.move_smooth(self.instance, self, targetx, targety, self.z, target_direction).and_then(function()
                     resolve(true)
                 end)
             end)
@@ -215,52 +223,61 @@ function EnemyTemplates.ai.simple_charge(self)
         if #caught_sessions > 0 then
             local closest = EnemyHelpers.find_closest_player_session(self.instance, self)
             EnemyHelpers.face_position(self, closest.player.x, closest.player.y)
-            self.selection:indicate()
+            AttackRuntime.begin_telegraph(self.selection)
             Async.await(Async.sleep(1))
-            local attack_records = GuardInterception.prepare_attack(self.instance, self, caught_sessions, 0.5)
+            local attack_records = AttackRuntime.prepare(self, caught_sessions, 0.5)
             EnemyHelpers.play_attack_animation(self)
             local spawned_bots = {}
             for _, record in ipairs(attack_records) do
                 local position = record.visual_position
                 if position then
-                local bot_id = Net.create_bot({
+                local bot_id = AttackRuntime.spawn_effect(self, {
                     texture_path = self.attack_texture or "/server/assets/ezlibs-custom/nebulous-liberations/bots/attacks/beast breath.png",
                     animation_path = self.attack_animation_path or "/server/assets/ezlibs-custom/nebulous-liberations/bots/attacks/beast breath.animation",
-                    animation = "ANIMATE",
+                    animation = self.attack_effect_animation or "ANIMATE",
                     area_id = self.instance.area_id,
                     warp_in = false,
-                    x = position.x + 1/32,
-                    y = position.y + 1/32,
-                    z = position.z
+                    -- Guard supplies actual player-center world coordinates.
+                    -- Runtime handles Z-lift / isometric XY compensation.
+                    x = position.x,
+                    y = position.y,
+                    z = self.attack_effect_motion == "fall" and (position.z + 8) or position.z
                 })
-                table.insert(spawned_bots, bot_id)
+                if bot_id ~= nil then
+                    if self.attack_effect_motion == "fall" then
+                        AttackRuntime.animate_falling_effect(bot_id, position.z + 1, 0.5)
+                    end
+                    table.insert(spawned_bots, bot_id)
+                end
                 end
             end
             Async.await(Async.sleep(.5))
             for _, player in ipairs(self.instance.players) do
                 Net.shake_player_camera(player.id, 2, .5)
             end
-            GuardInterception.apply_damage(attack_records, self.attack_damage or 20, self)
-            GuardInterception.finish_attack(self.instance, attack_records)
+            AttackRuntime.impact(self, attack_records, self.attack_damage or 20)
             Async.await(Async.sleep(.5))
             for _, bot_id in ipairs(spawned_bots) do
-                Net.remove_bot(bot_id, false)
+                AttackRuntime.remove_effect(bot_id)
             end
             Async.await(Async.sleep(1))
-            self.selection:remove_indicators()
+            AttackRuntime.end_telegraph(self.selection)
         end
     end)
     return Async.promisify(co)
 end
 
 function EnemyTemplates.ai.ranged(self)
-    if self.template_name == "ShadeMan" and EnemyTemplates.ai.shademan_ambush then
+    -- Backwards compatibility for old point objects where AI Type = ranged.
+    -- Keep the real OW attack policy of the selected registered template.
+    if self.template_name == "ShadeMan" then
         return EnemyTemplates.ai.shademan_ambush(self)
-    end
-    if self.template_name == "Bladia" and EnemyTemplates.ai.bladia_strike then
+    elseif self.template_name == "Bladia" then
         return EnemyTemplates.ai.bladia_strike(self)
+    elseif type(self.attack_profile) == "table" then
+        return EnemyTemplates.ai.patterned_attack(self)
     end
-    -- Only named templates with implemented AI may attack here.
+    -- Prog and legacy generic ranged bots remain explicitly non-attacking.
     return Async.create_promise(function(resolve) resolve() end)
 end
 
@@ -268,21 +285,21 @@ end
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_bigbrute")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_blizzardman")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_shademan")(EnemyTemplates)
+
+
+
+
+
+
+-- Register *all* supported point-object templates before asset provisioning
+-- and mission construction. Never register templates inside take_turn().
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/mettaur")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_prog")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_bladia")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/shademan_ow")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/bladia_ow")(EnemyTemplates)
-
-
-
-
-
-
--- Register the Mettaur template and its unique overworld shockwave AI.
--- Keep enemy-specific behaviors in enemies/ rather than in this shared registry.
-require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/mettaur")(EnemyTemplates)
-
--- Additional existing overworld sprite sheets used by DEBUGLIB scaling tests.
--- These use currently supported AI placeholders; they do not change other templates.
-require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_bladia")(EnemyTemplates)
-require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_prog")(EnemyTemplates)
+-- This is the authoritative five-enemy directional OW profile source.
+-- template_debuglib_attackers.lua is legacy and must not overwrite it.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_directional_attacks")(EnemyTemplates)
 
 return EnemyTemplates

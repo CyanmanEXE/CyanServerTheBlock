@@ -3,6 +3,7 @@
 -- No separate enemy constructor: EnemyTemplates.create handles instance lifecycle.
 local EnemyHelpers = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy_helpers")
 local GuardInterception = require("scripts/ezlibs-custom/nebulous-liberations/liberations/guard_interception")
+local Runtime = require("scripts/ezlibs-custom/nebulous-liberations/liberations/ai/attack_runtime")
 local Direction = require("scripts/libs/direction")
 
 return function(EnemyTemplates)
@@ -22,7 +23,7 @@ local SHOCKWAVE_DIRECTION = {
     [Direction.DOWN_LEFT] = { suffix = "DL", dx = 0, dy = 1 },
 }
 local SHOCKWAVE_RANGE = 3
-local SHOCKWAVE_STEP_SECONDS = 0.24
+local SHOCKWAVE_STEP_SECONDS = 0.36
 -- All four ATTACK_* states in mettaur_ow.animation total 0.83s.
 -- Switch to the authored HOLD_* frame just BEFORE that state expires so
 -- there is no one-frame return to IDLE between swing and shockwave.
@@ -131,7 +132,7 @@ function EnemyTemplates.ai.shockwave_line(self)
         local direction = firing_position.direction
         local travel = SHOCKWAVE_DIRECTION[direction]
         if firing_position.x ~= self.x or firing_position.y ~= self.y then
-            Async.await(EnemyHelpers.move(self.instance, self,
+            Async.await(EnemyHelpers.move_smooth(self.instance, self,
                 firing_position.x, firing_position.y, self.z, direction))
         end
         Net.set_bot_direction(self.id, direction)
@@ -139,11 +140,11 @@ function EnemyTemplates.ai.shockwave_line(self)
         self.selection:move(self, direction)
         if #self.selection:detect_player_sessions() == 0 then return end
 
-        self.selection:indicate()
+        Runtime.begin_telegraph(self.selection)
         Async.await(Async.sleep(0.5))
         local caught_sessions = self.selection:detect_player_sessions()
         if #caught_sessions == 0 then
-            self.selection:remove_indicators()
+            Runtime.end_telegraph(self.selection)
             return
         end
 
@@ -155,8 +156,8 @@ function EnemyTemplates.ai.shockwave_line(self)
         local records_by_step = {}
         for step = 1, SHOCKWAVE_RANGE do
             if groups[step] then
-                records_by_step[step] = GuardInterception.prepare_attack(
-                    self.instance, self, groups[step], step * SHOCKWAVE_STEP_SECONDS)
+                records_by_step[step] = Runtime.prepare(
+                    self, groups[step], step * SHOCKWAVE_STEP_SECONDS)
             end
         end
 
@@ -167,7 +168,7 @@ function EnemyTemplates.ai.shockwave_line(self)
             local x, y = self.x + travel.dx * step, self.y + travel.dy * step
             if not has_terrain_tile(self.instance, x, y, self.z) then break end
             if not projectile_id then
-                projectile_id = Net.create_bot({
+                projectile_id = Runtime.spawn_effect(self, {
                     texture_path = SHOCKWAVE_TEXTURE,
                     animation_path = SHOCKWAVE_ANIMATION,
                     animation = "SHOCKWAVE_" .. travel.suffix,
@@ -177,20 +178,19 @@ function EnemyTemplates.ai.shockwave_line(self)
                     x = x + 0.5, y = y + 0.5, z = self.z,
                 })
             else
-                Net.transfer_bot(projectile_id, self.instance.area_id, false,
-                    x + 0.5, y + 0.5, self.z)
-                Net.animate_bot(projectile_id, "SHOCKWAVE_" .. travel.suffix)
+                Runtime.move_effect(self, projectile_id,
+                    x + 0.5, y + 0.5, self.z,
+                    "SHOCKWAVE_" .. travel.suffix, SHOCKWAVE_STEP_SECONDS)
             end
             Async.await(Async.sleep(SHOCKWAVE_STEP_SECONDS))
             local records = records_by_step[step]
             if records then
-                GuardInterception.apply_damage(records, self.attack_damage or 20, self)
-                GuardInterception.finish_attack(self.instance, records)
+                Runtime.impact(self, records, self.attack_damage or 20)
             end
         end
-        if projectile_id then Net.remove_bot(projectile_id, false) end
+        if projectile_id then Runtime.remove_effect(projectile_id) end
         EnemyHelpers.finish_attack_animation(self)
-        self.selection:remove_indicators()
+        Runtime.end_telegraph(self.selection)
     end)
     return Async.promisify(co)
 end

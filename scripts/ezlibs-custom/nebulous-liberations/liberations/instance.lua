@@ -1498,19 +1498,36 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
         mission_area_id = tostring(new_area_id),
     })
 
-    local preload_ok, preload_error = pcall(function()
-        Preloader.update(new_area_id, EnemyTemplates)
-    end)
+    local preload_ok, assets_ok, templates_found, failed_count = pcall(
+        Preloader.update, new_area_id, EnemyTemplates)
     if not preload_ok then
-        log:error_data("Collision tileset diagnostic: preload failed", {
+        log:error_data("Liberation mission asset preflight crashed", {
             mission_area_id = tostring(new_area_id),
-            error = tostring(preload_error),
+            error = tostring(assets_ok),
         })
-        error(preload_error)
+        error(assets_ok)
+    end
+    if not assets_ok then
+        -- Preloader.update returns false for missing assets or absent
+        -- animation states. A successful pcall alone does not mean the
+        -- requested sprites were actually provided to the cloned area.
+        print("[NL_ASSET][MISSION_PREFLIGHT_INCOMPLETE]", "area",
+            tostring(new_area_id), "templates", tostring(templates_found),
+            "failures", tostring(failed_count))
+        log:error_data("Liberation mission asset preflight incomplete", {
+            mission_area_id = tostring(new_area_id),
+            registered_templates = templates_found,
+            failed_requests = failed_count,
+            action = "Check NL_ASSET diagnostics; missing attack art may not render",
+        })
+    else
+        print("[NL_ASSET][MISSION_PREFLIGHT_OK]", "area", tostring(new_area_id),
+            "templates", tostring(templates_found))
     end
     log:info_data("Collision tileset diagnostic: preload complete", {
         mission_area_id = tostring(new_area_id),
         collision_tileset_path = "/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx",
+        assets_ok = assets_ok == true,
     })
 
     -- Cloned mission areas do not go through ezencounters' base-area package

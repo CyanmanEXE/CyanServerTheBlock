@@ -241,6 +241,50 @@ function EnemyHelpers.move(instance, enemy, x, y, z, direction)
   return Async.promisify(co)
 end
 
+
+-- Smooth reposition for patterned OW bots. Unlike the legacy move() used by
+-- boss/ambush attacks, this never transfers the bot away/offscreen. The
+-- existing PlayerSession HP digits are hidden during movement as usual.
+function EnemyHelpers.move_smooth(instance, enemy, x, y, z, direction, seconds_per_tile)
+  local co = coroutine.create(function()
+    x, y = math.floor(x), math.floor(y)
+    if x == enemy.x and y == enemy.y and z == enemy.z then return end
+    if not EnemyHelpers.can_move_to(instance, x, y, z, enemy) then
+      print("[NL_AI][SMOOTH_MOVE_BLOCKED]", tostring(enemy.id),x,y,z)
+      return
+    end
+    if type(Net.animate_bot_properties) ~= "function" then
+      print("[NL_AI][SMOOTH_MOVE_UNAVAILABLE]", tostring(enemy.id))
+      return
+    end
+    local steps = math.abs(x - enemy.x) + math.abs(y - enemy.y)
+    local per_tile = tonumber(seconds_per_tile) or 0.38
+    if per_tile <= 0 or per_tile ~= per_tile or per_tile == math.huge then per_tile=0.38 end
+    per_tile = math.max(0.30, math.min(0.70, per_tile))
+    local duration = steps * per_tile
+    if direction then Net.set_bot_direction(enemy.id, direction) end
+    HPIndicators.hide_enemy(instance, enemy)
+    local frames = {{
+      properties = {
+        { property = "X", value = x + 0.5, ease = "Linear" },
+        { property = "Y", value = y + 0.5, ease = "Linear" },
+        { property = "Z", value = z, ease = "Linear" },
+      },
+      duration = duration,
+    }}
+    local ok, result = pcall(Net.animate_bot_properties, enemy.id, frames)
+    if not ok or result == false then
+      HPIndicators.show_enemy(instance, enemy)
+      print("[NL_AI][SMOOTH_MOVE_FAILED]", tostring(enemy.id), tostring(result))
+      return
+    end
+    Async.await(Async.sleep(duration))
+    enemy.x,enemy.y,enemy.z = x,y,z
+    HPIndicators.show_enemy(instance, enemy)
+  end)
+  return Async.promisify(co)
+end
+
 function EnemyHelpers.offset_position_with_direction(position, direction)
   position = {
     x = position.x,

@@ -99,12 +99,6 @@ function Config.resolve(area_id, source, legacy_health_property, category)
     local legacy_hp = numeric(own[legacy_health_property], false)
     local max_hp = numeric(own["Max HP"], false) or legacy_hp or positive("Max HP")
     local starting_hp = positive("Starting HP")
-    -- -1 means inherit authored encounter rank. 0..7 use ezencounters ranks.
-    local configured_rank = tonumber(first(bot_layers, "Battle Rank", true))
-    if not configured_rank or configured_rank < 0 or configured_rank > 7
-        or configured_rank ~= math.floor(configured_rank) then
-        configured_rank = nil
-    end
     local legacy_scale = numeric(own.scale, false)
     local ow_scale = numeric(own["OW Scale"], false)
         or (legacy_scale ~= 1 and legacy_scale or nil)
@@ -125,7 +119,7 @@ function Config.resolve(area_id, source, legacy_health_property, category)
     if not pool and encounter_ref and mode == "Pool" then pool = encounter_ref.id end
     local resolved = {
         template_name = template_name,
-        max_hp = max_hp, starting_hp = starting_hp, battle_rank = configured_rank,
+        max_hp = max_hp, starting_hp = starting_hp,
         ow_scale = ow_scale, battle_scale = battle_scale,
         battle_scale_explicit = explicit_battle_scale ~= nil,
         battle_scale_scope = scope,
@@ -135,6 +129,15 @@ function Config.resolve(area_id, source, legacy_health_property, category)
         battle_attack_multiplier = positive("Battle Attack Multiplier"),
         battle_defense_multiplier = positive("Battle Defense Multiplier"),
         ai_type = (function() local v = bot_text("AI Type"); return v ~= "Auto" and v or nil end)(),
+        -- Optional profile overrides; 0 inherits except movement tiles where
+        -- 0 explicitly means stationary/no reposition.
+        ow_attack_shape = bot_text("OW Attack Shape"),
+        ow_attack_range = positive("OW Attack Range"),
+        ow_move_mode = bot_text("OW Movement Mode"),
+        ow_move_tiles = numeric(first(bot_layers, "OW Movement Tiles", true), true),
+        ow_telegraph_seconds = positive("OW Telegraph Seconds"),
+        ow_windup_seconds = positive("OW Windup Seconds"),
+        ow_step_seconds = positive("OW Step Seconds"),
         heal_percent_per_turn = healing, heal_flat_per_turn = flat_healing,
         encounter_name = name, encounter_mode = mode, encounter_pool = pool,
         encounter_category = enc_text("Encounter Category"),
@@ -152,7 +155,6 @@ end
 
 function Config.apply(enemy, cfg)
     if not enemy or not cfg then return end
-    if cfg.battle_rank ~= nil then enemy.battle_rank = cfg.battle_rank end
     if cfg.max_hp then
         enemy.max_health = cfg.max_hp
         enemy.health = cfg.max_hp
@@ -169,6 +171,48 @@ function Config.apply(enemy, cfg)
     if cfg.battle_attack_multiplier then enemy.battle_attack_multiplier = cfg.battle_attack_multiplier end
     if cfg.battle_defense_multiplier then enemy.battle_defense_multiplier = cfg.battle_defense_multiplier end
     if cfg.ai_type then enemy.ai_type = cfg.ai_type end
+    if type(enemy.attack_profile) == "table" then
+        local overrides = cfg.ow_attack_shape or cfg.ow_attack_range
+            or cfg.ow_move_mode or cfg.ow_move_tiles ~= nil
+            or cfg.ow_telegraph_seconds or cfg.ow_windup_seconds or cfg.ow_step_seconds
+        if overrides then
+            -- Profiles belong to a template, but one Tiled bot can customize
+            -- its own instance without mutating other enemies' shared tables.
+            local function clone(value)
+                if type(value) ~= "table" then return value end
+                local result = {}
+                for k, v in pairs(value) do result[k] = clone(v) end
+                return result
+            end
+            local profile = clone(enemy.attack_profile)
+            profile.movement = profile.movement or {}
+            if cfg.ow_move_mode and cfg.ow_move_mode ~= "Auto" then
+                profile.movement.mode = cfg.ow_move_mode
+            end
+            if cfg.ow_move_tiles ~= nil then profile.movement.tiles = cfg.ow_move_tiles end
+            if cfg.ow_telegraph_seconds then profile.telegraph_seconds = cfg.ow_telegraph_seconds end
+            if cfg.ow_windup_seconds then profile.windup_seconds = cfg.ow_windup_seconds end
+            local shapes = {line=true,arc=true,cone=true,cross=true,diamond=true}
+            local selected = cfg.ow_attack_shape
+            if selected == "Auto" or not shapes[selected] then selected = nil end
+            if selected then
+                profile.telegraph = {shape_type=selected,range=cfg.ow_attack_range or 1}
+            elseif cfg.ow_attack_range and type(profile.telegraph)=="table" then
+                profile.telegraph.range = cfg.ow_attack_range
+            end
+            for _, stage in ipairs(profile.stages or {}) do
+                if cfg.ow_attack_range and stage.range then stage.range = cfg.ow_attack_range end
+                if selected then
+                    -- Replace the old shape consistently across all stages.
+                    -- Motion still determines the traveling tile offsets.
+                    stage.shape_type = selected
+                    if stage.motion == "travel" then stage.motion = nil end
+                end
+                if cfg.ow_step_seconds then stage.duration = cfg.ow_step_seconds end
+            end
+            enemy.attack_profile = profile
+        end
+    end
     enemy.heal_percent_per_turn = cfg.heal_percent_per_turn
     enemy.heal_flat_per_turn = cfg.heal_flat_per_turn
     enemy.encounter_mode = cfg.encounter_mode

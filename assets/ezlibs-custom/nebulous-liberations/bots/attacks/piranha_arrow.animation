@@ -1,0 +1,30 @@
+imagePath="piranha_arrow.png"
+
+animation state="PIRANHA_ARROW_UL"
+frame duration="0.090" x="0" y="0" w="64" h="64" originx="32" originy="48"
+
+animation state="PIRANHA_ARROW_UR"
+frame duration="0.090" x="0" y="64" w="64" h="64" originx="32" originy="48"
+
+animation state="PIRANHA_ARROW_DL"
+frame duration="0.090" x="0" y="128" w="64" h="64" originx="32" originy="48"
+
+animation state="PIRANHA_ARROW_DR"
+frame duration="0.090" x="0" y="192" w="64" h="64" originx="32" originy="48"
+animation state="IMPACT"
+frame duration="0.12" x="0" y="0" w="64" h="64" originx="32" originy="48"
+
+animation state="IDLE_UL"
+frame duration="0.090" x="0" y="0" w="64" h="64" originx="32" originy="48"
+
+animation state="IDLE_UR"
+frame duration="0.090" x="0" y="64" w="64" h="64" originx="32" originy="48"
+
+animation state="IDLE_DL"
+frame duration="0.090" x="0" y="128" w="64" h="64" originx="32" originy="48"
+
+animation state="IDLE_DR"
+frame duration="0.090" x="0" y="192" w="64" h="64" originx="32" originy="48"
+
+animation state="IDLE"
+frame duration="0.090" x="0" y="0" w="64" h="64" originx="32" originy="48"

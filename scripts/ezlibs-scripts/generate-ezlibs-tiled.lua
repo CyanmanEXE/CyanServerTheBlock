@@ -133,13 +133,15 @@ local Enums = {
     },
     LiberationAIType = {
         type = "string",
-        values = {"Auto", "simple_charge", "ranged", "shockwave_line"}
+        values = {"Auto", "simple_charge", "ranged", "shockwave_line", "patterned_attack", "shademan_ambush", "bladia_strike"}
+    },
+    LiberationAttackShape = {
+        type = "string", values = {"Auto", "line", "arc", "cone", "cross", "diamond"}
+    },
+    LiberationMovementMode = {
+        type = "string", values = {"Auto", "stationary", "approach", "reposition"}
     },
     -- Matching is safe for composite encounters; All is an explicit opt-in.
-    LiberationBattleRank = {
-        type = "int",
-        values = {-1, 0, 1, 2, 3, 4, 5, 6, 7}
-    },
     LiberationBattleScaleScope = {
         type = "string",
         values = {"Auto", "Matching", "All"}
@@ -175,7 +177,6 @@ local function bot_config_members()
         prop("Spawns", "string", ""),
         prop("Max HP", "int", 0),
         prop("Starting HP", "int", 0),
-        prop("Battle Rank", "int", -1, "LiberationBattleRank"),
         prop("OW Scale", "float", 0),
         prop("Battle Scale", "float", 0),
         prop("Battle Scale Scope", "string", "Auto", "LiberationBattleScaleScope"),
@@ -185,6 +186,13 @@ local function bot_config_members()
         prop("Battle Attack Multiplier", "float", 0),
         prop("Battle Defense Multiplier", "float", 0),
         prop("AI Type", "string", "Auto", "LiberationAIType"),
+        prop("OW Attack Shape", "string", "Auto", "LiberationAttackShape"),
+        prop("OW Attack Range", "int", 0),
+        prop("OW Movement Mode", "string", "Auto", "LiberationMovementMode"),
+        prop("OW Movement Tiles", "int", -1),
+        prop("OW Telegraph Seconds", "float", 0),
+        prop("OW Windup Seconds", "float", 0),
+        prop("OW Step Seconds", "float", 0),
         prop("Heal Percent Per Turn", "float", -1),
         prop("Heal Flat Per Turn", "float", -1),
     }
@@ -1062,7 +1070,6 @@ local META = {
             ["Spawns"] = { category = "gameplay", description = "Enemy template registered in Liberation enemy_templates.lua." },
             ["Max HP"] = { category = "gameplay", description = "Zero/unset inherits template HP; explicit positive overrides persistent OW maximum and matching battle HP where character supports it." },
             ["Starting HP"] = { category = "gameplay", description = "Positive value starts the OW bot partially damaged." },
-            ["Battle Rank"] = { category = "gameplay", description = "-1 inherits the encounter entry rank. 0=V1, 1=V2, 2=V3, 3=SP, 4=EX, 5=Rare1, 6=Rare2, 7=NM. OW sprite remains default." },
             ["OW Scale"] = { category = "appearance", description = "OW scale; unset/zero uses default." },
             ["Battle Scale"] = { category = "appearance", description = "Battle scale, inherits OW Scale unless explicitly set." },
             ["Battle Scale Scope"] = { category = "appearance", description = "Matching or All; Matching is safer for multi-enemy battles." },
