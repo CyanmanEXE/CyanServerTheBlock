@@ -232,16 +232,23 @@ function Registry.init(directory)
         if not archive then
             report.bad_zip = report.bad_zip + 1
             log('ZIP_SKIPPED', filename, tostring(err))
-        elseif string.match(lower(filename), '^ezencounters') then
-            local aliases = parse_encounter_aliases(archive)
-            if aliases then
-                aliases_by_battle_zip[lower(filename)] = aliases
-                for _ in pairs(aliases) do report.alias_entries = report.alias_entries + 1 end
-            end
         else
+            local is_encounter = string.match(lower(filename), '^ezencounters') ~= nil
+            if is_encounter then
+                local aliases = parse_encounter_aliases(archive)
+                if aliases then
+                    aliases_by_battle_zip[lower(filename)] = aliases
+                    for _ in pairs(aliases) do report.alias_entries = report.alias_entries + 1 end
+                end
+            end
             local entry = archive:read('entry.lua', 1024 * 1024)
             if entry then
-                report.character_archives = report.character_archives + 1
+                if not is_encounter then
+                    report.character_archives = report.character_archives + 1
+                end
+                -- Include locally defined characters inside battle ZIPs.
+                -- These use Engine.define_character just like character mods,
+                -- so their animation metadata can be extracted at boot.
                 local definitions = parse_character_definitions(entry)
                 for _, def in ipairs(definitions) do
                     report.character_ids = report.character_ids + 1
