@@ -281,11 +281,56 @@ end
 -- Keep a per-area cache to avoid resending the same package for every panel.
 local provided_package_paths = {}
 
+-- Server asset URLs are virtual. The same ZIP is typically located at
+-- assets/... relative to the ONB server working directory, or at
+-- server/assets/... when launched from the repository root.
+-- Check the real ZIP before treating a successful Net.provide_asset call
+-- (which can return nil) as proof that the asset exists.
+local function encounter_zip_exists(package_path)
+  if type(package_path) ~= "string" or package_path == "" then
+    return false, "empty package path"
+  end
+  local candidates = { package_path }
+  if package_path:sub(1, 1) == "/" then
+    candidates[#candidates + 1] = package_path:sub(2)
+  end
+  local relative = package_path:match("^/?server/(.+)$")
+  if relative then
+    candidates[#candidates + 1] = relative
+    candidates[#candidates + 1] = "server/" .. relative
+  end
+  for _, candidate in ipairs(candidates) do
+    local file = io.open(candidate, "rb")
+    if file then
+      local signature = file:read(4)
+      file:close()
+      -- ZIP files use PK headers; reject missing/zero-byte/incorrect assets.
+      if signature == "PK\003\004" or signature == "PK\005\006"
+          or signature == "PK\007\008" then
+        return true, candidate
+      end
+      return false, "not a ZIP: " .. candidate
+    end
+  end
+  return false, "not found at " .. table.concat(candidates, ", ")
+end
+
 function PanelEncounters.ensure_encounter_asset(area_id, package_path)
   if area_id == nil or type(package_path) ~= "string" or package_path == "" then
     log:error_data("Cannot provision liberation encounter: missing area or package", {
       area_id = tostring(area_id), package_path = tostring(package_path),
     })
+    return false
+  end
+
+  local found, resolved_path = encounter_zip_exists(package_path)
+  if not found then
+    log:error_data("Liberation battle ZIP missing from server disk", {
+      area_id = area_id, package_path = package_path,
+      problem = resolved_path,
+      instruction = "Install the matching ZIP under server/assets or assets",
+    })
+    print("[EZDBG][SERVER][MISSING_ENCOUNTER_ZIP]", tostring(package_path), tostring(resolved_path))
     return false
   end
 
@@ -308,7 +353,9 @@ function PanelEncounters.ensure_encounter_asset(area_id, package_path)
   provided[package_path] = true
   log:info_data("Liberation encounter package provision requested", {
     area_id = area_id, package_path = package_path,
+    disk_path = resolved_path,
   })
+  print("[EZDBG][SERVER][ENCOUNTER_AREA_PROVIDED]", tostring(area_id), tostring(package_path), tostring(resolved_path))
   return true
 end
 

@@ -99,6 +99,12 @@ function Config.resolve(area_id, source, legacy_health_property, category)
     local legacy_hp = numeric(own[legacy_health_property], false)
     local max_hp = numeric(own["Max HP"], false) or legacy_hp or positive("Max HP")
     local starting_hp = positive("Starting HP")
+    -- -1 means inherit authored encounter rank. 0..7 use ezencounters ranks.
+    local configured_rank = tonumber(first(bot_layers, "Battle Rank", true))
+    if not configured_rank or configured_rank < 0 or configured_rank > 7
+        or configured_rank ~= math.floor(configured_rank) then
+        configured_rank = nil
+    end
     local legacy_scale = numeric(own.scale, false)
     local ow_scale = numeric(own["OW Scale"], false)
         or (legacy_scale ~= 1 and legacy_scale or nil)
@@ -119,7 +125,7 @@ function Config.resolve(area_id, source, legacy_health_property, category)
     if not pool and encounter_ref and mode == "Pool" then pool = encounter_ref.id end
     local resolved = {
         template_name = template_name,
-        max_hp = max_hp, starting_hp = starting_hp,
+        max_hp = max_hp, starting_hp = starting_hp, battle_rank = configured_rank,
         ow_scale = ow_scale, battle_scale = battle_scale,
         battle_scale_explicit = explicit_battle_scale ~= nil,
         battle_scale_scope = scope,
@@ -146,6 +152,7 @@ end
 
 function Config.apply(enemy, cfg)
     if not enemy or not cfg then return end
+    if cfg.battle_rank ~= nil then enemy.battle_rank = cfg.battle_rank end
     if cfg.max_hp then
         enemy.max_health = cfg.max_hp
         enemy.health = cfg.max_hp

@@ -255,7 +255,7 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
     local expected_display_name = persistent_enemy
         and normalize_enemy_name(persistent_enemy.battle_name or persistent_enemy.name)
 
-    if persistent_enemy and persistent_enemy.health ~= nil and type(data.enemies) == "table" then
+    if persistent_enemy and type(data.enemies) == "table" then
         -- ezencounters resolves data.enemies[index].name through its
         -- enemy_packages table. Prefer the exact template registry key, which
         -- is that package alias; only fall back to the display name for older
@@ -267,14 +267,19 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
                 local display_name_matches = expected_display_name
                     and encounter_alias == expected_display_name
                 if alias_matches or display_name_matches then
-                    enemy_info.health = persistent_enemy.health
-                    -- A separate max_hp request lets ezencounters choose a
-                    -- compatible character package whose first set_health()
-                    -- call establishes this maximum. A mutator cannot raise
-                    -- an already initialized character's maximum HP.
+                    if persistent_enemy.health ~= nil then
+                        enemy_info.health = persistent_enemy.health
+                    end
+                    if persistent_enemy.battle_rank ~= nil then
+                        enemy_info.rank_override = persistent_enemy.battle_rank
+                    end
+                    -- Deferred-native HP: EZEncounters' spawn mutator
+                    -- establishes maximum HP on the first positive set_health().
+                    -- Starting/current HP is applied separately afterward.
                     local maximum = tonumber(persistent_enemy.max_health)
-                    if maximum and maximum > 0 then
+                    if maximum and maximum > 0 and maximum < math.huge then
                         enemy_info.max_hp = maximum
+                        if #data.enemies == 1 then data.max_hp = maximum end
                     end
                     health_applied = true
                     matched_enemy_alias = enemy_info.name
@@ -292,10 +297,16 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
         and type(data.enemies) == "table"
         and #data.enemies == 1
         and type(data.enemies[1]) == "table" then
-        data.enemies[1].health = persistent_enemy.health
+        if persistent_enemy.health ~= nil then
+            data.enemies[1].health = persistent_enemy.health
+        end
+        if persistent_enemy.battle_rank ~= nil then
+            data.enemies[1].rank_override = persistent_enemy.battle_rank
+        end
         local maximum = tonumber(persistent_enemy.max_health)
-        if maximum and maximum > 0 then
+        if maximum and maximum > 0 and maximum < math.huge then
             data.enemies[1].max_hp = maximum
+            data.max_hp = maximum
         end
         health_applied = true
         matched_enemy_alias = data.enemies[1].name
@@ -344,6 +355,17 @@ local function build_encounter_data(encounter_definition, overrides, persistent_
             expected_display_name = tostring(expected_display_name),
             encounter_entries = table.concat(entry_summary, " | "),
         })
+    end
+
+    if persistent_enemy then
+        print('[EZHP][SERVER][BATTLE_HANDOFF]',
+            'template', tostring(persistent_enemy.template_name),
+            'ow_health', tostring(persistent_enemy.health),
+            'ow_max', tostring(persistent_enemy.max_health),
+            'top_max', tostring(data.max_hp),
+            'matched', tostring(health_applied),
+            'alias', tostring(matched_enemy_alias),
+            'entries', table.concat(entry_summary, ' | '))
     end
 
     return data, health_applied, matched_enemy_alias

@@ -52,8 +52,12 @@ local load_encounters_for_areas = function ()
                         encounter_areas[encounter_info] = area_id
                         if encounter_info.path and not provided_encounter_assets[area_id][encounter_info.path] then
                             logger:info('[ezencounters] providing mob package '..encounter_info.path..' to '..tostring(area_id))
-                            Net.provide_asset(area_id, encounter_info.path)
-                            provided_encounter_assets[area_id][encounter_info.path] = true
+                            local ok, result = pcall(Net.provide_asset, area_id, encounter_info.path)
+                            if ok and result ~= false then
+                                provided_encounter_assets[area_id][encounter_info.path] = true
+                            else
+                                print("[EZDBG][SERVER][EZENCOUNTERS_AREA_PROVISION_FAIL]", tostring(area_id), tostring(encounter_info.path), tostring(result))
+                            end
                         end
                         if encounter_info.name then
                             logger:info('[ezencounters] loaded named encounter '..encounter_info.name..' ('..section_name..')')
@@ -303,6 +307,18 @@ ezencounters.begin_encounter = function (player_id,encounter_info,trigger_object
             end
         end
 
+        -- Re-provide the selected battle ZIP specifically to the player just
+        -- before dispatch, matching the Liberation safety check.
+        local provided, provision_result = pcall(Net.provide_asset_for_player,
+            player_id, encounter_info.path)
+        if not provided or provision_result == false then
+            print("[EZDBG][SERVER][EZENCOUNTERS_PLAYER_PROVISION_FAIL]",
+                tostring(player_id), tostring(encounter_info.path), tostring(provision_result))
+            players_in_encounters[player_id] = nil
+            return { reason = 0, ran = false, enemies = {}, missing_battle_results = true }
+        end
+        print("[EZDBG][SERVER][EZENCOUNTERS_PLAYER_ASSET_REQUESTED]",
+            tostring(player_id), tostring(encounter_info.path))
         ezbus:emit("encounter_started", {
             player_id = player_id,
             encounter_info = encounter_info,

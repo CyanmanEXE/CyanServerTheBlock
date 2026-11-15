@@ -165,7 +165,36 @@ function Player:initiate_encounter(asset_path, data)
     error("This player is already in a battle")
   end
 
-  Net.initiate_encounter(self.id, asset_path, data)
+  -- Provision on the player connection immediately before dispatch, in
+  -- addition to the mission-area preflight. This closes the gap for cloned
+  -- Liberation areas and clients that entered after the area was provisioned.
+  -- A successful API call requests delivery; it is not a client ACK.
+  print("[EZDBG][SERVER][BATTLE_ASSET_PLAYER_BEGIN]", tostring(self.id), tostring(asset_path))
+  local provided, provision_result = pcall(Net.provide_asset_for_player, self.id, asset_path)
+  if not provided or provision_result == false then
+    log:error_data("Battle ZIP player provisioning failed; encounter not dispatched", {
+      player_id = self.id, package_path = asset_path,
+      error = tostring(provision_result),
+    })
+    print("[EZDBG][SERVER][BATTLE_ASSET_PLAYER_FAIL]", tostring(self.id), tostring(asset_path), tostring(provision_result))
+    return Async.create_promise(function(resolve)
+      resolve(create_default_results())
+    end)
+  end
+  print("[EZDBG][SERVER][BATTLE_ASSET_PLAYER_REQUESTED]", tostring(self.id), tostring(asset_path))
+
+  local started, dispatch_error = pcall(Net.initiate_encounter, self.id, asset_path, data)
+  if not started or dispatch_error == false then
+    log:error_data("Battle dispatch failed", {
+      player_id = self.id, package_path = asset_path,
+      error = tostring(dispatch_error),
+    })
+    print("[EZDBG][SERVER][BATTLE_DISPATCH_FAIL]", tostring(self.id), tostring(asset_path), tostring(dispatch_error))
+    return Async.create_promise(function(resolve)
+      resolve(create_default_results())
+    end)
+  end
+  print("[EZDBG][SERVER][BATTLE_DISPATCH_SENT]", tostring(self.id), tostring(asset_path))
 
   return Async.create_promise(function(resolve)
     self.resolve_battle = resolve
