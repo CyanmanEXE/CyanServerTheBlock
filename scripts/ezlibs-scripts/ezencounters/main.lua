@@ -7,6 +7,10 @@ local object_registry = require('scripts/ezlibs-scripts/object_registry')
 local ezbus = require('scripts/ezlibs-scripts/ezbus')
 local ezconfig = require('scripts/ezlibs-scripts/ezconfig')
 local RewardProcessor = require('scripts/ezlibs-scripts/ezencounters/rewards')
+local ScaleRegistry = require('scripts/ezlibs-scripts/ezencounters/scale_registry')
+-- Server boot: scan installed mod archives once before encounter tables are
+-- registered and before players can enter any EZEncounters battle.
+ScaleRegistry.init()
 
 local ezencounters = {}
 local players_in_encounters = {}
@@ -325,6 +329,9 @@ ezencounters.begin_encounter = function (player_id,encounter_info,trigger_object
             encounter_data = encounter_data,
             trigger_object = trigger_object
         })
+        -- The client receives native battle-frame metadata only for the
+        -- enemies participating in this one encounter. No global asset rewrite.
+        battle_data = ScaleRegistry.enrich(battle_data, encounter_info.path)
         local stats = await(Async.initiate_encounter(player_id,encounter_info.path,battle_data))
         return stats
     end)

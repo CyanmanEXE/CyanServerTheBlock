@@ -3,6 +3,7 @@ local helpers = require('scripts/ezlibs-scripts/helpers')
 local SharedLogger = require("scripts/logger/logger")
 local log = SharedLogger.register("nebulous-liberations"):register_subsystem("player")
 local OptionMenu = require("scripts/ezlibs-custom/nebulous-liberations/liberations/option_menu")
+local ScaleRegistry = require('scripts/ezlibs-scripts/ezencounters/scale_registry')
 
 -- private functions
 
@@ -183,7 +184,11 @@ function Player:initiate_encounter(asset_path, data)
   end
   print("[EZDBG][SERVER][BATTLE_ASSET_PLAYER_REQUESTED]", tostring(self.id), tostring(asset_path))
 
-  local started, dispatch_error = pcall(Net.initiate_encounter, self.id, asset_path, data)
+  -- Liberation uses Net.initiate_encounter directly (it bypasses
+  -- ezencounters.begin_encounter). Enrich the network payload here as well.
+  -- `enrich` clones the enemy tables, preserving persistent overworld HP.
+  local battle_data = ScaleRegistry.enrich(data, asset_path)
+  local started, dispatch_error = pcall(Net.initiate_encounter, self.id, asset_path, battle_data)
   if not started or dispatch_error == false then
     log:error_data("Battle dispatch failed", {
       player_id = self.id, package_path = asset_path,
