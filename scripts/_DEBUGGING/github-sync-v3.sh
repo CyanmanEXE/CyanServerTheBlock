@@ -90,7 +90,10 @@ sync_now() (
         fi
     fi
 
-    git -C "$repo_dir" commit -m "Automatic sync $(date '+%Y-%m-%d %H:%M:%S')"
+    git -C "$repo_dir" \
+    -c user.name="Server Sync Bot" \
+    -c user.email="server-sync@users.noreply.github.com" \
+    commit -m "Automatic sync $(date '+%Y-%m-%d %H:%M:%S')"
 
     # Other servers may push to the same repository at the same time.
     # Retry safely by rebasing our additive commit on the latest branch.
