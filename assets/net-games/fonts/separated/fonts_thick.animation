@@ -276,3 +276,9 @@ frame duration="1" x="0" y="0" w="0" h="0" originx="0" originy="0" flipx="0" fli
 animation state="THICK_LOWER_ "
 frame duration="1" x="0" y="0" w="0" h="0" originx="0" originy="0" flipx="0" flipy="0"
 
+animation state="THICK_["
+frame duration="1" x="22" y="115" w="6" h="11" originx="0" originy="0" flipx="0" flipy="0"
+
+animation state="THICK_]"
+frame duration="1" x="29" y="115" w="6" h="11" originx="0" originy="0" flipx="0" flipy="0"
+
