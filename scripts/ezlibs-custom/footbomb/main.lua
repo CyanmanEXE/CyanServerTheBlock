@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 -- FootBomb Controller and match-instance entry point.
 -- Loaded by scripts/ezlibs-scripts/main.lua through custom.lua.
 
@@ -9,12 +9,13 @@ local games = require("scripts/net-games/main")
 local UISafe = require("scripts/net-games/ui-safe")
 local EzExplosions = require("scripts/ezlibs-scripts/ezexplosions")
 local TextLayout = require("scripts/displayer/text-layout")
-local InputAPI = require("scripts/input-controller/main")
+local InputAPI = PlayerControl -- shared PlayerInterface API (input + control)
 local Boom = require("scripts/boom/main")
 local EzBus = require("scripts/ezlibs-scripts/ezbus")
 local EventEmitter = require("scripts/ezlibs-scripts/ezemitter")
 
 local Config = require("scripts/ezlibs-custom/footbomb/constants")
+local RefereeMenu = require("scripts/ezlibs-custom/footbomb/referee_menu")
 local AnimationStates = require("scripts/ezlibs-custom/footbomb/animation_states")
 local NAVI_OPTIONS = require("scripts/ezlibs-custom/footbomb/navi_options")
 local BOMB_OPTIONS = require("scripts/ezlibs-custom/footbomb/bomb_options")
@@ -469,6 +470,26 @@ local function as_number(value, fallback)
     return parsed
 end
 
+-- This observer follows Tiled referee objects and EzMapInstance metadata,
+-- never an area-name literal. Separate module keeps diagnostics testable.
+local AreaObserver = require("scripts/ezlibs-custom/footbomb/area_observer")
+local area_observer = AreaObserver.new({
+    instances = EzMapInstance,
+    default_instance_map = Config.DEFAULTS.INSTANCE_MAP,
+    log = log,
+})
+local function get_area_role(area_id)
+    return area_observer:role(area_id)
+end
+
+-- Read-only inspection helpers for FootBomb diagnostics or future tooling.
+function FootBomb.get_area_role(area_id)
+    return get_area_role(area_id)
+end
+function FootBomb.get_area_diagnostic(area_id)
+    return area_observer:describe(area_id)
+end
+
 local function ensure_area_refs(area_id)
     State.npc_refs[area_id] = State.npc_refs[area_id] or {}
     return State.npc_refs[area_id]
@@ -520,9 +541,17 @@ local function create_ref_npc(area_id, object)
     return reference.npc
 end
 
-object_registry.register_handler("FootBomb Controller", function(area_id, object)
+local function register_footbomb_referee(area_id, object)
+    -- Register before bot creation: a missing bot asset should not make the
+    -- map's Tiled identity disappear from the asset observer.
+    area_observer:register_source(area_id, object)
     create_ref_npc(area_id, object)
-end)
+end
+
+-- FootBomb Ref is the legacy type in footbombZ.tmx. New maps should use the
+-- canonical FootBomb Controller type; both describe the same referee behavior.
+object_registry.register_handler("FootBomb Controller", register_footbomb_referee)
+object_registry.register_handler("FootBomb Ref", register_footbomb_referee)
 
 local function player_is_available(player_id)
     if player_id == nil then return false end
@@ -1032,7 +1061,9 @@ end
 local source_area_assets_ready = {}
 
 local function provide_source_area_assets(area_id, reason)
-    area_id = area_id or Config.DEFAULTS.SOURCE_AREA
+    if get_area_role(area_id) ~= "source" then
+        return false, "area is not a registered FootBomb referee/source map: " .. tostring(area_id)
+    end
     log("ASSET_FLOW: source-area preload starting area=" .. tostring(area_id)
         .. " reason=" .. tostring(reason or "unspecified"))
     if source_area_assets_ready[area_id] then
@@ -1067,17 +1098,26 @@ local function provide_source_area_assets(area_id, reason)
     return true
 end
 
-local function make_instance(player_id, source_area_id, object, mode)
+local function make_instance(player_id, source_area_id, object, mode, rules)
     local props = object.custom_properties or {}
     local instance_id = "footbomb_"
         .. tostring(player_id):gsub("[^%w_%-]", "_")
         .. "_" .. tostring(os.time())
     local configured_points = math.floor(as_number(
-        props["Points to Win"], Config.DEFAULTS.POINTS_TO_WIN
+        rules and rules.points_to_win,
+        as_number(props["Points to Win"], Config.DEFAULTS.POINTS_TO_WIN)
     ))
     if configured_points < 1 then configured_points = Config.DEFAULTS.POINTS_TO_WIN end
+    local grace_enabled = rules and rules.grace_enabled
+    if grace_enabled == nil then grace_enabled = Config.DEFAULTS.GRACE_ENABLED end
+    grace_enabled = grace_enabled ~= false
+    local instance_template = as_string(props["Instance Map"], Config.DEFAULTS.INSTANCE_MAP)
+    log("INSTANCE_FLOW: cloning FootBomb template=" .. tostring(instance_template)
+        .. " source_area=" .. tostring(source_area_id)
+        .. " referee_id=" .. tostring(object.id)
+        .. " mode=" .. tostring(mode))
     local instance, err = EzMapInstance.create(
-        as_string(props["Instance Map"], Config.DEFAULTS.SOURCE_AREA),
+        instance_template,
         instance_id,
         {
             host_id = player_id,
@@ -1087,11 +1127,17 @@ local function make_instance(player_id, source_area_id, object, mode)
                 game = "footbomb", mode = mode,
                 return_area_id = source_area_id,
                 points_to_win = configured_points,
+                grace_enabled = grace_enabled,
                 party = { host_id = player_id, members = {} }
             }
         }
     )
-    if not instance then return nil, err end
+    if not instance then
+        log("INSTANCE_FLOW: clone failed template=" .. tostring(instance_template)
+            .. " source_area=" .. tostring(source_area_id)
+            .. " reason=" .. tostring(err))
+        return nil, err
+    end
     local assets_ok, assets_error = provide_instance_bot_assets(instance.area_id)
     if not assets_ok then
         pcall(EzMapInstance.remove, instance.id)
@@ -1108,6 +1154,7 @@ local function make_instance(player_id, source_area_id, object, mode)
         return nil, bot_error
     end
     bots.points_to_win = configured_points
+    bots.grace_enabled = grace_enabled
     bots.return_area_id = source_area_id
     local ref_x = tonumber(object.x)
     local ref_y = tonumber(object.y)
@@ -1131,6 +1178,7 @@ local function make_instance(player_id, source_area_id, object, mode)
     bots.match_point_challenger_slot = nil
     bots.match_complete = false
     log("MATCH_RULES: configured points_to_win=" .. tostring(configured_points)
+        .. " grace_enabled=" .. tostring(grace_enabled)
         .. " return_area_id=" .. tostring(source_area_id)
         .. " instance=" .. tostring(instance.id))
     return instance, spawn_points
@@ -1499,10 +1547,10 @@ end
 -- Match creation
 -- ---------------------------------------------------------------------------
 
-local function launch_npc_match(player_id, source_area_id, object, npc)
+local function launch_npc_match(player_id, source_area_id, object, npc, rules)
     if not player_is_available(player_id) then return end
     local instance, spawn_or_error = make_instance(
-        player_id, source_area_id, object, "npc"
+        player_id, source_area_id, object, "npc", rules
     )
     if not instance then
         await_player_message(
@@ -1537,7 +1585,7 @@ local function launch_player_match(waiting, second_player)
         return false, "One of the players is no longer available."
     end
     local instance, spawn_or_error = make_instance(
-        first_player, waiting.source_area_id, waiting.object, "player"
+        first_player, waiting.source_area_id, waiting.object, "player", waiting.rules
     )
     if not instance then return false, tostring(spawn_or_error) end
     local spawn_points = spawn_or_error
@@ -2406,6 +2454,27 @@ local function evaluate_match_point(bots, instance_id)
     local score_one = bots.player_one_score or 0
     local score_two = bots.player_two_score or 0
     local target = bots.points_to_win or Config.DEFAULTS.POINTS_TO_WIN
+    if bots.grace_enabled == false and math.max(score_one, score_two) >= target then
+        local leader_slot = score_one > score_two and 1 or 2
+        if score_one == score_two then return false end
+        bots.match_complete = true
+        bots.final_winner_slot = leader_slot
+        local record = EzMapInstance.get(instance_id)
+        if record then
+            EzMapInstance.events:emit("match_completed", instance_id, {
+                instance_id = instance_id,
+                winner_slot = leader_slot,
+                player_one_score = score_one,
+                player_two_score = score_two,
+                target = target,
+            })
+        end
+        log("MATCH_FLOW: immediate win (grace disabled) instance="
+            .. tostring(instance_id) .. " winner_slot=" .. tostring(leader_slot)
+            .. " score=" .. tostring(score_one) .. "-" .. tostring(score_two)
+            .. " target=" .. tostring(target))
+        return true
+    end
     if score_one == score_two then
         if bots.match_point_active then
             bots.match_point_challenger_slot = nil
@@ -2472,8 +2541,16 @@ end
 local function complete_match_and_return(instance_id)
     local bots = State.instance_bots[instance_id]
     if not bots or bots.returning_players then return end
+    local instance_record = EzMapInstance.get(instance_id)
+    local return_area_id = bots.return_area_id
+        or (instance_record and instance_record.metadata
+            and instance_record.metadata.return_area_id)
+    if type(return_area_id) ~= "string" or return_area_id == "" then
+        log("MATCH_FLOW: cannot return players; instance has no recorded source area="
+            .. tostring(instance_id))
+        return
+    end
     bots.returning_players = true
-    local return_area_id = bots.return_area_id or Config.DEFAULTS.SOURCE_AREA
     local return_position = bots.return_position
     local players = {}
     for player_id, rep in pairs(State.player_representations) do
@@ -4379,123 +4456,145 @@ end
 -- Ref interaction and matchmaking
 -- ---------------------------------------------------------------------------
 
+-- Invoked only after the player selects [VS] Player in the FootBomb
+-- option menu. The waiting host owns the rules; guests cannot change them.
 local function join_waiting_match(player_id, source_area_id, reference)
     local waiting = State.waiting_matches[source_area_id]
     if not waiting then return false end
-    if State.pending_interactions[player_id] then return true end
-    State.pending_interactions[player_id] = true
-    async(function()
-        local npc = reference.npc
-        if waiting.player_id == player_id then
-            await_player_message(
-                player_id,
-                "You're already waiting for an opponent. The next player to talk to me can join.",
-                npc.mug_texture_path, npc.mug_animation_path
-            )
-            State.pending_interactions[player_id] = nil
-            return
-        end
+    local npc = reference.npc
+    if waiting.player_id == player_id then
         await_player_message(
             player_id,
-            "Someone is looking for a FootBomb opponent. Would you like to join?",
+            "You're already waiting for an opponent. Another player can join by choosing [VS] Player.",
             npc.mug_texture_path, npc.mug_animation_path
         )
-        if Net.get_player_area(player_id) ~= source_area_id
-            or State.waiting_matches[source_area_id] ~= waiting then
-            State.pending_interactions[player_id] = nil
-            return
-        end
-        local choice = await_player_quiz(
-            player_id, "Join Match", "No", "Cancel",
+        return true
+    end
+    local choice = await(RefereeMenu.select_join(player_id))
+    if Net.get_player_area(player_id) ~= source_area_id
+        or State.waiting_matches[source_area_id] ~= waiting then
+        return true
+    end
+    if choice ~= 0 then return true end
+
+    State.waiting_matches[source_area_id] = nil
+    local ok, err = launch_player_match(waiting, player_id)
+    if not ok then
+        await_player_message(
+            player_id, "We couldn't start the match: " .. tostring(err),
             npc.mug_texture_path, npc.mug_animation_path
         )
-        if choice == 0 and State.waiting_matches[source_area_id] == waiting then
-            State.waiting_matches[source_area_id] = nil
-            local ok, err = launch_player_match(waiting, player_id)
-            if not ok then
-                await_player_message(
-                    player_id, "We couldn't start the match: " .. tostring(err),
-                    npc.mug_texture_path, npc.mug_animation_path
-                )
-                if player_is_available(waiting.player_id) then
-                    State.waiting_matches[source_area_id] = waiting
-                end
-            end
-        else
-            await_player_message(
-                player_id,
-                "No problem. The match is still waiting for an opponent.",
-                npc.mug_texture_path, npc.mug_animation_path
-            )
+        if player_is_available(waiting.player_id)
+            and not State.waiting_matches[source_area_id] then
+            State.waiting_matches[source_area_id] = waiting
         end
-        State.pending_interactions[player_id] = nil
-    end)
+    end
     return true
+end
+
+local function referee_interaction_current(player_id, area_id)
+    return player_is_available(player_id)
+        and Net.get_player_area(player_id) == area_id
+end
+
+local function explain_footbomb(player_id, area_id, npc)
+    local messages = {
+        "Welcome to FootBomb! Two Navis take turns as Kicker and Defender.",
+        "Both choose Left, Up, or Right. If the Defender guesses the Kicker's direction, the Defender scores. Otherwise, the Kicker scores.",
+        "The first side to reach the winning score wins. With Grace on, the trailing side gets a final chance; a tie keeps the match going.",
+        "The host chooses the winning score and whether Grace is enabled before the match begins. Have fun!",
+    }
+    for _, message in ipairs(messages) do
+        if not referee_interaction_current(player_id, area_id) then return end
+        -- OptionMenu has already erased its panels and released input focus.
+        -- Wait for the final textbox_response before reopening that menu.
+        await_player_message(player_id, message,
+            npc.mug_texture_path, npc.mug_animation_path)
+    end
 end
 
 local function begin_interaction(player_id, area_id, reference)
     if State.pending_interactions[player_id] then return end
-    log("ASSET_FLOW: source-area interaction observed player=" .. tostring(player_id)
+    log("ASSET_FLOW: referee interaction player=" .. tostring(player_id)
         .. " area=" .. tostring(area_id)
-        .. " expected_source_area=" .. tostring(Config.DEFAULTS.SOURCE_AREA))
-    if area_id == Config.DEFAULTS.SOURCE_AREA then
+        .. " role=" .. tostring(get_area_role(area_id)))
+    if get_area_role(area_id) == "source" then
         provide_source_area_assets(area_id, "begin_interaction")
     end
-    if join_waiting_match(player_id, area_id, reference) then return end
     State.pending_interactions[player_id] = true
     async(function()
         local npc = reference.npc
         local object = reference.object
-        await_player_message(
-            player_id, "Hey! Would you like to play FootBomb?",
-            npc.mug_texture_path, npc.mug_animation_path
-        )
-        if Net.get_player_area(player_id) ~= area_id then
-            State.pending_interactions[player_id] = nil
-            return
+        local function is_current()
+            return referee_interaction_current(player_id, area_id)
         end
-        local choice = await_player_quiz(
-            player_id, "VS [NPC]", "VS Player", "No",
-            npc.mug_texture_path, npc.mug_animation_path
-        )
-        if Net.get_player_area(player_id) ~= area_id then
-            State.pending_interactions[player_id] = nil
-            return
-        end
-        if choice == 0 then
-            await_player_message(
-                player_id, "Let's do it! I'll prepare a private field.",
-                npc.mug_texture_path, npc.mug_animation_path
-            )
-            if Net.get_player_area(player_id) == area_id then
-                launch_npc_match(player_id, area_id, object, npc)
-            end
-        elseif choice == 1 then
-            if State.waiting_matches[area_id] then
-                await_player_message(
-                    player_id,
-                    "Another player is already waiting for an opponent. Please let them finish matchmaking first.",
-                    npc.mug_texture_path, npc.mug_animation_path
-                )
+        while is_current() do
+            -- The menu owns player input until a selection. Each select() call
+            -- removes its sprite panels and releases input before resolving.
+            local choice = await(RefereeMenu.select_mode(player_id))
+            if not is_current() then break end
+            if choice == 0 or choice == 1 then
+                if choice == 1 and State.waiting_matches[area_id] then
+                    join_waiting_match(player_id, area_id, reference)
+                    break
+                end
+                -- Read the referee's authored Tiled default each time so the
+                -- host sees the current configuration when opening setup.
+                local props = object.custom_properties or {}
+                local default_points = math.floor(as_number(
+                    props["Points to Win"], Config.DEFAULTS.POINTS_TO_WIN))
+                if default_points < 1 then
+                    default_points = Config.DEFAULTS.POINTS_TO_WIN
+                end
+                local rules = await(RefereeMenu.configure(player_id, {
+                    points_to_win = default_points,
+                    grace_enabled = Config.DEFAULTS.GRACE_ENABLED,
+                }, is_current))
+                if not is_current() then break end
+                if rules then
+                    log("MATCH_RULES: host=" .. tostring(player_id)
+                        .. " mode=" .. (choice == 0 and "npc" or "player")
+                        .. " points_to_win=" .. tostring(rules.points_to_win)
+                        .. " grace_enabled=" .. tostring(rules.grace_enabled))
+                    if choice == 0 then
+                        await_player_message(
+                            player_id, "Let's do it! I'll prepare a private field.",
+                            npc.mug_texture_path, npc.mug_animation_path
+                        )
+                        if is_current() then
+                            launch_npc_match(player_id, area_id, object, npc, rules)
+                        end
+                    elseif not State.waiting_matches[area_id] then
+                        State.waiting_matches[area_id] = {
+                            player_id = player_id,
+                            source_area_id = area_id,
+                            object = object,
+                            npc = npc,
+                            rules = rules,
+                            created_at = os.time(),
+                        }
+                        await_player_message(
+                            player_id,
+                            "Match ready! Stay here. Another player can join by choosing [VS] Player.",
+                            npc.mug_texture_path, npc.mug_animation_path
+                        )
+                    else
+                        await_player_message(
+                            player_id,
+                            "Another player is already waiting for an opponent.",
+                            npc.mug_texture_path, npc.mug_animation_path
+                        )
+                    end
+                    break
+                end
+                -- Canceled match setup: go back to the four-option menu.
+            elseif choice == 2 then
+                -- Suppress the menu for the entire explanation; the last
+                -- awaited textbox dismissal releases suppression naturally.
+                explain_footbomb(player_id, area_id, npc)
             else
-                State.waiting_matches[area_id] = {
-                    player_id = player_id,
-                    source_area_id = area_id,
-                    object = object,
-                    npc = npc,
-                    created_at = os.time()
-                }
-                await_player_message(
-                    player_id,
-                    "All right! Stay here. The next player who talks to me can join your match.",
-                    npc.mug_texture_path, npc.mug_animation_path
-                )
+                break
             end
-        else
-            await_player_message(
-                player_id, "No problem. Come back when you're ready.",
-                npc.mug_texture_path, npc.mug_animation_path
-            )
         end
         State.pending_interactions[player_id] = nil
     end)
@@ -4503,10 +4602,8 @@ end
 
 function FootBomb.handle_player_join(player_id)
     local area_id = Net.get_player_area(player_id)
-    log("ASSET_FLOW: player_join observed player=" .. tostring(player_id)
-        .. " area=" .. tostring(area_id)
-        .. " expected_source_area=" .. tostring(Config.DEFAULTS.SOURCE_AREA))
-    if area_id == Config.DEFAULTS.SOURCE_AREA then
+    local role = area_observer:observe_player("player_join", player_id, area_id)
+    if role == "source" then
         provide_source_area_assets(area_id, "player_join")
     end
 end
@@ -4525,10 +4622,8 @@ end
 
 function FootBomb.handle_player_transfer(player_id)
     local area_id = Net.get_player_area(player_id)
-    log("ASSET_FLOW: player_transfer observed player=" .. tostring(player_id)
-        .. " area=" .. tostring(area_id)
-        .. " expected_source_area=" .. tostring(Config.DEFAULTS.SOURCE_AREA))
-    if area_id == Config.DEFAULTS.SOURCE_AREA then
+    local role = area_observer:observe_player("player_transfer", player_id, area_id)
+    if role == "source" then
         provide_source_area_assets(area_id, "player_transfer")
     end
     local record = EzMapInstance.get_for_player(player_id)
@@ -4553,6 +4648,7 @@ function FootBomb.handle_player_transfer(player_id)
 end
 
 function FootBomb.handle_player_disconnect(player_id)
+    area_observer:forget_player(player_id)
     State.pending_interactions[player_id] = nil
     for area_id, waiting in pairs(State.waiting_matches) do
         if waiting.player_id == player_id then

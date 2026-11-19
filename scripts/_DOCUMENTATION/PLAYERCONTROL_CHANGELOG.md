@@ -1,6 +1,6 @@
 # 🧩 PlayerControl — Documentation refresh and source notes (2026-11-11)
 
-[🏠 Documentation home](index.md) · [🎮 API](player-control/README.md) · [🛠 Migration audit](player-control/MIGRATION_AUDIT.md)
+[🏠 Documentation home](index.md) · [🎮 API](player-interface/history/control/README.md) · [🛠 Migration audit](player-interface/history/control/MIGRATION_AUDIT.md)
 
 ## Scope
 
@@ -34,4 +34,4 @@ Two additional authored READMEs were centralized in the documentation set: `net-
 
 ## Follow-up — Direct PlayerControl migration
 
-The standalone imperative capture adapter is removed from the deployed Lua tree. All first-party callers from `scripts(2).zip` now import PlayerControl directly. MenuAPI and the Liberation interaction menu use parent/child managed sessions, `ui-suppression.lua` is canonical under `player-control/resources/`, and the root animation-points test file forwards to its `scripts/tests` implementation. Historical descriptions above may refer to earlier architecture. See [current migration audit](player-control/MIGRATION_AUDIT.md).
+The standalone imperative capture adapter is removed from the deployed Lua tree. All first-party callers from `scripts(2).zip` now import PlayerControl directly. MenuAPI and the Liberation interaction menu use parent/child managed sessions, `ui-suppression.lua` is canonical under `player-control/resources/`, and the root animation-points test file forwards to its `scripts/tests` implementation. Historical descriptions above may refer to earlier architecture. See [current migration audit](player-interface/history/control/MIGRATION_AUDIT.md).

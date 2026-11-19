@@ -1,3 +1,5 @@
+> 🗃️ **Prior snapshot / historical context.** For the current runtime folder layout and module paths, use the [PlayerInterface migration guide](player-interface/MIGRATION.md) and [source inventory](SOURCE_INVENTORY.md).
+
 # 📂 README centralization status
 
 [🏠 Documentation home](index.md)
@@ -11,7 +13,7 @@ The current server ZIP still contains **26 authored Markdown/text guide files ou
 | `scripts/animation-engine/README.md` | [`_DOCUMENTATION/animation-engine/README.md`](animation-engine/README.md) |
 | `scripts/avatar_utils/lua_yes_parser/README.md` | [`_DOCUMENTATION/avatar_utils/lua_yes_parser/README.md`](avatar_utils/lua_yes_parser/README.md) |
 | `scripts/avatar_utils/lua_yes_parser/spec/README.md` | [`_DOCUMENTATION/avatar_utils/lua_yes_parser/spec/README.md`](avatar_utils/lua_yes_parser/spec/README.md) |
-| `scripts/camera/README.md` | [`_DOCUMENTATION/camera/README.md`](camera/README.md) |
+| `scripts/camera/README.md` | [`_DOCUMENTATION/camera/README.md`](player-interface/history/camera/README.md) |
 | `scripts/displayer/readme.md` | [`_DOCUMENTATION/displayer/readme.md`](displayer/readme.md) |
 | `scripts/ezlibs-custom/endless-runner/README.md` | [`_DOCUMENTATION/ezlibs-custom/endless-runner/README.md`](ezlibs-custom/endless-runner/README.md) |
 | `scripts/ezlibs-custom/footbomb/README.md` | [`_DOCUMENTATION/ezlibs-custom/footbomb/README.md`](ezlibs-custom/footbomb/README.md) |
@@ -23,7 +25,7 @@ The current server ZIP still contains **26 authored Markdown/text guide files ou
 | `scripts/ezlibs-scripts/ezlibs-tiled-reference.md` | [`_DOCUMENTATION/ezlibs-scripts/ezlibs-tiled-reference.md`](ezlibs-scripts/ezlibs-tiled-reference.md) |
 | `scripts/ezlibs-scripts/readme.md` | [`_DOCUMENTATION/ezlibs-scripts/readme.md`](ezlibs-scripts/readme.md) |
 | `scripts/ezlibs-scripts/utils/README.md` | [`_DOCUMENTATION/ezlibs-scripts/utils/README.md`](ezlibs-scripts/utils/README.md) |
-| `scripts/input-controller/README.md` | [`_DOCUMENTATION/input-controller/README.md`](input-controller/README.md) |
+| `scripts/input-controller/README.md` | [`_DOCUMENTATION/input-controller/README.md`](player-interface/history/input/README.md) |
 | `scripts/libs/stardust/README.md` | [`_DOCUMENTATION/libs/stardust/README.md`](libs/stardust/README.md) |
 | `scripts/net-game-tourney/readme.md` | [`_DOCUMENTATION/net-game-tourney/readme.md`](net-game-tourney/readme.md) |
 | `scripts/net-games/UI-SUPPRESSION.md` | [`_DOCUMENTATION/net-games/UI-SUPPRESSION.md`](net-games/UI-SUPPRESSION.md) |

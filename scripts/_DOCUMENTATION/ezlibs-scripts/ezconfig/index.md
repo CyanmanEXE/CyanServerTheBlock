@@ -1,46 +1,21 @@
-# 📄 `ezconfig.lua` — Current Lua reference
+# 📁 `ezlibs-scripts/ezconfig`
 
-[🏠 Documentation home](../../index.md) · [⬆ Folder index](../index.md)
+[🏠 Documentation home](../../index.md) · [⬆ Parent folder](../index.md)
 
-> **Source:** [`scripts/ezlibs-scripts/ezconfig.lua`](../../../ezlibs-scripts/ezconfig.lua)  
-> **Source lines:** 8  
-> **SHA-256 (UTF-8):** `59732400640f1c426961c553e3bfacebfd65fd321b4af149d36fe0805cdae1c1`  
-> **Named/assigned functions detected:** 0  
-> **Table initializers detected:** 0
+## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../logger/README.md) for logging semantics.
+## 📂 Child references
 
-## 🧭 Contents
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Event hooks](#event-hooks)
-- [Functions](#functions)
-- [Tables](#tables)
-- [Net API calls](#net-api-calls)
+| Folder / Lua script | Reference |
+|---|---|
+| — | No child folders |
 
-## Overview
+## 📚 Guides and additional material
 
-Current source inventory for `scripts/ezlibs-scripts/ezconfig.lua` in the shared-logger migration.
+| Document | Description |
+|---|---|
+| — | No separate guides |
 
-## Dependencies
-
-| Line | `require` module |
-|---:|---|
-| 1 | `scripts/logger/logger` |
-| 4 | `ezlibs-config` |
-
-## Event hooks
-
-No literal `:on` event registration detected by the simple source pattern.
-
-## Functions
-
-No named function declarations matched. Anonymous callbacks may exist.
-
-## Tables
-
-No simple `name = {` table initializer matched.
-
-## Net API calls
-
-No direct `Net.method(...)` call expression matched.
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

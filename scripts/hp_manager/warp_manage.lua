@@ -5,7 +5,7 @@
 ]]
 
 local WarpManage = {}
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 local log = require("scripts/logger/logger").register("hp_manager"):register_subsystem("warp")
 local warp_contexts = {}
 

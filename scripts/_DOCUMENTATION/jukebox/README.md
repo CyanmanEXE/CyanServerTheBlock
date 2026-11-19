@@ -1,6 +1,6 @@
 # 🎵 Jukebox — Standalone and HP desktop usage
 
-[🏠 Documentation home](../index.md) · [📚 Module index](index.md) · [🎮 PlayerControl API](../player-control/README.md)
+[🏠 Documentation home](../index.md) · [📚 Module index](index.md) · [🎮 PlayerControl API](../player-interface/history/control/README.md)
 
 ## 🧭 Contents
 - [Purpose](#purpose)

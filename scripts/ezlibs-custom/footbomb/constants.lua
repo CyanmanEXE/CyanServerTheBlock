@@ -14,8 +14,12 @@ local constants = {
     },
 
     DEFAULTS = {
-        SOURCE_AREA = "footbomb",
+        -- Default match template, NOT a referee/source/lobby area ID.
+        -- The actual source area is discovered from Tiled referee objects.
+        INSTANCE_MAP = "footbomb",
         POINTS_TO_WIN = 10,
+        -- Preserve the current final-chance rule unless the host turns it off.
+        GRACE_ENABLED = true,
         ASSET_NAME = "ref-prog",
         MUGSHOT_NAME = "ref-prog-mug",
     },

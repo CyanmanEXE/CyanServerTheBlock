@@ -1,4 +1,4 @@
-> **2026-11-11 PlayerControl overlay:** This file is the original snapshot report, **not** a regenerated report for the overlaid `internal_test_server(4).zip`. For patched modules and remaining legacy lock callers see [change digest](PLAYERCONTROL_CHANGELOG.md), [current API](player-control/README.md), and [migration inventory](player-control/MIGRATION_AUDIT.md).
+> **2026-11-11 PlayerControl overlay:** This file is the original snapshot report, **not** a regenerated report for the overlaid `internal_test_server(4).zip`. For patched modules and remaining legacy lock callers see [change digest](PLAYERCONTROL_CHANGELOG.md), [current API](player-interface/history/control/README.md), and [migration inventory](player-interface/history/control/MIGRATION_AUDIT.md).
 
 # 🧭 Internal Test Server — Documentation Snapshot
 
@@ -116,7 +116,7 @@
 | `scripts/ezlibs-scripts/eztriggers.lua` | undocumented | 370 |
 | `scripts/ezlibs-scripts/ezwarps/main.lua` | 339 | 347 |
 | `scripts/ezlibs-scripts/generate-ezlibs-tiled.lua` | 2023 | 2309 |
-| `scripts/input-controller/input-controller.lua` | 660 | 672 |
+| `scripts/player-interface/input/input-controller.lua` | 660 | 672 |
 | `scripts/libs/encounters.lua` | undocumented | 143 |
 | `scripts/utils/async.lua` | 171 | 302 |
 

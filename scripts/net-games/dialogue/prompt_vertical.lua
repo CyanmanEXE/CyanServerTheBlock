@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 -- scripts/net-games/dialogue/prompt_vertical.lua
 -- Vertical menu prompt helper for net-games Dialogue (adapted to new displayer)
 -- NOTE: This version preserves the original logic but marks areas where the new

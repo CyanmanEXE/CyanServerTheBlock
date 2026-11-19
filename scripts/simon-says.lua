@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 --[[
 * ---------------------------------------------------------- *
              CyberSimon Says (minigame) by Indiana

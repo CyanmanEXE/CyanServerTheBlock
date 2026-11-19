@@ -1,27 +1,30 @@
-# 🖥️ HP Manager — Documentation index
+# 📁 `hp_manager`
 
-[🏠 Documentation home](../index.md)
+[🏠 Documentation home](../index.md) · [⬆ Parent folder](../index.md)
 
-| Reference | Purpose |
+## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
+
+## 📂 Child references
+
+| Folder / Lua script | Reference |
 |---|---|
-| [README.md](README.md) | Guide: desktop + editors |
-| [DIAGNOSTIC_READBACK.md](DIAGNOSTIC_READBACK.md) | Save/write/readback and foreground debugging guide |
-| [INPUT_HANDOFF_FIX.md](INPUT_HANDOFF_FIX.md) | Post-save input rearming, log evidence, and regression test |
-| [index.md](main/index.md) | Desktop main.lua reference |
-| [index.md](background_manage/index.md) | Background editor |
-| [index.md](realtime_manage/index.md) | Real Time settings editor |
-| [index.md](warp_manage/index.md) | Warp native board editor |
-| [index.md](constants/constants/index.md) | Constants and paths |
-| [index.md](extensions/extensions/index.md) | Extensions |
+| `background_manage` | [Open index](background_manage/index.md) |
+| `constants` | [Open index](constants/index.md) |
+| `extensions` | [Open index](extensions/index.md) |
+| `main` | [Open index](main/index.md) |
+| `realtime_manage` | [Open index](realtime_manage/index.md) |
+| `warp_manage` | [Open index](warp_manage/index.md) |
 
-## November 2026 reliability notes
+## 📚 Guides and additional material
 
-- HP Manager's standalone script entry point is authoritative; a redundant bootstrap import was removed after logs showed the listener registering twice.
-- The desktop ignores re-entrant object interactions while a desktop or child session is active.
-- Background Manager keeps its background-name label visible on both the chooser and settings screen.
-- Background and Real Time editors are single-flight for save prompts and reject stale/duplicate responses.
-- Child modules expose abort cleanup when a parent catches a failed open; UI or persistence failures should not leave input capture stuck.
-- Real Time editor offsets are now restricted to **−840 to +840 minutes**, consistent with the runtime validation.
-- [Related Nebulous Liberations asset migration and log findings](../ezlibs-custom/nebulous-liberations/ASSET_PATHS.md).
+| Document | Description |
+|---|---|
+| [`BACKGROUND_TIMEZONE_MAP_FIX.md`](BACKGROUND_TIMEZONE_MAP_FIX.md) | Authored reference (check current Lua module index for source-verified APIs) |
+| [`DIAGNOSTIC_READBACK.md`](DIAGNOSTIC_READBACK.md) | Authored reference (check current Lua module index for source-verified APIs) |
+| [`INPUT_HANDOFF_FIX.md`](INPUT_HANDOFF_FIX.md) | Authored reference (check current Lua module index for source-verified APIs) |
+| [`README.md`](README.md) | Authored reference (check current Lua module index for source-verified APIs) |
+| [`SAVE_AND_RETURN_FIX.md`](SAVE_AND_RETURN_FIX.md) | Authored reference (check current Lua module index for source-verified APIs) |
 
-**Save, timezone, foreground and submenu-return repair:** [Regression guide](SAVE_AND_RETURN_FIX.md)
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

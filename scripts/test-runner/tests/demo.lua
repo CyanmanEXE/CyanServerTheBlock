@@ -9,8 +9,8 @@ local games = require("scripts/net-games/main")
 local NetHelpers = require("scripts/net-games/helpers/net-helpers")
 local AnimationEngine = require("scripts/animation-engine/animation-engine")
 local AnimationSequences = require("scripts/animation-engine/animation-sequences")
-local InputSystem = require("scripts/input-controller/main")
-local PlayerControl = require("scripts/player-control/main")   -- per‑player input controllers
+local InputSystem = require("scripts/player-interface/main") -- shared PlayerInterface API (input + control)
+local PlayerControl = InputSystem -- same interface; no second require   -- per‑player input controllers
 
 NetHelpers.patch_net()
 

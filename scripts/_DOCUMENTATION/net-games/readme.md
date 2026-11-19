@@ -93,7 +93,7 @@ These are names observed in the source, grouped by the feature that uses them. T
 ### External dependencies
 
 - `scripts/displayer/displayer`: glyph, text, textbox and timer-display rendering.
-- `scripts/input-controller/main` and `scripts/input/input`: input handling.
+- `scripts/player-interface/main` and `scripts/input/input`: input handling.
 - `scripts/animation-engine/animation-engine` and `animation-sequences`: UI/layout animation.
 - `scripts/boom/main`: sprite/resource helpers used by layouts and effects.
 - `scripts/libs/direction`: direction utilities used by NPC scripts.

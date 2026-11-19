@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 -- ezrushroads.lua
 -- Rush Roads minigame integrated with ezlibs
 -- Uses eztriggers for tile detection and ezmemory for persistence

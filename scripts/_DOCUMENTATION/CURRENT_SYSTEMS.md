@@ -1,4 +1,8 @@
-> **2026-11-11 — Current PlayerControl migration:** New scoped PlayerControl now handles HP desktop/Background/Real Time/Warp/Jukebox sessions and the free camera has an owned capture lease. This is a first-stage migration; other direct engine-lock and scripted-camera callers remain. Read the [current PlayerControl API](player-control/README.md), [migration inventory](player-control/MIGRATION_AUDIT.md), and [Tiled setup](areas/HP_MANAGER_TILED.md). The remainder of this guide originates from an earlier project snapshot.
+> 🗃️ **Prior snapshot / historical context.** For the current runtime folder layout and module paths, use the [PlayerInterface migration guide](player-interface/MIGRATION.md) and [source inventory](SOURCE_INVENTORY.md).
+
+> **2026-11-11 — Current PlayerControl migration:** New scoped PlayerControl now handles HP desktop/Background/Real Time/Warp/Jukebox sessions and the free camera has an owned capture lease. This is a first-stage migration; other direct engine-lock and scripted-camera callers remain. Read the [current PlayerControl API](player-interface/history/control/README.md), [migration inventory](player-interface/history/control/MIGRATION_AUDIT.md), and [Tiled setup](areas/HP_MANAGER_TILED.md). The remainder of this guide originates from an earlier project snapshot.
+
+> 📡 **Verified source update — 2026-11-19:** [📊 Source-verified API inventory](SOURCE_INVENTORY.md) · [🗺️ Current Tiled objects](areas/TILED_OBJECT_REFERENCE.md) · [🎮 Shared PlayerManager](player-interface/history/manager/README.md). The referenced source-generated indexes reflect the newly uploaded code; parts of this earlier authored narrative may describe prior versions and should be read alongside the current references.
 
 # 🧭 Current Systems Guide — Internal Test Server
 
@@ -75,7 +79,7 @@ An explicitly configured `Battle Scale`, a non-1 scale, or scope `All` may repla
 
 ## 🎮 Input-controller ownership
 
-[`input-controller/input-controller.lua`](input-controller/input-controller/index.md) has exclusive logical ownership for interactive control. It continues collecting raw input, but when an owner is set, edge polling requires that owner. The source provides these operations:
+[`input-controller/input-controller.lua`](player-interface/input/input-controller/index.md) has exclusive logical ownership for interactive control. It continues collecting raw input, but when an owner is set, edge polling requires that owner. The source provides these operations:
 
 | API | Declared arguments | Source behavior |
 |---|---|---|
@@ -97,5 +101,5 @@ The uploaded [`encounters/DEBUGLIB.lua`](encounters/DEBUGLIB/index.md) includes 
 - [🌌 Nebulous Liberations module directory](ezlibs-custom/nebulous-liberations/index.md)
 - [⚔️ All example encounters](encounters/index.md)
 - [🧠 `ezencounters` directory](ezlibs-scripts/ezencounters/index.md)
-- [🧩 Input Controller directory](input-controller/index.md)
+- [🧩 Input Controller directory](player-interface/history/input/index.md)
 - [📋 Change and coverage report](SNAPSHOT_REPORT.md)

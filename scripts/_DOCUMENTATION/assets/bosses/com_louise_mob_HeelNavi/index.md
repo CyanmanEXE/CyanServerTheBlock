@@ -1,30 +1,24 @@
-# 📁 assets/bosses/com_louise_mob_HeelNavi
+# 📁 `assets/bosses/com_louise_mob_HeelNavi`
 
 [🏠 Documentation home](../../../index.md) · [⬆ Parent folder](../index.md)
 
 ## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-- [📚 Collection contents](#collection-contents)
-- [🔎 Module API overview](#module-api-overview)
-- [📊 Collection summary](#collection-summary)
+## 📂 Child references
 
-## 📚 Collection contents
+| Folder / Lua script | Reference |
+|---|---|
+| `allies` | [Open index](allies/index.md) |
+| `entry` | [Open index](entry/index.md) |
+| `HeelNavi` | [Open index](HeelNavi/index.md) |
+| `shared` | [Open index](shared/index.md) |
 
-| Type | Entry | Lua files | Functions | Tables | Source lines | Documentation |
-|---|---|---|---|---|---|---|
-| 📂 Folder | `HeelNavi/` | 1 | 1 | 1 | — | [Open folder index](HeelNavi/index.md) |
-| 📂 Folder | `allies/` | 14 | 110 | 24 | — | [Open folder index](allies/index.md) |
-| 📂 Folder | `shared/` | 7 | 56 | 24 | — | [Open folder index](shared/index.md) |
-| 📄 Script | `entry.lua` | 1 | 5 | 0 | 42 | [Open script reference](entry/index.md) |
+## 📚 Guides and additional material
 
-## 🔎 Module API overview
+| Document | Description |
+|---|---|
+| — | No separate guides |
 
-Named, qualified functions detected in direct files in this folder. Check each linked script reference for **all local and assigned functions**, parameters, initializer tables, and line numbers. A qualified name alone does not establish external accessibility.
-
-*No qualified function declarations detected in directly contained files.*
-
-## 📊 Collection summary
-
-This folder subtree contains **23 Lua source files**, **172 named/assigned function detections**, and **49 table initializer detections**.
-
-Counts represent static matching of archived code and may omit anonymous closures or dynamic table construction.
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

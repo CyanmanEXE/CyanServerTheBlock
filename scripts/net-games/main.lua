@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 --[[
 * ---------------------------------------------------------- *
            Net Games (framework) - Version 0.08
@@ -12,7 +12,7 @@ local PlayerControl = require("scripts/player-control/main")
 local Displayer = require("scripts/displayer/displayer")
 local AnimationEngine = require("scripts/animation-engine/animation-engine")
 local boom = require("scripts/boom/main")
-local InputSystem = require("scripts/input-controller/main")
+local InputSystem = PlayerControl -- shared PlayerInterface API (input + control)
 
 -- Font assets are provisioned by scripts/displayer/font-system.lua.
 -- Keep this single source of truth instead of a duplicate preload list.

@@ -1,5 +1,7 @@
 # Tiled Reference
 
+> 📡 **Verified source update — 2026-11-19:** [🗺️ Current Tiled class catalog](../areas/TILED_OBJECT_REFERENCE.md) · [⚔️ Current Liberation setup](../areas/LIBERATION_TILED_SETUP.md). The referenced source-generated indexes reflect the newly uploaded code; parts of this earlier authored narrative may describe prior versions and should be read alongside the current references.
+
 Auto-generated from `generate-ezlibs-tiled.lua`. Do not edit by hand.
 
 ## Enums

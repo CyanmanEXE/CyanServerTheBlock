@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 local logger = require('scripts/logger/logger').register('ezcheckpoints')
 local ezmemory = require('scripts/ezlibs-scripts/ezmemory')
 local helpers = require('scripts/ezlibs-scripts/helpers')

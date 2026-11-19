@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 -- player_session.lua
 local SharedLogger = require("scripts/logger/logger")
 local log = SharedLogger.register("nebulous-liberations"):register_subsystem("player-session")

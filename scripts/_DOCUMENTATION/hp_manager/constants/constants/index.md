@@ -1,15 +1,21 @@
-# `constants.lua` — Source reference
+# 📁 `hp_manager/constants/constants`
 
-[Documentation home](../../../index.md) · [HP Manager guide](../../README.md)
+[🏠 Documentation home](../../../index.md) · [⬆ Parent folder](../index.md)
 
-Source: [`scripts/hp_manager/constants/constants.lua`](../../../../hp_manager/constants/constants.lua)
+## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-Source SHA-256: `4d32dfb88401c03774c85cfaee5e2b1712574fe10b9c3459d57b23b101b668c9`
+## 📂 Child references
 
-## Public functions
+| Folder / Lua script | Reference |
+|---|---|
+| — | No child folders |
 
-- `file_exists(path)`
+## 📚 Guides and additional material
 
-## Source
+| Document | Description |
+|---|---|
+| — | No separate guides |
 
-This file supplies the existing background file paths and optional extension paths. The complete Lua implementation is linked above.
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

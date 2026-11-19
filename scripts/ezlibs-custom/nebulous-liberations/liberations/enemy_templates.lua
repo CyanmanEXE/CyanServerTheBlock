@@ -145,17 +145,47 @@ EnemyTemplates.metatable = {
     take_turn = function(self)
         -- Use the AI type to determine behaviour
         if self.ai_type == "simple_charge" then
-            return EnemyTemplates.ai.simple_charge(self)
+            require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+return EnemyTemplates.ai.simple_charge(self)
         elseif self.ai_type == "shademan_ambush" then
-            return EnemyTemplates.ai.shademan_ambush(self)
+            require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+return EnemyTemplates.ai.shademan_ambush(self)
         elseif self.ai_type == "bladia_strike" then
-            return EnemyTemplates.ai.bladia_strike(self)
+            require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+return EnemyTemplates.ai.bladia_strike(self)
         elseif self.ai_type == "ranged" then
-            return EnemyTemplates.ai.ranged(self)
+            require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+return EnemyTemplates.ai.ranged(self)
+        elseif self.ai_type == "roll_heart_whip" then
+            require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+return EnemyTemplates.ai.roll_heart_whip(self)
         elseif self.ai_type == "patterned_attack" then
-            return EnemyTemplates.ai.patterned_attack(self)
+            require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+return EnemyTemplates.ai.patterned_attack(self)
         elseif self.ai_type == "shockwave_line" then
-            return EnemyTemplates.ai.shockwave_line(self)
+            require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+return EnemyTemplates.ai.shockwave_line(self)
         else
             return Async.create_promise(function(resolve) resolve() end)
         end
@@ -271,11 +301,23 @@ function EnemyTemplates.ai.ranged(self)
     -- Backwards compatibility for old point objects where AI Type = ranged.
     -- Keep the real OW attack policy of the selected registered template.
     if self.template_name == "ShadeMan" then
-        return EnemyTemplates.ai.shademan_ambush(self)
+        require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+return EnemyTemplates.ai.shademan_ambush(self)
     elseif self.template_name == "Bladia" then
-        return EnemyTemplates.ai.bladia_strike(self)
+        require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+return EnemyTemplates.ai.bladia_strike(self)
     elseif type(self.attack_profile) == "table" then
-        return EnemyTemplates.ai.patterned_attack(self)
+        require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+return EnemyTemplates.ai.patterned_attack(self)
     end
     -- Prog and legacy generic ranged bots remain explicitly non-attacking.
     return Async.create_promise(function(resolve) resolve() end)
@@ -301,5 +343,9 @@ require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/bladia_o
 -- This is the authoritative five-enemy directional OW profile source.
 -- template_debuglib_attackers.lua is legacy and must not overwrite it.
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_directional_attacks")(EnemyTemplates)
+
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
 
 return EnemyTemplates

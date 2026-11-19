@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 local logger = require('scripts/logger/logger').register('ezwarps')
 local json = require('scripts/ezlibs-scripts/json')
 local create_arrow_animation = require('scripts/ezlibs-scripts/ezwarps/arrow_animation_factory')

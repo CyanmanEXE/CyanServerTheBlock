@@ -16,7 +16,7 @@ local Utils = require("scripts/jukebox/utils")
 local NetGames = require("scripts/net-games/main")
 local Emitter = require("scripts/utils/event-emitter")
 local UIData = require("scripts/jukebox/constants/ui-data")
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 local TextAPI = NetGames.Text or require("scripts/displayer/displayer").Text
 
 local Jukebox = Emitter.new()

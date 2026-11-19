@@ -1,27 +1,21 @@
-# 📁 assets/bosses
+# 📁 `assets/bosses`
 
 [🏠 Documentation home](../../index.md) · [⬆ Parent folder](../index.md)
 
 ## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-- [📚 Collection contents](#collection-contents)
-- [🔎 Module API overview](#module-api-overview)
-- [📊 Collection summary](#collection-summary)
+## 📂 Child references
 
-## 📚 Collection contents
+| Folder / Lua script | Reference |
+|---|---|
+| `com_louise_mob_HeelNavi` | [Open index](com_louise_mob_HeelNavi/index.md) |
 
-| Type | Entry | Lua files | Functions | Tables | Source lines | Documentation |
-|---|---|---|---|---|---|---|
-| 📂 Folder | `com_louise_mob_HeelNavi/` | 23 | 172 | 49 | — | [Open folder index](com_louise_mob_HeelNavi/index.md) |
+## 📚 Guides and additional material
 
-## 🔎 Module API overview
+| Document | Description |
+|---|---|
+| — | No separate guides |
 
-Named, qualified functions detected in direct files in this folder. Check each linked script reference for **all local and assigned functions**, parameters, initializer tables, and line numbers. A qualified name alone does not establish external accessibility.
-
-*No qualified function declarations detected in directly contained files.*
-
-## 📊 Collection summary
-
-This folder subtree contains **23 Lua source files**, **172 named/assigned function detections**, and **49 table initializer detections**.
-
-Counts represent static matching of archived code and may omit anonymous closures or dynamic table construction.
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

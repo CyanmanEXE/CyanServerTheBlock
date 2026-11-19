@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 print("[trains] Starting Indy's Trains")
 
 -- VERSION v1.10

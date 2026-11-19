@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 --[[
 endless-runner.lua — Cinematic endless-runner with floors, HP, and combat.
 
@@ -113,7 +113,7 @@ end
 
 local InputAPI
 do
-    local ok, mod = pcall(require, "scripts/input-controller/main")
+    local ok, mod = true, PlayerControl -- already imported shared interface
     if ok and type(mod) == "table" then InputAPI = mod end
 end
 

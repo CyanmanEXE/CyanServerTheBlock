@@ -1,12 +1,24 @@
-# 🎵 Jukebox — Documentation index
+# 📁 `jukebox`
 
-[🏠 Documentation home](../index.md)
+[🏠 Documentation home](../index.md) · [⬆ Parent folder](../index.md)
 
-| Reference | Purpose |
+## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
+
+## 📂 Child references
+
+| Folder / Lua script | Reference |
 |---|---|
-| [README.md](README.md) | Guide: public API and lifecycles |
-| [INITIALIZATION_GUARD.md](INITIALIZATION_GUARD.md) | Duplicate startup analysis and loading guard |
-| [index.md](main/index.md) | Jukebox main.lua source |
-| [index.md](utils/index.md) | Jukebox utils |
-| [index.md](constants/paths/index.md) | Path constants |
-| [index.md](constants/ui-data/index.md) | UI data |
+| `constants` | [Open index](constants/index.md) |
+| `main` | [Open index](main/index.md) |
+| `utils` | [Open index](utils/index.md) |
+
+## 📚 Guides and additional material
+
+| Document | Description |
+|---|---|
+| [`INITIALIZATION_GUARD.md`](INITIALIZATION_GUARD.md) | Authored reference (check current Lua module index for source-verified APIs) |
+| [`README.md`](README.md) | Authored reference (check current Lua module index for source-verified APIs) |
+
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

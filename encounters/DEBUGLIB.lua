@@ -825,5 +825,73 @@ return {
             },
             no_battle_rewards = true,
         },
+        {
+            name = "AutoScale_Yurarion",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            weight = 10,
+            enemies = {
+                { name = "Yurarion", rank = 1 },
+            },
+            obstacles = {},
+            positions = {{0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}},
+            player_positions = {{0, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}},
+            freedom_mission = {
+                enabled = true,
+                player_can_flip = false,
+                turn_count = 3,
+            },
+            no_battle_rewards = true,
+        },
+        {
+            name = "AutoScale_Yurayura",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            weight = 10,
+            enemies = {
+                { name = "Yurayura", rank = 1 },
+            },
+            obstacles = {},
+            positions = {{0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}},
+            player_positions = {{0, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}},
+            freedom_mission = {
+                enabled = true,
+                player_can_flip = false,
+                turn_count = 3,
+            },
+            no_battle_rewards = true,
+        },
+        {
+            name = "AutoScale_KillWeed",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            weight = 10,
+            enemies = {
+                { name = "KillWeed", rank = 1 },
+            },
+            obstacles = {},
+            positions = {{0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}},
+            player_positions = {{0, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}},
+            freedom_mission = {
+                enabled = true,
+                player_can_flip = false,
+                turn_count = 3,
+            },
+            no_battle_rewards = true,
+        },
+        {
+            name = "AutoScale_KillFlower",
+            path = "/server/assets/ezlibs-assets/ezencounters/ezencounters-liberation-debuglib.zip",
+            weight = 10,
+            enemies = {
+                { name = "KillFlower", rank = 1 },
+            },
+            obstacles = {},
+            positions = {{0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}},
+            player_positions = {{0, 0, 0, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}},
+            freedom_mission = {
+                enabled = true,
+                player_can_flip = false,
+                turn_count = 3,
+            },
+            no_battle_rewards = true,
+        },
     },
 }

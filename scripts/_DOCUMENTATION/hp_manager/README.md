@@ -1,6 +1,6 @@
 # 🖥️ HP Manager — Desktop and editors
 
-[🏠 Documentation home](../index.md) · [📚 Module index](index.md) · [🎮 PlayerControl](../player-control/README.md) · [🗺️ Tiled setup](../areas/HP_MANAGER_TILED.md)
+[🏠 Documentation home](../index.md) · [📚 Module index](index.md) · [🎮 PlayerControl](../player-interface/history/control/README.md) · [🗺️ Tiled setup](../areas/HP_MANAGER_TILED.md)
 
 ## 🧭 Contents
 - [Purpose and startup](#purpose-and-startup)
@@ -79,7 +79,7 @@ Cancel first moves selection to Exit unless it is already selected; another Canc
 - `PlayerControl` automatically cleans its stack at `player_disconnect`; the editors also register their own transfer/disconnect hooks to clean up game-specific UI and rollback unsaved edits.
 - Do not add direct `Net.unlock_player_input` inside editors; that bypasses the root/child lease count.
 - `Net.fade_player_camera` is used on the Warp desktop transition; this does **not** imply a global camera ownership lease.
-- One lingering risk is the unconverted legacy systems that call low-level engine locks directly. See [migration audit](../player-control/MIGRATION_AUDIT.md).
+- One lingering risk is the unconverted legacy systems that call low-level engine locks directly. See [migration audit](../player-interface/history/control/MIGRATION_AUDIT.md).
 - See [Tiled object 185 and startup checks](../areas/HP_MANAGER_TILED.md) if the desktop does not appear.
 
 ## Source files

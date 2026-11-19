@@ -1,29 +1,23 @@
-# 📁 assets/bosses/com_louise_mob_HeelNavi/allies
+# 📁 `assets/bosses/com_louise_mob_HeelNavi/allies`
 
 [🏠 Documentation home](../../../../index.md) · [⬆ Parent folder](../index.md)
 
 ## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-- [📚 Collection contents](#collection-contents)
-- [🔎 Module API overview](#module-api-overview)
-- [📊 Collection summary](#collection-summary)
+## 📂 Child references
 
-## 📚 Collection contents
+| Folder / Lua script | Reference |
+|---|---|
+| `Boomer` | [Open index](Boomer/index.md) |
+| `Piranha` | [Open index](Piranha/index.md) |
+| `Volgear` | [Open index](Volgear/index.md) |
 
-| Type | Entry | Lua files | Functions | Tables | Source lines | Documentation |
-|---|---|---|---|---|---|---|
-| 📂 Folder | `Boomer/` | 6 | 32 | 9 | — | [Open folder index](Boomer/index.md) |
-| 📂 Folder | `Piranha/` | 4 | 35 | 9 | — | [Open folder index](Piranha/index.md) |
-| 📂 Folder | `Volgear/` | 4 | 43 | 6 | — | [Open folder index](Volgear/index.md) |
+## 📚 Guides and additional material
 
-## 🔎 Module API overview
+| Document | Description |
+|---|---|
+| — | No separate guides |
 
-Named, qualified functions detected in direct files in this folder. Check each linked script reference for **all local and assigned functions**, parameters, initializer tables, and line numbers. A qualified name alone does not establish external accessibility.
-
-*No qualified function declarations detected in directly contained files.*
-
-## 📊 Collection summary
-
-This folder subtree contains **14 Lua source files**, **110 named/assigned function detections**, and **24 table initializer detections**.
-
-Counts represent static matching of archived code and may omit anonymous closures or dynamic table construction.
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

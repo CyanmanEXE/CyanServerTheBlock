@@ -1,15 +1,21 @@
-# `extensions.lua` — Source reference
+# 📁 `hp_manager/extensions/extensions`
 
-[Documentation home](../../../index.md) · [HP Manager guide](../../README.md)
+[🏠 Documentation home](../../../index.md) · [⬆ Parent folder](../index.md)
 
-Source: [`scripts/hp_manager/extensions/extensions.lua`](../../../../hp_manager/extensions/extensions.lua)
+## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-Source SHA-256: `5c459bc4409aa2d2fc74dd611a0591658ccaee0a1ba20c1451f8a9227f485f84`
+## 📂 Child references
 
-## Public functions
+| Folder / Lua script | Reference |
+|---|---|
+| — | No child folders |
 
-- `file_exists(path)`
+## 📚 Guides and additional material
 
-## Source
+| Document | Description |
+|---|---|
+| — | No separate guides |
 
-This file supplies the existing extension helper declarations. The complete Lua implementation is linked above.
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

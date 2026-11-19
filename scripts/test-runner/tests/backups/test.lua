@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 --[[
 test_Displayer.lua – Comprehensive test script for Displayer API.
 All coordinates are now in 240×160 virtual space.

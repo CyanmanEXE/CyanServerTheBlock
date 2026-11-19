@@ -1,8 +1,22 @@
-# 🎵 Jukebox constants
+# 📁 `jukebox/constants`
 
-[🏠 Documentation home](../../index.md)
+[🏠 Documentation home](../../index.md) · [⬆ Parent folder](../index.md)
 
-| Reference | Description |
+## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
+
+## 📂 Child references
+
+| Folder / Lua script | Reference |
 |---|---|
-| [paths.lua](paths/index.md) | Current source / guide |
-| [ui-data.lua](ui-data/index.md) | Current source / guide |
+| `paths` | [Open index](paths/index.md) |
+| `ui-data` | [Open index](ui-data/index.md) |
+
+## 📚 Guides and additional material
+
+| Document | Description |
+|---|---|
+| — | No separate guides |
+
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

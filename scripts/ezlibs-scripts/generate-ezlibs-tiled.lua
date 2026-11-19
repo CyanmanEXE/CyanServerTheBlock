@@ -133,7 +133,7 @@ local Enums = {
     },
     LiberationAIType = {
         type = "string",
-        values = {"Auto", "simple_charge", "ranged", "shockwave_line", "patterned_attack", "shademan_ambush", "bladia_strike"}
+        values = {"Auto", "simple_charge", "ranged", "shockwave_line", "patterned_attack", "roll_heart_whip", "shademan_ambush", "bladia_strike"}
     },
     LiberationAttackShape = {
         type = "string", values = {"Auto", "line", "arc", "cone", "cross", "diamond"}

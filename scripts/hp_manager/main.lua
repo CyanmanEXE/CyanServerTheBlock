@@ -16,7 +16,7 @@ end
 
 --DEPENDENCES
 local games = require("scripts/net-games/main")
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 local log = require("scripts/logger/logger").register("hp_manager"):register_subsystem("desktop")
 local TextLayout = require("scripts/displayer/text-layout")
 --MANAGERS

@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 local fall_in_animation = {
     --these offsets will modify the warp landing location so that the player can animate from their spawn location nicely
     pre_animation_offsets={

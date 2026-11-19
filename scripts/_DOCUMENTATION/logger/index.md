@@ -1,16 +1,23 @@
-# 🪵 Logger
+# 📁 `logger`
 
-[🏠 Documentation home](../index.md) · [🪵 Programmer guide](README.md) · [🔄 Migration](MIGRATION.md) · [🧪 Validation](TESTING.md)
+[🏠 Documentation home](../index.md) · [⬆ Parent folder](../index.md)
 
 ## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-| Document | Purpose |
+## 📂 Child references
+
+| Folder / Lua script | Reference |
 |---|---|
-| [Programmer guide](README.md) | API, log hierarchy, options, system and subsystem conventions |
-| [Logger migration](MIGRATION.md) | Shared import paths and compatibility adapters |
-| [Tests](TESTING.md) | Regression checks and suggested live-server verification |
-| [Current `logger.lua` reference](logger/index.md) | Source-derived functions and dependencies |
-| [Compatibility `ezlogger.lua`](../ezlibs-scripts/ezlogger/index.md) | Shim to the shared logger, no separate runtime |
-| [Compatibility `persistence/logger.lua`](../persistence/logger/index.md) | Legacy `createLogger` adapter |
+| `logger` | [Open index](logger/index.md) |
 
-All generated logs now go beneath `scripts/_DEBUGGING/` in the root of `scripts/`.
+## 📚 Guides and additional material
+
+| Document | Description |
+|---|---|
+| [`MIGRATION.md`](MIGRATION.md) | Authored reference (check current Lua module index for source-verified APIs) |
+| [`README.md`](README.md) | Authored reference (check current Lua module index for source-verified APIs) |
+| [`TESTING.md`](TESTING.md) | Authored reference (check current Lua module index for source-verified APIs) |
+
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

@@ -1,30 +1,24 @@
-# 📁 assets/bosses/com_louise_mob_HeelNavi/shared/chipattacks
+# 📁 `assets/bosses/com_louise_mob_HeelNavi/shared/chipattacks`
 
 [🏠 Documentation home](../../../../../index.md) · [⬆ Parent folder](../index.md)
 
 ## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-- [📚 Collection contents](#collection-contents)
-- [🔎 Module API overview](#module-api-overview)
-- [📊 Collection summary](#collection-summary)
+## 📂 Child references
 
-## 📚 Collection contents
+| Folder / Lua script | Reference |
+|---|---|
+| `AreaGrab` | [Open index](AreaGrab/index.md) |
+| `Cannonball` | [Open index](Cannonball/index.md) |
+| `HeroSword` | [Open index](HeroSword/index.md) |
+| `Lilbomb` | [Open index](Lilbomb/index.md) |
 
-| Type | Entry | Lua files | Functions | Tables | Source lines | Documentation |
-|---|---|---|---|---|---|---|
-| 📂 Folder | `AreaGrab/` | 1 | 7 | 3 | — | [Open folder index](AreaGrab/index.md) |
-| 📂 Folder | `Cannonball/` | 1 | 9 | 3 | — | [Open folder index](Cannonball/index.md) |
-| 📂 Folder | `HeroSword/` | 1 | 5 | 1 | — | [Open folder index](HeroSword/index.md) |
-| 📂 Folder | `Lilbomb/` | 1 | 9 | 4 | — | [Open folder index](Lilbomb/index.md) |
+## 📚 Guides and additional material
 
-## 🔎 Module API overview
+| Document | Description |
+|---|---|
+| — | No separate guides |
 
-Named, qualified functions detected in direct files in this folder. Check each linked script reference for **all local and assigned functions**, parameters, initializer tables, and line numbers. A qualified name alone does not establish external accessibility.
-
-*No qualified function declarations detected in directly contained files.*
-
-## 📊 Collection summary
-
-This folder subtree contains **4 Lua source files**, **30 named/assigned function detections**, and **11 table initializer detections**.
-
-Counts represent static matching of archived code and may omit anonymous closures or dynamic table construction.
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

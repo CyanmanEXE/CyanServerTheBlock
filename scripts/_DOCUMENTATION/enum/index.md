@@ -1,33 +1,24 @@
-# 📁 enum
+# 📁 `enum`
 
 [🏠 Documentation home](../index.md) · [⬆ Parent folder](../index.md)
 
 ## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-- [📚 Collection contents](#collection-contents)
-- [🔎 Module API overview](#module-api-overview)
-- [📊 Collection summary](#collection-summary)
+## 📂 Child references
 
-## 📚 Collection contents
+| Folder / Lua script | Reference |
+|---|---|
+| `enum` | [Open index](enum/index.md) |
+| `enumset` | [Open index](enumset/index.md) |
+| `main` | [Open index](main/index.md) |
+| `predefined-enums` | [Open index](predefined-enums/index.md) |
 
-| Type | Entry | Lua files | Functions | Tables | Source lines | Documentation |
-|---|---|---|---|---|---|---|
-| 📄 Script | `enum.lua` | 1 | 14 | 14 | 184 | [Open script reference](enum/index.md) |
-| 📄 Script | `enumset.lua` | 1 | 6 | 5 | 72 | [Open script reference](enumset/index.md) |
-| 📄 Script | `main.lua` | 1 | 0 | 0 | 35 | [Open script reference](main/index.md) |
-| 📄 Script | `predefined-enums.lua` | 1 | 0 | 3 | 38 | [Open script reference](predefined-enums/index.md) |
+## 📚 Guides and additional material
 
-## 🔎 Module API overview
+| Document | Description |
+|---|---|
+| — | No separate guides |
 
-Named, qualified functions detected in direct files in this folder. Check each linked script reference for **all local and assigned functions**, parameters, initializer tables, and line numbers. A qualified name alone does not establish external accessibility.
-
-| Module | Qualified function / method | Source line | Reference |
-|---|---|---|---|
-| `enum.lua` | `Enum.new(...)` | 18 | [Details](enum/index.md) |
-| `enumset.lua` | `EnumSet.new(definitions)` | 14 | [Details](enumset/index.md) |
-
-## 📊 Collection summary
-
-This folder subtree contains **4 Lua source files**, **20 named/assigned function detections**, and **22 table initializer detections**.
-
-Counts represent static matching of archived code and may omit anonymous closures or dynamic table construction.
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

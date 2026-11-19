@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 -- scripts/net-games/dialogue/prompt.lua
 -- Hardened YES/NO prompt using the public TextLayout service.
 

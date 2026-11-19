@@ -1,47 +1,21 @@
-# 📄 `logger.lua` — Current Lua reference
+# 📁 `ezlibs-custom/nebulous-liberations/liberations/logger`
 
-[🏠 Documentation home](../../../../index.md) · [⬆ Folder index](../index.md)
+[🏠 Documentation home](../../../../index.md) · [⬆ Parent folder](../index.md)
 
-> **Source:** [`scripts/ezlibs-custom/nebulous-liberations/liberations/logger.lua`](../../../../../ezlibs-custom/nebulous-liberations/liberations/logger.lua)  
-> **Source lines:** 14  
-> **SHA-256 (UTF-8):** `32037103d7e760589b63c3b987e525fb112be0cd802c4f3d50246df2582ca32c`  
-> **Named/assigned functions detected:** 0  
-> **Table initializers detected:** 1
+## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-> **Static reference:** Function names, parameter names, dependencies and call counts below were regenerated from the current Lua. Not all locals are part of the public API. See the [shared logger guide](../../../../logger/README.md) for logging semantics.
+## 📂 Child references
 
-## 🧭 Contents
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Event hooks](#event-hooks)
-- [Functions](#functions)
-- [Tables](#tables)
-- [Net API calls](#net-api-calls)
+| Folder / Lua script | Reference |
+|---|---|
+| — | No child folders |
 
-## Overview
+## 📚 Guides and additional material
 
-Current source inventory for `scripts/ezlibs-custom/nebulous-liberations/liberations/logger.lua` in the shared-logger migration.
+| Document | Description |
+|---|---|
+| — | No separate guides |
 
-## Dependencies
-
-| Line | `require` module |
-|---:|---|
-| 3 | `scripts/logger/logger` |
-
-## Event hooks
-
-No literal `:on` event registration detected by the simple source pattern.
-
-## Functions
-
-No named function declarations matched. Anonymous callbacks may exist.
-
-## Tables
-
-| Source line | Assignment |
-|---:|---|
-| 6 | `Logger` |
-
-## Net API calls
-
-No direct `Net.method(...)` call expression matched.
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

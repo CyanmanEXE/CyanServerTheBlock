@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 -- ezpushback.lua
 -- A Pushback NPC uses the regular eznpcs NPC pipeline, with a moving rectangle
 -- trigger that follows its bot. On collision, a temporary bot uses the player's

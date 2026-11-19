@@ -1,11 +1,11 @@
-> **2026-11-11 — Current PlayerControl integration:** `UISuppression.acquire_input_lock` implements reference-counted *engine default-control suppression*. It does not block `virtual_input`. PlayerControl and the free camera now use these owned handles; legacy direct unlock callers are **not** protected. See [PlayerControl](../player-control/README.md) and [migration inventory](../player-control/MIGRATION_AUDIT.md).
+> **2026-11-11 — Current PlayerControl integration:** `UISuppression.acquire_input_lock` implements reference-counted *engine default-control suppression*. It does not block `virtual_input`. PlayerControl and the free camera now use these owned handles; legacy direct unlock callers are **not** protected. See [PlayerControl](../player-interface/history/control/README.md) and [migration inventory](../player-interface/history/control/MIGRATION_AUDIT.md).
 
 # UI Suppression Manager
 
 > 📡 **Current-source update · 2026-11-11:** This authored guide is retained from the uploaded `internal_test_server(2).zip`. Its existing narrative/examples have **not** been exhaustively rewritten. For refreshed function signatures, parameters, dependencies, table initializers, and source line numbers, see the [regenerated module index](index.md) and [current systems guide](../CURRENT_SYSTEMS.md). If older instructions here conflict with the current Lua implementation, follow the linked source references.
 
 
-**Canonical implementation:** `scripts/player-control/resources/ui-suppression.lua`
+**Canonical implementation:** `scripts/player-interface/resources/ui-suppression.lua`
 
 The original `scripts/net-games/ui-suppression.lua` path now forwards to the canonical module for older external callers.
 

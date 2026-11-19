@@ -7,7 +7,7 @@
 
 local Displayer = require("scripts/displayer/displayer")
 local TextLayout = require("scripts/displayer/text-layout")
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 local Logger = require("scripts/logger/logger")
 local log = Logger.register("nebulous-liberations"):register_subsystem("option-menu")
 

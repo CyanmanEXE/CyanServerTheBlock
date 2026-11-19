@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 -- scripts/events/eznpcs_onceitem.lua
 -- Dialogue Type "onceitem": unique, server-wide rental with renewals
 -- Dialogue Type "oncepass": renter sets/clears a visitor password for the HP checkpoint

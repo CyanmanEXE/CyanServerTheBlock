@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 -- instance.lua
 local SharedLogger = require("scripts/logger/logger")
 local log = SharedLogger.register("nebulous-liberations"):register_subsystem("instance")
@@ -2080,7 +2080,6 @@ function Mission:begin()
     local spawn = self:get_spawn_position()
     local hold_time = .7
     local slide_time = .7
-    local total_camera_time = 0
     local start_health = 0
     local player_ids = {}
     for _, player in ipairs(self.players) do
@@ -2099,23 +2098,47 @@ function Mission:begin()
         self.player_sessions[player.id].max_health = start_health
         self.player_sessions[player.id].health = start_health
         if not debug then
-            PlayerControl.acquire_capture(player.id, "liberation:turn")
-            if self.points_of_interest and #self.points_of_interest > 0 then
-                -- CameraSequence.play returns the full duration of its
-                -- movement/hold sequence. Include it so input is not
-                -- unlocked before the camera has returned to the spawn.
-                total_camera_time = total_camera_time + CameraSequence.play(self, player, spawn)
-            else
-                Net.move_player_camera(player.id, spawn.x, spawn.y, spawn.z, hold_time)
-                total_camera_time = total_camera_time + hold_time
-                for j, point in ipairs(self.points_of_interest) do
-                    Net.slide_player_camera(player.id, point.x, point.y, point.z, slide_time)
-                    Net.move_player_camera(player.id, point.x, point.y, point.z, hold_time)
-                    total_camera_time = total_camera_time + slide_time + hold_time
+            -- A camera intro is a separate capture owner from the turn. An
+            -- active turn/modal operation must not be unlocked by its timer.
+            -- Also release any player-operated camera left over from the
+            -- lobby before the mission's scripted camera takes control.
+            PlayerControl.deactivate_free_camera(player.id, true)
+            PlayerControl.acquire_capture(player.id, "liberation:intro")
+            local intro_seconds = 0
+            local camera_ok, camera_error = pcall(function()
+                if self.points_of_interest and #self.points_of_interest > 0 then
+                    intro_seconds = CameraSequence.play(self, player, spawn)
+                else
+                    Net.move_player_camera(player.id, spawn.x, spawn.y, spawn.z, hold_time)
+                    intro_seconds = hold_time
                 end
-                Net.slide_player_camera(player.id, spawn.x, spawn.y, spawn.z, slide_time)
-                Net.unlock_player_camera(player.id)
-                total_camera_time = total_camera_time + slide_time
+            end)
+            if not camera_ok then
+                log:error_data("Liberation camera intro failed", {
+                    player_id = player.id, instance_area_id = self.area_id,
+                    error = tostring(camera_error),
+                })
+            end
+            -- Each player gets their own timer, rather than the sum of every
+            -- party member's camera duration. These callbacks never release
+            -- liberation:turn, and never unlock the camera in another area.
+            local intro_player_id = player.id
+            local function finish_intro()
+                if Net.is_player(intro_player_id) and
+                    Net.get_player_area(intro_player_id) == self.area_id then
+                    local unlocked, unlock_error = pcall(Net.unlock_player_camera, intro_player_id)
+                    if not unlocked then
+                        log:warn_data("Liberation camera unlock failed", {
+                            player_id = intro_player_id, error = tostring(unlock_error),
+                        })
+                    end
+                end
+                PlayerControl.release_capture(intro_player_id, "liberation:intro")
+            end
+            if not camera_ok or intro_seconds <= 0 then
+                finish_intro()
+            else
+                Async.sleep(intro_seconds).and_then(finish_intro)
             end
         end
     end
@@ -2145,13 +2168,6 @@ function Mission:begin()
         max_order_points = self.MAX_ORDER_POINTS,
     })
 
-    if not debug then
-        Async.sleep(total_camera_time).and_then(function()
-            for _, player in ipairs(self.players) do
-                PlayerControl.release_capture(player.id, "liberation:turn")
-            end
-        end)
-    end
 end
 
 function Mission:on_tick(elapsed)

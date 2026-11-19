@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 -- ezbuttons.lua
 -- Creates trigger-based buttons (non-solid NPCs).
 -- Logical relationships are defined with groups and button/group effects.

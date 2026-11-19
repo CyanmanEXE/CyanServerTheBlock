@@ -152,4 +152,4 @@ HP Manager retains the previous console message prefixes (such as `[HP_Manager]`
 
 ## 🎮 PlayerControl subsystem logs
 
-`PlayerControl` registers the `player_control` system with the shared logger. Its `_INPUT.log`, `_CAPTURE.log`, `_CAMERA.log`, and `_HANDOFF.log` are mirrored into `_FULL-log.log`. These are event-driven lifetime transitions, not per-frame input spam. See [PlayerControl programmer guide](../player-control/README.md).
+`PlayerControl` registers the `player_control` system with the shared logger. Its `_INPUT.log`, `_CAPTURE.log`, `_CAMERA.log`, and `_HANDOFF.log` are mirrored into `_FULL-log.log`. These are event-driven lifetime transitions, not per-frame input spam. See [PlayerControl programmer guide](../player-interface/history/control/README.md).

@@ -1,5 +1,7 @@
 # ⚔️ Encounter Lua — Source Field Inventory
 
+> 📡 **Verified source update — 2026-11-19:** [📊 Updated source inventory](SOURCE_INVENTORY.md) · [🗺️ Current Tiled configuration](areas/TILED_OBJECT_REFERENCE.md). The referenced source-generated indexes reflect the newly uploaded code; parts of this earlier authored narrative may describe prior versions and should be read alongside the current references.
+
 [🏠 Documentation home](index.md) · [⚔️ Browse encounter files](encounters/index.md)
 
 ## About this inventory

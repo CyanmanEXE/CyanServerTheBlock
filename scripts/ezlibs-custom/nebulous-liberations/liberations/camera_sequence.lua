@@ -28,7 +28,8 @@ function CameraSequence.play(instance, player, start_point)
 
     -- Return to start
     Net.slide_player_camera(player.id, start_point.x, start_point.y, start_point.z, slide_time)
-    Net.unlock_player_camera(player.id)
+    -- Do NOT unlock here: this slide is asynchronous in the client.
+    -- Mission:begin unlocks only after this player's total camera duration.
     total_time = total_time + slide_time
 
     return total_time

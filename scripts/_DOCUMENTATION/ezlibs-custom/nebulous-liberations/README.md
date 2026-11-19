@@ -1,5 +1,7 @@
 # 🌌 Nebulous Liberations — Complete Documentation
 
+> 📡 **Verified source update — 2026-11-19:** [🔍 November 19 Liberation input-lock investigation](STARTUP_INPUT_LOCK.md) · [⚔️ Current Tiled setup](../../areas/LIBERATION_TILED_SETUP.md) · [📄 Current module APIs](index.md). The referenced source-generated indexes reflect the newly uploaded code; parts of this earlier authored narrative may describe prior versions and should be read alongside the current references.
+
 > 📡 **Current-source update · 2026-11-11:** This authored guide is retained from the uploaded `internal_test_server(2).zip`. Its existing narrative/examples have **not** been exhaustively rewritten. For refreshed function signatures, parameters, dependencies, table initializers, and source line numbers, see the [regenerated module index](index.md) and [current systems guide](../../CURRENT_SYSTEMS.md). If older instructions here conflict with the current Lua implementation, follow the linked source references.
 > **Changes in this snapshot:** Enemy settings now resolve via `liberations/enemy_config.lua`; battle presentation scale is handled by `liberations/battle_scale.lua`; Mettaur and enemy template modules are present. Battle-result rewards are intentionally not registered with `ezencounters`.
 

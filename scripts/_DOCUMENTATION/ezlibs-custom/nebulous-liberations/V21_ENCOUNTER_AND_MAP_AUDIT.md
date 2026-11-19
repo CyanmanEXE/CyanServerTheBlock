@@ -1,5 +1,7 @@
 # ⚔️ Nebulous Liberations — V2.1 encounter and map audit
 
+> 📡 **Verified source update — 2026-11-19:** [⚔️ Current Tiled setup](../../areas/LIBERATION_TILED_SETUP.md) · [🗺️ Full current object catalog](../../areas/TILED_OBJECT_REFERENCE.md). The referenced source-generated indexes reflect the newly uploaded code; parts of this earlier authored narrative may describe prior versions and should be read alongside the current references.
+
 [🏠 Documentation home](../../index.md) · [⬆ Nebulous Liberations index](index.md)
 
 ## Contents

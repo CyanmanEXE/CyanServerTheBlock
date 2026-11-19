@@ -18,7 +18,7 @@ The external `LICENSE.md` files remain next to their corresponding third-party s
 | `scripts/animation-engine/README.md` | [README.md](animation-engine/README.md) |
 | `scripts/avatar_utils/lua_yes_parser/README.md` | [README.md](avatar_utils/lua_yes_parser/README.md) |
 | `scripts/avatar_utils/lua_yes_parser/spec/README.md` | [README.md](avatar_utils/lua_yes_parser/spec/README.md) |
-| `scripts/camera/README.md` | [README.md](camera/README.md) |
+| `scripts/camera/README.md` | [README.md](player-interface/history/camera/README.md) |
 | `scripts/displayer/readme.md` | [readme.md](displayer/readme.md) |
 | `scripts/ezlibs-custom/footbomb/README.md` | [README.md](ezlibs-custom/footbomb/README.md) |
 | `scripts/ezlibs-custom/nebulous-liberations/README.md` | [README.md](ezlibs-custom/nebulous-liberations/README.md) |
@@ -30,7 +30,7 @@ The external `LICENSE.md` files remain next to their corresponding third-party s
 | `scripts/ezlibs-scripts/ezlibs-tiled-reference.md` | [ezlibs-tiled-reference.md](ezlibs-scripts/ezlibs-tiled-reference.md) |
 | `scripts/ezlibs-scripts/readme.md` | [readme.md](ezlibs-scripts/readme.md) |
 | `scripts/ezlibs-scripts/utils/README.md` | [README.md](ezlibs-scripts/utils/README.md) |
-| `scripts/input-controller/README.md` | [README.md](input-controller/README.md) |
+| `scripts/input-controller/README.md` | [README.md](player-interface/history/input/README.md) |
 | `scripts/libs/stardust/README.md` | [README.md](libs/stardust/README.md) |
 | `scripts/net-games/UI-SUPPRESSION.md` | [UI-SUPPRESSION.md](net-games/UI-SUPPRESSION.md) |
 | `scripts/net-games/menuAPI/README.md` | [README.md](net-games/menuAPI/README.md) |

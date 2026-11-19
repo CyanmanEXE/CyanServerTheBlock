@@ -1,18 +1,22 @@
-# 📁 assets/ezlibs-assets
+# 📁 `assets/ezlibs-assets`
 
 [🏠 Documentation home](../../index.md) · [⬆ Parent folder](../index.md)
 
-All documentation in this collection is indexed below.
+## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-## 📖 Guides & reference material
+## 📂 Child references
+
+| Folder / Lua script | Reference |
+|---|---|
+| `ezencounters` | [Open index](ezencounters/index.md) |
+| `eznpcs` | [Open index](eznpcs/index.md) |
+
+## 📚 Guides and additional material
 
 | Document | Description |
 |---|---|
-| [📘 `readme.md`](readme.md) | ezlibs |
+| [`readme.md`](readme.md) | Authored reference (check current Lua module index for source-verified APIs) |
 
-## 📂 Additional documentation folders
-
-| Folder | Index |
-|---|---|
-| `ezencounters/` | [Open folder index](ezencounters/index.md) |
-| `eznpcs/` | [Open folder index](eznpcs/index.md) |
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

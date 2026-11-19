@@ -8,9 +8,9 @@
 require("scripts/net-games/main")
 
 local Displayer = require("scripts/displayer/displayer")
-local InputSystem = require("scripts/input-controller/main")
+local InputSystem = require("scripts/player-interface/main") -- shared PlayerInterface API (input + control)
 local UISafe = require("scripts/net-games/ui-safe")
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = InputSystem -- same interface; no second require
 
 local MenuLog = require("scripts/net-games/logging").get("MENU")
 local MenuAPI = {}

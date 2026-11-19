@@ -1,47 +1,36 @@
-# 📁 ezlibs-custom/nebulous-liberations/liberations/enemies
+# 📁 `ezlibs-custom/nebulous-liberations/liberations/enemies`
 
 [🏠 Documentation home](../../../../index.md) · [⬆ Parent folder](../index.md)
 
 ## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-- [📚 Collection contents](#collection-contents)
-- [🔎 Module API overview](#module-api-overview)
-- [📊 Collection summary](#collection-summary)
+## 📂 Child references
 
-## 📚 Collection contents
+| Folder / Lua script | Reference |
+|---|---|
+| `bigbrute` | [Open index](bigbrute/index.md) |
+| `bladia_ow` | [Open index](bladia_ow/index.md) |
+| `blizzardman` | [Open index](blizzardman/index.md) |
+| `mettaur` | [Open index](mettaur/index.md) |
+| `roll_ow` | [Open index](roll_ow/index.md) |
+| `shademan` | [Open index](shademan/index.md) |
+| `shademan_ow` | [Open index](shademan_ow/index.md) |
+| `template_bigbrute` | [Open index](template_bigbrute/index.md) |
+| `template_bladia` | [Open index](template_bladia/index.md) |
+| `template_blizzardman` | [Open index](template_blizzardman/index.md) |
+| `template_debuglib_attackers` | [Open index](template_debuglib_attackers/index.md) |
+| `template_directional_attacks` | [Open index](template_directional_attacks/index.md) |
+| `template_missing_viruses` | [Open index](template_missing_viruses/index.md) |
+| `template_prog` | [Open index](template_prog/index.md) |
+| `template_roll` | [Open index](template_roll/index.md) |
+| `template_shademan` | [Open index](template_shademan/index.md) |
 
-| Type | Entry | Lua files | Functions | Tables | Source lines | Documentation |
-|---|---|---|---|---|---|---|
-| 📄 Script | `bigbrute.lua` | 1 | 9 | 4 | 224 | [Open script reference](bigbrute/index.md) |
-| 📄 Script | `blizzardman.lua` | 1 | 4 | 7 | 159 | [Open script reference](blizzardman/index.md) |
-| 📄 Script | `mettaur.lua` | 1 | 4 | 5 | 223 | [Open script reference](mettaur/index.md) |
-| 📄 Script | `shademan.lua` | 1 | 4 | 5 | 111 | [Open script reference](shademan/index.md) |
-| 📄 Script | `template_bigbrute.lua` | 1 | 0 | 2 | 19 | [Open script reference](template_bigbrute/index.md) |
-| 📄 Script | `template_blizzardman.lua` | 1 | 0 | 3 | 24 | [Open script reference](template_blizzardman/index.md) |
-| 📄 Script | `template_shademan.lua` | 1 | 0 | 3 | 22 | [Open script reference](template_shademan/index.md) |
+## 📚 Guides and additional material
 
-## 🔎 Module API overview
+| Document | Description |
+|---|---|
+| — | No separate guides |
 
-Named, qualified functions detected in direct files in this folder. Check each linked script reference for **all local and assigned functions**, parameters, initializer tables, and line numbers. A qualified name alone does not establish external accessibility.
-
-| Module | Qualified function / method | Source line | Reference |
-|---|---|---|---|
-| `bigbrute.lua` | `BigBrute:new(instance, position, direction)` | 11 | [Details](bigbrute/index.md) |
-| `bigbrute.lua` | `BigBrute:spawn(direction)` | 40 | [Details](bigbrute/index.md) |
-| `bigbrute.lua` | `BigBrute:get_death_message()` | 63 | [Details](bigbrute/index.md) |
-| `bigbrute.lua` | `BigBrute:take_turn()` | 216 | [Details](bigbrute/index.md) |
-| `blizzardman.lua` | `BlizzardMan:new(instance, position, direction)` | 11 | [Details](blizzardman/index.md) |
-| `blizzardman.lua` | `BlizzardMan:spawn(direction)` | 45 | [Details](blizzardman/index.md) |
-| `blizzardman.lua` | `BlizzardMan:get_death_message()` | 59 | [Details](blizzardman/index.md) |
-| `blizzardman.lua` | `BlizzardMan:take_turn()` | 63 | [Details](blizzardman/index.md) |
-| `mettaur.lua` | `EnemyTemplates.ai.shockwave_line(self)` | 99 | [Details](mettaur/index.md) |
-| `shademan.lua` | `ShadeMan:new(instance, position, direction)` | 9 | [Details](shademan/index.md) |
-| `shademan.lua` | `ShadeMan:spawn(direction)` | 40 | [Details](shademan/index.md) |
-| `shademan.lua` | `ShadeMan:get_death_message()` | 55 | [Details](shademan/index.md) |
-| `shademan.lua` | `ShadeMan:take_turn()` | 59 | [Details](shademan/index.md) |
-
-## 📊 Collection summary
-
-This folder subtree contains **7 Lua source files**, **21 named/assigned function detections**, and **29 table initializer detections**.
-
-Counts represent static matching of archived code and may omit anonymous closures or dynamic table construction.
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

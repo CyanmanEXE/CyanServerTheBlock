@@ -1,4 +1,4 @@
-local PlayerControl = require("scripts/player-control/main")
+local PlayerControl = require("scripts/player-interface/main")
 local Enemy = require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemy")
 
 -- Loot reward messages are part of the reward sequence. Awaiting the

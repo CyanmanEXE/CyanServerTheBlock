@@ -1,57 +1,21 @@
-# 📄 `trim.lua` — Refreshed Lua reference
+# 📁 `avatar_utils/lua_yes_parser/src/utils/trim`
 
-[🏠 Documentation home](../../../../../index.md) · [⬆ Folder index](../index.md)
+[🏠 Documentation home](../../../../../index.md) · [⬆ Parent folder](../index.md)
 
-> **Source:** [`scripts/avatar_utils/lua_yes_parser/src/utils/trim.lua`](../../../../../../avatar_utils/lua_yes_parser/src/utils/trim.lua)  
-> **Source lines:** 24  
-> **SHA-256 (UTF-8):** `ab7bd5aebcbf3e899da17ac0757662e5444e033a0902f3ad9b6bd776a976dfa9`  
-> **Named/assigned functions detected:** 1  
-> **Table initializers detected (simple pattern):** 0
+## 🗂️ Contents
+- [Child references](#-child-references)
+- [Guides and additional material](#-guides-and-additional-material)
 
-> **Static reference:** All function signatures and argument names come directly from the current Lua. Syntax detection does not prove a function is exported, reachable, or called at runtime. Review source and authored guides for semantics.
+## 📂 Child references
 
-## 🧭 Contents
-- [Overview](#overview)
-- [Dependencies](#dependencies)
-- [Event hooks](#event-hooks)
-- [Functions](#functions)
-- [Tables](#tables)
-- [Net API calls](#net-api-calls)
+| Folder / Lua script | Reference |
+|---|---|
+| — | No child folders |
 
-## Overview
+## 📚 Guides and additional material
 
-Current source inventory for `scripts/avatar_utils/lua_yes_parser/src/utils/trim.lua` from the latest overlaid server archive.
+| Document | Description |
+|---|---|
+| — | No separate guides |
 
-## Dependencies
-
-No statically identified literal `require` module strings.
-
-## Event hooks
-
-No named `.on`/`:on` events detected by the simple source pattern.
-
-## Functions
-
-| Source line | Function | Parameters | Declaration |
-|---:|---|---|---|
-| 1 | `trim` | `str` | local |
-
-### Detailed parameter inventory
-
-#### 1. `trim(str)`
-
-- **Line:** 1
-- **Declaration:** local
-
-| # | Parameter | Evidence |
-|---:|---|---|
-| 1 | `str` | Declared by this function; type not inferred. |
-
-
-## Tables
-
-No plain `name = {` table initializer matched.
-
-## Net API calls
-
-No direct `Net.method(...)` call expression matched.
+> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.
