@@ -33,6 +33,11 @@ local FONTS = {
         anim_path    = "/server/assets/net-games/fonts/separated/fonts_thin.animation",
         prefix = "THIN"
     },
+    SMALL = {
+        texture_path = "/server/assets/net-games/fonts/separated/fonts_small.png",
+        anim_path    = "/server/assets/net-games/fonts/separated/fonts_small.animation",
+        prefix = "SMALL"
+    },
     WIDE = {
         texture_path = "/server/assets/net-games/fonts/separated/fonts_wide.png",
         anim_path    = "/server/assets/net-games/fonts/separated/fonts_wide.animation",
@@ -90,6 +95,11 @@ local FONTS = {
         anim_path    = "/server/assets/net-games/fonts/separated/fonts_thin_black.animation",
         prefix = "THIN"
     },
+    SMALL_BLACK = {
+        texture_path = "/server/assets/net-games/fonts/separated/fonts_small_black.png",
+        anim_path    = "/server/assets/net-games/fonts/separated/fonts_small_black.animation",
+        prefix = "SMALL"
+    },
     WIDE_BLACK = {
         texture_path = "/server/assets/net-games/fonts/separated/fonts_wide_black.png",
         anim_path    = "/server/assets/net-games/fonts/separated/fonts_wide_black.animation",
@@ -141,7 +151,7 @@ local FONTS = {
 -- less frequently used families. The remaining families are still available
 -- through the same FontSystem API.
 local PRIORITY_FONTS = {
-    "THIN_BLACK", "TINY_BLACK", "THICK", "THICK_BLACK", "THIN", "WIDE_BLACK"
+    "THIN_BLACK", "SMALL_BLACK", "TINY_BLACK", "THICK", "THICK_BLACK", "THIN", "SMALL", "WIDE_BLACK"
 }
 
 local function ordered_font_names()

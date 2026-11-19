@@ -267,3 +267,8 @@ frame duration="10" x="0" y="0" w="0" h="0" originx="0" originy="0" flipx="0" fl
 animation state="SMALL_LOWER_ "
 frame duration="10" x="0" y="0" w="0" h="0" originx="0" originy="0" flipx="0" flipy="0"
 
+animation state="SMALL_["
+frame duration="1" x="22" y="121" w="3" h="7" originx="0" originy="0" flipx="0" flipy="0"
+
+animation state="SMALL_]"
+frame duration="1" x="26" y="121" w="3" h="7" originx="0" originy="0" flipx="0" flipy="0"

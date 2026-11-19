@@ -266,3 +266,8 @@ animation state="TINY_ "
 animation state="TINY_LOWER_ "
 frame duration="10" x="0" y="0" w="0" h="0" originx="0" originy="0" flipx="0" flipy="0"
 
+animation state="TINY_["
+frame duration="1" x="1" y="56" w="5" h="5" originx="0" originy="0" flipx="0" flipy="0"
+
+animation state="TINY_]"
+frame duration="1" x="7" y="56" w="5" h="5" originx="0" originy="0" flipx="0" flipy="0"
