@@ -1,6 +1,6 @@
 ## Current FootBomb referee menu (2026-11-19)
 
-The referee now uses `scripts/ezlibs-custom/footbomb/referee_menu.lua`, a wrapper around `scripts/ezlibs-custom/nebulous-liberations/liberations/option_menu.lua`. Interacting offers `[VS] NPC`, `[VS] Player`, `Explanation`, `Cancel`. The host can modify the winning score in increments of 1 or 5 and toggle the existing Grace/final-chance rule. For PvP the selected rules stay with the waiting host until another player joins. Explanation closes the 9-slice menu before opening the referee's native mugshot textboxes, then reopens the menu only after the final dismissal. For more details, see `_DOCUMENTATION/ezlibs-custom/footbomb/referee_menu/index.md` and `AREA_SETUP.md`.
+The referee now uses `scripts/ezlibs-custom/footbomb/referee_menu.lua`, a wrapper around `scripts/ezlibs-custom/nebulous-liberations/liberations/option_menu.lua`. Interacting offers `[VS] NPC`, `[VS] Player`, `Explanation`, `Cancel`. The host edits a single `Winning Score` row with Left/Right (one point per press/repeat) and toggles the existing Grace/final-chance rule on its own row. The backdrop is allocated once per menu and remains stable during navigation and value changes. For PvP the selected rules stay with the waiting host until another player joins. Explanation closes the 9-slice menu before opening the referee's native mugshot textboxes, then reopens the menu only after the final dismissal. For more details, see `_DOCUMENTATION/ezlibs-custom/footbomb/referee_menu/index.md` and `AREA_SETUP.md`.
 
 ---
 

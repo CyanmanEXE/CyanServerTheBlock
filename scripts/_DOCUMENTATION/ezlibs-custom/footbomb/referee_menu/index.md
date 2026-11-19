@@ -12,19 +12,19 @@ The referee uses the existing Nebulous Liberations `liberations/option_menu.lua`
 |---|---|---|---|
 | `select_mode(player_id)` | Player ID | `Async` promise of 0-based selection index or `nil` | `[VS] NPC` = 0, `[VS] Player` = 1, `Explanation` = 2, `Cancel` = 3 |
 | `select_join(player_id)` | Player ID | `Async` promise of 0-based selection index or `nil` | `Join Match` = 0, `Cancel` = 1 for guest matchmaking |
-| `configure(player_id, initial_rules, is_current)` | Player ID, `{points_to_win=number, grace_enabled=boolean}`, callable returning boolean | `Async` promise resolving to `{points_to_win=integer, grace_enabled=boolean}` or `nil` | Host adjusts score (+/-1 or +/-5), toggles Grace, selects Start Match; Cancel returns nil |
+| `configure(player_id, initial_rules, is_current)` | Player ID, `{points_to_win=number, grace_enabled=boolean}`, callable returning boolean | `Async` promise resolving to `{points_to_win=integer, grace_enabled=boolean}` or `nil` | Host adjusts Winning Score via Left/Right (+/-1), changes Grace in-place, and selects Start Match; Cancel returns nil |
 
-`initial_rules.points_to_win` falls back to `Config.DEFAULTS.POINTS_TO_WIN` and clamps to at least 1. `initial_rules.grace_enabled` defaults to on. The `is_current()` callback stops the flow after transfer/disconnect. `OptionMenu.select` automatically releases its input session and erases UI sprites **before** resolving each selection.
+`initial_rules.points_to_win` falls back to `Config.DEFAULTS.POINTS_TO_WIN` and clamps to at least 1. `initial_rules.grace_enabled` defaults to on. The `is_current()` callback stops the flow after transfer/disconnect. `OptionMenu.select` maintains the same panels during score/Grace edits and releases its input session and erases UI sprites **once**, when the final choice resolves.
 
 ## Screen lifecycle
 
 1. Interaction opens the main option menu without a preceding native greeting textbox.
-2. `[VS] NPC` or `[VS] Player` (when no match is waiting) opens the host score/grace editor.
+2. `[VS] NPC` or `[VS] Player` (when no match is waiting) opens a persistent `FootBomb Setup` menu with `Winning Score: < N >`, `Grace: < On/Off >`, `Start Match`, and `Cancel`. Up/Down selects a row. Left/Right edits score by one (minimum 1); on Grace, Left=Off and Right=On. Confirm toggles Grace or submits Start Match. Editing never recreates the background panels.
 3. A host's accepted rules are passed to `make_instance` directly (NPC) or saved in `State.waiting_matches[source_area_id].rules` for the second player (PvP). The guest cannot change host rules.
 4. `Explanation` closes the menu first. Four `Async.message_player` textboxes display the referee's `mug_texture_path` and `mug_animation_path`. The code awaits all dismissals, **including the final textbox**, then reopens the four-option menu.
 5. Cancel closes the menu, releases its PlayerInterface input capture, and exits without creating a match. Cancel in the score editor returns to the main menu.
 
-`State.pending_interactions[player_id]` prevents duplicate interactions throughout explanation and menu handoffs. `OptionMenu.select` guards Confirm/Cancel against held-button opening input. Do not manually lock player input around these menus.
+`State.pending_interactions[player_id]` prevents duplicate interactions throughout explanation and menu handoffs. Each FootBomb menu enables `stable_text=true`, so selection/adjustments update glyph sprites without reconstructing the header/body 9-slice backgrounds. `OptionMenu.select` guards Confirm/Cancel against held-button opening input. Do not manually lock player input around these menus.
 
 ## Grace rule
 

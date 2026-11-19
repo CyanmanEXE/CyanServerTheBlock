@@ -76,6 +76,9 @@ local NAVIGATION_DIRECTIONS = {
     "UpLeft", "UpRight", "DownLeft", "DownRight",
 }
 
+-- Return independent vertical/horizontal directions. Consume *all* edges
+-- together, including the interim diagonal edges, so changing an adjustable
+-- row never leaves an old press to act on a subsequent tick.
 local function read_navigation(controller, owner)
     local active = controller:get_active_direction(owner)
     local current_edge = false
@@ -87,13 +90,17 @@ local function read_navigation(controller, owner)
         end
     end
 
-    if not current_edge then return 0 end
+    if not current_edge then return 0, 0 end
     if active == "Up" or active == "UpLeft" or active == "UpRight" then
-        return -1
+        return -1, 0
     elseif active == "Down" or active == "DownLeft" or active == "DownRight" then
-        return 1
+        return 1, 0
+    elseif active == "Left" then
+        return 0, -1
+    elseif active == "Right" then
+        return 0, 1
     end
-    return 0
+    return 0, 0
 end
 
 local function make_header_children(title, text_scale)
@@ -400,13 +407,16 @@ local function menu_text_width(menu, scale)
             .. "/" .. tostring(#menu.options)
     end
     local maximum = screen_text_width(title, scale)
-    for _, label in ipairs(menu.options) do
-        local line = tostring(label)
-        -- A selected line includes the actual > cursor. Also allow for the
-        -- unselected padding so either state fits at the same panel width.
-        maximum = math.max(maximum,
-            screen_text_width("> " .. line, scale),
-            screen_text_width("  " .. line, scale))
+    -- Optional width_samples reserve room for changing numeric/toggle labels.
+    -- A changing label must never force a 9-slice panel rebuild mid-menu.
+    for _, source in ipairs({ menu.options, menu.width_samples or {} }) do
+        for _, label in ipairs(source) do
+            local line = tostring(label)
+            -- Selected and unselected rows may use different prefix widths.
+            maximum = math.max(maximum,
+                screen_text_width("> " .. line, scale),
+                screen_text_width("  " .. line, scale))
+        end
     end
     return maximum
 end
@@ -514,6 +524,30 @@ local function refresh_body(menu)
             position_panels(menu)
         end
     end
+end
+
+-- Optional handlers keep editable menu rows alive without closing and
+-- recreating the background. Indexes are zero-based, like select() results.
+-- Return true when an action was handled; the callback may edit options[]
+-- in-place. Handler failures are logged without submitting a menu choice.
+local function run_menu_handler(menu, handler, delta)
+    if not handler then return false end
+    local ok, handled
+    if delta == nil then
+        ok, handled = pcall(handler, menu.selected - 1, menu.options)
+    else
+        ok, handled = pcall(handler, menu.selected - 1, delta, menu.options)
+    end
+    if not ok then
+        print("[Liberation OptionMenu] Row handler failed: " .. tostring(handled))
+        -- A broken Confirm handler must not inadvertently start a match.
+        return true
+    end
+    if handled == true then
+        refresh_body(menu)
+        return true
+    end
+    return false
 end
 
 local function cleanup(player_id, menu, result)
@@ -673,13 +707,17 @@ Net:on("tick", function(event)
                 if cancel_pressed then
                     cleanup(player_id, menu, menu.cancel_index - 1)
                 elseif confirm_pressed then
-                    cleanup(player_id, menu, menu.selected - 1)
+                    if not run_menu_handler(menu, menu.on_confirm) then
+                        cleanup(player_id, menu, menu.selected - 1)
+                    end
                 else
-                    local navigation = read_navigation(ctrl, owner)
-                    if navigation ~= 0 then
-                        menu.selected = ((menu.selected - 1 + navigation)
+                    local vertical, horizontal = read_navigation(ctrl, owner)
+                    if vertical ~= 0 then
+                        menu.selected = ((menu.selected - 1 + vertical)
                             % #menu.options) + 1
                         refresh_body(menu)
+                    elseif horizontal ~= 0 then
+                        run_menu_handler(menu, menu.on_horizontal, horizontal)
                     end
                 end
                 end -- managed input is current
@@ -688,8 +726,12 @@ Net:on("tick", function(event)
     end
 end)
 
--- config (optional): max_visible, centered, mugshot. Selection results remain
--- zero based, including the visible Cancel row, for existing callers.
+-- config (optional): max_visible, centered, mugshot, stable_text,
+-- width_samples, on_horizontal(index0, delta, options),
+-- on_confirm(index0, options). Handler indexes and selection results are
+-- zero-based. Horizontal delta is -1 (Left) or +1 (Right); return true for
+-- an in-place edit. stable_text=true keeps 9-slice backgrounds stationary
+-- during edits and navigation, rendering only changed text glyphs.
 function OptionMenu.select(player_id, options, title, config)
     config = config or {}
     if type(options) ~= "table" then
@@ -729,6 +771,9 @@ function OptionMenu.select(player_id, options, title, config)
             body_id = body_id,
             title = title,
             options = menu_options,
+            width_samples = config.width_samples,
+            on_horizontal = config.on_horizontal,
+            on_confirm = config.on_confirm,
             cancel_index = cancel_index,
             selected = 1,
             first_visible = 1,
