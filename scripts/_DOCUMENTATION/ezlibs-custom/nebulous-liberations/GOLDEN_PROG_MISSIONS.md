@@ -28,7 +28,7 @@ In the most recent supplied `areas/default.tmx`, the selector is on the raised `
 
 **Required Tiled NPC fields:** `Asset Name`, `Direction`, and `First Dialogue` pointing to the event's Dialogue object. The Dialogue requires `Event Name = Liberation Mission Selector`. `Mug Animation Name` and `Dont Face Player` are optional.
 
-**Return tile:** When a player starts a mission using this NPC, the mission stores the center of the next tile in its authored `Direction` (here, `Down Left`). It also stores the NPC's runtime `z` elevation and source area. Returning from the mission sends players to that precise tile instead of the mission's generic `Liberation Respawn`. This works for other selector NPC placements and all eight directions without extra Tiled return-coordinate properties.
+**Return tile:** When a player starts a mission using this NPC, the mission stores the center of the next tile in its authored `Direction` (here, `Down Left`). It also stores the NPC's runtime `z` elevation and source area. When the victory textbox is dismissed (or a mission boot-to-lobby exit is triggered), `Player:boot_to_lobby()` consumes this per-instance saved destination **before** detaching the player and requesting cleanup. The returning player is transferred to that precise tile instead of the mission's generic `Liberation Respawn`. This works for other selector NPC placements and all eight directions without extra Tiled return-coordinate properties.
 
 The `Direction` used for the return point is read from the original Tiled object rather than from a bot temporarily facing the person interacting with it. Moving or rotating the NPC in Tiled therefore changes its return tile automatically. If the area is no longer loaded on return, the normal mission respawn fallback is used. Regular Liberation Gates continue using their original configured return behavior.
 
@@ -65,7 +65,7 @@ The menu is implemented by `OptionMenu.select(player_id, labels, "Liberations", 
 
 The existing `PlayerControl.begin(... profile="menu")` session continues to own virtual input, engine movement lock, and cleanup. The eznpcs dialogue's separate named capture remains scoped to the conversation. On completion or disconnect, both 9-slice panels and the mugshot sprite are erased, and the session is closed. Input release guards remain active to prevent selecting the first row accidentally. The input handler does not impose an additional indefinite neutral-direction gate after those guards. It reads the two return values from `PlayerControl.Session:input()` without a Lua logical operator, so the InputController ownership token is never lost.
 
-The menu's promise result is **zero-based**. If the chosen result is in `[0, mission_count - 1]`, the event calls `LibPlugin.start_game_for_player(player_id, missions[result+1].id, return_destination)`, preserving party behavior. The optional return destination is stored per instance and used for every participant's mission exit. No gate object is changed, deleted, or disabled.
+The menu's promise result is **zero-based**. If the chosen result is in `[0, mission_count - 1]`, the event calls `LibPlugin.start_game_for_player(player_id, missions[result+1].id, return_destination)`, preserving party behavior. The optional return destination is stored per instance and consumed at **each player's normal mission exit** in `player.lua`. `main.lua`'s `remove_instance()` retains the saved return destination for the abnormal/partial-transfer teardown fallback; normal exits must not rely on cleanup because the player has already left the mission by then. No gate object is changed, deleted, or disabled.
 
 ### API
 
@@ -101,3 +101,18 @@ Gold Prog and the menu are provisioned through existing eznpcs/Net/Displayer API
 7. Leave while the menu is open, if possible, and check the mug and menu UI are removed.
 
 Offline tests cover mission filtering, party-launch call, five-row scroll, selection indices, mugshot cleanup, and legacy menu layout. Live ONB client rendering and transfers must be verified in-game.
+
+## Normal mission-exit timing and diagnostics
+
+After victory, `liberations/instance.lua` dismisses the victory textbox and calls `player:boot_to_lobby(true, area_name)`. The player exit function:
+
+1. Reads `player.activity.return_destination`, which `main.lua` saved from the selector at launch.
+2. Verifies the source area is still loaded and the saved `x`, `y`, `z` are valid numbers. If unavailable, uses the mission's configured `Respawn Area` / `Liberation Respawn`, then the default spawn.
+3. Logs `Liberation exit transfer requested` with the chosen return source, area, and coordinates, and stores a one-time `pending_return_verification` record for the transfer observer.
+4. Requests `Net.transfer_player()` **before** disconnecting the player from the mission. A reported failure keeps the activity/session intact and logs `Liberation exit transfer failed`.
+5. On accepted transfer, detaches the player, applies victory-gate memory where applicable, and restores health. The now-empty instance may then be cleaned up normally.
+6. `main.lua` observes the transfer and compares the actual destination with the saved target, logging either `Liberation exit transfer verified` or `Liberation exit destination differs from request`. The observer ignores events that still report the departing instance. To prevent early area removal during asynchronous transfers, the mission records an outgoing-transfer marker and `main.lua` defers empty-instance cleanup while `Net.get_player_area` still reports that player inside. A transfer still pending after 10 seconds logs a warning for investigation; the instance is not silently deleted. Empty missions also skip their normal enemy/turn tick while waiting.
+
+**Expected log sequence:** `Liberation exit transfer requested` → `Player disconnected from liberation` → `Removing liberation instance` → `Cleaning up liberation instance`. The word *disconnected* here refers to leaving the Liberation mission; it does **not** by itself prove a network disconnect. EzNPCs `Waypoint ... incorrect type` warnings are unrelated to this return-coordinate selection.
+
+If the player still appears on the wrong tile, inspect the `Liberation exit transfer requested` log to see whether `return_source=mission_selector`, `return_area=default`, and `return_x/y/z` match the Prog's intended tile. If the chosen values are wrong, trace the Tiled placeholder via `Selector.return_destination_for_npc()`. If the values are right but the character appears elsewhere, inspect other systems that also transfer or reposition the player after the mission exit.

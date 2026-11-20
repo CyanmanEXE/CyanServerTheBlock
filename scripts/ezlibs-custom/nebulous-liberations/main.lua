@@ -408,9 +408,47 @@ function LibPlugin.on_tick(delta_time)
 
     local dead_instances = {}
     for area_id, instance in pairs(instances) do
-        instance:on_tick(elapsed)
+        -- Once all players have left, the instance is only waiting for
+        -- outgoing transfers/cleanup. Do not advance enemy turns on an
+        -- empty mission (ready_count == #players can otherwise be 0 == 0).
+        if #instance:get_players() > 0 then
+            instance:on_tick(elapsed)
+        end
         if #instance:get_players() == 0 and not instance:cleaning_up() then
-            dead_instances[#dead_instances + 1] = area_id
+            -- Normal returns may still be in flight even though the player
+            -- session is already detached. Do not remove the instance's area
+            -- until the engine reports its outgoing players outside it.
+            local pending = instance.pending_exit_transfers
+            local waiting = 0
+            if type(pending) == "table" then
+                for player_id, transfer in pairs(pending) do
+                    local ok, current_area = pcall(Net.get_player_area, player_id)
+                    if ok and current_area == area_id then
+                        waiting = waiting + 1
+                        transfer.elapsed = (transfer.elapsed or 0) + elapsed
+                        if transfer.elapsed >= 10 and not transfer.warned then
+                            transfer.warned = true
+                            log:warn_data("Liberation exit transfer has not reached target area", {
+                                player_id = player_id,
+                                instance_area_id = area_id,
+                                requested_return_area = transfer.requested_area,
+                                wait_seconds = transfer.elapsed,
+                            })
+                        end
+                    else
+                        pending[player_id] = nil
+                    end
+                end
+            end
+            if waiting == 0 then
+                dead_instances[#dead_instances + 1] = area_id
+            elseif not instance.return_cleanup_wait_logged then
+                instance.return_cleanup_wait_logged = true
+                log:info_data("Delaying liberation cleanup until return transfer completes", {
+                    instance_area_id = area_id,
+                    pending_return_players = waiting,
+                })
+            end
         end
     end
     for _, area_id in ipairs(dead_instances) do
@@ -572,6 +610,41 @@ function LibPlugin.handle_player_transfer(player_id)
         player.x = player_pos.x
         player.y = player_pos.y
         player.z = player_pos.z
+    end
+
+    -- Normal mission exits are requested by Player:boot_to_lobby(), before
+    -- the final player is detached and the instance becomes cleanup-eligible.
+    -- Compare the actual post-transfer area/position with the selector target;
+    -- this also reveals later spawn/warp overrides in live server logs.
+    local expected_return = player.pending_return_verification
+    if expected_return and current_area_id ~= expected_return.source_area_id then
+        local position_matches = player_pos
+            and type(player_pos.x) == "number"
+            and type(player_pos.y) == "number"
+            and type(player_pos.z) == "number"
+            and math.abs(player_pos.x - expected_return.x) <= 0.1
+            and math.abs(player_pos.y - expected_return.y) <= 0.1
+            and math.abs(player_pos.z - expected_return.z) <= 0.1
+        local details = {
+            player_id = player_id,
+            return_source = expected_return.return_source,
+            requested_area = expected_return.area_id,
+            actual_area = current_area_id,
+            requested_x = expected_return.x,
+            requested_y = expected_return.y,
+            requested_z = expected_return.z,
+            actual_x = player_pos and player_pos.x,
+            actual_y = player_pos and player_pos.y,
+            actual_z = player_pos and player_pos.z,
+            area_matches = current_area_id == expected_return.area_id,
+            position_matches = not not position_matches,
+        }
+        if details.area_matches and position_matches then
+            log:info_data("Liberation exit transfer verified", details)
+        else
+            log:warn_data("Liberation exit destination differs from request", details)
+        end
+        player.pending_return_verification = nil
     end
 
     if player.pending_battle_stats and player.resolve_battle then

@@ -304,6 +304,7 @@ end
 
 function Player:handle_disconnect()
   self.disconnected = true
+  self.pending_return_verification = nil
   self.battle_exit_fallback_token = nil
 
   for _, resolve in ipairs(self.textbox_promise_resolvers) do
@@ -326,37 +327,172 @@ function Player:handle_disconnect()
   end
 end
 
-function Player:boot_to_lobby(isVictory, mapName)
-  self.activity:handle_player_disconnect(self.id)
-  self.activity = nil
-  local area_id = Net.get_player_area(self.id)
-  local respawn_area = Net.get_area_custom_property(area_id, "Respawn Area")
-  local spawn = nil
-  if respawn_area ~= nil then
-    spawn = Net.get_object_by_name(respawn_area, "Liberation Respawn")
-  else
-    respawn_area = "default"
-    spawn = Net.get_spawn_position("default")
+-- Resolve the area ID supplied by the Mission Selector. Source Tiled objects
+-- may use a runtime area ID or a map name; do not assume they are identical.
+local function resolve_loaded_return_area(reference)
+  if type(reference) ~= "string" or reference == "" then return nil end
+  local ok, areas = pcall(Net.list_areas)
+  if not ok or type(areas) ~= "table" then return nil end
+  for _, candidate in ipairs(areas) do
+    if candidate == reference then return candidate end
   end
-  Net.transfer_player(self.id, respawn_area, true, spawn.x, spawn.y, spawn.z)
+  for _, candidate in ipairs(areas) do
+    local name_ok, name = pcall(Net.get_area_name, candidate)
+    if name_ok and name == reference then return candidate end
+  end
+  return nil
+end
+
+local function valid_return_coordinate(value)
+  return type(value) == "number"
+    and value == value and value ~= math.huge and value ~= -math.huge
+end
+
+local function resolve_liberation_return(player_id, activity, current_area)
+  -- Mission Selector launches store a return point on their unique instance.
+  -- Victory exits happen before the general instance cleanup, so the
+  -- Player exit path MUST consume this destination itself.
+  local selected = activity and activity.return_destination
+  if selected then
+    local area = resolve_loaded_return_area(selected.area_id)
+    if area and valid_return_coordinate(selected.x)
+      and valid_return_coordinate(selected.y)
+      and valid_return_coordinate(selected.z) then
+      return area, { x = selected.x, y = selected.y, z = selected.z }, "mission_selector"
+    end
+    log:warn_data("Invalid Mission Selector return point; using mission respawn", {
+      player_id = player_id,
+      mission_instance_area = current_area,
+      requested_area = selected.area_id,
+      return_x = selected.x,
+      return_y = selected.y,
+      return_z = selected.z,
+    })
+  end
+
+  -- Existing Liberation Gate behavior: prefer the mission's configured
+  -- Respawn Area / Liberation Respawn, then the default spawn.
+  local property_ok, configured_area = pcall(Net.get_area_custom_property,
+    current_area, "Respawn Area")
+  local area = property_ok and resolve_loaded_return_area(configured_area) or nil
+  if area then
+    local object_ok, spawn = pcall(Net.get_object_by_name, area, "Liberation Respawn")
+    if object_ok and spawn and valid_return_coordinate(spawn.x)
+      and valid_return_coordinate(spawn.y)
+      and valid_return_coordinate(spawn.z) then
+      return area, spawn, "mission_respawn"
+    end
+    local default_ok, area_spawn = pcall(Net.get_spawn_position, area)
+    if default_ok and area_spawn and valid_return_coordinate(area_spawn.x)
+      and valid_return_coordinate(area_spawn.y)
+      and valid_return_coordinate(area_spawn.z) then
+      return area, area_spawn, "configured_area_spawn"
+    end
+  end
+
+  area = resolve_loaded_return_area("default")
+  if area then
+    local ok, spawn = pcall(Net.get_spawn_position, area)
+    if ok and spawn and valid_return_coordinate(spawn.x)
+      and valid_return_coordinate(spawn.y)
+      and valid_return_coordinate(spawn.z) then
+      return area, spawn, "default_spawn"
+    end
+  end
+  return nil, nil, "no_valid_return"
+end
+
+function Player:boot_to_lobby(isVictory, mapName)
+  local activity = self.activity
+  if not activity then
+    log:warn_data("Liberation return skipped: no active mission", {
+      player_id = self.id,
+      map_name = mapName,
+    })
+    return false
+  end
+
+  local mission_area = Net.get_player_area(self.id)
+  local return_area, spawn, return_source = resolve_liberation_return(
+    self.id, activity, mission_area)
+  if not return_area then
+    log:error_data("Liberation return blocked: no valid destination", {
+      player_id = self.id,
+      mission_area = mission_area,
+      map_name = mapName,
+    })
+    return false
+  end
+
+  -- Retain the requested destination until the player_transfer observer
+  -- reports the area/coordinates actually accepted by the engine.
+  self.pending_return_verification = {
+    source_area_id = mission_area,
+    area_id = return_area,
+    x = spawn.x, y = spawn.y, z = spawn.z,
+    return_source = return_source,
+  }
+
+  log:info_data("Liberation exit transfer requested", {
+    player_id = self.id,
+    mission_instance_area = mission_area,
+    return_area = return_area,
+    return_source = return_source,
+    return_x = spawn.x,
+    return_y = spawn.y,
+    return_z = spawn.z,
+    victory = isVictory,
+  })
+
+  -- Request the transfer before removing this player from the mission.
+  -- That prevents an empty mission from being eligible for cleanup before
+  -- the server has even accepted its outgoing transfer request.
+  local transfer_ok, transfer_result = pcall(Net.transfer_player,
+    self.id, return_area, true, spawn.x, spawn.y, spawn.z)
+  if not transfer_ok or transfer_result == false then
+    self.pending_return_verification = nil
+    log:error_data("Liberation exit transfer failed; retaining mission state", {
+      player_id = self.id,
+      mission_instance_area = mission_area,
+      return_area = return_area,
+      return_source = return_source,
+      error = not transfer_ok and tostring(transfer_result) or "transfer returned false",
+    })
+    return false
+  end
+
+  -- A transfer request may be accepted before Net reports the destination
+  -- area. Hold the empty instance's cleanup until the player has actually
+  -- left the instance on the server, preventing premature area removal.
+  activity.pending_exit_transfers = activity.pending_exit_transfers or {}
+  activity.pending_exit_transfers[self.id] = {
+    requested_area = return_area,
+    elapsed = 0,
+  }
+
+  activity:handle_player_disconnect(self.id)
+  self.activity = nil
+
   if isVictory then
     local gate_to_remove = nil
-    for index, value in ipairs(Net.list_objects(respawn_area)) do
-      local prospective_gate = Net.get_object_by_id(respawn_area, value)
-      if prospective_gate.custom_properties["Liberation Map Name"] == mapName then
+    for _, value in ipairs(Net.list_objects(return_area) or {}) do
+      local prospective_gate = Net.get_object_by_id(return_area, value)
+      if prospective_gate and prospective_gate.custom_properties
+        and prospective_gate.custom_properties["Liberation Map Name"] == mapName then
         gate_to_remove = prospective_gate
         break
       end
     end
-    if gate_to_remove ~= nil then
+    if gate_to_remove then
       local safe_secret = helpers.get_safe_player_secret(self.id)
-      local player_area_memory = ezmemory.get_player_area_memory(safe_secret,respawn_area)
+      local player_area_memory = ezmemory.get_player_area_memory(safe_secret, return_area)
       player_area_memory.hidden_objects[tostring(gate_to_remove.id)] = true
       ezmemory.save_player_memory(safe_secret)
     end
   end
   ezmemory.set_player_max_health(self.id, ezmemory.get_player_max_health(self.id), true)
   ezmemory.set_player_health(self.id, 9999)
+  return true
 end
 
 return Player
