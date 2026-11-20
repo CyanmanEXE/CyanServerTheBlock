@@ -11,6 +11,9 @@ local constants = {
     DIAGNOSTICS = {
         RUN_ANIMATION_DIAGNOSTICS = false,
         RUN_DIRECTION_MAPPING_TEST = false,
+        -- Log every sampled Ball attachment location during timing diagnosis.
+        -- Off in normal play to avoid 20+ log writes per moving catch.
+        RUN_RESULT_TIMING_DIAGNOSTICS = false,
     },
 
     DEFAULTS = {
@@ -103,12 +106,30 @@ local constants = {
     },
 
     GAMEPLAY = {
-        -- Result phase movement tuning. Defender jump speed shapes progress
-        -- within the authored movement window; it does not alter animation time.
+        -- All translational speeds are in projected isometric half-tile-width
+        -- units per second, not raw map x/y tiles per second. The ball's old
+        -- effective speed was 3 * 3; store that 9 directly to avoid a hidden
+        -- multiplier and catch-specific speed overrides.
         RESULT_KICKER_WALK_UR_SPEED = 3,
         RESULT_KICKER_WALK_U_SPEED = 3,
-        RESULT_BOMB_MOVE_SPEED = 3,
-        RESULT_DEFENDER_JUMP_SPEED = 3,
+        RESULT_BOMB_MOVE_SPEED = 9,
+        -- Successful catches use a readable contact window. A fast natural
+        -- flight must not snap to a defender's hand before the jump has visibly
+        -- progressed. Misses still use RESULT_BOMB_MOVE_SPEED unchanged.
+        RESULT_CATCH_MIN_FLIGHT_SECONDS = 0.70,
+        -- Contact within the authored Left/Right jump movement interval. This
+        -- is also used to sample the exact matching Ball attachment point.
+        RESULT_CATCH_JUMP_CONTACT_RATIO = 0.70,
+        -- The authored jump animation controls its duration. 5 is neutral
+        -- linear traversal progress along the original shallow Bezier arc.
+        RESULT_DEFENDER_JUMP_SPEED = 5,
+        -- Sampling cadence for the client-side position keyframes. No server-
+        -- tick position polling; one interpolated track per movement.
+        RESULT_JUMP_SAMPLE_SECONDS = 0.05,
+        RESULT_ATTACHMENT_SAMPLE_SECONDS = 0.05,
+        -- Single insurance reassert for the non-looping jump -> looping END
+        -- transition. Reasserting repeatedly every 0.2s reset the pose.
+        RESULT_END_POSE_REASSERT_SECONDS = 0.08,
         -- Render the attached ball in front of the defender using bot depth.
         RESULT_BALL_Z_LIFT = 4,
     },

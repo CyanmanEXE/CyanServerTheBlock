@@ -6,6 +6,10 @@
 - [Child references](#-child-references)
 - [Guides and additional material](#-guides-and-additional-material)
 
+## ⏱️ Current result timing
+
+Result movement, catch synchronization, and moving Ball-point sampling use `ResultTimeline.plan_response()` and the methods described in [TIMING.md](../TIMING.md). All nine direction combinations plan normal-speed ball travel, and the host-side response barrier waits for both tracks. This replaces the old catch-specific ball acceleration.
+
 ## 🔎 Current area-identity API
 
 The FootBomb main module now exports `FootBomb.get_area_role(area_id)` and `FootBomb.get_area_diagnostic(area_id)`, and delegates source recognition and player-transfer tracing to the new [`area_observer.lua` module](../area_observer/index.md). See [`AREA_SETUP.md`](../AREA_SETUP.md) for all current Tiled object requirements.

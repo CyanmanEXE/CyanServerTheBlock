@@ -29,5 +29,6 @@
 |---|---|
 | [`README.md`](README.md) | Authored animation reference (check current Lua module index for source-verified APIs) |
 | [`AREA_SETUP.md`](AREA_SETUP.md) | **Current FootBomb map, observer, and station setup including exact Tiled properties** |
+| [`TIMING.md`](TIMING.md) | **Current projected-speed, catch synchronization, and animation sampling reference** |
 
 > 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.

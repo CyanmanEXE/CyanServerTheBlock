@@ -1,4 +1,8 @@
+> **Current catch timing:** matching Left/Left and Right/Right catches use `RESULT_CATCH_JUMP_CONTACT_RATIO` (default 0.70 of jump movement) and `RESULT_CATCH_MIN_FLIGHT_SECONDS` (default 0.70s). Up/Up uses the same minimum flight. See [TIMING.md](TIMING.md). Earlier descriptions of midpoint/instant center catches are historical.
+
 # FootBomb animation parser versioning
+
+**Current timing/motion behavior:** [FootBomb result timing guide](TIMING.md) (supersedes historical speed/attachment notes below).
 
 **Current map/observer setup:** [FootBomb source and train-station configuration](AREA_SETUP.md) (2026-11-19).
 
@@ -46,9 +50,9 @@ The code can be syntax-checked and its parser can be tested against supplied v2.
 
 ### Center catches, ball animation, and draw order
 
-When both players choose **Up** (the center direction) and the Defender wins, the ball first reaches the center target, then attaches to the Defender's `Ball` point in `FOOTBOMB_READY_DEFENSE`. The follower samples looping animation states using their loop duration and remains active until the result camera fade begins.
+When both players choose **Up** (the center direction) and the Defender wins, the ball first reaches the center target, then attaches to the Defender's `Ball` point in `FOOTBOMB_READY_DEFENSE`. The attached ball stays at the stationary ready-defense Ball point until the result camera fade begins; this does **not** need a moving follower.
 
-The ball bot stores its selected looping animation state (`Small-Bomb` by default; `Big-Bomb` if configured) on the bomb-bot record. Its movement keyframes and attached-ball track contain position properties only; animation state is set separately so a position track cannot overwrite the intended looping animation. The attached-ball track is built once using the parsed `Ball` point's animation-frame boundaries, with short positive-duration position keyframes rather than a polling loop. Immediately before the result camera fade, FootBomb reasserts the bomb's stored looping animation so it remains selected through the transition.
+The ball bot stores its selected looping animation state (`Small-Bomb` by default; `Big-Bomb` if configured) on the bomb-bot record. Its movement keyframes and attached-ball track contain position properties only; animation state is set separately so a position track cannot overwrite the intended looping animation. The moving attached-ball track is built once with blended points and uniform ~0.05s position keyframes, rather than frame-boundary-only positions or a polling loop. Immediately before the result camera fade, FootBomb reasserts the bomb's stored looping animation so it remains selected through the transition.
 
 While attached, the ball's Z coordinate is `defender Z + Gameplay.RESULT_BALL_Z_LIFT` (default `4`). The initial catch travel stays on the defender's current Z layer; Z is excluded from horizontal travel-distance calculations. During the remaining defender jump, the ball track uses the same quadratic start-to-target path used by the defender's jump movement, avoiding a handoff snap if `Net.get_bot_position` still reports a stale position. The full position track is submitted to `Net.animate_bot_properties`; it does not switch to a live-position polling loop at the end of the jump.
 
@@ -76,7 +80,7 @@ Navi avatars are assigned when the bot is created. During gameplay, defense, jum
 
 The resolved response now carries a per-round timeline record for the shared bomb/defender duration, planned defender contact time, and completion barrier. The kicker impact is the response time-zero contact; matching-direction catches fire a second impact at the midpoint only once. Contact dispatch rejects stale round work and suppresses duplicate contact events across async branches. The final jump-frame deadline and result-hold duration are tied to the named timeline/configuration values. `GAMEPLAY.RESULT_HOLD_SECONDS` defaults to `1.5` seconds.
 
-This pass intentionally preserves the existing destination points, curved defender jump, Ball-point offsets and tracking, bomb speed adjustment, `RESULT_BALL_Z_LIFT`, winner rules, and position-only movement keyframes. The round timeline is a shared timing plan and completion barrier; the engine's animation/property APIs still own actual client-side interpolation.
+**Historical Pass 2 note (superseded by [TIMING.md](TIMING.md)):** At that time the code preserved catch-specific bomb speed adjustment. The current planner removes that adjustment while keeping the destination points, curved jump, Ball-point tracking, lift, winner rules, and position-only keyframes. The round timeline is a shared timing plan and completion barrier; the engine's animation/property APIs still own actual client-side interpolation.
 
 
 ## Pass 3 — Result animation ownership

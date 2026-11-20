@@ -14,6 +14,10 @@
 
 `DEFAULTS.POINTS_TO_WIN = 10` is a fallback if the Tiled referee lacks a valid `Points to Win` integer. That Tiled value seeds the host's winning-score menu and can be edited there. `DEFAULTS.GRACE_ENABLED = true` preserves the existing trailing-player final-chance behavior until the host toggles it off in that menu.
 
+## ⚡ Movement tuning
+
+See [TIMING.md](../TIMING.md) for current defaults and units. `RESULT_BOMB_MOVE_SPEED=9` is the **actual** projected speed (no ×3); `RESULT_DEFENDER_JUMP_SPEED=5` provides neutral progress within the authored jump animation, not a seconds-per-tile calculation.
+
 ## 📂 Child references
 
 | Folder / Lua script | Reference |
