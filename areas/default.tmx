@@ -10,6 +10,9 @@
   <property name="Mystery Data Minimum" type="int" value="3"/>
   <property name="Name" value="Rail Road"/>
   <property name="Song" value="/server/assets/music/BN3 Internet.mid"/>
+  <property name="Weather_latitude" value="28.59"/>
+  <property name="Weather_longitude" value="-80.63"/>
+  <property name="Weather_mode" value="sync"/>
  </properties>
  <tileset firstgid="1" source="../assets/tiles/Cyber_Rail.tsx"/>
  <tileset firstgid="2" source="../assets/tiles/rainbow_floor.tsx"/>
@@ -45,7 +48,7 @@
  <tileset firstgid="206" source="../assets/tiles/nebula door.tsx"/>
  <tileset firstgid="218" source="../assets/tiles/Boulder.tsx"/>
  <tileset firstgid="219" source="../assets/tiles/Bench.tsx"/>
- <tileset firstgid="4097" source="../assets/tourney/ow-tourney-board.tsx"/>
+ <tileset firstgid="220" source="../assets/tourney/ow-tourney-board.tsx"/>
  <layer id="1" name="Tile Layer 1" width="100" height="100" opacity="0.9">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -2095,7 +2098,7 @@ DO YOU WANT THEM?</property>
     <property name="Event Name" value="Liberation Mission Selector"/>
    </properties>
   </object>
-  <object id="274" name="Tournament Board" type="Tournament Board" gid="4097" x="1856" y="1544" width="64" height="57">
+  <object id="274" name="Tournament Board" type="Tournament Board" gid="220" x="1856" y="1544" width="64" height="57">
    <properties>
     <property name="Best Of" type="int" value="3"/>
     <property name="Board Background" value="blue_bn4"/>
