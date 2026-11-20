@@ -7,6 +7,7 @@ local Config = require("scripts/ezlibs-custom/footbomb/constants")
 local RefereeMenu = {}
 
 local MENU_TITLE = "FootBomb"
+local MAX_WINNING_SCORE = 999
 
 function RefereeMenu.select_mode(player_id)
     -- OptionMenu returns zero-based indexes, including the explicit Cancel.
@@ -29,49 +30,46 @@ function RefereeMenu.configure(player_id, initial_rules, is_current)
     is_current = is_current or function() return true end
     local points = math.floor(tonumber(initial_rules.points_to_win)
         or Config.DEFAULTS.POINTS_TO_WIN)
-    points = math.max(1, points)
+    points = math.min(MAX_WINNING_SCORE, math.max(1, points))
     local grace = initial_rules.grace_enabled ~= false
 
-    local function score_label()
-        return "Winning Score: < " .. tostring(points) .. " >"
-    end
-    local function grace_label()
-        return "Grace: < " .. (grace and "On" or "Off") .. " >"
-    end
+    -- Aligned fields are measured in actual THICK font pixels by OptionMenu.
+    -- Both rows use the same arrow positions and a centered three-character
+    -- value field. Only the field value changes while the menu is open.
+    local aligned_values = {
+        [1] = { label = "Winning Score:", value = tostring(points), reserve = "999" },
+        [2] = { label = "Grace:", value = grace and "On" or "Off", reserve = "Off" },
+    }
 
     return Async.promisify(coroutine.create(function()
         local choice = Async.await(OptionMenu.select(player_id, {
-            score_label(), grace_label(), "Start Match", "Cancel",
+            "Winning Score:", "Grace:", "Start Match", "Cancel",
         }, "FootBomb Setup", {
             stable_text = true,
-            -- Keep the panel width fixed even as score digits are added.
-            -- Reserve four digits (or one more than the current score).
-            -- This prevents normal adjustments from resizing the backdrop
-            -- without scaling down the font for an unnecessarily wide value.
-            width_samples = { "Winning Score: < "
-                .. string.rep("9", math.max(4, #tostring(points) + 1))
-                .. " >" },
-            on_horizontal = function(index, delta, options)
+            aligned_values = aligned_values,
+            on_horizontal = function(index, delta)
                 if not is_current() then return true end
                 if index == 0 then
-                    points = math.max(1, points + delta)
-                    options[1] = score_label()
+                    -- Wrap within 1..999 in either direction (999+1 -> 1; 1-1 -> 999).
+                    points = ((points - 1 + delta) % MAX_WINNING_SCORE) + 1
+                    aligned_values[1].value = tostring(points)
                     return true
                 elseif index == 1 then
-                    grace = delta > 0
-                    options[2] = grace_label()
+                    -- Either direction flips the current value, never forces On/Off.
+                    if delta ~= 0 then grace = not grace end
+                    aligned_values[2].value = grace and "On" or "Off"
                     return true
                 end
                 return false
             end,
-            on_confirm = function(index, options)
+            on_confirm = function(index)
                 if not is_current() then return true end
                 if index == 0 then
                     -- Score is adjusted with Left/Right, not Confirm.
                     return true
                 elseif index == 1 then
                     grace = not grace
-                    options[2] = grace_label()
+                    aligned_values[2].value = grace and "On" or "Off"
                     return true
                 end
                 return false

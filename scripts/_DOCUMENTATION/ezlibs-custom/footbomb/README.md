@@ -2,7 +2,7 @@
 
 **Current map/observer setup:** [FootBomb source and train-station configuration](AREA_SETUP.md) (2026-11-19).
 
-**Current referee interaction:** [Unified 9-slice referee menu, winning score, Grace, and explanation lifecycle](referee_menu/index.md).
+**Current referee interaction:** [Unified 9-slice referee menu, aligned score/Grace value fields (1–999), and explanation lifecycle](referee_menu/index.md).
 
 > 📡 **Current-source update · 2026-11-11:** This authored guide is retained from the uploaded `internal_test_server(2).zip`. Its existing narrative/examples have **not** been exhaustively rewritten. For refreshed function signatures, parameters, dependencies, table initializers, and source line numbers, see the [regenerated module index](index.md) and [current systems guide](../../CURRENT_SYSTEMS.md). If older instructions here conflict with the current Lua implementation, follow the linked source references.
 > **Cross-system references:** For exact current input-controller and instance integration code, use the latest per-script references rather than assuming older hand-written examples are current.

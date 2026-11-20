@@ -270,6 +270,65 @@ local function render_stable_slot(menu, slot_name, text, physical_x, physical_y)
     menu.text_slots[slot_name] = new
 end
 
+-- Adjustable rows reserve the widest label and value *once* for all rows.
+-- Fixed physical anchor positions prevent a changing digit count from moving
+-- either arrow. The actual value text is measured and centered in the reserved
+-- slot, so a single digit is centered just like three digits or "Off".
+-- Values and reserves are plain strings; callers update a row.value in place.
+local function aligned_value_metrics(menu, scale)
+    local rows = menu.aligned_values
+    if type(rows) ~= "table" then return nil end
+
+    local label_width, value_width = 0, 0
+    local has_rows = false
+    for _, field in pairs(rows) do
+        if type(field) == "table" then
+            has_rows = true
+            label_width = math.max(label_width,
+                screen_text_width(field.label or "", scale))
+            value_width = math.max(value_width,
+                screen_text_width(field.reserve or field.value or "", scale),
+                screen_text_width(field.value or "", scale))
+        end
+    end
+    if not has_rows then return nil end
+
+    local gap = screen_text_width(" ", scale)
+    local prefix_width = math.max(screen_text_width("> ", scale),
+        screen_text_width("  ", scale))
+    local left_width = screen_text_width("<", scale)
+    local right_width = screen_text_width(">", scale)
+    local left_x = prefix_width + label_width + 2 * gap
+    local value_x = left_x + left_width + gap
+    local right_x = value_x + value_width + gap
+    return {
+        left_x = left_x,
+        value_x = value_x,
+        value_width = value_width,
+        right_x = right_x,
+        total_width = right_x + right_width,
+    }
+end
+
+local function render_aligned_row(menu, row, field, x, y, prefix, metrics)
+    local slot = "row" .. tostring(row)
+    -- Reuse stable per-character sprite IDs for each text fragment. Neither
+    -- left nor right arrow ever changes its world/screen position when a value
+    -- changes; only the value's glyphs move inside their fixed-width field.
+    render_stable_slot(menu, slot .. ":label",
+        prefix .. tostring(field.label or ""), x, y)
+    render_stable_slot(menu, slot .. ":left", "<",
+        x + metrics.left_x, y)
+    local value = tostring(field.value or "")
+    local value_width = screen_text_width(value, menu.text_scale)
+    local centered_value_x = x + metrics.value_x
+        + (metrics.value_width - value_width) / 2
+    render_stable_slot(menu, slot .. ":value", value,
+        centered_value_x, y)
+    render_stable_slot(menu, slot .. ":right", ">",
+        x + metrics.right_x, y)
+end
+
 local function refresh_stable_text(menu)
     if not menu.text_slots then return end
     local header = menu_title(menu)
@@ -281,15 +340,27 @@ local function refresh_stable_text(menu)
     local first, last = menu_window(menu)
     local row_step = menu.stable_row_height
         + 2 * CHILD_PADDING.vertical + OPTION_SPACING
+    local aligned = aligned_value_metrics(menu, menu.text_scale)
     local row = 0
     for index = first, last do
         row = row + 1
         local label = tostring(menu.options[index]):gsub("[\r\n\f]", " ")
         local prefix = index == menu.selected and "> " or "  "
-        render_stable_slot(menu, "row" .. tostring(row), prefix .. label,
-            menu.body_x + PANEL_PADDING.horizontal + CHILD_PADDING.horizontal,
-            menu.body_y + PANEL_PADDING.vertical + CHILD_PADDING.vertical
-                + (row - 1) * row_step)
+        local x = menu.body_x + PANEL_PADDING.horizontal + CHILD_PADDING.horizontal
+        local y = menu.body_y + PANEL_PADDING.vertical + CHILD_PADDING.vertical
+            + (row - 1) * row_step
+        local slot = "row" .. tostring(row)
+        local field = aligned and menu.aligned_values[index]
+        if type(field) == "table" then
+            render_stable_slot(menu, slot, "", x, y)
+            render_aligned_row(menu, row, field, x, y, prefix, aligned)
+        else
+            render_stable_slot(menu, slot .. ":label", "", x, y)
+            render_stable_slot(menu, slot .. ":left", "", x, y)
+            render_stable_slot(menu, slot .. ":value", "", x, y)
+            render_stable_slot(menu, slot .. ":right", "", x, y)
+            render_stable_slot(menu, slot, prefix .. label, x, y)
+        end
     end
 end
 
@@ -409,15 +480,22 @@ local function menu_text_width(menu, scale)
     local maximum = screen_text_width(title, scale)
     -- Optional width_samples reserve room for changing numeric/toggle labels.
     -- A changing label must never force a 9-slice panel rebuild mid-menu.
-    for _, source in ipairs({ menu.options, menu.width_samples or {} }) do
-        for _, label in ipairs(source) do
+    for index, label in ipairs(menu.options) do
+        if not (menu.aligned_values and menu.aligned_values[index]) then
             local line = tostring(label)
-            -- Selected and unselected rows may use different prefix widths.
             maximum = math.max(maximum,
                 screen_text_width("> " .. line, scale),
                 screen_text_width("  " .. line, scale))
         end
     end
+    for _, label in ipairs(menu.width_samples or {}) do
+        local line = tostring(label)
+        maximum = math.max(maximum,
+            screen_text_width("> " .. line, scale),
+            screen_text_width("  " .. line, scale))
+    end
+    local aligned = aligned_value_metrics(menu, scale)
+    if aligned then maximum = math.max(maximum, aligned.total_width) end
     return maximum
 end
 
@@ -727,11 +805,14 @@ Net:on("tick", function(event)
 end)
 
 -- config (optional): max_visible, centered, mugshot, stable_text,
--- width_samples, on_horizontal(index0, delta, options),
+-- width_samples, aligned_values[index1]={label,value,reserve},
+-- on_horizontal(index0, delta, options),
 -- on_confirm(index0, options). Handler indexes and selection results are
 -- zero-based. Horizontal delta is -1 (Left) or +1 (Right); return true for
 -- an in-place edit. stable_text=true keeps 9-slice backgrounds stationary
 -- during edits and navigation, rendering only changed text glyphs.
+-- aligned_values is supported with stable_text: reserves aligned left/right
+-- arrows and centers the live value within a fixed-width field for all rows.
 function OptionMenu.select(player_id, options, title, config)
     config = config or {}
     if type(options) ~= "table" then
@@ -772,6 +853,7 @@ function OptionMenu.select(player_id, options, title, config)
             title = title,
             options = menu_options,
             width_samples = config.width_samples,
+            aligned_values = config.stable_text == true and config.aligned_values or nil,
             on_horizontal = config.on_horizontal,
             on_confirm = config.on_confirm,
             cancel_index = cancel_index,
