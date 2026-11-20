@@ -318,6 +318,15 @@ function Dialogue.start(player_id, script, opts)
         type_sound_min_dt = o.type_sfx_min_dt,
         max_lines = backdrop and backdrop.max_lines or nil,
     }
+    -- Pass through the existing TextDisplay tint API when explicitly
+    -- requested by a textbox. Other dialogue retains its original colors.
+    if ui and type(ui.text_tint) == "table" then
+        local tint = ui.text_tint
+        text_options.r = tint.r
+        text_options.g = tint.g
+        text_options.b = tint.b
+        text_options.color_mode = tint.color_mode
+    end
 
     local visual_ui = {
         box_id = box_id,
@@ -336,6 +345,8 @@ function Dialogue.start(player_id, script, opts)
             type_sound = o.type_sfx_path,
             type_sound_min_dt = o.type_sfx_min_dt,
             max_lines = backdrop and backdrop.max_lines or nil,
+            r = text_options.r, g = text_options.g, b = text_options.b,
+            color_mode = text_options.color_mode,
         })
     else
         Displayer.Text.createTextBox(player_id, box_id, full_text, x_v, y_v, w_v, h_v, text_options)

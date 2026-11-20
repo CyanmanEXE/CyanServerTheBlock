@@ -1,3 +1,5 @@
+**[🟡 Gold Prog Ability Shop / Tiled class](LIBERATION_ABILITY_PROG.md)** — optional costs, persistent ownership and a gold-tinted MenuAPI shop.
+
 # 📁 `ezlibs-custom/nebulous-liberations`
 
 [🏠 Documentation home](../../index.md) · [⬆ Parent folder](../index.md)

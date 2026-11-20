@@ -1,3 +1,5 @@
+**[Gold Prog Ability Shop API](ability_shop/index.md)**
+
 # 📁 `ezlibs-custom/nebulous-liberations/liberations`
 
 [🏠 Documentation home](../../../index.md) · [⬆ Parent folder](../index.md)

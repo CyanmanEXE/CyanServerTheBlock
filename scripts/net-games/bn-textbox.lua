@@ -27,6 +27,8 @@ local function build_ui(player_id, opts)
         typing_speed = opts.typing_speed or 30,
         type_sfx_path = opts.type_sfx_path or "/server/assets/net-games/sfx/text.ogg",
         type_sfx_min_dt = opts.type_sfx_min_dt or 0.05,
+        -- Optional, opt-in text-glyph color. Ordinary dialogue is unchanged.
+        text_tint = opts.text_tint and shallow_copy(opts.text_tint) or nil,
     }
 
     -- Backdrop (text box frame)

@@ -657,11 +657,19 @@ function MenuAPI.handle_cancel(player_id)
 end
 
 -- Poll the canonical per-player InputController.
--- virtual_input and repeat timing are handled by input-controller/main.lua.
+-- virtual_input and repeat timing are handled by player-interface/input/api.lua.
 Net:on("tick", function(event)
     for player_id, stack in pairs(stacks) do
         local st=stack[#stack]
-        local ctrl,owner=st and st.control_session and st.control_session:input()
+        -- Preserve both return values. Lua's `and` expression collapses a
+        -- multi-result function call to one value, so the former expression
+        -- `st and st.control_session and st.control_session:input()` dropped
+        -- `owner`. The shared InputController denies reads without the owner
+        -- token while a PlayerInterface menu is active.
+        local ctrl, owner
+        if st and st.control_session then
+            ctrl, owner = st.control_session:input()
+        end
         -- Foreign input owners suspend the menu; never try to reclaim the
         -- controller from a timer/tick callback.
         if st and ctrl then

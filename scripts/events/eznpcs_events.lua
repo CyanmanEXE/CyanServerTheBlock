@@ -153,18 +153,33 @@ local RematchProgEvent ={
 }
 
 local GrantLiberationAbility = {
-	name = "Grant Liberation Mission Ability",
-	action = function(npc, player_id, dialogue, relay_object)
-		return async(function()
-			for i = 1, #liberation_item_list, 1 do
-				ezmemory.create_or_update_item(liberation_item_list[i].n, liberation_item_list[i].d, true)
-				local item_count = ezmemory.count_player_item(player_id, liberation_item_list[i].n)
-				if item_count > 0 then ezmemory.remove_player_item(player_id, liberation_item_list[i].n, item_count) end
-			end
-
-			if dialogue.custom_properties["Ability Item"] ~= nil then ezmemory.give_player_item(player_id, dialogue.custom_properties["Ability Item"], 1) end
-		end)
-	end
+    name = "Grant Liberation Mission Ability",
+    action = function(npc, player_id, dialogue, relay_object)
+        return async(function()
+            local id = dialogue and dialogue.custom_properties and dialogue.custom_properties["Ability Item"]
+            if type(id) ~= "string" or id == "" then return end
+            local Shop = require("scripts/ezlibs-custom/nebulous-liberations/liberations/ability_shop")
+            if Shop.is_supported(id) then
+                local ok, err = Shop.grant(player_id, id)
+                if not ok then
+                    print("[Liberation Ability] Legacy grant failed: " .. tostring(err))
+                end
+            else
+                -- Preserve the historical item-awarding behavior for aliases
+                -- whose Liberation action is not implemented in this snapshot.
+                for _, item in ipairs(liberation_item_list) do
+                    ezmemory.create_or_update_item(item.n, item.d, true)
+                    local n = ezmemory.count_player_item(player_id, item.n)
+                    if n > 0 then ezmemory.remove_player_item(player_id, item.n, n) end
+                end
+                ezmemory.give_player_item(player_id, id, 1)
+                local normalized = Shop.unlock(player_id, id)
+                if not normalized then
+                    print("[Liberation Ability] Legacy ability not in Gold Prog catalog: " .. tostring(id))
+                end
+            end
+        end)
+    end
 }
 
 --[[local VirologistDateCheck = {
@@ -345,3 +360,8 @@ eznpcs.add_event(event1)
 eznpcs.add_event(GrantLiberationAbility)
 eznpcs.add_event(event2)
 eznpcs.add_event(RematchProgEvent)
+
+-- Register the dedicated Gold Prog shop event without changing legacy quiz-grant behavior.
+local LiberationAbilityShop = require(
+    "scripts/ezlibs-custom/nebulous-liberations/liberations/ability_shop")
+LiberationAbilityShop.register(eznpcs)

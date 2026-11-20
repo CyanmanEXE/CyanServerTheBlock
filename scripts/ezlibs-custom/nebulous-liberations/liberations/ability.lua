@@ -6,6 +6,7 @@ local PanelEncounters = require("scripts/ezlibs-custom/nebulous-liberations/libe
 local helpers = require('scripts/ezlibs-scripts/helpers')
 local ezmemory = require('scripts/ezlibs-scripts/ezmemory')
 local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberations/constants")
+local Ownership = require("scripts/ezlibs-custom/nebulous-liberations/liberations/ability_ownership")
 
 local function static_shape_generator(offset_x, offset_y, shape)
     return function() return shape, offset_x, offset_y end
@@ -107,6 +108,17 @@ local Ability = {
         generate_shape = static_shape_generator(0, 0, { {1}, {1} }),
         activate = battle_to_liberate_and_loot
     },
+    -- Distinct from the two-panel fallback LongSwrd: the original HeroSwrd
+    -- liberates a three-panel vertical line at a cost of two Order Points.
+    HeroSwrd = {
+        name = "HeroSwrd",
+        question = "Use HeroSwrd?",
+        cost = 2,
+        remove_traps = false,
+        destroy_items = false,
+        generate_shape = static_shape_generator(0, 0, { {1}, {1}, {1} }),
+        activate = battle_to_liberate_and_loot
+    },
     WideSwrd = {
         name = "WideSwrd",
         question = "Use WideSwrd?",
@@ -169,28 +181,93 @@ local Ability = {
         generate_shape = static_shape_generator(0, 1, { {1, 1, 1} }),
         activate = battle_to_liberate_and_loot
     },
+    -- These four definitions restore the original Liberation abilities. They
+    -- use the current base-area encounter resolver and existing loot handlers.
+    Blaster = {
+        name = "Blaster",
+        question = "Should I blast panels with Blaster?",
+        cost = 1,
+        remove_traps = false,
+        destroy_items = false,
+        generate_shape = static_shape_generator(0, 0, {
+            {0, 1, 0},
+            {1, 1, 1},
+        }),
+        activate = battle_to_liberate_and_loot
+    },
+    Burner = {
+        name = "Burner",
+        question = "Should I burn panels with Burner?",
+        cost = 4,
+        remove_traps = true,
+        destroy_items = true,
+        generate_shape = static_shape_generator(0, 0, {
+            {1, 1, 1},
+            {1, 1, 1},
+            {1, 1, 1},
+        }),
+        activate = battle_to_liberate_and_loot
+    },
+    CrosBmb = {
+        name = "CrosBmb",
+        question = "Should I blow up panels with Cross Bomb?",
+        cost = 2,
+        remove_traps = true,
+        destroy_items = false,
+        generate_shape = static_shape_generator(0, 0, {
+            {0, 1, 0},
+            {1, 1, 1},
+            {0, 1, 0},
+        }),
+        activate = battle_to_liberate_and_loot
+    },
+    Bazooka = {
+        name = "Bazooka",
+        question = "Demolish with Bazooka?",
+        cost = 2,
+        remove_traps = true,
+        destroy_items = true,
+        generate_shape = static_shape_generator(0, 0, {
+            {1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1},
+            {1, 1, 1, 1, 1},
+        }),
+        activate = liberate_and_loot
+    },
 }
 
+-- The old resolver used only legacy item IDs and selected an arbitrary item
+-- through pairs(). The Gold Prog uses the canonical IDs below, so resolve
+-- the actual equipped item deterministically instead.
 local navi_ability_map = {
-    [Constants.AbilityIDs.LongSwrd] = Ability.LongSwrd,
-    [Constants.AbilityIDs.WideSwrd] = Ability.WideSwrd,
-    [Constants.AbilityIDs.OldSaber] = Ability.ScrenDiv,
-    [Constants.AbilityIDs.HevyShld] = Ability.Guard,
-    [Constants.AbilityIDs.HexScyth] = Ability.HexSickle,
-    [Constants.AbilityIDs.NumGadgt] = Ability.NumberSearch,
-    [Constants.AbilityIDs.GutsHamr] = Ability.GutsWave,
-    [Constants.AbilityIDs.ShdwShoe] = Ability.Shadowstep,
+    LongSwrd = Ability.LongSwrd,
+    HeroSwrd = Ability.HeroSwrd,
+    WideSwrd = Ability.WideSwrd,
+    OldSaber = Ability.ScrenDiv,
+    Guard = Ability.Guard,
+    HevyShld = Ability.Guard,
+    HexSickle = Ability.HexSickle,
+    NumGadgt = Ability.NumberSearch,
+    GutsHamr = Ability.GutsWave,
+    ShdwShoe = Ability.Shadowstep,
+    CrosBmb = Ability.CrosBmb,
+    Burner = Ability.Burner,
+    Blaster = Ability.Blaster,
+    Bazooka = Ability.Bazooka,
 }
 
 function Ability.resolve_for_player(player)
-    local ability = Ability.LongSwrd
-    for key,value in pairs(navi_ability_map) do
-        if ezmemory.count_player_item(player.id, key) > 0 then
-            ability = navi_ability_map[key]
-            break
-        end
+    local equipped = Ownership.get_equipped(player.id)
+    local selected = equipped and navi_ability_map[equipped]
+    if selected then return selected end
+    if equipped then
+        log:warn_data("Equipped Liberation item has no implemented ability", {
+            player_id=player.id, item=equipped,
+        })
     end
-    return ability
+    return Ability.LongSwrd
 end
 
 return Ability

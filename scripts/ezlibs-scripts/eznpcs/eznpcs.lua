@@ -284,8 +284,20 @@ function create_bot_from_object(area_id, object, player_id, options)
     npc.placeholder_id = object.id
     npc.placeholder_custom_properties = object.custom_properties or {}
 
+    -- Liberation Ability Prog is a first-class NPC subtype. It opens its
+    -- own gold shop event without requiring legacy Quiz/Dialogue object chains.
+    -- Existing First Dialogue links may remain in older maps for rollback.
+    if object.type == "Liberation Ability Prog" then
+        npc.first_dialogue = {
+            id = "liberation_ability_prog:" .. tostring(object.id),
+            type = "Dialogue",
+            custom_properties = { ["Event Name"] = "Liberation Ability Shop" },
+        }
+    end
+
     local first_dialogue_id = object.custom_properties["First Dialogue"]
-    if first_dialogue_id ~= nil and tostring(first_dialogue_id) ~= "" then
+    if object.type ~= "Liberation Ability Prog" and first_dialogue_id ~= nil
+        and tostring(first_dialogue_id) ~= "" then
         local first_dialogue = ezcache.get_object_by_id_cached(area_id, first_dialogue_id)
         if first_dialogue and (first_dialogue.type == "Dialogue" or first_dialogue.class == "Dialogue") then
             npc.first_dialogue = first_dialogue
@@ -956,7 +968,8 @@ local function register_npc_spawner(area_id, object)
             tostring(object.id), "->", tostring(template_ref))
         return
     end
-    if template.type ~= "NPC" and template.type ~= "Pushback NPC" then
+    if template.type ~= "NPC" and template.type ~= "Pushback NPC"
+        and template.type ~= "Liberation Ability Prog" then
         logger:for_area(area_id):warn(
             "[eznpcs] NPC Spawner NPC Template must reference an NPC or Pushback NPC object; got type:",
             tostring(template.type))
@@ -1221,6 +1234,7 @@ end
 
 object_registry.register_handler("NPC", register_npc_object)
 object_registry.register_handler("Pushback NPC", register_npc_object)
+object_registry.register_handler("Liberation Ability Prog", register_npc_object)
 
 -- Public lookup used by companion systems such as ezpushback.
 function eznpcs.get_bot_for_placeholder(area_id, object_id)
@@ -1241,7 +1255,8 @@ function eznpcs.add_npcs_to_area(area_id)
     local objects = Net.list_objects(area_id)
     for i, object_id in next, objects do
         local object = ezcache.get_object_by_id_cached(area_id, object_id)
-        if object and (object.type == "NPC" or object.type == "Pushback NPC") then
+        if object and (object.type == "NPC" or object.type == "Pushback NPC"
+            or object.type == "Liberation Ability Prog") then
             local props = object.custom_properties or {}
             local is_template_only = is_property_true(props["Template Only"])
             local is_quest = is_property_true(props["Quest NPC"])
@@ -1389,7 +1404,8 @@ function eznpcs.handle_object_interaction(player_id, object_id)
     end
 
     -- Check if it's an exclusive NPC placeholder
-    if (object.type == "NPC" or object.type == "Pushback NPC") and object.custom_properties then
+    if (object.type == "NPC" or object.type == "Pushback NPC"
+        or object.type == "Liberation Ability Prog") and object.custom_properties then
         if is_property_true(object.custom_properties["Player Exclusive"]) then
             printd("Exclusive NPC interaction for player", player_id, "placeholder", object.id)
             if not exclusive_npcs[player_id] or not exclusive_npcs[player_id][tostring(object.id)] then

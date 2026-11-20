@@ -10,9 +10,6 @@
   <property name="Mystery Data Minimum" type="int" value="3"/>
   <property name="Name" value="Rail Road"/>
   <property name="Song" value="/server/assets/music/BN3 Internet.mid"/>
-  <property name="Weather_latitude" value="28.59"/>
-  <property name="Weather_longitude" value="-80.63"/>
-  <property name="Weather_mode" value="sync"/>
  </properties>
  <tileset firstgid="1" source="../assets/tiles/Cyber_Rail.tsx"/>
  <tileset firstgid="2" source="../assets/tiles/rainbow_floor.tsx"/>
@@ -1452,14 +1449,6 @@
    </properties>
    <point/>
   </object>
-  <object id="202" name="Ability Prog" type="NPC" x="2392" y="2040">
-   <properties>
-    <property name="Asset Name" value="prog-gold"/>
-    <property name="Direction" value="Up Left"/>
-    <property name="First Dialogue" type="object" value="254"/>
-   </properties>
-   <point/>
-  </object>
   <object id="203" name="Ability Quiz 1" type="dialogue" x="1880" y="2712">
    <properties>
     <property name="Dialogue Type" value="quiz"/>
@@ -1585,13 +1574,25 @@ DO YOU WANT THEM?</property>
    </properties>
    <point/>
   </object>
-  <object id="215" name="Ability Prog" type="NPC" x="2392" y="2008">
+  <object id="215" name="Ability Prog" type="Liberation Ability Prog" x="2384" y="2064">
    <properties>
+    <property name="Ability 1" value="HeroSwrd"/>
+    <property name="Ability 10" value="CrosBmb"/>
+    <property name="Ability 11" value="Burner"/>
+    <property name="Ability 12" value="Blaster"/>
+    <property name="Ability 13" value="Bazooka"/>
+    <property name="Ability 2" value="WideSwrd"/>
+    <property name="Ability 3" value="OldSaber"/>
+    <property name="Ability 4" value="Guard"/>
+    <property name="Ability 5" value="HevyShld"/>
+    <property name="Ability 6" value="HexSickle"/>
+    <property name="Ability 7" value="NumGadgt"/>
+    <property name="Ability 8" value="GutsHamr"/>
+    <property name="Ability 9" value="ShdwShoe"/>
     <property name="Asset Name" value="prog-gold"/>
-    <property name="Dialogue Type" value="first"/>
     <property name="Direction" value="Up Right"/>
-    <property name="First Dialogue" type="object" value="267"/>
-    <property name="Text 1">HELLO!
+    <property name="Enable Costs" type="bool" value="false"/>
+    <property name="Welcome Text">HELLO!
 
 
 I CAN GRANT YOU NEW POWER.
@@ -1720,21 +1721,6 @@ DO YOU WANT THEM?</property>
    <properties>
     <property name="Dialogue Type" value="first"/>
     <property name="Text 1" value="NO PROBLEM. SEE YOU LATER!"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="228" name="Ability Prog" type="NPC" x="2384" y="2064">
-   <properties>
-    <property name="Asset Name" value="prog-gold"/>
-    <property name="Dialogue Type" value="first"/>
-    <property name="Direction" value="Up Right"/>
-    <property name="First Dialogue" type="object" value="266"/>
-    <property name="Text 1">HELLO!
-
-
-I CAN GRANT YOU NEW POWER.
-
-WHAT WOULD YOU LIKE?</property>
    </properties>
    <point/>
   </object>

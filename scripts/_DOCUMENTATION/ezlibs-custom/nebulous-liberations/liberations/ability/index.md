@@ -1,21 +1,18 @@
-# 📁 `ezlibs-custom/nebulous-liberations/liberations/ability`
+# 🗡️ Liberation Ability Runtime (`ability.lua`)
 
-[🏠 Documentation home](../../../../index.md) · [⬆ Parent folder](../index.md)
+[🏠 Documentation home](../../../../index.md) · [⬆ Parent folder](../index.md) · [🟡 Gold Prog guide](../../LIBERATION_ABILITY_PROG.md)
 
-## 🗂️ Contents
-- [Child references](#-child-references)
-- [Guides and additional material](#-guides-and-additional-material)
+The file is **`liberations/ability.lua`** (singular, not `abilities.lua`). It retains the current base-area EZEncounters resolver, plus the original missing Liberation actions.
 
-## 📂 Child references
+| Public interface | Parameters | Behavior |
+|---|---|---|
+| `Ability.resolve_for_player(player)` | player with `.id` | Uses equipped inventory item via `ability_ownership.get_equipped` and returns the mapped mission action. Falls back to `LongSwrd`. |
+| `Ability.<ability name>` | table | `name`, `question`, `cost`, `remove_traps`, `destroy_items`, `generate_shape`, `activate`; passives omit interactive fields. |
+| `generate_shape()` | None (extra arguments ignored) | Returns `shape`, `offset_x`, `offset_y`. |
+| `activate(instance, player_session, results, remove_traps, destroy_items)` | Mission/session and optional results/flags | Uses existing `initiate_encounter`, `liberate_and_loot_panels`, `loot_panels`, `complete_turn` handlers. |
 
-| Folder / Lua script | Reference |
-|---|---|
-| — | No child folders |
+**Restored original actions:** `HeroSwrd` (3 vertical panels; 2 points), `CrosBmb` (plus; 2), `Burner` (3×3; 4), `Blaster` (T; 1), `Bazooka` (5×5; 2). Other abilities retain their **current** server costs and behavior, not the old copied values. `PanelSearch` remains a placeholder.
 
-## 📚 Guides and additional material
+**Item IDs:** `HeroSwrd`, `WideSwrd`, `OldSaber`, `Guard`, `HevyShld`, `HexSickle`, `NumGadgt`, `GutsHamr`, `ShdwShoe`, `CrosBmb`, `Burner`, `Blaster`, `Bazooka`.
 
-| Document | Description |
-|---|---|
-| — | No separate guides |
-
-> 📅 Rebuilt from the supplied snapshot on 2026-11-19. Source-verified function signatures live in each script reference. Historical guides remain available alongside them.
+See [Tiled and shop configuration](../../LIBERATION_ABILITY_PROG.md) for ownership, quest-gated abilities, prices, and examples.
