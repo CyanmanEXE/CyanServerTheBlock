@@ -4,6 +4,12 @@ local Direction = require("scripts/ezlibs-scripts/direction")
 local helpers = require('scripts/ezlibs-scripts/helpers')
 local ezmemory = require('scripts/ezlibs-scripts/ezmemory')
 local ezcache = require('scripts/ezlibs-scripts/ezcache')
+
+-- Tiled Waypoints are resolved by object ID during NPC movement. They are
+-- not object-registry handlers, so register their cache eligibility here
+-- before object_registry.load_all() and eznpcs.load_npcs() run.
+-- The first ezcache lookup stores a waypoint and removes its Net object.
+ezcache.add_cacheable_type("Waypoint")
 local object_registry = require('scripts/ezlibs-scripts/object_registry')
 local math = require('math')
 local ezbus = require('scripts/ezlibs-scripts/ezbus')
@@ -41,6 +47,9 @@ local npc_spawners = {}
 
 local npcs = {}                           -- global bot ID -> npc data (for all bots, including exclusive)
 local current_player_conversation = {}
+-- Report each invalid movement target only once per area/object, rather
+-- than flooding the log on every loop through an incorrectly linked path.
+local warned_invalid_waypoint_targets = {}
 
 local npc_asset_folder = '/server/assets/ezlibs-assets/eznpcs/'
 local custom_events_script_path = 'scripts/events/eznpcs_events'
@@ -718,9 +727,31 @@ function move_npc(npc,delta_time)
 end
 
 function on_npc_reached_waypoint(npc,waypoint)
-    local should_be_cached = ezcache.object_is_of_type(waypoint,{"Waypoint"})
-    if not should_be_cached then
-        printd("WARNING Waypoint "..waypoint.id.." at "..waypoint.x..","..waypoint.y.." in "..npc.area_id.." has incorrect type and wont be cached")
+    local props = waypoint.custom_properties or {}
+    local next_waypoints = helpers.extract_numbered_properties(waypoint,"Next Waypoint ")
+
+    -- Normal path nodes have Tiled type/class "Waypoint". Legacy paths also
+    -- point BACK to the original NPC placeholder, allowing a walking NPC to
+    -- return to its spawn tile before starting the route again. That NPC is
+    -- not a misclassified Waypoint and must not be cached *as* one.
+    -- Only accept NPC route anchors that actually have a Next Waypoint link.
+    local is_waypoint = ezcache.object_is_of_type(waypoint, "Waypoint")
+    local is_npc_route_anchor =
+        ezcache.object_is_of_type(waypoint,
+            {"NPC", "Pushback NPC", "Liberation Ability Prog"})
+        and next(next_waypoints) ~= nil
+
+    if not is_waypoint and not is_npc_route_anchor then
+        local warning_key = tostring(npc.area_id) .. ":" .. tostring(waypoint.id)
+        if not warned_invalid_waypoint_targets[warning_key] then
+            warned_invalid_waypoint_targets[warning_key] = true
+            printd("WARNING movement target " .. tostring(waypoint.id)
+                .. " at " .. tostring(waypoint.x) .. "," .. tostring(waypoint.y)
+                .. " in " .. tostring(npc.area_id)
+                .. " has type " .. tostring(waypoint.type)
+                .. ", class " .. tostring(waypoint.class)
+                .. " (expected Waypoint or linked NPC route anchor)")
+        end
     end
     if waypoint.custom_properties['Wait Time'] ~= nil then
         npc.wait_time = tonumber(waypoint.custom_properties['Wait Time'])
@@ -745,7 +776,6 @@ function on_npc_reached_waypoint(npc,waypoint)
     if waypoint.custom_properties["Waypoint Type"] then
         waypoint_type = waypoint.custom_properties["Waypoint Type"]
     end
-    local next_waypoints = helpers.extract_numbered_properties(waypoint,"Next Waypoint ")
     local next_waypoint_id = nil
     if waypoint_type == "first" then
         next_waypoint_id = first_value_from_table(next_waypoints)

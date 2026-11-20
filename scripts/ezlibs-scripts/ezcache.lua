@@ -7,9 +7,38 @@ function ezcache.add_cacheable_type(type_name)
     ezcache.cacheable_types[type_name] = true
 end
 
--- Check if an object type should be cached
-function ezcache.object_is_of_type(object)
-    return ezcache.cacheable_types[object.type] == true
+-- Tiled exposes object classification as type, class, or both, depending on
+-- the map/runtime. A match in either field is intentional; a Lua object may
+-- have type = "NPC" and class = "Waypoint" (or the reverse).
+local function matches_object_type(object, expected)
+    return type(expected) == "string"
+        and (object.type == expected or object.class == expected)
+end
+
+-- With allowed_types omitted, check whether either classification is
+-- registered as cacheable. With a string or array of strings, perform a
+-- direct classification check independent of cache registration.
+-- This does not make arbitrary NPC route anchors into Waypoints: an NPC
+-- still needs its own cache registration, as it did before.
+function ezcache.object_is_of_type(object, allowed_types)
+    if not object then return false end
+
+    if allowed_types == nil then
+        return (type(object.type) == "string"
+                and ezcache.cacheable_types[object.type] == true)
+            or (type(object.class) == "string"
+                and ezcache.cacheable_types[object.class] == true)
+    end
+
+    if type(allowed_types) == "string" then
+        return matches_object_type(object, allowed_types)
+    end
+    if type(allowed_types) == "table" then
+        for _, expected in ipairs(allowed_types) do
+            if matches_object_type(object, expected) then return true end
+        end
+    end
+    return false
 end
 
 -- Store a pre‑fetched object in the cache and remove it from Net
