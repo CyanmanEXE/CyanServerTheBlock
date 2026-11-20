@@ -63,7 +63,7 @@ end
 
 local remove_instance
 
-local function transfer_players_to_new_instance(base_area, player_ids)
+local function transfer_players_to_new_instance(base_area, player_ids, return_destination)
     if type(base_area) ~= "string" or base_area == "" then
         log:error("Cannot start mission: missing liberation area name.")
         return
@@ -136,6 +136,20 @@ local function transfer_players_to_new_instance(base_area, player_ids)
         return
     end
     local instance = instance_or_error
+    -- This return point belongs to this particular mission instance, not the
+    -- shared map template. Other gates keep their existing Respawn Area flow.
+    if type(return_destination) == "table"
+        and type(return_destination.area_id) == "string"
+        and tonumber(return_destination.x)
+        and tonumber(return_destination.y)
+        and tonumber(return_destination.z) then
+        instance.return_destination = {
+            area_id = return_destination.area_id,
+            x = tonumber(return_destination.x),
+            y = tonumber(return_destination.y),
+            z = tonumber(return_destination.z),
+        }
+    end
     local spawn = instance:get_spawn_position()
     if not spawn then
         log:error_data("Cannot start mission: no spawn position", {
@@ -209,7 +223,7 @@ function LibPlugin.spawn_boss(instance_area_id, boss_id)
     return instance:spawn_boss(boss_id, true)
 end
 
-function LibPlugin.start_game_for_player(player_id, liberation_id)
+function LibPlugin.start_game_for_player(player_id, liberation_id, return_destination)
     local player = players[player_id]
     if not player then
         log:error_data("Cannot start mission: player not initialized", {
@@ -221,9 +235,9 @@ function LibPlugin.start_game_for_player(player_id, liberation_id)
 
     local party = Parties.find(player_id)
     if party == nil then
-        transfer_players_to_new_instance(liberation_id, { player_id })
+        transfer_players_to_new_instance(liberation_id, { player_id }, return_destination)
     else
-        transfer_players_to_new_instance(liberation_id, party.members)
+        transfer_players_to_new_instance(liberation_id, party.members, return_destination)
     end
 end
 
@@ -299,8 +313,35 @@ remove_instance = function(area_id)
 
     local area_name = Net.get_area_name(area_id)
     local configured_area = respawn_table[area_name]
-    local respawn_area = loaded_area_id(configured_area)
-    local spawn = safe_respawn_position(respawn_area)
+    local respawn_area
+    local spawn
+    local return_source = "mission_config"
+
+    -- Mission Selector launches save the source NPC's front tile on this
+    -- particular instance. Validate the area is still loaded at cleanup.
+    -- A missing/invalid override falls back to the original mission config.
+    local return_destination = instance.return_destination
+    if return_destination then
+        local resolved_area = loaded_area_id(return_destination.area_id)
+        if resolved_area
+            and type(return_destination.x) == "number"
+            and type(return_destination.y) == "number"
+            and type(return_destination.z) == "number" then
+            respawn_area = resolved_area
+            spawn = return_destination
+            return_source = "mission_selector"
+        else
+            log:warn_data("Mission Selector return destination unavailable; using mission respawn", {
+                instance_area_id = area_id,
+                requested_return_area = return_destination.area_id,
+            })
+        end
+    end
+
+    if not spawn then
+        respawn_area = loaded_area_id(configured_area)
+        spawn = safe_respawn_position(respawn_area)
+    end
 
     if configured_area and not respawn_area then
         log:warn_data("Liberation respawn area not loaded; using fallback", {
@@ -325,6 +366,10 @@ remove_instance = function(area_id)
         configured_respawn_area = configured_area,
         respawn_area = respawn_area,
         spawn_found = spawn ~= nil,
+        return_source = return_source,
+        return_x = spawn and spawn.x,
+        return_y = spawn and spawn.y,
+        return_z = spawn and spawn.z,
     })
 
     if not spawn then

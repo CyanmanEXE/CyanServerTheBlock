@@ -7,6 +7,7 @@
 local EzNPCs = require("scripts/ezlibs-scripts/eznpcs/eznpcs")
 local OptionMenu = require("scripts/ezlibs-custom/nebulous-liberations/liberations/option_menu")
 local Constants = require("scripts/ezlibs-custom/nebulous-liberations/liberations/constants")
+local Direction = require("scripts/ezlibs-scripts/direction")
 local SharedLogger = require("scripts/logger/logger")
 local log = SharedLogger.register("nebulous-liberations"):register_subsystem("mission-selector")
 
@@ -95,6 +96,72 @@ function Selector.available_missions()
     return missions
 end
 
+-- The NPC bot can temporarily face the player while talking. For the
+-- return tile, use the fixed Direction on the original Tiled placeholder.
+-- Net.get_object_by_id returns world/tile coordinates, NOT raw TMX pixels.
+-- The same tile-center convention (floor + 0.5) is used by Endless Runner.
+local function direction_step(direction)
+    if type(direction) ~= "string" or type(Direction.to_vector) ~= "function" then
+        return nil, nil
+    end
+    local known = {
+        ["Up"] = true, ["Down"] = true,
+        ["Left"] = true, ["Right"] = true,
+        ["Up Left"] = true, ["Up Right"] = true,
+        ["Down Left"] = true, ["Down Right"] = true,
+    }
+    if not known[direction] then return nil, nil end
+    local vec = Direction.to_vector(direction)
+    if type(vec) ~= "table" then return nil, nil end
+    -- to_vector uses +/-0.5 for the four screen-cardinal directions.
+    -- Normalize each nonzero component to one map tile, so every target
+    -- remains at a tile center for all eight possible directions.
+    local function tile_step(value)
+        if type(value) ~= "number" then return nil end
+        if value > 0 then return 1 end
+        if value < 0 then return -1 end
+        return 0
+    end
+    return tile_step(vec.x), tile_step(vec.y)
+end
+
+-- Returns an optional *instance-specific* destination to be used by mission
+-- cleanup. Never changes the configured Respawn Area of the mission map.
+function Selector.return_destination_for_npc(npc, area_id)
+    if type(npc) ~= "table" or type(area_id) ~= "string" or area_id == "" then
+        return nil, "missing_npc_or_area"
+    end
+
+    local object
+    if npc.placeholder_id ~= nil then
+        local ok, result = pcall(Net.get_object_by_id, area_id, npc.placeholder_id)
+        if ok then object = result end
+    end
+    local props = (object and object.custom_properties)
+        or npc.placeholder_custom_properties or {}
+    local direction = props.Direction or npc.direction
+    local step_x, step_y = direction_step(direction)
+    if step_x == nil or step_y == nil then
+        return nil, "invalid_tiled_direction"
+    end
+
+    local x = tonumber(object and object.x or npc.x)
+    local y = tonumber(object and object.y or npc.y)
+    local z = tonumber(object and object.z or npc.z)
+    if not x or not y or not z then
+        return nil, "missing_npc_position"
+    end
+
+    return {
+        area_id = area_id,
+        x = math.floor(x) + step_x + 0.5,
+        y = math.floor(y) + step_y + 0.5,
+        z = z,
+        npc_id = object and object.id or npc.placeholder_id,
+        direction = direction,
+    }
+end
+
 function Selector.register(plugin)
     assert(plugin and type(plugin.start_game_for_player) == "function",
         "Mission Selector requires the Nebulous Liberations plugin")
@@ -138,9 +205,30 @@ function Selector.register(plugin)
                     mission_area = mission.id,
                     label = mission.label,
                 })
-                -- This is the same party-aware entry point used by permanent
-                -- and destructible Liberation Gates. No gate is removed.
-                plugin.start_game_for_player(player_id, mission.id)
+                local return_destination, return_error =
+                    Selector.return_destination_for_npc(npc, area_id)
+                if return_destination then
+                    log:info_data("Golden Prog mission return destination", {
+                        player_id = player_id,
+                        mission_area = mission.id,
+                        return_area = return_destination.area_id,
+                        return_x = return_destination.x,
+                        return_y = return_destination.y,
+                        return_z = return_destination.z,
+                        npc_id = return_destination.npc_id,
+                        tiled_direction = return_destination.direction,
+                    })
+                else
+                    log:warn_data("Golden Prog return tile unavailable; using mission respawn", {
+                        player_id = player_id,
+                        mission_area = mission.id,
+                        reason = return_error,
+                        npc_id = npc and npc.placeholder_id,
+                    })
+                end
+                -- Keep the same party-aware launcher used by Liberation Gates.
+                -- Only the Mission Selector passes a source-NPC return point.
+                plugin.start_game_for_player(player_id, mission.id, return_destination)
             end)
         end,
     })

@@ -19,18 +19,22 @@ The menu includes a **Gold Prog mugshot to the left**, centers the combined UI g
 
 ## Map configuration
 
-`areas/default.tmx` contains two new objects in `Object Layer 0`:
+In the most recent supplied `areas/default.tmx`, the selector is on the raised `Object Layer 4`:
 
-| ID | Type | Name | Position (Tiled object coordinates) | Properties |
-|---|---|---|---|---|
-| **216** | `NPC` | `Golden Liberation Prog` | **(744, 736)** | `Asset Name=prog-gold`, `Direction=Up Right`, `First Dialogue=217`, `Mug Animation Name=prog-gold`, `Dont Face Player=false` |
-| **217** | `Dialogue` | `Golden Prog Mission Selection` | **(720, 736)** | `Dialogue Type=none`, `Event Name=Liberation Mission Selector` |
+| Object ID | Type | Name | TMX position | Relevant properties |
+|---:|---|---|---|---|
+| **272** | `NPC` | `Golden Liberation Prog` | `(1776, 1544)` | `Asset Name=prog-gold`, `Direction=Down Left`, `First Dialogue=273`, `Mug Animation Name=prog-gold` |
+| **273** | `Dialogue` | `Golden Liberation Mission Selector` | `(1808, 1536)` | `Event Name=Liberation Mission Selector` |
 
-The existing Home Warp is object **45** at **(786, 690)**; its properties and every existing map object/tileset GID are unchanged. The next object ID is now **218**.
+**Required Tiled NPC fields:** `Asset Name`, `Direction`, and `First Dialogue` pointing to the event's Dialogue object. The Dialogue requires `Event Name = Liberation Mission Selector`. `Mug Animation Name` and `Dont Face Player` are optional.
 
-**To move the Prog:** reposition object 216 in Tiled. Do not change `First Dialogue=217`, the `Event Name`, or these objects' IDs without updating the references.
+**Return tile:** When a player starts a mission using this NPC, the mission stores the center of the next tile in its authored `Direction` (here, `Down Left`). It also stores the NPC's runtime `z` elevation and source area. Returning from the mission sends players to that precise tile instead of the mission's generic `Liberation Respawn`. This works for other selector NPC placements and all eight directions without extra Tiled return-coordinate properties.
 
-**If the server has a newer customized default map:** merge objects 216 and 217 instead of overwriting that map. Assign new IDs if those numbers are already occupied, and update `First Dialogue` accordingly.
+The `Direction` used for the return point is read from the original Tiled object rather than from a bot temporarily facing the person interacting with it. Moving or rotating the NPC in Tiled therefore changes its return tile automatically. If the area is no longer loaded on return, the normal mission respawn fallback is used. Regular Liberation Gates continue using their original configured return behavior.
+
+**Do not set return points using TMX pixel coordinates manually.** The code uses the engine-provided object world/tile position (`Net.get_object_by_id`) and snaps it to a tile center before transferring.
+
+The NPC and Dialogue IDs above are from the latest supplied default-map snapshot; if you edit or replace the map, preserve the `First Dialogue` reference and keep the object IDs unique.
 
 ## Mission discovery
 
@@ -61,7 +65,7 @@ The menu is implemented by `OptionMenu.select(player_id, labels, "Liberations", 
 
 The existing `PlayerControl.begin(... profile="menu")` session continues to own virtual input, engine movement lock, and cleanup. The eznpcs dialogue's separate named capture remains scoped to the conversation. On completion or disconnect, both 9-slice panels and the mugshot sprite are erased, and the session is closed. Input release guards remain active to prevent selecting the first row accidentally. The input handler does not impose an additional indefinite neutral-direction gate after those guards. It reads the two return values from `PlayerControl.Session:input()` without a Lua logical operator, so the InputController ownership token is never lost.
 
-The menu's promise result is **zero-based**. If the chosen result is in `[0, mission_count - 1]`, the event calls `LibPlugin.start_game_for_player(player_id, missions[result+1].id)`, preserving party behavior. No gate object is changed, deleted, or disabled.
+The menu's promise result is **zero-based**. If the chosen result is in `[0, mission_count - 1]`, the event calls `LibPlugin.start_game_for_player(player_id, missions[result+1].id, return_destination)`, preserving party behavior. The optional return destination is stored per instance and used for every participant's mission exit. No gate object is changed, deleted, or disabled.
 
 ### API
 
@@ -93,7 +97,7 @@ Gold Prog and the menu are provisioned through existing eznpcs/Net/Displayer API
 3. Verify the mug is cropped to **one 40×48 frame** and shown beside the centered 9-slice menu.
 4. Verify every choice stays on one line with room for its selection cursor. Scroll through more than five options and check the panel width stays fixed; verify selection and Cancel work without moving the player.
 5. Launch a mission; verify a new Liberation instance is created and party members transfer using the existing mission launcher.
-6. Return to `default` and confirm the **same Prog remains** ready to open the menu again.
+6. Return to `default` and confirm the player appears at the center of the tile directly in front of the **same Prog** (including its map elevation) and can open the menu again.
 7. Leave while the menu is open, if possible, and check the mug and menu UI are removed.
 
 Offline tests cover mission filtering, party-launch call, five-row scroll, selection indices, mugshot cleanup, and legacy menu layout. Live ONB client rendering and transfers must be verified in-game.
