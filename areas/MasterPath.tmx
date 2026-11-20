@@ -158,34 +158,34 @@
   </object>
   <object id="113" name="TESTER" type="Radius Encounter" x="400" y="1112" width="35" height="31">
    <properties>
-    <property name="Name" value="Encounter1"/>
+    <property name="Name" value="FirstBattle"/>
     <property name="Radius" value="2.0"/>
    </properties>
   </object>
   <object id="114" name="TESTER" type="Radius Encounter" x="1104" y="1176" width="35" height="31">
    <properties>
-    <property name="Name" value="Encounter2"/>
+    <property name="Name" value="FireBattle"/>
     <property name="Once" type="bool" value="false"/>
     <property name="Path" value=""/>
    </properties>
   </object>
   <object id="115" name="TESTER" type="Radius Encounter" x="1096" y="1040" width="35" height="31">
    <properties>
-    <property name="Name" value="Encounter3"/>
+    <property name="Name" value="AquaBattle"/>
     <property name="Once" type="bool" value="false"/>
     <property name="Path" value=""/>
    </properties>
   </object>
   <object id="116" name="TESTER" type="Radius Encounter" x="992" y="864" width="35" height="31">
    <properties>
-    <property name="Name" value="Encounter4"/>
+    <property name="Name" value="ElecBattle"/>
     <property name="Once" type="bool" value="false"/>
     <property name="Path" value=""/>
    </properties>
   </object>
   <object id="117" name="TESTER" type="Radius Encounter" x="1176" y="800" width="35" height="31">
    <properties>
-    <property name="Name" value="Encounter5"/>
+    <property name="Name" value="WoodBattle"/>
     <property name="Once" type="bool" value="false"/>
     <property name="Path" value=""/>
    </properties>
@@ -346,6 +346,7 @@
    <properties>
     <property name="Battle Lost" type="object" value="123"/>
     <property name="Battle Won" type="object" value="138"/>
+    <property name="Encounter Name" value="SwordBattle"/>
     <property name="Dialogue Type" value="none"/>
     <property name="Event Name" value=""/>
    </properties>

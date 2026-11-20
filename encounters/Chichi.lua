@@ -82,7 +82,7 @@ local Encounter3 = {
     path="/server/assets/ezlibs-assets/ezencounters/ezencounters.zip",
     weight=10,
     enemies={
-        {name="Zomon / Zaemon",rank=1},
+        {name="Zomon",rank=1},
         {name="Beetank",rank=3},
         {name="Zomon",rank=4},
     },
