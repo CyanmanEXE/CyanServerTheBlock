@@ -422,6 +422,61 @@ local function is_panel(self, object)
     return resolve_panel_type(object) ~= nil
 end
 
+-- DEBUGLIB is a catalog test map. Unlike normal Liberation maps, its
+-- hundreds of test panels are not intended to attack at the same time.
+-- Keep the authored encounters/panels available while limiting active bots,
+-- HP digits, camera sequences and network packets to the player's vicinity.
+local DEBUGLIB_CATALOG_WAKE_RADIUS = 9
+local DEBUGLIB_CATALOG_SLEEP_RADIUS = 16
+local DEBUGLIB_CATALOG_TURN_RADIUS = 12
+local DEBUGLIB_CATALOG_REFRESH_SECONDS = 0.4
+local DEBUGLIB_CATALOG_SPAWN_BUDGET = 3
+local DEBUGLIB_CATALOG_DESPAWN_BUDGET = 6
+
+-- Cache the active players' current coordinates once per refresh/turn.
+-- Reading Net.get_player_position hundreds of times per tick caused avoidable
+-- server work on DEBUGLIB's long testing corridor.
+local function get_active_mission_player_positions(mission)
+    local positions = {}
+    for _, player in ipairs(mission.players or {}) do
+        local area_ok, area = pcall(Net.get_player_area, player.id)
+        if area_ok and area == mission.area_id then
+            local position_ok, position = pcall(Net.get_player_position, player.id)
+            local px = position_ok and type(position) == "table" and tonumber(position.x)
+                or tonumber(player.x)
+            local py = position_ok and type(position) == "table" and tonumber(position.y)
+                or tonumber(player.y)
+            local pz = position_ok and type(position) == "table" and tonumber(position.z)
+                or tonumber(player.z)
+            if px and py and pz then
+                positions[#positions + 1] = {x = px, y = py, z = pz}
+            end
+        end
+    end
+    return positions
+end
+
+local function distance_to_player_positions(positions, position)
+    local closest = math.huge
+    for _, player in ipairs(positions) do
+        if math.floor(player.z) == math.floor(position.z) then
+            local distance = math.max(math.abs(math.floor(player.x) - math.floor(position.x)),
+                math.abs(math.floor(player.y) - math.floor(position.y)))
+            if distance < closest then closest = distance end
+        end
+    end
+    return closest
+end
+
+-- Only labeled DEBUGLIB testing viruses are streamed. All mission panels,
+-- encounter configs, and regular mission enemy behavior remain intact.
+local function is_debuglib_catalog_test(mission, object, object_type)
+    return mission.base_area_id == "DEBUGLIB"
+        and object_type == Constants.PanelTypes.DarkHoleBuffedVirus
+        and type(object.name) == "string"
+        and object.name:sub(1, 7) == "TEST - "
+end
+
 local function is_adjacent(position_a, position_b)
     if position_a.z ~= position_b.z then
         return false
@@ -1207,7 +1262,16 @@ local function take_enemy_turn(self)
             return
         end
 
+        local active_player_positions = self.base_area_id == "DEBUGLIB"
+            and get_active_mission_player_positions(self) or nil
         for _, enemy in ipairs(self.enemies) do
+            -- Only streamed DEBUGLIB testing Progs skip faraway turns.
+            -- Original mission enemies retain their authored behavior.
+            if #self.players == 0 then break end
+            local should_take_turn = not enemy.debuglib_catalog_test
+                or distance_to_player_positions(active_player_positions, enemy)
+                    <= DEBUGLIB_CATALOG_TURN_RADIUS
+            if should_take_turn then
             for _, player in ipairs(self.players) do
                 Net.slide_player_camera(player.id, enemy.x + .5, enemy.y + .5, enemy.z, slide_time)
             end
@@ -1233,10 +1297,14 @@ local function take_enemy_turn(self)
             })
             Async.await(enemy:take_turn())
             Async.await(Async.sleep(hold_time))
+            end
         end
 
         for _, dark_hole in ipairs(self.dark_holes) do
-            if not Enemy.is_alive(dark_hole.enemy) then
+            -- DEBUGLIB catalog viruses are managed by proximity streaming.
+            -- Without this guard the ordinary Dark Hole respawn pass would
+            -- immediately recreate every deferred test enemy after a turn.
+            if not dark_hole.catalog_lazy_spawn and not Enemy.is_alive(dark_hole.enemy) then
                 local neighbor_offsets = {
                     {1, -1}, {1, 0}, {1, 1}, {-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {0, -1}
                 }
@@ -1447,6 +1515,10 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
         bosses = {},
         boss_definitions = {},
         enemies = {},
+        -- DEBUGLIB labeled test viruses are loaded on demand. This avoids
+        -- spawning 394 bots plus thousands of private HP-digit bots at once.
+        catalog_spawn_entries = {},
+        catalog_refresh_timer = 0,
         panels = {},
         dark_holes = {},
         indestructible_panels = {},
@@ -1569,6 +1641,20 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
         })
     end
 
+    -- Build default-policy lookup once while the cloned area's authored
+    -- objects are intact. Subsequent per-panel configuration resolves can
+    -- reuse it instead of rescanning every object hundreds of times.
+    EnemyConfig.prepare_area(mission.area_id)
+
+    -- Resolve the collision panel GID once, not once per authored panel.
+    -- Preserve the previous base-area fallback if the cloned lookup failed.
+    local collision_panel_gid = collision_tileset_ok
+        and type(collision_tileset) == "table" and collision_tileset.first_gid
+    if not collision_panel_gid then
+        local base_collision_tileset = Net.get_tileset(base_area_id, collision_tileset_path)
+        collision_panel_gid = base_collision_tileset.first_gid
+    end
+
     -- Enemy spawns are deferred until every panel has been registered in
     -- mission.panels. Dark Hole spawn offsets can point at panels whose Tiled
     -- objects appear later in Net.list_objects(), so spawning during this
@@ -1601,13 +1687,14 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
             local panel_type = resolve_panel_type(object)
             local new_panel = {
                 name = "", type = panel_type, source_type = object_type,
+                catalog_lazy_spawn = is_debuglib_catalog_test(mission, object, object_type),
                 scale = requested_panel_scale or (is_buffed_virus and 1 or nil),
                 enemy_config = EnemyConfig.resolve(mission.area_id, object,
                     Constants.CustomProperties.MinionHealthOverride,
                     is_buffed_virus and "Buffed Virus" or "Dark Hole"),
                 visible = true,
                 x = object.x, y = object.y, z = object.z, width = object.width, height = object.height,
-                data = { type = "tile", gid = Net.get_tileset(base_area_id, "/server/assets/ezlibs-custom/nebulous-liberations/tiles/Liberation Collision.tsx").first_gid },
+                data = { type = "tile", gid = collision_panel_gid },
                 custom_properties = object.custom_properties,
                 visual_object_id = object.id,
                 visual_gid = object.data.gid
@@ -1737,13 +1824,19 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
                         remediation = "Set Spawns to a registered overworld enemy template",
                     })
                 else
-                    pending_enemy_spawns[#pending_enemy_spawns + 1] = {
-                    source_object_id = object.id,
-                    source_panel = new_panel,
-                    name = template_name,
-                    direction = object.custom_properties[Constants.CustomProperties.Direction] or "Down",
-                    position = { x = object.x, y = object.y, z = object.z },
+                    local pending = {
+                        source_object_id = object.id,
+                        source_panel = new_panel,
+                        name = template_name,
+                        direction = object.custom_properties[Constants.CustomProperties.Direction] or "Down",
+                        position = { x = object.x, y = object.y, z = object.z },
                     }
+                    if new_panel.catalog_lazy_spawn then
+                        new_panel.catalog_spawn_entry = pending
+                        mission.catalog_spawn_entries[#mission.catalog_spawn_entries + 1] = pending
+                    else
+                        pending_enemy_spawns[#pending_enemy_spawns + 1] = pending
+                    end
                 end
             end
         end
@@ -1754,6 +1847,7 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
     -- destination panel, regardless of Tiled object ordering.
     spawn_log:info_data("Panel overworld spawn queue constructed", {
         area_id = mission.area_id, configured_count = #pending_enemy_spawns,
+        deferred_catalog_count = #mission.catalog_spawn_entries,
         dark_hole_count = #mission.dark_holes,
     })
     local spawned_panel_enemy_count = 0
@@ -1857,6 +1951,117 @@ function Mission:new(base_area_id, new_area_id, players, max_order_points)
     })
 
     return mission
+end
+
+
+-- Spawn only nearby DEBUGLIB test progs. These test markers stay authored in
+-- the TMX and remain valid encounter/HP/scale references while offscreen.
+-- Spawn and despawn budgets spread the work across ticks rather than causing
+-- a single synchronous Net.create_bot + HP display packet burst.
+local function refresh_debuglib_catalog_spawns(mission)
+    local entries = mission.catalog_spawn_entries
+    if not entries or #entries == 0 or #mission.players == 0 then return end
+
+    local player_positions = get_active_mission_player_positions(mission)
+    if #player_positions == 0 then return end
+
+    local spawned, despawned = 0, 0
+    for _, entry in ipairs(entries) do
+        local panel = entry.source_panel
+        if not entry.removed then
+            -- A liberated/removed test panel must not re-create its bot.
+            if mission:get_panel_at(panel.x, panel.y, panel.z) ~= panel then
+                entry.removed = true
+            else
+                local distance = distance_to_player_positions(player_positions, entry.position)
+                local enemy = entry.enemy
+                -- Enemy.destroy may remove a bot without notifying the spawn
+                -- tracker; detect and clear stale references before respawning.
+                if enemy and not Enemy.is_alive(enemy) then
+                    HPIndicators.remove_enemy(mission, enemy)
+                    for i = #mission.enemies, 1, -1 do
+                        if mission.enemies[i] == enemy then
+                            table.remove(mission.enemies, i)
+                            break
+                        end
+                    end
+                    panel.enemy = nil
+                    entry.enemy = nil
+                    enemy = nil
+                end
+                if enemy and distance > DEBUGLIB_CATALOG_SLEEP_RADIUS
+                    and despawned < DEBUGLIB_CATALOG_DESPAWN_BUDGET then
+                    local removed, removal_result = pcall(Net.remove_bot, enemy.id, false)
+                    if not removed or removal_result == false then
+                        spawn_log:warn_data("DEBUGLIB catalog enemy despawn failed", {
+                            area_id = mission.area_id,
+                            object_id = entry.source_object_id,
+                            error = removed and "Net.remove_bot returned false"
+                                or tostring(removal_result),
+                        })
+                    else
+                        -- Keep HP from the actual world bot for later visits.
+                        entry.saved_health = enemy.health
+                        HPIndicators.remove_enemy(mission, enemy)
+                        for i = #mission.enemies, 1, -1 do
+                            if mission.enemies[i] == enemy then
+                                table.remove(mission.enemies, i)
+                                break
+                            end
+                        end
+                        panel.enemy = nil
+                        entry.enemy = nil
+                        despawned = despawned + 1
+                    end
+                elseif not enemy and distance <= DEBUGLIB_CATALOG_WAKE_RADIUS
+                    and spawned < DEBUGLIB_CATALOG_SPAWN_BUDGET then
+                    local position = EnemyHelpers.offset_position_with_direction(
+                        entry.position, entry.direction)
+                    if EnemyHelpers.can_spawn_on(mission, position.x, position.y, position.z) then
+                        local ok, result = pcall(Enemy.from, mission, position,
+                            entry.direction, entry.name, {
+                                scale = panel.scale,
+                                source_panel_type = panel.source_type or panel.type,
+                            })
+                        if ok and result then
+                            enemy = result
+                            apply_panel_enemy_config(panel, enemy)
+                            assign_dark_hole_bot_encounter(panel, enemy)
+                            apply_dark_hole_minion_health_to_bot(panel, enemy)
+                            if entry.saved_health ~= nil then
+                                enemy.health = math.max(0, math.min(
+                                    tonumber(entry.saved_health) or enemy.health,
+                                    tonumber(enemy.max_health) or enemy.health))
+                                EnemyHelpers.update_name(enemy)
+                            end
+                            enemy.debuglib_catalog_test = true
+                            panel.enemy = enemy
+                            entry.enemy = enemy
+                            mission.enemies[#mission.enemies + 1] = enemy
+                            spawned = spawned + 1
+                        elseif not entry.spawn_error_logged then
+                            entry.spawn_error_logged = true
+                            spawn_log:warn_data("DEBUGLIB deferred enemy spawn failed", {
+                                area_id = mission.area_id,
+                                object_id = entry.source_object_id,
+                                template_name = entry.name,
+                                error = ok and "Enemy.from returned nil" or tostring(result),
+                            })
+                        end
+                    end
+                end
+            end
+        end
+    end
+    if spawned > 0 or despawned > 0 then
+        spawn_log:info_data("DEBUGLIB catalog streaming refresh", {
+            area_id = mission.area_id,
+            catalog_total = #entries,
+            spawned = spawned,
+            despawned = despawned,
+            active_enemies = #mission.enemies,
+        })
+    end
 end
 
 function Mission:spawn_boss(boss_id, force, triggered)
@@ -2058,6 +2263,7 @@ function Mission:clean_up()
     end
     PanelEncounters.clear_mission_encounter_assets(self.area_id)
     Preloader.clear(self.area_id)
+    EnemyConfig.clear_area(self.area_id)
     Net.remove_area(self.area_id)
     self.resolve_disposal()
     return self.disposal_promise
@@ -2171,7 +2377,16 @@ function Mission:begin()
 end
 
 function Mission:on_tick(elapsed)
-    if self.ready_count == #self.players then
+    if self.begin_started and not self.updating
+        and #self.players > 0 and #self.catalog_spawn_entries > 0 then
+        self.catalog_refresh_timer = (self.catalog_refresh_timer or 0) - elapsed
+        if self.catalog_refresh_timer <= 0 then
+            self.catalog_refresh_timer = DEBUGLIB_CATALOG_REFRESH_SECONDS
+            refresh_debuglib_catalog_spawns(self)
+        end
+    end
+    if self.begin_started and #self.players > 0
+        and self.ready_count == #self.players then
         self.ready_count = 0
         take_enemy_turn(self)
     end
@@ -2374,7 +2589,7 @@ function Mission:handle_player_transfer(player_id)
         remaining_transfers = remaining,
     })
 
-    if remaining == 0 then
+    if remaining == 0 and #self.players > 0 then
         log:info_data("All liberation players transferred; beginning mission", {
             base_area_id = self.base_area_id,
             instance_area_id = self.area_id,
@@ -2402,9 +2617,23 @@ function Mission:handle_player_disconnect(player_id)
             break
         end
     end
-    if self and self.player_sessions then
-        self.player_sessions[player_id]:handle_disconnect()
+    -- A disconnect can arrive before Mission:begin() has created this
+    -- player's session (notably during a large area transfer), or after
+    -- another exit path already detached it. Both are valid lifecycle cases.
+    local session = self.player_sessions and self.player_sessions[player_id]
+    if session then
+        session:handle_disconnect()
         self.player_sessions[player_id] = nil
+    else
+        log:debug_data("Liberation disconnect had no active player session", {
+            base_area_id = self.base_area_id,
+            instance_area_id = self.area_id,
+            player_id = player_id,
+            begin_started = self.begin_started,
+        })
+    end
+    if self.pending_transfer_players then
+        self.pending_transfer_players[player_id] = nil
     end
 end
 
@@ -2456,6 +2685,9 @@ function Mission:remove_panel(panel)
     if row == nil then return end
     local x = math.floor(panel.x) + 1
     if row[x] == nil then return end
+    if panel.catalog_spawn_entry then
+        panel.catalog_spawn_entry.removed = true
+    end
     Net.remove_object(self.area_id, panel.visual_object_id)
     Net.remove_object(self.area_id, panel.id)
     row[x] = nil

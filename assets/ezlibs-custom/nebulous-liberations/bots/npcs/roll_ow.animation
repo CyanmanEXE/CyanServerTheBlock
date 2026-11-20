@@ -1,4 +1,4 @@
-imagePath="attack_4dir.png"
+imagePath="roll_ow.png"
 
 animation state="ATTACK_UP_LEFT"
 frame duration="0.075" x="0" y="0" w="96" h="64" originx="48" originy="48"

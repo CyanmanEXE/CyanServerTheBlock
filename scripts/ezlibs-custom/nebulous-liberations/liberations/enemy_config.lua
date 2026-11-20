@@ -48,10 +48,16 @@ local function reference_object(area_id, source, key, accepted_types)
 end
 Config.reference_object = reference_object
 
-local function area_defaults(area_id, category)
+-- The authored default objects are immutable during an active mission. Cache
+-- their priority-ordered merged properties once per cloned area instead of
+-- rescanning every map object once for every panel's EnemyConfig.resolve().
+-- DEBUGLIB has hundreds of panels, making the old lookup quadratic.
+local area_default_indexes = {}
+
+local function index_area_defaults(area_id)
     local ok, ids = pcall(Net.list_objects, area_id)
-    if not ok or type(ids) ~= "table" then return {}, {} end
-    local all, specific = {}, {}
+    local index = {all = {}, categories = {}}
+    if not ok or type(ids) ~= "table" then return index end
     table.sort(ids, function(a, b) return (tonumber(a) or 0) < (tonumber(b) or 0) end)
     for _, id in ipairs(ids) do
         local valid, object = pcall(Net.get_object_by_id, area_id, id)
@@ -64,11 +70,30 @@ local function area_defaults(area_id, category)
                 if key ~= "Bot Config" and defined(value) then merged[key] = value end
             end
             local group = trim(values.Category)
-            if group == "All" or group == "" then all = merged
-            elseif group == category then specific = merged end
+            if group == "All" or group == "" then
+                index.all = merged
+            else
+                index.categories[group] = merged
+            end
         end
     end
-    return specific, all
+    return index
+end
+
+function Config.prepare_area(area_id)
+    if not area_default_indexes[area_id] then
+        area_default_indexes[area_id] = index_area_defaults(area_id)
+    end
+end
+
+function Config.clear_area(area_id)
+    area_default_indexes[area_id] = nil
+end
+
+local function area_defaults(area_id, category)
+    Config.prepare_area(area_id)
+    local index = area_default_indexes[area_id]
+    return index.categories[category] or {}, index.all
 end
 
 function Config.resolve(area_id, source, legacy_health_property, category)

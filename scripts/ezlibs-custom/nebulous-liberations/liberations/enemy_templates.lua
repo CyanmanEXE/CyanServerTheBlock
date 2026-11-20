@@ -149,11 +149,17 @@ EnemyTemplates.metatable = {
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
 
+-- DEBUGLIB-only generic Prog profiles for the additional encounter aliases.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_debuglib_catalog")(EnemyTemplates)
+
 return EnemyTemplates.ai.simple_charge(self)
         elseif self.ai_type == "shademan_ambush" then
             require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+-- DEBUGLIB-only generic Prog profiles for the additional encounter aliases.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_debuglib_catalog")(EnemyTemplates)
 
 return EnemyTemplates.ai.shademan_ambush(self)
         elseif self.ai_type == "bladia_strike" then
@@ -161,11 +167,17 @@ return EnemyTemplates.ai.shademan_ambush(self)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
 
+-- DEBUGLIB-only generic Prog profiles for the additional encounter aliases.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_debuglib_catalog")(EnemyTemplates)
+
 return EnemyTemplates.ai.bladia_strike(self)
         elseif self.ai_type == "ranged" then
             require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+-- DEBUGLIB-only generic Prog profiles for the additional encounter aliases.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_debuglib_catalog")(EnemyTemplates)
 
 return EnemyTemplates.ai.ranged(self)
         elseif self.ai_type == "roll_heart_whip" then
@@ -173,17 +185,26 @@ return EnemyTemplates.ai.ranged(self)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
 
+-- DEBUGLIB-only generic Prog profiles for the additional encounter aliases.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_debuglib_catalog")(EnemyTemplates)
+
 return EnemyTemplates.ai.roll_heart_whip(self)
         elseif self.ai_type == "patterned_attack" then
             require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
 
+-- DEBUGLIB-only generic Prog profiles for the additional encounter aliases.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_debuglib_catalog")(EnemyTemplates)
+
 return EnemyTemplates.ai.patterned_attack(self)
         elseif self.ai_type == "shockwave_line" then
             require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+-- DEBUGLIB-only generic Prog profiles for the additional encounter aliases.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_debuglib_catalog")(EnemyTemplates)
 
 return EnemyTemplates.ai.shockwave_line(self)
         else
@@ -305,17 +326,26 @@ function EnemyTemplates.ai.ranged(self)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
 
+-- DEBUGLIB-only generic Prog profiles for the additional encounter aliases.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_debuglib_catalog")(EnemyTemplates)
+
 return EnemyTemplates.ai.shademan_ambush(self)
     elseif self.template_name == "Bladia" then
         require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
 
+-- DEBUGLIB-only generic Prog profiles for the additional encounter aliases.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_debuglib_catalog")(EnemyTemplates)
+
 return EnemyTemplates.ai.bladia_strike(self)
     elseif type(self.attack_profile) == "table" then
         require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+-- DEBUGLIB-only generic Prog profiles for the additional encounter aliases.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_debuglib_catalog")(EnemyTemplates)
 
 return EnemyTemplates.ai.patterned_attack(self)
     end
@@ -347,5 +377,8 @@ require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_missing_viruses")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_roll")(EnemyTemplates)
 require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/roll_ow")(EnemyTemplates)
+
+-- DEBUGLIB-only generic Prog profiles for the additional encounter aliases.
+require("scripts/ezlibs-custom/nebulous-liberations/liberations/enemies/template_debuglib_catalog")(EnemyTemplates)
 
 return EnemyTemplates
